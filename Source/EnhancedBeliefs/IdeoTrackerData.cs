@@ -631,6 +631,12 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         EnhancedBeliefsUtilities.ShowCertaintyChangeMote(Pawn, oldCertainty, newCertainty);
 
+        if (newIdeo != null && newIdeo != Pawn.Ideo)
+        {
+            AdjustPersonalOpinion(newIdeo, certaintyReduction * 2f);
+            EnhancedBeliefsMod.Debug($"OverrideConversionAttempt: Adjusted opinion of {newIdeo} by {certaintyReduction * 2f}");
+        }
+
         var ideoOpinion = PersonalIdeoOpinion(Pawn.Ideo, out var _);
         EnhancedBeliefsMod.Debug($"OverrideConversionAttempt: ideoOpinion={ideoOpinion}");
         if (ideoOpinion > 0)

@@ -31,7 +31,7 @@ internal static class Pawn_ExposeData
 
         Scribe_Deep.Look(ref data, "EB_IdeoTrackerData", __instance);
 
-        if (Scribe.mode == LoadSaveMode.PostLoadInit && data != null)
+        if (Scribe.mode != LoadSaveMode.Saving && data != null)
         {
             if (data.Pawn is not Pawn pawn || (pawn != __instance && !pawn.Dead))
             {
