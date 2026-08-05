@@ -1,9 +1,9 @@
 namespace EnhancedBeliefs.Tests;
 
-public class DefaultOpinionTests
+public class StructuralOpinionTests
 {
     [Fact]
-    public void DefaultIdeoOpinion_SupremacistMeme_DecreasesBaseOpinion()
+    public void StructuralIdeoOpinion_SupremacistMeme_DecreasesBaseOpinion()
     {
         // Supremacist on own ideo subtracts 20 from foreign ideo opinion (30 base → 10)
         var world = new SimWorld();
@@ -20,13 +20,13 @@ public class DefaultOpinionTests
         var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        var opinion = tracker.DefaultIdeoOpinion(foreignIdeo);
+        var opinion = tracker.StructuralIdeoOpinion(foreignIdeo);
 
         Assert.True(opinion < 30f, $"Expected opinion < 30 (base) for Supremacist, got {opinion}");
     }
 
     [Fact]
-    public void DefaultIdeoOpinion_GuiltyMeme_IncreasesBaseOpinion()
+    public void StructuralIdeoOpinion_GuiltyMeme_IncreasesBaseOpinion()
     {
         // Guilty on own ideo adds 10 to foreign ideo opinion (30 base → 40)
         var world = new SimWorld();
@@ -43,13 +43,13 @@ public class DefaultOpinionTests
         var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        var opinion = tracker.DefaultIdeoOpinion(foreignIdeo);
+        var opinion = tracker.StructuralIdeoOpinion(foreignIdeo);
 
         Assert.True(opinion > 30f, $"Expected opinion > 30 (base) for Guilty, got {opinion}");
     }
 
     [Fact]
-    public void DefaultIdeoOpinion_InternalOffset_AppliesToForeignIdeoOpinion()
+    public void StructuralIdeoOpinion_InternalOffset_AppliesToForeignIdeoOpinion()
     {
         // InternalOffset on own ideo's precept adds to opinion of ALL foreign ideos
         var world = new SimWorld();
@@ -64,7 +64,7 @@ public class DefaultOpinionTests
         var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        var opinion = tracker.DefaultIdeoOpinion(foreignIdeo);
+        var opinion = tracker.StructuralIdeoOpinion(foreignIdeo);
 
         Assert.Equal(50f, opinion, precision: 4); // 30 base + 20 internal offset
     }

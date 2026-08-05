@@ -14,13 +14,19 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         pawn = newPawn;
     }
 
-    private int lastPositiveThoughtTick = Find.TickManager.TicksGame;
-    public int LastPositiveThoughtTick => lastPositiveThoughtTick;
-
     public float CachedCertaintyChange { get; private set; } = -9999f;
-    public float CachedMoodCertaintyOffset { get; private set; }
-    public float CachedRelationshipMultiplier { get; private set; }
-    public float CachedInactivityLoss { get; private set; }
+
+    // Setpoint (target certainty) and its bands, all in certainty fraction (0-1), refreshed by CertaintyChangeRecache.
+    public float CachedTargetCertainty { get; private set; }
+    public float CachedStructural { get; private set; }
+    public float CachedRelational { get; private set; }
+    public float CachedPractitional { get; private set; }
+    public float CachedDifficulty { get; private set; }
+
+    // Top contributors to each band for the social-card tooltip; (label, certainty-fraction contribution).
+    public readonly List<(string label, float pct)> StructuralContributors = [];
+    public readonly List<(string label, float pct)> RelationalContributors = [];
+    public readonly List<(string label, float pct)> PractitionalContributors = [];
 
     // Separate because recalculating base from memes in case player's ideo is fluid cuts down on overall performance cost
     // Breaks if you multiply opinion but you really shouldn't do that
@@ -44,11 +50,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
     private float cachedOpinionMultiplier = -1f;
     private int lastMultiplierCacheTick = -1;
-
-    public void UpdateLastPositiveThoughtTick()
-    {
-        lastPositiveThoughtTick = Find.TickManager.TicksGame;
-    }
 
     public void SetIdeoBaseOpinion(Ideo ideo, float opinion)
     {
@@ -90,42 +91,107 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     }
 
     private readonly List<Thought> _tmpThoughts = [];
+
+    // Certainty is a first-order relaxation toward a setpoint (target certainty): dc/dt = k * (target - c).
+    // The setpoint is the sum of three bands - structural (innate fit), relational (co-religionists) and
+    // practitional (current precept moods) - plus a difficulty offset, all clamped to [0, 1]. There is no
+    // forcing term, so certainty can never leave [0, 1] and always drifts toward where the pawn "belongs".
 #pragma warning disable IDE0060 // Remove unused parameter
     // TODO: Figure out why worldComp was even passed here
     public void CertaintyChangeRecache(GameComponent_EnhancedBeliefs worldComp)
 #pragma warning restore IDE0060 // Remove unused parameter
     {
-        CachedCertaintyChange = 0;
+        var settings = EnhancedBeliefsMod.Settings;
+
+        StructuralContributors.Clear();
+        RelationalContributors.Clear();
+        PractitionalContributors.Clear();
+
+        // Structural band: innate fit of the pawn to their own ideo, including the flat base faith.
+        var structural = StructuralOpinionOf(Pawn.Ideo, StructuralContributors) / 100f;
+        StructuralContributors.Add(("EnhancedBeliefs.Certainty.BaseFaith".Translate(), 0.30f));
+        CachedStructural = structural;
+
+        // Relational band: mean opinion of co-religionists, scaled by the user's max range.
+        CachedRelational = RelationalBand(settings.RelationalMaxRange, RelationalContributors);
+
+        // Practitional band: summed precept-thought mood, scaled by the user's max range.
+        CachedPractitional = PractitionalBand(settings.PracticeMaxRange, PractitionalContributors);
+
+        CachedDifficulty = settings.DifficultyOffset;
+        var target = Mathf.Clamp01(structural + CachedRelational + CachedPractitional + settings.DifficultyOffset);
+        CachedTargetCertainty = target;
+
+        CachedCertaintyChange = settings.CertaintyDriftRate * (target - Pawn.ideo.Certainty);
+    }
+
+    private float RelationalBand(float maxRange, List<(string label, float pct)> contributors)
+    {
+        CacheRelationshipIdeoOpinion(Pawn.Ideo);
+
+        float sum = 0;
+        float absSum = 0;
+        int count = 0;
+        foreach (var (_, opinion) in GetOwnIdeoRelationships())
+        {
+            sum += opinion;
+            absSum += Math.Abs(opinion);
+            count++;
+        }
+
+        if (count == 0)
+        {
+            return 0f;
+        }
+
+        var band = GameComponent_EnhancedBeliefs.RelationalIntensityCurve.Evaluate(sum / count) * maxRange;
+
+        if (absSum > 0f)
+        {
+            foreach (var (relPawn, opinion) in GetOwnIdeoRelationships())
+            {
+                if (opinion != 0f)
+                {
+                    contributors.Add((relPawn.LabelShort, band * (opinion / absSum)));
+                }
+            }
+        }
+
+        return band;
+    }
+
+    private float PractitionalBand(float maxRange, List<(string label, float pct)> contributors)
+    {
         _tmpThoughts.Clear();
         Pawn.needs?.mood?.thoughts?.GetAllMoodThoughts(_tmpThoughts);
 
         float moodSum = 0;
+        float absSum = 0;
         foreach (var thought in _tmpThoughts)
         {
             if (thought.sourcePrecept != null || thought.def.Worker is ThoughtWorker_Precept)
             {
-                moodSum += thought.MoodOffset();
+                var offset = thought.MoodOffset();
+                moodSum += offset;
+                absSum += Math.Abs(offset);
             }
         }
 
-        var moodCertaintyOffset = GameComponent_EnhancedBeliefs.CertaintyOffsetFromThoughts.Evaluate(moodSum);
-        var rawRelationshipSum = IdeoOpinionFromRelationships(Pawn.Ideo, false, out var _) / PawnOpinionFactor;
-        var relationshipMultiplier = 1 + (GameComponent_EnhancedBeliefs.CertaintyMultiplierFromRelationships.Evaluate(rawRelationshipSum) * Math.Sign(moodCertaintyOffset));
+        var band = GameComponent_EnhancedBeliefs.PracticeIntensityCurve.Evaluate(moodSum) * maxRange;
 
-        CachedMoodCertaintyOffset = moodCertaintyOffset;
-        CachedRelationshipMultiplier = (float)relationshipMultiplier;
-        CachedCertaintyChange += moodCertaintyOffset * relationshipMultiplier;
+        if (absSum > 0f)
+        {
+            foreach (var thought in _tmpThoughts)
+            {
+                var offset = thought.MoodOffset();
+                if (offset != 0f && (thought.sourcePrecept != null || thought.def.Worker is ThoughtWorker_Precept))
+                {
+                    contributors.Add((thought.LabelCap, band * (offset / absSum)));
+                }
+            }
+        }
 
-        // Certainty only starts decreasing at moods below stellar and after 3 days of lacking positive precept moodlets
-        if (Pawn.needs?.mood.CurLevelPercentage < 0.8 && Find.TickManager.TicksGame - LastPositiveThoughtTick > GenDate.TicksPerDay * 3f)
-        {
-            CachedInactivityLoss = GameComponent_EnhancedBeliefs.CertaintyLossFromInactivity.Evaluate((Find.TickManager.TicksGame - LastPositiveThoughtTick) / GenDate.TicksPerDay);
-            CachedCertaintyChange -= CachedInactivityLoss;
-        }
-        else
-        {
-            CachedInactivityLoss = 0f;
-        }
+        return band;
     }
 
     // Form opinion based on memes, personal thoughts and experience with other pawns from that ideo
@@ -133,7 +199,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         if (!baseIdeoOpinions.ContainsKey(ideo) || !personalIdeoOpinions.ContainsKey(ideo))
         {
-            baseIdeoOpinions[ideo] = DefaultIdeoOpinion(ideo);
+            baseIdeoOpinions[ideo] = StructuralIdeoOpinion(ideo);
             personalIdeoOpinions[ideo] = 0;
         }
 
@@ -171,29 +237,41 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         );
     }
 
-    // Get pawn's basic opinion from hearing about ideos beliefs, based on their traits, relationships and current ideo
-    public float DefaultIdeoOpinion(Ideo ideo)
+    // Get pawn's basic opinion from hearing about ideos beliefs, based on their traits, relationships and current ideo.
+    // Own-ideo short-circuits to current certainty; call StructuralOpinionOf directly for the certainty-independent value.
+    public float StructuralIdeoOpinion(Ideo ideo)
     {
-        var pawnIdeo = Pawn.Ideo;
-
-        if (ideo == pawnIdeo)
+        if (ideo == Pawn.Ideo)
         {
             return Pawn.ideo.Certainty * 100f;
         }
 
+        return StructuralOpinionOf(ideo);
+    }
+
+    // Certainty-independent structural opinion (0-100) a pawn holds toward an ideo based on their traits,
+    // memes and the ideo's precepts. Shared by StructuralIdeoOpinion and the certainty setpoint's structural band.
+    // If contributors is supplied, each term is recorded (in certainty-fraction units) for the tooltip breakdown.
+    private float StructuralOpinionOf(Ideo ideo, List<(string label, float pct)>? contributors = null)
+    {
+        var pawnIdeo = Pawn.Ideo;
+        var start = contributors?.Count ?? 0;
         float opinion = 0;
 
         if (pawnIdeo.HasMeme(EnhancedBeliefsDefOf.Supremacist))
         {
             opinion -= 20;
+            contributors?.Add((EnhancedBeliefsDefOf.Supremacist.LabelCap, -20f));
         }
         else if (pawnIdeo.HasMeme(EnhancedBeliefsDefOf.Loyalist))
         {
             opinion -= 10;
+            contributors?.Add((EnhancedBeliefsDefOf.Loyalist.LabelCap, -10f));
         }
         else if (pawnIdeo.HasMeme(EnhancedBeliefsDefOf.Guilty))
         {
             opinion += 10;
+            contributors?.Add((EnhancedBeliefsDefOf.Guilty.LabelCap, 10f));
         }
 
         foreach (var meme in ideo.memes)
@@ -205,6 +283,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                     if (trait.HasTrait(Pawn))
                     {
                         opinion += 10;
+                        contributors?.Add((trait.def?.LabelCap ?? meme.LabelCap, 10f));
                     }
                 }
             }
@@ -216,18 +295,23 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                     if (trait.HasTrait(Pawn))
                     {
                         opinion -= 10;
+                        contributors?.Add((trait.def?.LabelCap ?? meme.LabelCap, -10f));
                     }
                 }
             }
         }
 
-        foreach (var precept in Pawn.Ideo.precepts)
+        foreach (var precept in pawnIdeo.precepts)
         {
             var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
 
             foreach (var comp in comps)
             {
                 opinion += comp.InternalOffset;
+                if (comp.InternalOffset != 0)
+                {
+                    contributors?.Add((precept.def.LabelCap, comp.InternalOffset));
+                }
             }
         }
 
@@ -237,15 +321,35 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
             foreach (var comp in comps)
             {
-                opinion += comp.ExternalOffset + comp.GetTraitOpinion(Pawn);
+                var value = comp.ExternalOffset + comp.GetTraitOpinion(Pawn);
+                opinion += value;
+                if (value != 0f)
+                {
+                    contributors?.Add((precept.def.LabelCap, value));
+                }
             }
         }
 
-        // -5 opinion per incompatible meme, +5 per shared meme
-        opinion -= GameComponent_EnhancedBeliefs.BeliefDifferences(pawnIdeo, ideo) * 5f;
+        // -5 opinion per incompatible meme, +5 per shared meme (own ideo is maximally similar to itself)
+        var cohesion = -GameComponent_EnhancedBeliefs.BeliefDifferences(pawnIdeo, ideo) * 5f;
+        opinion += cohesion;
+        if (cohesion != 0f)
+        {
+            contributors?.Add(("EnhancedBeliefs.Certainty.MemeCohesion".Translate(), cohesion));
+        }
+
         // Only decrease opinion if we don't like getting converted, shouldn't go the other way
-        opinion *= Mathf.Clamp01(Pawn.GetStatValue(StatDefOf.CertaintyLossFactor));
-        opinion *= OpinionMultiplier;
+        var scale = Mathf.Clamp01(Pawn.GetStatValue(StatDefOf.CertaintyLossFactor)) * OpinionMultiplier;
+        opinion *= scale;
+
+        // Rescale the collected raw offsets into certainty-fraction units matching the band total.
+        if (contributors != null)
+        {
+            for (var ii = start; ii < contributors.Count; ii++)
+            {
+                contributors[ii] = (contributors[ii].label, contributors[ii].pct * scale / 100f);
+            }
+        }
 
         // 30 base opinion
         return Mathf.Clamp(opinion + 30f, 0, 100);
@@ -257,7 +361,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         {
             var devDetailsBuilder = new StringBuilder();
             _ = devDetailsBuilder
-                .AppendLine($"Base opinion: {baseIdeoOpinions.GetValueOrDefault(ideo, DefaultIdeoOpinion(ideo))}")
+                .AppendLine($"Base opinion: {baseIdeoOpinions.GetValueOrDefault(ideo, StructuralIdeoOpinion(ideo))}")
                 .AppendLine($"Personal opinion: {personalIdeoOpinions.GetValueOrDefault(ideo, 0)}");
             var relevantMemeCount = ideo.memes.Intersect(memeOpinions.Keys).Count();
             _ = devDetailsBuilder
@@ -288,7 +392,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         if (!baseIdeoOpinions.TryGetValue(ideo, out var baseIdeoOpinion))
         {
-            baseIdeoOpinion = DefaultIdeoOpinion(ideo);
+            baseIdeoOpinion = StructuralIdeoOpinion(ideo);
             baseIdeoOpinions[ideo] = baseIdeoOpinion;
         }
         if (!personalIdeoOpinions.TryGetValue(ideo, out var personalIdeoOpinion))
@@ -386,55 +490,12 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         cachedRelationshipIdeoOpinions[ideo] = opinion;
     }
 
-    // Certainty level this pawn would naturally have based on their traits/memes/precepts,
-    // independent of current certainty (unlike DefaultIdeoOpinion which short-circuits to Certainty for own ideo).
-    public float StructuralBaselineCertainty
-    {
-        get
-        {
-            var ideo = Pawn.Ideo;
-            float opinion = 0;
-
-            if (ideo.HasMeme(EnhancedBeliefsDefOf.Supremacist))
-                opinion -= 20;
-            else if (ideo.HasMeme(EnhancedBeliefsDefOf.Loyalist))
-                opinion -= 10;
-            else if (ideo.HasMeme(EnhancedBeliefsDefOf.Guilty))
-                opinion += 10;
-
-            foreach (var meme in ideo.memes)
-            {
-                if (!meme.agreeableTraits.NullOrEmpty())
-                    foreach (var trait in meme.agreeableTraits)
-                        if (trait.HasTrait(Pawn)) opinion += 10;
-
-                if (!meme.disagreeableTraits.NullOrEmpty())
-                    foreach (var trait in meme.disagreeableTraits)
-                        if (trait.HasTrait(Pawn)) opinion -= 10;
-            }
-
-            foreach (var precept in ideo.precepts)
-            {
-                var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
-                foreach (var comp in comps)
-                    opinion += comp.InternalOffset + comp.ExternalOffset + comp.GetTraitOpinion(Pawn);
-            }
-
-            // Shared memes with own ideo add opinion (using same logic as BeliefDifferences)
-            opinion -= GameComponent_EnhancedBeliefs.BeliefDifferences(ideo, ideo) * 5f;
-            opinion *= Mathf.Clamp01(Pawn.GetStatValue(StatDefOf.CertaintyLossFactor));
-            opinion *= OpinionMultiplier;
-
-            return Mathf.Clamp01((opinion + 30f) / 100f);
-        }
-    }
-
     public IEnumerable<(Pawn pawn, float opinion)> GetOwnIdeoRelationships()
     {
         var ideo = Pawn.Ideo;
         foreach (var kvp in cachedRelationships)
         {
-            if (kvp.Key.Ideo == ideo)
+            if (kvp.Key != Pawn && kvp.Key.Ideo == ideo)
                 yield return (kvp.Key, kvp.Value);
         }
     }
@@ -442,7 +503,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     public void ExposeData()
     {
         Scribe_References.Look(ref pawn, "pawn");
-        Scribe_Values.Look(ref lastPositiveThoughtTick, "lastPositiveThoughtTick");
         Scribe_Collections.Look(ref baseIdeoOpinions, "baseIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache1, ref cache5);
         Scribe_Collections.Look(ref personalIdeoOpinions, "personalIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache2, ref cache6);
         Scribe_Collections.Look(ref memeOpinions, "memeOpinions", LookMode.Def, LookMode.Value, ref cache3, ref cache7);
@@ -468,7 +528,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (!baseIdeoOpinions.ContainsKey(ideo) || !personalIdeoOpinions.ContainsKey(ideo))
         {
             EnhancedBeliefsMod.Debug("AdjustPersonalOpinion: Initializing base/personal opinions.");
-            baseIdeoOpinions[ideo] = DefaultIdeoOpinion(ideo);
+            baseIdeoOpinions[ideo] = StructuralIdeoOpinion(ideo);
             personalIdeoOpinions[ideo] = 0;
         }
 
@@ -555,7 +615,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         foreach (var ideo in baseIdeoOpinions.Keys.ToList())
         {
-            baseIdeoOpinions[ideo] = DefaultIdeoOpinion(ideo);
+            baseIdeoOpinions[ideo] = StructuralIdeoOpinion(ideo);
         }
     }
 

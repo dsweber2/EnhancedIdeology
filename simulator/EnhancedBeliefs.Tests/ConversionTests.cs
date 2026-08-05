@@ -20,7 +20,7 @@ public class ConversionTests
     [Fact]
     public void CheckConversion_ZeroCertainty_HighOpinionAlternative_Converts()
     {
-        // ideoB has a precept with ExternalOffset=90 → DefaultIdeoOpinion returns 90
+        // ideoB has a precept with ExternalOffset=90 → StructuralIdeoOpinion returns 90
         // certainty=0 → threshold=0.6, and opinion=0.9 → random chance always succeeds (1.2 > any [0,1] roll)
         var world = new SimWorld();
         world.Initialize();

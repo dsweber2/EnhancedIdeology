@@ -2,8 +2,12 @@
 
 <LanguageData>
     <EnhancedBeliefs.PawnCertaintyTooltip>{PAWN_nameDef}'s certainty in {IDEO_name}: {2}</EnhancedBeliefs.PawnCertaintyTooltip>
-    <EnhancedBeliefs.CertainChangePerDay>Certainty change per day from beliefs: {0}</EnhancedBeliefs.CertainChangePerDay>
-    <EnhancedBeliefs.CertaintyFromPreceptMoods>  From precept moods: {0}/day</EnhancedBeliefs.CertaintyFromPreceptMoods>
-    <EnhancedBeliefs.CertaintyRelationshipModifier>  Relationship modifier: ×{0}</EnhancedBeliefs.CertaintyRelationshipModifier>
-    <EnhancedBeliefs.CertaintyLossFromInactivity>  Inactivity penalty (no belief affirmation): -{0}/day</EnhancedBeliefs.CertaintyLossFromInactivity>
+    <EnhancedBeliefs.CertaintyTarget>Target certainty: {0}</EnhancedBeliefs.CertaintyTarget>
+    <EnhancedBeliefs.CertainChangePerDay>Drifting toward it at {0}/day</EnhancedBeliefs.CertainChangePerDay>
+    <EnhancedBeliefs.CertaintyBandStructural>Structural (beliefs &amp; nature): {0}</EnhancedBeliefs.CertaintyBandStructural>
+    <EnhancedBeliefs.CertaintyBandRelational>Congregation: {0}</EnhancedBeliefs.CertaintyBandRelational>
+    <EnhancedBeliefs.CertaintyBandPractice>Practice (recent rites): {0}</EnhancedBeliefs.CertaintyBandPractice>
+    <EnhancedBeliefs.CertaintyBandDifficulty>Difficulty: {0}</EnhancedBeliefs.CertaintyBandDifficulty>
+    <EnhancedBeliefs.Certainty.BaseFaith>Base faith</EnhancedBeliefs.Certainty.BaseFaith>
+    <EnhancedBeliefs.Certainty.MemeCohesion>Meme cohesion</EnhancedBeliefs.Certainty.MemeCohesion>
 </LanguageData>

@@ -27,36 +27,23 @@ internal static class SocialCardUtility_DrawCertainty
         var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
+        // Refresh the cached setpoint/bands (cheap - guarded to a recache per rare tick).
+        var certaintyChangePerDay = pawn.ideo.CertaintyChangePerDay;
+
         if (Mouse.IsOver(containerRect))
         {
             Widgets.DrawHighlight(containerRect);
 
-            var certaintyChange = (pawn.ideo.CertaintyChangePerDay >= 0f ? "+" : "") + pawn.ideo.CertaintyChangePerDay.ToStringPercent();
+            var certaintyChange = (certaintyChangePerDay >= 0f ? "+" : "") + certaintyChangePerDay.ToStringPercent();
 
             var tip = "EnhancedBeliefs.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO"), pawn.ideo.Certainty.ToStringPercent()) + "\n\n";
-            tip += "EnhancedBeliefs.CertainChangePerDay".Translate(certaintyChange) + "\n";
+            tip += "EnhancedBeliefs.CertaintyTarget".Translate(data.CachedTargetCertainty.ToStringPercent()) + "\n";
+            tip += "EnhancedBeliefs.CertainChangePerDay".Translate(certaintyChange) + "\n\n";
 
-            var moodOffset = data.CachedMoodCertaintyOffset;
-            var moodSign = moodOffset >= 0f ? "+" : "";
-            tip += "EnhancedBeliefs.CertaintyFromPreceptMoods".Translate(moodSign + moodOffset.ToStringPercent()) + "\n";
-
-            var relMult = data.CachedRelationshipMultiplier;
-            tip += "EnhancedBeliefs.CertaintyRelationshipModifier".Translate(relMult.ToStringPercent()) + "\n";
-
-            var relationships = data.GetOwnIdeoRelationships().OrderByDescending(r => Math.Abs(r.opinion)).Take(5).ToList();
-            if (relationships.Count > 0)
-            {
-                foreach (var (relPawn, opinion) in relationships)
-                {
-                    var opSign = opinion >= 0f ? "+" : "";
-                    tip += $"  - {relPawn.LabelShort}: {opSign}{opinion:F0}\n";
-                }
-            }
-
-            if (data.CachedInactivityLoss > 0f)
-            {
-                tip += "EnhancedBeliefs.CertaintyLossFromInactivity".Translate(data.CachedInactivityLoss.ToStringPercent()) + "\n";
-            }
+            tip += Band("EnhancedBeliefs.CertaintyBandStructural", data.CachedStructural, data.StructuralContributors);
+            tip += Band("EnhancedBeliefs.CertaintyBandRelational", data.CachedRelational, data.RelationalContributors);
+            tip += Band("EnhancedBeliefs.CertaintyBandPractice", data.CachedPractitional, data.PractitionalContributors);
+            tip += "EnhancedBeliefs.CertaintyBandDifficulty".Translate(Signed(data.CachedDifficulty));
 
             TooltipHandler.TipRegion(containerRect, tip);
         }
@@ -70,12 +57,12 @@ internal static class SocialCardUtility_DrawCertainty
         // Background
         GUI.DrawTexture(innerRect, BaseContent.BlackTex);
 
-        // Structural baseline (dark green, behind current bar)
-        var baseline = data.StructuralBaselineCertainty;
-        if (baseline > 0f)
+        // Target certainty (dark green, behind current bar) - where certainty is drifting toward
+        var target = data.CachedTargetCertainty;
+        if (target > 0f)
         {
-            var baselineRect = new Rect(innerRect.x, innerRect.y, innerRect.width * Mathf.Clamp01(baseline), innerRect.height);
-            GUI.DrawTexture(baselineRect, BaselineBarTex);
+            var targetRect = new Rect(innerRect.x, innerRect.y, innerRect.width * Mathf.Clamp01(target), innerRect.height);
+            GUI.DrawTexture(targetRect, BaselineBarTex);
         }
 
         // Current certainty on top
@@ -86,5 +73,23 @@ internal static class SocialCardUtility_DrawCertainty
         }
 
         return false;
+    }
+
+    private static string Signed(float fraction)
+    {
+        return (fraction >= 0f ? "+" : "") + fraction.ToStringPercent();
+    }
+
+    // A band header line ("Structural  +48%") followed by its top-3 contributors, each signed.
+    private static string Band(string labelKey, float total, List<(string label, float pct)> contributors)
+    {
+        var text = labelKey.Translate(Signed(total)) + "\n";
+
+        foreach (var (label, pct) in contributors.OrderByDescending(c => Math.Abs(c.pct)).Take(3))
+        {
+            text += $"    {label}: {Signed(pct)}\n";
+        }
+
+        return text;
     }
 }

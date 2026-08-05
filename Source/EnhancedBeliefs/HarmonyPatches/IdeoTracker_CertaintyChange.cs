@@ -20,11 +20,6 @@ internal static class IdeoTracker_CertaintyChange
 
         __result += data.CachedCertaintyChange;
 
-        if (__result > 0)
-        {
-            data.UpdateLastPositiveThoughtTick();
-        }
-
         return false;
     }
 }

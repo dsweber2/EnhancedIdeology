@@ -4,48 +4,34 @@
 internal sealed partial class GameComponent_EnhancedBeliefs(Game game) : GameComponent
 #pragma warning restore CS9113 // Parameter is unread.
 {
-    // Days to percentage
-    internal static readonly SimpleCurve CertaintyLossFromInactivity =
+    // Practice band shape: summed precept-thought mood offset to a normalized intensity in [-1, 1].
+    // Amplitude (how much certainty this can move) is applied afterwards via PracticeMaxRange.
+    internal static readonly SimpleCurve PracticeIntensityCurve =
     [
-        new CurvePoint(3f,  0.01f),
-        new CurvePoint(5f,  0.02f),
-        new CurvePoint(10f, 0.03f),
-        new CurvePoint(30f, 0.05f),
+        new CurvePoint(-50f, -1.0f),
+        new CurvePoint(-30f, -0.75f),
+        new CurvePoint(-15f, -0.45f),
+        new CurvePoint(-5f,  -0.15f),
+        new CurvePoint(0f,    0f),
+        new CurvePoint(5f,    0.15f),
+        new CurvePoint(15f,   0.45f),
+        new CurvePoint(30f,   0.75f),
+        new CurvePoint(50f,   1.0f),
     ];
 
-    // Sum mood offset to percentage
-    internal static readonly SimpleCurve CertaintyOffsetFromThoughts =
+    // Relational band shape: mean opinion of co-religionists to a normalized intensity in [-1, 1].
+    // Amplitude is applied afterwards via RelationalMaxRange.
+    internal static readonly SimpleCurve RelationalIntensityCurve =
     [
-        new CurvePoint(-50f, -0.15f),
-        new CurvePoint(-30f, -0.07f),
-        new CurvePoint(-10f, -0.03f),
-        new CurvePoint(-5f,  -0.015f),
-        new CurvePoint(-3f,  -0.005f),
-        new CurvePoint(-0,    0f),
-        new CurvePoint(3f,    0.005f),
-        new CurvePoint(5f,    0.012f),
-        new CurvePoint(10f,   0.025f),
-        new CurvePoint(30f,   0.05f),
-        new CurvePoint(50f,   0.12f),
-    ];
-
-    // Sum relationship value to multiplier - 1. Values are flipped if summary mood offset is negative
-    // I know that this doesn't actually result in symmetric multipliers, but else we'll get x10 certainty loss if you hate everyone and everything in your ideology
-    internal static readonly SimpleCurve CertaintyMultiplierFromRelationships =
-    [
-        new CurvePoint(-1000f, -0.9f),
-        new CurvePoint(-500f,  -0.5f),
-        new CurvePoint(-200f,  -0.3f),
-        new CurvePoint(-100f,  -0.1f),
-        new CurvePoint(-50f,   -0.05f),
-        new CurvePoint(-10f,   -0.02f),
-        new CurvePoint(0f,     -0f),
-        new CurvePoint(10f,     0.01f),
-        new CurvePoint(50f,     0.03f),
-        new CurvePoint(100f,    0.07f),
-        new CurvePoint(200f,    0.2f),
-        new CurvePoint(500f,    0.4f),
-        new CurvePoint(1000f,   0.6f),
+        new CurvePoint(-100f, -1.0f),
+        new CurvePoint(-60f,  -0.70f),
+        new CurvePoint(-30f,  -0.45f),
+        new CurvePoint(-10f,  -0.18f),
+        new CurvePoint(0f,     0f),
+        new CurvePoint(10f,    0.18f),
+        new CurvePoint(30f,    0.45f),
+        new CurvePoint(60f,    0.70f),
+        new CurvePoint(100f,   1.0f),
     ];
 
     public PawnIdeoTracker PawnTracker { get; } = new();
@@ -111,7 +97,7 @@ internal sealed partial class GameComponent_EnhancedBeliefs(Game game) : GameCom
     {
         foreach (var ideoTracker in PawnTracker.Select(kvp => kvp.Value).ToList())
         {
-            ideoTracker.SetIdeoBaseOpinion(ideo, ideoTracker.DefaultIdeoOpinion(ideo));
+            ideoTracker.SetIdeoBaseOpinion(ideo, ideoTracker.StructuralIdeoOpinion(ideo));
         }
     }
 

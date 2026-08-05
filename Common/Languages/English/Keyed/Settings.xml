@@ -3,4 +3,12 @@
 <LanguageData>
     <EnhancedBeliefs.DebugInteractionWorkers>DEV: Debug Interaction Workers</EnhancedBeliefs.DebugInteractionWorkers>
     <EnhancedBeliefs.DebugInteractionWorkers.Tip>Enables debug logging for interaction workers when dev mode is active.</EnhancedBeliefs.DebugInteractionWorkers.Tip>
+    <EnhancedBeliefs.CertaintyDriftRate>Certainty drift rate: {0}/day</EnhancedBeliefs.CertaintyDriftRate>
+    <EnhancedBeliefs.CertaintyDriftRate.Tip>How fast a pawn's certainty moves toward its target each day. Higher = faith reacts faster to circumstances.</EnhancedBeliefs.CertaintyDriftRate.Tip>
+    <EnhancedBeliefs.DifficultyOffset>Difficulty offset: {0}</EnhancedBeliefs.DifficultyOffset>
+    <EnhancedBeliefs.DifficultyOffset.Tip>Flat shift applied to every pawn's target certainty. Positive makes faith stickier; negative makes converts easier to peel away.</EnhancedBeliefs.DifficultyOffset.Tip>
+    <EnhancedBeliefs.RelationalMaxRange>Congregation influence: ±{0}</EnhancedBeliefs.RelationalMaxRange>
+    <EnhancedBeliefs.RelationalMaxRange.Tip>The most that a pawn's opinion of their co-religionists can raise or lower their target certainty.</EnhancedBeliefs.RelationalMaxRange.Tip>
+    <EnhancedBeliefs.PracticeMaxRange>Practice influence: ±{0}</EnhancedBeliefs.PracticeMaxRange>
+    <EnhancedBeliefs.PracticeMaxRange.Tip>The most that recent precept moods (rituals, veneration, taboos) can raise or lower their target certainty.</EnhancedBeliefs.PracticeMaxRange.Tip>
 </LanguageData>

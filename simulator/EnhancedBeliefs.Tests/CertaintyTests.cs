@@ -29,91 +29,143 @@ public class CertaintyTests
         return (world, tracker, pawn);
     }
 
-    [Fact]
-    public void CertaintyChangeRecache_PositivePreceptMood_YieldsPositiveRate()
+    private static IdeoTrackerData Recache(SimWorld world, SimPawn pawn, IdeoTrackerData tracker)
     {
-        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: 10f);
         pawn.UpdateThoughts();
         tracker.CertaintyChangeRecache(world.Comp);
+        return tracker;
+    }
 
+    [Fact]
+    public void Drift_CertaintyAboveTarget_YieldsNegativeRate()
+    {
+        var (world, tracker, pawn) = Setup(withPrecept: true, certainty: 0.95f);
+        Recache(world, pawn, tracker);
+
+        Assert.True(tracker.CachedTargetCertainty < 0.95f);
+        Assert.True(tracker.CachedCertaintyChange < 0f,
+            $"Expected drift down toward target {tracker.CachedTargetCertainty}, got {tracker.CachedCertaintyChange}");
+    }
+
+    [Fact]
+    public void Drift_CertaintyBelowTarget_YieldsPositiveRate()
+    {
+        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: 10f, certainty: 0.05f);
+        Recache(world, pawn, tracker);
+
+        Assert.True(tracker.CachedTargetCertainty > 0.05f);
         Assert.True(tracker.CachedCertaintyChange > 0f,
-            $"Expected positive certainty rate, got {tracker.CachedCertaintyChange}");
+            $"Expected drift up toward target {tracker.CachedTargetCertainty}, got {tracker.CachedCertaintyChange}");
     }
 
     [Fact]
-    public void CertaintyChangeRecache_NegativePreceptMood_YieldsNegativeRate()
+    public void Drift_AtTarget_YieldsZeroRate()
     {
-        // Mood < 0.8 also needed to allow inactivity loss; use large negative offset
-        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: -30f, baseMood: 0.5f);
-        pawn.UpdateThoughts();
-        tracker.CertaintyChangeRecache(world.Comp);
+        var (world, tracker, pawn) = Setup(withPrecept: true);
+        Recache(world, pawn, tracker);
 
-        Assert.True(tracker.CachedCertaintyChange < 0f,
-            $"Expected negative certainty rate, got {tracker.CachedCertaintyChange}");
+        pawn.ideo.Certainty = tracker.CachedTargetCertainty;
+        Recache(world, pawn, tracker);
+
+        Assert.Equal(0f, tracker.CachedCertaintyChange, precision: 5);
     }
 
     [Fact]
-    public void CertaintyChangeRecache_NoPreceptThought_HighMood_YieldsZeroRate()
+    public void Drift_RateEqualsDriftRateTimesGap()
     {
-        // Ideo with no precepts → SimThought.SourcePrecept = null → moodSum = 0
-        // Mood >= 0.8 → inactivity penalty also blocked
-        var (world, tracker, pawn) = Setup(withPrecept: false, baseMood: 0.85f);
-        pawn.UpdateThoughts();
-        tracker.CertaintyChangeRecache(world.Comp);
+        var (world, tracker, pawn) = Setup(withPrecept: true, certainty: 0.5f);
+        Recache(world, pawn, tracker);
 
-        Assert.Equal(0f, tracker.CachedCertaintyChange, precision: 6);
+        var expected = EnhancedBeliefsMod.Settings.CertaintyDriftRate * (tracker.CachedTargetCertainty - 0.5f);
+        Assert.Equal(expected, tracker.CachedCertaintyChange, precision: 5);
     }
 
     [Fact]
-    public void CertaintyChangeRecache_InactivityPenalty_LowMoodAfterThreeDays_YieldsNegativeRate()
+    public void Practice_PositivePreceptMood_RaisesTarget()
     {
-        // No precept thought → moodSum = 0; but mood < 0.8 and 4 days elapsed → inactivity loss
-        var (world, tracker, pawn) = Setup(withPrecept: false, baseMood: 0.7f);
-        Find.TickManager.TicksGame = 4 * GenDate.TicksPerDay;
+        var (withMood, moodTracker, moodPawn) = Setup(withPrecept: true, colonyMoodOffset: 20f);
+        Recache(withMood, moodPawn, moodTracker);
 
-        pawn.UpdateThoughts();
-        tracker.CertaintyChangeRecache(world.Comp);
+        var (noMood, flatTracker, flatPawn) = Setup(withPrecept: true, colonyMoodOffset: 0f);
+        Recache(noMood, flatPawn, flatTracker);
 
-        Assert.True(tracker.CachedCertaintyChange < 0f,
-            $"Expected inactivity penalty to produce negative rate, got {tracker.CachedCertaintyChange}");
+        Assert.True(moodTracker.CachedPractitional > 0f);
+        Assert.True(moodTracker.CachedTargetCertainty > flatTracker.CachedTargetCertainty);
     }
 
     [Fact]
-    public void CertaintyChangeRecache_InactivityPenalty_BlockedByHighMood()
+    public void Practice_NoPreceptThought_YieldsZeroPractitionalBand()
     {
-        // Same timing, but mood >= 0.8 → penalty suppressed
-        var (world, tracker, pawn) = Setup(withPrecept: false, baseMood: 0.85f);
-        Find.TickManager.TicksGame = 4 * GenDate.TicksPerDay;
+        // Ideo with no precepts -> SimThought.SourcePrecept = null -> no practitional contribution,
+        // even with a large colony mood offset.
+        var (world, tracker, pawn) = Setup(withPrecept: false, colonyMoodOffset: 20f);
+        Recache(world, pawn, tracker);
 
-        pawn.UpdateThoughts();
-        tracker.CertaintyChangeRecache(world.Comp);
-
-        Assert.Equal(0f, tracker.CachedCertaintyChange, precision: 6);
+        Assert.Equal(0f, tracker.CachedPractitional, precision: 6);
     }
 
     [Fact]
-    public void CertaintyChangeRecache_InactivityPenalty_BlockedWithinThreeDays()
+    public void Practice_MaxRange_CapsPractitionalBand()
     {
-        // Low mood but only 2 days elapsed → below 3-day threshold
-        var (world, tracker, pawn) = Setup(withPrecept: false, baseMood: 0.7f);
-        Find.TickManager.TicksGame = 2 * GenDate.TicksPerDay;
+        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: 1000f);
+        Recache(world, pawn, tracker);
 
-        pawn.UpdateThoughts();
-        tracker.CertaintyChangeRecache(world.Comp);
-
-        Assert.Equal(0f, tracker.CachedCertaintyChange, precision: 6);
+        Assert.Equal(EnhancedBeliefsMod.Settings.PracticeMaxRange, tracker.CachedPractitional, precision: 5);
     }
 
     [Fact]
-    public void CertaintyChangeRecache_InactivityPenalty_BlockedAtExactlyThreeDays()
+    public void Target_StaysWithinUnitInterval_UnderExtremeNegativeInputs()
     {
-        // Condition is "> 3 days", so exactly 3*TicksPerDay must not trigger
-        var (world, tracker, pawn) = Setup(withPrecept: false, baseMood: 0.7f);
-        Find.TickManager.TicksGame = 3 * GenDate.TicksPerDay;
+        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: -1000f, baseMood: 0.2f);
+        Recache(world, pawn, tracker);
 
-        pawn.UpdateThoughts();
-        tracker.CertaintyChangeRecache(world.Comp);
+        Assert.InRange(tracker.CachedTargetCertainty, 0f, 1f);
+    }
 
-        Assert.Equal(0f, tracker.CachedCertaintyChange, precision: 6);
+    [Fact]
+    public void Relational_LikedCoReligionists_RaiseTarget()
+    {
+        var (world, tracker, pawn) = RelationalSetup(opinion: 80f);
+        Recache(world, pawn, tracker);
+
+        Assert.True(tracker.CachedRelational > 0f);
+    }
+
+    [Fact]
+    public void Relational_HatedCoReligionists_LowerTarget()
+    {
+        var (world, tracker, pawn) = RelationalSetup(opinion: -80f);
+        Recache(world, pawn, tracker);
+
+        Assert.True(tracker.CachedRelational < 0f);
+    }
+
+    [Fact]
+    public void Relational_NoCoReligionists_YieldsZeroBand()
+    {
+        var (world, tracker, pawn) = Setup(withPrecept: true);
+        Recache(world, pawn, tracker);
+
+        Assert.Equal(0f, tracker.CachedRelational, precision: 6);
+    }
+
+    private static (SimWorld world, IdeoTrackerData tracker, SimPawn pawn) RelationalSetup(float opinion)
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var ideo = new IdeoBuilder().WithName("I").AddPrecept(new PreceptDef { defName = "P" }).Build();
+        world.AddIdeo(ideo);
+
+        var other = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("Other").Build(world);
+        var pawn = new PawnBuilder()
+            .WithIdeo(ideo)
+            .WithCertainty(0.5f)
+            .WithLabel("P")
+            .WithOpinionOf(other, opinion)
+            .Build(world);
+
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        return (world, tracker, pawn);
     }
 }
