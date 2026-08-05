@@ -18,6 +18,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     public int LastPositiveThoughtTick => lastPositiveThoughtTick;
 
     public float CachedCertaintyChange { get; private set; } = -9999f;
+    public float CachedMoodCertaintyOffset { get; private set; }
+    public float CachedRelationshipMultiplier { get; private set; }
+    public float CachedInactivityLoss { get; private set; }
 
     // Separate because recalculating base from memes in case player's ideo is fluid cuts down on overall performance cost
     // Breaks if you multiply opinion but you really shouldn't do that
@@ -59,7 +62,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         get
         {
-            if (cachedOpinionMultiplier >= 0f && Find.TickManager.TicksGame - 2000 > lastMultiplierCacheTick)
+            if (cachedOpinionMultiplier >= 0f && Find.TickManager.TicksGame - lastMultiplierCacheTick < 2000)
             {
                 return cachedOpinionMultiplier;
             }
@@ -106,14 +109,22 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         var moodCertaintyOffset = GameComponent_EnhancedBeliefs.CertaintyOffsetFromThoughts.Evaluate(moodSum);
-        var relationshipMultiplier = 1 + (GameComponent_EnhancedBeliefs.CertaintyMultiplierFromRelationships.Evaluate(IdeoOpinionFromRelationships(Pawn.Ideo, false, out var _) / 0.02f) * Math.Sign(moodCertaintyOffset));
+        var rawRelationshipSum = IdeoOpinionFromRelationships(Pawn.Ideo, false, out var _) / PawnOpinionFactor;
+        var relationshipMultiplier = 1 + (GameComponent_EnhancedBeliefs.CertaintyMultiplierFromRelationships.Evaluate(rawRelationshipSum) * Math.Sign(moodCertaintyOffset));
 
+        CachedMoodCertaintyOffset = moodCertaintyOffset;
+        CachedRelationshipMultiplier = (float)relationshipMultiplier;
         CachedCertaintyChange += moodCertaintyOffset * relationshipMultiplier;
 
         // Certainty only starts decreasing at moods below stellar and after 3 days of lacking positive precept moodlets
         if (Pawn.needs?.mood.CurLevelPercentage < 0.8 && Find.TickManager.TicksGame - LastPositiveThoughtTick > GenDate.TicksPerDay * 3f)
         {
-            CachedCertaintyChange -= GameComponent_EnhancedBeliefs.CertaintyLossFromInactivity.Evaluate((Find.TickManager.TicksGame - LastPositiveThoughtTick) / GenDate.TicksPerDay);
+            CachedInactivityLoss = GameComponent_EnhancedBeliefs.CertaintyLossFromInactivity.Evaluate((Find.TickManager.TicksGame - LastPositiveThoughtTick) / GenDate.TicksPerDay);
+            CachedCertaintyChange -= CachedInactivityLoss;
+        }
+        else
+        {
+            CachedInactivityLoss = 0f;
         }
     }
 
@@ -375,6 +386,59 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         cachedRelationshipIdeoOpinions[ideo] = opinion;
     }
 
+    // Certainty level this pawn would naturally have based on their traits/memes/precepts,
+    // independent of current certainty (unlike DefaultIdeoOpinion which short-circuits to Certainty for own ideo).
+    public float StructuralBaselineCertainty
+    {
+        get
+        {
+            var ideo = Pawn.Ideo;
+            float opinion = 0;
+
+            if (ideo.HasMeme(EnhancedBeliefsDefOf.Supremacist))
+                opinion -= 20;
+            else if (ideo.HasMeme(EnhancedBeliefsDefOf.Loyalist))
+                opinion -= 10;
+            else if (ideo.HasMeme(EnhancedBeliefsDefOf.Guilty))
+                opinion += 10;
+
+            foreach (var meme in ideo.memes)
+            {
+                if (!meme.agreeableTraits.NullOrEmpty())
+                    foreach (var trait in meme.agreeableTraits)
+                        if (trait.HasTrait(Pawn)) opinion += 10;
+
+                if (!meme.disagreeableTraits.NullOrEmpty())
+                    foreach (var trait in meme.disagreeableTraits)
+                        if (trait.HasTrait(Pawn)) opinion -= 10;
+            }
+
+            foreach (var precept in ideo.precepts)
+            {
+                var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
+                foreach (var comp in comps)
+                    opinion += comp.InternalOffset + comp.ExternalOffset + comp.GetTraitOpinion(Pawn);
+            }
+
+            // Shared memes with own ideo add opinion (using same logic as BeliefDifferences)
+            opinion -= GameComponent_EnhancedBeliefs.BeliefDifferences(ideo, ideo) * 5f;
+            opinion *= Mathf.Clamp01(Pawn.GetStatValue(StatDefOf.CertaintyLossFactor));
+            opinion *= OpinionMultiplier;
+
+            return Mathf.Clamp01((opinion + 30f) / 100f);
+        }
+    }
+
+    public IEnumerable<(Pawn pawn, float opinion)> GetOwnIdeoRelationships()
+    {
+        var ideo = Pawn.Ideo;
+        foreach (var kvp in cachedRelationships)
+        {
+            if (kvp.Key.Ideo == ideo)
+                yield return (kvp.Key, kvp.Value);
+        }
+    }
+
     public void ExposeData()
     {
         Scribe_References.Look(ref pawn, "pawn");
@@ -534,7 +598,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         var currentOpinion = IdeoOpinion(Pawn.Ideo);
-        var ideos = whitelistIdeos ?? Find.IdeoManager.IdeosListForReading;
+        List<Ideo> ideos = [.. whitelistIdeos ?? Find.IdeoManager.IdeosListForReading];
         ideos.SortBy(IdeoOpinion);
 
         if (excludeIdeos != null)

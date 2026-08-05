@@ -33,7 +33,8 @@ internal partial class GameComponent_EnhancedBeliefs
         public void EnsureIdeoPawnTrackerHasPawn(Ideo ideo, Pawn pawn)
         {
             var pawnList = EnsureIdeoHasPawnTracker(ideo);
-            pawnList.Add(pawn);
+            if (!pawnList.Contains(pawn))
+                pawnList.Add(pawn);
         }
 
         public bool RemovePawnFromIdeoPawnTracker(Ideo ideo, Pawn pawn)

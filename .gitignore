@@ -1,3 +1,5 @@
+.envrc
 /**/obj
-
+*bin*
+*__pycache__*
 /1.*/Assemblies

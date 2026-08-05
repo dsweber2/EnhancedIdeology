@@ -4,6 +4,8 @@ namespace EnhancedBeliefs.HarmonyPatches;
 [HotSwappable]
 internal static class SocialCardUtility_DrawCertainty
 {
+    private static readonly Texture2D BaselineBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.12f, 0.38f, 0.12f));
+
     private static Rect containerRect;
     internal static Rect ContainerRect => containerRect;
 
@@ -22,6 +24,9 @@ internal static class SocialCardUtility_DrawCertainty
         Rect barRect = new(num, rect.y + (rect.height / 2f) - 16f, rect.width - num - 26f, 32f);
         containerRect.xMax = barRect.xMax;
 
+        var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
+        var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
         if (Mouse.IsOver(containerRect))
         {
             Widgets.DrawHighlight(containerRect);
@@ -31,11 +36,26 @@ internal static class SocialCardUtility_DrawCertainty
             var tip = "EnhancedBeliefs.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO"), pawn.ideo.Certainty.ToStringPercent()) + "\n\n";
             tip += "EnhancedBeliefs.CertainChangePerDay".Translate(certaintyChange) + "\n";
 
-            var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
-            var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-            if (pawn.needs.mood.CurLevelPercentage < 0.8 && Find.TickManager.TicksGame - data.LastPositiveThoughtTick > 180000f)
+            var moodOffset = data.CachedMoodCertaintyOffset;
+            var moodSign = moodOffset >= 0f ? "+" : "";
+            tip += "EnhancedBeliefs.CertaintyFromPreceptMoods".Translate(moodSign + moodOffset.ToStringPercent()) + "\n";
+
+            var relMult = data.CachedRelationshipMultiplier;
+            tip += "EnhancedBeliefs.CertaintyRelationshipModifier".Translate(relMult.ToStringPercent()) + "\n";
+
+            var relationships = data.GetOwnIdeoRelationships().OrderByDescending(r => Math.Abs(r.opinion)).Take(5).ToList();
+            if (relationships.Count > 0)
             {
-                tip += "EnhancedBeliefs.CertaintyLossFromInactivity".Translate(GameComponent_EnhancedBeliefs.CertaintyLossFromInactivity.Evaluate((Find.TickManager.TicksGame - data.LastPositiveThoughtTick) / 60000f).ToStringPercent()) + "\n";
+                foreach (var (relPawn, opinion) in relationships)
+                {
+                    var opSign = opinion >= 0f ? "+" : "";
+                    tip += $"  - {relPawn.LabelShort}: {opSign}{opinion:F0}\n";
+                }
+            }
+
+            if (data.CachedInactivityLoss > 0f)
+            {
+                tip += "EnhancedBeliefs.CertaintyLossFromInactivity".Translate(data.CachedInactivityLoss.ToStringPercent()) + "\n";
             }
 
             TooltipHandler.TipRegion(containerRect, tip);
@@ -45,8 +65,25 @@ internal static class SocialCardUtility_DrawCertainty
             IdeoUIUtility.OpenIdeoInfo(pawn.Ideo);
         }
 
+        var innerRect = barRect.ContractedBy(4f);
 
-        _ = Widgets.FillableBar(barRect.ContractedBy(4f), pawn.ideo.Certainty, SocialCardUtility.BarFullTexHor);
+        // Background
+        GUI.DrawTexture(innerRect, BaseContent.BlackTex);
+
+        // Structural baseline (dark green, behind current bar)
+        var baseline = data.StructuralBaselineCertainty;
+        if (baseline > 0f)
+        {
+            var baselineRect = new Rect(innerRect.x, innerRect.y, innerRect.width * Mathf.Clamp01(baseline), innerRect.height);
+            GUI.DrawTexture(baselineRect, BaselineBarTex);
+        }
+
+        // Current certainty on top
+        if (pawn.ideo.Certainty > 0f)
+        {
+            var fillRect = new Rect(innerRect.x, innerRect.y, innerRect.width * Mathf.Clamp01(pawn.ideo.Certainty), innerRect.height);
+            GUI.DrawTexture(fillRect, SocialCardUtility.BarFullTexHor);
+        }
 
         return false;
     }

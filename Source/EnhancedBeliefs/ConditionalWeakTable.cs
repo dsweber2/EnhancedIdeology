@@ -9,10 +9,16 @@ internal sealed class ConditionalWeakTable<TKey, TValue> : IEnumerable<KeyValueP
     private readonly System.Runtime.CompilerServices.ConditionalWeakTable<TKey, TValue> innerConditionalWeakTable = new();
     private readonly HashSet<System.WeakReference<TKey>> keyReferences = [];
 
+    private bool IsKeyTracked(TKey key)
+    {
+        return keyReferences.Any(wr => wr.TryGetTarget(out var k) && k == key);
+    }
+
     public void Add(TKey key, TValue value)
     {
         innerConditionalWeakTable.Add(key, value);
-        _ = keyReferences.Add(new System.WeakReference<TKey>(key));
+        if (!IsKeyTracked(key))
+            _ = keyReferences.Add(new System.WeakReference<TKey>(key));
     }
 
     public void AddOrUpdate(TKey key, TValue value)
@@ -42,7 +48,8 @@ internal sealed class ConditionalWeakTable<TKey, TValue> : IEnumerable<KeyValueP
 
     public TValue GetOrCreateValue(TKey key)
     {
-        _ = keyReferences.Add(new System.WeakReference<TKey>(key));
+        if (!IsKeyTracked(key))
+            _ = keyReferences.Add(new System.WeakReference<TKey>(key));
         return innerConditionalWeakTable.GetOrCreateValue(key);
     }
 

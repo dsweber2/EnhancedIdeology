@@ -3,5 +3,7 @@
 <LanguageData>
     <EnhancedBeliefs.PawnCertaintyTooltip>{PAWN_nameDef}'s certainty in {IDEO_name}: {2}</EnhancedBeliefs.PawnCertaintyTooltip>
     <EnhancedBeliefs.CertainChangePerDay>Certainty change per day from beliefs: {0}</EnhancedBeliefs.CertainChangePerDay>
-    <EnhancedBeliefs.CertaintyLossFromInactivity>Certainty loss from lack of belief affirmation: {0}</EnhancedBeliefs.CertaintyLossFromInactivity>
+    <EnhancedBeliefs.CertaintyFromPreceptMoods>  From precept moods: {0}/day</EnhancedBeliefs.CertaintyFromPreceptMoods>
+    <EnhancedBeliefs.CertaintyRelationshipModifier>  Relationship modifier: ×{0}</EnhancedBeliefs.CertaintyRelationshipModifier>
+    <EnhancedBeliefs.CertaintyLossFromInactivity>  Inactivity penalty (no belief affirmation): -{0}/day</EnhancedBeliefs.CertaintyLossFromInactivity>
 </LanguageData>
