@@ -258,6 +258,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         var start = contributors?.Count ?? 0;
         float opinion = 0;
 
+        // various global meme specific opinions
         if (pawnIdeo.HasMeme(EnhancedBeliefsDefOf.Supremacist))
         {
             opinion -= 20;
@@ -274,6 +275,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             contributors?.Add((EnhancedBeliefsDefOf.Guilty.LabelCap, 10f));
         }
 
+        // pawn trait compatibility
         foreach (var meme in ideo.memes)
         {
             if (!meme.agreeableTraits.NullOrEmpty())
@@ -301,6 +303,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
         }
 
+        // check if the pawn has well regarded traits for the ideoligion
         foreach (var precept in pawnIdeo.precepts)
         {
             var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
@@ -315,6 +318,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
         }
 
+        // inter-ideoligion precept compatibility
         foreach (var precept in ideo.precepts)
         {
             var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
@@ -619,61 +623,92 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
     }
 
-    // Check if pawn should get converted to a new ideo after losing certainty in some way.
-    // TODO: This sounds like a method without side-effects, but it actually makes changes,
-    //       so go through the code and figure out what it actually does and then rename it to something more appropriate.
+    // Relative-preference conversion probability toward `candidate`: 1 - opinionOfOwn/opinionOfCandidate,
+    // and 0 unless the pawn genuinely prefers the candidate. Both sides are in the same "opinion" currency
+    // (opinion of the current ideo is the pawn's certainty in it), so this is scale-aware: near-total
+    // conviction resists even a strongly-liked alternative, while weakly-held belief flips easily.
+    public float ConversionProbability(Ideo candidate)
+    {
+        var opinion = IdeoOpinion(candidate);
+        var current = IdeoOpinion(Pawn.Ideo);
+        return opinion > current ? (opinion - current) / opinion : 0f;
+    }
+
+    // Discrete, one-shot conversion driven by acute social pressure (debates, directed attempts). The pawn's
+    // real ideos and a "crisis of faith" pseudo-candidate compete in one weighted draw; if the crisis wins,
+    // that is the IdeoChange breakdown. No time integration here - the event itself is the occurrence.
     public ConversionOutcome CheckConversion(
         Ideo? priorityIdeo = null,
         bool noBreakdown = false,
         List<Ideo>? excludeIdeos = null,
-        List<Ideo>? whitelistIdeos = null,
-        float? opinionThreshold = null)
+        List<Ideo>? whitelistIdeos = null)
     {
-        EnhancedBeliefsMod.Debug($"CheckConversion called: pawn={Pawn}, priorityIdeo={priorityIdeo}, noBreakdown={noBreakdown}, excludeIdeos={excludeIdeos}, whitelistIdeos={whitelistIdeos}, opinionThreshold={opinionThreshold}");
-        if (!ModLister.CheckIdeology("Ideoligion conversion") || Pawn.DevelopmentalStage.Baby())
+        if (!ModLister.CheckIdeology("Ideoligion conversion") || Pawn.DevelopmentalStage.Baby() || Find.IdeoManager.classicMode)
         {
-            EnhancedBeliefsMod.Debug("CheckConversion: ideology not enabled or pawn is baby. Returning Failure.");
-            return ConversionOutcome.Failure;
-        }
-        if (Find.IdeoManager.classicMode)
-        {
-            EnhancedBeliefsMod.Debug("CheckConversion: classicMode enabled. Returning Failure.");
             return ConversionOutcome.Failure;
         }
 
-        var certainty = Pawn.ideo.Certainty;
-        EnhancedBeliefsMod.Debug($"CheckConversion: certainty={certainty}");
+        var current = IdeoOpinion(Pawn.Ideo);
+        var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
-        if (certainty > 0.2f)
+        foreach (var ideo in whitelistIdeos ?? Find.IdeoManager.IdeosListForReading)
         {
-            EnhancedBeliefsMod.Debug("CheckConversion: certainty > 0.2. Returning Failure.");
+            if (ideo == Pawn.Ideo || (excludeIdeos != null && excludeIdeos.Contains(ideo)))
+            {
+                continue;
+            }
+
+            var opinion = IdeoOpinion(ideo);
+            if (opinion <= current)
+            {
+                continue;
+            }
+
+            // Converting to a "wrong" ideo during a directed attempt is half as likely - a rare lol moment.
+            var mult = priorityIdeo != null && priorityIdeo != ideo ? 0.5f : 1f;
+            candidates.Add((ideo, (opinion - current) / opinion * mult, (opinion - current) * mult));
+        }
+
+        AddCrisisCandidate(candidates, current, crisisWeight => crisisWeight / EnhancedBeliefsMod.Settings.CrisisThreshold);
+
+        var index = SelectWeightedConversion(candidates);
+        if (index < 0)
+        {
             return ConversionOutcome.Failure;
         }
 
-        var threshold = certainty <= 0f ? 0.6f : 0.85f; //Drastically lower conversion threshold if we're about to have a breakdown
-
-        if (opinionThreshold.HasValue) // Or if we're already having one
+        var chosen = candidates[index].ideo;
+        if (chosen == null)
         {
-            threshold = opinionThreshold.Value;
+            if (noBreakdown)
+            {
+                return ConversionOutcome.Failure;
+            }
+
+            _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedBeliefsDefOf.IdeoChange);
+            return ConversionOutcome.Breakdown;
         }
 
-        var currentOpinion = IdeoOpinion(Pawn.Ideo);
-        List<Ideo> ideos = [.. whitelistIdeos ?? Find.IdeoManager.IdeosListForReading];
-        ideos.SortBy(IdeoOpinion);
+        ApplyConversion(chosen);
+        return ConversionOutcome.Success;
+    }
 
-        if (excludeIdeos != null)
+    // Continuous, spontaneous conversion integrated over elapsed time. Each candidate's chance is its
+    // ConversionProbability treated as a hazard over ConversionInterval days, so it is invariant to how
+    // finely time is sampled - tick batching never silently sets the conversion rate. Called from the tick.
+    public void TryBackgroundConversion(float deltaDays)
+    {
+        if (deltaDays <= 0f || !ModLister.CheckIdeology("Ideoligion conversion")
+            || Pawn.DevelopmentalStage.Baby() || Find.IdeoManager.classicMode)
         {
-            ideos = [.. ideos.Except(excludeIdeos)];
+            return;
         }
 
-        // Moves priority ideo up to the top of the list so if the pawn is being converted and not having a random breakdown, they're gonna probably get converted to the target ideology
-        if (priorityIdeo != null)
-        {
-            _ = ideos.Remove(priorityIdeo);
-            ideos.Add(priorityIdeo);
-        }
+        var interval = EnhancedBeliefsMod.Settings.ConversionInterval;
+        var current = IdeoOpinion(Pawn.Ideo);
+        var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
-        foreach (var ideo in ideos.Reverse<Ideo>())
+        foreach (var ideo in Find.IdeoManager.IdeosListForReading)
         {
             if (ideo == Pawn.Ideo)
             {
@@ -681,63 +716,128 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
 
             var opinion = IdeoOpinion(ideo);
-            EnhancedBeliefsMod.Debug($"CheckConversion: considering ideo={ideo}, opinion={opinion}, threshold={threshold}, currentOpinion={currentOpinion}");
-
-            // Also don't convert in case we somehow like our current ideo significantly more than the new one
-            // Either we have VERY high relationships with a lot of people or very strong personal opinions on current ideology for this to even be possible
-            if (opinion < threshold || currentOpinion > opinion)
+            if (opinion <= current)
             {
-                EnhancedBeliefsMod.Debug("CheckConversion: opinion below threshold or currentOpinion > opinion. Skipping.");
                 continue;
             }
 
-            // 17% minimal chance of conversion at 20% certrainty and 85% opinion, half that if we're being converted and this is a wrong ideology. Randomly converting to a wrong ideology should be just a rare lol moment
-            var rand = Rand.Value;
-            var chance = (1 - (certainty * 4f)) * (opinion + (certainty <= 0f ? 0.3f : 0)) * ((priorityIdeo != null && priorityIdeo != ideo) ? 0.5f : 1f);
-            EnhancedBeliefsMod.Debug($"CheckConversion: rand={rand}, chance={chance}");
-            if (rand > chance)
-            {
-                EnhancedBeliefsMod.Debug("CheckConversion: random roll failed. Skipping.");
-                continue;
-            }
-
-            var oldIdeoContains = Pawn.ideo.PreviousIdeos.Contains(ideo);
-            var oldIdeo = Pawn.Ideo;
-            EnhancedBeliefsMod.Debug($"CheckConversion: converting from {oldIdeo} to {ideo}");
-            Pawn.ideo.SetIdeo(ideo);
-            ideo.Notify_MemberGainedByConversion();
-
-            // Move personal opinion into certainty i.e. base opinion, then zero it, since base opinions are fixed and personal beliefs are what is usually meant by certainty anyways
-            var rundown = DetailedIdeoOpinion(ideo);
-            Pawn.ideo.Certainty = Mathf.Min(rundown.BaseOpinion, 0.2f) + rundown.PersonalOpinion;
-            personalIdeoOpinions[ideo] = 0;
-
-            // Keep current opinion of our old ideo by moving difference between new base and old base (certainty) into personal thoughts
-            var oldBase = DetailedIdeoOpinion(oldIdeo).BaseOpinion;
-            EnhancedBeliefsMod.Debug($"CheckConversion: Adjusting personal opinion for oldIdeo {oldIdeo} by {certainty - oldBase}");
-            AdjustPersonalOpinion(oldIdeo, certainty - oldBase);
-
-            if (!oldIdeoContains)
-            {
-                EnhancedBeliefsMod.Debug($"CheckConversion: recording conversion event for {Pawn} to {ideo}");
-                Find.HistoryEventsManager.RecordEvent(new HistoryEvent(HistoryEventDefOf.ConvertedNewMember, Pawn.Named(HistoryEventArgsNames.Doer), ideo.Named(HistoryEventArgsNames.Ideo)));
-            }
-
-            RecacheAllBaseOpinions();
-            EnhancedBeliefsMod.Debug("CheckConversion: ConversionOutcome.Success");
-            return ConversionOutcome.Success;
+            var chance = HazardConversionChance((opinion - current) / opinion, deltaDays, interval);
+            candidates.Add((ideo, chance, opinion - current));
         }
 
-        if (certainty > 0f || noBreakdown)
+        AddCrisisCandidate(candidates, current,
+            crisisWeight => HazardConversionChance(crisisWeight / EnhancedBeliefsMod.Settings.CrisisThreshold, deltaDays, interval));
+
+        var index = SelectWeightedConversion(candidates);
+        if (index < 0)
         {
-            EnhancedBeliefsMod.Debug("CheckConversion: certainty > 0 or noBreakdown. Returning Failure.");
-            return ConversionOutcome.Failure;
+            return;
         }
 
-        // Oops
-        EnhancedBeliefsMod.Debug("CheckConversion: triggering IdeoChange mental state. Returning Breakdown.");
-        _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedBeliefsDefOf.IdeoChange);
-        return ConversionOutcome.Breakdown;
+        var chosen = candidates[index].ideo;
+        if (chosen == null)
+        {
+            _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedBeliefsDefOf.IdeoChange);
+            return;
+        }
+
+        ApplyConversion(chosen);
+    }
+
+    // Adds the crisis-of-faith pseudo-candidate (a null ideo) when the pawn now prefers doubt to their own
+    // faith, i.e. their conviction has fallen below the crisis threshold. It competes in the same draw as the
+    // real ideos with the same gap-based weight; only its chance differs between the one-shot and hazard paths.
+    private static void AddCrisisCandidate(List<(Ideo? ideo, float chance, float weight)> candidates, float current, Func<float, float> chanceOf)
+    {
+        var crisisThreshold = EnhancedBeliefsMod.Settings.CrisisThreshold;
+        if (current >= crisisThreshold)
+        {
+            return;
+        }
+
+        var weight = crisisThreshold - current;
+        candidates.Add((null, chanceOf(weight), weight));
+    }
+
+    // Weighted conversion draw. First rolls the competing-risks probability that *any* candidate fires
+    // (1 minus the product of each candidate's survival), then, if it does, picks which one proportional to
+    // its weight. Splitting "whether" (chance) from "which" (weight) lets the target stay discriminating by
+    // opinion gap even when certainty is near zero, where the ratio-based chances all saturate toward 1.
+    // Returns the chosen candidate's index, or -1 if nothing fired.
+    private static int SelectWeightedConversion(List<(Ideo? ideo, float chance, float weight)> candidates)
+    {
+        float survival = 1f;
+        foreach (var candidate in candidates)
+        {
+            survival *= 1f - candidate.chance;
+        }
+
+        if (Rand.Value >= 1f - survival)
+        {
+            return -1;
+        }
+
+        float totalWeight = 0f;
+        foreach (var candidate in candidates)
+        {
+            totalWeight += candidate.weight;
+        }
+
+        if (totalWeight <= 0f)
+        {
+            return -1;
+        }
+
+        var roll = Rand.Value * totalWeight;
+        for (var ii = 0; ii < candidates.Count; ii++)
+        {
+            roll -= candidates[ii].weight;
+            if (roll <= 0f)
+            {
+                return ii;
+            }
+        }
+
+        return candidates.Count - 1;
+    }
+
+    // A per-window probability p, integrated over deltaDays as a hazard with the given interval.
+    // Survival is multiplicative in time, so sampling the same span more finely yields the same total
+    // probability - the roll cadence cannot silently change the conversion rate.
+    public static float HazardConversionChance(float p, float deltaDays, float intervalDays)
+    {
+        return 1f - Mathf.Pow(1f - p, deltaDays / intervalDays);
+    }
+
+    // Performs the actual conversion to newIdeo. Side-effectful by nature: swaps the pawn's ideo, reseeds
+    // certainty from opinion, preserves the old ideo's standing as personal opinion, records history, recaches.
+    private void ApplyConversion(Ideo newIdeo)
+    {
+        var oldCertainty = Pawn.ideo.Certainty;
+        var oldIdeo = Pawn.Ideo;
+        var oldIdeoContains = Pawn.ideo.PreviousIdeos.Contains(newIdeo);
+
+        // How drawn the pawn is to the new ideo, captured before SetIdeo - afterwards the own-ideo
+        // short-circuit would report raw certainty instead. A convert arrives believing as strongly as
+        // they preferred it, so they can't immediately be out-preferred by an ideo they just rejected.
+        var newCertainty = IdeoOpinion(newIdeo);
+
+        Pawn.ideo.SetIdeo(newIdeo);
+        newIdeo.Notify_MemberGainedByConversion();
+
+        Pawn.ideo.Certainty = newCertainty;
+        personalIdeoOpinions[newIdeo] = 0;
+
+        // Keep current opinion of our old ideo by moving difference between new base and old base (certainty) into personal thoughts
+        var oldBase = DetailedIdeoOpinion(oldIdeo).BaseOpinion;
+        AdjustPersonalOpinion(oldIdeo, oldCertainty - oldBase);
+
+        if (!oldIdeoContains)
+        {
+            Find.HistoryEventsManager.RecordEvent(new HistoryEvent(HistoryEventDefOf.ConvertedNewMember, Pawn.Named(HistoryEventArgsNames.Doer), newIdeo.Named(HistoryEventArgsNames.Ideo)));
+        }
+
+        RecacheAllBaseOpinions();
     }
 
     public bool OverrideConversionAttempt(float certaintyReduction, Ideo newIdeo, bool applyCertaintyFactor = true)

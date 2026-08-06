@@ -1,6 +1,6 @@
 namespace EnhancedBeliefs.Tests;
 
-public class StructuralOpinionTests
+public class StructuralOpinionTests : SeededTest
 {
     [Fact]
     public void StructuralIdeoOpinion_SupremacistMeme_DecreasesBaseOpinion()

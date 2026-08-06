@@ -25,6 +25,20 @@ public class Settings : ModSettings
     private float _practiceMaxRange = 0.15f;
     public float PracticeMaxRange => _practiceMaxRange;
 
+    // Reference window (in days) over which a fully-tempted pawn's spontaneous-conversion odds play out
+    // at 1x pace. The player-facing knob is a pace multiplier over this default; higher pace = shorter
+    // effective interval = faster conversions.
+    private const float DefaultConversionInterval = 3f;
+    private float _conversionPace = 1f;
+    public float ConversionPace => _conversionPace;
+    public float ConversionInterval => DefaultConversionInterval / _conversionPace;
+
+    // Certainty of the "crisis of faith" pseudo-ideo. When a pawn's conviction in their own ideo falls
+    // below this, doubt joins the conversion draw as a competing option weighted by how far below it they
+    // are - so a collapsing pawn with only weakly-preferred alternatives is likely to break down instead.
+    private float _crisisThreshold = 0.25f;
+    public float CrisisThreshold => _crisisThreshold;
+
     public override void ExposeData()
     {
         base.ExposeData();
@@ -34,6 +48,8 @@ public class Settings : ModSettings
         Scribe_Values.Look(ref _difficultyOffset, "difficultyOffset", 0f);
         Scribe_Values.Look(ref _relationalMaxRange, "relationalMaxRange", 0.12f);
         Scribe_Values.Look(ref _practiceMaxRange, "practiceMaxRange", 0.15f);
+        Scribe_Values.Look(ref _conversionPace, "conversionPace", 1f);
+        Scribe_Values.Look(ref _crisisThreshold, "crisisThreshold", 0.25f);
     }
 
     public void DoSettingsWindowContents(Rect inRect)
@@ -48,6 +64,11 @@ public class Settings : ModSettings
 
         listingStandard.Gap();
 
+        MultiplierSlider(listingStandard, "EnhancedBeliefs.ConversionPace", ref _conversionPace, 0.25f, 4f);
+        PercentSlider(listingStandard, "EnhancedBeliefs.CrisisThreshold", ref _crisisThreshold, 0f, 0.5f);
+
+        listingStandard.Gap();
+
         listingStandard.CheckboxLabeled(
             "EnhancedBeliefs.DebugInteractionWorkers".Translate(),
             ref _debugInteractionWorkers,
@@ -59,6 +80,12 @@ public class Settings : ModSettings
     private static void PercentSlider(Listing_Standard listing, string labelKey, ref float value, float min, float max)
     {
         listing.Label(labelKey.Translate(value.ToStringPercent()), tooltip: (labelKey + ".Tip").Translate());
+        value = listing.Slider(value, min, max);
+    }
+
+    private static void MultiplierSlider(Listing_Standard listing, string labelKey, ref float value, float min, float max)
+    {
+        listing.Label(labelKey.Translate(value.ToString("0.0#") + "x"), tooltip: (labelKey + ".Tip").Translate());
         value = listing.Slider(value, min, max);
     }
 }

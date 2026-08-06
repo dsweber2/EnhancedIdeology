@@ -2,7 +2,7 @@ using RimWorld;
 
 namespace EnhancedBeliefs.Tests;
 
-public class BookReadingTests
+public class BookReadingTests : SeededTest
 {
     private static (SimWorld world, SimPawn pawn, ReadingOutcomeDoer_CertaintyChange doer) Setup(
         QualityCategory quality = QualityCategory.Normal)

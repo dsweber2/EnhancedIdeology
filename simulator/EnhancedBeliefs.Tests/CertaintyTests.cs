@@ -1,6 +1,6 @@
 namespace EnhancedBeliefs.Tests;
 
-public class CertaintyTests
+public class CertaintyTests : SeededTest
 {
     private static (SimWorld world, IdeoTrackerData tracker, SimPawn pawn) Setup(
         bool withPrecept,

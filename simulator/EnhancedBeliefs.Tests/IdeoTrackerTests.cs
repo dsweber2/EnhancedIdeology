@@ -1,6 +1,6 @@
 namespace EnhancedBeliefs.Tests;
 
-public class IdeoTrackerTests
+public class IdeoTrackerTests : SeededTest
 {
     [Fact]
     public void GetIdeoPawns_ZeroPawnIdeo_ReturnsEmptyWithoutRecursion()

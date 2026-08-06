@@ -1,27 +1,32 @@
 namespace EnhancedBeliefs.Tests;
 
-public class ConversionTests
+public class ConversionTests : SeededTest
 {
     [Fact]
-    public void CheckConversion_CertaintyAboveThreshold_ReturnsFail()
+    public void CheckConversion_PrefersOwnIdeo_ReturnsFail()
     {
+        // High certainty in a plain ideo (opinion 0.8) vs a plain alternative (base opinion 0.3):
+        // the pawn prefers their own, so ConversionProbability is 0 and nothing fires.
         var world = new SimWorld();
         world.Initialize();
 
         var ideo = new IdeoBuilder().WithName("I").Build();
+        var other = new IdeoBuilder().WithName("Other").Build();
         world.AddIdeo(ideo);
-        var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("P").Build(world);
+        world.AddIdeo(other);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.8f).WithLabel("P").Build(world);
 
         var result = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn).CheckConversion();
 
         Assert.Equal(ConversionOutcome.Failure, result);
+        Assert.Equal(ideo, pawn.Ideo);
     }
 
     [Fact]
     public void CheckConversion_ZeroCertainty_HighOpinionAlternative_Converts()
     {
-        // ideoB has a precept with ExternalOffset=90 → StructuralIdeoOpinion returns 90
-        // certainty=0 → threshold=0.6, and opinion=0.9 → random chance always succeeds (1.2 > any [0,1] roll)
+        // ideoB has a precept with ExternalOffset=90 → opinion of it is 0.9.
+        // certainty=0 → opinion of own ideo is 0, so p = (0.9 - 0)/0.9 = 1 → always converts.
         var world = new SimWorld();
         world.Initialize();
         Rand.SetSeed(1);
@@ -46,7 +51,9 @@ public class ConversionTests
     [Fact]
     public void InteractionWorker_HighConversionPower_DropsCertainty()
     {
-        // Verify the worker directly reduces recipient certainty (5 * 0.04 * power=3 = 0.6 drop from 0.75)
+        // A single attempt drops recipient certainty (~0.04 * power=3 = 0.12) without yet converting them -
+        // their opinion of the evangelist's plain ideo (~0.55) is still below their post-drop certainty (~0.63).
+        Rand.SetSeed(1);
         var world = new SimWorld();
         world.Initialize();
 
@@ -68,73 +75,95 @@ public class ConversionTests
             .WithLabel("Recipient")
             .Build(world);
 
-        // 3 iterations: certainty → 0.75 − 3×0.12 = 0.39, which keeps chance formula negative
-        // ((1 − 0.39×4) = −0.56) so conversion is mathematically impossible regardless of rand
         var worker = new InteractionWorker_AdvancedConversionAttempt();
-        for (int ii = 0; ii < 3; ii++)
-            worker.Interacted(evangelist, recipient, [], out _, out _, out _, out _);
+        worker.Interacted(evangelist, recipient, [], out _, out _, out _, out _);
 
+        Assert.Equal(recipientIdeo, recipient.Ideo);
         Assert.True(recipient.ideo.Certainty < 0.75f,
             $"Expected certainty to drop after conversion pressure. Got: {recipient.ideo.Certainty:F4}");
     }
 
     [Fact]
-    public void CheckConversion_MultipleIdeos_PicksHighestOpinion()
+    public void CheckConversion_WeightedByGap_FavoursHigherOpinionButBothReachable()
     {
-        // SortBy(IdeoOpinion) + Reverse means highest-opinion ideo is tried first
-        var world = new SimWorld();
-        world.Initialize();
+        // Target selection is a weighted draw by opinion gap, not a guaranteed pick of the top ideo.
+        // The higher-gap ideo (0.9) should win clearly more than the lower (0.5) - roughly 1.8:1 - but
+        // the lower one must remain reachable, unlike the old deterministic "always highest" behaviour.
         Rand.SetSeed(1);
+        const int trials = 400;
+        var high = 0;
+        var low = 0;
 
-        var lowPreceptDef = new PreceptDef { defName = "Low" };
-        lowPreceptDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 10 });
-        var highPreceptDef = new PreceptDef { defName = "High" };
-        highPreceptDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 90 });
+        for (var ii = 0; ii < trials; ii++)
+        {
+            var world = new SimWorld();
+            world.Initialize();
 
-        var ideoA = new IdeoBuilder().WithName("IdeoA").Build();
-        var ideoB = new IdeoBuilder().WithName("IdeoB").AddPrecept(lowPreceptDef).Build();
-        var ideoC = new IdeoBuilder().WithName("IdeoC").AddPrecept(highPreceptDef).Build();
-        world.AddIdeo(ideoA);
-        world.AddIdeo(ideoB);
-        world.AddIdeo(ideoC);
+            var lowDef = new PreceptDef { defName = $"Low{ii}" };
+            lowDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 20 });
+            var highDef = new PreceptDef { defName = $"High{ii}" };
+            highDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 60 });
 
-        var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0f).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+            var own = new IdeoBuilder().WithName("Own").Build();
+            var lowIdeo = new IdeoBuilder().WithName("Low").AddPrecept(lowDef).Build();
+            var highIdeo = new IdeoBuilder().WithName("High").AddPrecept(highDef).Build();
+            world.AddIdeo(own);
+            world.AddIdeo(lowIdeo);
+            world.AddIdeo(highIdeo);
 
-        var result = tracker.CheckConversion();
+            var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0f).WithLabel("P").Build(world);
+            var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        Assert.Equal(ConversionOutcome.Success, result);
-        Assert.Equal(ideoC, pawn.Ideo);
+            tracker.CheckConversion();
+
+            if (pawn.Ideo == highIdeo) high++;
+            else if (pawn.Ideo == lowIdeo) low++;
+        }
+
+        // Some trials break down (the crisis pseudo-candidate wins) so high + low < trials, but the two
+        // real ideos keep their gap ratio among the conversions that do happen.
+        Assert.True(high > low, $"higher-gap ideo should be favoured: high={high} low={low}");
+        Assert.True(low > 0, $"lower-gap ideo must remain reachable: low={low}");
+        Assert.InRange((float)high / low, 1.4f, 2.3f); // gap ratio 0.9:0.5 = 1.8
     }
 
     [Fact]
-    public void CheckConversion_PriorityIdeo_ConvertsToTargetOverHigherOpinionAlternative()
+    public void CheckConversion_PriorityIdeo_FavouredOverHigherOpinionAlternative()
     {
-        // Without priority, pawn converts to ideoC (opinion=0.9). With priorityIdeo=ideoB,
-        // ideoB is moved to the front of the reversed list and tried first despite lower opinion.
-        var world = new SimWorld();
-        world.Initialize();
+        // A directed attempt halves every *other* candidate's chance and weight, so the priority ideo
+        // (opinion 0.6) is favoured over a higher-opinion alternative (0.9) - a bias now, not a guarantee.
         Rand.SetSeed(1);
+        const int trials = 400;
+        var priority = 0;
+        var other = 0;
 
-        var preceptB = new PreceptDef { defName = "PB" };
-        preceptB.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 30 });
-        var preceptC = new PreceptDef { defName = "PC" };
-        preceptC.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 60 });
+        for (var ii = 0; ii < trials; ii++)
+        {
+            var world = new SimWorld();
+            world.Initialize();
 
-        var ideoA = new IdeoBuilder().WithName("A").Build();
-        var ideoB = new IdeoBuilder().WithName("B").AddPrecept(preceptB).Build();
-        var ideoC = new IdeoBuilder().WithName("C").AddPrecept(preceptC).Build();
-        world.AddIdeo(ideoA);
-        world.AddIdeo(ideoB);
-        world.AddIdeo(ideoC);
+            var defB = new PreceptDef { defName = $"PB{ii}" };
+            defB.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 30 });
+            var defC = new PreceptDef { defName = $"PC{ii}" };
+            defC.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 60 });
 
-        var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0f).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+            var ideoA = new IdeoBuilder().WithName("A").Build();
+            var ideoB = new IdeoBuilder().WithName("B").AddPrecept(defB).Build();
+            var ideoC = new IdeoBuilder().WithName("C").AddPrecept(defC).Build();
+            world.AddIdeo(ideoA);
+            world.AddIdeo(ideoB);
+            world.AddIdeo(ideoC);
 
-        var result = tracker.CheckConversion(priorityIdeo: ideoB);
+            var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0f).WithLabel("P").Build(world);
+            var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        Assert.Equal(ConversionOutcome.Success, result);
-        Assert.Equal(ideoB, pawn.Ideo);
+            tracker.CheckConversion(priorityIdeo: ideoB);
+
+            if (pawn.Ideo == ideoB) priority++;
+            else if (pawn.Ideo == ideoC) other++;
+        }
+
+        Assert.True(priority > other, $"priority ideo should be favoured: priority={priority} other={other}");
     }
 
     [Fact]
@@ -167,16 +196,15 @@ public class ConversionTests
     }
 
     [Fact]
-    public void CheckConversion_NoCandidateAboveThreshold_ReturnsBreakdown()
+    public void CheckConversion_NoPreferableAlternative_ZeroCertainty_ReturnsBreakdown()
     {
-        // ideoB opinion = (30+0)/100 = 0.3, below threshold 0.6 for certainty=0 → breakdown path
+        // With no absolute threshold, breakdown only fires when the pawn prefers no other ideo over their
+        // (collapsed) own. Here the only ideo is their own, so there is nothing to convert to.
         var world = new SimWorld();
         world.Initialize();
 
         var ideoA = new IdeoBuilder().WithName("Aa").Build();
-        var ideoB = new IdeoBuilder().WithName("Ba").Build();
         world.AddIdeo(ideoA);
-        world.AddIdeo(ideoB);
 
         var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0f).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);

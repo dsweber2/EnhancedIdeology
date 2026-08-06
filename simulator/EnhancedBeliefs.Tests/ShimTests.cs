@@ -1,6 +1,6 @@
 namespace EnhancedBeliefs.Tests;
 
-public class ShimTests
+public class ShimTests : SeededTest
 {
     [Fact]
     public void SimpleCurve_Evaluate_BelowRange_ClampsToFirstPoint()

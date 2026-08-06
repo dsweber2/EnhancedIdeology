@@ -17,7 +17,7 @@ internal static class IdeoChangeBreak_Start
         var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        if (data.CheckConversion(noBreakdown: true, opinionThreshold: 0.4f) == ConversionOutcome.Success)
+        if (data.CheckConversion(noBreakdown: true) == ConversionOutcome.Success)
         {
             __instance.newIdeo = pawn.Ideo;
             __instance.changedIdeo = true;

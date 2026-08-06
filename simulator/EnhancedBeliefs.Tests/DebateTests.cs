@@ -1,6 +1,6 @@
 namespace EnhancedBeliefs.Tests;
 
-public class DebateTests
+public class DebateTests : SeededTest
 {
     [Fact]
     public void DebateMeme_InitiatorWins_IncreasesLoserMemeOpinion()
