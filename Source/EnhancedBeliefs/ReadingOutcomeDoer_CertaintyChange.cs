@@ -6,6 +6,11 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 
     public Ideo? ideo;
 
+    // Per-issue conviction the book argues its ideo's stances with, so a book is not a uniformly certain tract.
+    // Derived from the author's own convictions (censored to the ideo's approved positions) when there is one,
+    // otherwise rolled like a pawn's. Read at generation and lazily backfilled for books that predate it.
+    private Dictionary<IssueDef, float> issueStrength = [];
+
     // In percents, so divided by 100 when actually applied
     internal static readonly SimpleCurve certaintyGainFromQuality =
     [
@@ -30,13 +35,57 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
     {
         base.OnBookGenerated(author);
 
-        if (author != null && author.Ideo != null)
+        ideo = author?.Ideo ?? Find.IdeoManager.IdeosListForReading.RandomElement();
+        SeedIssueStrengths(author);
+    }
+
+    // Fix the conviction the book argues each of its ideo's Moral positions with. An authored book inherits the
+    // author's own per-issue conviction (which already carries their personality's zeal), censored to the ideo's
+    // approved rungs; a found or trader book with no known author rolls a plain conviction per issue.
+    private void SeedIssueStrengths(Pawn? author)
+    {
+        Dictionary<IssueDef, (float rank, float strength)>? authorStances = null;
+        if (author != null && author.Ideo == ideo)
         {
-            ideo = author.Ideo;
-            return;
+            var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
+            var authorTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(author);
+            authorStances = authorTracker.IssueStances()
+                .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
         }
 
-        ideo = Find.IdeoManager.IdeosListForReading.RandomElement();
+        foreach (var precept in MoralPrecepts(ideo!))
+        {
+            var issue = precept.issue!;
+            issueStrength[issue] = AuthoredStrength(authorStances, issue, PreceptLadder.RankOf(precept));
+        }
+    }
+
+    // What conviction the author writes a given orthodox position with. If the author still personally holds
+    // that rung, it is their own conviction; if their stance has drifted to a different rung (they now disagree
+    // with the party line they are penning), they argue it only faintly, at CensoredConviction. With no known
+    // author, a plain roll stands in.
+    private static float AuthoredStrength(
+        Dictionary<IssueDef, (float rank, float strength)>? authorStances, IssueDef issue, float orthodoxRank)
+    {
+        if (authorStances != null && authorStances.TryGetValue(issue, out var stance))
+        {
+            return Mathf.RoundToInt(stance.rank) == Mathf.RoundToInt(orthodoxRank) ? stance.strength : CensoredConviction;
+        }
+
+        return Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.BaseConvictionMax);
+    }
+
+    // The book's conviction on an issue, backfilled with a fresh roll for books that predate this data or issues
+    // the ideo picked up after generation.
+    private float BookStrength(IssueDef issue)
+    {
+        if (!issueStrength.TryGetValue(issue, out var strength))
+        {
+            strength = Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.BaseConvictionMax);
+            issueStrength[issue] = strength;
+        }
+
+        return strength;
     }
 
     public override void Reset()
@@ -58,6 +107,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         }
 
         Scribe_References.Look(ref ideo, "ideo");
+        Scribe_Collections.Look(ref issueStrength, "issueStrength", LookMode.Def, LookMode.Value);
     }
 
     public override IEnumerable<Dialog_InfoCard.Hyperlink> GetHyperlinks()
@@ -94,6 +144,10 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
     // and certainty follows structurally via the setpoint rather than being poked here.
     private const float SubversionPull = 1f;
 
+    // Conviction a heterodox author argues the orthodox line with when their own stance has drifted off it -
+    // they toe the party line in the book, but faintly, since they no longer believe it.
+    private const float CensoredConviction = 1f;
+
     public override void OnReadingTick(Pawn reader, float factor)
     {
         base.OnReadingTick(reader, factor);
@@ -114,22 +168,23 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 
         if (reader.Ideo == ideo)
         {
-            // Reading your own faith's book hardens conviction on the issues it takes a stance on. Certainty
-            // 1.0 corresponds to MaxConvictionStrength conviction, so convert the gain on that footing.
-            var delta = gain * IdeoTrackerData.MaxConvictionStrength;
+            // Reading your own faith's book hardens conviction on the issues it takes a stance on, by more where
+            // the book argues that issue with more conviction. A book arguing an issue at MaxConvictionStrength
+            // reproduces the old flat "certainty 1.0 == MaxConvictionStrength conviction" footing.
             foreach (var precept in MoralPrecepts(ideo))
             {
-                tracker.ShiftIssueStance(precept.issue!, 0f, 0f, delta);
+                tracker.ShiftIssueStance(precept.issue!, 0f, 0f, gain * BookStrength(precept.issue!));
             }
 
             return;
         }
 
         // Reading a rival faith's book tugs your stances toward its positions, warming you to it and, as your
-        // fit with your own ideo erodes, letting the certainty setpoint pull your conviction down over time.
-        var pull = gain * SubversionPull;
+        // fit with your own ideo erodes, letting the certainty setpoint pull your conviction down over time. A
+        // more fervently argued position tugs harder, normalized so MaxConvictionStrength matches the old pull.
         foreach (var precept in MoralPrecepts(ideo))
         {
+            var pull = gain * SubversionPull * (BookStrength(precept.issue!) / IdeoTrackerData.MaxConvictionStrength);
             tracker.ShiftIssueStance(precept.issue!, PreceptLadder.RankOf(precept), pull, 0f);
         }
     }
