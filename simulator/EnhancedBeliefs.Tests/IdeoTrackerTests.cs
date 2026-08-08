@@ -138,30 +138,6 @@ public class IdeoTrackerTests : SeededTest
     }
 
     [Fact]
-    public void TruePreceptOpinion_AgreeableTrait_AddsTraitBonus()
-    {
-        // PreceptComp_OpinionOffset.GetTraitOpinion: 1 agreeable trait match → 1 * opinionPerTrait(2f) = +2
-        var world = new SimWorld();
-        world.Initialize();
-
-        var traitDef = new TraitDef { defName = "AgreeableForPrecept" };
-        var preceptDef = new PreceptDef { defName = "TraitPrecept" };
-        var comp = new PreceptComp_OpinionOffset_Mutable();
-        comp.agreeableTraits.Add(new TraitRequirement { def = traitDef });
-        preceptDef.AddComp(comp);
-
-        var ideo = new IdeoBuilder().WithName("TP").AddPrecept(preceptDef).Build();
-        world.AddIdeo(ideo);
-
-        var pawn = new PawnBuilder().WithIdeo(ideo).WithTrait(traitDef).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-
-        var opinion = tracker.TruePreceptOpinion(preceptDef);
-
-        Assert.Equal(2f, opinion, precision: 4);
-    }
-
-    [Fact]
     public void OverrideConversionAttempt_HighCertainty_ReturnsFalse()
     {
         // certainty=0.8, reduction=0.1 → newCertainty=0.7 > 0.2 → CheckConversion returns Failure

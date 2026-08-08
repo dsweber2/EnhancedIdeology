@@ -124,14 +124,16 @@ public class CertaintySetpointTests : SeededTest
     }
 
     [Fact]
-    public void StructuralContributors_IncludeBaseFaithAndPreceptOffset()
+    public void StructuralContributors_ComeFromPerIssuePreceptStances()
     {
+        // The flat +30 base faith and the per-precept external offset are gone. The structural band is now
+        // built from per-issue precept agreement: the pawn's own ideo holds a rung, so on that issue they
+        // agree with themselves (+strength) and it contributes a positive term that sums to the band.
         var world = new SimWorld();
         world.Initialize();
 
-        var ideo = new IdeoBuilder().WithName("I")
-            .AddPrecept(new PreceptDef { defName = "Generous" }, externalOffset: 40)
-            .Build();
+        var (issue, rungs) = SimIssues.Ladder("Generosity", "Selfish", "Generous");
+        var ideo = new IdeoBuilder().WithName("I").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
         world.AddIdeo(ideo);
 
         var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("P").Build(world);
@@ -139,11 +141,11 @@ public class CertaintySetpointTests : SeededTest
         pawn.UpdateThoughts();
         tracker.CertaintyChangeRecache(world.Comp);
 
-        // Base faith is a flat +30%.
-        Assert.Contains(tracker.StructuralContributors, c => Math.Abs(c.pct - 0.30f) < 1e-4f);
-        // The +40 external offset rescales to +40% of a certainty bar.
-        Assert.Contains(tracker.StructuralContributors, c => Math.Abs(c.pct - 0.40f) < 1e-4f);
-        // Contributors sum to the (unclamped) structural band.
+        // The structural band is positive (agreement with own stance) and non-trivial.
+        Assert.True(tracker.CachedStructural > 0f, $"expected positive structural band, got {tracker.CachedStructural}");
+        // There is a per-issue contributor for the registered ladder.
+        Assert.Contains(tracker.StructuralContributors, c => c.label == issue.LabelCap && c.pct > 0f);
+        // Contributors sum to the structural band.
         Assert.Equal(tracker.CachedStructural, tracker.StructuralContributors.Sum(c => c.pct), precision: 5);
     }
 

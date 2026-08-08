@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LanguageData>
-    <EnhancedBeliefs.DebugInteractionWorkers>DEV: Debug Interaction Workers</EnhancedBeliefs.DebugInteractionWorkers>
-    <EnhancedBeliefs.DebugInteractionWorkers.Tip>Enables debug logging for interaction workers when dev mode is active.</EnhancedBeliefs.DebugInteractionWorkers.Tip>
-    <EnhancedBeliefs.CertaintyDriftRate>Certainty drift rate: {0}/day</EnhancedBeliefs.CertaintyDriftRate>
-    <EnhancedBeliefs.CertaintyDriftRate.Tip>How fast a pawn's certainty moves toward its target each day. Higher = faith reacts faster to circumstances.</EnhancedBeliefs.CertaintyDriftRate.Tip>
-    <EnhancedBeliefs.DifficultyOffset>Difficulty offset: {0}</EnhancedBeliefs.DifficultyOffset>
-    <EnhancedBeliefs.DifficultyOffset.Tip>Flat shift applied to every pawn's target certainty. Positive makes faith stickier; negative makes converts easier to peel away.</EnhancedBeliefs.DifficultyOffset.Tip>
-    <EnhancedBeliefs.RelationalMaxRange>Congregation influence: ±{0}</EnhancedBeliefs.RelationalMaxRange>
-    <EnhancedBeliefs.RelationalMaxRange.Tip>The most that a pawn's opinion of their co-religionists can raise or lower their target certainty.</EnhancedBeliefs.RelationalMaxRange.Tip>
-    <EnhancedBeliefs.PracticeMaxRange>Practice influence: ±{0}</EnhancedBeliefs.PracticeMaxRange>
-    <EnhancedBeliefs.PracticeMaxRange.Tip>The most that recent precept moods (rituals, veneration, taboos) can raise or lower their target certainty.</EnhancedBeliefs.PracticeMaxRange.Tip>
-    <EnhancedBeliefs.ConversionPace>Conversion pace: {0}</EnhancedBeliefs.ConversionPace>
-    <EnhancedBeliefs.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions happen faster. Only affects passive drift; debates and conversion attempts are unaffected.</EnhancedBeliefs.ConversionPace.Tip>
-    <EnhancedBeliefs.CrisisThreshold>Crisis of faith threshold: {0}</EnhancedBeliefs.CrisisThreshold>
-    <EnhancedBeliefs.CrisisThreshold.Tip>When a pawn's certainty falls below this, doubt itself competes for their belief: they may have a crisis-of-faith breakdown instead of converting, and they won't switch to a faith they like even less than this. Higher = crises of faith are more common.</EnhancedBeliefs.CrisisThreshold.Tip>
+  <EnhancedBeliefs.DebugInteractionWorkers>DEV: Debug Interaction Workers</EnhancedBeliefs.DebugInteractionWorkers>
+  <EnhancedBeliefs.DebugInteractionWorkers.Tip>Enables debug logging for interaction workers when dev mode is active.</EnhancedBeliefs.DebugInteractionWorkers.Tip>
+  <EnhancedBeliefs.CertaintyDriftRate>Certainty drift rate: {0}/day</EnhancedBeliefs.CertaintyDriftRate>
+  <EnhancedBeliefs.CertaintyDriftRate.Tip>How fast a pawn's certainty moves toward its target each day. Higher = faith reacts faster to circumstances.</EnhancedBeliefs.CertaintyDriftRate.Tip>
+  <EnhancedBeliefs.DifficultyOffset>Difficulty offset: {0}</EnhancedBeliefs.DifficultyOffset>
+  <EnhancedBeliefs.DifficultyOffset.Tip>Flat shift applied to every pawn's target certainty. Positive makes faith stickier; negative makes converts easier to peel away.</EnhancedBeliefs.DifficultyOffset.Tip>
+  <EnhancedBeliefs.RelationalMaxRange>Congregation influence: ±{0}</EnhancedBeliefs.RelationalMaxRange>
+  <EnhancedBeliefs.RelationalMaxRange.Tip>The most that a pawn's opinion of their co-religionists can raise or lower their target certainty.</EnhancedBeliefs.RelationalMaxRange.Tip>
+  <EnhancedBeliefs.PracticeMaxRange>Practice influence: ±{0}</EnhancedBeliefs.PracticeMaxRange>
+  <EnhancedBeliefs.PracticeMaxRange.Tip>The most that recent precept moods (rituals, veneration, taboos) can raise or lower their target certainty.</EnhancedBeliefs.PracticeMaxRange.Tip>
+  <EnhancedBeliefs.ConversionPace>Conversion pace: {0}</EnhancedBeliefs.ConversionPace>
+  <EnhancedBeliefs.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions happen faster. Only affects passive drift; debates and conversion attempts are unaffected.</EnhancedBeliefs.ConversionPace.Tip>
+  <EnhancedBeliefs.CrisisThreshold>Crisis of faith threshold: {0}</EnhancedBeliefs.CrisisThreshold>
+  <EnhancedBeliefs.CrisisThreshold.Tip>When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown instead of converting. They also won't switch to a faith they like less than this. </EnhancedBeliefs.CrisisThreshold.Tip>
+  <EnhancedBeliefs.PreceptZeroFrac>Precept tolerance: {0}</EnhancedBeliefs.PreceptZeroFrac>
+  <EnhancedBeliefs.PreceptZeroFrac.Tip>How far another faith's stance on an issue can drift from a pawn's own before their opinion of it turns negative, as a fraction of the distance to the opposite extreme. Lower = pawns are pickier about differing beliefs and harder to convert.</EnhancedBeliefs.PreceptZeroFrac.Tip>
 </LanguageData>

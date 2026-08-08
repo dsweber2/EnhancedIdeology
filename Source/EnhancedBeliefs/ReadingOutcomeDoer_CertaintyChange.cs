@@ -89,6 +89,11 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         return certaintyGain;
     }
 
+    // Per unit of certainty-fraction gain, how far a rival faith's book tugs the reader's stance toward each
+    // of its positions. Deliberately slow: belief migrates over a whole book (many ticks), not in one page,
+    // and certainty follows structurally via the setpoint rather than being poked here.
+    private const float SubversionPull = 1f;
+
     public override void OnReadingTick(Pawn reader, float factor)
     {
         base.OnReadingTick(reader, factor);
@@ -103,20 +108,36 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
             return;
         }
 
-        var certaintyGain = CertaintyGain(reader) * factor;
-
-        if (reader.Ideo == ideo)
-        {
-            reader.ideo.Certainty = Mathf.Clamp01(reader.ideo.Certainty + certaintyGain);
-            return;
-        }
-
+        var gain = CertaintyGain(reader) * factor;
         var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
         var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(reader);
 
-        reader.ideo.Certainty = Mathf.Clamp01(reader.ideo.Certainty - (certaintyGain * 0.25f));
-        tracker.AdjustPersonalOpinion(ideo, certaintyGain);
+        if (reader.Ideo == ideo)
+        {
+            // Reading your own faith's book hardens conviction on the issues it takes a stance on. Certainty
+            // 1.0 corresponds to MaxConvictionStrength conviction, so convert the gain on that footing.
+            var delta = gain * IdeoTrackerData.MaxConvictionStrength;
+            foreach (var precept in MoralPrecepts(ideo))
+            {
+                tracker.ShiftIssueStance(precept.issue!, 0f, 0f, delta);
+            }
+
+            return;
+        }
+
+        // Reading a rival faith's book tugs your stances toward its positions, warming you to it and, as your
+        // fit with your own ideo erodes, letting the certainty setpoint pull your conviction down over time.
+        var pull = gain * SubversionPull;
+        foreach (var precept in MoralPrecepts(ideo))
+        {
+            tracker.ShiftIssueStance(precept.issue!, PreceptLadder.RankOf(precept), pull, 0f);
+        }
     }
+
+    private static IEnumerable<PreceptDef> MoralPrecepts(Ideo ideo) =>
+        ideo.precepts
+            .Select(precept => precept.def)
+            .Where(def => def.issue != null && PreceptPolicy.CategoryOf(def.issue) == PreceptCategory.Moral);
 }
 
 internal sealed class BookOutcomeProperties_CertaintyChange : BookOutcomeProperties

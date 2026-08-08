@@ -33,61 +33,38 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     private Dictionary<Ideo, float> baseIdeoOpinions = [];
     private Dictionary<Ideo, float> personalIdeoOpinions = [];
 
+    // Set when a stance shift invalidates the cached structural (base) opinions. Read paths refresh lazily so
+    // a per-tick caller (book reading) can shift many issues cheaply and pay the one recompute only on read.
+    private bool baseOpinionsDirty;
+
     private readonly Dictionary<Ideo, float> cachedRelationshipIdeoOpinions = [];
     private readonly Dictionary<Pawn, float> cachedRelationships = [];
 
     private Dictionary<MemeDef, float> memeOpinions = [];
-    private Dictionary<PreceptDef, float> preceptOpinions = [];
+
+    // R2 structural precept model: per issue, the pawn's preferred stance (rank on the issue's ladder) and
+    // how strongly they hold it. Seeded once from the pawn's own ideo; opinion of any ideo's stances is
+    // derived via PreceptLadder. Separate from preceptOpinions above, which is the debate/personal delta.
+    private Dictionary<IssueDef, float> issuePreferredRank = [];
+    private Dictionary<IssueDef, float> issueStrength = [];
 
     private List<Ideo>? cache1;
     private List<Ideo>? cache2;
     private List<MemeDef>? cache3;
-    private List<PreceptDef>? cache4;
     private List<float>? cache5;
     private List<float>? cache6;
     private List<float>? cache7;
-    private List<float>? cache8;
-
-    private float cachedOpinionMultiplier = -1f;
-    private int lastMultiplierCacheTick = -1;
+    private List<IssueDef>? cache9;
+    private List<IssueDef>? cache10;
+    private List<float>? cache11;
+    private List<float>? cache12;
 
     public void SetIdeoBaseOpinion(Ideo ideo, float opinion)
     {
-        if (!baseIdeoOpinions.TryAdd(ideo, opinion))
-        {
-            baseIdeoOpinions[ideo] = opinion;
-        }
-    }
-
-    public float OpinionMultiplier
-    {
-        get
-        {
-            if (cachedOpinionMultiplier >= 0f && Find.TickManager.TicksGame - lastMultiplierCacheTick < 2000)
-            {
-                return cachedOpinionMultiplier;
-            }
-
-            cachedOpinionMultiplier = 1f;
-            lastMultiplierCacheTick = Find.TickManager.TicksGame;
-
-            if (Pawn.story == null || Pawn.story.traits == null)
-            {
-                return cachedOpinionMultiplier;
-            }
-
-            foreach (var trait in Pawn.story.traits.allTraits)
-            {
-                var ext = trait.def.GetModExtension<IdeoTraitExtension>();
-
-                if (ext != null)
-                {
-                    cachedOpinionMultiplier *= ext.opinionMultiplier;
-                }
-            }
-
-            return cachedOpinionMultiplier;
-        }
+        baseIdeoOpinions[ideo] = opinion;
+        // Establish the personal-opinion entry too, so IdeoOpinion's "recompute if unknown" guard treats
+        // this ideo as known and does not clobber the base we just set.
+        _ = personalIdeoOpinions.TryAdd(ideo, 0f);
     }
 
     private readonly List<Thought> _tmpThoughts = [];
@@ -107,9 +84,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         RelationalContributors.Clear();
         PractitionalContributors.Clear();
 
-        // Structural band: innate fit of the pawn to their own ideo, including the flat base faith.
+        // Structural band: innate fit of the pawn to their own ideo, from their per-issue precept stances.
         var structural = StructuralOpinionOf(Pawn.Ideo, StructuralContributors) / 100f;
-        StructuralContributors.Add(("EnhancedBeliefs.Certainty.BaseFaith".Translate(), 0.30f));
         CachedStructural = structural;
 
         // Relational band: mean opinion of co-religionists, scaled by the user's max range.
@@ -197,6 +173,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // Form opinion based on memes, personal thoughts and experience with other pawns from that ideo
     public float IdeoOpinion(Ideo ideo)
     {
+        RefreshBaseOpinionsIfDirty();
         if (!baseIdeoOpinions.ContainsKey(ideo) || !personalIdeoOpinions.ContainsKey(ideo))
         {
             baseIdeoOpinions[ideo] = StructuralIdeoOpinion(ideo);
@@ -217,6 +194,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // Rundown on the function above, for UI reasons
     public DetailedIdeoOpinion DetailedIdeoOpinion(Ideo ideo, bool noRelationship = false)
     {
+        RefreshBaseOpinionsIfDirty();
         if (!baseIdeoOpinions.ContainsKey(ideo))
         {
             _ = IdeoOpinion(ideo);
@@ -303,64 +281,237 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
         }
 
-        // check if the pawn has well regarded traits for the ideoligion
-        foreach (var precept in pawnIdeo.precepts)
+        // Structural precept fit: for each issue at least one of the two faiths takes a position on, how the
+        // target ideo's stance compares to the pawn's own preferred stance, weighted by conviction, averaged
+        // and scaled to 0-100 (R2). Issues neither faith holds are irrelevant - there is nothing to agree or
+        // disagree about - so they are excluded rather than counted as (mutual don't-care) agreement.
+        EnsureIssueStancesSeeded();
+        var zeroFrac = EnhancedBeliefsMod.Settings.PreceptZeroFrac;
+        var preceptStart = contributors?.Count ?? 0;
+        float preceptSum = 0;
+        int issueCount = 0;
+        // Coupled target issues (e.g. TreeCutting, induced by a stance on Trees) join the set even when
+        // neither faith holds them explicitly, and grade by rung distance like a Moral issue regardless of
+        // their own category.
+        var inducedTargets = new HashSet<IssueDef>(
+            PreceptPolicy.InducedIssues(pawnIdeo).Concat(PreceptPolicy.InducedIssues(ideo)));
+        var relevantIssues = pawnIdeo.precepts.Select(precept => precept.def.issue)
+            .Concat(ideo.precepts.Select(precept => precept.def.issue))
+            .Where(issue => issue != null)
+            .Concat(inducedTargets)
+            .Distinct();
+        foreach (var issue in relevantIssues)
         {
-            var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
-
-            foreach (var comp in comps)
+            // Moral issues (and coupled targets) grade by rung distance; Special issues (leader, mood) carry
+            // bespoke categorical logic. PositiveOnly/NA contribute nothing, and UniversalPositive is a flat
+            // boost added below.
+            var category = PreceptPolicy.CategoryOf(issue);
+            float perIssue;
+            if (category == PreceptCategory.Moral || inducedTargets.Contains(issue))
             {
-                opinion += comp.InternalOffset;
-                if (comp.InternalOffset != 0)
+                var pawnRank = issuePreferredRank[issue];
+                var targetRank = HeldRank(ideo, issue);
+                // Widen the extent to any induced rank sitting past the ladder ends, so a "beyond Don't-care"
+                // stance reads as the axis extreme rather than falling outside it.
+                var minRank = Mathf.Min(Mathf.Min(0f, PreceptLadder.DontCareRank(issue)), Mathf.Min(pawnRank, targetRank));
+                var maxRank = Mathf.Max(PreceptLadder.Rungs(issue).Count - 1, Mathf.Max(pawnRank, targetRank));
+                perIssue = PreceptLadder.OpinionOnPrecept(
+                    pawnRank, targetRank, minRank, maxRank, issueStrength[issue], zeroFrac);
+            }
+            else if (category == PreceptCategory.Special)
+            {
+                // Weapons / PreferredXenotypes compare precept payloads directly; leader / mood are rank-based.
+                // Either resolver returning false means the two faiths have no stance to compare - skip it.
+                if (!PreceptPolicy.TryPayloadSpecialOpinion(issue, pawnIdeo, ideo, issueStrength[issue], out perIssue)
+                    && !PreceptPolicy.TrySpecialOpinion(
+                        issue, issuePreferredRank[issue], HeldRank(ideo, issue), issueStrength[issue], zeroFrac, out perIssue))
                 {
-                    contributors?.Add((precept.def.LabelCap, comp.InternalOffset));
+                    continue;
+                }
+            }
+            else
+            {
+                continue;
+            }
+
+            preceptSum += perIssue;
+            issueCount++;
+            if (contributors != null && perIssue != 0f)
+            {
+                contributors.Add((issue.LabelCap, perIssue));
+            }
+        }
+
+        if (issueCount > 0)
+        {
+            opinion += (preceptSum / issueCount) * 5f;
+            // The per-issue contributors were pushed as raw perIssue values; rescale to the averaged, 5x
+            // precept contribution so they still sum to it (kept in 0-100 units; the block below /100s all).
+            if (contributors != null)
+            {
+                for (var ii = preceptStart; ii < contributors.Count; ii++)
+                {
+                    contributors[ii] = (contributors[ii].label, contributors[ii].pct * 5f / issueCount);
                 }
             }
         }
 
-        // inter-ideoligion precept compatibility
-        foreach (var precept in ideo.precepts)
+        // Universally-valued issues (Charity): a flat boost when the target ideo holds a stance on them,
+        // regardless of the pawn's own view. Added after the Moral rescale so it is not averaged in.
+        foreach (var issue in DefDatabase<IssueDef>.AllDefs)
         {
-            var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
-
-            foreach (var comp in comps)
+            if (PreceptPolicy.CategoryOf(issue) == PreceptCategory.UniversalPositive
+                && ideo.precepts.Any(precept => precept.def.issue == issue))
             {
-                var value = comp.ExternalOffset + comp.GetTraitOpinion(Pawn);
-                opinion += value;
-                if (value != 0f)
-                {
-                    contributors?.Add((precept.def.LabelCap, value));
-                }
+                opinion += UniversalPositiveBonus;
+                contributors?.Add((issue.LabelCap, UniversalPositiveBonus));
             }
         }
 
-        // -5 opinion per incompatible meme, +5 per shared meme (own ideo is maximally similar to itself)
-        var cohesion = -GameComponent_EnhancedBeliefs.BeliefDifferences(pawnIdeo, ideo) * 5f;
-        opinion += cohesion;
-        if (cohesion != 0f)
+        // Directional coupling penalties (e.g. despising mechanoids sours opinion of an ideo that enhances
+        // mechanoid labour) - a flat hit scaled by the pawn's conviction on the offending issue, for couplings
+        // whose target issue is single-rung and so cannot be graded by ladder distance.
+        var couplingPenalty = PreceptPolicy.CouplingPenalty(pawnIdeo, ideo, issue => issueStrength[issue]);
+        if (couplingPenalty != 0f)
         {
-            contributors?.Add(("EnhancedBeliefs.Certainty.MemeCohesion".Translate(), cohesion));
+            opinion -= couplingPenalty;
+            contributors?.Add(("EnhancedBeliefs.CouplingPenalty".Translate(), -couplingPenalty));
         }
-
-        // Only decrease opinion if we don't like getting converted, shouldn't go the other way
-        var scale = Mathf.Clamp01(Pawn.GetStatValue(StatDefOf.CertaintyLossFactor)) * OpinionMultiplier;
-        opinion *= scale;
 
         // Rescale the collected raw offsets into certainty-fraction units matching the band total.
         if (contributors != null)
         {
             for (var ii = start; ii < contributors.Count; ii++)
             {
-                contributors[ii] = (contributors[ii].label, contributors[ii].pct * scale / 100f);
+                contributors[ii] = (contributors[ii].label, contributors[ii].pct / 100f);
             }
         }
 
-        // 30 base opinion
-        return Mathf.Clamp(opinion + 30f, 0, 100);
+        return Mathf.Clamp(opinion, 0, 100);
+    }
+
+    // Rank of the stance `ideo` holds on `issue`: an explicit precept if it has one, otherwise a stance a
+    // cross-precept coupling induces (e.g. valuing trees implies disapproving of cutting them), otherwise the
+    // virtual Don't-care rank. Because seeding reads this too, a pawn's own coupled stances seed correctly.
+    private static float HeldRank(Ideo ideo, IssueDef issue)
+    {
+        foreach (var precept in ideo.precepts)
+        {
+            if (precept.def.issue == issue)
+            {
+                return PreceptLadder.RankOf(precept.def);
+            }
+        }
+
+        return PreceptPolicy.InducedRank(ideo, issue) ?? PreceptLadder.DontCareRank(issue);
+    }
+
+    // Conviction-strength seeding. The base draw averages 15 (~75% starting certainty); full certainty sits
+    // at a mean of MaxConvictionStrength. Personality shifts the whole pawn up or down (2b).
+    internal const float BaseConvictionMin = 5f;
+    internal const float BaseConvictionMax = 25f;
+    private const float MinConvictionStrength = 0f;
+    public const float MaxConvictionStrength = 20f;
+    public const float AbsoluteMaxConvictionStrength = 50f;
+    internal const float ConvictionPerTraitDegree = 3f;
+
+    // Flat opinion bonus (0-100 units) for a UniversalPositive issue the target ideo values, e.g. Charity.
+    private const float UniversalPositiveBonus = 5f;
+
+    // Seed the pawn's preferred stance and conviction strength for every issue, once. Preferred stance is
+    // whatever their own ideo holds (Don't-care where it is silent); strength is a U(12, 17) draw shifted by
+    // the pawn's personality.
+    private void EnsureIssueStancesSeeded()
+    {
+        var traitOffset = ConvictionStrengthOffset();
+        foreach (var issue in DefDatabase<IssueDef>.AllDefs)
+        {
+            if (issueStrength.ContainsKey(issue))
+            {
+                continue;
+            }
+
+            issuePreferredRank[issue] = HeldRank(Pawn.Ideo, issue);
+            issueStrength[issue] = Mathf.Clamp(
+                Rand.Range(BaseConvictionMin, BaseConvictionMax) + traitOffset,
+                MinConvictionStrength, AbsoluteMaxConvictionStrength);
+        }
+    }
+
+    // Persuasion write-path (design.md R2). Nudge the pawn's personal stance on `issue`: slide the
+    // preferred rung a `pull` fraction (0-1) of the remaining gap toward `targetRank`, and shift conviction
+    // by `strengthDelta` points. This is how debates and books move belief - the personal preferred rung
+    // drifts away from the pawn's own ideo toward whatever is being argued, eroding structural fit with their
+    // faith and raising it toward the persuader's. Structural opinions cached from the old stance are now
+    // stale, so base opinions are marked dirty and refreshed on the next read.
+    public void ShiftIssueStance(IssueDef issue, float targetRank, float pull, float strengthDelta)
+    {
+        EnsureIssueStancesSeeded();
+
+        var current = issuePreferredRank[issue];
+        issuePreferredRank[issue] = current + ((targetRank - current) * pull);
+        issueStrength[issue] = Mathf.Clamp(
+            issueStrength[issue] + strengthDelta, MinConvictionStrength, AbsoluteMaxConvictionStrength);
+
+        baseOpinionsDirty = true;
+    }
+
+    // Recompute the cached structural opinions if a stance shift has invalidated them. Called at the top of
+    // every read that consumes baseIdeoOpinions, so a batch of ShiftIssueStance calls pays one recompute.
+    private void RefreshBaseOpinionsIfDirty()
+    {
+        if (!baseOpinionsDirty)
+        {
+            return;
+        }
+
+        baseOpinionsDirty = false;
+        RecacheAllBaseOpinions();
+    }
+
+    // The pawn's personal stance on every seeded issue: (issue, preferred rung rank, conviction strength).
+    // Rank can be fractional once debates have dragged it between rungs; a rank below 0 is the Don't-care rung.
+    public IEnumerable<(IssueDef issue, float rank, float strength)> IssueStances()
+    {
+        EnsureIssueStancesSeeded();
+        foreach (var (issue, strength) in issueStrength)
+        {
+            yield return (issue, issuePreferredRank[issue], strength);
+        }
+    }
+
+    private float ConvictionStrengthOffset() => ConvictionOffsetFromTraits(Pawn.story.traits.allTraits);
+
+    // Per-pawn shift to conviction strength from personality: strong-willed pawns hold beliefs more firmly,
+    // anxious / pessimistic / neurotic ones more weakly (design.md R2, 2b). Signed by trait degree.
+    internal static float ConvictionOffsetFromTraits(IEnumerable<Trait> traits)
+    {
+        var offset = 0f;
+        foreach (var trait in traits)
+        {
+            switch (trait.def.defName)
+            {
+                case "Nerves": // iron-willed (+2) / steadfast (+1) strengthen; nervous (-1) / volatile (-2) weaken
+                    offset += trait.Degree * ConvictionPerTraitDegree;
+                    break;
+                case "NaturalMood": // only the down side matters: pessimist (-1) / depressive (-2) weaken
+                    if (trait.Degree < 0)
+                    {
+                        offset += trait.Degree * ConvictionPerTraitDegree;
+                    }
+                    break;
+                case "Neurotic": // neurotic (+1) / very neurotic (+2) weaken, so subtract
+                    offset -= trait.Degree * ConvictionPerTraitDegree;
+                    break;
+            }
+        }
+
+        return offset;
     }
 
     public float PersonalIdeoOpinion(Ideo ideo, out string? devDetails)
     {
+        RefreshBaseOpinionsIfDirty();
         if (Prefs.DevMode)
         {
             var devDetailsBuilder = new StringBuilder();
@@ -377,16 +528,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                     _ = devDetailsBuilder.AppendLine($" - {meme.LabelCap}: {memeOpinion}");
                 }
             }
-            var relevantPreceptCount = ideo.precepts.Select(p => p.def).Intersect(preceptOpinions.Keys).Count();
-            _ = devDetailsBuilder.AppendLine($"Precept opinions: {relevantPreceptCount}");
-            foreach (var preceptDef in ideo.precepts.Select(p => p.def))
-            {
-                if (preceptOpinions.TryGetValue(preceptDef, out var preceptOpinion))
-                {
-                    _ = devDetailsBuilder.AppendLine($" - {preceptDef.LabelCap}: {preceptOpinion}");
-                }
-            }
-
             devDetails = devDetailsBuilder.ToString();
         }
         else
@@ -415,14 +556,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
         }
 
-        foreach (var preceptDef in ideo.precepts.Select(p => p.def))
-        {
-            if (preceptOpinions.TryGetValue(preceptDef, out var preceptOpinion))
-            {
-                opinion += preceptOpinion;
-            }
-        }
-
         // Makes sure that pawn's personal opinion cannot go below/above 100% purely from circlejerking
         var curOpinion = Mathf.Clamp(baseIdeoOpinion + opinion, 0, 100);
         if (personalIdeoOpinion > 100f - curOpinion)
@@ -434,7 +567,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             personalIdeoOpinions[ideo] = -curOpinion;
         }
 
-        return (opinion + personalIdeoOpinions[ideo]) * OpinionMultiplier;
+        return opinion + personalIdeoOpinions[ideo];
     }
 
     public float IdeoOpinionFromRelationships(Ideo ideo, bool includeDevDetails, out string? devDetails)
@@ -463,7 +596,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             devDetails = null;
         }
 
-        return cachedRelationshipIdeoOpinions[ideo] * OpinionMultiplier;
+        return cachedRelationshipIdeoOpinions[ideo];
     }
 
     // Calculates ideo opinion offset based on how much pawn likes other pawns of other ideos, should have little weight overall
@@ -510,7 +643,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         Scribe_Collections.Look(ref baseIdeoOpinions, "baseIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache1, ref cache5);
         Scribe_Collections.Look(ref personalIdeoOpinions, "personalIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache2, ref cache6);
         Scribe_Collections.Look(ref memeOpinions, "memeOpinions", LookMode.Def, LookMode.Value, ref cache3, ref cache7);
-        Scribe_Collections.Look(ref preceptOpinions, "preceptOpinions", LookMode.Def, LookMode.Value, ref cache4, ref cache8);
+        Scribe_Collections.Look(ref issuePreferredRank, "issuePreferredRank", LookMode.Def, LookMode.Value, ref cache9, ref cache11);
+        Scribe_Collections.Look(ref issueStrength, "issueStrength", LookMode.Def, LookMode.Value, ref cache10, ref cache12);
 
         if (Scribe.mode == LoadSaveMode.PostLoadInit)
         {
@@ -552,18 +686,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         memeOpinions[meme] += power * 100f;
     }
 
-    public void AdjustPreceptOpinion(PreceptDef precept, float power)
-    {
-        preceptOpinions ??= [];
-
-        if (!preceptOpinions.ContainsKey(precept))
-        {
-            preceptOpinions[precept] = 0;
-        }
-
-        preceptOpinions[precept] += power * 100f;
-    }
-
     public float TrueMemeOpinion(MemeDef meme)
     {
         if (!memeOpinions.TryGetValue(meme, out var opinion))
@@ -592,24 +714,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                     opinion -= 10;
                 }
             }
-        }
-
-        return opinion;
-    }
-
-    public float TruePreceptOpinion(PreceptDef precept)
-    {
-        if (!preceptOpinions.TryGetValue(precept, out var opinion))
-        {
-            opinion = 0;
-            preceptOpinions[precept] = opinion;
-        }
-
-        var comps = precept.TryGetComps<PreceptComp_OpinionOffset>();
-
-        foreach (var comp in comps)
-        {
-            opinion += comp.ExternalOffset + comp.GetTraitOpinion(Pawn);
         }
 
         return opinion;
@@ -728,7 +832,10 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         AddCrisisCandidate(candidates, current,
             crisisWeight => HazardConversionChance(crisisWeight / EnhancedBeliefsMod.Settings.CrisisThreshold, deltaDays, interval));
 
-        var index = SelectWeightedConversion(candidates);
+        // CertaintyLossFactor scales the conversion/breakdown hazard: a resistant pawn (factor < 1) clings
+        // to their faith, a fragile one (factor > 1) drifts away faster. Only the spontaneous path applies
+        // it here - the acute-event callers already fold CertaintyLossFactor into the certainty they shed.
+        var index = SelectWeightedConversion(candidates, Pawn.GetStatValue(StatDefOf.CertaintyLossFactor));
         if (index < 0)
         {
             return;
@@ -763,8 +870,10 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // (1 minus the product of each candidate's survival), then, if it does, picks which one proportional to
     // its weight. Splitting "whether" (chance) from "which" (weight) lets the target stay discriminating by
     // opinion gap even when certainty is near zero, where the ratio-based chances all saturate toward 1.
-    // Returns the chosen candidate's index, or -1 if nothing fired.
-    private static int SelectWeightedConversion(List<(Ideo? ideo, float chance, float weight)> candidates)
+    // Returns the chosen candidate's index, or -1 if nothing fired. chanceFactor is a plain multiplier on the
+    // probability that something fires (clamped to [0,1]) - CertaintyLossFactor is a linear factor, so a
+    // volatile pawn (x3) is ~3x as likely to convert, not driven toward certainty like an exponent would.
+    private static int SelectWeightedConversion(List<(Ideo? ideo, float chance, float weight)> candidates, float chanceFactor = 1f)
     {
         float survival = 1f;
         foreach (var candidate in candidates)
@@ -772,7 +881,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             survival *= 1f - candidate.chance;
         }
 
-        if (Rand.Value >= 1f - survival)
+        var fireChance = Mathf.Clamp01((1f - survival) * chanceFactor);
+
+        if (Rand.Value >= fireChance)
         {
             return -1;
         }

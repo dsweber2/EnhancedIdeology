@@ -70,34 +70,62 @@ public class BookReadingTests : SeededTest
     }
 
     [Fact]
-    public void OnReadingTick_OwnIdeo_IncreasesCertainty()
+    public void OnReadingTick_OwnIdeo_HardensConviction()
     {
-        var (_, pawn, doer) = Setup(QualityCategory.Normal);
-        var before = pawn.ideo.Certainty;
+        // Reading your own faith's book raises conviction on the issues it takes a stance on, which lifts
+        // structural fit and (via the setpoint) certainty over time - no direct certainty poke.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
 
-        doer.OnReadingTick(pawn, 1f);
+        var (issue, rungs) = SimIssues.Ladder("BookIssue", "Permissive", "Forbidding");
+        var ideo = new IdeoBuilder().WithName("OwnFaith").AddPrecept(rungs[0]).Build();
+        world.AddIdeo(ideo);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("P").Build(world);
 
-        Assert.True(pawn.ideo.Certainty > before,
-            $"Expected certainty to increase. Before: {before}, After: {pawn.ideo.Certainty}");
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        var before = tracker.IssueStances().First(stance => stance.issue == issue).strength;
+
+        var doer = new ReadingOutcomeDoer_CertaintyChange { Quality = QualityCategory.Normal, ideo = ideo };
+        for (var ii = 0; ii < 200; ii++)
+        {
+            doer.OnReadingTick(pawn, 1f);
+        }
+
+        var after = tracker.IssueStances().First(stance => stance.issue == issue).strength;
+        Assert.True(after > before, $"Expected reading to harden conviction. before={before}, after={after}");
     }
 
     [Fact]
-    public void OnReadingTick_ForeignIdeo_DecreasesCertaintyAndIncreasesOpinion()
+    public void OnReadingTick_ForeignIdeo_WarmsReaderToBookIdeo()
     {
-        var (world, pawn, _) = Setup(QualityCategory.Normal);
-        var foreignIdeo = new IdeoBuilder().WithName("Foreign2").Build();
-        world.AddIdeo(foreignIdeo);
+        // Reading a rival faith's book tugs the reader's stance toward its position, so their preferred rung
+        // slides off their own ideo's rung and their opinion of the book's ideo climbs.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
 
-        var doer = new ReadingOutcomeDoer_CertaintyChange { Quality = QualityCategory.Normal, ideo = foreignIdeo };
-        var beforeCertainty = pawn.ideo.Certainty;
+        var (issue, rungs) = SimIssues.Ladder("BookIssue", "Permissive", "Forbidding");
+        var ownIdeo = new IdeoBuilder().WithName("OwnFaith").AddPrecept(rungs[1]).Build();
+        var bookIdeo = new IdeoBuilder().WithName("RivalFaith").AddPrecept(rungs[0]).Build();
+        world.AddIdeo(ownIdeo);
+        world.AddIdeo(bookIdeo);
+        var pawn = new PawnBuilder().WithIdeo(ownIdeo).WithCertainty(0.5f).WithLabel("P").Build(world);
+
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var opinionBefore = tracker.IdeoOpinion(foreignIdeo);
+        var rankBefore = tracker.IssueStances().First(stance => stance.issue == issue).rank;
+        var opinionBefore = tracker.IdeoOpinion(bookIdeo);
 
-        doer.OnReadingTick(pawn, 1f);
+        var doer = new ReadingOutcomeDoer_CertaintyChange { Quality = QualityCategory.Normal, ideo = bookIdeo };
+        for (var ii = 0; ii < 500; ii++)
+        {
+            doer.OnReadingTick(pawn, 1f);
+        }
 
-        Assert.True(pawn.ideo.Certainty < beforeCertainty,
-            $"Expected certainty to decrease. Before: {beforeCertainty}, After: {pawn.ideo.Certainty}");
-        Assert.True(tracker.IdeoOpinion(foreignIdeo) > opinionBefore,
-            $"Expected opinion of foreign ideo to increase.");
+        var rankAfter = tracker.IssueStances().First(stance => stance.issue == issue).rank;
+        Assert.True(rankAfter < rankBefore,
+            $"Expected reader's stance to slide toward the book ideo's rung 0. before={rankBefore}, after={rankAfter}");
+        Assert.True(tracker.IdeoOpinion(bookIdeo) > opinionBefore,
+            "Expected opinion of the book's ideo to rise as the reader's stance nears it.");
     }
 }

@@ -16,6 +16,7 @@ internal static class EnhancedBeliefsDefOf
     public static HistoryEventDef EB_DestroyedReligiousBook;
     public static HistoryEventDef EB_BookDestroyed;
     public static EffecterDef EB_CompleteBook;
+    public static InteractionDef EB_IdeologicalDebatePrecept;
 #pragma warning restore CA2211, CS0649
 
 #pragma warning disable CS8618 // Set by RimWorld

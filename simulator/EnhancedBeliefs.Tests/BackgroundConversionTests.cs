@@ -12,23 +12,25 @@ public class BackgroundConversionTests : SeededTest
         finally { settings.ConversionPace = old; }
     }
 
+    // The pawn's opinion of the alternative ideo is set directly (alternativeOpinion in 0..100) rather than
+    // derived from a precept offset: the structural precept model no longer supports a per-precept opinion
+    // knob, so we pin the opinion the tests need with SetIdeoBaseOpinion after the tracker exists.
     private static (SimWorld world, IdeoTrackerData tracker, SimPawn pawn) TwoIdeoWorld(
-        float certainty, int alternativeOffset)
+        float certainty, int alternativeOpinion)
     {
         var world = new SimWorld();
         world.Initialize();
 
         var own = new IdeoBuilder().WithName("Own").Build();
-        var altDef = new PreceptDef { defName = "Alt" };
-        if (alternativeOffset != 0)
-            altDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = alternativeOffset });
-        var alt = new IdeoBuilder().WithName("Alt").AddPrecept(altDef).Build();
+        var alt = new IdeoBuilder().WithName("Alt").Build();
 
         world.AddIdeo(own);
         world.AddIdeo(alt);
 
         var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(certainty).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        if (alternativeOpinion != 0)
+            tracker.SetIdeoBaseOpinion(alt, alternativeOpinion);
         return (world, tracker, pawn);
     }
 
@@ -36,7 +38,7 @@ public class BackgroundConversionTests : SeededTest
     public void ConversionProbability_PrefersOwnIdeo_IsZero()
     {
         // certainty 0.8 (own opinion 0.8) vs a plain alternative (0.3): no preference, no chance.
-        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0.8f, alternativeOffset: 0);
+        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0.8f, alternativeOpinion: 30);
         var altIdeo = FindAlt(tracker, pawn);
 
         Assert.Equal(0f, tracker.ConversionProbability(altIdeo), precision: 6);
@@ -46,7 +48,7 @@ public class BackgroundConversionTests : SeededTest
     public void ConversionProbability_PrefersAlternative_EqualsRelativeGap()
     {
         // certainty 0.2 (own opinion 0.2) vs alternative opinion 0.8 → p = 1 - 0.2/0.8 = 0.75.
-        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0.2f, alternativeOffset: 50);
+        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0.2f, alternativeOpinion: 80);
         var altIdeo = FindAlt(tracker, pawn);
 
         var expected = 1f - 0.2f / tracker.IdeoOpinion(altIdeo);
@@ -101,7 +103,7 @@ public class BackgroundConversionTests : SeededTest
     [Fact]
     public void TryBackgroundConversion_PrefersOwn_DoesNotConvert()
     {
-        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0.8f, alternativeOffset: 0);
+        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0.8f, alternativeOpinion: 30);
         var ownIdeo = pawn.Ideo;
 
         // A long elapsed span still cannot convert a pawn who prefers their own faith.
@@ -114,7 +116,7 @@ public class BackgroundConversionTests : SeededTest
     public void TryBackgroundConversion_StronglyPreferredAlternative_Converts()
     {
         Rand.SetSeed(1);
-        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0f, alternativeOffset: 90);
+        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0f, alternativeOpinion: 90);
         var altIdeo = FindAlt(tracker, pawn);
 
         // certainty 0 → p = 1 for the 0.9 alternative → converts on any elapsed time.
@@ -126,12 +128,51 @@ public class BackgroundConversionTests : SeededTest
     [Fact]
     public void TryBackgroundConversion_ZeroElapsed_NeverConverts()
     {
-        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0f, alternativeOffset: 90);
+        var (world, tracker, pawn) = TwoIdeoWorld(certainty: 0f, alternativeOpinion: 90);
         var ownIdeo = pawn.Ideo;
 
         tracker.TryBackgroundConversion(deltaDays: 0f);
 
         Assert.Equal(ownIdeo, pawn.Ideo);
+    }
+
+    [Fact]
+    public void CertaintyLossFactor_LinearlyScalesConversionChance()
+    {
+        // At small per-check chances the factor is ~linear: a 3x-volatile pawn converts ~3x as often, a
+        // 0.5x-resistant one ~half, and a factor of 0 never converts - not driven to certainty like an exponent.
+        int Trials(float factor)
+        {
+            var conversions = 0;
+            for (var ii = 0; ii < 2000; ii++)
+            {
+                var world = new SimWorld();
+                world.Initialize();
+
+                var own = new IdeoBuilder().WithName("Own").Build();
+                var alt = new IdeoBuilder().WithName("Alt").Build();
+                world.AddIdeo(own);
+                world.AddIdeo(alt);
+
+                var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0.4f).WithCertaintyLossFactor(factor).WithLabel("P").Build(world);
+                var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+                tracker.SetIdeoBaseOpinion(alt, 60);
+
+                tracker.TryBackgroundConversion(deltaDays: 0.5f);
+                if (pawn.Ideo == alt) conversions++;
+            }
+            return conversions;
+        }
+
+        var baseline = Trials(1f);
+        var volatileCount = Trials(3f);
+        var resistant = Trials(0.5f);
+
+        Assert.Equal(0, Trials(0f));
+        Assert.True(volatileCount > baseline && resistant < baseline,
+            $"expected resistant < baseline < volatile, got {resistant} < {baseline} < {volatileCount}");
+        Assert.InRange((double)volatileCount / baseline, 2.3, 3.7);
+        Assert.InRange((double)resistant / baseline, 0.3, 0.7);
     }
 
     private static Ideo FindAlt(IdeoTrackerData tracker, SimPawn pawn)

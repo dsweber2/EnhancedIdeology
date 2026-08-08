@@ -5,6 +5,15 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 {
     public IssueDef? topic;
 
+    // Fraction of the rung gap a decisive win drags the loser's stance across, before scaling by the
+    // winner's ConversionPower and the loser's CertaintyLossFactor. Small, so belief migrates over repeated
+    // debates rather than in one conversation.
+    private const float StancePullPerDebate = 0.1f;
+
+    // Conviction points (0-20 scale) a mutual-doubt draw erodes from each pawn on the contested issue,
+    // before the same stat/jitter scaling.
+    private const float DebateDoubtStrengthLoss = 1f;
+
     internal static readonly SimpleCurve CompatibilityFactorCurve =
     [
         new CurvePoint(-1.5f, 0.1f),
@@ -223,16 +232,15 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: randOpinion={randOpinion}");
         if (randOpinion < randomOpinion)
         {
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Mutual conclusion reached. Adjusting precept opinions and certainty.");
-            var adjInit = -0.03f * initiator.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
-            var adjRecip = -0.03f * recipient.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: Adjusting precept opinions: initiator={adjInit}, recipient={adjRecip}");
-            initiatorTracker.AdjustPreceptOpinion(
-                initiatorPrecept,
-                adjInit);
-            recipientTracker.AdjustPreceptOpinion(
-                recipientPrecept,
-                adjRecip);
+            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Mutual conclusion reached. Eroding conviction and adjusting certainty.");
+
+            // Both walk away less sure: their conviction on the contested issue erodes, no rung moves. A
+            // weaker-held stance contributes less either way, leaving them more open to future persuasion.
+            var doubtInit = DebateDoubtStrengthLoss * initiator.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
+            var doubtRecip = DebateDoubtStrengthLoss * recipient.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
+            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: eroding conviction on {initiatorPrecept.issue}: initiator={doubtInit}, recipient={doubtRecip}");
+            initiatorTracker.ShiftIssueStance(initiatorPrecept.issue!, 0f, 0f, -doubtInit);
+            recipientTracker.ShiftIssueStance(recipientPrecept.issue!, 0f, 0f, -doubtRecip);
 
             var newCertInit = Mathf.Clamp01(0.01f * initiator.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f)));
             var newCertRecip = Mathf.Clamp01(0.01f * recipient.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f)));
@@ -318,11 +326,17 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         }
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}, winnerPrecept={winnerPrecept}, loserPrecept={loserPrecept}");
         var loserTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(loser);
-        var adjWin = 0.03f * winner.GetStatValue(StatDefOf.ConversionPower) * loser.GetStatValue(StatDefOf.CertaintyLossFactor);
-        var adjLose = -0.03f * winner.GetStatValue(StatDefOf.ConversionPower) * loser.GetStatValue(StatDefOf.CertaintyLossFactor);
 
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: Adjusting precept opinions for loser: winnerPrecept={adjWin}, loserPrecept={adjLose}");
-        loserTracker.AdjustPreceptOpinion(winnerPrecept, adjWin);
-        loserTracker.AdjustPreceptOpinion(loserPrecept, adjLose);
+        // The loser is persuaded: their personal stance on the contested issue slides toward the rung the
+        // winner argued for, by a fraction of the remaining gap set by the winner's conversion power and the
+        // loser's fragility. Moving toward the winner is moving away from the loser's own ideo, so this both
+        // warms them to the winner's faith and cools them on their own - captured in one stance shift.
+        var pull = Mathf.Clamp01(StancePullPerDebate
+            * winner.GetStatValue(StatDefOf.ConversionPower)
+            * loser.GetStatValue(StatDefOf.CertaintyLossFactor));
+        var targetRank = PreceptLadder.RankOf(winnerPrecept);
+
+        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: pulling loser stance on {winnerPrecept.issue} toward rank {targetRank} by {pull}");
+        loserTracker.ShiftIssueStance(winnerPrecept.issue!, targetRank, pull, 0f);
     }
 }

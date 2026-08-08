@@ -80,14 +80,13 @@ public class CrisisTests : SeededTest
             world.Initialize();
 
             var own = new IdeoBuilder().WithName("Own").Build();
-            var altDef = new PreceptDef { defName = $"Alt{ii}" };
-            altDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 60 });
-            var alt = new IdeoBuilder().WithName("Alt").AddPrecept(altDef).Build();
+            var alt = new IdeoBuilder().WithName("Alt").Build();
             world.AddIdeo(own);
             world.AddIdeo(alt);
 
             var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0f).WithLabel("P").Build(world);
             var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+            tracker.SetIdeoBaseOpinion(alt, 60);
 
             var result = tracker.CheckConversion();
             if (result == ConversionOutcome.Success) converts++;

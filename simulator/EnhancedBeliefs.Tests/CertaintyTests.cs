@@ -13,7 +13,13 @@ public class CertaintyTests : SeededTest
 
         var builder = new IdeoBuilder().WithName("TestIdeo");
         if (withPrecept)
-            builder.AddPrecept(new PreceptDef { defName = "TestPrecept" });
+        {
+            // A registered issue stance gives the pawn a per-issue structural floor (own ideo agrees with
+            // itself, so ~mean(strength)·5). The old flat +30 base is gone, so this rung is what now keeps
+            // the structural band non-zero.
+            var (issue, rungs) = SimIssues.Ladder("TestIssue", "TestPrecept", "TestPreceptHigh");
+            builder.AddPrecept(rungs[0], issue, displayOrderInIssue: 0);
+        }
         var ideo = builder.Build();
         world.AddIdeo(ideo);
 
@@ -83,14 +89,20 @@ public class CertaintyTests : SeededTest
     [Fact]
     public void Practice_PositivePreceptMood_RaisesTarget()
     {
-        var (withMood, moodTracker, moodPawn) = Setup(withPrecept: true, colonyMoodOffset: 20f);
-        Recache(withMood, moodPawn, moodTracker);
+        // One pawn recached twice isolates the practitional band: the structural band comes from the same
+        // once-seeded convictions, so only the precept mood changes between the two targets. A weakening trait
+        // keeps the single-issue structural well under saturation, leaving headroom for the mood to move it.
+        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: 0f);
+        pawn.story.traits.allTraits.Add(new Trait { def = new TraitDef { defName = "Nerves" }, Degree = -2 });
 
-        var (noMood, flatTracker, flatPawn) = Setup(withPrecept: true, colonyMoodOffset: 0f);
-        Recache(noMood, flatPawn, flatTracker);
+        Recache(world, pawn, tracker);
+        var flatTarget = tracker.CachedTargetCertainty;
 
-        Assert.True(moodTracker.CachedPractitional > 0f);
-        Assert.True(moodTracker.CachedTargetCertainty > flatTracker.CachedTargetCertainty);
+        pawn.ColonyMoodOffset = 20f;
+        Recache(world, pawn, tracker);
+
+        Assert.True(tracker.CachedPractitional > 0f);
+        Assert.True(tracker.CachedTargetCertainty > flatTarget);
     }
 
     [Fact]

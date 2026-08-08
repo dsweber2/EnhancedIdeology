@@ -3,70 +3,90 @@ namespace EnhancedBeliefs.Tests;
 public class StructuralOpinionTests : SeededTest
 {
     [Fact]
-    public void StructuralIdeoOpinion_SupremacistMeme_DecreasesBaseOpinion()
+    public void StructuralIdeoOpinion_SupremacistMeme_LowersOpinionVsNonSupremacist()
     {
-        // Supremacist on own ideo subtracts 20 from foreign ideo opinion (30 base → 10)
-        var world = new SimWorld();
-        world.Initialize();
-
+        // Supremacist on the pawn's own ideo subtracts 20 from their opinion of any foreign ideo. There is
+        // no fixed base any more, so we compare against an otherwise-identical non-Supremacist pawn instead
+        // of a magic number: the Supremacist must land strictly lower.
         var supremacistMeme = new MemeDef { defName = "Supremacist" };
         EnhancedBeliefsDefOf.Supremacist = supremacistMeme;
 
-        var pawnIdeo = new IdeoBuilder().WithName("Supremacist").AddMeme(supremacistMeme).Build();
-        var foreignIdeo = new IdeoBuilder().WithName("Foreign").Build();
-        world.AddIdeo(pawnIdeo);
-        world.AddIdeo(foreignIdeo);
+        var supremacist = StructuralOpinionTowardPlainForeign(pawnMeme: supremacistMeme);
+        var plain = StructuralOpinionTowardPlainForeign(pawnMeme: null);
 
-        var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-
-        var opinion = tracker.StructuralIdeoOpinion(foreignIdeo);
-
-        Assert.True(opinion < 30f, $"Expected opinion < 30 (base) for Supremacist, got {opinion}");
+        Assert.True(supremacist < plain,
+            $"Supremacist pawn should hold a lower structural opinion of a foreign ideo: {supremacist} < {plain}");
     }
 
     [Fact]
-    public void StructuralIdeoOpinion_GuiltyMeme_IncreasesBaseOpinion()
+    public void StructuralIdeoOpinion_GuiltyMeme_RaisesOpinionVsNonGuilty()
     {
-        // Guilty on own ideo adds 10 to foreign ideo opinion (30 base → 40)
-        var world = new SimWorld();
-        world.Initialize();
-
+        // Guilty on the pawn's own ideo adds 10 to their opinion of any foreign ideo. Assert the sign of the
+        // relationship (higher than an otherwise-identical non-Guilty pawn), not the vanished +30 base.
         var guiltyMeme = new MemeDef { defName = "Guilty" };
         EnhancedBeliefsDefOf.Guilty = guiltyMeme;
 
-        var pawnIdeo = new IdeoBuilder().WithName("Guilty").AddMeme(guiltyMeme).Build();
-        var foreignIdeo = new IdeoBuilder().WithName("Foreign2").Build();
-        world.AddIdeo(pawnIdeo);
-        world.AddIdeo(foreignIdeo);
+        var guilty = StructuralOpinionTowardPlainForeign(pawnMeme: guiltyMeme);
+        var plain = StructuralOpinionTowardPlainForeign(pawnMeme: null);
 
-        var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-
-        var opinion = tracker.StructuralIdeoOpinion(foreignIdeo);
-
-        Assert.True(opinion > 30f, $"Expected opinion > 30 (base) for Guilty, got {opinion}");
+        Assert.True(guilty > plain,
+            $"Guilty pawn should hold a higher structural opinion of a foreign ideo: {guilty} > {plain}");
     }
 
     [Fact]
-    public void StructuralIdeoOpinion_InternalOffset_AppliesToForeignIdeoOpinion()
+    public void StructuralIdeoOpinion_ForeignHoldsDistantStance_IsLowerThanMatchingStance()
     {
-        // InternalOffset on own ideo's precept adds to opinion of ALL foreign ideos
+        // Two foreign ideos on the same issue ladder: one holds the pawn's own preferred rung, the other the
+        // far extreme. Distance is disagreement, so the pawn's structural opinion of the far one is lower.
         var world = new SimWorld();
         world.Initialize();
 
-        var ownPreceptDef = new PreceptDef { defName = "OwnPrecept" };
-        var pawnIdeo = new IdeoBuilder().WithName("OwnIdeo").AddPrecept(ownPreceptDef, internalOffset: 20).Build();
-        var foreignIdeo = new IdeoBuilder().WithName("ForeignIdeo").Build();
+        var (issue, rungs) = SimIssues.Ladder("Diet", "Permissive", "Middle", "Forbidding");
+
+        // The pawn's own ideo holds the permissive rung, so that becomes their preferred stance.
+        var pawnIdeo = new IdeoBuilder().WithName("Own").AddPrecept(rungs[0], issue, displayOrderInIssue: 0).Build();
+        var matching = new IdeoBuilder().WithName("Matching").AddPrecept(rungs[0], issue, displayOrderInIssue: 0).Build();
+        var distant = new IdeoBuilder().WithName("Distant").AddPrecept(rungs[2], issue, displayOrderInIssue: 20).Build();
         world.AddIdeo(pawnIdeo);
-        world.AddIdeo(foreignIdeo);
+        world.AddIdeo(matching);
+        world.AddIdeo(distant);
 
         var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        var opinion = tracker.StructuralIdeoOpinion(foreignIdeo);
+        var matchingOpinion = tracker.StructuralIdeoOpinion(matching);
+        var distantOpinion = tracker.StructuralIdeoOpinion(distant);
 
-        Assert.Equal(50f, opinion, precision: 4); // 30 base + 20 internal offset
+        Assert.True(distantOpinion < matchingOpinion,
+            $"ideo holding a distant rung should score lower: distant={distantOpinion} matching={matchingOpinion}");
+    }
+
+    [Fact]
+    public void StructuralIdeoOpinion_OwnIdeo_SitsNearSeededFloor()
+    {
+        // For the own ideo every issue's target rung equals the pawn's preferred rung, so each per-issue
+        // opinion returns +strength and the structural value is strength·5 (one issue here). Strength is drawn
+        // from U(BaseConvictionMin, BaseConvictionMax), so assert that band (·5, clamped to 100), not a number.
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (issue, rungs) = SimIssues.Ladder("Diet", "Permissive", "Middle", "Forbidding");
+        var pawnIdeo = new IdeoBuilder().WithName("Own").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        world.AddIdeo(pawnIdeo);
+
+        var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        // Own-ideo goes through StructuralOpinionOf directly (not the certainty short-circuit) via the
+        // certainty setpoint; read it through a foreign-free structural computation by asking about the own
+        // ideo's stance set on a second, identical ideo (same rung → full agreement, no meme terms).
+        var mirror = new IdeoBuilder().WithName("Mirror").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        world.AddIdeo(mirror);
+        var structural = tracker.StructuralIdeoOpinion(mirror);
+
+        Assert.InRange(structural,
+            IdeoTrackerData.BaseConvictionMin * 5f,
+            Mathf.Min(IdeoTrackerData.BaseConvictionMax * 5f, 100f));
     }
 
     [Fact]
@@ -92,5 +112,33 @@ public class StructuralOpinionTests : SeededTest
         var diff = GameComponent_EnhancedBeliefs.BeliefDifferences(ideoA, ideoB);
 
         Assert.Equal(1, diff);
+    }
+
+    // Builds a pawn whose own ideo optionally carries pawnMeme and returns their structural opinion of a
+    // foreign ideo that holds the pawn's own preferred stance. The shared stance lifts the base structural
+    // value clear of the 0 floor, so the meme term's sign (Supremacist -20, Guilty +10) is observable
+    // instead of being clamped away.
+    private static float StructuralOpinionTowardPlainForeign(MemeDef? pawnMeme)
+    {
+        // Reseed so the two worlds compared in a test draw identical per-issue strengths - the only thing
+        // that should differ between them is the meme term under test.
+        Rand.SetSeed(1);
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (issue, rungs) = SimIssues.Ladder("Diet", "Permissive", "Forbidding");
+
+        var pawnBuilder = new IdeoBuilder().WithName("Own").AddPrecept(rungs[0], issue, displayOrderInIssue: 0);
+        if (pawnMeme != null)
+            pawnBuilder.AddMeme(pawnMeme);
+        var pawnIdeo = pawnBuilder.Build();
+        var foreignIdeo = new IdeoBuilder().WithName("Foreign").AddPrecept(rungs[0], issue, displayOrderInIssue: 0).Build();
+        world.AddIdeo(pawnIdeo);
+        world.AddIdeo(foreignIdeo);
+
+        var pawn = new PawnBuilder().WithIdeo(pawnIdeo).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        return tracker.StructuralIdeoOpinion(foreignIdeo);
     }
 }

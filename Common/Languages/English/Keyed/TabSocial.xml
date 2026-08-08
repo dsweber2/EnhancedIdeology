@@ -8,6 +8,5 @@
     <EnhancedBeliefs.CertaintyBandRelational>Congregation: {0}</EnhancedBeliefs.CertaintyBandRelational>
     <EnhancedBeliefs.CertaintyBandPractice>Practice (recent rites): {0}</EnhancedBeliefs.CertaintyBandPractice>
     <EnhancedBeliefs.CertaintyBandDifficulty>Difficulty: {0}</EnhancedBeliefs.CertaintyBandDifficulty>
-    <EnhancedBeliefs.Certainty.BaseFaith>Base faith</EnhancedBeliefs.Certainty.BaseFaith>
-    <EnhancedBeliefs.Certainty.MemeCohesion>Meme cohesion</EnhancedBeliefs.Certainty.MemeCohesion>
+    <EnhancedBeliefs.CouplingPenalty>Opposed practices</EnhancedBeliefs.CouplingPenalty>
 </LanguageData>

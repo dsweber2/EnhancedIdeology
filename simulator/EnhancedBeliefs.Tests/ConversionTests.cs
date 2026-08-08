@@ -25,22 +25,21 @@ public class ConversionTests : SeededTest
     [Fact]
     public void CheckConversion_ZeroCertainty_HighOpinionAlternative_Converts()
     {
-        // ideoB has a precept with ExternalOffset=90 → opinion of it is 0.9.
+        // Pawn's opinion of ideoB is pinned to 0.9.
         // certainty=0 → opinion of own ideo is 0, so p = (0.9 - 0)/0.9 = 1 → always converts.
         var world = new SimWorld();
         world.Initialize();
         Rand.SetSeed(1);
 
         var ideoA = new IdeoBuilder().WithName("IdeoA").Build();
-        var friendlyPreceptDef = new PreceptDef { defName = "FriendlyPrecept" };
-        friendlyPreceptDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 90 });
-        var ideoB = new IdeoBuilder().WithName("IdeoB").AddPrecept(friendlyPreceptDef).Build();
+        var ideoB = new IdeoBuilder().WithName("IdeoB").Build();
 
         world.AddIdeo(ideoA);
         world.AddIdeo(ideoB);
 
         var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0f).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.SetIdeoBaseOpinion(ideoB, 90);
 
         var result = tracker.CheckConversion();
 
@@ -99,20 +98,17 @@ public class ConversionTests : SeededTest
             var world = new SimWorld();
             world.Initialize();
 
-            var lowDef = new PreceptDef { defName = $"Low{ii}" };
-            lowDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 20 });
-            var highDef = new PreceptDef { defName = $"High{ii}" };
-            highDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 60 });
-
             var own = new IdeoBuilder().WithName("Own").Build();
-            var lowIdeo = new IdeoBuilder().WithName("Low").AddPrecept(lowDef).Build();
-            var highIdeo = new IdeoBuilder().WithName("High").AddPrecept(highDef).Build();
+            var lowIdeo = new IdeoBuilder().WithName("Low").Build();
+            var highIdeo = new IdeoBuilder().WithName("High").Build();
             world.AddIdeo(own);
             world.AddIdeo(lowIdeo);
             world.AddIdeo(highIdeo);
 
             var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0f).WithLabel("P").Build(world);
             var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+            tracker.SetIdeoBaseOpinion(lowIdeo, 50);
+            tracker.SetIdeoBaseOpinion(highIdeo, 90);
 
             tracker.CheckConversion();
 
@@ -142,20 +138,17 @@ public class ConversionTests : SeededTest
             var world = new SimWorld();
             world.Initialize();
 
-            var defB = new PreceptDef { defName = $"PB{ii}" };
-            defB.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 30 });
-            var defC = new PreceptDef { defName = $"PC{ii}" };
-            defC.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 60 });
-
             var ideoA = new IdeoBuilder().WithName("A").Build();
-            var ideoB = new IdeoBuilder().WithName("B").AddPrecept(defB).Build();
-            var ideoC = new IdeoBuilder().WithName("C").AddPrecept(defC).Build();
+            var ideoB = new IdeoBuilder().WithName("B").Build();
+            var ideoC = new IdeoBuilder().WithName("C").Build();
             world.AddIdeo(ideoA);
             world.AddIdeo(ideoB);
             world.AddIdeo(ideoC);
 
             var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0f).WithLabel("P").Build(world);
             var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+            tracker.SetIdeoBaseOpinion(ideoB, 60);
+            tracker.SetIdeoBaseOpinion(ideoC, 90);
 
             tracker.CheckConversion(priorityIdeo: ideoB);
 
@@ -174,20 +167,17 @@ public class ConversionTests : SeededTest
         world.Initialize();
         Rand.SetSeed(1);
 
-        var preceptB = new PreceptDef { defName = "PB2" };
-        preceptB.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 45 });
-        var preceptC = new PreceptDef { defName = "PC2" };
-        preceptC.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 90 });
-
         var ideoA = new IdeoBuilder().WithName("A2").Build();
-        var ideoB = new IdeoBuilder().WithName("B2").AddPrecept(preceptB).Build();
-        var ideoC = new IdeoBuilder().WithName("C2").AddPrecept(preceptC).Build();
+        var ideoB = new IdeoBuilder().WithName("B2").Build();
+        var ideoC = new IdeoBuilder().WithName("C2").Build();
         world.AddIdeo(ideoA);
         world.AddIdeo(ideoB);
         world.AddIdeo(ideoC);
 
         var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0f).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.SetIdeoBaseOpinion(ideoB, 45);
+        tracker.SetIdeoBaseOpinion(ideoC, 90);
 
         var result = tracker.CheckConversion(excludeIdeos: [ideoC]);
 
@@ -223,16 +213,14 @@ public class ConversionTests : SeededTest
         world.Initialize();
         Rand.SetSeed(1);
 
-        var preceptDef = new PreceptDef { defName = "OCAp" };
-        preceptDef.AddComp(new PreceptComp_OpinionOffset_Mutable { ExternalOffsetValue = 90 });
-
         var ideoA = new IdeoBuilder().WithName("OCA").Build();
-        var ideoB = new IdeoBuilder().WithName("OCB").AddPrecept(preceptDef).Build();
+        var ideoB = new IdeoBuilder().WithName("OCB").Build();
         world.AddIdeo(ideoA);
         world.AddIdeo(ideoB);
 
         var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0.3f).WithLabel("P").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.SetIdeoBaseOpinion(ideoB, 90);
 
         var converted = tracker.OverrideConversionAttempt(0.5f, ideoB, applyCertaintyFactor: false);
 
