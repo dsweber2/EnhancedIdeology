@@ -14,6 +14,15 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // before the same stat/jitter scaling.
     private const float DebateDoubtStrengthLoss = 1f;
 
+    // Smallest rung gap that counts as a genuinely different position; below it the two pawns hold the same rung.
+    internal const float DebateRankEpsilon = 0.01f;
+
+    // Smallest conviction gap (0-20+ scale) that makes a same-rung issue worth arguing over.
+    internal const float DebateStrengthGap = 5f;
+
+    // standard deviation for getting a debate roll; approximately set so a skill difference of 5 still results in a 1 in 5 chance of winning
+    internal const float DebateStandardDeviation = 0.75f;
+
     internal static readonly SimpleCurve CompatibilityFactorCurve =
     [
         new CurvePoint(-1.5f, 0.1f),
@@ -50,11 +59,6 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         if (!recipient.RaceProps.Humanlike)
         {
             EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Recipient not humanlike. Returning 0.");
-            return 0f;
-        }
-        if (initiator.Ideo == recipient.Ideo)
-        {
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Initiator and recipient have same ideo. Returning 0.");
             return 0f;
         }
         if (recipient.DevelopmentalStage.Baby())
@@ -97,7 +101,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var initiatorIdeo = initiator.Ideo;
         var recipientIdeo = recipient.Ideo;
 
-        topic = GetDebateTopic(initiatorIdeo, recipientIdeo, initiator, recipient, out var initiatorPrecept, out var recipientPrecept);
+        topic = GetDebateTopic(initiatorIdeo, recipientIdeo, initiatorTracker, recipientTracker, initiator, recipient, out var initiatorPrecept, out var recipientPrecept);
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"Debate topic selected: {topic}");
         if (initiatorPrecept == null)
         {
@@ -107,11 +111,6 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         if (recipientPrecept == null)
         {
             EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "No recipient precept found. Exiting.");
-            return;
-        }
-        if (initiatorPrecept == recipientPrecept)
-        {
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Initiator and recipient have the same precept. Exiting.");
             return;
         }
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"Initiator's precept: {initiatorPrecept}, recipient's precept: {recipientPrecept}");
@@ -136,13 +135,24 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         }
     }
 
-    private static IssueDef? GetDebateTopic(Ideo initiatorIdeo, Ideo recipientIdeo, Pawn initiator, Pawn recipient, out PreceptDef? initiatorPrecept, out PreceptDef? recipientPrecept)
+    private static IssueDef? GetDebateTopic(
+        Ideo initiatorIdeo, Ideo recipientIdeo,
+        IdeoTrackerData initiatorTracker, IdeoTrackerData recipientTracker,
+        Pawn initiator, Pawn recipient,
+        out PreceptDef? initiatorPrecept, out PreceptDef? recipientPrecept)
     {
-        var retryAttempts = DefDatabase<IssueDef>.DefCount * 5;
+        // Conviction is per pawn, not per precept, so pull each pawn's own stance on every issue. Two same-faith
+        // pawns share every precept; what they can argue about is how firmly they each hold it.
+        var initiatorStances = initiatorTracker.IssueStances()
+            .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
+        var recipientStances = recipientTracker.IssueStances()
+            .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
 
-        var initiatorIssues = initiatorIdeo.precepts.Select(p => p.def.issue).Distinct();
-        var recipientIssues = recipientIdeo.precepts.Select(p => p.def.issue).Distinct();
-        var conflictingIssues = initiatorIssues.Intersect(recipientIssues)
+        var sharedIssues = initiatorIdeo.precepts.Select(p => p.def.issue)
+            .Intersect(recipientIdeo.precepts.Select(p => p.def.issue))
+            .Distinct();
+
+        var conflictingIssues = sharedIssues
             .Select(issue => (
                 issue,
                 initiatorPrecept: GetPreceptForTopic(initiatorIdeo, issue, initiator),
@@ -150,9 +160,10 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             ))
             .Where(ip =>
                 ip.initiatorPrecept != null &&
-                ip.initiatorPrecept != ip.recipientPrecept);
+                Disagree(initiatorStances[ip.issue!], recipientStances[ip.issue!]))
+            .ToList();
 
-        if (!conflictingIssues.Any())
+        if (conflictingIssues.Count == 0)
         {
             EnhancedBeliefsMod.Warning("GetDebateTopic: No conflicting topics found. Exiting.");
             initiatorPrecept = null;
@@ -163,6 +174,12 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         (var selectedIssue, initiatorPrecept, recipientPrecept) = conflictingIssues.RandomElement();
         return selectedIssue;
     }
+
+    // A topic is worth debating when the two pawns' personal stances differ: either a different rung (cross-faith,
+    // or one has drifted) or the same rung held with meaningfully different conviction (same faith, different zeal).
+    private static bool Disagree((float rank, float strength) a, (float rank, float strength) b) =>
+        Mathf.Abs(a.rank - b.rank) > DebateRankEpsilon
+        || Mathf.Abs(a.strength - b.strength) > DebateStrengthGap;
 
     private static PreceptDef? GetPreceptForTopic(Ideo ideo, IssueDef? topic, Pawn pawn)
     {
@@ -176,13 +193,18 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
     private static float GetDebateRoll(Pawn pawn)
     {
-        var rand = Rand.Value;
         var convPower = pawn.GetStatValue(StatDefOf.ConversionPower);
+        // intellectual impact ranges from 0 to 2.2
+        var intImpact = pawn.skills.GetSkill(SkillDefOf.Intellectual).Level * 11/ 100;
         var certaintyLoss = pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
         var socialImpact = pawn.GetStatValue(StatDefOf.SocialImpact);
-        var certainty = pawn.ideo.Certainty;
-        var result = rand * convPower / certaintyLoss * socialImpact * (1f + ((certainty - 0.6f) * 0.5f));
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"GetDebateRoll: pawn={pawn}, rand={rand}, convPower={convPower}, certaintyLoss={certaintyLoss}, socialImpact={socialImpact}, certainty={certainty}, result={result}");
+        // debating dropping certainty and strength entirely
+        // var certainty = pawn.ideo.Certainty;
+        // // ranges from 0-50, 20 being full faith
+        // var pawnStrength = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn).IssueStances().First(stance => stance.issue == issue).strength;
+        // pull from a gaussian centered around an average of conversion power, intellectual ability, and social impact; max is ~2.58167
+        var result = Rand.Gaussian(convPower/2 + intImpact/2 + socialImpact/3, DebateStandardDeviation);
+        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"GetDebateRoll: pawn={pawn}, convPower={convPower}, certaintyLoss={certaintyLoss}, socialImpact={socialImpact}, intImpact={intImpact}, result={result}");
         return result;
     }
 
@@ -326,17 +348,24 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         }
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}, winnerPrecept={winnerPrecept}, loserPrecept={loserPrecept}");
         var loserTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(loser);
+        var winnerTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(winner);
+        var issue = winnerPrecept.issue!;
 
-        // The loser is persuaded: their personal stance on the contested issue slides toward the rung the
-        // winner argued for, by a fraction of the remaining gap set by the winner's conversion power and the
-        // loser's fragility. Moving toward the winner is moving away from the loser's own ideo, so this both
-        // warms them to the winner's faith and cools them on their own - captured in one stance shift.
+        // The loser is persuaded: their personal stance on the contested issue slides toward the rung the winner
+        // argued for, and their conviction is dragged toward the winner's, both by a fraction of the gap set by
+        // the winner's conversion power and the loser's fragility. Moving toward the winner is moving away from
+        // the loser's own ideo, warming them to the winner's faith and cooling them on their own. When the two
+        // already share a rung (a same-faith debate) the rank pull is a no-op and only the conviction moves - the
+        // less certain pawn is talked toward the more certain one's conviction, or vice versa.
         var pull = Mathf.Clamp01(StancePullPerDebate
             * winner.GetStatValue(StatDefOf.ConversionPower)
             * loser.GetStatValue(StatDefOf.CertaintyLossFactor));
         var targetRank = PreceptLadder.RankOf(winnerPrecept);
+        var winnerStrength = winnerTracker.IssueStances().First(stance => stance.issue == issue).strength;
+        var loserStrength = loserTracker.IssueStances().First(stance => stance.issue == issue).strength;
+        var strengthDelta = (winnerStrength - loserStrength) * pull;
 
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: pulling loser stance on {winnerPrecept.issue} toward rank {targetRank} by {pull}");
-        loserTracker.ShiftIssueStance(winnerPrecept.issue!, targetRank, pull, 0f);
+        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: pulling loser stance on {issue} toward rank {targetRank} and conviction {winnerStrength} by {pull}");
+        loserTracker.ShiftIssueStance(issue, targetRank, pull, strengthDelta);
     }
 }

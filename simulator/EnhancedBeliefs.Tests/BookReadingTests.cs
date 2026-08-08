@@ -152,14 +152,15 @@ public class BookReadingTests : SeededTest
 
         var reader = new PawnBuilder().WithIdeo(ideo).WithLabel("R").Build(world);
         var readerTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(reader);
+        // Zero the reader's conviction on the issue first, so the tiny hardening is measured from 0 and free of
+        // the float cancellation that subtracting two ~15-scale strengths would introduce.
+        readerTracker.ShiftIssueStance(issue, 0f, 0f, -IdeoTrackerData.AbsoluteMaxConvictionStrength);
         var before = readerTracker.IssueStances().First(stance => stance.issue == issue).strength;
 
         var gain = doer.CertaintyGain(reader);
         doer.OnReadingTick(reader, 1f);
         var after = readerTracker.IssueStances().First(stance => stance.issue == issue).strength;
 
-        // The per-tick delta is a ~1e-4 increment on a ~15 base, so subtracting two floats only leaves a few
-        // significant figures; a 1% tolerance is well inside that and far tighter than any flat-strength model.
         var expected = gain * authorStrength;
         var actual = after - before;
         Assert.True(Mathf.Abs(actual - expected) < expected * 0.01f,
@@ -190,6 +191,8 @@ public class BookReadingTests : SeededTest
 
         var reader = new PawnBuilder().WithIdeo(ideo).WithLabel("R").Build(world);
         var readerTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(reader);
+        // Measure the faint hardening from a zeroed base, free of float cancellation on a ~15-scale strength.
+        readerTracker.ShiftIssueStance(issue, 0f, 0f, -IdeoTrackerData.AbsoluteMaxConvictionStrength);
         var before = readerTracker.IssueStances().First(stance => stance.issue == issue).strength;
 
         var gain = doer.CertaintyGain(reader);

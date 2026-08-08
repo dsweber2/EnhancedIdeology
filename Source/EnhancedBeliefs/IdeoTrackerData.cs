@@ -302,34 +302,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             .Distinct();
         foreach (var issue in relevantIssues)
         {
-            // Moral issues (and coupled targets) grade by rung distance; Special issues (leader, mood) carry
-            // bespoke categorical logic. PositiveOnly/NA contribute nothing, and UniversalPositive is a flat
-            // boost added below.
-            var category = PreceptPolicy.CategoryOf(issue);
-            float perIssue;
-            if (category == PreceptCategory.Moral || inducedTargets.Contains(issue))
-            {
-                var pawnRank = issuePreferredRank[issue];
-                var targetRank = HeldRank(ideo, issue);
-                // Widen the extent to any induced rank sitting past the ladder ends, so a "beyond Don't-care"
-                // stance reads as the axis extreme rather than falling outside it.
-                var minRank = Mathf.Min(Mathf.Min(0f, PreceptLadder.DontCareRank(issue)), Mathf.Min(pawnRank, targetRank));
-                var maxRank = Mathf.Max(PreceptLadder.Rungs(issue).Count - 1, Mathf.Max(pawnRank, targetRank));
-                perIssue = PreceptLadder.OpinionOnPrecept(
-                    pawnRank, targetRank, minRank, maxRank, issueStrength[issue], zeroFrac);
-            }
-            else if (category == PreceptCategory.Special)
-            {
-                // Weapons / PreferredXenotypes compare precept payloads directly; leader / mood are rank-based.
-                // Either resolver returning false means the two faiths have no stance to compare - skip it.
-                if (!PreceptPolicy.TryPayloadSpecialOpinion(issue, pawnIdeo, ideo, issueStrength[issue], out perIssue)
-                    && !PreceptPolicy.TrySpecialOpinion(
-                        issue, issuePreferredRank[issue], HeldRank(ideo, issue), issueStrength[issue], zeroFrac, out perIssue))
-                {
-                    continue;
-                }
-            }
-            else
+            var perIssue = PerIssueOpinion(ideo, issue, inducedTargets, zeroFrac, out var graded);
+            if (!graded)
             {
                 continue;
             }
@@ -390,6 +364,51 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         return Mathf.Clamp(opinion, 0, 100);
     }
 
+    // Raw per-issue opinion (roughly +/-strength) the pawn holds toward `ideo`'s stance on `issue`: the same
+    // ladder-distance / special-payload grade the structural band averages, before the /issueCount mean.
+    // Moral issues (and coupled targets) grade by rung distance; Special issues carry bespoke categorical logic.
+    // `graded` is false when neither faith takes a comparable position, so the caller leaves it out of the mean.
+    private float PerIssueOpinion(Ideo ideo, IssueDef issue, HashSet<IssueDef> inducedTargets, float zeroFrac, out bool graded)
+    {
+        graded = true;
+        var category = PreceptPolicy.CategoryOf(issue);
+        if (category == PreceptCategory.Moral || inducedTargets.Contains(issue))
+        {
+            var pawnRank = issuePreferredRank[issue];
+            var targetRank = HeldRank(ideo, issue);
+            // Widen the extent to any induced rank sitting past the ladder ends, so a "beyond Don't-care"
+            // stance reads as the axis extreme rather than falling outside it.
+            var minRank = Mathf.Min(Mathf.Min(0f, PreceptLadder.DontCareRank(issue)), Mathf.Min(pawnRank, targetRank));
+            var maxRank = Mathf.Max(PreceptLadder.Rungs(issue).Count - 1, Mathf.Max(pawnRank, targetRank));
+            return PreceptLadder.OpinionOnPrecept(
+                pawnRank, targetRank, minRank, maxRank, issueStrength[issue], zeroFrac);
+        }
+
+        // Weapons / PreferredXenotypes compare precept payloads directly; leader / mood are rank-based.
+        // Either resolver returning false means the two faiths have no stance to compare.
+        if (category == PreceptCategory.Special
+            && (PreceptPolicy.TryPayloadSpecialOpinion(issue, Pawn.Ideo, ideo, issueStrength[issue], out var special)
+                || PreceptPolicy.TrySpecialOpinion(
+                    issue, issuePreferredRank[issue], HeldRank(ideo, issue), issueStrength[issue], zeroFrac, out special)))
+        {
+            return special;
+        }
+
+        graded = false;
+        return 0f;
+    }
+
+    // Signed per-issue opinion (conviction-strength units) the pawn holds toward `ideo`'s stance on `issue`,
+    // for the opinion tab's per-precept agreement display: positive means the pawn's stance agrees with what
+    // `ideo` preaches on the issue, negative that it clashes. Ungraded issues (nothing to compare) read 0.
+    public float IssueOpinionToward(Ideo ideo, IssueDef issue)
+    {
+        EnsureIssueStancesSeeded();
+        var inducedTargets = new HashSet<IssueDef>(
+            PreceptPolicy.InducedIssues(Pawn.Ideo).Concat(PreceptPolicy.InducedIssues(ideo)));
+        return PerIssueOpinion(ideo, issue, inducedTargets, EnhancedBeliefsMod.Settings.PreceptZeroFrac, out _);
+    }
+
     // Rank of the stance `ideo` holds on `issue`: an explicit precept if it has one, otherwise a stance a
     // cross-precept coupling induces (e.g. valuing trees implies disapproving of cutting them), otherwise the
     // virtual Don't-care rank. Because seeding reads this too, a pawn's own coupled stances seed correctly.
@@ -418,11 +437,18 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // Flat opinion bonus (0-100 units) for a UniversalPositive issue the target ideo values, e.g. Charity.
     private const float UniversalPositiveBonus = 5f;
 
+    // Heterodoxy: at spawn a pawn quietly diverges from their faith on up to this many of the Moral positions
+    // they hold least firmly. A static (not const) so tests can disable the RNG-consuming flip; the game uses
+    // the default.
+    internal const int DefaultHeterodoxyMax = 3;
+    internal static int HeterodoxyMax = DefaultHeterodoxyMax;
+
     // Seed the pawn's preferred stance and conviction strength for every issue, once. Preferred stance is
     // whatever their own ideo holds (Don't-care where it is silent); strength is a U(12, 17) draw shifted by
-    // the pawn's personality.
+    // the pawn's personality. A fresh seeding then applies heterodoxy.
     private void EnsureIssueStancesSeeded()
     {
+        var freshSeed = issueStrength.Count == 0;
         var traitOffset = ConvictionStrengthOffset();
         foreach (var issue in DefDatabase<IssueDef>.AllDefs)
         {
@@ -436,6 +462,47 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 Rand.Range(BaseConvictionMin, BaseConvictionMax) + traitOffset,
                 MinConvictionStrength, AbsoluteMaxConvictionStrength);
         }
+
+        if (freshSeed)
+        {
+            ApplyHeterodoxy();
+        }
+    }
+
+    // Quietly diverge from the pawn's own ideo on a few of the Moral issues they hold least firmly: flip each to
+    // a nearby rung, so a colonist can mildly disagree with their faith from the start. This lowers their fit
+    // with their own ideo on those issues and makes them a live topic for same-faith debate.
+    private void ApplyHeterodoxy()
+    {
+        var flipCount = Rand.RangeInclusive(0, HeterodoxyMax);
+        if (flipCount == 0)
+        {
+            return;
+        }
+
+        var candidates = issueStrength.Keys
+            .Where(issue => PreceptPolicy.CategoryOf(issue) == PreceptCategory.Moral
+                && Pawn.Ideo.precepts.Any(precept => precept.def.issue == issue)
+                && PreceptLadder.Rungs(issue).Count > 1)
+            .OrderBy(issue => issueStrength[issue])
+            .Take(flipCount)
+            .ToList();
+
+        foreach (var issue in candidates)
+        {
+            issuePreferredRank[issue] = FlippedRank(issue, issuePreferredRank[issue]);
+        }
+    }
+
+    // A rung other than the one the pawn's ideo holds, weighted toward nearby rungs so a mild dissent is common
+    // and a wholesale reversal rare.
+    private static float FlippedRank(IssueDef issue, float orthodoxRank)
+    {
+        var rungCount = PreceptLadder.Rungs(issue).Count;
+        var current = Mathf.RoundToInt(orthodoxRank);
+        return Enumerable.Range(0, rungCount)
+            .Where(rank => rank != current)
+            .RandomElementByWeight(rank => 1f / (1f + Mathf.Abs(rank - current)));
     }
 
     // Persuasion write-path (design.md R2). Nudge the pawn's personal stance on `issue`: slide the
