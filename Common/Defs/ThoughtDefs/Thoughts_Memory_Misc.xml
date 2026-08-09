@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
-    <ThoughtDef>
-        <defName>EB_ReligiousBookDestroyed</defName>
-        <thoughtClass>EnhancedBeliefs.Thought_ReligiousBookDestroyed</thoughtClass>
-        <showBubble>false</showBubble>
-        <durationDays>3</durationDays>
-        <stackLimit>2</stackLimit>
-        <nullifyingHediffs>
-            <li MayRequire="Ludeon.RimWorld.Anomaly">Inhumanized</li>
-        </nullifyingHediffs>
-        <stages>
-            <li>
-                <label>religious book destroyed</label>
-                <description>Our religious book was destroyed. That is absolutely inexcusable.</description>
-                <baseMoodEffect>-15</baseMoodEffect>
-            </li>
-        </stages>
-    </ThoughtDef>
-
+  <ThoughtDef>
+    <defName>EB_ReligiousBookDestroyed</defName>
+    <thoughtClass>EnhancedBeliefs.Thought_ReligiousBookDestroyed</thoughtClass>
+    <showBubble>false</showBubble>
+    <durationDays>15</durationDays>
+    <stackLimit>2</stackLimit>
+    <nullifyingHediffs>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">Inhumanized</li>
+    </nullifyingHediffs>
+    <stages>
+      <li>
+        <label>religious book destroyed</label>
+        <description>Our religious book was destroyed. That is absolutely inexcusable.</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <!-- Diversity-of-thought debate aftermath. Social memories that also carry a mood stage, so
+         one def both warms/cools opinion of the debate partner and lifts/dents mood. Gained per pawn whose faith
+         appreciates (good) or is bigoted toward (bad) diversity of thought. -->
+  <ThoughtDef>
+    <defName>EB_GoodDebate</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>3</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>good debate</label>
+        <description>We had a stimulating debate about our beliefs. A meeting of open minds.</description>
+        <baseOpinionOffset>7</baseOpinionOffset>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_BadDebate</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>3</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>heretical debate</label>
+        <description>I had to refute their deviant beliefs. Diversity of thought is a poison.</description>
+        <baseOpinionOffset>-7</baseOpinionOffset>
+        <baseMoodEffect>-3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>

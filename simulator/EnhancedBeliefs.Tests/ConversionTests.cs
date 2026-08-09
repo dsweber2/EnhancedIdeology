@@ -102,14 +102,15 @@ public class ConversionTests : SeededTest
     }
 
     [Fact]
-    public void InteractionWorker_PullsTwiceThePerDebatePull()
+    public void InteractionWorker_WinPull_ScalesWithConversionStancePullSetting()
     {
-        // Conversion reuses the per-debate stance pull at double strength, scaled by the preacher's ConversionPower
-        // and the recipient's CertaintyLossFactor. With a modest power the clamp does not bite, so the rung move is
-        // exactly (target - before) * 2 * StancePullPerDebate * CP * CLF. Derive the expectation from the constant
-        // rather than hardcoding it, so retuning the pull keeps this honest.
+        // A won conversion reuses the per-debate pull times the ConversionStancePull setting, scaled by the
+        // preacher's ConversionPower and the recipient's CertaintyLossFactor. With a modest power the clamp does
+        // not bite, so the rung move is exactly (target - before) * setting * StancePullPerDebate * CP * CLF.
+        // Derive the expectation from the setting and constant so retuning either keeps this honest.
+        EnhancedBeliefsMod.Settings.ConversionStancePull = 3f;
         Rand.SetSeed(1);
-        var (world, initiator, recipient, issue, initiatorIdeo) = OpposedFaiths(initiatorConversionPower: 2f);
+        var (world, initiator, recipient, issue, initiatorIdeo) = OpposedFaiths(initiatorConversionPower: 1.5f);
         var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
         var before = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
         var targetRank = PreceptLadder.RankOf(initiatorIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
@@ -117,7 +118,7 @@ public class ConversionTests : SeededTest
         new InteractionWorker_AdvancedConversionAttempt().Interacted(initiator, recipient, [], out _, out _, out _, out _);
 
         var after = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
-        var pull = 2f * InteractionWorker_IdeologicalDebatePrecept.StancePullPerDebate
+        var pull = EnhancedBeliefsMod.Settings.ConversionStancePull * InteractionWorker_IdeologicalDebatePrecept.StancePullPerDebate
             * initiator.GetStatValue(StatDefOf.ConversionPower)
             * recipient.GetStatValue(StatDefOf.CertaintyLossFactor);
         Assert.Equal(before + ((targetRank - before) * pull), after, 3);
@@ -149,6 +150,104 @@ public class ConversionTests : SeededTest
         Assert.Equal(initiatorBefore + ((recipientRank - initiatorBefore) * pull), initiatorAfter, 3);
         Assert.Equal(recipientRank, recipientTracker.IssueStances().First(stance => stance.issue == issue).rank);
         Assert.Equal(recipientIdeoBefore, recipient.Ideo);
+    }
+
+    [Fact]
+    public void InteractionWorker_WonAttempt_KnocksRecipientCertaintyDown()
+    {
+        // The preacher wins the roll (high SocialImpact) but barely moves the stance (low ConversionPower), so the
+        // recipient still prefers their own faith and does not flip. Their certainty is knocked down by
+        // ConversionCertaintyKnock, leaving them more convertible later.
+        Rand.SetSeed(1);
+        var (world, initiator, recipient, issue, _) = OpposedFaiths(
+            initiatorConversionPower: 0.2f, initiatorSocialImpact: 12f);
+        var recipientIdeoBefore = recipient.Ideo;
+        var certaintyBefore = recipient.ideo.Certainty;
+
+        new InteractionWorker_AdvancedConversionAttempt().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        Assert.Equal(recipientIdeoBefore, recipient.Ideo); // did not convert
+        Assert.Equal(certaintyBefore * EnhancedBeliefsMod.Settings.ConversionCertaintyKnock, recipient.ideo.Certainty, 3);
+    }
+
+    [Fact]
+    public void ShiftIssueStance_CrossesMultipleRungs_WithoutSnapping()
+    {
+        // A stance is a continuous rank, not a whole-rung slot: one pull can carry it across several rungs, and a
+        // partial pull lands squarely between them. The per-issue opinion tracks that fractional rank - strong
+        // opposition four rungs from the target's stance, full agreement once it lands on it.
+        Rand.SetSeed(1);
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (issue, rungs) = SimIssues.Ladder("FiveStep", "R0", "R1", "R2", "R3", "R4");
+        var ownIdeo = new IdeoBuilder().WithName("Own").AddPrecept(rungs[4], issue, displayOrderInIssue: 40).Build();
+        var targetIdeo = new IdeoBuilder().WithName("Target").AddPrecept(rungs[0], issue, displayOrderInIssue: 0).Build();
+        world.AddIdeo(ownIdeo);
+        world.AddIdeo(targetIdeo);
+
+        var pawn = new PawnBuilder().WithIdeo(ownIdeo).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        Assert.Equal(4f, tracker.IssueStances().First(stance => stance.issue == issue).rank); // seeds to own rung 4
+        Assert.True(tracker.IssueOpinionToward(targetIdeo, issue) < 0f, "a four-rung gap should read as opposition");
+
+        // A tenth of the way from rung 4 toward rung 0 lands at rank 3.6 - a fractional rung, no snapping.
+        tracker.ShiftIssueStance(issue, PreceptLadder.RankOf(rungs[0]), 0.1f, 0f);
+        Assert.Equal(3.6f, tracker.IssueStances().First(stance => stance.issue == issue).rank, 3);
+
+        // The rest of the way in one pull crosses the remaining rungs and lands on the target's stance.
+        tracker.ShiftIssueStance(issue, PreceptLadder.RankOf(rungs[0]), 1f, 0f);
+        Assert.Equal(0f, tracker.IssueStances().First(stance => stance.issue == issue).rank, 3);
+        Assert.True(tracker.IssueOpinionToward(targetIdeo, issue) > 0f, "landing on the target's rung should agree");
+    }
+
+    [Fact]
+    public void Conversion_OvershootsPastOpinionOfNewFaith_AndKeepsHeterodoxStance()
+    {
+        // A convert overshoots: they arrive at their old certainty plus twice the margin by which they preferred
+        // the new faith (old + 2*(opinion - old)), clamped - always above the raw opinion, since preferring the new
+        // faith is a precondition of converting. And they keep their personal stances: joining a rung-2 faith does
+        // not snap their rung-0 conviction to rung 2, so a convert with a clashing belief still holds it.
+        EnhancedBeliefsMod.Settings.CrisisThreshold = 0f; // drop the crisis pseudo-candidate so the draw is deterministic
+        Rand.SetSeed(1);
+        var world = new SimWorld();
+        world.Initialize();
+
+        // Own and target agree on two issues and clash on a third (own/pawn rung 0, target rung 2), so the target
+        // is a net-positive but imperfect fit.
+        var (agreeA, aRungs) = SimIssues.Ladder("AgreeA", "Aa", "Ab", "Ac");
+        var (agreeB, bRungs) = SimIssues.Ladder("AgreeB", "Ba", "Bb", "Bc");
+        var (clash, cRungs) = SimIssues.Ladder("Clash", "Ca", "Cb", "Cc");
+        var ownIdeo = new IdeoBuilder().WithName("Own")
+            .AddPrecept(aRungs[0], agreeA, displayOrderInIssue: 0)
+            .AddPrecept(bRungs[0], agreeB, displayOrderInIssue: 0)
+            .AddPrecept(cRungs[0], clash, displayOrderInIssue: 0).Build();
+        var targetIdeo = new IdeoBuilder().WithName("Target")
+            .AddPrecept(aRungs[0], agreeA, displayOrderInIssue: 0)
+            .AddPrecept(bRungs[0], agreeB, displayOrderInIssue: 0)
+            .AddPrecept(cRungs[2], clash, displayOrderInIssue: 20).Build();
+        world.AddIdeo(ownIdeo);
+        world.AddIdeo(targetIdeo);
+
+        // Zero starting certainty guarantees the conversion draw fires deterministically. The overshoot formula
+        // is still checked in general form below (it just reduces to 2*opinion when old certainty is 0).
+        var pawn = new PawnBuilder().WithIdeo(ownIdeo).WithCertainty(0f).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        var oldCertainty = pawn.ideo.Certainty;
+        var opinionOfTarget = tracker.IdeoOpinion(targetIdeo);
+        var clashStanceBefore = tracker.IssueStances().First(stance => stance.issue == clash).rank;
+
+        var result = tracker.CheckConversion();
+
+        Assert.Equal(ConversionOutcome.Success, result);
+        Assert.Equal(targetIdeo, pawn.Ideo);
+        // Arrival certainty overshoots the raw opinion by the preference margin.
+        Assert.Equal(Mathf.Clamp01(oldCertainty + (2f * (opinionOfTarget - oldCertainty))), pawn.ideo.Certainty, 3);
+        Assert.True(pawn.ideo.Certainty > opinionOfTarget, $"convert should overshoot the raw opinion {opinionOfTarget}, got {pawn.ideo.Certainty}");
+        // The clashing stance is retained, not snapped to the new faith's rung.
+        Assert.Equal(clashStanceBefore, tracker.IssueStances().First(stance => stance.issue == clash).rank);
     }
 
     // An initiator whose faith preaches rung 0 vs a recipient whose faith preaches the far rung on one shared Moral
@@ -298,29 +397,6 @@ public class ConversionTests : SeededTest
 
         Assert.Equal(ConversionOutcome.Breakdown, result);
         Assert.Equal(ideoA, pawn.Ideo);
-    }
-
-    [Fact]
-    public void OverrideConversionAttempt_DropsToZeroCertainty_ConvertsToTargetIdeo()
-    {
-        // certainty 0.3 − 0.5 = −0.2 → clamped to 0 → CheckConversion fires → converts to ideoB
-        var world = new SimWorld();
-        world.Initialize();
-        Rand.SetSeed(1);
-
-        var ideoA = new IdeoBuilder().WithName("OCA").Build();
-        var ideoB = new IdeoBuilder().WithName("OCB").Build();
-        world.AddIdeo(ideoA);
-        world.AddIdeo(ideoB);
-
-        var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0.3f).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        tracker.SetIdeoBaseOpinion(ideoB, 90);
-
-        var converted = tracker.OverrideConversionAttempt(0.5f, ideoB, applyCertaintyFactor: false);
-
-        Assert.True(converted);
-        Assert.Equal(ideoB, pawn.Ideo);
     }
 
     [Fact]

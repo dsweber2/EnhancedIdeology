@@ -10,9 +10,11 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // debates rather than in one conversation. Directed conversion (a priest's action) reuses this at double.
     internal const float StancePullPerDebate = 0.1f;
 
-    // Conviction points (0-20 scale) a mutual-doubt draw erodes from each pawn on the contested issue,
-    // before the same stat/jitter scaling.
-    private const float DebateDoubtStrengthLoss = 1f;
+    // A tie hardens both sides (design.md R3). Per pawn, base probability of digging in, the conviction points
+    // gained on the contested issue, and the certainty gained - all before the same stat/jitter scaling.
+    private const float DebateEntrenchBaseChance = 0.2f;
+    private const float DebateEntrenchStrengthGain = 1f;
+    private const float DebateEntrenchCertaintyGain = 0.01f;
 
     // Smallest rung gap that counts as a genuinely different position; below it the two pawns hold the same rung.
     internal const float DebateRankEpsilon = 0.01f;
@@ -23,7 +25,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // standard deviation for getting a debate roll; approximately set so a skill difference of 5 still results in a 1 in 5 chance of winning
     internal const float DebateStandardDeviation = 0.75f;
 
-    // Roll gap below which the two debaters are deemed evenly matched: a draw (mutual doubt / social fight) rather
+    // Roll gap below which the two debaters are deemed evenly matched: a draw (mutual retrenchment / social fight) rather
     // than a decisive win for either side.
     internal const float DebateDrawThreshold = 0.1f;
 
@@ -126,9 +128,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         if (Math.Abs(initiatorRoll - recipientRoll) <= DebateDrawThreshold)
         {
             EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
-            if (HandleDraw(initiator, recipient, initiatorTracker, recipientTracker, initiatorPrecept, recipientPrecept, initiatorIdeo, recipientIdeo, extraSentencePacks, ref letterText, ref letterLabel, ref letterDef, ref lookTargets))
+            if (HandleDraw(initiator, recipient, initiatorTracker, recipientTracker, initiatorPrecept, recipientPrecept))
             {
-                EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight or conversion occurred). Exiting.");
+                EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight). Exiting.");
                 return;
             }
         }
@@ -137,6 +139,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Debate is not a draw. Adjusting opinions.");
             AdjustOpinions(initiator, recipient, comp, initiatorPrecept, recipientPrecept, initiatorRoll, recipientRoll);
         }
+
+        // Precept-driven social aftermath, evaluated per pawn on every non-fight outcome (design.md R3).
+        ApplyDiversityAftermath(initiator, recipient);
     }
 
     private static IssueDef? GetDebateTopic(
@@ -195,37 +200,56 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         return precept;
     }
 
+    // intellectual impact ranges from 0 to ~2.2 (integer-stepped by the /100)
+    internal static float IntellectualImpact(Pawn pawn) => pawn.skills.GetSkill(SkillDefOf.Intellectual).Level * 11 / 100;
+
+    // Deterministic centre of a pawn's debate roll: an average of conversion power, intellectual persuasiveness
+    // and social impact (max ~2.58167). GetDebateRoll draws a Gaussian around this; the convert-ability tooltip
+    // reads it directly to preview the win chance and its per-factor breakdown.
+    internal static float DebateRollMean(Pawn pawn) =>
+        (pawn.GetStatValue(StatDefOf.ConversionPower) / 2f)
+        + (IntellectualImpact(pawn) / 2f)
+        + (pawn.GetStatValue(StatDefOf.SocialImpact) / 3f);
+
     internal static float GetDebateRoll(Pawn pawn)
     {
-        var convPower = pawn.GetStatValue(StatDefOf.ConversionPower);
-        // intellectual impact ranges from 0 to 2.2
-        var intImpact = pawn.skills.GetSkill(SkillDefOf.Intellectual).Level * 11/ 100;
-        var certaintyLoss = pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
-        var socialImpact = pawn.GetStatValue(StatDefOf.SocialImpact);
-        // debating dropping certainty and strength entirely
-        // var certainty = pawn.ideo.Certainty;
-        // // ranges from 0-50, 20 being full faith
-        // var pawnStrength = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn).IssueStances().First(stance => stance.issue == issue).strength;
-        // pull from a gaussian centered around an average of conversion power, intellectual ability, and social impact; max is ~2.58167
-        var result = Rand.Gaussian(convPower/2 + intImpact/2 + socialImpact/3, DebateStandardDeviation);
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"GetDebateRoll: pawn={pawn}, convPower={convPower}, certaintyLoss={certaintyLoss}, socialImpact={socialImpact}, intImpact={intImpact}, result={result}");
+        var result = Rand.Gaussian(DebateRollMean(pawn), DebateStandardDeviation);
+        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"GetDebateRoll: pawn={pawn}, mean={DebateRollMean(pawn)}, result={result}");
         return result;
     }
 
+    // Probability the initiator wins the roll outright (draw excluded): P(initiatorRoll - recipientRoll > draw
+    // threshold). The two rolls are independent Gaussians, so their difference is Gaussian with the summed
+    // variance; this is the tail of that difference past the draw band. Read-only, for the ability tooltip.
+    internal static float WinChance(Pawn initiator, Pawn recipient)
+    {
+        var meanDiff = DebateRollMean(initiator) - DebateRollMean(recipient);
+        var sdDiff = DebateStandardDeviation * Mathf.Sqrt(2f);
+        return 1f - NormalCdf((DebateDrawThreshold - meanDiff) / sdDiff);
+    }
+
+    // Standard normal CDF via an erf approximation (Abramowitz & Stegun 7.1.26, ~1e-7 max error). Mathf has no
+    // erf, and this only feeds a displayed percentage, so the approximation is ample.
+    internal static float NormalCdf(float x) => 0.5f * (1f + Erf(x / Mathf.Sqrt(2f)));
+
+    private static float Erf(float x)
+    {
+        var sign = Mathf.Sign(x);
+        x = Mathf.Abs(x);
+        var t = 1f / (1f + (0.3275911f * x));
+        var y = 1f - ((((((((1.061405429f * t) - 1.453152027f) * t) + 1.421413741f) * t) - 0.284496736f) * t + 0.254829592f) * t) * Mathf.Exp(-x * x);
+        return sign * y;
+    }
+
+    // An evenly-matched debate. Either it boils over into a social fight (returns true), or it entrenches both
+    // sides (returns false). No rung moves and no one converts on a tie.
     private bool HandleDraw(
         Pawn initiator,
         Pawn recipient,
         IdeoTrackerData initiatorTracker,
         IdeoTrackerData recipientTracker,
         PreceptDef initiatorPrecept,
-        PreceptDef recipientPrecept,
-        Ideo initiatorIdeo,
-        Ideo recipientIdeo,
-        List<RulePackDef> extraSentencePacks,
-        ref string? letterText,
-        ref string? letterLabel,
-        ref LetterDef? letterDef,
-        ref LookTargets? lookTargets)
+        PreceptDef recipientPrecept)
     {
         // Fetch social fight multiplier
         interaction.socialFightBaseChance = 1f;
@@ -239,97 +263,92 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             (0.5f + (recipient.skills.GetSkill(SkillDefOf.Social).Level * 0.1f));
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: socialFightChance={socialFightChance}");
 
-        var randFight = Rand.Value;
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: randFight={randFight}");
-        if (randFight < socialFightChance)
+        if (Rand.Value < socialFightChance)
         {
             EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Social fight triggered!");
             recipient.interactions.StartSocialFight(initiator, "EnhancedBeliefs.IdeologicalDebateOutcomeSocialFight");
             return true;
         }
 
-        // Smarter pawns have a higher chance of arriving to a mutual conclusion that both of their ideoligions suck
-        var randomOpinion = 0.2f * (0.75f + (initiator.skills.GetSkill(SkillDefOf.Intellectual).Level * 0.05f)) *
-            (0.75f + (recipient.skills.GetSkill(SkillDefOf.Intellectual).Level * 0.05f)) /
-            (0.2f + ((initiator.ideo.Certainty + recipient.ideo.Certainty) / 2f * 0.8f));
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: randomOpinion={randomOpinion}");
-
-        var randOpinion = Rand.Value;
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: randOpinion={randOpinion}");
-        if (randOpinion < randomOpinion)
-        {
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Mutual conclusion reached. Eroding conviction and adjusting certainty.");
-
-            // Both walk away less sure: their conviction on the contested issue erodes, no rung moves. A
-            // weaker-held stance contributes less either way, leaving them more open to future persuasion.
-            var doubtInit = DebateDoubtStrengthLoss * initiator.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
-            var doubtRecip = DebateDoubtStrengthLoss * recipient.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: eroding conviction on {initiatorPrecept.issue}: initiator={doubtInit}, recipient={doubtRecip}");
-            initiatorTracker.ShiftIssueStance(initiatorPrecept.issue!, 0f, 0f, -doubtInit);
-            recipientTracker.ShiftIssueStance(recipientPrecept.issue!, 0f, 0f, -doubtRecip);
-
-            var newCertInit = Mathf.Clamp01(0.01f * initiator.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f)));
-            var newCertRecip = Mathf.Clamp01(0.01f * recipient.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f)));
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"HandleDraw: Setting new certainty: initiator={newCertInit}, recipient={newCertRecip}");
-            initiator.ideo.Certainty = newCertInit;
-            recipient.ideo.Certainty = newCertRecip;
-
-            // Would be pretty funny if they both decide to change their beliefs at the same time
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "HandleDraw: Calling HandleConversion.");
-            HandleConversion(initiator, recipient, initiatorTracker, recipientTracker, initiatorIdeo, recipientIdeo, extraSentencePacks, ref letterText, ref letterLabel, ref letterDef, ref lookTargets);
-            return true;
-        }
-        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "HandleDraw: No social fight or mutual conclusion. Returning false.");
+        // Neither side backs down, so each digs in. A pawn entrenches with a probability that rises with
+        // intelligence (a smarter arguer rationalizes the stalemate into vindication) and with how shaky their
+        // faith already is; digging in strengthens conviction on the contested issue and nudges certainty up.
+        TryEntrench(initiator, initiatorTracker, initiatorPrecept);
+        TryEntrench(recipient, recipientTracker, recipientPrecept);
         return false;
     }
 
-    private static void HandleConversion(
-        Pawn initiator,
-        Pawn recipient,
-        IdeoTrackerData initiatorTracker,
-        IdeoTrackerData recipientTracker,
-        Ideo initiatorIdeo,
-        Ideo recipientIdeo,
-        List<RulePackDef> extraSentencePacks,
-        ref string? letterText,
-        ref string? letterLabel,
-        ref LetterDef? letterDef,
-        ref LookTargets? lookTargets)
+    private static void TryEntrench(Pawn pawn, IdeoTrackerData tracker, PreceptDef precept)
     {
-        if (initiatorTracker.CheckConversion() == ConversionOutcome.Success)
+        var entrenchChance = DebateEntrenchBaseChance
+            * (0.75f + (pawn.skills.GetSkill(SkillDefOf.Intellectual).Level * 0.05f))
+            / (0.2f + (pawn.ideo.Certainty * 0.8f));
+        if (Rand.Value >= entrenchChance)
         {
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "HandleConversion: Initiator conversion success.");
-            if (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient))
-            {
-                letterLabel = "LetterLabelConvertIdeoAttempt_Success".Translate();
-                letterText = "EnhancedBeliefs.LetterIdeologicalDebateConversionText".Translate(initiator.Named("CONVINCED"), recipient.Named("CONVINCER"), initiatorIdeo.Named("OLDIDEO"), initiator.Ideo.Named("NEWIDEO"));
-                letterDef = LetterDefOf.NeutralEvent;
-                lookTargets = new LookTargets(recipient, initiator);
-                var role = initiatorIdeo.GetRole(initiator);
-                if (role != null)
-                {
-                    letterText = letterText + "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(initiator.Named("PAWN"), role.Named("ROLE"), initiatorIdeo.Named("OLDIDEO")).Resolve();
-                }
-            }
-            extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
+            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"TryEntrench: {pawn} unmoved (chance {entrenchChance}).");
+            return;
         }
-        if (recipientTracker.CheckConversion() == ConversionOutcome.Success)
+
+        // A resistant pawn (CertaintyLossFactor < 1) also hardens less; fold it in so entrenchment mirrors the
+        // fragility scaling the rest of the debate uses.
+        var strengthGain = DebateEntrenchStrengthGain * pawn.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
+        tracker.ShiftIssueStance(precept.issue!, 0f, 0f, strengthGain);
+        pawn.ideo.Certainty = Mathf.Clamp01(pawn.ideo.Certainty + (DebateEntrenchCertaintyGain * (0.8f + (Rand.Value * 0.4f))));
+        EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"TryEntrench: {pawn} dug in (+{strengthGain} conviction on {precept.issue}).");
+    }
+
+    // Diversity-of-thought aftermath: how a pawn feels about the person they just debated depends on their
+    // faith's stance on IdeoDiversity, not their personal opinion. A tolerant faith reads a debate as a good
+    // exchange (a mood lift + warmer opinion of the other pawn); a bigoted one reads it as an affront (the
+    // mirror). A neutral or silent faith produces nothing. Applied to each pawn independently every outcome.
+    private static void ApplyDiversityAftermath(Pawn initiator, Pawn recipient)
+    {
+        GainDiversityMemory(initiator, recipient);
+        GainDiversityMemory(recipient, initiator);
+    }
+
+    private static void GainDiversityMemory(Pawn pawn, Pawn other)
+    {
+        var thought = DiversityStance(pawn.Ideo) switch
         {
-            EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "HandleConversion: Recipient conversion success.");
-            if (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient))
-            {
-                letterLabel = "LetterLabelConvertIdeoAttempt_Success".Translate();
-                letterText = "EnhancedBeliefs.LetterIdeologicalDebateConversionText".Translate(recipient.Named("CONVINCED"), initiator.Named("CONVINCER"), recipientIdeo.Named("OLDIDEO"), recipient.Ideo.Named("NEWIDEO"));
-                letterDef = LetterDefOf.NeutralEvent;
-                lookTargets = new LookTargets(initiator, recipient);
-                var role = recipientIdeo.GetRole(recipient);
-                if (role != null)
-                {
-                    letterText = letterText + "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(recipient.Named("PAWN"), role.Named("ROLE"), recipientIdeo.Named("OLDIDEO")).Resolve();
-                }
-            }
-            extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
+            DiversityReaction.Tolerant => EnhancedBeliefsDefOf.EB_GoodDebate,
+            DiversityReaction.Bigoted => EnhancedBeliefsDefOf.EB_BadDebate,
+            _ => null,
+        };
+        if (thought != null)
+        {
+            pawn.needs.mood?.thoughts.memories.TryGainMemory(thought, other);
         }
+    }
+
+    private enum DiversityReaction { None, Bigoted, Neutral, Tolerant }
+
+    // Classify a faith's IdeoDiversity stance relative to its Standard (neutral) rung: anything on the Approved
+    // side is tolerant, anything on the Disapproved side is bigoted. Direction-agnostic (the ladder's numeric
+    // orientation is derived from the Approved-vs-Standard sign), so it holds however the rungs are ordered.
+    private static DiversityReaction DiversityStance(Ideo ideo)
+    {
+        var precept = ideo.precepts.FirstOrDefault(p => p.def.issue?.defName == "IdeoDiversity");
+        if (precept == null)
+        {
+            return DiversityReaction.None;
+        }
+
+        var issue = precept.def.issue!;
+        var standard = PreceptLadder.RankOfName(issue, "IdeoDiversity_Standard");
+        var approved = PreceptLadder.RankOfName(issue, "IdeoDiversity_Approved");
+        if (standard < 0f || approved < 0f)
+        {
+            return DiversityReaction.None;
+        }
+
+        var delta = (PreceptLadder.RankOf(precept.def) - standard) * Math.Sign(approved - standard);
+        if (delta > 0.5f)
+        {
+            return DiversityReaction.Tolerant;
+        }
+
+        return delta < -0.5f ? DiversityReaction.Bigoted : DiversityReaction.Neutral;
     }
 
     private static void AdjustOpinions(Pawn initiator, Pawn recipient, GameComponent_EnhancedBeliefs comp, PreceptDef initiatorPrecept, PreceptDef recipientPrecept, float initiatorRoll, float recipientRoll)

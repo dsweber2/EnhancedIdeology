@@ -138,27 +138,6 @@ public class IdeoTrackerTests : SeededTest
     }
 
     [Fact]
-    public void OverrideConversionAttempt_HighCertainty_ReturnsFalse()
-    {
-        // certainty=0.8, reduction=0.1 → newCertainty=0.7 > 0.2 → CheckConversion returns Failure
-        var world = new SimWorld();
-        world.Initialize();
-
-        var ideoA = new IdeoBuilder().WithName("HighC").Build();
-        var ideoB = new IdeoBuilder().WithName("Target").Build();
-        world.AddIdeo(ideoA);
-        world.AddIdeo(ideoB);
-
-        var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0.8f).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-
-        var converted = tracker.OverrideConversionAttempt(0.1f, ideoB, applyCertaintyFactor: false);
-
-        Assert.False(converted);
-        Assert.Equal(ideoA, pawn.Ideo);
-    }
-
-    [Fact]
     public void DetailedIdeoOpinion_OwnIdeo_ReturnsCurrentCertaintyAsBase()
     {
         // Own-ideo branch: BaseOpinion = Pawn.ideo.Certainty (not baseIdeoOpinions lookup)

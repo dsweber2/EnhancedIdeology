@@ -12,6 +12,14 @@
   <EnhancedBeliefs.PracticeMaxRange.Tip>The most that recent precept moods (rituals, veneration, taboos) can raise or lower their target certainty.</EnhancedBeliefs.PracticeMaxRange.Tip>
   <EnhancedBeliefs.ConversionPace>Conversion pace: {0}</EnhancedBeliefs.ConversionPace>
   <EnhancedBeliefs.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions happen faster. Only affects passive drift; debates and conversion attempts are unaffected.</EnhancedBeliefs.ConversionPace.Tip>
+  <EnhancedBeliefs.ConversionStancePull>Conversion strength: {0}</EnhancedBeliefs.ConversionStancePull>
+  <EnhancedBeliefs.Section.Certainty>Certainty and drift</EnhancedBeliefs.Section.Certainty>
+  <EnhancedBeliefs.Section.Conversion>Conversion</EnhancedBeliefs.Section.Conversion>
+  <EnhancedBeliefs.Section.Opinion>Opinion</EnhancedBeliefs.Section.Opinion>
+  <EnhancedBeliefs.Section.Debug>Debug</EnhancedBeliefs.Section.Debug>
+  <EnhancedBeliefs.ConversionCertaintyKnock>Certainty kept after a conversion attempt: {0}</EnhancedBeliefs.ConversionCertaintyKnock>
+  <EnhancedBeliefs.ConversionCertaintyKnock.Tip>When a priest wins a conversion attempt but doesn't immediately flip the pawn, their certainty is multiplied by this - a temporary knock that leaves them more likely to switch, now and spontaneously afterwards. It climbs back toward their structural setpoint over time. 100% = no knock; 80% = an 80%-certain pawn drops to 64%. Lower = conversion attempts destabilize faith more.</EnhancedBeliefs.ConversionCertaintyKnock.Tip>
+  <EnhancedBeliefs.ConversionStancePull.Tip>How much harder a successful conversion attempt (a priest's directed action) pushes a pawn's beliefs than an ordinary debate win. It targets whichever belief most opposes the preacher's faith. At 1x a conversion is just a debate the preacher tries to win; higher = each successful attempt drags them further and converts faster. A failed attempt still shifts the preacher's own belief by the ordinary amount.</EnhancedBeliefs.ConversionStancePull.Tip>
   <EnhancedBeliefs.CrisisThreshold>Crisis of faith threshold: {0}</EnhancedBeliefs.CrisisThreshold>
   <EnhancedBeliefs.CrisisThreshold.Tip>When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown instead of converting. They also won't switch to a faith they like less than this. </EnhancedBeliefs.CrisisThreshold.Tip>
   <EnhancedBeliefs.PreceptOppositionScale>Opposite-stance opposition: {0}</EnhancedBeliefs.PreceptOppositionScale>

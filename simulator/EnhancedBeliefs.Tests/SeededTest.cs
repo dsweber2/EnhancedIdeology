@@ -16,5 +16,14 @@ public abstract class SeededTest
         DefDatabase<PreceptDef>.Clear();
         DefDatabase<IssueDef>.Clear();
         PreceptPolicy.ClearOverrides();
+        // Settings are a process-wide singleton in the sim; reset the knobs tests tweak so one test's mutation
+        // never leaks into another's expectations.
+        var settings = EnhancedBeliefsMod.Settings;
+        settings.CertaintyDriftRate = 0.10f;
+        settings.ConversionPace = 1f;
+        settings.ConversionStancePull = 2f;
+        settings.ConversionCertaintyKnock = 0.8f;
+        settings.CrisisThreshold = 0.25f;
+        settings.PreceptOppositionScale = 1f;
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <EnhancedBeliefs.Convert.CertaintyKnock>Temporary certainty reduction: {0}</EnhancedBeliefs.Convert.CertaintyKnock>
+  <EnhancedBeliefs.Convert.SuccessChance>Chance to win the debate: {0}</EnhancedBeliefs.Convert.SuccessChance>
+  <EnhancedBeliefs.Convert.ConversionChance>Chance to convert if you win: {0}</EnhancedBeliefs.Convert.ConversionChance>
+  <EnhancedBeliefs.Convert.TargetBeliefs>Target beliefs (a random 1-{0} of):</EnhancedBeliefs.Convert.TargetBeliefs>
+  <EnhancedBeliefs.Convert.NoOpposition>They oppose nothing your faith preaches - there is nothing to convert.</EnhancedBeliefs.Convert.NoOpposition>
+  <EnhancedBeliefs.Convert.Factors>Factors (you vs. them):</EnhancedBeliefs.Convert.Factors>
+  <EnhancedBeliefs.Convert.Factor.ConversionPower>Conversion power: {0} vs {1}</EnhancedBeliefs.Convert.Factor.ConversionPower>
+  <EnhancedBeliefs.Convert.Factor.Intellectual>Intellectual debate: {0} vs {1}</EnhancedBeliefs.Convert.Factor.Intellectual>
+  <EnhancedBeliefs.Convert.Factor.Social>Social impact: {0} vs {1}</EnhancedBeliefs.Convert.Factor.Social>
+</LanguageData>

@@ -425,26 +425,26 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // The issue on which the pawn's stance most opposes `ideo` (the most negative per-issue opinion) - the belief
     // a preacher of `ideo` would target first when trying to convert this pawn. Returns null when the pawn opposes
     // nothing `ideo` preaches (every graded issue reads >= 0).
-    public IssueDef? MostOpposingIssue(Ideo ideo)
+    public IssueDef? MostOpposingIssue(Ideo ideo) => MostOpposingIssues(ideo, 1).FirstOrDefault();
+
+    // The `n` issues the pawn's stance most opposes about `ideo`, most-opposed first, dropping any that read
+    // >= 0 (nothing to argue). Fewer than `n` are returned when the pawn opposes fewer than `n` of the ideo's
+    // stances. The convert ability targets this bundle; conversion targets just the first.
+    public IReadOnlyList<IssueDef> MostOpposingIssues(Ideo ideo, int n)
     {
         EnsureIssueStancesSeeded();
         var inducedTargets = new HashSet<IssueDef>(
             PreceptPolicy.InducedIssues(Pawn.Ideo).Concat(PreceptPolicy.InducedIssues(ideo)));
         var oppositionScale = EnhancedBeliefsMod.Settings.PreceptOppositionScale;
 
-        IssueDef? worst = null;
-        var worstOpinion = 0f;
-        foreach (var issue in ideo.precepts.Select(precept => precept.def.issue).Where(issue => issue != null).Distinct())
-        {
-            var opinion = PerIssueOpinion(ideo, issue!, inducedTargets, oppositionScale, out var graded);
-            if (graded && opinion < worstOpinion)
-            {
-                worstOpinion = opinion;
-                worst = issue;
-            }
-        }
-
-        return worst;
+        return ideo.precepts.Select(precept => precept.def.issue)
+            .Where(issue => issue != null).Distinct()
+            .Select(issue => (issue, opinion: PerIssueOpinion(ideo, issue!, inducedTargets, oppositionScale, out var graded), graded))
+            .Where(entry => entry.graded && entry.opinion < 0f)
+            .OrderBy(entry => entry.opinion)
+            .Take(n)
+            .Select(entry => entry.issue!)
+            .ToList();
     }
 
     // Dev-only: the full extent/rank breakdown behind IssueOpinionToward, for diagnosing per-issue opinions.
@@ -869,6 +869,17 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         return opinion > current ? (opinion - current) / opinion : 0f;
     }
 
+    // Read-only preview of the conversion chance toward `target` after a won attempt applies its certainty knock
+    // (Certainty *= knock), used by the convert-ability tooltip. Folds in the knock but not the stance pull, and
+    // reduces to CheckConversion's single-candidate ratio - it ignores competing ideos and the crisis candidate,
+    // so it is an estimate, not the exact draw.
+    public float ConversionChanceAfterKnock(Ideo target, float knock)
+    {
+        var opinion = IdeoOpinion(target);
+        var current = IdeoOpinion(Pawn.Ideo) * knock;
+        return opinion > current ? (opinion - current) / opinion : 0f;
+    }
+
     // Discrete, one-shot conversion driven by acute social pressure (debates, directed attempts). The pawn's
     // real ideos and a "crisis of faith" pseudo-candidate compete in one weighted draw; if the crisis wins,
     // that is the IdeoChange breakdown. No time integration here - the event itself is the occurrence.
@@ -1059,10 +1070,13 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         var oldIdeo = Pawn.Ideo;
         var oldIdeoContains = Pawn.ideo.PreviousIdeos.Contains(newIdeo);
 
-        // How drawn the pawn is to the new ideo, captured before SetIdeo - afterwards the own-ideo
-        // short-circuit would report raw certainty instead. A convert arrives believing as strongly as
-        // they preferred it, so they can't immediately be out-preferred by an ideo they just rejected.
-        var newCertainty = IdeoOpinion(newIdeo);
+        // How drawn the pawn is to the new ideo, captured before SetIdeo - afterwards the own-ideo short-circuit
+        // would report raw certainty instead. A convert overshoots: they arrive at their old certainty plus twice
+        // the margin by which they preferred the new faith, so switching feels like a step up rather than a lateral
+        // move (e.g. old certainty 0.4, new-faith opinion 0.5 -> arrives at 0.6). Preferring the new faith is a
+        // precondition of conversion, so the margin is positive; the clamp only guards the top end.
+        var opinionOfNew = IdeoOpinion(newIdeo);
+        var newCertainty = Mathf.Clamp01(oldCertainty + (2f * (opinionOfNew - oldCertainty)));
 
         Pawn.ideo.SetIdeo(newIdeo);
         newIdeo.Notify_MemberGainedByConversion();
@@ -1080,42 +1094,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         RecacheAllBaseOpinions();
-    }
-
-    public bool OverrideConversionAttempt(float certaintyReduction, Ideo newIdeo, bool applyCertaintyFactor = true)
-    {
-        EnhancedBeliefsMod.Debug($"OverrideConversionAttempt called: pawn={Pawn}, certaintyReduction={certaintyReduction}, newIdeo={newIdeo}, applyCertaintyFactor={applyCertaintyFactor}");
-        if (Find.IdeoManager.classicMode || Pawn.ideo == null || Pawn.DevelopmentalStage.Baby())
-        {
-            EnhancedBeliefsMod.Debug("OverrideConversionAttempt: classicMode, no ideo, or baby. Returning false.");
-            return false;
-        }
-
-        var oldCertainty = Pawn.ideo.Certainty;
-        var newCertainty = Mathf.Clamp01(Pawn.ideo.Certainty + (applyCertaintyFactor ? Pawn.ideo.ApplyCertaintyChangeFactor(0f - certaintyReduction) : (0f - certaintyReduction)));
-        EnhancedBeliefsMod.Debug($"OverrideConversionAttempt: oldCertainty={oldCertainty}, newCertainty={newCertainty}");
-
-        EnhancedBeliefsUtilities.ShowCertaintyChangeMote(Pawn, oldCertainty, newCertainty);
-
-        if (newIdeo != null && newIdeo != Pawn.Ideo)
-        {
-            AdjustPersonalOpinion(newIdeo, certaintyReduction * 2f);
-            EnhancedBeliefsMod.Debug($"OverrideConversionAttempt: Adjusted opinion of {newIdeo} by {certaintyReduction * 2f}");
-        }
-
-        var ideoOpinion = PersonalIdeoOpinion(Pawn.Ideo, out var _);
-        EnhancedBeliefsMod.Debug($"OverrideConversionAttempt: ideoOpinion={ideoOpinion}");
-        if (ideoOpinion > 0)
-        {
-            var adj = Math.Max(ideoOpinion * -0.01f, -0.25f * certaintyReduction);
-            EnhancedBeliefsMod.Debug($"OverrideConversionAttempt: Adjusting personal opinion by {adj}");
-            AdjustPersonalOpinion(Pawn.Ideo, adj);
-        }
-
-        Pawn.ideo.Certainty = newCertainty;
-        var conversionResult = CheckConversion(newIdeo);
-        EnhancedBeliefsMod.Debug($"OverrideConversionAttempt: conversionResult={conversionResult}");
-        return conversionResult == ConversionOutcome.Success;
     }
 }
 
