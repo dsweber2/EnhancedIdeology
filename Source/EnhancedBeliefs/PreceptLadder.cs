@@ -10,11 +10,13 @@ internal static class PreceptLadder
 {
     // Stance rungs of an issue, permissive/pro -> forbidding/anti. This is the canonical filter vanilla's own
     // RandomizePrecepts uses (issue equality); reaction thoughts are ThoughtDefs, not PreceptDefs, so they
-    // never pollute the ladder. For issues whose displayOrderInIssue scrambles the axis once stacked, a
-    // PreceptPolicy order override pins the sequence (listed rungs first, others appended by display order).
+    // never pollute the ladder. Classic-mode default precepts (Lovin_Free, Cannibalism_Classic, ...) carry an
+    // issue but are the no-ideology fallback, duplicating a real rung; they are excluded so they do not add a
+    // phantom rung that shifts every real rank and skews the opinion falloff. For issues whose
+    // displayOrderInIssue scrambles the axis once stacked, a PreceptPolicy order override pins the sequence.
     public static List<PreceptDef> Rungs(IssueDef issue)
     {
-        var rungs = DefDatabase<PreceptDef>.AllDefs.Where(precept => precept.issue == issue);
+        var rungs = DefDatabase<PreceptDef>.AllDefs.Where(precept => precept.issue == issue && !precept.classic);
 
         if (PreceptPolicy.OrderOverrides.TryGetValue(issue.defName, out var order))
         {
@@ -42,13 +44,14 @@ internal static class PreceptLadder
         PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : -1f;
 
     // Opinion of targetRank given the pawn prefers preferredRank with the given strength, over a ladder
-    // spanning [minRank, maxRank] (extent includes the virtual Don't-care rung when the issue is
-    // absent-able). Falloff is symmetric in rung distance: +strength at the preferred rung, crossing zero
-    // at zeroFrac of the distance to the FARTHER ladder end, reaching -strength only at that far extreme.
-    // The nearer extreme comes out softer, scaled by its shorter distance - it is closer to the pawn's
-    // view. (design.md R2)
+    // spanning [minRank, maxRank] (extent includes the virtual Don't-care rung when the issue is absent-able).
+    // Falloff is linear in rung distance: +strength at the preferred rung, falling to
+    // -oppositionScale·strength at the FARTHER ladder end (t = 1), crossing zero at 1/(1+oppositionScale) of
+    // the way out. The nearer extreme comes out softer, scaled by its shorter distance - it is closer to the
+    // pawn's view. oppositionScale (0-1) sets how strongly the far extreme is opposed: 0 fades to mere
+    // indifference there, 1 is full opposition. (design.md R2)
     public static float OpinionOnPrecept(
-        float preferredRank, float targetRank, float minRank, float maxRank, float strength, float zeroFrac)
+        float preferredRank, float targetRank, float minRank, float maxRank, float strength, float oppositionScale)
     {
         var maxDist = Mathf.Max(preferredRank - minRank, maxRank - preferredRank);
         if (maxDist <= 0f)
@@ -58,9 +61,6 @@ internal static class PreceptLadder
         }
 
         var t = Mathf.Abs(targetRank - preferredRank) / maxDist;
-        var falloff = t <= zeroFrac
-            ? 1f - (t / zeroFrac)
-            : -(t - zeroFrac) / (1f - zeroFrac);
-        return strength * falloff;
+        return strength * (1f - (t * (1f + oppositionScale)));
     }
 }

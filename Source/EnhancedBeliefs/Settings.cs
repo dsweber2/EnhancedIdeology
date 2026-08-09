@@ -39,11 +39,12 @@ public class Settings : ModSettings
     private float _crisisThreshold = 0.25f;
     public float CrisisThreshold => _crisisThreshold;
 
-    // Fraction of the distance from a pawn's preferred stance to the far end of an issue's ladder at which
-    // their opinion of a rung crosses from positive to negative (design.md R2). Lower = less tolerant of
-    // differing stances.
-    private float _preceptZeroFrac = 0.5f;
-    public float PreceptZeroFrac => _preceptZeroFrac;
+    // How strongly a pawn opposes the stance at the opposite extreme of an issue's ladder, as a fraction of
+    // their conviction (design.md R2). Opinion falls linearly from +strength at their own rung to
+    // -oppositionScale·strength at the far end, crossing zero at 1/(1+oppositionScale) of the way out.
+    // 0 = they merely grow indifferent toward opposite stances; 1 = full opposition. Higher = less tolerant.
+    private float _preceptOppositionScale = 1f;
+    public float PreceptOppositionScale => _preceptOppositionScale;
 
     public override void ExposeData()
     {
@@ -56,7 +57,7 @@ public class Settings : ModSettings
         Scribe_Values.Look(ref _practiceMaxRange, "practiceMaxRange", 0.15f);
         Scribe_Values.Look(ref _conversionPace, "conversionPace", 1f);
         Scribe_Values.Look(ref _crisisThreshold, "crisisThreshold", 0.25f);
-        Scribe_Values.Look(ref _preceptZeroFrac, "preceptZeroFrac", 0.5f);
+        Scribe_Values.Look(ref _preceptOppositionScale, "preceptOppositionScale", 1f);
     }
 
     public void DoSettingsWindowContents(Rect inRect)
@@ -73,7 +74,7 @@ public class Settings : ModSettings
 
         MultiplierSlider(listingStandard, "EnhancedBeliefs.ConversionPace", ref _conversionPace, 0.25f, 4f);
         PercentSlider(listingStandard, "EnhancedBeliefs.CrisisThreshold", ref _crisisThreshold, 0f, 0.5f);
-        PercentSlider(listingStandard, "EnhancedBeliefs.PreceptZeroFrac", ref _preceptZeroFrac, 0.1f, 1f);
+        PercentSlider(listingStandard, "EnhancedBeliefs.PreceptOppositionScale", ref _preceptOppositionScale, 0f, 1f);
 
         listingStandard.Gap();
 

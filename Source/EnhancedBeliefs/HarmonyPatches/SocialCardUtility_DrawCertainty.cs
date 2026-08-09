@@ -4,8 +4,6 @@ namespace EnhancedBeliefs.HarmonyPatches;
 [HotSwappable]
 internal static class SocialCardUtility_DrawCertainty
 {
-    private static readonly Texture2D BaselineBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.12f, 0.38f, 0.12f));
-
     private static Rect containerRect;
     internal static Rect ContainerRect => containerRect;
 
@@ -52,25 +50,14 @@ internal static class SocialCardUtility_DrawCertainty
             IdeoUIUtility.OpenIdeoInfo(pawn.Ideo);
         }
 
-        var innerRect = barRect.ContractedBy(4f);
+        // Draw it the way Need.DrawOnGUI does: a real FillableBar, a threshold tick in its lower half, and the
+        // instant-level marker just below the bar. The bar gives up MarkerHeight of its height so the marker fits
+        // inside the 40px certainty row instead of colliding with the role row beneath it.
+        var certaintyBar = new Rect(barRect.x, barRect.y, barRect.width, barRect.height - CertaintyBar.MarkerHeight);
+        var filled = Widgets.FillableBar(certaintyBar, Mathf.Clamp01(pawn.ideo.Certainty));
 
-        // Background
-        GUI.DrawTexture(innerRect, BaseContent.BlackTex);
-
-        // Target certainty (dark green, behind current bar) - where certainty is drifting toward
-        var target = data.CachedTargetCertainty;
-        if (target > 0f)
-        {
-            var targetRect = new Rect(innerRect.x, innerRect.y, innerRect.width * Mathf.Clamp01(target), innerRect.height);
-            GUI.DrawTexture(targetRect, BaselineBarTex);
-        }
-
-        // Current certainty on top
-        if (pawn.ideo.Certainty > 0f)
-        {
-            var fillRect = new Rect(innerRect.x, innerRect.y, innerRect.width * Mathf.Clamp01(pawn.ideo.Certainty), innerRect.height);
-            GUI.DrawTexture(fillRect, SocialCardUtility.BarFullTexHor);
-        }
+        CertaintyBar.DrawThreshold(filled, EnhancedBeliefsMod.Settings.CrisisThreshold, pawn.ideo.Certainty);
+        CertaintyBar.DrawTargetMarker(filled, Mathf.Clamp01(data.CachedTargetCertainty));
 
         return false;
     }

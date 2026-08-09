@@ -37,6 +37,11 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // a per-tick caller (book reading) can shift many issues cheaply and pay the one recompute only on read.
     private bool baseOpinionsDirty;
 
+    // A pawn spawns at equilibrium: the first setpoint computed for them seeds their certainty to it, so the
+    // target sits exactly on the bar until an event pushes belief off it. Defaults true on load so existing
+    // pawns keep their played-in certainty.
+    private bool certaintyInitialized;
+
     private readonly Dictionary<Ideo, float> cachedRelationshipIdeoOpinions = [];
     private readonly Dictionary<Pawn, float> cachedRelationships = [];
 
@@ -97,6 +102,14 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         CachedDifficulty = settings.DifficultyOffset;
         var target = Mathf.Clamp01(structural + CachedRelational + CachedPractitional + settings.DifficultyOffset);
         CachedTargetCertainty = target;
+
+        // Seed a fresh pawn's certainty to their net setpoint the first time it is known - relationships and
+        // practices aren't "new" at spawn, so the pawn starts where those bands already place them.
+        if (!certaintyInitialized)
+        {
+            certaintyInitialized = true;
+            Pawn.ideo.Certainty = target;
+        }
 
         CachedCertaintyChange = settings.CertaintyDriftRate * (target - Pawn.ideo.Certainty);
     }
@@ -286,7 +299,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         // and scaled to 0-100 (R2). Issues neither faith holds are irrelevant - there is nothing to agree or
         // disagree about - so they are excluded rather than counted as (mutual don't-care) agreement.
         EnsureIssueStancesSeeded();
-        var zeroFrac = EnhancedBeliefsMod.Settings.PreceptZeroFrac;
+        var oppositionScale = EnhancedBeliefsMod.Settings.PreceptOppositionScale;
         var preceptStart = contributors?.Count ?? 0;
         float preceptSum = 0;
         int issueCount = 0;
@@ -302,7 +315,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             .Distinct();
         foreach (var issue in relevantIssues)
         {
-            var perIssue = PerIssueOpinion(ideo, issue, inducedTargets, zeroFrac, out var graded);
+            var perIssue = PerIssueOpinion(ideo, issue, inducedTargets, oppositionScale, out var graded);
             if (!graded)
             {
                 continue;
@@ -368,7 +381,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // ladder-distance / special-payload grade the structural band averages, before the /issueCount mean.
     // Moral issues (and coupled targets) grade by rung distance; Special issues carry bespoke categorical logic.
     // `graded` is false when neither faith takes a comparable position, so the caller leaves it out of the mean.
-    private float PerIssueOpinion(Ideo ideo, IssueDef issue, HashSet<IssueDef> inducedTargets, float zeroFrac, out bool graded)
+    private float PerIssueOpinion(Ideo ideo, IssueDef issue, HashSet<IssueDef> inducedTargets, float oppositionScale, out bool graded)
     {
         graded = true;
         var category = PreceptPolicy.CategoryOf(issue);
@@ -381,7 +394,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             var minRank = Mathf.Min(Mathf.Min(0f, PreceptLadder.DontCareRank(issue)), Mathf.Min(pawnRank, targetRank));
             var maxRank = Mathf.Max(PreceptLadder.Rungs(issue).Count - 1, Mathf.Max(pawnRank, targetRank));
             return PreceptLadder.OpinionOnPrecept(
-                pawnRank, targetRank, minRank, maxRank, issueStrength[issue], zeroFrac);
+                pawnRank, targetRank, minRank, maxRank, issueStrength[issue], oppositionScale);
         }
 
         // Weapons / PreferredXenotypes compare precept payloads directly; leader / mood are rank-based.
@@ -389,7 +402,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (category == PreceptCategory.Special
             && (PreceptPolicy.TryPayloadSpecialOpinion(issue, Pawn.Ideo, ideo, issueStrength[issue], out var special)
                 || PreceptPolicy.TrySpecialOpinion(
-                    issue, issuePreferredRank[issue], HeldRank(ideo, issue), issueStrength[issue], zeroFrac, out special)))
+                    issue, issuePreferredRank[issue], HeldRank(ideo, issue), issueStrength[issue], oppositionScale, out special)))
         {
             return special;
         }
@@ -406,7 +419,30 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         EnsureIssueStancesSeeded();
         var inducedTargets = new HashSet<IssueDef>(
             PreceptPolicy.InducedIssues(Pawn.Ideo).Concat(PreceptPolicy.InducedIssues(ideo)));
-        return PerIssueOpinion(ideo, issue, inducedTargets, EnhancedBeliefsMod.Settings.PreceptZeroFrac, out _);
+        return PerIssueOpinion(ideo, issue, inducedTargets, EnhancedBeliefsMod.Settings.PreceptOppositionScale, out _);
+    }
+
+    // Dev-only: the full extent/rank breakdown behind IssueOpinionToward, for diagnosing per-issue opinions.
+    public string IssueOpinionDebug(Ideo ideo, IssueDef issue)
+    {
+        EnsureIssueStancesSeeded();
+        var pawnRank = issuePreferredRank.TryGetValue(issue, out var pr) ? pr : float.NaN;
+        var targetRank = HeldRank(ideo, issue);
+        var rungCount = PreceptLadder.Rungs(issue).Count;
+        var dontCare = PreceptLadder.DontCareRank(issue);
+        var strength = issueStrength.TryGetValue(issue, out var st) ? st : float.NaN;
+        var minRank = Mathf.Min(Mathf.Min(0f, dontCare), Mathf.Min(pawnRank, targetRank));
+        var maxRank = Mathf.Max(rungCount - 1, Mathf.Max(pawnRank, targetRank));
+        var maxDist = Mathf.Max(pawnRank - minRank, maxRank - pawnRank);
+        var t = maxDist > 0f ? Mathf.Abs(targetRank - pawnRank) / maxDist : 0f;
+        var oppositionScale = EnhancedBeliefsMod.Settings.PreceptOppositionScale;
+        var falloff = 1f - (t * (1f + oppositionScale));
+        var ladder = string.Join(", ", PreceptLadder.Rungs(issue).Select((precept, ix) => $"{ix}:{precept.defName}"));
+        return $"str={strength:F1} cat={PreceptPolicy.CategoryOf(issue)}"
+            + $"\n  pawn={pawnRank:F2} target={targetRank:F2} rungs={rungCount} dontCare={dontCare:F2}"
+            + $"\n  extent=[{minRank:F2},{maxRank:F2}] maxDist={maxDist:F2} t={t:F2}"
+            + $"\n  oppScale={oppositionScale:F2} falloff={falloff:F2}"
+            + $"\n  ladder: {ladder}";
     }
 
     // Rank of the stance `ideo` holds on `issue`: an explicit precept if it has one, otherwise a stance a
@@ -707,6 +743,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     public void ExposeData()
     {
         Scribe_References.Look(ref pawn, "pawn");
+        // Default true: a save without this key predates spawn-seeding, so its pawns are already "initialized"
+        // and must not have their played-in certainty overwritten on load.
+        Scribe_Values.Look(ref certaintyInitialized, "certaintyInitialized", defaultValue: true);
         Scribe_Collections.Look(ref baseIdeoOpinions, "baseIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache1, ref cache5);
         Scribe_Collections.Look(ref personalIdeoOpinions, "personalIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache2, ref cache6);
         Scribe_Collections.Look(ref memeOpinions, "memeOpinions", LookMode.Def, LookMode.Value, ref cache3, ref cache7);

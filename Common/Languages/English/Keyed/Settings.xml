@@ -14,6 +14,6 @@
   <EnhancedBeliefs.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions happen faster. Only affects passive drift; debates and conversion attempts are unaffected.</EnhancedBeliefs.ConversionPace.Tip>
   <EnhancedBeliefs.CrisisThreshold>Crisis of faith threshold: {0}</EnhancedBeliefs.CrisisThreshold>
   <EnhancedBeliefs.CrisisThreshold.Tip>When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown instead of converting. They also won't switch to a faith they like less than this. </EnhancedBeliefs.CrisisThreshold.Tip>
-  <EnhancedBeliefs.PreceptZeroFrac>Precept tolerance: {0}</EnhancedBeliefs.PreceptZeroFrac>
-  <EnhancedBeliefs.PreceptZeroFrac.Tip>How far another faith's stance on an issue can drift from a pawn's own before their opinion of it turns negative, as a fraction of the distance to the opposite extreme. Lower = pawns are pickier about differing beliefs and harder to convert.</EnhancedBeliefs.PreceptZeroFrac.Tip>
+  <EnhancedBeliefs.PreceptOppositionScale>Opposite-stance opposition: {0}</EnhancedBeliefs.PreceptOppositionScale>
+  <EnhancedBeliefs.PreceptOppositionScale.Tip>How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. Opinion falls from full agreement at their own stance to this much opposition at the far end. 0 = they merely grow indifferent to opposing stances; 100% = full opposition (and harder to convert). Higher = pawns are pickier about differing beliefs.</EnhancedBeliefs.PreceptOppositionScale.Tip>
 </LanguageData>

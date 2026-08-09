@@ -111,10 +111,11 @@ public class PreceptPolicyTests : SeededTest
     {
         var issue = MoodLadder();
 
-        // High(0) vs High(0): full agreement. High(0) vs Low(2): opposite ends of the linear axis -> -strength.
-        Assert.True(PreceptPolicy.TrySpecialOpinion(issue, 0f, 0f, 10f, 0.5f, out var agree));
+        // High(0) vs High(0): full agreement. High(0) vs Low(2): opposite ends of the linear axis -> full
+        // opposition (-strength) at oppositionScale 1.
+        Assert.True(PreceptPolicy.TrySpecialOpinion(issue, 0f, 0f, 10f, 1f, out var agree));
         Assert.Equal(10f, agree);
-        Assert.True(PreceptPolicy.TrySpecialOpinion(issue, 0f, 2f, 10f, 0.5f, out var opposite));
+        Assert.True(PreceptPolicy.TrySpecialOpinion(issue, 0f, 2f, 10f, 1f, out var opposite));
         Assert.Equal(-10f, opposite);
     }
 

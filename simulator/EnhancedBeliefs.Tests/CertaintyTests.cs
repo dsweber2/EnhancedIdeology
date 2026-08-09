@@ -42,11 +42,20 @@ public class CertaintyTests : SeededTest
         return tracker;
     }
 
+    // A fresh pawn's first recache seeds certainty to its setpoint. To exercise drift we model the sequel: an
+    // event pushes certainty off the setpoint, then the next recache measures the pull back.
+    private static void SeedThenPush(SimWorld world, SimPawn pawn, IdeoTrackerData tracker, float certainty)
+    {
+        Recache(world, pawn, tracker);
+        pawn.ideo.Certainty = certainty;
+        Recache(world, pawn, tracker);
+    }
+
     [Fact]
     public void Drift_CertaintyAboveTarget_YieldsNegativeRate()
     {
-        var (world, tracker, pawn) = Setup(withPrecept: true, certainty: 0.95f);
-        Recache(world, pawn, tracker);
+        var (world, tracker, pawn) = Setup(withPrecept: true);
+        SeedThenPush(world, pawn, tracker, 0.95f);
 
         Assert.True(tracker.CachedTargetCertainty < 0.95f);
         Assert.True(tracker.CachedCertaintyChange < 0f,
@@ -56,12 +65,36 @@ public class CertaintyTests : SeededTest
     [Fact]
     public void Drift_CertaintyBelowTarget_YieldsPositiveRate()
     {
-        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: 10f, certainty: 0.05f);
-        Recache(world, pawn, tracker);
+        var (world, tracker, pawn) = Setup(withPrecept: true, colonyMoodOffset: 10f);
+        SeedThenPush(world, pawn, tracker, 0.05f);
 
         Assert.True(tracker.CachedTargetCertainty > 0.05f);
         Assert.True(tracker.CachedCertaintyChange > 0f,
             $"Expected drift up toward target {tracker.CachedTargetCertainty}, got {tracker.CachedCertaintyChange}");
+    }
+
+    [Fact]
+    public void Spawn_FirstRecache_SeedsCertaintyToSetpoint()
+    {
+        // A fresh pawn starts at equilibrium: the first setpoint computed pins certainty to it, whatever it was
+        // seeded with, so there is no spurious drift on day one.
+        var (world, tracker, pawn) = Setup(withPrecept: true, certainty: 0.3f);
+        Recache(world, pawn, tracker);
+
+        Assert.Equal(tracker.CachedTargetCertainty, pawn.ideo.Certainty, precision: 5);
+        Assert.Equal(0f, tracker.CachedCertaintyChange, precision: 5);
+    }
+
+    [Fact]
+    public void Spawn_LaterRecache_DoesNotReseed()
+    {
+        // Only the first recache seeds; afterwards an event that moves certainty must survive the next recache.
+        var (world, tracker, pawn) = Setup(withPrecept: true);
+        Recache(world, pawn, tracker);
+        pawn.ideo.Certainty = 0.2f;
+        Recache(world, pawn, tracker);
+
+        Assert.Equal(0.2f, pawn.ideo.Certainty, precision: 5);
     }
 
     [Fact]
@@ -79,8 +112,8 @@ public class CertaintyTests : SeededTest
     [Fact]
     public void Drift_RateEqualsDriftRateTimesGap()
     {
-        var (world, tracker, pawn) = Setup(withPrecept: true, certainty: 0.5f);
-        Recache(world, pawn, tracker);
+        var (world, tracker, pawn) = Setup(withPrecept: true);
+        SeedThenPush(world, pawn, tracker, 0.5f);
 
         var expected = EnhancedBeliefsMod.Settings.CertaintyDriftRate * (tracker.CachedTargetCertainty - 0.5f);
         Assert.Equal(expected, tracker.CachedCertaintyChange, precision: 5);

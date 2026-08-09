@@ -102,15 +102,23 @@ public class CertaintySetpointTests : SeededTest
     [Fact]
     public void DriftRateSetting_ScalesRate()
     {
-        float fast = 0f;
-        float slow = 0f;
-        WithSettings(s => s.CertaintyDriftRate = 0.20f, () =>
-            fast = BuildCongregation(coReligionists: 0, opinionEach: 0f, certainty: 0.9f).tracker.CachedCertaintyChange);
-        WithSettings(s => s.CertaintyDriftRate = 0.05f, () =>
-            slow = BuildCongregation(coReligionists: 0, opinionEach: 0f, certainty: 0.9f).tracker.CachedCertaintyChange);
+        // A fresh pawn seeds to its setpoint (zero drift), so push certainty off-target first, then measure.
+        float DriftAt(float rate)
+        {
+            var result = 0f;
+            WithSettings(s => s.CertaintyDriftRate = rate, () =>
+            {
+                var (world, tracker, pawn) = BuildCongregation(coReligionists: 0, opinionEach: 0f);
+                pawn.ideo.Certainty = 0.9f;
+                pawn.UpdateThoughts();
+                tracker.CertaintyChangeRecache(world.Comp);
+                result = tracker.CachedCertaintyChange;
+            });
+            return result;
+        }
 
         // Same gap, 4x the rate -> 4x the (negative) change.
-        Assert.Equal(4f, fast / slow, precision: 3);
+        Assert.Equal(4f, DriftAt(0.20f) / DriftAt(0.05f), precision: 3);
     }
 
     [Fact]

@@ -224,7 +224,7 @@ internal static class PreceptPolicy
     // below 0 is the "no stance" rung. Returns false to skip the issue (not yet modelled), leaving it out of
     // the structural mean entirely.
     internal static bool TrySpecialOpinion(
-        IssueDef issue, float pawnRank, float targetRank, float strength, float zeroFrac, out float opinion)
+        IssueDef issue, float pawnRank, float targetRank, float strength, float oppositionScale, out float opinion)
     {
         switch (issue.defName)
         {
@@ -235,7 +235,7 @@ internal static class PreceptPolicy
                 return true;
 
             case "VME_Mood":
-                opinion = MoodOpinion(issue, pawnRank, targetRank, strength, zeroFrac);
+                opinion = MoodOpinion(issue, pawnRank, targetRank, strength, oppositionScale);
                 return true;
 
             default:
@@ -328,14 +328,14 @@ internal static class PreceptPolicy
     // VME_Mood is a linear high/normal/low ladder with two pariah rungs (shared, dictated-by-stars) bolted on.
     // Either pariah disagrees with everything but its own kind; the linear rungs grade by distance among
     // themselves. Pariahs are found by defName so a scrambled or extended ladder still classifies correctly.
-    private static float MoodOpinion(IssueDef issue, float pawnRank, float targetRank, float strength, float zeroFrac)
+    private static float MoodOpinion(IssueDef issue, float pawnRank, float targetRank, float strength, float oppositionScale)
     {
         if (IsMoodPariah(issue, pawnRank) || IsMoodPariah(issue, targetRank))
         {
             return SameRung(pawnRank, targetRank) ? strength : -strength;
         }
 
-        return PreceptLadder.OpinionOnPrecept(pawnRank, targetRank, 0f, MoodLinearMaxRank(issue), strength, zeroFrac);
+        return PreceptLadder.OpinionOnPrecept(pawnRank, targetRank, 0f, MoodLinearMaxRank(issue), strength, oppositionScale);
     }
 
     private static bool IsMoodPariah(IssueDef issue, float rank)
