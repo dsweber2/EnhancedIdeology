@@ -48,38 +48,133 @@ public class ConversionTests : SeededTest
     }
 
     [Fact]
-    public void InteractionWorker_HighConversionPower_DropsCertainty()
+    public void InteractionWorker_PullsRecipientStanceTowardPreachersRung()
     {
-        // A single attempt drops recipient certainty (~0.04 * power=3 = 0.12) without yet converting them -
-        // their opinion of the evangelist's plain ideo (~0.55) is still below their post-drop certainty (~0.63).
+        // Directed conversion is a debate the preacher always wins: the recipient's stance on the contested issue
+        // slides toward the rung the evangelist's faith holds (rung 0), without converting them outright here.
+        Rand.SetSeed(1);
+        var (world, evangelist, recipient, issue, _) = OpposedFaiths();
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var rankBefore = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
+
+        new InteractionWorker_AdvancedConversionAttempt().Interacted(evangelist, recipient, [], out _, out _, out _, out _);
+
+        var rankAfter = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        Assert.True(rankAfter < rankBefore,
+            $"Expected recipient's stance to slide toward the preacher's rung 0. before={rankBefore}, after={rankAfter}");
+    }
+
+    [Fact]
+    public void InteractionWorker_TargetsTheMostOpposedIssue()
+    {
+        // The evangelist's faith preaches rung 0 on two issues; the recipient sits at rung 0 on one (agreement)
+        // and the far rung on the other (opposition). Conversion must target the opposed issue and leave the
+        // agreed-upon one untouched.
         Rand.SetSeed(1);
         var world = new SimWorld();
         world.Initialize();
 
-        var evangelistIdeo = new IdeoBuilder().WithName("Evangelist").Build();
-        var recipientIdeo = new IdeoBuilder().WithName("Recipient").Build();
+        var (agree, agreeRungs) = SimIssues.Ladder("AgreeIssue", "Aa", "Ab", "Ac");
+        var (clash, clashRungs) = SimIssues.Ladder("ClashIssue", "Ca", "Cb", "Cc");
+        var evangelistIdeo = new IdeoBuilder().WithName("Preacher")
+            .AddPrecept(agreeRungs[0], agree, displayOrderInIssue: 0)
+            .AddPrecept(clashRungs[0], clash, displayOrderInIssue: 0).Build();
+        var recipientIdeo = new IdeoBuilder().WithName("Convert")
+            .AddPrecept(agreeRungs[0], agree, displayOrderInIssue: 0)
+            .AddPrecept(clashRungs[2], clash, displayOrderInIssue: 20).Build();
         world.AddIdeo(evangelistIdeo);
         world.AddIdeo(recipientIdeo);
 
-        var evangelist = new PawnBuilder()
-            .WithIdeo(evangelistIdeo)
-            .WithCertainty(0.95f)
-            .WithConversionPower(3f)
-            .WithLabel("Evangelist")
-            .Build(world);
+        var evangelist = new PawnBuilder().WithIdeo(evangelistIdeo).WithCertainty(1f).WithConversionPower(5f).WithLabel("E").Build(world);
+        var recipient = new PawnBuilder().WithIdeo(recipientIdeo).WithCertainty(0.5f).WithConversionPower(0.1f).WithLabel("R").Build(world);
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
 
+        var agreeBefore = recipientTracker.IssueStances().First(stance => stance.issue == agree).rank;
+        var clashBefore = recipientTracker.IssueStances().First(stance => stance.issue == clash).rank;
+
+        new InteractionWorker_AdvancedConversionAttempt().Interacted(evangelist, recipient, [], out _, out _, out _, out _);
+
+        var agreeAfter = recipientTracker.IssueStances().First(stance => stance.issue == agree).rank;
+        var clashAfter = recipientTracker.IssueStances().First(stance => stance.issue == clash).rank;
+
+        Assert.Equal(agreeBefore, agreeAfter);
+        Assert.True(clashAfter < clashBefore, $"Expected the opposed issue to move. before={clashBefore}, after={clashAfter}");
+    }
+
+    [Fact]
+    public void InteractionWorker_PullsTwiceThePerDebatePull()
+    {
+        // Conversion reuses the per-debate stance pull at double strength, scaled by the preacher's ConversionPower
+        // and the recipient's CertaintyLossFactor. With a modest power the clamp does not bite, so the rung move is
+        // exactly (target - before) * 2 * StancePullPerDebate * CP * CLF. Derive the expectation from the constant
+        // rather than hardcoding it, so retuning the pull keeps this honest.
+        Rand.SetSeed(1);
+        var (world, initiator, recipient, issue, initiatorIdeo) = OpposedFaiths(initiatorConversionPower: 2f);
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var before = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        var targetRank = PreceptLadder.RankOf(initiatorIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
+
+        new InteractionWorker_AdvancedConversionAttempt().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        var after = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        var pull = 2f * InteractionWorker_IdeologicalDebatePrecept.StancePullPerDebate
+            * initiator.GetStatValue(StatDefOf.ConversionPower)
+            * recipient.GetStatValue(StatDefOf.CertaintyLossFactor);
+        Assert.Equal(before + ((targetRank - before) * pull), after, 3);
+    }
+
+    [Fact]
+    public void InteractionWorker_PreacherLoses_ShiftsPreacherByOrdinaryDebateAmount()
+    {
+        // Flip the stats so the recipient dominates the roll: the preacher loses. Their own stance on the contested
+        // issue is pulled toward the recipient's rung by the ordinary (1x) debate pull, the recipient does not budge,
+        // and no conversion happens.
+        Rand.SetSeed(1);
+        var (world, initiator, recipient, issue, _) = OpposedFaiths(
+            initiatorConversionPower: 0.1f, initiatorSocialImpact: 1f,
+            recipientConversionPower: 5f, recipientSocialImpact: 6f);
+        var initiatorTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(initiator);
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var initiatorBefore = initiatorTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        var recipientRank = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        var recipientIdeoBefore = recipient.Ideo;
+
+        new InteractionWorker_AdvancedConversionAttempt().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        var initiatorAfter = initiatorTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        var pull = InteractionWorker_IdeologicalDebatePrecept.StancePullPerDebate
+            * recipient.GetStatValue(StatDefOf.ConversionPower)
+            * initiator.GetStatValue(StatDefOf.CertaintyLossFactor);
+
+        Assert.Equal(initiatorBefore + ((recipientRank - initiatorBefore) * pull), initiatorAfter, 3);
+        Assert.Equal(recipientRank, recipientTracker.IssueStances().First(stance => stance.issue == issue).rank);
+        Assert.Equal(recipientIdeoBefore, recipient.Ideo);
+    }
+
+    // An initiator whose faith preaches rung 0 vs a recipient whose faith preaches the far rung on one shared Moral
+    // issue. By default the initiator is a dominant debater (high ConversionPower and SocialImpact) so the roll is
+    // a reliable win; the loss test flips the stats so the recipient dominates instead.
+    private static (SimWorld world, Pawn initiator, Pawn recipient, IssueDef issue, Ideo initiatorIdeo) OpposedFaiths(
+        float initiatorConversionPower = 5f, float initiatorSocialImpact = 6f,
+        float recipientConversionPower = 0.1f, float recipientSocialImpact = 1f)
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (issue, rungs) = SimIssues.Ladder("ConvIssue", "Permissive", "Middle", "Forbidding");
+        var initiatorIdeo = new IdeoBuilder().WithName("StrongFaith").AddPrecept(rungs[0], issue, displayOrderInIssue: 0).Build();
+        var recipientIdeo = new IdeoBuilder().WithName("WeakFaith").AddPrecept(rungs[2], issue, displayOrderInIssue: 20).Build();
+        world.AddIdeo(initiatorIdeo);
+        world.AddIdeo(recipientIdeo);
+
+        var initiator = new PawnBuilder()
+            .WithIdeo(initiatorIdeo).WithCertainty(1f).WithConversionPower(initiatorConversionPower).WithSocialImpact(initiatorSocialImpact)
+            .WithLabel("Strong").Build(world);
         var recipient = new PawnBuilder()
-            .WithIdeo(recipientIdeo)
-            .WithCertainty(0.75f)
-            .WithLabel("Recipient")
-            .Build(world);
+            .WithIdeo(recipientIdeo).WithCertainty(0.3f).WithConversionPower(recipientConversionPower).WithSocialImpact(recipientSocialImpact)
+            .WithLabel("Weak").Build(world);
 
-        var worker = new InteractionWorker_AdvancedConversionAttempt();
-        worker.Interacted(evangelist, recipient, [], out _, out _, out _, out _);
-
-        Assert.Equal(recipientIdeo, recipient.Ideo);
-        Assert.True(recipient.ideo.Certainty < 0.75f,
-            $"Expected certainty to drop after conversion pressure. Got: {recipient.ideo.Certainty:F4}");
+        return (world, initiator, recipient, issue, initiatorIdeo);
     }
 
     [Fact]

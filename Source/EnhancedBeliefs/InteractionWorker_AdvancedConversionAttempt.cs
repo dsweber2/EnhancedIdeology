@@ -1,4 +1,4 @@
-﻿namespace EnhancedBeliefs;
+namespace EnhancedBeliefs;
 
 internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionWorker_ConvertIdeoAttempt
 {
@@ -23,61 +23,57 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
 
         var certaintyBefore = recipient.ideo.Certainty;
 
-        // 1) Compute conversion power
-        var conversionPower = CalculateConversionPower(initiator, recipient, comp);
+        // 1) Argue the belief the recipient most opposes about the preacher's faith. Like a debate, either side can
+        //    win the roll; only a decisive win for the preacher persuades the recipient (and does so twice as hard
+        //    as an ordinary debate). A loss shifts the preacher instead; a draw moves no one.
+        var preacherPersuaded = ResolveDirectedDebate(initiator, recipient, comp, initiatorIdeo, recipientTracker);
 
-        // 2) Apply certainty and opinion changes
-        UpdateCertaintyAndOpinions(recipient, recipientIdeo, recipientTracker, initiatorIdeo, conversionPower);
-
-        // 3) Feedback mote
-        EnhancedBeliefsUtilities.ShowCertaintyChangeMote(recipient, certaintyBefore, recipient.ideo.Certainty);
-
-        // 4) Try success path (may set letter fields and return early)
-        if (TryHandleSuccessfulConversion(initiator, recipient, recipientTracker, initiatorIdeo, recipientIdeo, conversionPower, extraSentencePacks,
+        // 2) Only a won debate can flip the recipient's faith.
+        if (preacherPersuaded && TryHandleSuccessfulConversion(initiator, recipient, recipientTracker, initiatorIdeo, recipientIdeo, extraSentencePacks,
             ref letterText, ref letterLabel, ref letterDef, ref lookTargets))
         {
             return;
         }
 
-        // 5) Handle failure/neutral outcomes
+        // 3) Handle failure/neutral outcomes
         HandleOutcome(initiator, recipient, extraSentencePacks, certaintyBefore);
     }
 
-    private static float CalculateConversionPower(Pawn initiator, Pawn recipient, GameComponent_EnhancedBeliefs comp)
+    // A directed conversion is an argument over the belief the recipient most opposes about the preacher's faith,
+    // resolved by the same roll as a debate. Returns true only when the preacher wins decisively - then the
+    // recipient's stance is pulled toward the preacher at double strength and a conversion becomes possible. On a
+    // loss the preacher's own stance is pulled toward the recipient by the ordinary debate amount; a draw (or the
+    // recipient already agreeing on everything) moves no one. Either way, false means no conversion this attempt.
+    private static bool ResolveDirectedDebate(
+        Pawn initiator, Pawn recipient, GameComponent_EnhancedBeliefs comp, Ideo initiatorIdeo, IdeoTrackerData recipientTracker)
     {
-        // Conversion attempts don't actually adjust pawn's personal opinion of their own ideology, but rather certainty directly (aka base value).
-        // Initiator's ideology does get personal opinion adjusted though. Recipient's opinion of initiator matters a lot as well.
-        var power = initiator.GetStatValue(StatDefOf.ConversionPower) *
-                    recipient.GetStatValue(StatDefOf.CertaintyLossFactor) *
-                    comp.ConversionFactor(initiator, recipient) *
-                    ConversionUtility.ConversionPowerFactor_MemesVsTraits(initiator, recipient) *
-                    ReliquaryUtility.GetRelicConvertPowerFactorForPawn(initiator) *
-                    Find.Storyteller.difficulty.CertaintyReductionFactor(initiator, recipient) *
-                    (1 + (recipient.relations.OpinionOf(initiator) * 0.5f * 0.01f));
-
-        var recipientIdeoRole = recipient.Ideo?.GetRole(recipient);
-        if (recipientIdeoRole != null)
+        var issue = recipientTracker.MostOpposingIssue(initiatorIdeo);
+        if (issue == null)
         {
-            power *= recipientIdeoRole.def.certaintyLossFactor;
+            return false;
         }
 
-        // Give it +- 0.2f random value. If we're REALLY bad at it we can go into negatives and only scare the pawn off
-        power += 0.4f * (Rand.Value - 0.5f);
-
-        return power;
-    }
-
-    private static void UpdateCertaintyAndOpinions(Pawn recipient, Ideo recipientIdeo, IdeoTrackerData recipientTracker, Ideo initiatorIdeo, float conversionPower)
-    {
-        // Certainty drop scales with conversion power; also nudge personal opinions
-        recipient.ideo.Certainty = Mathf.Clamp01(recipient.ideo.Certainty - (0.04f * conversionPower));
-        recipientTracker.AdjustPersonalOpinion(initiatorIdeo, 0.08f * conversionPower);
-
-        var ideoOpinion = recipientTracker.PersonalIdeoOpinion(recipientIdeo, out var _);
-        if (ideoOpinion > 0)
+        var initiatorRoll = InteractionWorker_IdeologicalDebatePrecept.GetDebateRoll(initiator);
+        var recipientRoll = InteractionWorker_IdeologicalDebatePrecept.GetDebateRoll(recipient);
+        if (Math.Abs(initiatorRoll - recipientRoll) <= InteractionWorker_IdeologicalDebatePrecept.DebateDrawThreshold)
         {
-            recipientTracker.AdjustPersonalOpinion(recipientIdeo, Math.Max(ideoOpinion * -0.01f, -0.02f * conversionPower));
+            return false;
         }
+
+        if (initiatorRoll > recipientRoll)
+        {
+            // Preacher wins: the recipient's most-opposed stance is dragged toward the rung the preacher's faith
+            // holds, at double the per-debate pull.
+            var preacherRank = PreceptLadder.RankOf(initiatorIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
+            InteractionWorker_IdeologicalDebatePrecept.PullStance(comp, initiator, recipient, issue, preacherRank, 2f);
+            return true;
+        }
+
+        // Preacher loses: their own stance on the contested issue is pulled toward the recipient's, by the ordinary
+        // debate amount. The recipient is unmoved, so no conversion follows.
+        var recipientRank = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        InteractionWorker_IdeologicalDebatePrecept.PullStance(comp, recipient, initiator, issue, recipientRank, 1f);
+        return false;
     }
 
     private static bool TryHandleSuccessfulConversion(
@@ -86,16 +82,13 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
         IdeoTrackerData recipientTracker,
         Ideo initiatorIdeo,
         Ideo recipientIdeo,
-        float conversionPower,
         List<RulePackDef> extraSentencePacks,
         ref string? letterText,
         ref string? letterLabel,
         ref LetterDef? letterDef,
         ref LookTargets? lookTargets)
     {
-        // Don't check for conversion if we screwed up so bad that the pawn got reaffirmed in its beliefs, go straight to negative outcomes
-        // ...or if the pawn got a mental breakdown because they didn't get convinced in the new ideo, only that their current one is really bad
-        if (conversionPower > 0 && recipientTracker.CheckConversion(initiatorIdeo) == ConversionOutcome.Success)
+        if (recipientTracker.CheckConversion(initiatorIdeo) == ConversionOutcome.Success)
         {
             if (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient))
             {

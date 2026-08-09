@@ -422,6 +422,31 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         return PerIssueOpinion(ideo, issue, inducedTargets, EnhancedBeliefsMod.Settings.PreceptOppositionScale, out _);
     }
 
+    // The issue on which the pawn's stance most opposes `ideo` (the most negative per-issue opinion) - the belief
+    // a preacher of `ideo` would target first when trying to convert this pawn. Returns null when the pawn opposes
+    // nothing `ideo` preaches (every graded issue reads >= 0).
+    public IssueDef? MostOpposingIssue(Ideo ideo)
+    {
+        EnsureIssueStancesSeeded();
+        var inducedTargets = new HashSet<IssueDef>(
+            PreceptPolicy.InducedIssues(Pawn.Ideo).Concat(PreceptPolicy.InducedIssues(ideo)));
+        var oppositionScale = EnhancedBeliefsMod.Settings.PreceptOppositionScale;
+
+        IssueDef? worst = null;
+        var worstOpinion = 0f;
+        foreach (var issue in ideo.precepts.Select(precept => precept.def.issue).Where(issue => issue != null).Distinct())
+        {
+            var opinion = PerIssueOpinion(ideo, issue!, inducedTargets, oppositionScale, out var graded);
+            if (graded && opinion < worstOpinion)
+            {
+                worstOpinion = opinion;
+                worst = issue;
+            }
+        }
+
+        return worst;
+    }
+
     // Dev-only: the full extent/rank breakdown behind IssueOpinionToward, for diagnosing per-issue opinions.
     public string IssueOpinionDebug(Ideo ideo, IssueDef issue)
     {
