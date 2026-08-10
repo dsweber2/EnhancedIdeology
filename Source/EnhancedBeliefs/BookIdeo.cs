@@ -1,4 +1,5 @@
-﻿using Verse.Grammar;
+﻿using System.Text;
+using Verse.Grammar;
 
 using static RimWorld.IdeoFoundation_Deity;
 
@@ -50,9 +51,7 @@ internal sealed class BookIdeo : Book
         }
     }
 
-    public override void PostQualitySet()
-    {
-    }
+    public override string DescriptionDetailed => base.DescriptionDetailed + BuildStanceText();
 
     public override void GenerateBook(Pawn? author = null, long? fixedDate = null)
     {
@@ -86,6 +85,24 @@ internal sealed class BookIdeo : Book
             Ideo = Find.IdeoManager.IdeosListForReading.RandomElement();
             RegenerateName(Ideo);
         }
+    }
+
+    private string BuildStanceText()
+    {
+        var doer = GetComp<CompBook>().Doers.OfType<ReadingOutcomeDoer_CertaintyChange>().FirstOrDefault();
+        if (doer?.ideo == null) return string.Empty;
+
+        var stances = doer.IdeoStances().ToList();
+        if (stances.Count == 0) return string.Empty;
+
+        var sb = new StringBuilder("\n\n");
+        sb.AppendLine("EnhancedBeliefs.BookBeliefsHeader".Translate());
+        foreach (var (issue, stance, strength) in stances)
+        {
+            var pct = (strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent();
+            sb.AppendLine($"  - {issue.LabelCap}: {stance.LabelCap} ({pct})");
+        }
+        return sb.ToString().TrimEndNewlines();
     }
 
     //Completely copied over from ideo generation code, also generates description
@@ -134,6 +151,14 @@ internal sealed class BookIdeo : Book
 
         var def = patterns.RandomElementByWeight(entry => entry.weight).def;
         descriptionFlavor = IdeoDescriptionUtility.ResolveDescription(Ideo, def, true).text;
+
+        var topStances = Doer.IdeoStances().Take(3).ToList();
+        if (topStances.Count > 0)
+        {
+            var stanceList = topStances.Select(s => s.stance.LabelCap.ToString()).ToCommaList(useAnd: true);
+            descriptionFlavor += "\n\n" + "EnhancedBeliefs.BookFocalStances".Translate(stanceList);
+        }
+
         description = GenerateFullDescription();
 
         void AddMemeContent(Ideo ideo)

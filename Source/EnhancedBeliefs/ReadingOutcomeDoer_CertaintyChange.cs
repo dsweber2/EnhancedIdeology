@@ -39,41 +39,57 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         SeedIssueStrengths(author);
     }
 
-    // Fix the conviction the book argues each of its ideo's Moral positions with. An authored book inherits the
-    // author's own per-issue conviction (which already carries their personality's zeal), censored to the ideo's
-    // approved rungs; a found or trader book with no known author rolls a plain conviction per issue.
+    // Fix the conviction the book argues each of its ideo's Moral positions with.
+    //
+    // Authored books inherit the author's non-uniform conviction distribution (already concentrated on whatever
+    // they care most about), censored to the ideo's approved rungs where they've drifted. Books without a known
+    // author explicitly concentrate conviction on 3-5 focal issues so the book has a clear argumentative identity
+    // rather than being a uniformly mild tract on everything.
     private void SeedIssueStrengths(Pawn? author)
     {
-        Dictionary<IssueDef, (float rank, float strength)>? authorStances = null;
+        var allPrecepts = MoralPrecepts(ideo!).ToList();
+
         if (author != null && author.Ideo == ideo)
         {
             var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
             var authorTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(author);
-            authorStances = authorTracker.IssueStances()
+            var authorStances = authorTracker.IssueStances()
                 .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
+
+            foreach (var precept in allPrecepts)
+            {
+                var issue = precept.issue!;
+                issueStrength[issue] = authorStances.TryGetValue(issue, out var stance)
+                    ? (Mathf.RoundToInt(stance.rank) == Mathf.RoundToInt(PreceptLadder.RankOf(precept))
+                        ? stance.strength
+                        : CensoredConviction)
+                    : Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.BaseConvictionMax);
+            }
+            return;
         }
 
-        foreach (var precept in MoralPrecepts(ideo!))
+        var focalCount = Math.Min(Rand.RangeInclusive(3, 5), allPrecepts.Count);
+        var focalIssues = allPrecepts
+            .InRandomOrder()
+            .Take(focalCount)
+            .Select(p => p.issue!)
+            .ToHashSet();
+
+        foreach (var precept in allPrecepts)
         {
             var issue = precept.issue!;
-            issueStrength[issue] = AuthoredStrength(authorStances, issue, PreceptLadder.RankOf(precept));
+            issueStrength[issue] = focalIssues.Contains(issue)
+                ? Rand.Range(IdeoTrackerData.MaxConvictionStrength * 0.6f, IdeoTrackerData.MaxConvictionStrength)
+                : Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.MaxConvictionStrength * 0.3f);
         }
     }
 
-    // What conviction the author writes a given orthodox position with. If the author still personally holds
-    // that rung, it is their own conviction; if their stance has drifted to a different rung (they now disagree
-    // with the party line they are penning), they argue it only faintly, at CensoredConviction. With no known
-    // author, a plain roll stands in.
-    private static float AuthoredStrength(
-        Dictionary<IssueDef, (float rank, float strength)>? authorStances, IssueDef issue, float orthodoxRank)
-    {
-        if (authorStances != null && authorStances.TryGetValue(issue, out var stance))
-        {
-            return Mathf.RoundToInt(stance.rank) == Mathf.RoundToInt(orthodoxRank) ? stance.strength : CensoredConviction;
-        }
-
-        return Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.BaseConvictionMax);
-    }
+    public IEnumerable<(IssueDef issue, PreceptDef stance, float strength)> IdeoStances() =>
+        ideo == null
+            ? []
+            : MoralPrecepts(ideo)
+                .Select(precept => (precept.issue!, precept, BookStrength(precept.issue!)))
+                .OrderByDescending(entry => entry.Item3);
 
     // The book's conviction on an issue, backfilled with a fresh roll for books that predate this data or issues
     // the ideo picked up after generation.
