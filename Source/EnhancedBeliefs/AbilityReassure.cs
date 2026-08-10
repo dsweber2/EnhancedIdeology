@@ -13,8 +13,8 @@ internal static class AbilityReassure
 
     // How many of the target's most-divergent issues this cast will target: Uniform{1..MaxBundleIssues},
     // capped at the number of heterodox issues the target actually holds.
-    internal static IReadOnlyList<IssueDef> RollTargetIssues(IdeoTrackerData recipientTracker) =>
-        recipientTracker.MostHeterodoxIssues(Rand.RangeInclusive(1, MaxBundleIssues));
+    internal static IReadOnlyList<IssueDef> RollTargetIssues(IdeoTrackerData recipientTracker, IdeoTrackerData guideTracker) =>
+        recipientTracker.MostHeterodoxIssues(Rand.RangeInclusive(1, MaxBundleIssues), guideTracker);
 
     // Resolve one cast against a pre-rolled issue bundle. Returns true on a win.
     // Win: each targeted issue slides toward the target's own ideo's rung at ordinary (1x) debate strength,
@@ -39,7 +39,7 @@ internal static class AbilityReassure
         foreach (var issue in issues)
         {
             var orthodoxRank = IdeoTrackerData.HeldRank(recipientIdeo, issue);
-            InteractionWorker_IdeologicalDebatePrecept.PullStance(comp, guide, recipient, issue, orthodoxRank, 1f);
+            ConvictionMath.PullStance(comp, guide, recipient, issue, orthodoxRank, 1f);
         }
 
         recipient.ideo.Certainty = Mathf.Clamp01(recipient.ideo.Certainty + ReassureCertaintyGain);

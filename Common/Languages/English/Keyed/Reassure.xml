@@ -3,7 +3,7 @@
   <EnhancedBeliefs.Reassure.CertaintyGain>Certainty gain on win: +{0}</EnhancedBeliefs.Reassure.CertaintyGain>
   <EnhancedBeliefs.Reassure.SuccessChance>Chance to win the debate: {0}</EnhancedBeliefs.Reassure.SuccessChance>
   <EnhancedBeliefs.Reassure.SelfTarget>Self-reassurance: guaranteed success</EnhancedBeliefs.Reassure.SelfTarget>
-  <EnhancedBeliefs.Reassure.TargetBeliefs>Heterodox beliefs to reinforce (a random 1-{0} of):</EnhancedBeliefs.Reassure.TargetBeliefs>
+  <EnhancedBeliefs.Reassure.TargetBeliefs>Beliefs to reinforce (a random 1-{0} of):</EnhancedBeliefs.Reassure.TargetBeliefs>
   <EnhancedBeliefs.Reassure.NoHeterodoxy>Their beliefs are already orthodox - there is nothing to reinforce.</EnhancedBeliefs.Reassure.NoHeterodoxy>
   <EnhancedBeliefs.Reassure.FailMessage>{0} failed to reassure {1}.</EnhancedBeliefs.Reassure.FailMessage>
 </LanguageData>

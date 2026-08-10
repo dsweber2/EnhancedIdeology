@@ -191,7 +191,7 @@ public class DebateTests : SeededTest
         var steps = 0;
         for (; steps < 100 && (Mathf.Abs(rank - 3f) > 0.01f || Mathf.Abs(strength - 14f) > 0.5f); steps++)
         {
-            (rank, strength) = InteractionWorker_IdeologicalDebatePrecept.ValleyStep(rank, strength, 3f, 0f, 14f, 3f);
+            (rank, strength) = ConvictionMath.ValleyStep(rank, strength, 3f, 0f, 14f, 3f);
         }
 
         Assert.True(steps < 100, "Expected convergence to the winner within a bounded number of debates.");
@@ -205,8 +205,8 @@ public class DebateTests : SeededTest
         // The whole reason for the arc-length metric: from the same rung, a firmly-held stance shifts its rung
         // far less per won debate than a shaky one, because the extra conviction makes the curve steep there and
         // the fixed step is spent shedding conviction rather than moving rank.
-        var shakyMove = 0.5f - InteractionWorker_IdeologicalDebatePrecept.ValleyStep(0.5f, 4f, 3f, 0f, 14f, 3f).rank;
-        var firmMove = 0.5f - InteractionWorker_IdeologicalDebatePrecept.ValleyStep(0.5f, 18f, 3f, 0f, 14f, 3f).rank;
+        var shakyMove = 0.5f - ConvictionMath.ValleyStep(0.5f, 4f, 3f, 0f, 14f, 3f).rank;
+        var firmMove = 0.5f - ConvictionMath.ValleyStep(0.5f, 18f, 3f, 0f, 14f, 3f).rank;
 
         Assert.True(shakyMove < 0f && firmMove < 0f, "both should move toward the winner (rank rises from 0.5)");
         Assert.True(Mathf.Abs(shakyMove) > Mathf.Abs(firmMove),
@@ -222,7 +222,7 @@ public class DebateTests : SeededTest
         var lowest = strength;
         for (var ii = 0; ii < 100 && Mathf.Abs(rank - 3f) > 0.01f; ii++)
         {
-            (rank, strength) = InteractionWorker_IdeologicalDebatePrecept.ValleyStep(rank, strength, 3f, 0f, 14f, 3f);
+            (rank, strength) = ConvictionMath.ValleyStep(rank, strength, 3f, 0f, 14f, 3f);
             lowest = Mathf.Min(lowest, strength);
         }
 
@@ -234,7 +234,7 @@ public class DebateTests : SeededTest
     {
         // Within a hair of the winner's rung there is no arc left to integrate: the rung snaps home and only the
         // conviction closes the remaining gap.
-        var (rank, strength) = InteractionWorker_IdeologicalDebatePrecept.ValleyStep(3f, 6f, 3f, 0f, 14f, 3f);
+        var (rank, strength) = ConvictionMath.ValleyStep(3f, 6f, 3f, 0f, 14f, 3f);
 
         Assert.Equal(3f, rank);
         Assert.True(strength > 6f && strength < 14f, $"Expected conviction to move part-way toward the winner. got={strength}");

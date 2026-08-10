@@ -13,8 +13,8 @@ internal static class AbilityConversion
 
     // How many of the recipient's most-opposed issues this cast will target: Uniform{1..MaxBundleIssues},
     // capped at the number actually opposed. Rolled before Resolve so the tooltip can preview the same count.
-    internal static IReadOnlyList<IssueDef> RollTargetIssues(IdeoTrackerData recipientTracker, Ideo guideIdeo) =>
-        recipientTracker.MostOpposingIssues(guideIdeo, Rand.RangeInclusive(1, MaxBundleIssues));
+    internal static IReadOnlyList<IssueDef> RollTargetIssues(IdeoTrackerData recipientTracker, Ideo guideIdeo, IdeoTrackerData guideTracker) =>
+        recipientTracker.MostOpposingIssues(guideIdeo, Rand.RangeInclusive(1, MaxBundleIssues), guideTracker);
 
     // Resolve one cast against a pre-rolled issue bundle. Returns true iff the recipient converted.
     // Win: every targeted issue slides toward the guide's rung at ordinary (1x) debate strength - wide but
@@ -44,7 +44,7 @@ internal static class AbilityConversion
             foreach (var issue in issues)
             {
                 var guideRank = PreceptLadder.RankOf(guideIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
-                InteractionWorker_IdeologicalDebatePrecept.PullStance(comp, guide, recipient, issue, guideRank, 1f);
+                ConvictionMath.PullStance(comp, guide, recipient, issue, guideRank, 1f);
             }
 
             recipient.ideo.Certainty *= EnhancedBeliefsMod.Settings.ConversionCertaintyKnock;
@@ -53,7 +53,7 @@ internal static class AbilityConversion
 
         var topIssue = issues[0];
         var recipientRank = recipientTracker.IssueStances().First(stance => stance.issue == topIssue).rank;
-        InteractionWorker_IdeologicalDebatePrecept.PullStance(comp, recipient, guide, topIssue, recipientRank, 1f);
+        ConvictionMath.PullStance(comp, recipient, guide, topIssue, recipientRank, 1f);
         return false;
     }
 }

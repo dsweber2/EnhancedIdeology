@@ -65,7 +65,7 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
             // Preacher wins: the recipient's most-opposed stance is dragged toward the rung the preacher's faith
             // holds, at double the per-debate pull.
             var preacherRank = PreceptLadder.RankOf(initiatorIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
-            InteractionWorker_IdeologicalDebatePrecept.PullStance(comp, initiator, recipient, issue, preacherRank, EnhancedBeliefsMod.Settings.ConversionStancePull);
+            ConvictionMath.PullStance(comp, initiator, recipient, issue, preacherRank, EnhancedBeliefsMod.Settings.ConversionStancePull);
             // Temporary certainty knock so the recipient is more likely to switch now (a lower certainty lowers
             // their opinion of their own faith in the check below) and to spontaneously drift away afterwards.
             recipient.ideo.Certainty *= EnhancedBeliefsMod.Settings.ConversionCertaintyKnock;
@@ -75,7 +75,7 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
         // Preacher loses: their own stance on the contested issue is pulled toward the recipient's, by the ordinary
         // debate amount. The recipient is unmoved, so no conversion follows.
         var recipientRank = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
-        InteractionWorker_IdeologicalDebatePrecept.PullStance(comp, recipient, initiator, issue, recipientRank, 1f);
+        ConvictionMath.PullStance(comp, recipient, initiator, issue, recipientRank, 1f);
         return false;
     }
 

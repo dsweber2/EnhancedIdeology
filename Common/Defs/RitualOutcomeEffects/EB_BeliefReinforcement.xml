@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Ritual side-effect: nudges all participants' per-issue stances toward their ideo's orthodox position and
+       toward maximum conviction. Quality scales the effect: great rituals harden belief, terrible ones erode it. -->
+  <RitualAttachableOutcomeEffectDef>
+    <defName>EB_BeliefReinforcement</defName>
+    <label>belief reinforcement</label>
+    <workerClass>EnhancedBeliefs.RitualAttachableOutcomeEffectWorker_BeliefReinforcement</workerClass>
+    <effectDesc>participants' convictions will be reinforced toward orthodoxy.</effectDesc>
+    <letterInfoText>The ritual deepened the participants' convictions.</letterInfoText>
+  </RitualAttachableOutcomeEffectDef>
+
+
+</Defs>

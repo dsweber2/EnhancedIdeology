@@ -21,9 +21,10 @@ internal static class CompAbilityEffect_Convert_Apply
         var props = __instance.Props;
         var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var guideTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(guide);
 
         var certaintyBefore = recipient.ideo.Certainty;
-        var issues = AbilityConversion.RollTargetIssues(recipientTracker, guide.Ideo);
+        var issues = AbilityConversion.RollTargetIssues(recipientTracker, guide.Ideo, guideTracker);
 
         // A win runs CheckConversion inside Resolve, which already switches the recipient's ideo - so, unlike
         // vanilla, we do not force SetIdeo here.
@@ -63,8 +64,9 @@ internal static class CompAbilityEffect_Convert_Tooltip
         var guide = __instance.parent.pawn;
         var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var guideTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(guide);
         var knock = EnhancedBeliefsMod.Settings.ConversionCertaintyKnock;
-        var issues = recipientTracker.MostOpposingIssues(guide.Ideo, AbilityConversion.MaxBundleIssues);
+        var issues = recipientTracker.MostOpposingIssues(guide.Ideo, AbilityConversion.MaxBundleIssues, guideTracker);
 
         var sb = new StringBuilder();
         sb.AppendLine("EnhancedBeliefs.Convert.CertaintyKnock".Translate((1f - knock).ToStringPercent()));

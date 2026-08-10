@@ -36,8 +36,9 @@ internal static class CompAbilityEffect_Reassure_Apply
         var props = __instance.Props;
         var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var guideTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(guide);
 
-        var issues = AbilityReassure.RollTargetIssues(recipientTracker);
+        var issues = AbilityReassure.RollTargetIssues(recipientTracker, guideTracker);
         if (issues.Count == 0)
         {
             Messages.Message("EnhancedBeliefs.Reassure.NoHeterodoxy".Translate(),
@@ -70,23 +71,31 @@ internal static class CompAbilityEffect_Reassure_Apply
 }
 
 // Replace vanilla's tooltip (which references certainty gain from NegotiationAbility) with one describing
-// the R3 mechanic: the heterodox target beliefs, the debate win chance, and the stat factors.
-[HarmonyPatch(typeof(CompAbilityEffect_Reassure), nameof(CompAbilityEffect_Reassure.ExtraLabelMouseAttachment))]
+// the R3 mechanic: the target beliefs with their current-vs-orthodox rungs, the debate win chance, and the
+// stat factors. Mirrors the convert tooltip's structure.
+// CompAbilityEffect_Reassure does not override ExtraLabelMouseAttachment, so we patch the base class and
+// guard on instance type — only our prefix fires for Reassure; all other ability types pass through.
+[HarmonyPatch(typeof(CompAbilityEffect), nameof(CompAbilityEffect.ExtraLabelMouseAttachment))]
 internal static class CompAbilityEffect_Reassure_Tooltip
 {
-    private static bool Prefix(CompAbilityEffect_Reassure __instance, LocalTargetInfo target, ref string? __result)
+    private static bool Prefix(CompAbilityEffect __instance, LocalTargetInfo target, ref string? __result)
     {
+        if (__instance is not CompAbilityEffect_Reassure reassureComp)
+            return true;
+
         var recipient = target.Pawn;
-        if (recipient == null || !__instance.Valid(target))
+        if (recipient == null || !reassureComp.Valid(target))
         {
             __result = null;
             return false;
         }
 
-        var guide = __instance.parent.pawn;
+        var guide = reassureComp.parent.pawn;
         var comp = Current.Game.GetComponent<GameComponent_EnhancedBeliefs>();
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
-        var issues = recipientTracker.MostHeterodoxIssues(AbilityReassure.MaxBundleIssues);
+        var guideTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(guide);
+        var issues = recipientTracker.MostHeterodoxIssues(AbilityReassure.MaxBundleIssues, guideTracker);
+        var stanceByIssue = recipientTracker.IssueStances().ToDictionary(s => s.issue, s => s.rank);
 
         var sb = new StringBuilder();
         sb.AppendLine("EnhancedBeliefs.Reassure.CertaintyGain".Translate(AbilityReassure.ReassureCertaintyGain.ToStringPercent()));
@@ -110,7 +119,16 @@ internal static class CompAbilityEffect_Reassure_Tooltip
             sb.AppendLine("EnhancedBeliefs.Reassure.TargetBeliefs".Translate(AbilityReassure.MaxBundleIssues));
             foreach (var issue in issues)
             {
-                sb.AppendLine(" -  " + issue.LabelCap);
+                var currentRank = stanceByIssue.TryGetValue(issue, out var cr) ? cr : 0f;
+                var orthodoxRank = IdeoTrackerData.HeldRank(recipient.Ideo, issue);
+                var rungs = PreceptLadder.Rungs(issue);
+                var currentIdx = Mathf.Clamp(Mathf.RoundToInt(currentRank), 0, rungs.Count - 1);
+                var orthodoxIdx = Mathf.Clamp(Mathf.RoundToInt(orthodoxRank), 0, rungs.Count - 1);
+
+                if (rungs.Count > 0 && currentIdx != orthodoxIdx)
+                    sb.AppendLine($" -  {issue.LabelCap}: {rungs[currentIdx].LabelCap} → {rungs[orthodoxIdx].LabelCap}");
+                else
+                    sb.AppendLine(" -  " + issue.LabelCap);
             }
         }
 

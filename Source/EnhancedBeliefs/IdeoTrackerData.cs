@@ -432,7 +432,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // stances. The convert ability targets this bundle; conversion targets just the first.
     // Fallback when the pawn already agrees with everything: the `n` weakest agreements (lowest opinion),
     // which are the most persuadable even without active opposition.
-    public IReadOnlyList<IssueDef> MostOpposingIssues(Ideo ideo, int n)
+    // If guideTracker is supplied, issues where the pawn is already near the target rank but the guide holds
+    // weaker conviction are excluded — a win there would only drain the pawn's belief strength.
+    public IReadOnlyList<IssueDef> MostOpposingIssues(Ideo ideo, int n, IdeoTrackerData? guideTracker = null)
     {
         EnsureIssueStancesSeeded();
         var inducedTargets = new HashSet<IssueDef>(
@@ -446,7 +448,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             .ToList();
 
         var opposing = scored
-            .Where(entry => entry.opinion < 0f)
+            .Where(entry => entry.opinion < 0f && WorthTargeting(entry.issue, HeldRank(ideo, entry.issue), guideTracker))
             .OrderBy(entry => entry.opinion)
             .Take(n)
             .Select(entry => entry.issue)
@@ -455,10 +457,21 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (opposing.Count > 0) return opposing;
 
         return scored
+            .Where(entry => WorthTargeting(entry.issue, HeldRank(ideo, entry.issue), guideTracker))
             .OrderBy(entry => entry.opinion)
             .Take(n)
             .Select(entry => entry.issue)
             .ToList();
+    }
+
+    // True when this issue is worth targeting in a debate: either the rank gap is large enough to close, or
+    // the guide holds stronger conviction so a win raises rather than drains the pawn's belief strength.
+    private bool WorthTargeting(IssueDef issue, float targetRank, IdeoTrackerData? guideTracker)
+    {
+        if (guideTracker == null) return true;
+        if (Mathf.Abs(issuePreferredRank[issue] - targetRank) > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon) return true;
+        var guideStrength = guideTracker.IssueStances().First(s => s.issue == issue).strength;
+        return guideStrength > issueStrength[issue];
     }
 
     // Dev-only: the full extent/rank breakdown behind IssueOpinionToward, for diagnosing per-issue opinions.
@@ -488,7 +501,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // most-divergent first, dropping any within DebateRankEpsilon of orthodoxy. Reassure targets this bundle.
     // Fallback when already fully orthodox: the `n` weakest-held beliefs (lowest issueStrength), which are
     // the most susceptible to drift and still worth reinforcing.
-    public IReadOnlyList<IssueDef> MostHeterodoxIssues(int n)
+    // If guideTracker is supplied, the fallback filters to issues where the guide holds stronger conviction —
+    // a win on an already-orthodox issue with weaker guide conviction would only drain belief strength.
+    public IReadOnlyList<IssueDef> MostHeterodoxIssues(int n, IdeoTrackerData? guideTracker = null)
     {
         EnsureIssueStancesSeeded();
 
@@ -508,6 +523,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (divergent.Count > 0) return divergent;
 
         return ideoIssues
+            .Where(issue => WorthTargeting(issue, HeldRank(Pawn.Ideo, issue), guideTracker))
             .OrderBy(issue => issueStrength[issue])
             .Take(n)
             .ToList();
