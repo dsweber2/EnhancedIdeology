@@ -12,7 +12,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // races across - so belief migrates over repeated debates rather than in one conversation.
     private const float ValleyFloor = 1f;
     private const float ValleyWidthWinner = 0.3f;
-    private const float ValleyWidthHome = 0.3f;
+    private const float ValleyWidthHome = 0.1f;
 
     // Below this rank gap an arm is treated as effectively at its vertex rather than solving a near-singular
     // amplitude. It gates all three degeneracy guards: the switch into "pawn is the floor" bowl mode, the clamp
@@ -24,7 +24,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
     // Arc length a 1x debate covers before the settings multiplier and the pawns' stats scale it. One full
     // ladder traverse is metrically worth MaxConvictionStrength conviction-units (that sets rankWeight).
-    internal const float DebateBaseArc = 3f;
+    internal const float DebateBaseArc = 4f;
 
     // A tie hardens both sides (design.md R3). Per pawn, base probability of digging in, the conviction points
     // gained on the contested issue, and the certainty gained - all before the same stat/jitter scaling.

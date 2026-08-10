@@ -430,6 +430,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // The `n` issues the pawn's stance most opposes about `ideo`, most-opposed first, dropping any that read
     // >= 0 (nothing to argue). Fewer than `n` are returned when the pawn opposes fewer than `n` of the ideo's
     // stances. The convert ability targets this bundle; conversion targets just the first.
+    // Fallback when the pawn already agrees with everything: the `n` weakest agreements (lowest opinion),
+    // which are the most persuadable even without active opposition.
     public IReadOnlyList<IssueDef> MostOpposingIssues(Ideo ideo, int n)
     {
         EnsureIssueStancesSeeded();
@@ -437,13 +439,25 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             PreceptPolicy.InducedIssues(Pawn.Ideo).Concat(PreceptPolicy.InducedIssues(ideo)));
         var oppositionScale = EnhancedBeliefsMod.Settings.PreceptOppositionScale;
 
-        return ideo.precepts.Select(precept => precept.def.issue)
+        var scored = ideo.precepts.Select(precept => precept.def.issue)
             .Where(issue => issue != null).Distinct()
-            .Select(issue => (issue, opinion: PerIssueOpinion(ideo, issue!, inducedTargets, oppositionScale, out var graded), graded))
-            .Where(entry => entry.graded && entry.opinion < 0f)
+            .Select(issue => (issue: issue!, opinion: PerIssueOpinion(ideo, issue!, inducedTargets, oppositionScale, out var graded), graded))
+            .Where(entry => entry.graded)
+            .ToList();
+
+        var opposing = scored
+            .Where(entry => entry.opinion < 0f)
             .OrderBy(entry => entry.opinion)
             .Take(n)
-            .Select(entry => entry.issue!)
+            .Select(entry => entry.issue)
+            .ToList();
+
+        if (opposing.Count > 0) return opposing;
+
+        return scored
+            .OrderBy(entry => entry.opinion)
+            .Take(n)
+            .Select(entry => entry.issue)
             .ToList();
     }
 
@@ -470,10 +484,39 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             + $"\n  ladder: {ladder}";
     }
 
+    // The `n` issues where the pawn's personal stance most diverges from their own ideo's orthodox rungs,
+    // most-divergent first, dropping any within DebateRankEpsilon of orthodoxy. Reassure targets this bundle.
+    // Fallback when already fully orthodox: the `n` weakest-held beliefs (lowest issueStrength), which are
+    // the most susceptible to drift and still worth reinforcing.
+    public IReadOnlyList<IssueDef> MostHeterodoxIssues(int n)
+    {
+        EnsureIssueStancesSeeded();
+
+        var ideoIssues = Pawn.Ideo.precepts.Select(precept => precept.def.issue)
+            .Where(issue => issue != null).Distinct()
+            .Select(issue => issue!)
+            .ToList();
+
+        var divergent = ideoIssues
+            .Select(issue => (issue, divergence: Mathf.Abs(issuePreferredRank[issue] - HeldRank(Pawn.Ideo, issue))))
+            .Where(entry => entry.divergence > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon)
+            .OrderByDescending(entry => entry.divergence)
+            .Take(n)
+            .Select(entry => entry.issue)
+            .ToList();
+
+        if (divergent.Count > 0) return divergent;
+
+        return ideoIssues
+            .OrderBy(issue => issueStrength[issue])
+            .Take(n)
+            .ToList();
+    }
+
     // Rank of the stance `ideo` holds on `issue`: an explicit precept if it has one, otherwise a stance a
     // cross-precept coupling induces (e.g. valuing trees implies disapproving of cutting them), otherwise the
     // virtual Don't-care rank. Because seeding reads this too, a pawn's own coupled stances seed correctly.
-    private static float HeldRank(Ideo ideo, IssueDef issue)
+    internal static float HeldRank(Ideo ideo, IssueDef issue)
     {
         foreach (var precept in ideo.precepts)
         {
