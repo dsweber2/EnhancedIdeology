@@ -584,6 +584,20 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         baseOpinionsDirty = true;
     }
 
+    // Set the pawn's stance on `issue` to an absolute (rank, strength), clamping conviction to its bounds. The
+    // conviction-valley debate write-path (PullStance) computes the whole new stance at once, since rank and
+    // strength are coupled along the curve - unlike ShiftIssueStance's independent deltas. Invalidates the cached
+    // structural opinions like any stance move.
+    public void SetIssueStance(IssueDef issue, float rank, float strength)
+    {
+        EnsureIssueStancesSeeded();
+
+        issuePreferredRank[issue] = rank;
+        issueStrength[issue] = Mathf.Clamp(strength, MinConvictionStrength, AbsoluteMaxConvictionStrength);
+
+        baseOpinionsDirty = true;
+    }
+
     // Recompute the cached structural opinions if a stance shift has invalidated them. Called at the top of
     // every read that consumes baseIdeoOpinions, so a batch of ShiftIssueStance calls pays one recompute.
     private void RefreshBaseOpinionsIfDirty()

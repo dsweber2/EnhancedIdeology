@@ -104,24 +104,27 @@ public class ConversionTests : SeededTest
     [Fact]
     public void InteractionWorker_WinPull_ScalesWithConversionStancePullSetting()
     {
-        // A won conversion reuses the per-debate pull times the ConversionStancePull setting, scaled by the
-        // preacher's ConversionPower and the recipient's CertaintyLossFactor. With a modest power the clamp does
-        // not bite, so the rung move is exactly (target - before) * setting * StancePullPerDebate * CP * CLF.
-        // Derive the expectation from the setting and constant so retuning either keeps this honest.
-        EnhancedBeliefsMod.Settings.ConversionStancePull = 3f;
-        Rand.SetSeed(1);
-        var (world, initiator, recipient, issue, initiatorIdeo) = OpposedFaiths(initiatorConversionPower: 1.5f);
-        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
-        var before = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
-        var targetRank = PreceptLadder.RankOf(initiatorIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
+        // A won conversion walks the recipient's stance along the conviction valley toward the preacher's rung by
+        // an arc that scales with the ConversionStancePull setting (on top of the preacher's ConversionPower and
+        // the recipient's fragility). Same seed and debaters, so a higher setting can only move the stance
+        // further toward the preacher's rung 0.
+        float MoveTowardPreacher(float setting)
+        {
+            EnhancedBeliefsMod.Settings.ConversionStancePull = setting;
+            Rand.SetSeed(1);
+            var (world, initiator, recipient, issue, _) = OpposedFaiths(initiatorConversionPower: 1.5f);
+            var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+            var before = tracker.IssueStances().First(stance => stance.issue == issue).rank;
+            new InteractionWorker_AdvancedConversionAttempt().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+            var after = tracker.IssueStances().First(stance => stance.issue == issue).rank;
+            return before - after;
+        }
 
-        new InteractionWorker_AdvancedConversionAttempt().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+        var small = MoveTowardPreacher(1f);
+        var large = MoveTowardPreacher(4f);
 
-        var after = recipientTracker.IssueStances().First(stance => stance.issue == issue).rank;
-        var pull = EnhancedBeliefsMod.Settings.ConversionStancePull * InteractionWorker_IdeologicalDebatePrecept.StancePullPerDebate
-            * initiator.GetStatValue(StatDefOf.ConversionPower)
-            * recipient.GetStatValue(StatDefOf.CertaintyLossFactor);
-        Assert.Equal(before + ((targetRank - before) * pull), after, 3);
+        Assert.True(small > 0f, $"Expected a won conversion to move the stance toward the preacher. move={small}");
+        Assert.True(large > small, $"Expected a higher ConversionStancePull to move further. small={small}, large={large}");
     }
 
     [Fact]
@@ -143,11 +146,9 @@ public class ConversionTests : SeededTest
         new InteractionWorker_AdvancedConversionAttempt().Interacted(initiator, recipient, [], out _, out _, out _, out _);
 
         var initiatorAfter = initiatorTracker.IssueStances().First(stance => stance.issue == issue).rank;
-        var pull = InteractionWorker_IdeologicalDebatePrecept.StancePullPerDebate
-            * recipient.GetStatValue(StatDefOf.ConversionPower)
-            * initiator.GetStatValue(StatDefOf.CertaintyLossFactor);
 
-        Assert.Equal(initiatorBefore + ((recipientRank - initiatorBefore) * pull), initiatorAfter, 3);
+        Assert.True(initiatorAfter > initiatorBefore,
+            $"Expected the losing preacher's own stance to slide toward the recipient's rung. before={initiatorBefore}, after={initiatorAfter}");
         Assert.Equal(recipientRank, recipientTracker.IssueStances().First(stance => stance.issue == issue).rank);
         Assert.Equal(recipientIdeoBefore, recipient.Ideo);
     }

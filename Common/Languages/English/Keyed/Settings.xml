@@ -10,6 +10,8 @@
   <EnhancedBeliefs.RelationalMaxRange.Tip>The most that a pawn's opinion of their co-religionists can raise or lower their target certainty.</EnhancedBeliefs.RelationalMaxRange.Tip>
   <EnhancedBeliefs.PracticeMaxRange>Practice influence: ±{0}</EnhancedBeliefs.PracticeMaxRange>
   <EnhancedBeliefs.PracticeMaxRange.Tip>The most that recent precept moods (rituals, veneration, taboos) can raise or lower their target certainty.</EnhancedBeliefs.PracticeMaxRange.Tip>
+  <EnhancedBeliefs.DebateConvictionChange>Debate conviction change: {0}</EnhancedBeliefs.DebateConvictionChange>
+  <EnhancedBeliefs.DebateConvictionChange.Tip>How far a single won argument moves the loser's belief on the topic, relative to default. Shifts both the precept and the conviction in that precept simultaneously. Higher = each won debate persuades more.</EnhancedBeliefs.DebateConvictionChange.Tip>
   <EnhancedBeliefs.ConversionPace>Conversion pace: {0}</EnhancedBeliefs.ConversionPace>
   <EnhancedBeliefs.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions happen faster. Only affects passive drift; debates and conversion attempts are unaffected.</EnhancedBeliefs.ConversionPace.Tip>
   <EnhancedBeliefs.ConversionStancePull>Conversion strength: {0}</EnhancedBeliefs.ConversionStancePull>

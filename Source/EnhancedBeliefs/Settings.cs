@@ -9,6 +9,7 @@ public class Settings : ModSettings
     private const float DefaultRelationalMaxRange = 0.12f;
     private const float DefaultPracticeMaxRange = 0.15f;
     private const float DefaultConversionPace = 1f;
+    private const float DefaultDebateConvictionChange = 1f;
     private const float DefaultConversionStancePull = 2f;
     private const float DefaultConversionCertaintyKnock = 0.8f;
     private const float DefaultCrisisThreshold = 0.25f;
@@ -51,6 +52,11 @@ public class Settings : ModSettings
     private float _crisisThreshold = DefaultCrisisThreshold;
     public float CrisisThreshold => _crisisThreshold;
 
+    // How far a single won debate moves the loser's belief on the contested issue, relative to default. Scales the
+    // arc the loser's stance walks along the conviction valley toward the winner (on top of the debaters' stats).
+    private float _debateConvictionChange = DefaultDebateConvictionChange;
+    public float DebateConvictionChange => _debateConvictionChange;
+
     // How much harder a won directed conversion (a priest's action) pulls the recipient's stance than an ordinary
     // debate win. The recipient's most-opposed belief is dragged toward the preacher's rung by this multiple of the
     // per-debate pull; a lost conversion still shifts the preacher by the ordinary (1x) amount.
@@ -83,6 +89,7 @@ public class Settings : ModSettings
         Scribe_Values.Look(ref _relationalMaxRange, "relationalMaxRange", DefaultRelationalMaxRange);
         Scribe_Values.Look(ref _practiceMaxRange, "practiceMaxRange", DefaultPracticeMaxRange);
         Scribe_Values.Look(ref _conversionPace, "conversionPace", DefaultConversionPace);
+        Scribe_Values.Look(ref _debateConvictionChange, "debateConvictionChange", DefaultDebateConvictionChange);
         Scribe_Values.Look(ref _conversionStancePull, "conversionStancePull", DefaultConversionStancePull);
         Scribe_Values.Look(ref _conversionCertaintyKnock, "conversionCertaintyKnock", DefaultConversionCertaintyKnock);
         Scribe_Values.Look(ref _crisisThreshold, "crisisThreshold", DefaultCrisisThreshold);
@@ -108,6 +115,7 @@ public class Settings : ModSettings
         PercentSlider(listingStandard, "EnhancedBeliefs.CrisisThreshold", ref _crisisThreshold, 0f, 0.5f, DefaultCrisisThreshold);
 
         Header(listingStandard, "EnhancedBeliefs.Section.Conversion");
+        MultiplierSlider(listingStandard, "EnhancedBeliefs.DebateConvictionChange", ref _debateConvictionChange, 0.25f, 4f, DefaultDebateConvictionChange);
         MultiplierSlider(listingStandard, "EnhancedBeliefs.ConversionPace", ref _conversionPace, 0.25f, 4f, DefaultConversionPace);
         MultiplierSlider(listingStandard, "EnhancedBeliefs.ConversionStancePull", ref _conversionStancePull, 1f, 5f, DefaultConversionStancePull);
         PercentSlider(listingStandard, "EnhancedBeliefs.ConversionCertaintyKnock", ref _conversionCertaintyKnock, 0.5f, 1f, DefaultConversionCertaintyKnock);

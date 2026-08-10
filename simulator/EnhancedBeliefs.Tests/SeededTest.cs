@@ -21,6 +21,7 @@ public abstract class SeededTest
         var settings = EnhancedBeliefsMod.Settings;
         settings.CertaintyDriftRate = 0.10f;
         settings.ConversionPace = 1f;
+        settings.DebateConvictionChange = 1f;
         settings.ConversionStancePull = 2f;
         settings.ConversionCertaintyKnock = 0.8f;
         settings.CrisisThreshold = 0.25f;

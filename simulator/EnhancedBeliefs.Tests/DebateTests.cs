@@ -179,6 +179,67 @@ public class DebateTests : SeededTest
         Assert.Equal(strengthBefore, strengthAfter);
     }
 
+    // The conviction valley (analysis/conviction_valley.py) drives PullStance; these exercise its geometry
+    // directly on ValleyStep, independent of the debate roll. Ladder ranks 0..3, winner at rung 3.
+
+    [Fact]
+    public void ValleyStep_RepeatedWins_ConvergeToWinnerPole()
+    {
+        // A pawn losing every debate on the issue walks all the way to the winner's rung AND conviction over a
+        // handful of steps - the point of the fixed-vertex valley: it crosses the muddle and climbs the far arm.
+        var (rank, strength) = (0f, 14f);
+        var steps = 0;
+        for (; steps < 100 && (Mathf.Abs(rank - 3f) > 0.01f || Mathf.Abs(strength - 14f) > 0.5f); steps++)
+        {
+            (rank, strength) = InteractionWorker_IdeologicalDebatePrecept.ValleyStep(rank, strength, 3f, 0f, 14f, 3f);
+        }
+
+        Assert.True(steps < 100, "Expected convergence to the winner within a bounded number of debates.");
+        Assert.Equal(3f, rank, 2);
+        Assert.True(Mathf.Abs(strength - 14f) <= 0.5f, $"Expected conviction to reach the winner's. got={strength}");
+    }
+
+    [Fact]
+    public void ValleyStep_FirmerStanceCrawlsSlowerThanShakyOne()
+    {
+        // The whole reason for the arc-length metric: from the same rung, a firmly-held stance shifts its rung
+        // far less per won debate than a shaky one, because the extra conviction makes the curve steep there and
+        // the fixed step is spent shedding conviction rather than moving rank.
+        var shakyMove = 0.5f - InteractionWorker_IdeologicalDebatePrecept.ValleyStep(0.5f, 4f, 3f, 0f, 14f, 3f).rank;
+        var firmMove = 0.5f - InteractionWorker_IdeologicalDebatePrecept.ValleyStep(0.5f, 18f, 3f, 0f, 14f, 3f).rank;
+
+        Assert.True(shakyMove < 0f && firmMove < 0f, "both should move toward the winner (rank rises from 0.5)");
+        Assert.True(Mathf.Abs(shakyMove) > Mathf.Abs(firmMove),
+            $"Expected the shaky stance to move its rung further. shaky={shakyMove}, firm={firmMove}");
+    }
+
+    [Fact]
+    public void ValleyStep_CrossingFromFar_DipsThroughTheConvictionFloor()
+    {
+        // Migrating from the far rung drags conviction down through the muddled middle before it recovers: the
+        // low point of the walk sits well below both the pawn's starting conviction and the winner's.
+        var (rank, strength) = (0f, 14f);
+        var lowest = strength;
+        for (var ii = 0; ii < 100 && Mathf.Abs(rank - 3f) > 0.01f; ii++)
+        {
+            (rank, strength) = InteractionWorker_IdeologicalDebatePrecept.ValleyStep(rank, strength, 3f, 0f, 14f, 3f);
+            lowest = Mathf.Min(lowest, strength);
+        }
+
+        Assert.True(lowest < 5f, $"Expected the crossing to crater conviction toward the floor. lowest={lowest}");
+    }
+
+    [Fact]
+    public void ValleyStep_AtTheWinnersRung_SnapsHomeAndOnlyMovesConviction()
+    {
+        // Within a hair of the winner's rung there is no arc left to integrate: the rung snaps home and only the
+        // conviction closes the remaining gap.
+        var (rank, strength) = InteractionWorker_IdeologicalDebatePrecept.ValleyStep(3f, 6f, 3f, 0f, 14f, 3f);
+
+        Assert.Equal(3f, rank);
+        Assert.True(strength > 6f && strength < 14f, $"Expected conviction to move part-way toward the winner. got={strength}");
+    }
+
     // Two pawns of one shared faith, a strong initiator and a weak recipient, on one Moral issue they both hold
     // at the same rung. Returns the world, both pawns, and that shared issue.
     private static (SimWorld world, Pawn initiator, Pawn recipient, IssueDef issue) SameFaithPair()
