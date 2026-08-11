@@ -4,6 +4,9 @@
 internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWorker
 {
     public IssueDef? topic;
+    public Pawn? lastWinner;
+    public Pawn? lastLoser;
+    public PreceptDef? lastWinnerPrecept;
 
     // A tie hardens both sides (design.md R3). Per pawn, base probability of digging in, the conviction points
     // gained on the contested issue, and the certainty gained - all before the same stat/jitter scaling.
@@ -93,6 +96,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         letterLabel = null;
         letterDef = null;
         lookTargets = null;
+        lastWinner = null;
+        lastLoser = null;
+        lastWinnerPrecept = null;
 
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"Interacted called: initiator={initiator}, recipient={recipient}");
 
@@ -128,11 +134,41 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
                 EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight). Exiting.");
                 return;
             }
+            extraSentencePacks.Add(EnhancedBeliefsDefOf.EB_Sentence_DebateDraw);
         }
         else
         {
             EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, "Debate is not a draw. Adjusting opinions.");
-            AdjustOpinions(initiator, recipient, comp, initiatorPrecept, recipientPrecept, initiatorRoll, recipientRoll);
+            var (winner, loser, issue, winnerPrecept) = AdjustOpinions(initiator, recipient, comp, initiatorPrecept, recipientPrecept, initiatorRoll, recipientRoll);
+            lastWinner = winner;
+            lastLoser = loser;
+            lastWinnerPrecept = winnerPrecept;
+            extraSentencePacks.Add(winner == initiator
+                ? EnhancedBeliefsDefOf.EB_Sentence_InitiatorWon
+                : EnhancedBeliefsDefOf.EB_Sentence_RecipientWon);
+
+            var loserOldIdeo = loser.Ideo;
+            var loserTracker = loser == recipient ? recipientTracker : initiatorTracker;
+            if (loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
+                && (PawnUtility.ShouldSendNotificationAbout(winner) || PawnUtility.ShouldSendNotificationAbout(loser)))
+            {
+                var loserRole = loserOldIdeo.GetRole(loser);
+                letterLabel = "EnhancedBeliefs.LetterLabelIdeologicalDebateConversion".Translate();
+                letterText = "EnhancedBeliefs.LetterIdeologicalDebateConversionText".Translate(
+                    winner.Named("CONVINCER"),
+                    loser.Named("CONVINCED"),
+                    loserOldIdeo.Named("OLDIDEO"),
+                    loser.Ideo.Named("NEWIDEO"),
+                    issue.Named("ISSUE")).Resolve();
+                if (loserRole != null)
+                {
+                    letterText += "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(
+                        loser.Named("PAWN"), loserRole.Named("ROLE"), loserOldIdeo.Named("OLDIDEO")).Resolve();
+                }
+                letterDef = LetterDefOf.PositiveEvent;
+                lookTargets = new LookTargets(winner, loser);
+                extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
+            }
         }
 
         // Precept-driven social aftermath, evaluated per pawn on every non-fight outcome (design.md R3).
@@ -201,10 +237,11 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // Deterministic centre of a pawn's debate roll: an average of conversion power, intellectual persuasiveness
     // and social impact (max ~2.58167). GetDebateRoll draws a Gaussian around this; the convert-ability tooltip
     // reads it directly to preview the win chance and its per-factor breakdown.
-    internal static float DebateRollMean(Pawn pawn) =>
-        (pawn.GetStatValue(StatDefOf.ConversionPower) / 2f)
-        + (IntellectualImpact(pawn) / 2f)
-        + (pawn.GetStatValue(StatDefOf.SocialImpact) / 3f);
+    internal static float DebateRollMean(Pawn pawn)
+    {
+        var convPower = StatDefOf.ConversionPower.Worker.IsDisabledFor(pawn) ? 0f : pawn.GetStatValue(StatDefOf.ConversionPower);
+        return (convPower / 2f) + (IntellectualImpact(pawn) / 2f) + (pawn.GetStatValue(StatDefOf.SocialImpact) / 3f);
+    }
 
     internal static float GetDebateRoll(Pawn pawn)
     {
@@ -346,7 +383,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         return delta < -0.5f ? DiversityReaction.Bigoted : DiversityReaction.Neutral;
     }
 
-    private static void AdjustOpinions(Pawn initiator, Pawn recipient, GameComponent_EnhancedBeliefs comp, PreceptDef initiatorPrecept, PreceptDef recipientPrecept, float initiatorRoll, float recipientRoll)
+    private static (Pawn winner, Pawn loser, IssueDef issue, PreceptDef winnerPrecept) AdjustOpinions(Pawn initiator, Pawn recipient, GameComponent_EnhancedBeliefs comp, PreceptDef initiatorPrecept, PreceptDef recipientPrecept, float initiatorRoll, float recipientRoll)
     {
         Pawn winner, loser;
         PreceptDef winnerPrecept;
@@ -362,7 +399,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             loser = initiator;
             winnerPrecept = recipientPrecept;
         }
+        var issue = winnerPrecept.issue!;
         EnhancedBeliefsMod.DebugIf(EnhancedBeliefsMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}, winnerPrecept={winnerPrecept}");
-        ConvictionMath.PullStance(comp, winner, loser, winnerPrecept.issue!, PreceptLadder.RankOf(winnerPrecept), 1f);
+        ConvictionMath.PullStance(comp, winner, loser, issue, PreceptLadder.RankOf(winnerPrecept), 1f);
+        return (winner, loser, issue, winnerPrecept);
     }
 }

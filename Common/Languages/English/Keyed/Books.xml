@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
-    <EnhancedBeliefs.BookReadingBenefit>{IDEO} - {1} certainty gain per second</EnhancedBeliefs.BookReadingBenefit>
+    <EnhancedBeliefs.BookReadingBenefit>{IDEO} - {1} conviction shift/s</EnhancedBeliefs.BookReadingBenefit>
     <EnhancedBeliefs.BookBeliefsHeader>Beliefs advocated</EnhancedBeliefs.BookBeliefsHeader>
+    <EnhancedBeliefs.ShiftRatePerMinute>{0} per minute</EnhancedBeliefs.ShiftRatePerMinute>
     <EnhancedBeliefs.BookFocalStances>The work is particularly concerned with {0}.</EnhancedBeliefs.BookFocalStances>
 
     <!-- Book burning/destruction -->

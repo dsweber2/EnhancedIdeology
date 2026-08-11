@@ -20,10 +20,47 @@
 		<symbolSource>InitiatorIdeo</symbolSource>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry->[INITIATOR_nameDef] debated precepts with [RECIPIENT_nameDef] about their ideoligion.</li>
+				<li>TOPIC_label->a precept</li>
+				<li>r_logentry->[INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef].</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
+
+	<RulePackDef>
+		<defName>EB_Sentence_DebateWon</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>sent->[WINNER_nameDef] proved more persuasive.</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>EB_Sentence_InitiatorWon</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>sent->[INITIATOR_nameDef] proved more persuasive.</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>EB_Sentence_RecipientWon</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>sent->[RECIPIENT_nameDef] proved more persuasive.</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>EB_Sentence_DebateDraw</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>sent->Neither changed their view.</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
 
 	<!--
 

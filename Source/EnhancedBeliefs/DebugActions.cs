@@ -4,7 +4,7 @@ namespace EnhancedBeliefs;
 
 internal static class DebugActions
 {
-    // Force a precept debate from the clicked pawn against the nearest humanlike of a different ideoligion,
+    // Force a precept debate from the clicked pawn against the nearest visible humanlike with a debatable issue,
     // then report the topic and whether it flipped anyone. Drives the R2 stance write-path on demand instead
     // of waiting for the interaction to fire naturally.
     [DebugAction("Ideoligion", "Trigger precept debate", actionType = DebugActionType.ToolMapForPawns,
@@ -19,29 +19,45 @@ internal static class DebugActions
 
         var recipient = initiator.Map?.mapPawns.AllPawnsSpawned
             .Where(pawn => pawn != initiator && pawn.RaceProps.Humanlike && pawn.Ideo != null
-                && pawn.Ideo != initiator.Ideo && !pawn.DevelopmentalStage.Baby())
+                && !pawn.DevelopmentalStage.Baby()
+                && GenSight.LineOfSight(initiator.Position, pawn.Position, initiator.Map))
             .OrderBy(pawn => pawn.Position.DistanceToSquared(initiator.Position))
             .FirstOrDefault();
 
         if (recipient == null)
         {
-            Messages.Message($"No nearby humanlike of a different ideoligion for {initiator.LabelShort} to debate.",
+            Messages.Message($"No visible humanlike for {initiator.LabelShort} to debate.",
                 MessageTypeDefOf.RejectInput, false);
             return;
         }
 
         var worker = (InteractionWorker_IdeologicalDebatePrecept)EnhancedBeliefsDefOf.EB_IdeologicalDebatePrecept.Worker;
-        worker.Interacted(initiator, recipient, [], out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
+        var extraSentencePacks = new List<RulePackDef>();
+        worker.Interacted(initiator, recipient, extraSentencePacks, out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
 
-        if (letterText != null)
+        var logEntry = new PlayLogEntry_DebateInteraction(EnhancedBeliefsDefOf.EB_IdeologicalDebatePrecept, initiator, recipient, extraSentencePacks, worker.topic, worker.lastWinner);
+        Find.PlayLog.Add(logEntry);
+        if (letterDef != null)
         {
-            Find.LetterStack.ReceiveLetter(letterLabel, letterText, letterDef ?? LetterDefOf.NeutralEvent,
-                lookTargets ?? new LookTargets(recipient, initiator));
+            var logText = logEntry.ToGameStringFromPOV(initiator);
+            var text = letterText.NullOrEmpty() ? logText : logText + "\n\n" + letterText;
+            Find.LetterStack.ReceiveLetter(letterLabel, text, letterDef, lookTargets ?? new LookTargets(initiator, recipient));
         }
 
-        var outcome = worker.topic == null
-            ? "found no conflicting issue"
-            : letterText != null ? $"clashed on {worker.topic.LabelCap} → conversion!" : $"clashed on {worker.topic.LabelCap}";
+        string outcome;
+        if (worker.topic == null)
+        {
+            outcome = "no conflicting issue found";
+        }
+        else if (worker.lastWinner == null)
+        {
+            outcome = $"drew on {worker.topic.LabelCap}";
+        }
+        else
+        {
+            var conviction = letterDef != null ? " → converted!" : "";
+            outcome = $"{worker.lastWinner.LabelShort} out-argued {worker.lastLoser!.LabelShort} on {worker.topic.LabelCap}{conviction}";
+        }
         Messages.Message($"{initiator.LabelShort} vs {recipient.LabelShort}: {outcome}",
             new LookTargets(initiator, recipient), MessageTypeDefOf.NeutralEvent, false);
     }

@@ -95,12 +95,13 @@ internal sealed class BookIdeo : Book
         var stances = doer.IdeoStances().ToList();
         if (stances.Count == 0) return string.Empty;
 
+        var gainPerMin = doer.CertaintyGain() * GenTicks.TicksPerRealSecond * 60f;
         var sb = new StringBuilder("\n\n");
         sb.AppendLine("EnhancedBeliefs.BookBeliefsHeader".Translate());
         foreach (var (issue, stance, strength) in stances)
         {
-            var pct = (strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent();
-            sb.AppendLine($"  - {issue.LabelCap}: {stance.LabelCap} ({pct})");
+            var shiftPerSec = (gainPerMin * strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent("0.0##") + "/m";
+            sb.AppendLine($"  - {issue.LabelCap}: {stance.LabelCap} ({shiftPerSec})");
         }
         return sb.ToString().TrimEndNewlines();
     }

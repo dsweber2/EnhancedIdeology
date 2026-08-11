@@ -19,15 +19,21 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
     {
         var codes = instructions.ToList();
 
-        var getCertaintyOffset = AccessTools.PropertyGetter(
+        var ideoCertaintyOffsetField = AccessTools.Field(
             typeof(RitualOutcomePossibility), nameof(RitualOutcomePossibility.ideoCertaintyOffset));
         var offsetCertainty = AccessTools.Method(
             typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.OffsetCertainty));
 
+        if (ideoCertaintyOffsetField == null || offsetCertainty == null)
+        {
+            Log.Error("[EnhancedBeliefs] RitualOutcomeEffectWorker_Conversion transpiler: could not resolve vanilla members (ideoCertaintyOffset or OffsetCertainty missing — game update?). Patch skipped.");
+            return codes;
+        }
+
         int startIdx = -1, endIdx = -1;
         for (var ii = 0; ii < codes.Count; ii++)
         {
-            if (startIdx == -1 && codes[ii].Calls(getCertaintyOffset))
+            if (startIdx == -1 && codes[ii].LoadsField(ideoCertaintyOffsetField))
                 startIdx = ii - 1; // step back to the ldloc outcome preceding the callvirt
             if (endIdx == -1 && codes[ii].Calls(offsetCertainty))
             {
