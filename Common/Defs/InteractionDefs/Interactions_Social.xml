@@ -39,7 +39,8 @@
 		<defName>EB_Sentence_InitiatorWon</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent->[INITIATOR_nameDef] proved more persuasive.</li>
+				<li>WINNING_STANCE_label->the issue</li>
+				<li>sent->[INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]".</li>
 			</rulesStrings>
 		</rulePack>
 	</RulePackDef>
@@ -48,7 +49,8 @@
 		<defName>EB_Sentence_RecipientWon</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent->[RECIPIENT_nameDef] proved more persuasive.</li>
+				<li>WINNING_STANCE_label->the issue</li>
+				<li>sent->[RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]".</li>
 			</rulesStrings>
 		</rulePack>
 	</RulePackDef>

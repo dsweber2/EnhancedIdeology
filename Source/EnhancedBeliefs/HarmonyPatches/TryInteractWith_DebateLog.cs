@@ -23,6 +23,6 @@ internal static class TryInteractWith_DebateLog
         var sentencePacks = Traverse.Create(existing).Field<List<RulePackDef>>("extraSentencePacks").Value;
 
         entries[0] = new PlayLogEntry_DebateInteraction(
-            intDef, initiator, recipient, sentencePacks, worker.topic, worker.lastWinner);
+            intDef, initiator, recipient, sentencePacks, worker.topic, worker.lastWinner, worker.lastWinnerPrecept?.label);
     }
 }

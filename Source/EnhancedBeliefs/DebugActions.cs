@@ -35,7 +35,7 @@ internal static class DebugActions
         var extraSentencePacks = new List<RulePackDef>();
         worker.Interacted(initiator, recipient, extraSentencePacks, out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
 
-        var logEntry = new PlayLogEntry_DebateInteraction(EnhancedBeliefsDefOf.EB_IdeologicalDebatePrecept, initiator, recipient, extraSentencePacks, worker.topic, worker.lastWinner);
+        var logEntry = new PlayLogEntry_DebateInteraction(EnhancedBeliefsDefOf.EB_IdeologicalDebatePrecept, initiator, recipient, extraSentencePacks, worker.topic, worker.lastWinner, worker.lastWinnerPrecept?.label);
         Find.PlayLog.Add(logEntry);
         if (letterDef != null)
         {

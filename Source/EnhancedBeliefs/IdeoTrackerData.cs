@@ -42,6 +42,22 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // pawns keep their played-in certainty.
     private bool certaintyInitialized;
 
+    // Transient: set when stances are seeded for a pawn that already has a played-in certainty (vanilla or old
+    // EB save). On the next recache, issueStrength values are scaled so the structural band lands on
+    // calibrationTargetCertainty rather than wherever random seeding happened to place it.
+    private bool needsStanceCalibration;
+    private float calibrationTargetCertainty;
+
+    // Called for pawns whose saves predate EB's issue-stance model (vanilla or old EB). Marks certainty as
+    // already initialized (no snap) and schedules one calibration pass to align the structural setpoint with
+    // the certainty the pawn already has.
+    internal void MarkAsLoadedWithoutData(float existingCertainty)
+    {
+        certaintyInitialized = true;
+        needsStanceCalibration = true;
+        calibrationTargetCertainty = existingCertainty;
+    }
+
     private readonly Dictionary<Ideo, float> cachedRelationshipIdeoOpinions = [];
     private readonly Dictionary<Pawn, float> cachedRelationships = [];
 
@@ -100,6 +116,16 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         CachedPractitional = PractitionalBand(settings.PracticeMaxRange, PractitionalContributors);
 
         CachedDifficulty = settings.DifficultyOffset;
+
+        if (needsStanceCalibration)
+        {
+            needsStanceCalibration = false;
+            CalibrateStancesToCertainty(structural);
+            StructuralContributors.Clear();
+            structural = StructuralOpinionOf(Pawn.Ideo, StructuralContributors) / 100f;
+            CachedStructural = structural;
+        }
+
         var target = Mathf.Clamp01(structural + CachedRelational + CachedPractitional + settings.DifficultyOffset);
         CachedTargetCertainty = target;
 
@@ -585,8 +611,30 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         if (freshSeed)
         {
-            ApplyHeterodoxy();
+            if (certaintyInitialized)
+            {
+                // Stances seeded for an already-played pawn (old EB save missing these fields): calibrate
+                // strengths to preserve their existing certainty rather than drifting to the random setpoint.
+                // Heterodoxy is skipped — this isn't a fresh spawn.
+                needsStanceCalibration = true;
+                calibrationTargetCertainty = Pawn.ideo.Certainty;
+            }
+            else
+            {
+                ApplyHeterodoxy();
+            }
         }
+    }
+
+    // Scale all issueStrength values so that the structural band lands on calibrationTargetCertainty rather than
+    // wherever random seeding happened to place it. naturalStructural is the already-computed pre-scale value.
+    private void CalibrateStancesToCertainty(float naturalStructural)
+    {
+        if (naturalStructural <= 0f) return;
+        var targetStructural = Mathf.Clamp01(calibrationTargetCertainty - CachedRelational - CachedPractitional - CachedDifficulty);
+        var scale = targetStructural / naturalStructural;
+        foreach (var issue in issueStrength.Keys.ToList())
+            issueStrength[issue] = Mathf.Clamp(issueStrength[issue] * scale, MinConvictionStrength, AbsoluteMaxConvictionStrength);
     }
 
     // Quietly diverge from the pawn's own ideo on a few of the Moral issues they hold least firmly: flip each to

@@ -31,16 +31,28 @@ internal static class Pawn_ExposeData
 
         Scribe_Deep.Look(ref data, "EB_IdeoTrackerData", __instance);
 
-        if (Scribe.mode != LoadSaveMode.Saving && data != null)
+        if (Scribe.mode != LoadSaveMode.Saving)
         {
-            if (data.Pawn is not Pawn pawn || (pawn != __instance && !pawn.Dead))
+            if (data != null)
             {
-                EnhancedBeliefsMod.Warning($"Tried to scribe IdeoTrackerData for pawn {__instance} but "
-                    + $"the data is for pawn {data.Pawn?.ToString() ?? "[null]"}. "
-                    + $"This should not happen. Overriding data pawn to match the current pawn.");
-                data.ForceNewPawn(__instance);
+                if (data.Pawn is not Pawn pawn || (pawn != __instance && !pawn.Dead))
+                {
+                    EnhancedBeliefsMod.Warning($"Tried to scribe IdeoTrackerData for pawn {__instance} but "
+                        + $"the data is for pawn {data.Pawn?.ToString() ?? "[null]"}. "
+                        + $"This should not happen. Overriding data pawn to match the current pawn.");
+                    data.ForceNewPawn(__instance);
+                }
+                comp.PawnTracker.SetIdeoTracker(__instance, data);
             }
-            comp.PawnTracker.SetIdeoTracker(__instance, data);
+            else if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                // No EB data in save (vanilla or completely pre-EB save): create a tracker now that the pawn is
+                // fully loaded, preserving their existing certainty via calibration on the first recache.
+                data = new IdeoTrackerData(__instance);
+                data.MarkAsLoadedWithoutData(__instance.ideo.Certainty);
+                comp.PawnTracker.SetIdeoTracker(__instance, data);
+                comp.SetIdeo(__instance, __instance.Ideo);
+            }
         }
     }
 }

@@ -84,6 +84,8 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
             request.Rules.Add(new Rule_String("TOPIC_label", debateTopic.label));
         if (debateWinner != null)
             request.Rules.AddRange(GrammarUtility.RulesForPawn("WINNER", debateWinner, request.Constants));
+        if (winnerPreceptLabel != null)
+            request.Rules.Add(new Rule_String("WINNING_STANCE_label", winnerPreceptLabel));
     }
 
     private void AddPawnRules(ref GrammarRequest request)
@@ -97,5 +99,6 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
         base.ExposeData();
         Scribe_Defs.Look(ref debateTopic, "debateTopic");
         Scribe_References.Look(ref debateWinner, "debateWinner", saveDestroyedThings: true);
+        Scribe_Values.Look(ref winnerPreceptLabel, "winnerPreceptLabel");
     }
 }
