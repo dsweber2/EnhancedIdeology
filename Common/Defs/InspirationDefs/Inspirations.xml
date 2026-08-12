@@ -3,8 +3,8 @@
 
     <InspirationDef>
         <defName>EB_ReligiousBook</defName>
-        <workerClass>EnhancedBeliefs.InspirationWorker_ReligiousBook</workerClass>
-        <inspirationClass>EnhancedBeliefs.Inspiration_ReligiousBook</inspirationClass>
+        <workerClass>EnhancedIdeology.InspirationWorker_ReligiousBook</workerClass>
+        <inspirationClass>EnhancedIdeology.Inspiration_ReligiousBook</inspirationClass>
         <label>religious enlightenment</label>
         <baseDurationDays>0</baseDurationDays>
         <beginLetter>[PAWN_pronoun] had a sudden enlightenment and decided to start writing a religious book.</beginLetter>

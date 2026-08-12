@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
-    <EnhancedBeliefs.PawnCertaintyTooltip>{PAWN_nameDef}'s certainty in {IDEO_name}: {2}</EnhancedBeliefs.PawnCertaintyTooltip>
-    <EnhancedBeliefs.CertaintyTarget>Target certainty: {0}</EnhancedBeliefs.CertaintyTarget>
-    <EnhancedBeliefs.CertainChangePerDay>Drifting toward it at {0}/day</EnhancedBeliefs.CertainChangePerDay>
-    <EnhancedBeliefs.CertaintyBandStructural>Structural (beliefs &amp; nature): {0}</EnhancedBeliefs.CertaintyBandStructural>
-    <EnhancedBeliefs.CertaintyBandRelational>Congregation: {0}</EnhancedBeliefs.CertaintyBandRelational>
-    <EnhancedBeliefs.CertaintyBandPractice>Practice (recent rites): {0}</EnhancedBeliefs.CertaintyBandPractice>
-    <EnhancedBeliefs.CertaintyBandDifficulty>Difficulty: {0}</EnhancedBeliefs.CertaintyBandDifficulty>
-    <EnhancedBeliefs.CouplingPenalty>Opposed practices</EnhancedBeliefs.CouplingPenalty>
+    <EnhancedIdeology.PawnCertaintyTooltip>{PAWN_nameDef}'s certainty in {IDEO_name}: {2}</EnhancedIdeology.PawnCertaintyTooltip>
+    <EnhancedIdeology.CertaintyTarget>Target certainty: {0}</EnhancedIdeology.CertaintyTarget>
+    <EnhancedIdeology.CertainChangePerDay>Drifting toward it at {0}/day</EnhancedIdeology.CertainChangePerDay>
+    <EnhancedIdeology.CertaintyBandStructural>Structural (beliefs &amp; nature): {0}</EnhancedIdeology.CertaintyBandStructural>
+    <EnhancedIdeology.CertaintyBandRelational>Congregation: {0}</EnhancedIdeology.CertaintyBandRelational>
+    <EnhancedIdeology.CertaintyBandPractice>Practice (recent rites): {0}</EnhancedIdeology.CertaintyBandPractice>
+    <EnhancedIdeology.CertaintyBandDifficulty>Difficulty: {0}</EnhancedIdeology.CertaintyBandDifficulty>
+    <EnhancedIdeology.CouplingPenalty>Opposed practices</EnhancedIdeology.CouplingPenalty>
 </LanguageData>

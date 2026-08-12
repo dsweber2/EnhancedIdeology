@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-    <EnhancedBeliefs.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight!</EnhancedBeliefs.IdeologicalDebateOutcomeSocialFight>
-    <EnhancedBeliefs.LetterLabelIdeologicalDebateConversion>Ideological conversion</EnhancedBeliefs.LetterLabelIdeologicalDebateConversion>
-    <EnhancedBeliefs.LetterIdeologicalDebateConversionText>After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}.</EnhancedBeliefs.LetterIdeologicalDebateConversionText>
+    <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+    <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ideological conversion</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+    <EnhancedIdeology.LetterIdeologicalDebateConversionText>After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
 </LanguageData>

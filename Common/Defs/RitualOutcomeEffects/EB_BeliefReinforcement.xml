@@ -6,7 +6,7 @@
   <RitualAttachableOutcomeEffectDef>
     <defName>EB_BeliefReinforcement</defName>
     <label>belief reinforcement</label>
-    <workerClass>EnhancedBeliefs.RitualAttachableOutcomeEffectWorker_BeliefReinforcement</workerClass>
+    <workerClass>EnhancedIdeology.RitualAttachableOutcomeEffectWorker_BeliefReinforcement</workerClass>
     <effectDesc>participants' convictions will be reinforced toward orthodoxy.</effectDesc>
     <letterInfoText>The ritual deepened the participants' convictions.</letterInfoText>
   </RitualAttachableOutcomeEffectDef>

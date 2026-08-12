@@ -10,8 +10,8 @@
 
     <MentalStateDef ParentName="Tantrum">
         <defName>EB_Iconoclast</defName>
-        <stateClass>EnhancedBeliefs.MentalState_Iconoclast</stateClass>
-        <workerClass>EnhancedBeliefs.MentalStateWorker_Iconoclast</workerClass>
+        <stateClass>EnhancedIdeology.MentalState_Iconoclast</stateClass>
+        <workerClass>EnhancedIdeology.MentalStateWorker_Iconoclast</workerClass>
         <label>iconoclast</label>
         <minTicksBeforeRecovery>40000</minTicksBeforeRecovery>
         <maxTicksBeforeRecovery>60000</maxTicksBeforeRecovery>

@@ -1,0 +1,35 @@
+namespace EnhancedIdeology;
+
+internal static class EnhancedIdeologyUtilities
+{
+    internal static List<T> TryGetComps<T>(this Precept precept) where T : PreceptComp
+    {
+        return precept.def.TryGetComps<T>();
+    }
+
+    internal static List<T> TryGetComps<T>(this PreceptDef precept) where T : PreceptComp
+    {
+        List<T> comps = [];
+
+        foreach (var preceptComp in precept.comps)
+        {
+            if (preceptComp is T comp)
+            {
+                comps.Add(comp);
+            }
+        }
+
+        return comps;
+    }
+
+    internal static void ShowCertaintyChangeMote(Pawn recipient, float before, float after)
+    {
+        if (!recipient.Spawned)
+        {
+            return;
+        }
+
+        string text = "Certainty".Translate() + "\n" + before.ToStringPercent() + " -> " + after.ToStringPercent();
+        MoteMaker.ThrowText(recipient.DrawPos, recipient.Map, text, 8f);
+    }
+}

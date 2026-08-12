@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <EnhancedBeliefs.Convert.CertaintyKnock>Temporary certainty reduction: {0}</EnhancedBeliefs.Convert.CertaintyKnock>
-  <EnhancedBeliefs.Convert.SuccessChance>Chance to win the debate: {0}</EnhancedBeliefs.Convert.SuccessChance>
-  <EnhancedBeliefs.Convert.ConversionChance>Chance to convert if you win: {0}</EnhancedBeliefs.Convert.ConversionChance>
-  <EnhancedBeliefs.Convert.TargetBeliefs>Target beliefs (a random 1-{0} of):</EnhancedBeliefs.Convert.TargetBeliefs>
-  <EnhancedBeliefs.Convert.NoOpposition>They oppose nothing your faith preaches - there is nothing to convert.</EnhancedBeliefs.Convert.NoOpposition>
-  <EnhancedBeliefs.Convert.Factors>Factors (you vs. them):</EnhancedBeliefs.Convert.Factors>
-  <EnhancedBeliefs.Convert.Factor.ConversionPower>Conversion power: {0} vs {1}</EnhancedBeliefs.Convert.Factor.ConversionPower>
-  <EnhancedBeliefs.Convert.Factor.Intellectual>Intellectual debate: {0} vs {1}</EnhancedBeliefs.Convert.Factor.Intellectual>
-  <EnhancedBeliefs.Convert.Factor.Social>Social impact: {0} vs {1}</EnhancedBeliefs.Convert.Factor.Social>
+  <EnhancedIdeology.Convert.CertaintyKnock>Temporary certainty reduction: {0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>Chance to win the debate: {0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>Chance to convert if you win: {0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>Target beliefs (a random 1-{0} of):</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>They oppose nothing your faith preaches - there is nothing to convert.</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>Factors (you vs. them):</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>Conversion power: {0} vs {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>Intellectual debate: {0} vs {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>Social impact: {0} vs {1}</EnhancedIdeology.Convert.Factor.Social>
 </LanguageData>

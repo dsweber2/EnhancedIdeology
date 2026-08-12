@@ -3,20 +3,20 @@
 
     <JobDef>
         <defName>EB_PlaceAndBurnUntilDestroyed</defName>
-        <driverClass>EnhancedBeliefs.JobDriver_PlaceAndBurnUntilDestroyed</driverClass>
+        <driverClass>EnhancedIdeology.JobDriver_PlaceAndBurnUntilDestroyed</driverClass>
         <reportString>placing TargetA on the ground to burn.</reportString>
     </JobDef>
 
     <JobDef>
         <defName>EB_CompleteReligiousBook</defName>
-        <driverClass>EnhancedBeliefs.JobDriver_CompleteReligiousBook</driverClass>
+        <driverClass>EnhancedIdeology.JobDriver_CompleteReligiousBook</driverClass>
         <reportString>finishing writing TargetA.</reportString>
     </JobDef>
 
     <WorkGiverDef>
         <defName>EB_WriteReligiousBook</defName>
         <label>write religious book</label>
-        <giverClass>EnhancedBeliefs.WorkGiver_CompleteReligiousBook</giverClass>
+        <giverClass>EnhancedIdeology.WorkGiver_CompleteReligiousBook</giverClass>
         <workType>Art</workType>
         <priorityInType>220</priorityInType>
         <verb>write</verb>

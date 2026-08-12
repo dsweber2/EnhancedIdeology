@@ -4,14 +4,14 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/InteractionDef[defName="ConvertIdeoAttempt"]/workerClass</xpath>
 		<value>
-			<workerClass>EnhancedBeliefs.InteractionWorker_AdvancedConversionAttempt</workerClass>
+			<workerClass>EnhancedIdeology.InteractionWorker_AdvancedConversionAttempt</workerClass>
 		</value>
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators</xpath>
 		<value>
-			<li Class="EnhancedBeliefs.StockGenerator_IdeoBook">
+			<li Class="EnhancedIdeology.StockGenerator_IdeoBook">
 				<thingDef>EB_Ideobook</thingDef>
 				<countRange>0~2</countRange>
 			</li>
@@ -21,7 +21,7 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators</xpath>
 		<value>
-			<li Class="EnhancedBeliefs.StockGenerator_IdeoBook">
+			<li Class="EnhancedIdeology.StockGenerator_IdeoBook">
 				<thingDef>EB_Ideobook</thingDef>
 				<countRange>0~2</countRange>
 			</li>
@@ -31,7 +31,7 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
 		<value>
-			<li Class="EnhancedBeliefs.StockGenerator_IdeoBook">
+			<li Class="EnhancedIdeology.StockGenerator_IdeoBook">
 				<thingDef>EB_Ideobook</thingDef>
 				<countRange>1~2</countRange>
 			</li>
@@ -41,7 +41,7 @@
 	<Operation Class="PatchOperationInsert">
 		<xpath>Defs/ThingDef[@Name="BasePawn"]/inspectorTabs/li[text()="ITab_Pawn_Social"]</xpath>
 		<value>
-			<li>EnhancedBeliefs.ITab_Opinion</li>
+			<li>EnhancedIdeology.ITab_Opinion</li>
 		</value>
 	</Operation>
 
@@ -49,9 +49,9 @@
 		<xpath>Defs/ThinkTreeDef/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[@Class="ThinkNode_ConditionalMentalStateClass"][stateClass="MentalState_Tantrum"]</xpath>
 		<value>
 			<li Class="ThinkNode_ConditionalMentalStateClass">
-				<stateClass>EnhancedBeliefs.MentalState_Iconoclast</stateClass>
+				<stateClass>EnhancedIdeology.MentalState_Iconoclast</stateClass>
 				<subNodes>
-					<li Class="EnhancedBeliefs.JobGiver_Iconoclast" />
+					<li Class="EnhancedIdeology.JobGiver_Iconoclast" />
 					<li Class="ThinkNode_PrioritySorter">
 						<subNodes>
 							<li Class="JobGiver_GetFood">

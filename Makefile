@@ -1,10 +1,10 @@
 .PHONY: build deploy test logs
 
 build:
-	dotnet build Source/EnhancedBeliefs/EnhancedBeliefs.csproj
+	dotnet build Source/EnhancedIdeology.csproj
 
 test:
-	dotnet test simulator/EnhancedBeliefs.Tests/EnhancedBeliefs.Tests.csproj
+	dotnet test tests/EnhancedIdeology.Tests.csproj
 
 logs:
 	@mkdir -p simulator/cache

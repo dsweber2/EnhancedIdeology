@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <EnhancedBeliefs.Reassure.CertaintyGain>Certainty gain on win: +{0}</EnhancedBeliefs.Reassure.CertaintyGain>
-  <EnhancedBeliefs.Reassure.SuccessChance>Chance to win the debate: {0}</EnhancedBeliefs.Reassure.SuccessChance>
-  <EnhancedBeliefs.Reassure.SelfTarget>Self-reassurance: guaranteed success</EnhancedBeliefs.Reassure.SelfTarget>
-  <EnhancedBeliefs.Reassure.TargetBeliefs>Beliefs to reinforce (a random 1-{0} of):</EnhancedBeliefs.Reassure.TargetBeliefs>
-  <EnhancedBeliefs.Reassure.NoHeterodoxy>Their beliefs are already orthodox - there is nothing to reinforce.</EnhancedBeliefs.Reassure.NoHeterodoxy>
-  <EnhancedBeliefs.Reassure.FailMessage>{0} failed to reassure {1}.</EnhancedBeliefs.Reassure.FailMessage>
+  <EnhancedIdeology.Reassure.CertaintyGain>Certainty gain on win: +{0}</EnhancedIdeology.Reassure.CertaintyGain>
+  <EnhancedIdeology.Reassure.SuccessChance>Chance to win the debate: {0}</EnhancedIdeology.Reassure.SuccessChance>
+  <EnhancedIdeology.Reassure.SelfTarget>Self-reassurance: guaranteed success</EnhancedIdeology.Reassure.SelfTarget>
+  <EnhancedIdeology.Reassure.TargetBeliefs>Beliefs to reinforce (a random 1-{0} of):</EnhancedIdeology.Reassure.TargetBeliefs>
+  <EnhancedIdeology.Reassure.NoHeterodoxy>Their beliefs are already orthodox - there is nothing to reinforce.</EnhancedIdeology.Reassure.NoHeterodoxy>
+  <EnhancedIdeology.Reassure.FailMessage>{0} failed to reassure {1}.</EnhancedIdeology.Reassure.FailMessage>
 </LanguageData>

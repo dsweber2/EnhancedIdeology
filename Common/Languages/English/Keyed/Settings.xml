@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <EnhancedBeliefs.DebugInteractionWorkers>DEV: Debug Interaction Workers</EnhancedBeliefs.DebugInteractionWorkers>
-  <EnhancedBeliefs.DebugInteractionWorkers.Tip>Enables debug logging for interaction workers when dev mode is active.</EnhancedBeliefs.DebugInteractionWorkers.Tip>
-  <EnhancedBeliefs.CertaintyDriftRate>Certainty drift rate: {0}/day</EnhancedBeliefs.CertaintyDriftRate>
-  <EnhancedBeliefs.CertaintyDriftRate.Tip>How fast a pawn's certainty moves toward its target each day. Higher = faith reacts faster to circumstances.</EnhancedBeliefs.CertaintyDriftRate.Tip>
-  <EnhancedBeliefs.DifficultyOffset>Difficulty offset: {0}</EnhancedBeliefs.DifficultyOffset>
-  <EnhancedBeliefs.DifficultyOffset.Tip>Flat shift applied to every pawn's target certainty. Positive makes faith stickier; negative makes converts easier to peel away.</EnhancedBeliefs.DifficultyOffset.Tip>
-  <EnhancedBeliefs.RelationalMaxRange>Congregation influence: ±{0}</EnhancedBeliefs.RelationalMaxRange>
-  <EnhancedBeliefs.RelationalMaxRange.Tip>The most that a pawn's opinion of their co-religionists can raise or lower their target certainty.</EnhancedBeliefs.RelationalMaxRange.Tip>
-  <EnhancedBeliefs.PracticeMaxRange>Practice influence: ±{0}</EnhancedBeliefs.PracticeMaxRange>
-  <EnhancedBeliefs.PracticeMaxRange.Tip>The most that recent precept moods (rituals, veneration, taboos) can raise or lower their target certainty.</EnhancedBeliefs.PracticeMaxRange.Tip>
-  <EnhancedBeliefs.DebateConvictionChange>Debate conviction change: {0}</EnhancedBeliefs.DebateConvictionChange>
-  <EnhancedBeliefs.DebateConvictionChange.Tip>How far a single won argument moves the loser's belief on the topic, relative to default. Shifts both the precept and the conviction in that precept simultaneously. Higher = each won debate persuades more.</EnhancedBeliefs.DebateConvictionChange.Tip>
-  <EnhancedBeliefs.ConversionPace>Conversion pace: {0}</EnhancedBeliefs.ConversionPace>
-  <EnhancedBeliefs.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions happen faster. Only affects passive drift; debates and conversion attempts are unaffected.</EnhancedBeliefs.ConversionPace.Tip>
-  <EnhancedBeliefs.ConversionStancePull>Conversion strength: {0}</EnhancedBeliefs.ConversionStancePull>
-  <EnhancedBeliefs.Section.Certainty>Certainty and drift</EnhancedBeliefs.Section.Certainty>
-  <EnhancedBeliefs.Section.Conversion>Conversion</EnhancedBeliefs.Section.Conversion>
-  <EnhancedBeliefs.Section.Opinion>Opinion</EnhancedBeliefs.Section.Opinion>
-  <EnhancedBeliefs.Section.Debug>Debug</EnhancedBeliefs.Section.Debug>
-  <EnhancedBeliefs.ConversionCertaintyKnock>Certainty kept after a conversion attempt: {0}</EnhancedBeliefs.ConversionCertaintyKnock>
-  <EnhancedBeliefs.ConversionCertaintyKnock.Tip>When a priest wins a conversion attempt but doesn't immediately flip the pawn, their certainty is multiplied by this - a temporary knock that leaves them more likely to switch, now and spontaneously afterwards. It climbs back toward their structural setpoint over time. 100% = no knock; 80% = an 80%-certain pawn drops to 64%. Lower = conversion attempts destabilize faith more.</EnhancedBeliefs.ConversionCertaintyKnock.Tip>
-  <EnhancedBeliefs.ConversionStancePull.Tip>How much harder a successful conversion attempt (a priest's directed action) pushes a pawn's beliefs than an ordinary debate win. It targets whichever belief most opposes the preacher's faith. At 1x a conversion is just a debate the preacher tries to win; higher = each successful attempt drags them further and converts faster. A failed attempt still shifts the preacher's own belief by the ordinary amount.</EnhancedBeliefs.ConversionStancePull.Tip>
-  <EnhancedBeliefs.CrisisThreshold>Crisis of faith threshold: {0}</EnhancedBeliefs.CrisisThreshold>
-  <EnhancedBeliefs.CrisisThreshold.Tip>When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown instead of converting. They also won't switch to a faith they like less than this. </EnhancedBeliefs.CrisisThreshold.Tip>
-  <EnhancedBeliefs.PreceptOppositionScale>Opposite-stance opposition: {0}</EnhancedBeliefs.PreceptOppositionScale>
-  <EnhancedBeliefs.PreceptOppositionScale.Tip>How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. Opinion falls from full agreement at their own stance to this much opposition at the far end. 0 = they merely grow indifferent to opposing stances; 100% = full opposition (and harder to convert). Higher = pawns are pickier about differing beliefs.</EnhancedBeliefs.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Enables debug logging for interaction workers when dev mode is active.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+  <EnhancedIdeology.CertaintyDriftRate>Certainty drift rate: {0}/day</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>How fast a pawn's certainty moves toward its target each day. Higher = faith reacts faster to circumstances.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.DifficultyOffset>Difficulty offset: {0}</EnhancedIdeology.DifficultyOffset>
+  <EnhancedIdeology.DifficultyOffset.Tip>Flat shift applied to every pawn's target certainty. Positive makes faith stickier; negative makes converts easier to peel away.</EnhancedIdeology.DifficultyOffset.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Congregation influence: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>The most that a pawn's opinion of their co-religionists can raise or lower their target certainty.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Practice influence: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>The most that recent precept moods (rituals, veneration, taboos) can raise or lower their target certainty.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Debate conviction change: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>How far a single won argument moves the loser's belief on the topic, relative to default. Shifts both the precept and the conviction in that precept simultaneously. Higher = each won debate persuades more.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionPace>Conversion pace: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions happen faster. Only affects passive drift; debates and conversion attempts are unaffected.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionStancePull>Conversion strength: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.Section.Certainty>Certainty and drift</EnhancedIdeology.Section.Certainty>
+  <EnhancedIdeology.Section.Conversion>Conversion</EnhancedIdeology.Section.Conversion>
+  <EnhancedIdeology.Section.Opinion>Opinion</EnhancedIdeology.Section.Opinion>
+  <EnhancedIdeology.Section.Debug>Debug</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.ConversionCertaintyKnock>Certainty kept after a conversion attempt: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>When a priest wins a conversion attempt but doesn't immediately flip the pawn, their certainty is multiplied by this - a temporary knock that leaves them more likely to switch, now and spontaneously afterwards. It climbs back toward their structural setpoint over time. 100% = no knock; 80% = an 80%-certain pawn drops to 64%. Lower = conversion attempts destabilize faith more.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConversionStancePull.Tip>How much harder a successful conversion attempt (a priest's directed action) pushes a pawn's beliefs than an ordinary debate win. It targets whichever belief most opposes the preacher's faith. At 1x a conversion is just a debate the preacher tries to win; higher = each successful attempt drags them further and converts faster. A failed attempt still shifts the preacher's own belief by the ordinary amount.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.CrisisThreshold>Crisis of faith threshold: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown instead of converting. They also won't switch to a faith they like less than this. </EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Opposite-stance opposition: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. Opinion falls from full agreement at their own stance to this much opposition at the far end. 0 = they merely grow indifferent to opposing stances; 100% = full opposition (and harder to convert). Higher = pawns are pickier about differing beliefs.</EnhancedIdeology.PreceptOppositionScale.Tip>
 </LanguageData>

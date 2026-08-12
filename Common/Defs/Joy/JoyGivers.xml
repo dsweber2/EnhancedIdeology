@@ -3,7 +3,7 @@
 
 	<JoyGiverDef>
 		<defName>EB_IdeologicalDebate</defName>
-		<giverClass>EnhancedBeliefs.JoyGiver_IdeologicalDebate</giverClass>
+		<giverClass>EnhancedIdeology.JoyGiver_IdeologicalDebate</giverClass>
 		<baseChance>3</baseChance>
 		<jobDef>SocialRelax</jobDef>
 		<joyKind>Social</joyKind>

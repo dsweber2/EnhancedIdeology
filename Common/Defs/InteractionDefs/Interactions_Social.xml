@@ -4,7 +4,7 @@
 	<InteractionDef>
 		<defName>EB_IdeologicalDebateMeme</defName>
 		<label>ideological debate over memes</label>
-		<workerClass>EnhancedBeliefs.InteractionWorker_IdeologicalDebateMeme</workerClass>
+		<workerClass>EnhancedIdeology.InteractionWorker_IdeologicalDebateMeme</workerClass>
 		<symbolSource>InitiatorIdeo</symbolSource>
 		<logRulesInitiator>
 			<rulesStrings>
@@ -16,7 +16,7 @@
 	<InteractionDef>
 		<defName>EB_IdeologicalDebatePrecept</defName>
 		<label>ideological debate over precepts</label>
-		<workerClass>EnhancedBeliefs.InteractionWorker_IdeologicalDebatePrecept</workerClass>
+		<workerClass>EnhancedIdeology.InteractionWorker_IdeologicalDebatePrecept</workerClass>
 		<symbolSource>InitiatorIdeo</symbolSource>
 		<logRulesInitiator>
 			<rulesStrings>
@@ -68,8 +68,8 @@
 
 	<ThoughtDef>
 		<defName>EB_IdeologyOpinion</defName>
-		<thoughtClass>EnhancedBeliefs.Thought_IdeologyOpinion</thoughtClass>
-		<workerClass>EnhancedBeliefs.ThoughtWorker_IdeologyOpinion</workerClass>
+		<thoughtClass>EnhancedIdeology.Thought_IdeologyOpinion</thoughtClass>
+		<workerClass>EnhancedIdeology.ThoughtWorker_IdeologyOpinion</workerClass>
 		<stages>
 			<li>
 				<label>despicable beliefs</label>

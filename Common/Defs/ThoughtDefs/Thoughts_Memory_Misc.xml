@@ -2,7 +2,7 @@
 <Defs>
   <ThoughtDef>
     <defName>EB_ReligiousBookDestroyed</defName>
-    <thoughtClass>EnhancedBeliefs.Thought_ReligiousBookDestroyed</thoughtClass>
+    <thoughtClass>EnhancedIdeology.Thought_ReligiousBookDestroyed</thoughtClass>
     <showBubble>false</showBubble>
     <durationDays>15</durationDays>
     <stackLimit>2</stackLimit>

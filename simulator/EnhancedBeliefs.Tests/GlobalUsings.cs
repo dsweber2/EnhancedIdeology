@@ -1,9 +1,0 @@
-global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using RimWorld;
-global using UnityEngine;
-global using Verse;
-global using EnhancedBeliefs;
-global using EnhancedBeliefs.Sim;
-global using Xunit;

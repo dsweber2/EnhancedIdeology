@@ -11,7 +11,7 @@ jobs:
   build:
     uses: ilyvion/rimworld-utils/.github/workflows/build_mod.yml@main
     with:
-      mod_name: "EnhancedBeliefs-Updated"
+      mod_name: "EnhancedIdeology"
       rw_versions: |-
         1.5
         1.6
@@ -25,7 +25,7 @@ jobs:
     secrets: inherit
     with:
       artifact_name: ${{ needs.build.outputs.artifact_name }}
-      mod_name: "EnhancedBeliefs-Updated"
+      mod_name: "EnhancedIdeology"
       rw_versions: |-
         1.5
         1.6

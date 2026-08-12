@@ -5,7 +5,7 @@
         <defName>EB_Ideobook</defName>
         <label>religious book</label>
         <description>A book containing fictional or true stories for the pleasure and edification of the reader.</description>
-        <thingClass>EnhancedBeliefs.BookIdeo</thingClass>
+        <thingClass>EnhancedIdeology.BookIdeo</thingClass>
         <tickerType>Rare</tickerType>
         <graphicData>
             <texPath>Things/Item/Book/Ideobook/Ideobook</texPath>
@@ -32,16 +32,16 @@
                     <addTopAltitudeBias>true</addTopAltitudeBias>
                 </verticalGraphic>
                 <doers>
-                    <li Class="EnhancedBeliefs.BookOutcomeProperties_CertaintyChange" />
+                    <li Class="EnhancedIdeology.BookOutcomeProperties_CertaintyChange" />
                 </doers>
             </li>
-            <li Class="EnhancedBeliefs.CompProperties_ReligiousBook" />
+            <li Class="EnhancedIdeology.CompProperties_ReligiousBook" />
         </comps>
     </ThingDef>
 
     <ThingDef ParentName="UnfinishedBase">
         <defName>EB_UnfinishedIdeobook</defName>
-        <thingClass>EnhancedBeliefs.UnfinishedReligiousBook</thingClass>
+        <thingClass>EnhancedIdeology.UnfinishedReligiousBook</thingClass>
         <label>unfinished religious book</label>
         <description>An unfinished religious book which must be completed by a moral guide.</description>
         <statBases>
@@ -54,7 +54,7 @@
         </graphicData>
         <stuffCategories Inherit="false" />
         <modExtensions>
-            <li Class="EnhancedBeliefs.UnfinishedBookExtension">
+            <li Class="EnhancedIdeology.UnfinishedBookExtension">
                 <openGraphic>
                     <texPath>Things/Item/Book/Ideobook/Ideobook_Open</texPath>
                     <graphicClass>Graphic_Multi</graphicClass>
