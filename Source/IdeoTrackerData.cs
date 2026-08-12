@@ -631,7 +631,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     private void CalibrateStancesToCertainty(float naturalStructural)
     {
         if (naturalStructural <= 0f) return;
-        var targetStructural = Mathf.Clamp01(calibrationTargetCertainty - CachedRelational - CachedPractitional - CachedDifficulty);
+        var minCertainty = EnhancedIdeologyMod.Settings.SaveCompatMinCertainty;
+        var targetCertainty = Mathf.Max(calibrationTargetCertainty, minCertainty);
+        var targetStructural = Mathf.Clamp01(targetCertainty - CachedRelational - CachedPractitional - CachedDifficulty);
         var scale = targetStructural / naturalStructural;
         foreach (var issue in issueStrength.Keys.ToList())
             issueStrength[issue] = Mathf.Clamp(issueStrength[issue] * scale, MinConvictionStrength, AbsoluteMaxConvictionStrength);
@@ -900,6 +902,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         if (Scribe.mode == LoadSaveMode.PostLoadInit)
         {
+            issuePreferredRank ??= [];
+            issueStrength ??= [];
+
             var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
 
             if (Pawn == null)

@@ -13,6 +13,7 @@ public class Settings : ModSettings
     private const float DefaultConversionStancePull = 2f;
     private const float DefaultConversionCertaintyKnock = 0.8f;
     private const float DefaultCrisisThreshold = 0.25f;
+    private const float DefaultSaveCompatMinCertainty = 0.125f;
     private const float DefaultPreceptOppositionScale = 1f;
 
     private bool _debugInteractionWorkers;
@@ -51,6 +52,11 @@ public class Settings : ModSettings
     // are - so a collapsing pawn with only weakly-preferred alternatives is likely to break down instead.
     private float _crisisThreshold = DefaultCrisisThreshold;
     public float CrisisThreshold => _crisisThreshold;
+
+    // Minimum certainty target when calibrating stances for a save-game load (vanilla or pre-EB save). Prevents
+    // a pawn who was at 0 certainty from being seeded with no conviction pull at all.
+    private float _saveCompatMinCertainty = DefaultSaveCompatMinCertainty;
+    public float SaveCompatMinCertainty => _saveCompatMinCertainty;
 
     // How far a single won debate moves the loser's belief on the contested issue, relative to default. Scales the
     // arc the loser's stance walks along the conviction valley toward the winner (on top of the debaters' stats).
@@ -93,6 +99,7 @@ public class Settings : ModSettings
         Scribe_Values.Look(ref _conversionStancePull, "conversionStancePull", DefaultConversionStancePull);
         Scribe_Values.Look(ref _conversionCertaintyKnock, "conversionCertaintyKnock", DefaultConversionCertaintyKnock);
         Scribe_Values.Look(ref _crisisThreshold, "crisisThreshold", DefaultCrisisThreshold);
+        Scribe_Values.Look(ref _saveCompatMinCertainty, "saveCompatMinCertainty", DefaultSaveCompatMinCertainty);
         Scribe_Values.Look(ref _preceptOppositionScale, "preceptOppositionScale", DefaultPreceptOppositionScale);
     }
 
@@ -113,6 +120,7 @@ public class Settings : ModSettings
         PercentSlider(listingStandard, "EnhancedIdeology.RelationalMaxRange", ref _relationalMaxRange, 0f, 0.5f, DefaultRelationalMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.PracticeMaxRange", ref _practiceMaxRange, 0f, 0.5f, DefaultPracticeMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.CrisisThreshold", ref _crisisThreshold, 0f, 0.5f, DefaultCrisisThreshold);
+        PercentSlider(listingStandard, "EnhancedIdeology.SaveCompatMinCertainty", ref _saveCompatMinCertainty, 0f, 0.5f, DefaultSaveCompatMinCertainty);
 
         Header(listingStandard, "EnhancedIdeology.Section.Conversion");
         MultiplierSlider(listingStandard, "EnhancedIdeology.DebateConvictionChange", ref _debateConvictionChange, 0.25f, 4f, DefaultDebateConvictionChange);
