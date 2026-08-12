@@ -6,6 +6,7 @@ internal static class EnhancedIdeologyDefOf
 #pragma warning disable CA2211, CS0649 // Ensured by DefOfAttribute
     public static MemeDef Supremacist;
     public static MemeDef Loyalist;
+    public static MemeDef Proselytizer;
     public static MemeDef Guilty;
     public static MentalStateDef IdeoChange;
     public static ThingDef EB_UnfinishedIdeobook;
@@ -15,6 +16,16 @@ internal static class EnhancedIdeologyDefOf
     public static ThoughtDef EB_ReligiousBookDestroyed;
     public static ThoughtDef EB_GoodDebate;
     public static ThoughtDef EB_BadDebate;
+    [MayRequireIdeology]
+    public static ThoughtDef EB_ApostacyDebated;
+    [MayRequireIdeology]
+    public static ThoughtDef EB_LowCertaintyCoBeliever;
+    [MayRequireIdeology]
+    public static ThoughtDef EB_ProselytizerDebated;
+    [MayRequireIdeology]
+    public static ThoughtDef EB_ProselytizerConverted;
+    [MayRequireIdeology]
+    public static ThoughtDef EB_ProselytizerFailedConversion;
     public static HistoryEventDef EB_DestroyedReligiousBook;
     public static HistoryEventDef EB_BookDestroyed;
     public static EffecterDef EB_CompleteBook;

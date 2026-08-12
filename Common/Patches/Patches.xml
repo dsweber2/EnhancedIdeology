@@ -68,4 +68,35 @@
 		</value>
 	</Operation>
 
+
+	<!-- Apostacy: add the low-certainty co-believer situational social thought to all three strict
+	     apostacy precepts. The ThoughtWorker gates on same-ideo + certainty gap, so only relevant
+	     pairs see an opinion penalty. -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/PreceptDef[defName="Apostasy_Disapproved"]/comps</xpath>
+		<value>
+			<li Class="PreceptComp_SituationalThought">
+				<thought>EB_LowCertaintyCoBeliever</thought>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/PreceptDef[defName="Apostasy_Horrible"]/comps</xpath>
+		<value>
+			<li Class="PreceptComp_SituationalThought">
+				<thought>EB_LowCertaintyCoBeliever</thought>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/PreceptDef[defName="Apostasy_Abhorrent"]/comps</xpath>
+		<value>
+			<li Class="PreceptComp_SituationalThought">
+				<thought>EB_LowCertaintyCoBeliever</thought>
+			</li>
+		</value>
+	</Operation>
+
 </Patch>

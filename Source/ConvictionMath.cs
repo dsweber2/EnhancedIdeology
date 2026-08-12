@@ -115,11 +115,16 @@ internal static class ConvictionMath
         var loserStance = loserTracker.IssueStances().First(stance => stance.issue == issue);
         var winnerStrength = winnerTracker.IssueStances().First(stance => stance.issue == issue).strength;
 
+        // Strict apostacy stances make the loser's faith more rigid: an Abhorrent pawn moves at 3/4 the
+        // normal distance, scaling linearly down from 1x at the don't-care rung.
+        var apostacyResistance = 1f - (EnhancedIdeologyUtilities.ApostacyStrictness(loser.Ideo) * 0.75f);
+
         var stepLength = DebateBaseArc
             * EnhancedIdeologyMod.Settings.DebateConvictionChange
             * winner.GetStatValue(StatDefOf.ConversionPower)
             * loser.GetStatValue(StatDefOf.CertaintyLossFactor)
-            * pullMultiplier;
+            * pullMultiplier
+            * apostacyResistance;
 
         var farRank = LadderExtremeAwayFrom(issue, targetRank);
         var (newRank, newStrength) = ValleyStep(loserStance.rank, loserStance.strength, targetRank, farRank, winnerStrength, stepLength);

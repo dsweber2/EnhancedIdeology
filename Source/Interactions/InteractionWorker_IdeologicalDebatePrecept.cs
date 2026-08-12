@@ -173,6 +173,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
         // Precept-driven social aftermath, evaluated per pawn on every non-fight outcome (design.md R3).
         ApplyDiversityAftermath(initiator, recipient);
+        ApplyApostacyAftermath(initiator, recipient);
+        ApplyProselytizerAftermath(initiator, crossIdeo: initiatorIdeo != recipientIdeo,
+            initiatorConverted: lastWinner == initiator && letterDef == LetterDefOf.PositiveEvent);
     }
 
     private static IssueDef? GetDebateTopic(
@@ -293,6 +296,17 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var socialFightChance = 0.05f * fightChanceModifier /
             (0.5f + (initiator.skills.GetSkill(SkillDefOf.Social).Level * 0.1f)) /
             (0.5f + (recipient.skills.GetSkill(SkillDefOf.Social).Level * 0.1f));
+
+        // Pawns from strict-apostacy faiths have less tolerance for being stalemated by a heretic.
+        // Only applies across different ideoligions — a draw against a fellow believer doesn't trigger apostacy rage.
+        if (initiator.Ideo != recipient.Ideo)
+        {
+            var apostacyFightMultiplier = 1f
+                + (EnhancedIdeologyUtilities.ApostacyStrictness(initiator.Ideo) * 0.75f)
+                + (EnhancedIdeologyUtilities.ApostacyStrictness(recipient.Ideo) * 0.75f);
+            socialFightChance *= apostacyFightMultiplier;
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: apostacyFightMultiplier={apostacyFightMultiplier}");
+        }
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: socialFightChance={socialFightChance}");
 
         if (Rand.Value < socialFightChance)
@@ -381,6 +395,38 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         }
 
         return delta < -0.5f ? DiversityReaction.Bigoted : DiversityReaction.Neutral;
+    }
+
+    // Strict-apostacy aftermath: being debated at all is an affront to a pawn from a faith that treats
+    // apostasy as abhorrent. Scales with how strict the apostacy precept is.
+    // Proselytizer aftermath: a pawn from a proselytizing faith finds cross-ideo debates fulfilling,
+    // with an even stronger boost when they successfully convert the other pawn.
+    private static void ApplyProselytizerAftermath(Pawn initiator, bool crossIdeo, bool initiatorConverted)
+    {
+        if (!crossIdeo) return;
+        if (initiator.Ideo?.memes.Contains(EnhancedIdeologyDefOf.Proselytizer) != true) return;
+
+        var thought = initiatorConverted
+            ? EnhancedIdeologyDefOf.EB_ProselytizerConverted
+            : EnhancedIdeologyDefOf.EB_ProselytizerDebated;
+        initiator.needs.mood?.thoughts.memories.TryGainMemory(thought);
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"ApplyProselytizerAftermath: {initiator} gained {thought.defName}");
+    }
+
+    private static void ApplyApostacyAftermath(Pawn initiator, Pawn recipient)
+    {
+        GainApostacyDebatedMemory(initiator);
+        GainApostacyDebatedMemory(recipient);
+    }
+
+    private static void GainApostacyDebatedMemory(Pawn pawn)
+    {
+        if (EnhancedIdeologyUtilities.ApostacyStrictness(pawn.Ideo) <= 0f)
+        {
+            return;
+        }
+        pawn.needs.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ApostacyDebated);
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"ApplyApostacyAftermath: {pawn} gained EB_ApostacyDebated (strictness={EnhancedIdeologyUtilities.ApostacyStrictness(pawn.Ideo):F2})");
     }
 
     private static (Pawn winner, Pawn loser, IssueDef issue, PreceptDef winnerPrecept) AdjustOpinions(Pawn initiator, Pawn recipient, GameComponent_EnhancedIdeology comp, PreceptDef initiatorPrecept, PreceptDef recipientPrecept, float initiatorRoll, float recipientRoll)

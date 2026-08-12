@@ -50,4 +50,83 @@
       </li>
     </stages>
   </ThoughtDef>
+  <!-- Proselytizer aftermath: positive mood for initiating cross-ideo debates, bigger boost for
+       actually converting someone. Both fire only when the initiator's ideo has the Proselytizer meme. -->
+  <ThoughtDef>
+    <defName>EB_ProselytizerDebated</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>3</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>spread the word</label>
+        <description>I argued for the truth of my faith. Whatever the outcome, the attempt itself was a righteous act.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_ProselytizerConverted</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>3</stackLimit>
+    <stackedEffectMultiplier>0.6</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>brought a soul to the faith</label>
+        <description>I brought someone into the light of our faith. There is no greater calling.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_ProselytizerFailedConversion</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>3</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>failed to convert</label>
+        <description>I tried to bring someone to the faith and failed. They remain in their ignorance.</description>
+        <baseMoodEffect>-3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <!-- Apostacy aftermath: a pawn from a strict-apostacy faith is unsettled by having to defend their
+       beliefs in a debate, regardless of outcome. Scales with how strict the apostacy stance is,
+       but a single memory def covers all levels (the mood magnitude is fixed; resistance/fight
+       chance already scale per pawn in code). -->
+  <ThoughtDef>
+    <defName>EB_ApostacyDebated</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>faith challenged</label>
+        <description>I had to defend the truth of my faith against a challenger. The very fact they dared question it is an insult.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <!-- Situational social thought for strict-apostacy pawns: co-believers with noticeably lower certainty
+       are seen as potential apostates and treated with contempt. -->
+  <ThoughtDef>
+    <defName>EB_LowCertaintyCoBeliever</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>EnhancedIdeology.ThoughtWorker_LowCertaintyCoBeliever_Social</workerClass>
+    <stages>
+      <li>
+        <label>wavering co-believer</label>
+        <baseOpinionOffset>-5</baseOpinionOffset>
+      </li>
+      <li>
+        <label>faithless co-believer</label>
+        <baseOpinionOffset>-10</baseOpinionOffset>
+      </li>
+      <li>
+        <label>apostate-hearted co-believer</label>
+        <baseOpinionOffset>-15</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>
