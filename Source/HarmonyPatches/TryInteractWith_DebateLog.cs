@@ -8,11 +8,7 @@ internal static class TryInteractWith_DebateLog
     [HarmonyPostfix]
     static void Postfix(Pawn_InteractionsTracker __instance, Pawn recipient, InteractionDef intDef, bool __result)
     {
-        if (!__result || intDef != EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept)
-            return;
-
-        var worker = (InteractionWorker_IdeologicalDebatePrecept)intDef.Worker;
-        if (worker.topic == null)
+        if (!__result)
             return;
 
         var entries = Find.PlayLog.AllEntries;

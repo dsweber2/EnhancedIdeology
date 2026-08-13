@@ -1,8 +1,11 @@
-﻿namespace EnhancedIdeology;
+namespace EnhancedIdeology;
 
 internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorker
 {
     public MemeDef? topic;
+
+    // Per-precept pull is weaker than a focused precept debate since multiple precepts are affected at once.
+    private const float MemeDebatePullMultiplier = 0.5f;
 
     internal static readonly SimpleCurve CompatibilityFactorCurve =
     [
@@ -97,16 +100,43 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         if (Math.Abs(initiatorRoll - recipientRoll) <= 0.1f)
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
-            if (HandleDraw(initiator, recipient, initiatorTracker, recipientTracker, topic, initiatorIdeo, recipientIdeo, extraSentencePacks, ref letterText, ref letterLabel, ref letterDef, ref lookTargets))
+            if (InteractionWorker_IdeologicalDebatePrecept.HandleDraw(
+                interaction, initiator, recipient, initiatorTracker, recipientTracker,
+                MemePreceptsFor(initiatorIdeo, topic),
+                MemePreceptsFor(recipientIdeo, topic)))
             {
-                EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight or conversion occurred). Exiting.");
+                EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight). Exiting.");
                 return;
             }
+            extraSentencePacks.Add(EnhancedIdeologyDefOf.EB_Sentence_DebateDraw);
         }
         else
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is not a draw. Adjusting opinions.");
-            AdjustOpinions(initiator, recipient, comp, topic, initiatorRoll, recipientRoll);
+            var (winner, loser) = AdjustOpinions(initiator, recipient, comp, topic, initiatorIdeo, recipientIdeo, initiatorRoll, recipientRoll);
+
+            var loserOldIdeo = loser.Ideo;
+            var loserTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(loser);
+            if (loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
+                && (PawnUtility.ShouldSendNotificationAbout(winner) || PawnUtility.ShouldSendNotificationAbout(loser)))
+            {
+                var loserRole = loserOldIdeo.GetRole(loser);
+                letterLabel = "EnhancedIdeology.LetterLabelIdeologicalDebateConversion".Translate();
+                letterText = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(
+                    winner.Named("CONVINCER"),
+                    loser.Named("CONVINCED"),
+                    loserOldIdeo.Named("OLDIDEO"),
+                    loser.Ideo.Named("NEWIDEO"),
+                    topic.Named("ISSUE")).Resolve();
+                if (loserRole != null)
+                {
+                    letterText += "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(
+                        loser.Named("PAWN"), loserRole.Named("ROLE"), loserOldIdeo.Named("OLDIDEO")).Resolve();
+                }
+                letterDef = LetterDefOf.PositiveEvent;
+                lookTargets = new LookTargets(winner, loser);
+                extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
+            }
         }
     }
 
@@ -122,189 +152,20 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         return result;
     }
 
+    private static IEnumerable<PreceptDef> MemePreceptsFor(Ideo ideo, MemeDef meme) =>
+        ideo.precepts
+            .Where(p => p.def.issue != null && (p.def.requiredMemes.Contains(meme) || p.def.associatedMemes.Contains(meme)))
+            .Select(p => p.def);
 
-    private bool HandleDraw(
-        Pawn initiator,
-        Pawn recipient,
-        IdeoTrackerData initiatorTracker,
-        IdeoTrackerData recipientTracker,
-        MemeDef topic,
-        Ideo initiatorIdeo,
-        Ideo recipientIdeo,
-        List<RulePackDef> extraSentencePacks,
-        ref string? letterText,
-        ref string? letterLabel,
-        ref LetterDef? letterDef,
-        ref LookTargets? lookTargets)
+    // Finds all issues covered by the topic meme (via either ideo's precepts), then pulls the loser's stance
+    // on each toward the winner's position on that issue.
+    private static (Pawn winner, Pawn loser) AdjustOpinions(
+        Pawn initiator, Pawn recipient,
+        GameComponent_EnhancedIdeology comp,
+        MemeDef topic, Ideo initiatorIdeo, Ideo recipientIdeo,
+        float initiatorRoll, float recipientRoll)
     {
-        // Fetch social fight multiplier
-        interaction.socialFightBaseChance = 1f;
-        var fightChanceModifier = initiator.interactions.SocialFightChance(interaction, recipient) + recipient.interactions.SocialFightChance(interaction, initiator);
-        interaction.socialFightBaseChance = 0f;
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: fightChanceModifier={fightChanceModifier}");
-
-        // Socially adept pawns are much less likely to start a brawl over an ideological debate
-        var socialFightChance = 0.05f * fightChanceModifier /
-            (0.5f + (initiator.skills.GetSkill(SkillDefOf.Social).Level * 0.1f)) /
-            (0.5f + (recipient.skills.GetSkill(SkillDefOf.Social).Level * 0.1f));
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: socialFightChance={socialFightChance}");
-
-        var randFight = Rand.Value;
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: randFight={randFight}");
-        if (randFight < socialFightChance)
-        {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Social fight triggered!");
-            recipient.interactions.StartSocialFight(initiator, "EnhancedIdeology.IdeologicalDebateOutcomeSocialFight");
-            return true;
-        }
-
-        // Smarter pawns have a higher chance of arriving to a mutual conclusion that both of their ideoligions suck
-        var randomOpinion = 0.2f * (0.75f + (initiator.skills.GetSkill(SkillDefOf.Intellectual).Level * 0.05f)) *
-            (0.75f + (recipient.skills.GetSkill(SkillDefOf.Intellectual).Level * 0.05f)) /
-            (0.2f + ((initiator.ideo.Certainty + recipient.ideo.Certainty) / 2f * 0.8f));
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: randomOpinion={randomOpinion}");
-
-        var randOpinion = Rand.Value;
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: randOpinion={randOpinion}");
-        if (randOpinion < randomOpinion)
-        {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Mutual conclusion reached. Adjusting meme opinions and certainty.");
-            var initiatorLossFactor = initiator.GetStatValue(StatDefOf.CertaintyLossFactor);
-            var recipientLossFactor = recipient.GetStatValue(StatDefOf.CertaintyLossFactor);
-
-            if (!topic.agreeableTraits.NullOrEmpty())
-            {
-                var traitLossInit = ApplyTraitLossFactor(topic.agreeableTraits, initiator, initiator.Ideo, topic, agreeable: true);
-                var traitLossRecip = ApplyTraitLossFactor(topic.agreeableTraits, recipient, recipient.Ideo, topic, agreeable: true);
-                EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: agreeableTraits traitLossInit={traitLossInit}, traitLossRecip={traitLossRecip}");
-                initiatorLossFactor *= traitLossInit;
-                recipientLossFactor *= traitLossRecip;
-            }
-
-            if (!topic.disagreeableTraits.NullOrEmpty())
-            {
-                var traitLossInit = ApplyTraitLossFactor(topic.disagreeableTraits, initiator, initiator.Ideo, topic, agreeable: false);
-                var traitLossRecip = ApplyTraitLossFactor(topic.disagreeableTraits, recipient, recipient.Ideo, topic, agreeable: false);
-                EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: disagreeableTraits traitLossInit={traitLossInit}, traitLossRecip={traitLossRecip}");
-                initiatorLossFactor *= traitLossInit;
-                recipientLossFactor *= traitLossRecip;
-            }
-
-            var adjInit = -0.03f * initiatorLossFactor * (0.8f + (Rand.Value * 0.4f));
-            var adjRecip = -0.03f * recipientLossFactor * (0.8f + (Rand.Value * 0.4f));
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: Adjusting meme opinions: initiator={adjInit}, recipient={adjRecip}");
-            initiatorTracker.AdjustMemeOpinion(topic, adjInit);
-            recipientTracker.AdjustMemeOpinion(topic, adjRecip);
-
-            var newCertInit = Mathf.Clamp01(0.01f * initiatorLossFactor * (0.8f + (Rand.Value * 0.4f)));
-            var newCertRecip = Mathf.Clamp01(0.01f * recipientLossFactor * (0.8f + (Rand.Value * 0.4f)));
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: Setting new certainty: initiator={newCertInit}, recipient={newCertRecip}");
-            initiator.ideo.Certainty = newCertInit;
-            recipient.ideo.Certainty = newCertRecip;
-
-            // Would be pretty funny if they both decide to change their beliefs at the same time
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw: Calling HandleConversion.");
-            HandleConversion(
-                initiator,
-                recipient,
-                initiatorTracker,
-                recipientTracker,
-                initiatorIdeo,
-                recipientIdeo,
-                extraSentencePacks,
-                ref letterText,
-                ref letterLabel,
-                ref letterDef,
-                ref lookTargets);
-            return true;
-        }
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw: No social fight or mutual conclusion. Returning false.");
-        return false;
-    }
-
-    private static float ApplyTraitLossFactor(
-        IEnumerable<TraitRequirement> traits,
-        Pawn pawn,
-        Ideo memeOwnerIdeoForCheck,
-        MemeDef topic,
-        bool agreeable)
-    {
-        var factor = 1f;
-        foreach (var trait in traits)
-        {
-            if (trait.HasTrait(pawn))
-            {
-                var hasMeme = memeOwnerIdeoForCheck.memes.Contains(topic);
-                var before = factor;
-                factor *= agreeable
-                    ? (hasMeme ? 0.8f : 1.2f)
-                    : (hasMeme ? 1.2f : 0.8f);
-                EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"ApplyTraitLossFactor: pawn={pawn}, trait={trait}, hasMeme={hasMeme}, agreeable={agreeable}, before={before}, after={factor}");
-            }
-        }
-        return factor;
-    }
-
-    private static void HandleConversion(
-        Pawn initiator,
-        Pawn recipient,
-        IdeoTrackerData initiatorTracker,
-        IdeoTrackerData recipientTracker,
-        Ideo initiatorIdeo,
-        Ideo recipientIdeo,
-        List<RulePackDef> extraSentencePacks,
-        ref string? letterText,
-        ref string? letterLabel,
-        ref LetterDef? letterDef,
-        ref LookTargets? lookTargets)
-    {
-        if (initiatorTracker.CheckConversion() == ConversionOutcome.Success)
-        {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleConversion: Initiator conversion success.");
-            if (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient))
-            {
-                letterLabel = "LetterLabelConvertIdeoAttempt_Success".Translate();
-                letterText = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(initiator.Named("CONVINCED"), recipient.Named("CONVINCER"), initiatorIdeo.Named("OLDIDEO"), initiator.Ideo.Named("NEWIDEO"));
-                letterDef = LetterDefOf.NeutralEvent;
-                lookTargets = new LookTargets(recipient, initiator);
-                var role = initiatorIdeo.GetRole(initiator);
-
-                if (role != null)
-                {
-                    letterText = letterText + "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(initiator.Named("PAWN"), role.Named("ROLE"), initiatorIdeo.Named("OLDIDEO")).Resolve();
-                }
-            }
-
-            extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
-        }
-
-        if (recipientTracker.CheckConversion() == ConversionOutcome.Success)
-        {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleConversion: Recipient conversion success.");
-            if (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient))
-            {
-                letterLabel = "LetterLabelConvertIdeoAttempt_Success".Translate();
-                letterText = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(recipient.Named("CONVINCED"), initiator.Named("CONVINCER"), recipientIdeo.Named("OLDIDEO"), recipient.Ideo.Named("NEWIDEO"));
-                letterDef = LetterDefOf.NeutralEvent;
-                lookTargets = new LookTargets(initiator, recipient);
-                var role = recipientIdeo.GetRole(recipient);
-
-                if (role != null)
-                {
-                    letterText = letterText + "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(recipient.Named("PAWN"), role.Named("ROLE"), recipientIdeo.Named("OLDIDEO")).Resolve();
-                }
-            }
-
-            extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
-        }
-    }
-
-    private static void AdjustOpinions(Pawn initiator, Pawn recipient, GameComponent_EnhancedIdeology comp, MemeDef topic, float initiatorRoll, float recipientRoll)
-    {
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: initiatorRoll={initiatorRoll}, recipientRoll={recipientRoll}");
-        Pawn winner;
-        Pawn loser;
-
+        Pawn winner, loser;
         if (initiatorRoll > recipientRoll)
         {
             winner = initiator;
@@ -316,12 +177,14 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             loser = initiator;
         }
 
-        var wasPositiveOutcome = winner.Ideo.memes.Contains(topic);
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}, wasPositiveOutcome={wasPositiveOutcome}");
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}");
 
-        var loserTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(loser);
-        var adj = (wasPositiveOutcome ? 0.03f : -0.03f) * winner.GetStatValue(StatDefOf.ConversionPower) * loser.GetStatValue(StatDefOf.CertaintyLossFactor);
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: Adjusting meme opinion for loser: {adj}");
-        loserTracker.AdjustMemeOpinion(topic, adj);
+        var winnerPrecepts = MemePreceptsFor(winner.Ideo, topic).ToList();
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: meme covers {winnerPrecepts.Count} precepts in winner's ideo: {string.Join(", ", winnerPrecepts.Select(p => p.defName))}");
+
+        foreach (var precept in winnerPrecepts)
+            ConvictionMath.PullStance(comp, winner, loser, precept.issue!, PreceptLadder.RankOf(precept), MemeDebatePullMultiplier);
+
+        return (winner, loser);
     }
 }

@@ -30,6 +30,7 @@ internal static class EnhancedIdeologyDefOf
     public static HistoryEventDef EB_BookDestroyed;
     public static EffecterDef EB_CompleteBook;
     public static InteractionDef EB_IdeologicalDebatePrecept;
+    public static InteractionDef EB_IdeologicalDebateMeme;
     public static RulePackDef EB_Sentence_DebateWon;
     public static RulePackDef EB_Sentence_InitiatorWon;
     public static RulePackDef EB_Sentence_RecipientWon;

@@ -129,7 +129,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         if (Math.Abs(initiatorRoll - recipientRoll) <= DebateDrawThreshold)
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
-            if (HandleDraw(initiator, recipient, initiatorTracker, recipientTracker, initiatorPrecept, recipientPrecept))
+            if (HandleDraw(interaction, initiator, recipient, initiatorTracker, recipientTracker, [initiatorPrecept], [recipientPrecept]))
             {
                 EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight). Exiting.");
                 return;
@@ -278,13 +278,14 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
     // An evenly-matched debate. Either it boils over into a social fight (returns true), or it entrenches both
     // sides (returns false). No rung moves and no one converts on a tie.
-    private bool HandleDraw(
+    internal static bool HandleDraw(
+        InteractionDef interaction,
         Pawn initiator,
         Pawn recipient,
         IdeoTrackerData initiatorTracker,
         IdeoTrackerData recipientTracker,
-        PreceptDef initiatorPrecept,
-        PreceptDef recipientPrecept)
+        IEnumerable<PreceptDef> initiatorPrecepts,
+        IEnumerable<PreceptDef> recipientPrecepts)
     {
         // Fetch social fight multiplier
         interaction.socialFightBaseChance = 1f;
@@ -319,12 +320,14 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         // Neither side backs down, so each digs in. A pawn entrenches with a probability that rises with
         // intelligence (a smarter arguer rationalizes the stalemate into vindication) and with how shaky their
         // faith already is; digging in strengthens conviction on the contested issue and nudges certainty up.
-        TryEntrench(initiator, initiatorTracker, initiatorPrecept);
-        TryEntrench(recipient, recipientTracker, recipientPrecept);
+        foreach (var precept in initiatorPrecepts)
+            TryEntrench(initiator, initiatorTracker, precept);
+        foreach (var precept in recipientPrecepts)
+            TryEntrench(recipient, recipientTracker, precept);
         return false;
     }
 
-    private static void TryEntrench(Pawn pawn, IdeoTrackerData tracker, PreceptDef precept)
+    internal static void TryEntrench(Pawn pawn, IdeoTrackerData tracker, PreceptDef precept)
     {
         var entrenchChance = DebateEntrenchBaseChance
             * (0.75f + (pawn.skills.GetSkill(SkillDefOf.Intellectual).Level * 0.05f))
