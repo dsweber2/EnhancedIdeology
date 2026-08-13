@@ -14,10 +14,10 @@ public class PreceptDef : Def
 {
     public IssueDef? issue;
     public int displayOrderInIssue;
-    // Classic-mode (no-ideology) default precept; carries an issue but is not a real stance rung.
     public bool classic;
-    // Must be public: EnhancedIdeologyUtilities.TryGetComps iterates this directly
     public List<PreceptComp> comps = [];
+    public List<MemeDef> requiredMemes = [];
+    public List<MemeDef> associatedMemes = [];
 
     public void AddComp(PreceptComp comp) => comps.Add(comp);
 }

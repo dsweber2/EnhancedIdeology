@@ -46,7 +46,7 @@ internal static class ConvictionMath
     {
         if (Mathf.Abs(rw - ri) < ValleyMinGap)
         {
-            return (rw, si + ((sw - si) * 0.5f));
+            return ((rw + ri) / 2, Mathf.Min(si + stepLength, sw));
         }
 
         var vertex = 0.5f * (rw + rm);

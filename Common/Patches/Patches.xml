@@ -45,6 +45,13 @@
 		</value>
 	</Operation>
 
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThinkTreeDef/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[@Class="ThinkNode_ConditionalMentalStates"][states/li[text()="Wander_Sad"]]/states</xpath>
+		<value>
+			<li>EB_CrisisOfFaith</li>
+		</value>
+	</Operation>
+
 	<Operation Class="PatchOperationInsert">
 		<xpath>Defs/ThinkTreeDef/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[@Class="ThinkNode_ConditionalMentalStateClass"][stateClass="MentalState_Tantrum"]</xpath>
 		<value>

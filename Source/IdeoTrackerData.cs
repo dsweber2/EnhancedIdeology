@@ -94,10 +94,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // The setpoint is the sum of three bands - structural (innate fit), relational (co-religionists) and
     // practitional (current precept moods) - plus a difficulty offset, all clamped to [0, 1]. There is no
     // forcing term, so certainty can never leave [0, 1] and always drifts toward where the pawn "belongs".
-#pragma warning disable IDE0060 // Remove unused parameter
-    // TODO: Figure out why worldComp was even passed here
-    public void CertaintyChangeRecache(GameComponent_EnhancedIdeology worldComp)
-#pragma warning restore IDE0060 // Remove unused parameter
+    public void CertaintyChangeRecache(GameComponent_EnhancedIdeology comp)
     {
         var settings = EnhancedIdeologyMod.Settings;
 
@@ -110,7 +107,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         CachedStructural = structural;
 
         // Relational band: mean opinion of co-religionists, scaled by the user's max range.
-        CachedRelational = RelationalBand(settings.RelationalMaxRange, RelationalContributors);
+        CachedRelational = RelationalBand(settings.RelationalMaxRange, RelationalContributors, comp);
 
         // Practitional band: summed precept-thought mood, scaled by the user's max range.
         CachedPractitional = PractitionalBand(settings.PracticeMaxRange, PractitionalContributors);
@@ -140,17 +137,15 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         CachedCertaintyChange = settings.CertaintyDriftRate * (target - Pawn.ideo.Certainty);
     }
 
-    private float RelationalBand(float maxRange, List<(string label, float pct)> contributors)
+    private float RelationalBand(float maxRange, List<(string label, float pct)> contributors, GameComponent_EnhancedIdeology comp)
     {
-        CacheRelationshipIdeoOpinion(Pawn.Ideo);
+        CacheRelationshipIdeoOpinion(Pawn.Ideo, comp);
 
         float sum = 0;
-        float absSum = 0;
         int count = 0;
         foreach (var (_, opinion) in GetOwnIdeoRelationships())
         {
             sum += opinion;
-            absSum += Math.Abs(opinion);
             count++;
         }
 
@@ -161,13 +156,13 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         var band = GameComponent_EnhancedIdeology.RelationalIntensityCurve.Evaluate(sum / count) * maxRange;
 
-        if (absSum > 0f)
+        if (Math.Abs(sum) > 0.001f)
         {
             foreach (var (relPawn, opinion) in GetOwnIdeoRelationships())
             {
                 if (opinion != 0f)
                 {
-                    contributors.Add((relPawn.LabelShort, band * (opinion / absSum)));
+                    contributors.Add((relPawn.LabelShort, band * (opinion / sum)));
                 }
             }
         }
@@ -181,27 +176,24 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         Pawn.needs?.mood?.thoughts?.GetAllMoodThoughts(_tmpThoughts);
 
         float moodSum = 0;
-        float absSum = 0;
         foreach (var thought in _tmpThoughts)
         {
             if (thought.sourcePrecept != null || thought.def.Worker is ThoughtWorker_Precept)
             {
-                var offset = thought.MoodOffset();
-                moodSum += offset;
-                absSum += Math.Abs(offset);
+                moodSum += thought.MoodOffset();
             }
         }
 
         var band = GameComponent_EnhancedIdeology.PracticeIntensityCurve.Evaluate(moodSum) * maxRange;
 
-        if (absSum > 0f)
+        if (Math.Abs(moodSum) > 0.001f)
         {
             foreach (var thought in _tmpThoughts)
             {
                 var offset = thought.MoodOffset();
                 if (offset != 0f && (thought.sourcePrecept != null || thought.def.Worker is ThoughtWorker_Precept))
                 {
-                    contributors.Add((thought.LabelCap, band * (offset / absSum)));
+                    contributors.Add((thought.LabelCap, band * (offset / moodSum)));
                 }
             }
         }
@@ -861,10 +853,10 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     }
 
     // Caches specific ideo opinion from relationships
-    public void CacheRelationshipIdeoOpinion(Ideo ideo)
+    public void CacheRelationshipIdeoOpinion(Ideo ideo, GameComponent_EnhancedIdeology? comp = null)
     {
         float opinion = 0;
-        var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
+        comp ??= Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var pawns = comp.GetIdeoPawns(ideo);
 
         foreach (var otherPawn in pawns)
@@ -1036,8 +1028,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 continue;
             }
 
-            // Converting to a "wrong" ideo during a directed attempt is half as likely - a rare lol moment.
-            var mult = priorityIdeo != null && priorityIdeo != ideo ? 0.5f : 1f;
+            // Non-target ideos compete equally; roughly half of all conversions go somewhere unexpected.
+            var mult = 1f;
             candidates.Add((ideo, (opinion - current) / opinion * mult, (opinion - current) * mult));
         }
 
@@ -1057,7 +1049,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 return ConversionOutcome.Failure;
             }
 
-            _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.IdeoChange);
+            TriggerCrisisOfFaith();
             return ConversionOutcome.Breakdown;
         }
 
@@ -1112,11 +1104,42 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         var chosen = candidates[index].ideo;
         if (chosen == null)
         {
-            _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.IdeoChange);
+            TriggerCrisisOfFaith();
             return;
         }
 
         ApplyConversion(chosen);
+    }
+
+    // When the crisis-of-faith candidate wins: if the pawn's mood is already below their minor break threshold,
+    // the crisis collapses into a normal mood break (their spiritual doubt compounds existing misery rather than
+    // resolving it). Otherwise, we find the ideo they most prefer, convert them to it if it outrates their
+    // current certainty, then land their certainty at 1.5x the crisis threshold - above the danger zone but
+    // still fragile. The pawn then enters the crisis-of-faith wander state.
+    private void TriggerCrisisOfFaith()
+    {
+        var mood = Pawn.needs.mood;
+        if (mood != null && mood.CurLevel < Pawn.mindState.mentalBreaker.BreakThresholdMinor)
+        {
+            Pawn.mindState.mentalBreaker.TryDoRandomMoodCausedMentalBreak();
+            return;
+        }
+
+        var crisisThreshold = EnhancedIdeologyMod.Settings.CrisisThreshold;
+        var currentOpinion = IdeoOpinion(Pawn.Ideo);
+
+        var bestIdeo = Find.IdeoManager.IdeosListForReading
+            .Where(ii => ii != Pawn.Ideo)
+            .MaxByWithFallback(ii => IdeoOpinion(ii));
+
+        if (bestIdeo != null && IdeoOpinion(bestIdeo) > currentOpinion)
+        {
+            ApplyConversion(bestIdeo);
+        }
+
+        Pawn.ideo.Certainty = Mathf.Clamp01(1.5f * crisisThreshold);
+
+        _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.CrisisOfFaith);
     }
 
     // Adds the crisis-of-faith pseudo-candidate (a null ideo) when the pawn now prefers doubt to their own

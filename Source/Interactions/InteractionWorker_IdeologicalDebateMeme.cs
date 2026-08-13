@@ -3,6 +3,7 @@ namespace EnhancedIdeology;
 internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorker
 {
     public MemeDef? topic;
+    public Pawn? lastWinner;
 
     // Per-precept pull is weaker than a focused precept debate since multiple precepts are affected at once.
     private const float MemeDebatePullMultiplier = 0.5f;
@@ -63,7 +64,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         var spreadFactor = initiator.GetStatValue(StatDefOf.SocialIdeoSpreadFrequencyFactor);
         var compatibility = initiator.relations.CompatibilityWith(recipient);
         var curveEval = CompatibilityFactorCurve.Evaluate(compatibility);
-        var result = 0.03f * spreadFactor * curveEval;
+        var result = 0.015f * spreadFactor * curveEval;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Returning weight: {result} (spreadFactor={spreadFactor}, compatibility={compatibility}, curveEval={curveEval})");
         return result;
     }
@@ -81,8 +82,13 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         letterLabel = null;
         letterDef = null;
         lookTargets = null;
+        lastWinner = null;
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Interacted called: initiator={initiator}, recipient={recipient}");
+
+        // Ideo may have changed since this interaction was queued (same-tick double-conversion).
+        if (initiator.Ideo == recipient.Ideo)
+            return;
 
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var initiatorTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(initiator);
@@ -113,7 +119,11 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         else
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is not a draw. Adjusting opinions.");
-            var (winner, loser) = AdjustOpinions(initiator, recipient, comp, topic, initiatorIdeo, recipientIdeo, initiatorRoll, recipientRoll);
+            var (winner, loser) = AdjustOpinions(initiator, recipient, comp, topic, initiatorRoll, recipientRoll);
+            lastWinner = winner;
+            extraSentencePacks.Add(winner == initiator
+                ? EnhancedIdeologyDefOf.EB_Sentence_InitiatorWon
+                : EnhancedIdeologyDefOf.EB_Sentence_RecipientWon);
 
             var loserOldIdeo = loser.Ideo;
             var loserTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(loser);
@@ -138,6 +148,11 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
                 extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
             }
         }
+
+        InteractionWorker_IdeologicalDebatePrecept.ApplyDiversityAftermath(initiator, recipient);
+        InteractionWorker_IdeologicalDebatePrecept.ApplyApostacyAftermath(initiator, recipient);
+        InteractionWorker_IdeologicalDebatePrecept.ApplyProselytizerAftermath(initiator, crossIdeo: true,
+            initiatorConverted: lastWinner == initiator && letterDef == LetterDefOf.PositiveEvent);
     }
 
     private static float GetDebateRoll(Pawn pawn)
@@ -162,7 +177,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
     private static (Pawn winner, Pawn loser) AdjustOpinions(
         Pawn initiator, Pawn recipient,
         GameComponent_EnhancedIdeology comp,
-        MemeDef topic, Ideo initiatorIdeo, Ideo recipientIdeo,
+        MemeDef topic,
         float initiatorRoll, float recipientRoll)
     {
         Pawn winner, loser;

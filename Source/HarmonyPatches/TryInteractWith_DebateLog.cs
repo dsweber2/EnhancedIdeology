@@ -18,7 +18,28 @@ internal static class TryInteractWith_DebateLog
         var initiator = Traverse.Create(__instance).Field<Pawn>("pawn").Value;
         var sentencePacks = Traverse.Create(existing).Field<List<RulePackDef>>("extraSentencePacks").Value;
 
-        entries[0] = new PlayLogEntry_DebateInteraction(
-            intDef, initiator, recipient, sentencePacks, worker.topic, worker.lastWinner, worker.lastWinnerPrecept?.label);
+        PlayLogEntry_DebateInteraction? replacement = null;
+
+        if (intDef == EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept)
+        {
+            var worker = (InteractionWorker_IdeologicalDebatePrecept)intDef.Worker;
+            if (worker.topic == null)
+                return;
+            replacement = new PlayLogEntry_DebateInteraction(
+                intDef, initiator, recipient, sentencePacks,
+                worker.topic, worker.lastWinner, worker.lastWinnerPrecept?.label);
+        }
+        else if (intDef == EnhancedIdeologyDefOf.EB_IdeologicalDebateMeme)
+        {
+            var worker = (InteractionWorker_IdeologicalDebateMeme)intDef.Worker;
+            if (worker.topic == null)
+                return;
+            replacement = new PlayLogEntry_DebateInteraction(
+                intDef, initiator, recipient, sentencePacks,
+                worker.topic, worker.lastWinner, worker.topic.label);
+        }
+
+        if (replacement != null)
+            entries[0] = replacement;
     }
 }

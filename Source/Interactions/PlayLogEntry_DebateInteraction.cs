@@ -5,6 +5,7 @@ namespace EnhancedIdeology;
 internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
 {
     private IssueDef? debateTopic;
+    private MemeDef? debateMemeTopic;
     private Pawn? debateWinner;
     private string? winnerPreceptLabel;
 
@@ -12,12 +13,13 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
 
     public PlayLogEntry_DebateInteraction(
         InteractionDef intDef, Pawn initiator, Pawn recipient,
-        List<RulePackDef> extraSentencePacks, IssueDef? topic, Pawn? winner, string? winnerPrecept)
+        List<RulePackDef> extraSentencePacks, Def? topic, Pawn? winner, string? winnerLabel)
         : base(intDef, initiator, recipient, extraSentencePacks)
     {
-        debateTopic = topic;
+        debateTopic = topic as IssueDef;
+        debateMemeTopic = topic as MemeDef;
         debateWinner = winner;
-        winnerPreceptLabel = winnerPrecept;
+        winnerPreceptLabel = winnerLabel;
     }
 
     protected override string ToGameStringFromPOV_Worker(Thing pov, bool forceLog)
@@ -80,8 +82,8 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
 
     private void InjectDebateSymbols(ref GrammarRequest request)
     {
-        if (debateTopic != null)
-            request.Rules.Add(new Rule_String("TOPIC_label", debateTopic.label));
+        var topicLabel = debateTopic?.label ?? debateMemeTopic?.label ?? "a precept";
+        request.Rules.Add(new Rule_String("TOPIC_label", topicLabel));
         if (debateWinner != null)
             request.Rules.AddRange(GrammarUtility.RulesForPawn("WINNER", debateWinner, request.Constants));
         if (winnerPreceptLabel != null)
@@ -98,6 +100,7 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
     {
         base.ExposeData();
         Scribe_Defs.Look(ref debateTopic, "debateTopic");
+        Scribe_Defs.Look(ref debateMemeTopic, "debateMemeTopic");
         Scribe_References.Look(ref debateWinner, "debateWinner", saveDestroyedThings: true);
         Scribe_Values.Look(ref winnerPreceptLabel, "winnerPreceptLabel");
     }

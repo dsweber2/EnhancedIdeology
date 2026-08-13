@@ -149,7 +149,8 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
             var loserOldIdeo = loser.Ideo;
             var loserTracker = loser == recipient ? recipientTracker : initiatorTracker;
-            if (loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
+            // Same-faith debates adjust conviction only; no cross-faith conversion can result.
+            if (winner.Ideo != loser.Ideo && loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
                 && (PawnUtility.ShouldSendNotificationAbout(winner) || PawnUtility.ShouldSendNotificationAbout(loser)))
             {
                 var loserRole = loserOldIdeo.GetRole(loser);
@@ -350,7 +351,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // faith's stance on IdeoDiversity, not their personal opinion. A tolerant faith reads a debate as a good
     // exchange (a mood lift + warmer opinion of the other pawn); a bigoted one reads it as an affront (the
     // mirror). A neutral or silent faith produces nothing. Applied to each pawn independently every outcome.
-    private static void ApplyDiversityAftermath(Pawn initiator, Pawn recipient)
+    internal static void ApplyDiversityAftermath(Pawn initiator, Pawn recipient)
     {
         GainDiversityMemory(initiator, recipient);
         GainDiversityMemory(recipient, initiator);
@@ -404,7 +405,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // apostasy as abhorrent. Scales with how strict the apostacy precept is.
     // Proselytizer aftermath: a pawn from a proselytizing faith finds cross-ideo debates fulfilling,
     // with an even stronger boost when they successfully convert the other pawn.
-    private static void ApplyProselytizerAftermath(Pawn initiator, bool crossIdeo, bool initiatorConverted)
+    internal static void ApplyProselytizerAftermath(Pawn initiator, bool crossIdeo, bool initiatorConverted)
     {
         if (!crossIdeo) return;
         if (initiator.Ideo?.memes.Contains(EnhancedIdeologyDefOf.Proselytizer) != true) return;
@@ -416,7 +417,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"ApplyProselytizerAftermath: {initiator} gained {thought.defName}");
     }
 
-    private static void ApplyApostacyAftermath(Pawn initiator, Pawn recipient)
+    internal static void ApplyApostacyAftermath(Pawn initiator, Pawn recipient)
     {
         GainApostacyDebatedMemory(initiator);
         GainApostacyDebatedMemory(recipient);

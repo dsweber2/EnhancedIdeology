@@ -11,7 +11,14 @@ public class Pawn_NeedsTracker
 public class Need_Mood
 {
     public float CurLevelPercentage = 0.85f;
+    public float CurLevel = 0.85f;
     public readonly ThoughtHandler thoughts = new();
+}
+
+public class MentalBreaker
+{
+    public float BreakThresholdMinor = 0.2f;
+    public void TryDoRandomMoodCausedMentalBreak() { }
 }
 
 public class Pawn_StoryTracker
@@ -22,6 +29,7 @@ public class Pawn_StoryTracker
 public class Pawn_MindState
 {
     public readonly MentalStateHandler mentalStateHandler = new();
+    public readonly MentalBreaker mentalBreaker = new();
 }
 
 public class RaceProperties

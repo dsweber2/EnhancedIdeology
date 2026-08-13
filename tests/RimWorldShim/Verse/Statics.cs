@@ -63,6 +63,29 @@ public static class ModLister
     public static bool CheckIdeology(string reason) => true;
 }
 
+public static class GenCollection
+{
+    public static T? MaxByWithFallback<T, TKey>(this IEnumerable<T> source, Func<T, TKey> selector)
+        where TKey : IComparable<TKey>
+    {
+        T? best = default;
+        TKey? bestKey = default;
+        var first = true;
+        foreach (var item in source)
+        {
+            var key = selector(item);
+            if (first || key.CompareTo(bestKey!) > 0)
+            {
+                best = item;
+                bestKey = key;
+                first = false;
+            }
+        }
+
+        return best;
+    }
+}
+
 public static class PawnsFinder
 {
     private static List<Pawn> _allPawns = [];

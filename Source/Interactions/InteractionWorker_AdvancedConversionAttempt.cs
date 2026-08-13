@@ -16,6 +16,10 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
         letterDef = null;
         lookTargets = null;
 
+        // Ideo may have changed since this interaction was queued (same-tick double-conversion).
+        if (initiator.Ideo == recipient.Ideo)
+            return;
+
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var recipientIdeo = recipient.Ideo;
         var initiatorIdeo = initiator.Ideo;

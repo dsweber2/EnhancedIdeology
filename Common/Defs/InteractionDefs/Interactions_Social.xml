@@ -8,7 +8,7 @@
 		<symbolSource>InitiatorIdeo</symbolSource>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry->[INITIATOR_nameDef] debated memes with [RECIPIENT_nameDef] about their ideoligion.</li>
+				<li>r_logentry->[INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label].</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -20,7 +20,6 @@
 		<symbolSource>InitiatorIdeo</symbolSource>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>TOPIC_label->a precept</li>
 				<li>r_logentry->[INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef].</li>
 			</rulesStrings>
 		</logRulesInitiator>

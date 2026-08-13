@@ -149,7 +149,7 @@ internal sealed class ITab_Opinion : ITab
                 Widgets.DrawHighlight(rowRect);
                 var tip = "EnhancedIdeology.StanceTooltip".Translate(
                     SelPawn.Named("PAWN"), issue.LabelCap, personalRung,
-                    (strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent(),
+                    $"{strength:F1} ({(strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent()})",
                     selected.Named("IDEO"), selectedRung, Signed(contribution)).ToString();
                 if (Prefs.DevMode)
                 {
