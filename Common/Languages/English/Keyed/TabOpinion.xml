@@ -3,6 +3,9 @@
   <EnhancedIdeology.TabOpinion>Opinions</EnhancedIdeology.TabOpinion>
   <EnhancedIdeology.IdeologyOpinions>Ideology Opinions</EnhancedIdeology.IdeologyOpinions>
   <EnhancedIdeology.BeliefsHeader>Issues</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Issue</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Stance</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Strength</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Don't care</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}'s opinion of {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>

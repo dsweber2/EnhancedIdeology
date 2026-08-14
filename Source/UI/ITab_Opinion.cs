@@ -7,7 +7,7 @@ internal sealed class ITab_Opinion : ITab
     private const float Padding = 4f;
     private const float SmallPadding = 1f;
     private const float BarWidth = 200f;
-    private const float OpinionBarWidth = 90f;
+    private const float OpinionBarWidth = 130f;
     private const float IconSize = 32f;
     private const float IssueIconSize = 24f;
     private const float RowHeight = IconSize + (2 * Padding);
@@ -77,15 +77,24 @@ internal sealed class ITab_Opinion : ITab
 
         var tabContentRect = new Rect(0f, 0f, width, height).ContractedBy(Padding);
 
-        var beliefsHeader = "EnhancedIdeology.BeliefsHeader".Translate().ToString();
+        var headerH = Text.LineHeight + Padding;
+        Text.Anchor = TextAnchor.MiddleLeft;
+
+        // Three column labels in place of a single header for the stance side.
+        var issueColX = SmallPadding + IssueIconSize + SmallPadding;
+        Widgets.Label(new Rect(issueColX, 0f, issueWidth, headerH), "EnhancedIdeology.ColIssue".Translate());
+        var rungColX = issueColX + issueWidth + IconTextGap;
+        Widgets.Label(new Rect(rungColX, 0f, rungWidth, headerH), "EnhancedIdeology.ColStance".Translate());
+        var strengthColX = rungColX + rungWidth + IconTextGap;
+        Widgets.Label(new Rect(strengthColX, 0f, OpinionBarWidth, headerH), "EnhancedIdeology.ColStrength".Translate());
+
+        // Right column header, with the selected ideo name appended when it differs from the pawn's own.
+        var rightHeader = "EnhancedIdeology.IdeologyOpinions".Translate().ToString();
         if (selected != SelPawn.Ideo)
         {
-            beliefsHeader += $" ({selected.name})";
+            rightHeader += $" ({selected.name})";
         }
-
-        Text.Anchor = TextAnchor.MiddleLeft;
-        Widgets.Label(new Rect(SmallPadding, 0f, leftWidth, Text.LineHeight + Padding), beliefsHeader);
-        Widgets.Label(new Rect(leftWidth + ColumnGap, 0f, rightWidth, Text.LineHeight + Padding), "EnhancedIdeology.IdeologyOpinions".Translate());
+        Widgets.Label(new Rect(leftWidth + ColumnGap, 0f, rightWidth, headerH), rightHeader);
         Text.Anchor = TextAnchor.UpperLeft;
 
         tabContentRect.yMin += Text.LineHeight;
@@ -139,7 +148,7 @@ internal sealed class ITab_Opinion : ITab
             var opinionRect = new Rect(rungX + rungWidth + IconTextGap, pos, OpinionBarWidth, IconSize);
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = AgreementColor(opinion);
-            Widgets.Label(opinionRect, Signed(contribution));
+            Widgets.Label(opinionRect, $"{strength:F1} ({Signed(contribution)})");
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
