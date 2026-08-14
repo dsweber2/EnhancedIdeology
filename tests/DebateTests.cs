@@ -3,79 +3,113 @@ namespace EnhancedIdeology.Tests;
 public class DebateTests : SeededTest
 {
     [Fact]
-    public void DebateMeme_InitiatorWins_IncreasesLoserMemeOpinion()
+    public void DebateMeme_InitiatorWins_PullsLoserStanceTowardWinnerRung()
     {
-        // Initiator wins (far higher ConversionPower/stats) → topic meme is in initiator's ideo
-        // wasPositiveOutcome=true → adj=+0.03*power*lossFactor → loser's meme opinion increases
+        // Initiator wins (far higher ConversionPower/stats). Both ideos share the topic meme so it is always
+        // selected, and both hold precepts on the same issue at different rungs. The loser's stance rank
+        // should slide toward the winner's rung (rung 0) from its starting position (rung 1).
         var world = new SimWorld();
         world.Initialize();
         Rand.SetSeed(1);
 
         var topicMeme = new MemeBuilder().WithName("DebateMeme").Build();
-        var initiatorIdeo = new IdeoBuilder().WithName("Evangelist").AddMeme(topicMeme).Build();
-        var recipientIdeo = new IdeoBuilder().WithName("Skeptic").Build();
+        var (issue, rungs) = SimIssues.Ladder("MemeIssue1", "Rung0", "Rung1");
+        rungs[0].associatedMemes.Add(topicMeme);
+        rungs[1].associatedMemes.Add(topicMeme);
+
+        var initiatorIdeo = new IdeoBuilder().WithName("Evangelist").AddMeme(topicMeme).AddPrecept(rungs[0]).Build();
+        var recipientIdeo = new IdeoBuilder().WithName("Skeptic").AddMeme(topicMeme).AddPrecept(rungs[1]).Build();
         world.AddIdeo(initiatorIdeo);
         world.AddIdeo(recipientIdeo);
 
         var initiator = new PawnBuilder()
-            .WithIdeo(initiatorIdeo)
-            .WithCertainty(1f)
-            .WithConversionPower(5f)
-            .WithSocialImpact(2f)
-            .WithLabel("Init")
-            .Build(world);
+            .WithIdeo(initiatorIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Init").Build(world);
         var recipient = new PawnBuilder()
-            .WithIdeo(recipientIdeo)
-            .WithCertainty(0.3f)
-            .WithConversionPower(0.1f)
-            .WithLabel("Recip")
-            .Build(world);
+            .WithIdeo(recipientIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Recip").Build(world);
 
         var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
-        var worker = new InteractionWorker_IdeologicalDebateMeme();
-        worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
+        var before = StanceRank(recipientTracker, issue);
 
-        Assert.True(recipientTracker.TrueMemeOpinion(topicMeme) > 0f,
-            $"Expected recipient's meme opinion to increase. Got: {recipientTracker.TrueMemeOpinion(topicMeme)}");
+        new InteractionWorker_IdeologicalDebateMeme().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        var after = StanceRank(recipientTracker, issue);
+        Assert.True(after < before, $"Expected loser stance to slide toward winner's rung 0. before={before}, after={after}");
     }
 
     [Fact]
-    public void DebateMeme_RecipientWins_DecreasesRecipientMemeOpinionForOwnMeme()
+    public void DebateMeme_WinnerLacksPreceptForIssue_PullsLoserTowardDontCare()
     {
-        // Recipient wins → topic meme is NOT in winner's (recipient's) ideo
-        // wasPositiveOutcome = recipient.Ideo.memes.Contains(topic) = false (topic is from initiator's ideo)
-        // adj = -0.03 * power * lossFactor → loser (initiator) meme opinion decreases
-        // BUT the loser here is the initiator, so initiatorTracker.TrueMemeOpinion decreases
+        // The winner's ideo holds the meme but has no precept for the contested issue (optional/associated precept
+        // not taken). Before the fix AdjustOpinions iterated only the winner's precepts and did nothing; now it
+        // falls back to DontCareRank so the loser is pulled away from their explicit stance.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var topicMeme = new MemeBuilder().WithName("OptionalMeme").Build();
+        var (issue, rungs) = SimIssues.Ladder("OptIssue", "Permissive", "Forbidding");
+        rungs[0].associatedMemes.Add(topicMeme);
+        rungs[1].associatedMemes.Add(topicMeme);
+
+        // Winner holds the meme but skipped this optional precept entirely.
+        var winnerIdeo = new IdeoBuilder().WithName("NoPreceptIdeo").AddMeme(topicMeme).Build();
+        // Loser holds the meme and the forbidding precept (rung 1).
+        var loserIdeo = new IdeoBuilder().WithName("PreceptIdeo").AddMeme(topicMeme).AddPrecept(rungs[1]).Build();
+        world.AddIdeo(winnerIdeo);
+        world.AddIdeo(loserIdeo);
+
+        var initiator = new PawnBuilder()
+            .WithIdeo(winnerIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Winner").Build(world);
+        var recipient = new PawnBuilder()
+            .WithIdeo(loserIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Loser").Build(world);
+
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var before = StanceRank(recipientTracker, issue);
+
+        new InteractionWorker_IdeologicalDebateMeme().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        var after = StanceRank(recipientTracker, issue);
+        Assert.True(after < before,
+            $"Expected loser stance to be pulled toward DontCareRank even when winner holds no precept. before={before}, after={after}");
+    }
+
+    [Fact]
+    public void DebateMeme_RecipientWins_PullsLoserStanceTowardWinnerRung()
+    {
+        // Recipient wins (far higher ConversionPower/stats). Same shared-meme setup, but the recipient holds
+        // rung 0 and the initiator holds rung 1. The initiator (loser) should be pulled toward rung 0.
         var world = new SimWorld();
         world.Initialize();
         Rand.SetSeed(1);
 
         var topicMeme = new MemeBuilder().WithName("DebateMeme2").Build();
-        var initiatorIdeo = new IdeoBuilder().WithName("Weak").AddMeme(topicMeme).Build();
-        var recipientIdeo = new IdeoBuilder().WithName("Strong").Build();
+        var (issue, rungs) = SimIssues.Ladder("MemeIssue2", "Rung0", "Rung1");
+        rungs[0].associatedMemes.Add(topicMeme);
+        rungs[1].associatedMemes.Add(topicMeme);
+
+        var initiatorIdeo = new IdeoBuilder().WithName("Weak").AddMeme(topicMeme).AddPrecept(rungs[1]).Build();
+        var recipientIdeo = new IdeoBuilder().WithName("Strong").AddMeme(topicMeme).AddPrecept(rungs[0]).Build();
         world.AddIdeo(initiatorIdeo);
         world.AddIdeo(recipientIdeo);
 
         var initiator = new PawnBuilder()
-            .WithIdeo(initiatorIdeo)
-            .WithCertainty(0.3f)
-            .WithConversionPower(0.1f)
-            .WithLabel("Weak")
-            .Build(world);
+            .WithIdeo(initiatorIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Weak").Build(world);
         var recipient = new PawnBuilder()
-            .WithIdeo(recipientIdeo)
-            .WithCertainty(1f)
-            .WithConversionPower(5f)
-            .WithSocialImpact(2f)
-            .WithLabel("Strong")
-            .Build(world);
+            .WithIdeo(recipientIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Strong").Build(world);
 
         var initiatorTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(initiator);
-        var worker = new InteractionWorker_IdeologicalDebateMeme();
-        worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
+        var before = StanceRank(initiatorTracker, issue);
 
-        Assert.True(initiatorTracker.TrueMemeOpinion(topicMeme) < 0f,
-            $"Expected initiator's meme opinion to decrease after losing. Got: {initiatorTracker.TrueMemeOpinion(topicMeme)}");
+        new InteractionWorker_IdeologicalDebateMeme().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        var after = StanceRank(initiatorTracker, issue);
+        Assert.True(after < before, $"Expected loser stance to slide toward winner's rung 0. before={before}, after={after}");
     }
 
     [Fact]
@@ -92,6 +126,38 @@ public class DebateTests : SeededTest
         var after = StanceRank(recipientTracker, issue);
         Assert.True(after < before,
             $"Expected loser stance to slide toward the winner's rung 0. before={before}, after={after}");
+    }
+
+    [Fact]
+    public void DebatePrecept_NoSharedIssue_IsANoOp()
+    {
+        // Two cross-ideo pawns whose ideos cover entirely different issues: GetDebateTopic falls back to null
+        // and neither pawn's stance moves.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (issueA, rungsA) = SimIssues.Ladder("IssueA", "A0", "A1");
+        var (issueB, rungsB) = SimIssues.Ladder("IssueB", "B0", "B1");
+        var initiatorIdeo = new IdeoBuilder().WithName("IdeoA").AddPrecept(rungsA[0]).Build();
+        var recipientIdeo = new IdeoBuilder().WithName("IdeoB").AddPrecept(rungsB[1]).Build();
+        world.AddIdeo(initiatorIdeo);
+        world.AddIdeo(recipientIdeo);
+
+        var initiator = new PawnBuilder()
+            .WithIdeo(initiatorIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Init").Build(world);
+        var recipient = new PawnBuilder()
+            .WithIdeo(recipientIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Recip").Build(world);
+
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var before = StanceRank(recipientTracker, issueB);
+
+        new InteractionWorker_IdeologicalDebatePrecept().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        var after = StanceRank(recipientTracker, issueB);
+        Assert.Equal(before, after);
     }
 
     [Fact]
@@ -195,7 +261,7 @@ public class DebateTests : SeededTest
         }
 
         Assert.True(steps < 100, "Expected convergence to the winner within a bounded number of debates.");
-        Assert.Equal(3f, rank, 2);
+        Assert.True(Mathf.Abs(rank - 3f) <= 0.01f, $"Expected rank to converge to 3 within 0.01. got={rank}");
         Assert.True(Mathf.Abs(strength - 14f) <= 0.5f, $"Expected conviction to reach the winner's. got={strength}");
     }
 

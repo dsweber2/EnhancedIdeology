@@ -8,7 +8,7 @@ internal static class EnhancedIdeologyDefOf
     public static MemeDef Loyalist;
     public static MemeDef Proselytizer;
     public static MemeDef Guilty;
-    public static MentalStateDef CrisisOfFaith;
+    public static MentalStateDef EB_CrisisOfFaith;
     public static ThingDef EB_UnfinishedIdeobook;
     public static ThingDef EB_Ideobook;
     public static JobDef EB_CompleteReligiousBook;

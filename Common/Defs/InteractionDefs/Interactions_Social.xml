@@ -38,7 +38,6 @@
 		<defName>EB_Sentence_InitiatorWon</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>WINNING_STANCE_label->the issue</li>
 				<li>sent->[INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]".</li>
 			</rulesStrings>
 		</rulePack>
@@ -48,7 +47,6 @@
 		<defName>EB_Sentence_RecipientWon</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>WINNING_STANCE_label->the issue</li>
 				<li>sent->[RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]".</li>
 			</rulesStrings>
 		</rulePack>

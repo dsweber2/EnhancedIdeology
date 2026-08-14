@@ -64,10 +64,10 @@ public class CertaintySetpointTests : SeededTest
     [Fact]
     public void Relational_MaxRange_CapsBand()
     {
-        WithSettings(s => s.RelationalMaxRange = 0.12f, () =>
+        WithSettings(s => s.RelationalMaxRange = 0.25f, () =>
         {
             var (_, tracker, _) = BuildCongregation(coReligionists: 2, opinionEach: 100f);
-            Assert.Equal(0.12f, tracker.CachedRelational, precision: 5);
+            Assert.Equal(0.25f, tracker.CachedRelational, precision: 5);
         });
     }
 

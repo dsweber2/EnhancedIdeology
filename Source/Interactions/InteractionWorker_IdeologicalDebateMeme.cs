@@ -3,6 +3,7 @@ namespace EnhancedIdeology;
 internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorker
 {
     public MemeDef? topic;
+    public MemeDef? logTopic;
     public Pawn? lastWinner;
 
     // Per-precept pull is weaker than a focused precept debate since multiple precepts are affected at once.
@@ -97,6 +98,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         var recipientIdeo = recipient.Ideo;
 
         topic = initiatorIdeo.memes.Union(recipientIdeo.memes).RandomElement();
+        logTopic = topic;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate topic selected: {topic}");
 
         var initiatorRoll = GetDebateRoll(initiator);
@@ -172,8 +174,9 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             .Where(p => p.def.issue != null && (p.def.requiredMemes.Contains(meme) || p.def.associatedMemes.Contains(meme)))
             .Select(p => p.def);
 
-    // Finds all issues covered by the topic meme (via either ideo's precepts), then pulls the loser's stance
-    // on each toward the winner's position on that issue.
+    // Finds all issues touched by the topic meme in EITHER ideo, then pulls the loser's stance toward the
+    // winner's position. If the winner's ideo has no precept for an issue the loser holds, the target is
+    // DontCareRank — the winner is arguing "I have no stake in this" which weakens the loser's conviction.
     private static (Pawn winner, Pawn loser) AdjustOpinions(
         Pawn initiator, Pawn recipient,
         GameComponent_EnhancedIdeology comp,
@@ -194,11 +197,22 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}");
 
-        var winnerPrecepts = MemePreceptsFor(winner.Ideo, topic).ToList();
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: meme covers {winnerPrecepts.Count} precepts in winner's ideo: {string.Join(", ", winnerPrecepts.Select(p => p.defName))}");
+        var winnerPreceptsByIssue = MemePreceptsFor(winner.Ideo, topic).ToDictionary(p => p.issue!);
+        var loserIssues = MemePreceptsFor(loser.Ideo, topic).Select(p => p.issue!).ToHashSet();
+        var allIssues = winnerPreceptsByIssue.Keys.Union(loserIssues).ToList();
 
-        foreach (var precept in winnerPrecepts)
-            ConvictionMath.PullStance(comp, winner, loser, precept.issue!, PreceptLadder.RankOf(precept), MemeDebatePullMultiplier);
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
+            $"AdjustOpinions: meme covers {allIssues.Count} issues total " +
+            $"({winnerPreceptsByIssue.Count} from winner, {loserIssues.Count} from loser): " +
+            $"{string.Join(", ", allIssues.Select(i => i.defName))}");
+
+        foreach (var issue in allIssues)
+        {
+            var targetRank = winnerPreceptsByIssue.TryGetValue(issue, out var winnerPrecept)
+                ? PreceptLadder.RankOf(winnerPrecept)
+                : PreceptLadder.DontCareRank(issue);
+            ConvictionMath.PullStance(comp, winner, loser, issue, targetRank, MemeDebatePullMultiplier);
+        }
 
         return (winner, loser);
     }

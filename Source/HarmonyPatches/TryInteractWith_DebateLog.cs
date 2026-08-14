@@ -23,20 +23,22 @@ internal static class TryInteractWith_DebateLog
         if (intDef == EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept)
         {
             var worker = (InteractionWorker_IdeologicalDebatePrecept)intDef.Worker;
-            if (worker.topic == null)
+            if (worker.logTopic == null)
                 return;
             replacement = new PlayLogEntry_DebateInteraction(
                 intDef, initiator, recipient, sentencePacks,
-                worker.topic, worker.lastWinner, worker.lastWinnerPrecept?.label);
+                worker.logTopic, worker.lastWinner, worker.lastWinnerPrecept?.label);
+            worker.logTopic = null;
         }
         else if (intDef == EnhancedIdeologyDefOf.EB_IdeologicalDebateMeme)
         {
             var worker = (InteractionWorker_IdeologicalDebateMeme)intDef.Worker;
-            if (worker.topic == null)
+            if (worker.logTopic == null)
                 return;
             replacement = new PlayLogEntry_DebateInteraction(
                 intDef, initiator, recipient, sentencePacks,
-                worker.topic, worker.lastWinner, worker.topic.label);
+                worker.logTopic, worker.lastWinner, worker.logTopic.label);
+            worker.logTopic = null;
         }
 
         if (replacement != null)

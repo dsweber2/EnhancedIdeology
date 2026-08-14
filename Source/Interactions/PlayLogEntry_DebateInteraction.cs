@@ -86,8 +86,7 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
         request.Rules.Add(new Rule_String("TOPIC_label", topicLabel));
         if (debateWinner != null)
             request.Rules.AddRange(GrammarUtility.RulesForPawn("WINNER", debateWinner, request.Constants));
-        if (winnerPreceptLabel != null)
-            request.Rules.Add(new Rule_String("WINNING_STANCE_label", winnerPreceptLabel));
+        request.Rules.Add(new Rule_String("WINNING_STANCE_label", winnerPreceptLabel ?? "the issue"));
     }
 
     private void AddPawnRules(ref GrammarRequest request)

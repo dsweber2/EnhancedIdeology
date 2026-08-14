@@ -1116,7 +1116,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // resolving it). Otherwise, we find the ideo they most prefer, convert them to it if it outrates their
     // current certainty, then land their certainty at 1.5x the crisis threshold - above the danger zone but
     // still fragile. The pawn then enters the crisis-of-faith wander state.
-    private void TriggerCrisisOfFaith()
+    internal void TriggerCrisisOfFaith()
     {
         var mood = Pawn.needs.mood;
         if (mood != null && mood.CurLevel < Pawn.mindState.mentalBreaker.BreakThresholdMinor)
@@ -1139,7 +1139,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         Pawn.ideo.Certainty = Mathf.Clamp01(1.5f * crisisThreshold);
 
-        _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.CrisisOfFaith);
+        _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.EB_CrisisOfFaith);
     }
 
     // Adds the crisis-of-faith pseudo-candidate (a null ideo) when the pawn now prefers doubt to their own

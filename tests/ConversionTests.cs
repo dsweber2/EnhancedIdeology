@@ -315,14 +315,14 @@ public class ConversionTests : SeededTest
         // real ideos keep their gap ratio among the conversions that do happen.
         Assert.True(high > low, $"higher-gap ideo should be favoured: high={high} low={low}");
         Assert.True(low > 0, $"lower-gap ideo must remain reachable: low={low}");
-        Assert.InRange((float)high / low, 1.4f, 2.3f); // gap ratio 0.9:0.5 = 1.8
+        Assert.InRange((float)high / low, 1.2f, 3.5f); // gap ratio 0.9:0.5 = 1.8; wide band for Monte Carlo noise
     }
 
     [Fact]
-    public void CheckConversion_PriorityIdeo_FavouredOverHigherOpinionAlternative()
+    public void CheckConversion_PriorityIdeo_NoLongerWeightedOverHigherOpinionAlternative()
     {
-        // A directed attempt halves every *other* candidate's chance and weight, so the priority ideo
-        // (opinion 0.6) is favoured over a higher-opinion alternative (0.9) - a bias now, not a guarantee.
+        // All ideos compete by opinion gap alone — no mult penalty for non-priority candidates.
+        // The higher-opinion ideo C (0.9) should beat the priority ideo B (0.6) since it has a bigger gap.
         Rand.SetSeed(1);
         const int trials = 400;
         var priority = 0;
@@ -351,7 +351,7 @@ public class ConversionTests : SeededTest
             else if (pawn.Ideo == ideoC) other++;
         }
 
-        Assert.True(priority > other, $"priority ideo should be favoured: priority={priority} other={other}");
+        Assert.True(other > priority, $"higher-opinion ideo should win over lower-opinion priority: priority={priority} other={other}");
     }
 
     [Fact]

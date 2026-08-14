@@ -4,6 +4,7 @@
 internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWorker
 {
     public IssueDef? topic;
+    public IssueDef? logTopic;
     public Pawn? lastWinner;
     public Pawn? lastLoser;
     public PreceptDef? lastWinnerPrecept;
@@ -109,6 +110,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var recipientIdeo = recipient.Ideo;
 
         topic = GetDebateTopic(initiatorIdeo, recipientIdeo, initiatorTracker, recipientTracker, initiator, recipient, out var initiatorPrecept, out var recipientPrecept);
+        logTopic = topic;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate topic selected: {topic}");
         if (initiatorPrecept == null)
         {
