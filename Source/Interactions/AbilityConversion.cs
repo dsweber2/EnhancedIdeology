@@ -30,6 +30,7 @@ internal static class AbilityConversion
 
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var guideIdeo = guide.Ideo;
+        if (guideIdeo == null) return false;
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
 
         var guideRoll = InteractionWorker_IdeologicalDebatePrecept.GetDebateRoll(guide);
@@ -47,8 +48,8 @@ internal static class AbilityConversion
                 ConvictionMath.PullStance(comp, guide, recipient, issue, guideRank, 1f);
             }
 
-            recipient.ideo.Certainty *= EnhancedIdeologyMod.Settings.ConversionCertaintyKnock;
-            return recipientTracker.CheckConversion(guideIdeo) == ConversionOutcome.Success;
+            recipientTracker.SetExtendedCertainty(recipientTracker.ExtendedCertainty * EnhancedIdeologyMod.Settings.ConversionCertaintyKnock);
+            return recipientTracker.CheckConversion(guideIdeo, noBreakdown: true) == ConversionOutcome.Success;
         }
 
         var topIssue = issues[0];

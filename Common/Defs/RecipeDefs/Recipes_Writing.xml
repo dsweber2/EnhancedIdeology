@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <RecipeDef>
+    <defName>EB_WriteIdeobook</defName>
+    <label>write religious book</label>
+    <description>Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%).</description>
+    <jobString>writing a religious book.</jobString>
+    <workAmount>22500</workAmount>
+    <workSkill>Intellectual</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <workSpeedStat>ResearchSpeed</workSpeedStat>
+    <effectWorking>EB_CompleteBook</effectWorking>
+    <soundWorking>EB_Interact_Write</soundWorking>
+    <unfinishedThingDef>EB_UnfinishedDeskIdeobook</unfinishedThingDef>
+    <recipeUsers>
+      <li>EB_WritingDesk</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <customSummary>pages (Textile, Leather, or wood, no wool)</customSummary>
+          <categories>
+            <li>Textiles</li>
+            <li>Leathers</li>
+          </categories>
+          <disallowedCategories>
+            <li>Wools</li>
+          </disallowedCategories>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <customSummary>cover (Leather or Metal)</customSummary>
+          <categories>
+            <li>Leathers</li>
+          </categories>
+          <thingDefs>
+            <li>Steel</li>
+            <li>Plasteel</li>
+            <li>Uranium</li>
+            <li>Obsidian</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Textiles</li>
+        <li>Leathers</li>
+      </categories>
+      <disallowedCategories>
+        <li>Wools</li>
+      </disallowedCategories>
+      <thingDefs>
+        <li>WoodLog</li>
+        <li>Steel</li>
+        <li>Plasteel</li>
+        <li>Uranium</li>
+        <li>Obsidian</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <EB_Ideobook>1</EB_Ideobook>
+    </products>
+  </RecipeDef>
+  <RecipeDef>
+    <defName>EB_WriteIllustratedIdeobook</defName>
+    <label>write illustrated religious book</label>
+    <description>Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%).</description>
+    <jobString>illustrating religious book.</jobString>
+    <workAmount>30000</workAmount>
+    <workSkill>Intellectual</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <workSpeedStat>ResearchSpeed</workSpeedStat>
+    <effectWorking>EB_CompleteBook</effectWorking>
+    <soundWorking>EB_Interact_Write</soundWorking>
+    <unfinishedThingDef>EB_UnfinishedDeskIdeobook</unfinishedThingDef>
+    <recipeUsers>
+      <li>EB_WritingDesk</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <customSummary>pages (Textile, Leather, or wood, no wool)</customSummary>
+          <categories>
+            <li>Textiles</li>
+            <li>Leathers</li>
+          </categories>
+          <disallowedCategories>
+            <li>Wools</li>
+          </disallowedCategories>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <customSummary>cover (Leather or Metal)</customSummary>
+          <categories>
+            <li>Leathers</li>
+          </categories>
+          <thingDefs>
+            <li>Steel</li>
+            <li>Plasteel</li>
+            <li>Uranium</li>
+            <li>Obsidian</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+      <li>
+        <filter>
+          <customSummary>precious materials</customSummary>
+          <thingDefs>
+            <li>Gold</li>
+            <li>Silver</li>
+            <li>Jade</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Textiles</li>
+        <li>Leathers</li>
+      </categories>
+      <disallowedCategories>
+        <li>Wools</li>
+      </disallowedCategories>
+      <thingDefs>
+        <li>WoodLog</li>
+        <li>Steel</li>
+        <li>Plasteel</li>
+        <li>Uranium</li>
+        <li>Obsidian</li>
+        <li>Gold</li>
+        <li>Silver</li>
+        <li>Jade</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <EB_Ideobook>1</EB_Ideobook>
+    </products>
+  </RecipeDef>
+</Defs>

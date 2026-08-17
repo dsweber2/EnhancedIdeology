@@ -15,7 +15,7 @@ public static class Scribe
 
 public static class Scribe_References
 {
-    public static void Look<T>(ref T? value, string label) where T : class { }
+    public static void Look<T>(ref T value, string label) { }
 }
 
 public static class Scribe_Values
@@ -26,7 +26,7 @@ public static class Scribe_Values
 public static class Scribe_Collections
 {
     public static void Look<K, V>(
-        ref Dictionary<K, V>? dict, string label,
+        ref Dictionary<K, V> dict, string label,
         LookMode keyLookMode, LookMode valueLookMode,
         ref List<K>? keysWorkingList, ref List<V>? valuesWorkingList)
         where K : notnull { }

@@ -37,7 +37,7 @@ public static class DefDatabase<T> where T : Def
     public static void Add(T def) => _defs.Add(def);
     public static void Clear() => _defs.Clear();
 
-    public static T GetNamedSilentFail(string defName)
+    public static T? GetNamedSilentFail(string defName)
     {
         foreach (var def in _defs)
         {
@@ -56,6 +56,8 @@ public class IssueDef : Def { }
 public class ThingDef : Def { }
 
 public class JobDef : Def { }
+
+public class RecipeDef : Def { }
 
 public class EffecterDef : Def { }
 

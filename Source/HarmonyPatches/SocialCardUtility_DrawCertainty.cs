@@ -25,8 +25,10 @@ internal static class SocialCardUtility_DrawCertainty
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        // Refresh the cached setpoint/bands (cheap - guarded to a recache per rare tick).
-        var certaintyChangePerDay = pawn.ideo.CertaintyChangePerDay;
+        var certaintyChangePerDay = data.CachedCertaintyChange;
+
+        var extended = data.ExtendedCertainty;
+        var barMax = Mathf.Max(1f, extended, data.CachedTargetCertainty);
 
         if (Mouse.IsOver(containerRect))
         {
@@ -34,7 +36,7 @@ internal static class SocialCardUtility_DrawCertainty
 
             var certaintyChange = (certaintyChangePerDay >= 0f ? "+" : "") + certaintyChangePerDay.ToStringPercent();
 
-            var tip = "EnhancedIdeology.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO"), pawn.ideo.Certainty.ToStringPercent()) + "\n\n";
+            var tip = "EnhancedIdeology.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO"), extended.ToStringPercent()) + "\n\n";
             tip += "EnhancedIdeology.CertaintyTarget".Translate(data.CachedTargetCertainty.ToStringPercent()) + "\n";
             tip += "EnhancedIdeology.CertainChangePerDay".Translate(certaintyChange) + "\n\n";
 
@@ -54,10 +56,10 @@ internal static class SocialCardUtility_DrawCertainty
         // instant-level marker just below the bar. The bar gives up MarkerHeight of its height so the marker fits
         // inside the 40px certainty row instead of colliding with the role row beneath it.
         var certaintyBar = new Rect(barRect.x, barRect.y, barRect.width, barRect.height - CertaintyBar.MarkerHeight);
-        var filled = Widgets.FillableBar(certaintyBar, Mathf.Clamp01(pawn.ideo.Certainty));
+        var filled = Widgets.FillableBar(certaintyBar, extended / barMax);
 
-        CertaintyBar.DrawThreshold(filled, EnhancedIdeologyMod.Settings.CrisisThreshold, pawn.ideo.Certainty);
-        CertaintyBar.DrawTargetMarker(filled, Mathf.Clamp01(data.CachedTargetCertainty));
+        CertaintyBar.DrawThreshold(filled, EnhancedIdeologyMod.Settings.CrisisThreshold / barMax, extended / barMax);
+        CertaintyBar.DrawTargetMarker(filled, data.CachedTargetCertainty / barMax);
 
         return false;
     }

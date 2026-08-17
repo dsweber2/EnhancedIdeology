@@ -1,4 +1,5 @@
 using LudeonTK;
+using Verse.AI;
 
 namespace EnhancedIdeology;
 
@@ -116,6 +117,177 @@ internal static class DebugActions
         }
         Messages.Message($"{initiator.LabelShort} vs {recipient.LabelShort}: {outcome}",
             new LookTargets(initiator, recipient), MessageTypeDefOf.NeutralEvent, false);
+    }
+
+    [DebugAction("Ideoligion", "Trigger prayer", actionType = DebugActionType.ToolMapForPawns,
+        allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
+    private static void TriggerPrayer(Pawn pawn)
+    {
+        if (pawn.Ideo == null || pawn.Map == null)
+        {
+            Messages.Message($"{pawn.LabelShort} has no ideoligion or map.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        LogPrayerSiteDiagnosis(pawn);
+
+        var worshipRoom = JoyGiver_Prayer.FindWorshipRoom(pawn);
+        if (worshipRoom != null)
+        {
+            var reliquary = JoyGiver_Prayer.FindReliquary(worshipRoom, pawn);
+            if (reliquary != null)
+            {
+                pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, reliquary, reliquary), JobTag.Misc);
+                Messages.Message($"{pawn.LabelShort}: heading to pray at {reliquary.LabelShort}.",
+                    new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
+                return;
+            }
+            var pew = JoyGiver_Prayer.FindPew(worshipRoom, pawn);
+            if (pew != null)
+            {
+                var altar = JoyGiver_Prayer.FindPrayerTarget(worshipRoom, pawn);
+                pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, pew.Value, altar), JobTag.Misc);
+                Messages.Message($"{pawn.LabelShort}: heading to pray at pew.",
+                    new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
+                return;
+            }
+        }
+
+        var statueSite = JoyGiver_Prayer.FindStatuePrayerSite(pawn);
+        if (statueSite != null)
+        {
+            pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, statueSite.Value.cell, statueSite.Value.building), JobTag.Misc);
+            Messages.Message($"{pawn.LabelShort}: heading to pray at {statueSite.Value.building.LabelShort}.",
+                new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
+            return;
+        }
+
+        var impressiveReliquary = JoyGiver_Prayer.FindAccessibleImpressiveReliquary(pawn);
+        if (impressiveReliquary != null)
+        {
+            pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, impressiveReliquary, impressiveReliquary), JobTag.Misc);
+            Messages.Message($"{pawn.LabelShort}: heading to pray at {impressiveReliquary.LabelShort}.",
+                new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
+            return;
+        }
+
+        Messages.Message($"{pawn.LabelShort}: no valid prayer site found — see dev console for details.",
+            new LookTargets(pawn), MessageTypeDefOf.RejectInput, false);
+    }
+
+    private static void LogPrayerSiteDiagnosis(Pawn pawn)
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine($"=== Prayer site diagnosis: {pawn.LabelShort} ({pawn.Ideo!.name}) ===");
+        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  worshipRoom={JoyGiver_Prayer.FindWorshipRoom(pawn) != null}");
+
+        sb.AppendLine("\n-- Ideo buildings (non-altar) --");
+        foreach (var room in pawn.Map!.regionGrid.AllRooms)
+        {
+            if (room.PsychologicallyOutdoors) continue;
+            foreach (var thing in room.ContainedAndAdjacentThings.ToList())
+            {
+                if (thing is not ThingWithComps twc) continue;
+                var cs = twc.compStyleable;
+                if (cs == null || (cs.Ideo == null && cs.SourcePrecept == null)) continue;
+                sb.AppendLine($"  {thing.LabelShort} ({thing.def.defName})  isAltar={thing.def.isAltar}  csIdeo={cs.Ideo?.name ?? "null"}  match={cs.Ideo == pawn.Ideo}");
+                if (!thing.def.isAltar && cs.Ideo == pawn.Ideo)
+                {
+                    var cap = JoyGiver_Prayer.StatuePrayerCap(thing);
+                    sb.AppendLine($"    statueCap={cap}  canReserveCap={pawn.CanReserve(thing, cap, -1)}");
+                }
+                if (cs.SourcePrecept is Precept_Building pb && pb.presenceDemand != null)
+                {
+                    var demand = pb.presenceDemand;
+                    sb.Append($"    presenceDemand applies={demand.AppliesTo(pawn.Map)}");
+                    if (demand.AppliesTo(pawn.Map))
+                    {
+                        var effRoom = demand.GetEffectiveRoom(thing);
+                        sb.Append($"  effectiveRoom={effRoom?.ID.ToString() ?? "null"}");
+                        if (effRoom != null)
+                            foreach (var req in demand.roomRequirements ?? [])
+                                sb.Append($"  [{req.GetType().Name}={req.MetOrDisabled(effRoom, pawn)}]");
+                    }
+                    sb.AppendLine();
+                }
+                sb.AppendLine($"    forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}");
+            }
+        }
+
+        sb.AppendLine("\n-- Reliquaries --");
+        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        {
+            if (room.PsychologicallyOutdoors) continue;
+            foreach (var thing in room.ContainedAndAdjacentThings.ToList())
+            {
+                if (thing.def != ThingDefOf.Reliquary) continue;
+                sb.AppendLine($"  {thing.LabelShort}  impressiveness={room.GetStat(RoomStatDefOf.Impressiveness):F0}  forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}");
+            }
+        }
+
+        Log.Message(sb.ToString());
+    }
+
+    [DebugAction("Ideoligion", "Trigger conversion attempt", actionType = DebugActionType.ToolMapForPawns,
+        allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
+    private static void TriggerConversionAttempt(Pawn initiator)
+    {
+        if (initiator.Ideo == null)
+        {
+            Messages.Message($"{initiator.LabelShort} has no ideoligion.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var recipient = initiator.Map?.mapPawns.AllPawnsSpawned
+            .Where(pawn => pawn != initiator && pawn.RaceProps.Humanlike && pawn.Ideo != null
+                && pawn.Ideo != initiator.Ideo
+                && !pawn.DevelopmentalStage.Baby()
+                && GenSight.LineOfSight(initiator.Position, pawn.Position, initiator.Map))
+            .OrderBy(pawn => pawn.Position.DistanceToSquared(initiator.Position))
+            .FirstOrDefault();
+
+        if (recipient == null)
+        {
+            Messages.Message($"No visible cross-ideo humanlike for {initiator.LabelShort} to convert.",
+                MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var def = DefDatabase<InteractionDef>.GetNamed("ConvertIdeoAttempt");
+        var worker = (InteractionWorker_AdvancedConversionAttempt)def.Worker;
+        var extraSentencePacks = new List<RulePackDef>();
+        var oldIdeo = recipient.Ideo;
+
+        worker.Interacted(initiator, recipient, extraSentencePacks, out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
+
+        if (letterDef != null)
+        {
+            Find.LetterStack.ReceiveLetter(letterLabel, letterText, letterDef, lookTargets ?? new LookTargets(initiator, recipient));
+        }
+
+        var outcome = recipient.Ideo != oldIdeo
+            ? $"converted {oldIdeo!.name} → {recipient.Ideo!.name}"
+            : "no conversion";
+        Messages.Message($"{initiator.LabelShort} → {recipient.LabelShort}: {outcome}",
+            new LookTargets(initiator, recipient), MessageTypeDefOf.NeutralEvent, false);
+    }
+
+    [DebugAction("Ideoligion", "Set expectation override", actionType = DebugActionType.Action,
+        allowedGameStates = AllowedGameStates.PlayingOnMap)]
+    private static void SetExpectationOverride()
+    {
+        var options = new List<DebugMenuOption>
+        {
+            new("None (real value)", DebugMenuOptionMode.Action,
+                () => ExpectationsUtility_Override.ForcedExpectation = null)
+        };
+        foreach (var def in DefDatabase<ExpectationDef>.AllDefsListForReading.OrderBy(d => d.order))
+        {
+            var captured = def;
+            options.Add(new DebugMenuOption(def.label.CapitalizeFirst(), DebugMenuOptionMode.Action,
+                () => ExpectationsUtility_Override.ForcedExpectation = captured));
+        }
+        Find.WindowStack.Add(new Dialog_DebugOptionListLister(options));
     }
 
     [DebugAction("Ideoligion", "Trigger crisis of faith", actionType = DebugActionType.ToolMapForPawns,

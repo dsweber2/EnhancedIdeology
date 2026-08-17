@@ -11,7 +11,7 @@ public class AbilityConversionTests : SeededTest
         var (world, guide, recipient, opposed, agree) = BundleFaiths();
         var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
 
-        var all = recipientTracker.MostOpposingIssues(guide.Ideo, 4);
+        var all = recipientTracker.MostOpposingIssues(guide.Ideo!, 4);
         Assert.Equal(opposed.Count, all.Count);
         Assert.DoesNotContain(agree, all);
         foreach (var issue in opposed)
@@ -20,7 +20,7 @@ public class AbilityConversionTests : SeededTest
         }
 
         // The cap trims to n while keeping the most-opposed first.
-        var capped = recipientTracker.MostOpposingIssues(guide.Ideo, 2);
+        var capped = recipientTracker.MostOpposingIssues(guide.Ideo!, 2);
         Assert.Equal(2, capped.Count);
         Assert.Equal(all[0], capped[0]);
         Assert.Equal(all[1], capped[1]);

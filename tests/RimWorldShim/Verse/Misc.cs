@@ -17,7 +17,10 @@ public static class RulePackDefOf
     public static RulePackDef Sentence_ConvertIdeoAttemptFailSocialFight = new() { defName = "Sentence_ConvertIdeoAttemptFailSocialFight" };
 }
 
-public readonly struct HistoryEvent(RimWorld.HistoryEventDef? def, params NamedArgument[] args) { }
+public readonly struct HistoryEvent
+{
+    public HistoryEvent(RimWorld.HistoryEventDef? def, params NamedArgument[] args) { }
+}
 
 public static class MoteMaker
 {

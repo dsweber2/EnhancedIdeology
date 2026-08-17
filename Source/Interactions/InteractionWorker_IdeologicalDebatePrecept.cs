@@ -108,6 +108,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
         var initiatorIdeo = initiator.Ideo;
         var recipientIdeo = recipient.Ideo;
+        if (initiatorIdeo == null || recipientIdeo == null) return;
 
         topic = GetDebateTopic(initiatorIdeo, recipientIdeo, initiatorTracker, recipientTracker, initiator, recipient, out var initiatorPrecept, out var recipientPrecept);
         logTopic = topic;
@@ -155,7 +156,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             if (winner.Ideo != loser.Ideo && loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
                 && (PawnUtility.ShouldSendNotificationAbout(winner) || PawnUtility.ShouldSendNotificationAbout(loser)))
             {
-                var loserRole = loserOldIdeo.GetRole(loser);
+                var loserRole = loserOldIdeo!.GetRole(loser);
                 letterLabel = "EnhancedIdeology.LetterLabelIdeologicalDebateConversion".Translate();
                 letterText = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(
                     winner.Named("CONVINCER"),
@@ -361,7 +362,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
     private static void GainDiversityMemory(Pawn pawn, Pawn other)
     {
-        var thought = DiversityStance(pawn.Ideo) switch
+        var thought = DiversityStance(pawn.Ideo!) switch
         {
             DiversityReaction.Tolerant => EnhancedIdeologyDefOf.EB_GoodDebate,
             DiversityReaction.Bigoted => EnhancedIdeologyDefOf.EB_BadDebate,

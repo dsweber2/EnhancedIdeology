@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingDef ParentName="BuildingBase">
+        <defName>EB_WritingDesk</defName>
+        <label>writing desk</label>
+        <description>A desk for composing ideological texts. Only colonists with deep conviction in their beliefs can write at it.</description>
+        <thingClass>Building_WorkTable</thingClass>
+        <graphicData>
+            <texPath>Things/Building/Writing/WritingDesk</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>(2,1)</drawSize>
+            <shadowData>
+                <volume>(1.7, 0.3, 0.5)</volume>
+                <offset>(0, 0, -0.15)</offset>
+            </shadowData>
+        </graphicData>
+        <stuffCategories>
+            <li>Woody</li>
+            <li>Stony</li>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costStuffCount>100</costStuffCount>
+        <altitudeLayer>Building</altitudeLayer>
+        <fillPercent>0.5</fillPercent>
+        <useHitPoints>true</useHitPoints>
+        <selectable>true</selectable>
+        <size>(2,1)</size>
+        <statBases>
+            <MaxHitPoints>150</MaxHitPoints>
+            <WorkToBuild>3000</WorkToBuild>
+            <Beauty>5</Beauty>
+            <Flammability>1.0</Flammability>
+            <Mass>30</Mass>
+        </statBases>
+        <passability>PassThroughOnly</passability>
+        <pathCost>60</pathCost>
+        <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+        <hasInteractionCell>true</hasInteractionCell>
+        <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+        <surfaceType>Item</surfaceType>
+        <designationCategory>Ideology</designationCategory>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <thingCategories>
+            <li>BuildingsMisc</li>
+        </thingCategories>
+        <inspectorTabs>
+            <li>ITab_Bills</li>
+        </inspectorTabs>
+        <building>
+            <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+            <paintable>true</paintable>
+        </building>
+        <comps>
+            <li Class="CompProperties_Styleable" />
+        </comps>
+        <placeWorkers>
+            <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+        </placeWorkers>
+    </ThingDef>
+
+</Defs>

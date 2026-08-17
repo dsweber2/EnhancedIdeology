@@ -26,7 +26,7 @@ internal static class BookUIUtility_DrawBenefits_Reroute
         var stances = doer.IdeoStances().ToList();
         if (stances.Count == 0) return;
 
-        var gainPerMin = doer.CertaintyGain() * GenTicks.TicksPerRealSecond * 60f;
+        var gainPerQuadrum = doer.CertaintyGain() * ReadingOutcomeDoer_CertaintyChange.TypicalReadingTicksPerQuadrum;
 
         y += SectionGap;
 
@@ -53,7 +53,7 @@ internal static class BookUIUtility_DrawBenefits_Reroute
         float rowY = 0f;
         foreach (var (issue, stance, strength) in stances)
         {
-            var shiftPerSec = "EnhancedIdeology.ShiftRatePerMinute".Translate((gainPerMin * strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent("0.0##"));
+            var shiftPerQuadrum = "EnhancedIdeology.ShiftRatePerQuadrum".Translate((gainPerQuadrum * strength / IdeoTrackerData.MaxConvictionStrength).ToString("0.##"));
             if (issue.Icon != null)
             {
                 var iconRect = new Rect(Indent, rowY + ((IssueRowHeight - IssueIconSize) / 2f), IssueIconSize, IssueIconSize);
@@ -62,7 +62,7 @@ internal static class BookUIUtility_DrawBenefits_Reroute
 
             var textX = Indent + IssueIconSize + IconTextGap;
             Text.Anchor = TextAnchor.MiddleLeft;
-            Widgets.Label(new Rect(textX, rowY, viewRect.width - textX, IssueRowHeight), $"{issue.LabelCap}: {stance.LabelCap} ({shiftPerSec})");
+            Widgets.Label(new Rect(textX, rowY, viewRect.width - textX, IssueRowHeight), $"{issue.LabelCap}: {stance.LabelCap} ({shiftPerQuadrum})");
             Text.Anchor = TextAnchor.UpperLeft;
 
             rowY += IssueRowHeight;

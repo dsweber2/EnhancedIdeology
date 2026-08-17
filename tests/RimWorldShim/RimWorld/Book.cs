@@ -7,7 +7,10 @@ public enum QualityCategory
 
 public static class Dialog_InfoCard
 {
-    public readonly struct Hyperlink(object? def) { }
+    public readonly struct Hyperlink
+    {
+        public Hyperlink(object? def) { }
+    }
 }
 
 public abstract class BookOutcomeProperties
@@ -17,7 +20,8 @@ public abstract class BookOutcomeProperties
 
 public abstract class BookOutcomeDoer
 {
-    protected internal BookOutcomeProperties? props;
+    protected internal BookOutcomeProperties props = null!;
+    public BookOutcomeProperties Props => props;
     public QualityCategory Quality;
 
     public virtual void OnBookGenerated(Verse.Pawn? author = null) { }

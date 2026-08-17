@@ -86,5 +86,5 @@ public static class Find
 
 public static class Current
 {
-    public static Game? Game { get; set; }
+    public static Game Game { get; set; } = null!;
 }

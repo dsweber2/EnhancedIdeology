@@ -76,6 +76,25 @@
 	</Operation>
 
 
+	<!-- If VBE is active: suppress our desk and add our recipe to VBE's table instead -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="VBE_WritersTable"]</xpath>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/ThingDef[defName="EB_WritingDesk"]</xpath>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook"]/recipeUsers</xpath>
+					<value>
+						<li>VBE_WritersTable</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
 	<!-- Apostacy: add the low-certainty co-believer situational social thought to all three strict
 	     apostacy precepts. The ThoughtWorker gates on same-ideo + certainty gap, so only relevant
 	     pairs see an opinion penalty. -->

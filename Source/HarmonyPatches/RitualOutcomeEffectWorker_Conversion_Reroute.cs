@@ -136,7 +136,7 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
         if (outcome.positivityIndex > 0)
         {
             var converteeTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(convertee);
-            converteeTracker.CheckConversion(ritualIdeo);
+            converteeTracker.CheckConversion(ritualIdeo, noBreakdown: true);
         }
     }
 

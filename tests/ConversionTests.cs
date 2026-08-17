@@ -319,10 +319,10 @@ public class ConversionTests : SeededTest
     }
 
     [Fact]
-    public void CheckConversion_PriorityIdeo_NoLongerWeightedOverHigherOpinionAlternative()
+    public void CheckConversion_PriorityIdeo_RestrictsToOnlyPriorityIdeo()
     {
-        // All ideos compete by opinion gap alone — no mult penalty for non-priority candidates.
-        // The higher-opinion ideo C (0.9) should beat the priority ideo B (0.6) since it has a bigger gap.
+        // When a preacher triggers conversion, only their ideo should be the target — even if a third ideo
+        // has a higher opinion. IdeoC has a bigger gap (90 vs 60) but must be ignored.
         Rand.SetSeed(1);
         const int trials = 400;
         var priority = 0;
@@ -345,13 +345,15 @@ public class ConversionTests : SeededTest
             tracker.SetIdeoBaseOpinion(ideoB, 60);
             tracker.SetIdeoBaseOpinion(ideoC, 90);
 
-            tracker.CheckConversion(priorityIdeo: ideoB);
+            var outcome = tracker.CheckConversion(priorityIdeo: ideoB);
+            if (outcome != ConversionOutcome.Success) continue;
 
             if (pawn.Ideo == ideoB) priority++;
             else if (pawn.Ideo == ideoC) other++;
         }
 
-        Assert.True(other > priority, $"higher-opinion ideo should win over lower-opinion priority: priority={priority} other={other}");
+        Assert.True(other == 0, $"non-priority ideo C should never be a Success outcome in a priority conversion: other={other}");
+        Assert.True(priority > 0, $"priority ideo B should be reachable: priority={priority}");
     }
 
     [Fact]

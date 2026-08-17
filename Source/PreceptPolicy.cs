@@ -10,9 +10,9 @@ internal readonly struct DontCareSpec
 
     private readonly Kind _kind;
     private readonly string _a;
-    private readonly string _b;
+    private readonly string? _b;
 
-    private DontCareSpec(Kind kind, string a, string b)
+    private DontCareSpec(Kind kind, string a, string? b)
     {
         _kind = kind;
         _a = a;
@@ -30,7 +30,7 @@ internal readonly struct DontCareSpec
         switch (_kind)
         {
             case Kind.Between:
-                var b = PreceptLadder.RankOfName(issue, _b);
+                var b = PreceptLadder.RankOfName(issue, _b!);
                 if (a < 0f && b < 0f) return -1f;
                 if (a < 0f) return b;
                 if (b < 0f) return a;
@@ -55,10 +55,10 @@ internal readonly struct InducedStance
 
     public readonly string TargetIssue;
     private readonly Kind _kind;
-    private readonly string _rung;
+    private readonly string? _rung;
     private readonly float _offset;
 
-    private InducedStance(string targetIssue, Kind kind, string rung, float offset)
+    private InducedStance(string targetIssue, Kind kind, string? rung, float offset)
     {
         TargetIssue = targetIssue;
         _kind = kind;
@@ -75,7 +75,7 @@ internal readonly struct InducedStance
 
     public float Resolve(IssueDef issue) => _kind switch
     {
-        Kind.Rung => PreceptLadder.RankOfName(issue, _rung),
+        Kind.Rung => PreceptLadder.RankOfName(issue, _rung!),
         _ => PreceptLadder.DontCareRank(issue) + _offset,
     };
 }

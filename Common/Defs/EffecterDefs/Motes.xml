@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="MoteBase">
+    <defName>EB_Mote_PrayerIcon</defName>
+    <thingClass>EnhancedIdeology.Mote_PrayerIcon</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Mote/Transparent</texPath>
+      <drawSize>1</drawSize>
+    </graphicData>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <solidTime>0.5</solidTime>
+      <fadeOutTime>2.0</fadeOutTime>
+    </mote>
+  </ThingDef>
+</Defs>

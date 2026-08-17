@@ -62,8 +62,10 @@ public class IdeoTrackerTests : SeededTest
     }
 
     [Fact]
-    public void AdjustPersonalOpinion_ExtremePositive_ClampsToMaxOpinion()
+    public void AdjustPersonalOpinion_ExtremePositive_ExceedsOnePointZero()
     {
+        // Opinions are no longer capped at 1.0: a very strong personal boost can push them above certainty,
+        // which is what allows conversion to a similar-but-better-fit ideo at overcertainty.
         var world = new SimWorld();
         world.Initialize();
         var ideoA = new IdeoBuilder().WithName("A").Build();
@@ -76,7 +78,7 @@ public class IdeoTrackerTests : SeededTest
 
         tracker.AdjustPersonalOpinion(ideoB, 1000f);
 
-        Assert.Equal(1f, tracker.IdeoOpinion(ideoB), precision: 4);
+        Assert.True(tracker.IdeoOpinion(ideoB) > 1f, $"Expected opinion > 1.0, got {tracker.IdeoOpinion(ideoB)}");
     }
 
     [Fact]

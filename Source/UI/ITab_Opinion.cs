@@ -174,10 +174,18 @@ internal sealed class ITab_Opinion : ITab
     private void DrawIdeoColumn(IdeoTrackerData data, List<Ideo> ideos, Ideo selected, float xOffset, float nameWidth, float width)
     {
         var pos = Padding;
-        foreach (var (ideo, opinion) in ideos
+        var ideoOpinions = ideos
             .Select(ideo => (ideo, opinion: data.IdeoOpinion(ideo)))
             .OrderByDescending(entry => entry.ideo == SelPawn.Ideo)
-            .ThenByDescending(entry => entry.opinion))
+            .ThenByDescending(entry => entry.opinion)
+            .ToList();
+
+        // Scale bars to the highest opinion so overcertainty (>100%) is visible rather than clipped.
+        var barMax = ideoOpinions.Count > 0
+            ? Mathf.Max(1f, ideoOpinions.Max(ii => ii.opinion), data.CachedTargetCertainty)
+            : 1f;
+
+        foreach (var (ideo, opinion) in ideoOpinions)
         {
             // Content sits centred in the taller ideoligion row.
             var rowY = pos + ((IdeoRowHeight - IconSize) / 2f);
@@ -202,12 +210,13 @@ internal sealed class ITab_Opinion : ITab
             // Every bar reserves the marker strip and carries the crisis-of-faith tick (grey while the fill is
             // still above it, black once it has dropped past), so the rows read uniformly. Only the pawn's own
             // row - which is their certainty - also gets the drift-target marker.
+            var fill = opinion / barMax;
             var certaintyBar = new Rect(barRect.x, barRect.y, barRect.width, barRect.height - CertaintyBar.MarkerHeight).ContractedBy(Padding);
-            var filled = Widgets.FillableBar(certaintyBar, opinion, Widgets.BarFullTexHor);
-            CertaintyBar.DrawThreshold(filled, EnhancedIdeologyMod.Settings.CrisisThreshold, opinion);
+            var filled = Widgets.FillableBar(certaintyBar, fill, Widgets.BarFullTexHor);
+            CertaintyBar.DrawThreshold(filled, EnhancedIdeologyMod.Settings.CrisisThreshold / barMax, fill);
             if (ideo == SelPawn.Ideo)
             {
-                CertaintyBar.DrawTargetMarker(filled, Mathf.Clamp01(data.CachedTargetCertainty));
+                CertaintyBar.DrawTargetMarker(filled, data.CachedTargetCertainty / barMax);
             }
 
             if (Widgets.ButtonInvisible(iconRect))

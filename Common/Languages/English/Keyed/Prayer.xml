@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+    <EB_NoPewToPrayIn>{PAWN_nameDef} couldn't find a ritual seat to pray in for {IDEO_name}.</EB_NoPewToPrayIn>
+    <EB_PrayerRoomDisrespected>{PAWN_nameDef}'s {IDEO_name} prayer room is disrespected.</EB_PrayerRoomDisrespected>
+
+</LanguageData>

@@ -37,6 +37,38 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // a per-tick caller (book reading) can shift many issues cheaply and pay the one recompute only on read.
     private bool baseOpinionsDirty;
 
+    // Extended certainty: uncapped version of Pawn.ideo.Certainty. Vanilla certainty is always
+    // Clamp01(ExtendedCertainty). Initialized lazily from vanilla if not yet set (old saves, fresh trackers).
+    private float _extendedCertainty = -1f;
+    public float ExtendedCertainty
+    {
+        get
+        {
+            if (_extendedCertainty < 0f)
+                _extendedCertainty = Pawn.ideo.Certainty;
+            return _extendedCertainty;
+        }
+    }
+
+    // Set extended certainty to an absolute value (no upper cap) and sync vanilla to Clamp01.
+    public void SetExtendedCertainty(float value)
+    {
+        _extendedCertainty = Mathf.Max(0f, value);
+        Pawn.ideo.Certainty = Mathf.Clamp01(_extendedCertainty);
+    }
+
+    // Advance extended certainty by CachedCertaintyChange * deltaDays; sync vanilla = Clamp01(extended).
+    // Detects external resets (crisis, knock, book burn) by comparing vanilla against Clamp01(extended):
+    // if vanilla is lower than expected, something outside our tick reduced it — snap extended down to match.
+    internal void AdvanceExtendedCertainty(float deltaDays)
+    {
+        var expectedVanilla = Mathf.Clamp01(ExtendedCertainty);
+        if (Pawn.ideo.Certainty < expectedVanilla - 0.001f)
+            _extendedCertainty = Pawn.ideo.Certainty;
+        _extendedCertainty = Mathf.Max(0f, ExtendedCertainty + CachedCertaintyChange * deltaDays);
+        Pawn.ideo.Certainty = Mathf.Clamp01(_extendedCertainty);
+    }
+
     // A pawn spawns at equilibrium: the first setpoint computed for them seeds their certainty to it, so the
     // target sits exactly on the bar until an event pushes belief off it. Defaults true on load so existing
     // pawns keep their played-in certainty.
@@ -56,6 +88,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         certaintyInitialized = true;
         needsStanceCalibration = true;
         calibrationTargetCertainty = existingCertainty;
+        _extendedCertainty = existingCertainty;
     }
 
     private readonly Dictionary<Ideo, float> cachedRelationshipIdeoOpinions = [];
@@ -92,10 +125,16 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
     // Certainty is a first-order relaxation toward a setpoint (target certainty): dc/dt = k * (target - c).
     // The setpoint is the sum of three bands - structural (innate fit), relational (co-religionists) and
-    // practitional (current precept moods) - plus a difficulty offset, all clamped to [0, 1]. There is no
-    // forcing term, so certainty can never leave [0, 1] and always drifts toward where the pawn "belongs".
+    // practitional (current precept moods) - plus a difficulty offset. No upper cap: certainty can exceed 1
+    // when the pawn's structural fit is very strong.
     public void CertaintyChangeRecache(GameComponent_EnhancedIdeology comp)
     {
+        // Sync extended certainty with any external write to vanilla (tests, reassure, book, entrench, etc.).
+        // AdvanceExtendedCertainty handles the tick path; this catches same-tick reads like the conversion check.
+        var expectedVanilla = Mathf.Clamp01(ExtendedCertainty);
+        if (Mathf.Abs(Pawn.ideo.Certainty - expectedVanilla) > 0.001f)
+            _extendedCertainty = Pawn.ideo.Certainty;
+
         var settings = EnhancedIdeologyMod.Settings;
 
         StructuralContributors.Clear();
@@ -103,7 +142,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         PractitionalContributors.Clear();
 
         // Structural band: innate fit of the pawn to their own ideo, from their per-issue precept stances.
-        var structural = StructuralOpinionOf(Pawn.Ideo, StructuralContributors) / 100f;
+        var structural = StructuralOpinionOf(Pawn.Ideo!, StructuralContributors) / 100f;
         CachedStructural = structural;
 
         // Relational band: mean opinion of co-religionists, scaled by the user's max range.
@@ -119,11 +158,11 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             needsStanceCalibration = false;
             CalibrateStancesToCertainty(structural);
             StructuralContributors.Clear();
-            structural = StructuralOpinionOf(Pawn.Ideo, StructuralContributors) / 100f;
+            structural = StructuralOpinionOf(Pawn.Ideo!, StructuralContributors) / 100f;
             CachedStructural = structural;
         }
 
-        var target = Mathf.Clamp01(structural + CachedRelational + CachedPractitional + settings.DifficultyOffset);
+        var target = Mathf.Max(0f, structural + CachedRelational + CachedPractitional + settings.DifficultyOffset);
         CachedTargetCertainty = target;
 
         // Seed a fresh pawn's certainty to their net setpoint the first time it is known - relationships and
@@ -131,15 +170,16 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (!certaintyInitialized)
         {
             certaintyInitialized = true;
-            Pawn.ideo.Certainty = target;
+            _extendedCertainty = target;
+            Pawn.ideo.Certainty = Mathf.Clamp01(target);
         }
 
-        CachedCertaintyChange = settings.CertaintyDriftRate * (target - Pawn.ideo.Certainty);
+        CachedCertaintyChange = settings.CertaintyDriftRate * (target - ExtendedCertainty);
     }
 
     private float RelationalBand(float maxRange, List<(string label, float pct)> contributors, GameComponent_EnhancedIdeology comp)
     {
-        CacheRelationshipIdeoOpinion(Pawn.Ideo, comp);
+        CacheRelationshipIdeoOpinion(Pawn.Ideo!, comp);
 
         float sum = 0;
         int count = 0;
@@ -213,13 +253,13 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         if (ideo == Pawn.Ideo)
         {
-            baseIdeoOpinions[ideo] = Pawn.ideo.Certainty * 100f;
+            baseIdeoOpinions[ideo] = ExtendedCertainty * 100f;
         }
 
-        return Mathf.Clamp(
+        return Mathf.Max(
             baseIdeoOpinions[ideo] +
             PersonalIdeoOpinion(ideo, out var _) +
-            IdeoOpinionFromRelationships(ideo, false, out var _), 0, 100) / 100f;
+            IdeoOpinionFromRelationships(ideo, false, out var _), 0) / 100f;
     }
 
     // Rundown on the function above, for UI reasons
@@ -236,7 +276,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         var relationshipOpinion = noRelationship ? 0 : IdeoOpinionFromRelationships(ideo, true, out relationshipDevModeDetails) / 100f;
         return new DetailedIdeoOpinion
         (
-             ideo == Pawn.Ideo ? Pawn.ideo.Certainty : baseIdeoOpinions[ideo] / 100f,
+             ideo == Pawn.Ideo ? ExtendedCertainty : baseIdeoOpinions[ideo] / 100f,
              personalOpinion,
              relationshipOpinion,
              personalDevModeDetails +
@@ -252,7 +292,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         if (ideo == Pawn.Ideo)
         {
-            return Pawn.ideo.Certainty * 100f;
+            return ExtendedCertainty * 100f;
         }
 
         return StructuralOpinionOf(ideo);
@@ -263,7 +303,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // If contributors is supplied, each term is recorded (in certainty-fraction units) for the tooltip breakdown.
     private float StructuralOpinionOf(Ideo ideo, List<(string label, float pct)>? contributors = null)
     {
-        var pawnIdeo = Pawn.Ideo;
+        var pawnIdeo = Pawn.Ideo!;
         var start = contributors?.Count ?? 0;
         float opinion = 0;
 
@@ -333,7 +373,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             .Distinct();
         foreach (var issue in relevantIssues)
         {
-            var perIssue = PerIssueOpinion(ideo, issue, inducedTargets, oppositionScale, out var graded);
+            var perIssue = PerIssueOpinion(ideo, issue!, inducedTargets, oppositionScale, out var graded);
             if (!graded)
             {
                 continue;
@@ -343,7 +383,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             issueCount++;
             if (contributors != null && perIssue != 0f)
             {
-                contributors.Add((issue.LabelCap, perIssue));
+                contributors.Add((issue!.LabelCap, perIssue));
             }
         }
 
@@ -392,7 +432,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
         }
 
-        return Mathf.Clamp(opinion, 0, 100);
+        return Mathf.Max(opinion, 0);
     }
 
     // Raw per-issue opinion (roughly +/-strength) the pawn holds toward `ideo`'s stance on `issue`: the same
@@ -418,7 +458,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         // Weapons / PreferredXenotypes compare precept payloads directly; leader / mood are rank-based.
         // Either resolver returning false means the two faiths have no stance to compare.
         if (category == PreceptCategory.Special
-            && (PreceptPolicy.TryPayloadSpecialOpinion(issue, Pawn.Ideo, ideo, issueStrength[issue], out var special)
+            && (PreceptPolicy.TryPayloadSpecialOpinion(issue, Pawn.Ideo!, ideo, issueStrength[issue], out var special)
                 || PreceptPolicy.TrySpecialOpinion(
                     issue, issuePreferredRank[issue], HeldRank(ideo, issue), issueStrength[issue], oppositionScale, out special)))
         {
@@ -436,7 +476,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         EnsureIssueStancesSeeded();
         var inducedTargets = new HashSet<IssueDef>(
-            PreceptPolicy.InducedIssues(Pawn.Ideo).Concat(PreceptPolicy.InducedIssues(ideo)));
+            PreceptPolicy.InducedIssues(Pawn.Ideo!).Concat(PreceptPolicy.InducedIssues(ideo)));
         return PerIssueOpinion(ideo, issue, inducedTargets, EnhancedIdeologyMod.Settings.PreceptOppositionScale, out _);
     }
 
@@ -456,7 +496,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         EnsureIssueStancesSeeded();
         var inducedTargets = new HashSet<IssueDef>(
-            PreceptPolicy.InducedIssues(Pawn.Ideo).Concat(PreceptPolicy.InducedIssues(ideo)));
+            PreceptPolicy.InducedIssues(Pawn.Ideo!).Concat(PreceptPolicy.InducedIssues(ideo)));
         var oppositionScale = EnhancedIdeologyMod.Settings.PreceptOppositionScale;
 
         var scored = ideo.precepts.Select(precept => precept.def.issue)
@@ -525,13 +565,13 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         EnsureIssueStancesSeeded();
 
-        var ideoIssues = Pawn.Ideo.precepts.Select(precept => precept.def.issue)
+        var ideoIssues = Pawn.Ideo!.precepts.Select(precept => precept.def.issue)
             .Where(issue => issue != null).Distinct()
             .Select(issue => issue!)
             .ToList();
 
         var divergent = ideoIssues
-            .Select(issue => (issue, divergence: Mathf.Abs(issuePreferredRank[issue] - HeldRank(Pawn.Ideo, issue))))
+            .Select(issue => (issue, divergence: Mathf.Abs(issuePreferredRank[issue] - HeldRank(Pawn.Ideo!, issue))))
             .Where(entry => entry.divergence > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon)
             .OrderByDescending(entry => entry.divergence)
             .Take(n)
@@ -595,7 +635,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 continue;
             }
 
-            issuePreferredRank[issue] = HeldRank(Pawn.Ideo, issue);
+            issuePreferredRank[issue] = HeldRank(Pawn.Ideo!, issue);
             issueStrength[issue] = Mathf.Clamp(
                 Rand.Range(BaseConvictionMin, BaseConvictionMax) + traitOffset,
                 MinConvictionStrength, AbsoluteMaxConvictionStrength);
@@ -644,7 +684,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         var candidates = issueStrength.Keys
             .Where(issue => PreceptPolicy.CategoryOf(issue) == PreceptCategory.Moral
-                && Pawn.Ideo.precepts.Any(precept => precept.def.issue == issue)
+                && Pawn.Ideo!.precepts.Any(precept => precept.def.issue == issue)
                 && PreceptLadder.Rungs(issue).Count > 1)
             .OrderBy(issue => issueStrength[issue])
             .Take(flipCount)
@@ -799,13 +839,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
         }
 
-        // Makes sure that pawn's personal opinion cannot go below/above 100% purely from circlejerking
-        var curOpinion = Mathf.Clamp(baseIdeoOpinion + opinion, 0, 100);
-        if (personalIdeoOpinion > 100f - curOpinion)
-        {
-            personalIdeoOpinions[ideo] = 100f - curOpinion;
-        }
-        else if (personalIdeoOpinions[ideo] < -curOpinion)
+        // Makes sure personal opinions cannot drive total below zero
+        var curOpinion = Mathf.Max(baseIdeoOpinion + opinion, 0);
+        if (personalIdeoOpinions[ideo] < -curOpinion)
         {
             personalIdeoOpinions[ideo] = -curOpinion;
         }
@@ -872,7 +908,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
     public IEnumerable<(Pawn pawn, float opinion)> GetOwnIdeoRelationships()
     {
-        var ideo = Pawn.Ideo;
+        var ideo = Pawn.Ideo!;
         foreach (var kvp in cachedRelationships)
         {
             if (kvp.Key != Pawn && kvp.Key.Ideo == ideo)
@@ -886,6 +922,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         // Default true: a save without this key predates spawn-seeding, so its pawns are already "initialized"
         // and must not have their played-in certainty overwritten on load.
         Scribe_Values.Look(ref certaintyInitialized, "certaintyInitialized", defaultValue: true);
+        // Default -1: signals "uninitialized" on load from an old save; lazy-initialized to vanilla Certainty.
+        Scribe_Values.Look(ref _extendedCertainty, "extendedCertainty", defaultValue: -1f);
         Scribe_Collections.Look(ref baseIdeoOpinions, "baseIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache1, ref cache5);
         Scribe_Collections.Look(ref personalIdeoOpinions, "personalIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache2, ref cache6);
         Scribe_Collections.Look(ref memeOpinions, "memeOpinions", LookMode.Def, LookMode.Value, ref cache3, ref cache7);
@@ -904,7 +942,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 return;
             }
 
-            comp.SetIdeo(Pawn, Pawn.Ideo);
+            comp.SetIdeo(Pawn, Pawn.Ideo!);
         }
     }
 
@@ -983,7 +1021,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     public float ConversionProbability(Ideo candidate)
     {
         var opinion = IdeoOpinion(candidate);
-        var current = IdeoOpinion(Pawn.Ideo);
+        var current = IdeoOpinion(Pawn.Ideo!);
         return opinion > current ? (opinion - current) / opinion : 0f;
     }
 
@@ -994,7 +1032,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     public float ConversionChanceAfterKnock(Ideo target, float knock)
     {
         var opinion = IdeoOpinion(target);
-        var current = IdeoOpinion(Pawn.Ideo) * knock;
+        var current = IdeoOpinion(Pawn.Ideo!) * knock;
         return opinion > current ? (opinion - current) / opinion : 0f;
     }
 
@@ -1012,10 +1050,12 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             return ConversionOutcome.Failure;
         }
 
-        var current = IdeoOpinion(Pawn.Ideo);
+        var current = IdeoOpinion(Pawn.Ideo!);
         var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
-        foreach (var ideo in whitelistIdeos ?? Find.IdeoManager.IdeosListForReading)
+        IEnumerable<Ideo> pool = whitelistIdeos
+            ?? (priorityIdeo != null ? [priorityIdeo] : Find.IdeoManager.IdeosListForReading);
+        foreach (var ideo in pool)
         {
             if (ideo == Pawn.Ideo || (excludeIdeos != null && excludeIdeos.Contains(ideo)))
             {
@@ -1028,9 +1068,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 continue;
             }
 
-            // Non-target ideos compete equally; roughly half of all conversions go somewhere unexpected.
-            var mult = 1f;
-            candidates.Add((ideo, (opinion - current) / opinion * mult, (opinion - current) * mult));
+            candidates.Add((ideo, (opinion - current) / opinion, opinion - current));
         }
 
         AddCrisisCandidate(candidates, current, crisisWeight => crisisWeight / EnhancedIdeologyMod.Settings.CrisisThreshold);
@@ -1069,7 +1107,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         var interval = EnhancedIdeologyMod.Settings.ConversionInterval;
-        var current = IdeoOpinion(Pawn.Ideo);
+        var current = IdeoOpinion(Pawn.Ideo!);
         var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
         foreach (var ideo in Find.IdeoManager.IdeosListForReading)
@@ -1126,7 +1164,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         var crisisThreshold = EnhancedIdeologyMod.Settings.CrisisThreshold;
-        var currentOpinion = IdeoOpinion(Pawn.Ideo);
+        var currentOpinion = IdeoOpinion(Pawn.Ideo!);
 
         var bestIdeo = Find.IdeoManager.IdeosListForReading
             .Where(ii => ii != Pawn.Ideo)
@@ -1137,7 +1175,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             ApplyConversion(bestIdeo);
         }
 
-        Pawn.ideo.Certainty = Mathf.Clamp01(1.5f * crisisThreshold);
+        SetExtendedCertainty(1.5f * crisisThreshold);
 
         _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.EB_CrisisOfFaith);
     }
@@ -1230,12 +1268,12 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         Pawn.ideo.SetIdeo(newIdeo);
         newIdeo.Notify_MemberGainedByConversion();
 
-        Pawn.ideo.Certainty = newCertainty;
+        SetExtendedCertainty(newCertainty);
         personalIdeoOpinions[newIdeo] = 0;
 
         // Keep current opinion of our old ideo by moving difference between new base and old base (certainty) into personal thoughts
-        var oldBase = DetailedIdeoOpinion(oldIdeo).BaseOpinion;
-        AdjustPersonalOpinion(oldIdeo, oldCertainty - oldBase);
+        var oldBase = DetailedIdeoOpinion(oldIdeo!).BaseOpinion;
+        AdjustPersonalOpinion(oldIdeo!, oldCertainty - oldBase);
 
         if (!oldIdeoContains)
         {

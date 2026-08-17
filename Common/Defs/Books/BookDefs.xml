@@ -36,7 +36,23 @@
                 </doers>
             </li>
             <li Class="EnhancedIdeology.CompProperties_ReligiousBook" />
+            <li Class="EnhancedIdeology.CompProperties_BookIngredients" />
         </comps>
+    </ThingDef>
+
+    <ThingDef ParentName="UnfinishedBase">
+        <defName>EB_UnfinishedDeskIdeobook</defName>
+        <label>unfinished religious book</label>
+        <description>An unfinished religious book being written at the writing desk.</description>
+        <statBases>
+            <Flammability>0.5</Flammability>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Item/Book/Ideobook/Ideobook_Unfinished</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>0.8</drawSize>
+        </graphicData>
+        <stuffCategories Inherit="false" />
     </ThingDef>
 
     <ThingDef ParentName="UnfinishedBase">

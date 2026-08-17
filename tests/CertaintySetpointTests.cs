@@ -125,7 +125,7 @@ public class CertaintySetpointTests : SeededTest
     public void Target_IsSumOfBandsPlusDifficulty()
     {
         var (_, tracker, _) = BuildCongregation(coReligionists: 2, opinionEach: 50f);
-        var expected = Mathf.Clamp01(
+        var expected = Mathf.Max(0f,
             tracker.CachedStructural + tracker.CachedRelational + tracker.CachedPractitional + tracker.CachedDifficulty);
 
         Assert.Equal(expected, tracker.CachedTargetCertainty, precision: 5);

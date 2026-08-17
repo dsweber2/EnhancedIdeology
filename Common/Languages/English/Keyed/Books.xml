@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
-    <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} conviction shift/s</EnhancedIdeology.BookReadingBenefit>
+    <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} conviction shift/qd</EnhancedIdeology.BookReadingBenefit>
     <EnhancedIdeology.BookBeliefsHeader>Beliefs advocated</EnhancedIdeology.BookBeliefsHeader>
-    <EnhancedIdeology.ShiftRatePerMinute>{0} per minute</EnhancedIdeology.ShiftRatePerMinute>
+    <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
     <EnhancedIdeology.BookFocalStances>The work is particularly concerned with {0}.</EnhancedIdeology.BookFocalStances>
 
     <!-- Book burning/destruction -->

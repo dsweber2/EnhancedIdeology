@@ -23,6 +23,7 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var recipientIdeo = recipient.Ideo;
         var initiatorIdeo = initiator.Ideo;
+        if (initiatorIdeo == null || recipientIdeo == null) return;
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
 
         var certaintyBefore = recipient.ideo.Certainty;
@@ -80,7 +81,8 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
             ConvictionMath.PullStance(comp, initiator, recipient, issue, preacherRank, EnhancedIdeologyMod.Settings.ConversionStancePull);
             // Temporary certainty knock so the recipient is more likely to switch now (a lower certainty lowers
             // their opinion of their own faith in the check below) and to spontaneously drift away afterwards.
-            recipient.ideo.Certainty *= EnhancedIdeologyMod.Settings.ConversionCertaintyKnock;
+            // SetExtendedCertainty is used so the knock applies immediately to the extended value that CheckConversion reads.
+            recipientTracker.SetExtendedCertainty(recipientTracker.ExtendedCertainty * EnhancedIdeologyMod.Settings.ConversionCertaintyKnock);
             return true;
         }
 
@@ -103,7 +105,7 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
         ref LetterDef? letterDef,
         ref LookTargets? lookTargets)
     {
-        if (recipientTracker.CheckConversion(initiatorIdeo) == ConversionOutcome.Success)
+        if (recipientTracker.CheckConversion(initiatorIdeo, noBreakdown: true) == ConversionOutcome.Success)
         {
             if (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient))
             {

@@ -29,6 +29,7 @@ internal static class AbilityReassure
 
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var recipientIdeo = recipient.Ideo;
+        if (recipientIdeo == null) return false;
 
         var won = guide == recipient || IsGuideWinner(guide, recipient);
         if (!won)

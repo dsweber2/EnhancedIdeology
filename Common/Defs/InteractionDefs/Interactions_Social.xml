@@ -8,7 +8,7 @@
 		<symbolSource>InitiatorIdeo</symbolSource>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry->[INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label].</li>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] debated memes.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
@@ -20,16 +20,18 @@
 		<symbolSource>InitiatorIdeo</symbolSource>
 		<logRulesInitiator>
 			<rulesStrings>
-				<li>r_logentry->[INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] debated beliefs.</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>
 
+	<!-- Simple grammar used by vanilla/Interaction Bubbles (no custom symbols). -->
+	<!-- PlayLogEntry_DebateInteraction.ToGameStringFromPOV_Worker injects rich text for the social log. -->
 	<RulePackDef>
 		<defName>EB_Sentence_DebateWon</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent->[WINNER_nameDef] proved more persuasive.</li>
+				<li>sent->[INITIATOR_nameDef] won the debate.</li>
 			</rulesStrings>
 		</rulePack>
 	</RulePackDef>
@@ -38,7 +40,7 @@
 		<defName>EB_Sentence_InitiatorWon</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent->[INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]".</li>
+				<li>sent->[INITIATOR_nameDef] proved more persuasive.</li>
 			</rulesStrings>
 		</rulePack>
 	</RulePackDef>
@@ -47,7 +49,7 @@
 		<defName>EB_Sentence_RecipientWon</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent->[RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]".</li>
+				<li>sent->[RECIPIENT_nameDef] proved more persuasive.</li>
 			</rulesStrings>
 		</rulePack>
 	</RulePackDef>

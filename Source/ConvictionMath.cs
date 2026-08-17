@@ -118,10 +118,12 @@ internal static class ConvictionMath
         // Strict apostacy stances make the loser's faith more rigid: an Abhorrent pawn moves at 3/4 the
         // normal distance, scaling linearly down from 1x at the don't-care rung.
         var apostacyResistance = 1f - (EnhancedIdeologyUtilities.ApostacyStrictness(loser.Ideo) * 0.75f);
-
+        // check if they have the stat; if not, set it to 30%, below social
+        // skill level 0, which is 40%
+        var conversionPower = StatDefOf.ConversionPower.Worker.IsDisabledFor(winner) ? 0.3f : winner.GetStatValue(StatDefOf.ConversionPower);
         var stepLength = DebateBaseArc
             * EnhancedIdeologyMod.Settings.DebateConvictionChange
-            * winner.GetStatValue(StatDefOf.ConversionPower)
+            * conversionPower
             * loser.GetStatValue(StatDefOf.CertaintyLossFactor)
             * pullMultiplier
             * apostacyResistance;

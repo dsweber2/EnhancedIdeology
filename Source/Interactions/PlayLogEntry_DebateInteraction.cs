@@ -37,13 +37,15 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
 
         if (pov == initiator)
         {
-            request.IncludesBare.Add(intDef.logRulesInitiator);
+            // Inject r_logentry directly so logRulesInitiator (used by vanilla/Interaction Bubbles
+            // without our custom symbols) doesn't compete with the rich topic-aware version.
+            request.Rules.Add(new Rule_String("r_logentry", RlogentryTemplate()));
             AddPawnRules(ref request);
             text = GrammarResolver.Resolve("r_logentry", request, "interaction from initiator", forceLog);
         }
         else if (pov == recipient)
         {
-            request.IncludesBare.Add(intDef.logRulesRecipient ?? intDef.logRulesInitiator);
+            request.Rules.Add(new Rule_String("r_logentry", RlogentryTemplate()));
             AddPawnRules(ref request);
             text = GrammarResolver.Resolve("r_logentry", request, "interaction from recipient", forceLog);
         }
@@ -59,16 +61,42 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
             foreach (var pack in extraSentencePacks)
             {
                 request.Clear();
-                request.Includes.Add(pack);
-                // Re-inject on each sentence pack — request.Clear() wipes Constants too.
+                // Re-inject after Clear() — wipes Constants too.
                 InjectDebateSymbols(ref request);
                 AddPawnRules(ref request);
+                // Inject rich sentence rule directly; XML packs have simplified grammar for
+                // the vanilla/Interaction Bubbles path which lacks our custom symbols.
+                request.Rules.Add(new Rule_String(pack.FirstRuleKeyword, SentTemplateForPack(pack)));
                 text += " " + GrammarResolver.Resolve(pack.FirstRuleKeyword, request, "extraSentencePack", forceLog, pack.FirstUntranslatedRuleKeyword);
             }
         }
 
         Rand.PopState();
         return text;
+    }
+
+    private string RlogentryTemplate()
+    {
+        if (debateMemeTopic != null)
+            return "[INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label].";
+        if (debateTopic != null)
+            return "[INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef].";
+        return "[INITIATOR_nameDef] debated with [RECIPIENT_nameDef].";
+    }
+
+    private string SentTemplateForPack(RulePackDef pack)
+    {
+        if (pack == EnhancedIdeologyDefOf.EB_Sentence_InitiatorWon)
+            return "[INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance \"[WINNING_STANCE_label]\".";
+        if (pack == EnhancedIdeologyDefOf.EB_Sentence_RecipientWon)
+            return "[RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance \"[WINNING_STANCE_label]\".";
+        if (pack == EnhancedIdeologyDefOf.EB_Sentence_DebateWon)
+            return "[WINNER_nameDef] proved more persuasive.";
+        if (pack == EnhancedIdeologyDefOf.EB_Sentence_DebateDraw)
+            return "Neither changed their view.";
+        // Unknown pack — fall back to the pack's own first rule text.
+        // Won't have custom symbols but avoids a hard crash.
+        return pack.RulesImmediate?.FirstOrDefault()?.Generate() ?? string.Empty;
     }
 
     private GrammarRequest BuildRequest()

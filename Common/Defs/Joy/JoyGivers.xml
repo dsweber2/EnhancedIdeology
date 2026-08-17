@@ -9,4 +9,12 @@
 		<joyKind>Social</joyKind>
 	</JoyGiverDef>
 
+	<JoyGiverDef>
+		<defName>EB_Prayer</defName>
+		<giverClass>EnhancedIdeology.JoyGiver_Prayer</giverClass>
+		<baseChance>4</baseChance>
+		<jobDef>EB_Pray</jobDef>
+		<joyKind>Meditative</joyKind>
+	</JoyGiverDef>
+
 </Defs>

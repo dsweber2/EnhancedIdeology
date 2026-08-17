@@ -6,4 +6,5 @@
     <EnhancedIdeology.PawnIsNotAuthor>{PAWN} is not the author of the book.</EnhancedIdeology.PawnIsNotAuthor>
     <EnhancedIdeology.BookIsNotForPawnIdeoligion>The book is not for {PAWN_possessive} ideology.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
     <EnhancedIdeology.NoFreeValidLecternFound>No available, accessible lectern found to do work on.</EnhancedIdeology.NoFreeValidLecternFound>
+    <EnhancedIdeology.InsufficientCertaintyToWrite>Certainty must be above 90% to write religious texts.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

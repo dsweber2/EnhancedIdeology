@@ -8,6 +8,14 @@
     </JobDef>
 
     <JobDef>
+        <defName>EB_Pray</defName>
+        <driverClass>EnhancedIdeology.JobDriver_Pray</driverClass>
+        <reportString>praying.</reportString>
+        <joyDuration>4000</joyDuration>
+        <joyKind>Meditative</joyKind>
+    </JobDef>
+
+    <JobDef>
         <defName>EB_CompleteReligiousBook</defName>
         <driverClass>EnhancedIdeology.JobDriver_CompleteReligiousBook</driverClass>
         <reportString>finishing writing TargetA.</reportString>
@@ -25,6 +33,23 @@
             <li>Manipulation</li>
         </requiredCapacities>
         <prioritizeSustains>true</prioritizeSustains>
+        <canBeDoneByMechs>false</canBeDoneByMechs>
+    </WorkGiverDef>
+
+    <WorkGiverDef>
+        <defName>EB_WriteIdeobookAtDesk</defName>
+        <label>write religious books</label>
+        <giverClass>WorkGiver_DoBill</giverClass>
+        <workType>Research</workType>
+        <priorityInType>70</priorityInType>
+        <fixedBillGiverDefs>
+            <li>EB_WritingDesk</li>
+        </fixedBillGiverDefs>
+        <verb>write</verb>
+        <gerund>writing religious books</gerund>
+        <requiredCapacities>
+            <li>Manipulation</li>
+        </requiredCapacities>
         <canBeDoneByMechs>false</canBeDoneByMechs>
     </WorkGiverDef>
 

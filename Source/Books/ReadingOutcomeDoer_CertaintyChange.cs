@@ -2,7 +2,7 @@
 
 internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 {
-    public new BookOutcomeProperties_CertaintyChange Props => (BookOutcomeProperties_CertaintyChange)props;
+    public new BookOutcomeProperties_CertaintyChange Props => (BookOutcomeProperties_CertaintyChange)props!;
 
     public Ideo? ideo;
 
@@ -10,6 +10,22 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
     // Derived from the author's own convictions (censored to the ideo's approved positions) when there is one,
     // otherwise rolled like a pawn's. Read at generation and lazily backfilled for books that predate it.
     private Dictionary<IssueDef, float> issueStrength = [];
+
+    private float _materialBonus = 1f;
+    public float MaterialBonus => _materialBonus;
+    public void SetMaterialBonus(float bonus) { _materialBonus = bonus; _leatherCached = false; }
+
+    private bool _leatherCached;
+    private bool _hasLeather;
+    private bool BookHasLeather()
+    {
+        if (!_leatherCached)
+        {
+            _hasLeather = VegetarianUtils.HasLeatherIngredient(Book);
+            _leatherCached = true;
+        }
+        return _hasLeather;
+    }
 
     // In percents, so divided by 100 when actually applied
     internal static readonly SimpleCurve certaintyGainFromQuality =
@@ -116,19 +132,20 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 
         if (Scribe.mode == LoadSaveMode.Saving)
         {
-            if (!Find.IdeoManager.IdeosListForReading.Contains(ideo))
+            if (ideo != null && !Find.IdeoManager.IdeosListForReading.Contains(ideo))
             {
                 ideo = null;
             }
         }
 
         Scribe_References.Look(ref ideo, "ideo");
+        Scribe_Values.Look(ref _materialBonus, "materialBonus", 1f);
         Scribe_Collections.Look(ref issueStrength, "issueStrength", LookMode.Def, LookMode.Value);
     }
 
     public override IEnumerable<Dialog_InfoCard.Hyperlink> GetHyperlinks()
     {
-        if (!Find.IdeoManager.IdeosListForReading.Contains(ideo) || ideo == null)
+        if (ideo == null || !Find.IdeoManager.IdeosListForReading.Contains(ideo))
         {
             yield break;
         }
@@ -136,14 +153,21 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         yield return new Dialog_InfoCard.Hyperlink(ideo);
     }
 
+    // joyDuration = 4000 ticks per reading session, and the game's DaysPerSeason =
+    // 15. A pawn plausibly reads ~2 in-game hours/day during recreation. That's
+    // TicksPerHour * 4 * DaysPerSeason = 150,000 ticks/quadrum — or equivalently
+    // TicksPerSeason / 6.
+    internal const float TypicalReadingTicksPerQuadrum = GenDate.TicksPerSeason / 12f;
+
     public override string GetBenefitsString(Pawn? reader = null)
     {
-        return "EnhancedIdeology.BookReadingBenefit".Translate(ideo.Named("IDEO"), (CertaintyGain(reader) * GenTicks.TicksPerRealSecond).ToStringPercent());
+        return "EnhancedIdeology.BookReadingBenefit".Translate(ideo.Named("IDEO"), (CertaintyGain(reader) * TypicalReadingTicksPerQuadrum).ToString("0.##"));
     }
 
     public float CertaintyGain(Pawn? reader = null)
     {
         var certaintyGain = certaintyGainFromQuality.Evaluate((int)Quality) / 100f;
+        certaintyGain *= _materialBonus;
 
         if (reader != null)
         {
@@ -173,9 +197,15 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
             return;
         }
 
-        if (!Find.IdeoManager.IdeosListForReading.Contains(ideo) || ideo == null)
+        if (ideo == null || !Find.IdeoManager.IdeosListForReading.Contains(ideo))
         {
             return;
+        }
+
+        if (VegetarianUtils.IsVegetarian(reader) && BookHasLeather())
+        {
+            reader.needs?.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ReadingLeatherboundBook);
+            factor *= 0.5f;
         }
 
         var gain = CertaintyGain(reader) * factor;

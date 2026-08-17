@@ -17,6 +17,32 @@
       </li>
     </stages>
   </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_WroteSacrilegousBinding</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>defiled a sacred text</label>
+        <description>I bound a holy book in animal hide. That was wrong.</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>EB_ReadingLeatherboundBook</defName>
+    <durationDays>0.08</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>reading leather-bound scripture</label>
+        <description>This holy text is bound in animal hide. Holding it feels wrong.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
   <!-- Diversity-of-thought debate aftermath. Social memories that also carry a mood stage, so
          one def both warms/cools opinion of the debate partner and lifts/dents mood. Gained per pawn whose faith
          appreciates (good) or is bigoted toward (bad) diversity of thought. -->

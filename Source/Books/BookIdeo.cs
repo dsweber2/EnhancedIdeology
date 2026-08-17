@@ -51,6 +51,103 @@ internal sealed class BookIdeo : Book
         }
     }
 
+    // Set during recipe completion to override quality with (Intellectual+Social)/2 average
+    private Pawn? _recipeWorker;
+    private bool _applyingCustomQuality;
+
+    public float MaterialBonus => Doer.MaterialBonus;
+
+    // Curve input: sum of base market values of unique ingredient ThingDefs used.
+    // Plain (cloth+wood ~2.6) → 1.0x; illustrated jade (~43) → ~1.17x;
+    // illustrated silver (~78) → ~1.3x; illustrated gold (~303) → 2.0x.
+    // Sum of base market values of unique ingredient ThingDefs used in crafting.
+    // cloth+steel ≈ 2.0 → 1.05×; cloth+plasteel ≈ 8.0 → 1.1×;
+    // illustrated jade ≈ 42.5 → 1.15×; silver ≈ 77.5 → 1.3×; gold ≈ 302.5 → 2.0×.
+    private static readonly SimpleCurve materialBonusFromIngredientValue =
+    [
+        new CurvePoint(0f, 1.0f),
+        new CurvePoint(2f, 1.05f),
+        new CurvePoint(9f, 1.1f),
+        new CurvePoint(42f, 1.15f),
+        new CurvePoint(78f, 1.3f),
+        new CurvePoint(300f, 2.0f),
+    ];
+
+    public override void Notify_RecipeProduced(Pawn worker)
+    {
+        base.Notify_RecipeProduced(worker);
+        _recipeWorker = worker;
+    }
+
+    public override void PostQualitySet()
+    {
+        if (_applyingCustomQuality) return;
+
+        if (_recipeWorker != null)
+        {
+            var worker = _recipeWorker;
+            _recipeWorker = null;
+
+            var intellectLevel = worker.skills?.GetSkill(SkillDefOf.Intellectual)?.Level ?? 0;
+            var socialLevel = worker.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
+
+            _applyingCustomQuality = true;
+            this.TryGetComp<CompQuality>()?.SetQuality(
+                QualityUtility.GenerateQualityCreatedByPawn((intellectLevel + socialLevel) / 2, false),
+                ArtGenerationContext.Colony);
+            _applyingCustomQuality = false;
+
+            var ingredients = this.TryGetComp<CompIngredients>();
+            if (ingredients?.ingredients is { Count: > 0 } list)
+            {
+                var totalValue = list.Sum(t => t.GetStatValueAbstract(StatDefOf.MarketValue));
+                Doer.SetMaterialBonus(materialBonusFromIngredientValue.Evaluate(totalValue));
+            }
+
+            if (VegetarianUtils.IsVegetarian(worker) && VegetarianUtils.HasLeatherIngredient(this))
+                worker.needs?.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_WroteSacrilegousBinding);
+
+            Ideo = worker.Ideo;
+            GenerateBook(worker, GenTicks.TicksAbs);
+            return;
+        }
+
+        base.PostQualitySet();
+        GenerateSpawnedIngredients();
+    }
+
+    private void GenerateSpawnedIngredients()
+    {
+        var comp = this.TryGetComp<CompIngredients>();
+        if (comp == null) return;
+
+        static ThingDef? GetDef(string name) => DefDatabase<ThingDef>.GetNamedSilentFail(name);
+
+        var quality = (int)(this.TryGetComp<CompQuality>()?.Quality ?? QualityCategory.Normal);
+
+        ThingDef pages = quality >= 5 ? (GetDef("Synthread") ?? GetDef("Cloth") ?? ThingDefOf.WoodLog)
+                       : quality >= 2 ? (GetDef("Cloth") ?? ThingDefOf.WoodLog)
+                       :                ThingDefOf.WoodLog;
+        comp.ingredients.Add(pages);
+
+        ThingDef cover = quality >= 5 ? (GetDef("Plasteel") ?? ThingDefOf.Steel)
+                       : quality <= 1 ? (GetDef("Leather_Plain") ?? ThingDefOf.Steel)
+                       :                ThingDefOf.Steel;
+        comp.ingredients.Add(cover);
+
+        if (quality >= 3 && Rand.Value < (quality - 2) * 0.2f)
+        {
+            ThingDef? precious = quality >= 6 ? (GetDef("Gold") ?? GetDef("Silver") ?? GetDef("Jade"))
+                               : quality >= 5 ? (GetDef("Silver") ?? GetDef("Jade"))
+                               :                GetDef("Jade");
+            if (precious != null)
+                comp.ingredients.Add(precious);
+        }
+
+        var totalValue = comp.ingredients.Sum(t => t.GetStatValueAbstract(StatDefOf.MarketValue));
+        Doer.SetMaterialBonus(materialBonusFromIngredientValue.Evaluate(totalValue));
+    }
+
     public override string DescriptionDetailed => base.DescriptionDetailed + BuildStanceText();
 
     public override void GenerateBook(Pawn? author = null, long? fixedDate = null)
@@ -95,13 +192,13 @@ internal sealed class BookIdeo : Book
         var stances = doer.IdeoStances().ToList();
         if (stances.Count == 0) return string.Empty;
 
-        var gainPerMin = doer.CertaintyGain() * GenTicks.TicksPerRealSecond * 60f;
+        var gainPerQuadrum = doer.CertaintyGain() * ReadingOutcomeDoer_CertaintyChange.TypicalReadingTicksPerQuadrum;
         var sb = new StringBuilder("\n\n");
         sb.AppendLine("EnhancedIdeology.BookBeliefsHeader".Translate());
         foreach (var (issue, stance, strength) in stances)
         {
-            var shiftPerSec = (gainPerMin * strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent("0.0##") + "/m";
-            sb.AppendLine($"  - {issue.LabelCap}: {stance.LabelCap} ({shiftPerSec})");
+            var shiftPerQuadrum = (gainPerQuadrum * strength / IdeoTrackerData.MaxConvictionStrength).ToString("0.##") + "/qd";
+            sb.AppendLine($"  - {issue.LabelCap}: {stance.LabelCap} ({shiftPerQuadrum})");
         }
         return sb.ToString().TrimEndNewlines();
     }

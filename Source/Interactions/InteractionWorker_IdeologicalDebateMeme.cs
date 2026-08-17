@@ -96,6 +96,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
         var initiatorIdeo = initiator.Ideo;
         var recipientIdeo = recipient.Ideo;
+        if (initiatorIdeo == null || recipientIdeo == null) return;
 
         topic = initiatorIdeo.memes.Union(recipientIdeo.memes).RandomElement();
         logTopic = topic;
@@ -132,7 +133,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             if (loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
                 && (PawnUtility.ShouldSendNotificationAbout(winner) || PawnUtility.ShouldSendNotificationAbout(loser)))
             {
-                var loserRole = loserOldIdeo.GetRole(loser);
+                var loserRole = loserOldIdeo!.GetRole(loser);
                 letterLabel = "EnhancedIdeology.LetterLabelIdeologicalDebateConversion".Translate();
                 letterText = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(
                     winner.Named("CONVINCER"),
@@ -197,8 +198,8 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}");
 
-        var winnerPreceptsByIssue = MemePreceptsFor(winner.Ideo, topic).ToDictionary(p => p.issue!);
-        var loserIssues = MemePreceptsFor(loser.Ideo, topic).Select(p => p.issue!).ToHashSet();
+        var winnerPreceptsByIssue = MemePreceptsFor(winner.Ideo!, topic).ToDictionary(p => p.issue!);
+        var loserIssues = MemePreceptsFor(loser.Ideo!, topic).Select(p => p.issue!).ToHashSet();
         var allIssues = winnerPreceptsByIssue.Keys.Union(loserIssues).ToList();
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
