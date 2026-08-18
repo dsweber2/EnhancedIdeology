@@ -34,6 +34,9 @@ internal static class EnhancedIdeologyDefOf
     public static ThoughtDef EB_ProselytizerFailedConversion;
     public static HistoryEventDef EB_DestroyedReligiousBook;
     public static HistoryEventDef EB_BookDestroyed;
+    public static HistoryEventDef EB_Prayed;
+    [MayRequireIdeology]
+    public static NeedDef EB_Prayer;
     public static EffecterDef EB_CompleteBook;
     public static InteractionDef EB_IdeologicalDebatePrecept;
     public static InteractionDef EB_IdeologicalDebateMeme;

@@ -4,4 +4,9 @@
     <EB_NoPewToPrayIn>{PAWN_nameDef} couldn't find a ritual seat to pray in for {IDEO_name}.</EB_NoPewToPrayIn>
     <EB_PrayerRoomDisrespected>{PAWN_nameDef}'s {IDEO_name} prayer room is disrespected.</EB_PrayerRoomDisrespected>
 
+    <EB_PrayerSiteStatLabel>Prayer gain</EB_PrayerSiteStatLabel>
+    <EB_PrayerSiteStatReport>How much conviction this building provides per prayer session relative to the base rate.</EB_PrayerSiteStatReport>
+    <EB_PrayerSiteStatReportReliquary>How much conviction this building provides per prayer session. Rises to 4× when a relic belonging to the pawn's own ideology is enshrined.</EB_PrayerSiteStatReportReliquary>
+    <EB_PrayerSiteInspect>Prayer gain: {0}</EB_PrayerSiteInspect>
+
 </LanguageData>

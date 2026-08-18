@@ -1,4 +1,4 @@
-.PHONY: build deploy test logs
+.PHONY: build deploy test logs preview preview-all
 
 build:
 	dotnet build Source/EnhancedIdeology.csproj
@@ -9,6 +9,13 @@ test:
 logs:
 	@mkdir -p simulator/cache
 	cp "$(RIMWORLD_LOG)" "simulator/cache/$$(date +%Y%m%d_%H%M%S)_logs.txt"
+
+# Usage: make preview SVG=images/foo.svg
+preview:
+	python3 scripts/svg_to_png.py $(SVG)
+
+preview-all:
+	@for svg in images/*.svg; do python3 scripts/svg_to_png.py "$$svg"; done
 
 deploy:
 	rsync -a --delete About/      $(RIMWORLD_MOD)/About/

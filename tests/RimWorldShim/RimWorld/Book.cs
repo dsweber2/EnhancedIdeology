@@ -18,11 +18,14 @@ public abstract class BookOutcomeProperties
     public virtual Type DoerClass => typeof(BookOutcomeDoer);
 }
 
+public class Book { }
+
 public abstract class BookOutcomeDoer
 {
     protected internal BookOutcomeProperties props = null!;
     public BookOutcomeProperties Props => props;
     public QualityCategory Quality;
+    public Book? Book => null;
 
     public virtual void OnBookGenerated(Verse.Pawn? author = null) { }
     public virtual void Reset() { }

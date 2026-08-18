@@ -28,6 +28,7 @@ public static class GenDate
     public const int TicksPerDay = 60000;
     public const int DaysPerYear = 60;
     public const int TicksPerYear = TicksPerDay * DaysPerYear;
+    public const int TicksPerSeason = TicksPerDay * 15;
 }
 
 public static class GenTicks

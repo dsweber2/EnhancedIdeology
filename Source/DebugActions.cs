@@ -131,58 +131,34 @@ internal static class DebugActions
 
         LogPrayerSiteDiagnosis(pawn);
 
-        var worshipRoom = JoyGiver_Prayer.FindWorshipRoom(pawn);
-        if (worshipRoom != null)
+        var job = JoyGiver_Prayer.TryBuildPrayJob(pawn);
+        if (job == null)
         {
-            var reliquary = JoyGiver_Prayer.FindReliquary(worshipRoom, pawn);
-            if (reliquary != null)
-            {
-                pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, reliquary, reliquary), JobTag.Misc);
-                Messages.Message($"{pawn.LabelShort}: heading to pray at {reliquary.LabelShort}.",
-                    new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
-                return;
-            }
-            var pew = JoyGiver_Prayer.FindPew(worshipRoom, pawn);
-            if (pew != null)
-            {
-                var altar = JoyGiver_Prayer.FindPrayerTarget(worshipRoom, pawn);
-                pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, pew.Value, altar), JobTag.Misc);
-                Messages.Message($"{pawn.LabelShort}: heading to pray at pew.",
-                    new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
-                return;
-            }
-        }
-
-        var statueSite = JoyGiver_Prayer.FindStatuePrayerSite(pawn);
-        if (statueSite != null)
-        {
-            pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, statueSite.Value.cell, statueSite.Value.building), JobTag.Misc);
-            Messages.Message($"{pawn.LabelShort}: heading to pray at {statueSite.Value.building.LabelShort}.",
-                new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
+            Messages.Message($"{pawn.LabelShort}: no valid prayer site found — see dev console for details.",
+                new LookTargets(pawn), MessageTypeDefOf.RejectInput, false);
             return;
         }
 
-        var impressiveReliquary = JoyGiver_Prayer.FindAccessibleImpressiveReliquary(pawn);
-        if (impressiveReliquary != null)
-        {
-            pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, impressiveReliquary, impressiveReliquary), JobTag.Misc);
-            Messages.Message($"{pawn.LabelShort}: heading to pray at {impressiveReliquary.LabelShort}.",
-                new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
-            return;
-        }
-
-        Messages.Message($"{pawn.LabelShort}: no valid prayer site found — see dev console for details.",
-            new LookTargets(pawn), MessageTypeDefOf.RejectInput, false);
+        var siteName = job.targetA.HasThing ? job.targetA.Thing.LabelShort : "room cell";
+        pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+        Messages.Message($"{pawn.LabelShort}: heading to pray at {siteName}.",
+            new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
     }
 
     private static void LogPrayerSiteDiagnosis(Pawn pawn)
     {
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"=== Prayer site diagnosis: {pawn.LabelShort} ({pawn.Ideo!.name}) ===");
-        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  worshipRoom={JoyGiver_Prayer.FindWorshipRoom(pawn) != null}");
+        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  isMoralist={JoyGiver_Prayer.IsMoralist(pawn)}  worshipRoom={JoyGiver_Prayer.FindWorshipRoom(pawn) != null}");
+
+        sb.AppendLine("\n-- Lecterns (moralist prayer site) --");
+        foreach (var thing in pawn.Map!.listerThings.ThingsOfDef(ThingDefOf.Lectern))
+        {
+            sb.AppendLine($"  {thing.LabelShort}  forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}");
+        }
 
         sb.AppendLine("\n-- Ideo buildings (non-altar) --");
-        foreach (var room in pawn.Map!.regionGrid.AllRooms)
+        foreach (var room in pawn.Map.regionGrid.AllRooms)
         {
             if (room.PsychologicallyOutdoors) continue;
             foreach (var thing in room.ContainedAndAdjacentThings.ToList())

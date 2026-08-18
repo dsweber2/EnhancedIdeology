@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Issue -->
+  <IssueDef>
+    <defName>EB_Prayer</defName>
+    <label>prayer</label>
+    <iconPath>UI/Issues/EB_Prayer</iconPath>
+  </IssueDef>
+  <!-- History event fired when a pawn completes a prayer session -->
+  <HistoryEventDef>
+    <defName>EB_Prayed</defName>
+    <label>prayed</label>
+  </HistoryEventDef>
+  <!-- Need (only present when Prayer_Required precept is active) -->
+  <NeedDef>
+    <defName>EB_Prayer</defName>
+    <needClass>EnhancedIdeology.Need_Prayer</needClass>
+    <label>prayer</label>
+    <description>This pawn's ideology requires regular prayer. Neglecting it erodes their sense of devotion.</description>
+    <showOnNeedList>true</showOnNeedList>
+    <onlyIfCausedByIdeo>true</onlyIfCausedByIdeo>
+    <baseLevel>1</baseLevel>
+    <listPriority>50</listPriority>
+  </NeedDef>
+  <!-- Precepts -->
+  <PreceptDef>
+    <defName>Prayer_Required</defName>
+    <issue>EB_Prayer</issue>
+    <label>required</label>
+    <description>Prayer is a sacred obligation. Members must pray regularly, and the moral guide is expected to lead by example.</description>
+    <impact>High</impact>
+    <displayOrderInIssue>0</displayOrderInIssue>
+    <displayOrderInImpact>1000</displayOrderInImpact>
+    <enablesNeeds>
+      <li>EB_Prayer</li>
+    </enablesNeeds>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Prayed</eventDef>
+        <thought>EB_WitnessedPrayer_Approved</thought>
+        <doerMustBeMyIdeo>true</doerMustBeMyIdeo>
+      </li>
+      <li Class="PreceptComp_SituationalThought">
+        <thought>EB_PrayerNeed</thought>
+        <description>Prayer need satisfaction</description>
+      </li>
+    </comps>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Prayer_Respected</defName>
+    <issue>EB_Prayer</issue>
+    <label>respected</label>
+    <description>Prayer is a meaningful practice, and those who pray regularly are held in higher regard.</description>
+    <impact>Medium</impact>
+    <displayOrderInIssue>10</displayOrderInIssue>
+    <displayOrderInImpact>100</displayOrderInImpact>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Prayed</eventDef>
+        <thought>EB_WitnessedPrayer_Approved</thought>
+        <doerMustBeMyIdeo>true</doerMustBeMyIdeo>
+      </li>
+    </comps>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Prayer_Normal</defName>
+    <issue>EB_Prayer</issue>
+    <label>acceptable</label>
+    <description>Prayer is a personal matter — neither encouraged nor discouraged.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>20</displayOrderInIssue>
+    <displayOrderInImpact>10</displayOrderInImpact>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Prayer_Disapproved</defName>
+    <issue>EB_Prayer</issue>
+    <label>disapproved</label>
+    <description>Prayer is seen as weakness or superstition. Members who pray are viewed unfavorably.</description>
+    <impact>Medium</impact>
+    <displayOrderInIssue>30</displayOrderInIssue>
+    <displayOrderInImpact>100</displayOrderInImpact>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Prayed</eventDef>
+        <thought>EB_WitnessedPrayer_Disapproved</thought>
+      </li>
+    </comps>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Prayer_Forbidden</defName>
+    <issue>EB_Prayer</issue>
+    <label>forbidden</label>
+    <description>Prayer is strictly forbidden. Any member caught praying will be shunned.</description>
+    <impact>High</impact>
+    <displayOrderInIssue>40</displayOrderInIssue>
+    <displayOrderInImpact>1000</displayOrderInImpact>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Prayed</eventDef>
+        <thought>EB_WitnessedPrayer_Forbidden</thought>
+      </li>
+    </comps>
+  </PreceptDef>
+  <!-- Thought: prayer need (Required level) -->
+  <ThoughtDef>
+    <defName>EB_PrayerNeed</defName>
+    <workerClass>EnhancedIdeology.ThoughtWorker_PrayerNeed</workerClass>
+    <thoughtClass>Thought_Situational</thoughtClass>
+    <stages>
+      <li>
+        <label>prayed regularly</label>
+        <description>I've been faithful in my prayers. It brings me peace.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <li>
+        <label>prayer neglected</label>
+        <description>I haven't found time to pray. My devotion is slipping.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>prayer severely neglected</label>
+        <description>I've gone far too long without prayer. I feel spiritually adrift.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <!-- Thoughts: witnessed prayer -->
+  <ThoughtDef>
+    <defName>EB_WitnessedPrayer_Approved</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>6</stackLimit>
+    <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>prayed devoutly</label>
+        <baseOpinionOffset>2</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_WitnessedPrayer_Disapproved</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>6</stackLimit>
+    <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>engaged in prayer</label>
+        <baseOpinionOffset>-2</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_WitnessedPrayer_Forbidden</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>3</stackLimit>
+    <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>defied the ban on prayer</label>
+        <baseOpinionOffset>-7</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

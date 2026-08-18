@@ -69,6 +69,8 @@ internal sealed class JobDriver_Pray : JobDriver
         yield return pray;
     }
 
+    private const float NeedFillPerTick = 1f / GenDate.TicksPerHour;
+
     private void PrayTick()
     {
         if (Altar.IsValid)
@@ -77,11 +79,14 @@ internal sealed class JobDriver_Pray : JobDriver
         if (pawn.IsHashIntervalTick(SymbolMoteIntervalTicks) && pawn.Ideo != null)
             SpawnPrayerIcon(pawn);
 
+        pawn.needs?.TryGetNeed<Need_Prayer>()?.Satisfy(NeedFillPerTick);
+
         if (pawn.needs.joy != null)
         {
             JoyUtility.JoyTickCheckEnd(pawn, 1, JoyTickFullJoyAction.None);
             if (pawn.needs.joy.CurLevelPercentage >= 1f)
             {
+                CompletePrayer();
                 EndJobWith(JobCondition.Succeeded);
                 return;
             }
@@ -89,6 +94,14 @@ internal sealed class JobDriver_Pray : JobDriver
 
         if (pawn.IsHashIntervalTick(ReinforcementIntervalTicks))
             TryReinforceBeliefs();
+    }
+
+    private void CompletePrayer()
+    {
+        if (pawn.Ideo == null)
+            return;
+        Find.HistoryEventsManager.RecordEvent(
+            new HistoryEvent(EnhancedIdeologyDefOf.EB_Prayed, pawn.Named(HistoryEventArgsNames.Doer)));
     }
 
     private static void SpawnPrayerIcon(Pawn pawn)

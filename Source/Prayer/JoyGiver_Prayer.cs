@@ -11,10 +11,59 @@ internal sealed class JoyGiver_Prayer : JoyGiver
             return false;
         if (!MeditationUtility.CanMeditateNow(pawn))
             return false;
+        if (!PrayerAllowedByPrecept(pawn))
+            return false;
         return FindLectern(pawn) != null
             || HasAnyWorshipRoom(pawn)
             || FindStatuePrayerSite(pawn) != null
             || FindAccessibleImpressiveReliquary(pawn) != null;
+    }
+
+    internal static bool PrayerAllowedByPrecept(Pawn pawn)
+    {
+        var precept = GetPrayerPrecept(pawn);
+        if (precept == null)
+            return true;
+
+        var defName = precept.def.defName;
+        if (defName == "Prayer_Forbidden")
+            return false;
+
+        if (defName == "Prayer_Disapproved")
+        {
+            var certainty = GetCertainty(pawn);
+            return certainty < 0.25f;
+        }
+
+        if (defName == "Prayer_Normal")
+        {
+            var certainty = GetCertainty(pawn);
+            if (certainty > 0.75f)
+                return Rand.Value < 0.3f;
+            // Respected is ~1.5x more likely than Normal at the same certainty
+            return Rand.Value < 0.65f;
+        }
+
+        return true;
+    }
+
+    private static Precept? GetPrayerPrecept(Pawn pawn)
+    {
+        if (pawn.Ideo == null)
+            return null;
+        foreach (var precept in pawn.Ideo.precepts)
+        {
+            if (precept.def.issue?.defName == "EB_Prayer")
+                return precept;
+        }
+        return null;
+    }
+
+    private static float GetCertainty(Pawn pawn)
+    {
+        var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
+        var tracker = comp?.PawnTracker?.EnsurePawnHasIdeoTracker(pawn);
+        return tracker?.ExtendedCertainty ?? 1f;
     }
 
     internal static bool IsMoralist(Pawn pawn) =>
@@ -61,46 +110,15 @@ internal sealed class JoyGiver_Prayer : JoyGiver
         if (pawn.Ideo == null || pawn.Map == null)
             return null;
 
-        var lectern = FindLectern(pawn);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
-            $"Prayer site search: {pawn} moralist={IsMoralist(pawn)} lectern={lectern?.Label ?? "none"}");
+            $"Prayer site search: {pawn} moralist={IsMoralist(pawn)} lectern={FindLectern(pawn)?.Label ?? "none"}");
 
-        // Priority 1: worship room — reliquary first, then lectern (for moralist), then pew
-        var worshipRoom = FindWorshipRoom(pawn);
-        if (worshipRoom != null)
-        {
-            var reliquary = FindReliquary(worshipRoom, pawn);
-            if (reliquary != null)
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, reliquary, reliquary);
-
-            if (lectern != null)
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, lectern, lectern);
-
-            var pew = FindPew(worshipRoom, pawn);
-            if (pew != null)
-            {
-                var altar = FindPrayerTarget(worshipRoom, pawn);
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, pew.Value, altar);
-            }
-            // No seating — fall through to try other sites before warning
-        }
-
-        // Priority 2: lectern when there's no worship room at all
-        if (lectern != null)
-            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, lectern, lectern);
-
-        // Priority 3: ideo building (statue etc.) in any room, respecting its own presenceDemand.
-        // Each pawn gets a free cell in the room; the statue itself caps concurrent prayers by impressiveness.
-        var statueSite = FindStatuePrayerSite(pawn);
-        if (statueSite != null)
-            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, statueSite.Value.cell, statueSite.Value.building);
-
-        // Priority 4: reliquary in any sufficiently impressive room (single-pawn, Thing reservation)
-        var impressiveReliquary = FindAccessibleImpressiveReliquary(pawn);
-        if (impressiveReliquary != null)
-            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, impressiveReliquary, impressiveReliquary);
+        var job = TryBuildPrayJob(pawn);
+        if (job != null)
+            return job;
 
         // Nothing usable — emit the most specific message
+        var worshipRoom = FindWorshipRoom(pawn);
         if (worshipRoom != null)
         {
             if (!noPewWarnedAt.TryGetValue(pawn, out var lastWarn)
@@ -123,6 +141,47 @@ internal sealed class JoyGiver_Prayer : JoyGiver
                     pawn, MessageTypeDefOf.CautionInput, historical: false);
             }
         }
+        return null;
+    }
+
+    // Core site-finding logic shared with JobGiver_PrayFromNeed (no warnings emitted).
+    internal static Job? TryBuildPrayJob(Pawn pawn)
+    {
+        var lectern = FindLectern(pawn);
+
+        // Priority 1: worship room — reliquary first, then lectern (for moralist), then pew
+        var worshipRoom = FindWorshipRoom(pawn);
+        if (worshipRoom != null)
+        {
+            var reliquary = FindReliquary(worshipRoom, pawn);
+            if (reliquary != null)
+                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, reliquary, reliquary);
+
+            if (lectern != null)
+                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, lectern, lectern);
+
+            var pew = FindPew(worshipRoom, pawn);
+            if (pew != null)
+            {
+                var altar = FindPrayerTarget(worshipRoom, pawn);
+                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, pew.Value, altar);
+            }
+        }
+
+        // Priority 2: lectern when there's no worship room at all
+        if (lectern != null)
+            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, lectern, lectern);
+
+        // Priority 3: statue/ideo building in any room
+        var statueSite = FindStatuePrayerSite(pawn);
+        if (statueSite != null)
+            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, statueSite.Value.cell, statueSite.Value.building);
+
+        // Priority 4: reliquary in any sufficiently impressive room
+        var impressiveReliquary = FindAccessibleImpressiveReliquary(pawn);
+        if (impressiveReliquary != null)
+            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, impressiveReliquary, impressiveReliquary);
+
         return null;
     }
 
