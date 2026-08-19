@@ -12,7 +12,7 @@ internal static class EnhancedIdeologyDefOf
     public static ThingDef EB_UnfinishedIdeobook;
     public static ThingDef EB_Ideobook;
     public static JobDef EB_Pray;
-    public static ThingDef EB_Mote_PrayerIcon;
+    public static ThingDef EB_Mote_ContemplationIcon;
     public static JobDef EB_CompleteReligiousBook;
     public static RecipeDef EB_WriteIdeobook;
     public static RecipeDef EB_WriteIllustratedIdeobook;
@@ -34,9 +34,9 @@ internal static class EnhancedIdeologyDefOf
     public static ThoughtDef EB_ProselytizerFailedConversion;
     public static HistoryEventDef EB_DestroyedReligiousBook;
     public static HistoryEventDef EB_BookDestroyed;
-    public static HistoryEventDef EB_Prayed;
+    public static HistoryEventDef EB_Contemplated;
     [MayRequireIdeology]
-    public static NeedDef EB_Prayer;
+    public static NeedDef EB_Contemplation;
     public static EffecterDef EB_CompleteBook;
     public static InteractionDef EB_IdeologicalDebatePrecept;
     public static InteractionDef EB_IdeologicalDebateMeme;

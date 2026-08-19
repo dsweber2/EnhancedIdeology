@@ -95,8 +95,8 @@
 		</match>
 	</Operation>
 
-	<!-- Prayer need: insert a need-driven prayer job before main colonist behavior.
-	     The JobGiver gates on Need_Prayer.CurCategory == Critical so only Required precept
+	<!-- Contemplation need: insert a need-driven contemplation job before main colonist behavior.
+	     The JobGiver gates on Need_Contemplation.CurCategory == Critical so only Required precept
 	     pawns with a depleted need are affected. Fires regardless of joy level. -->
 	<Operation Class="PatchOperationInsert">
 		<xpath>Defs/ThinkTreeDef[defName="Humanlike"]/thinkRoot/subNodes/li[@Class="ThinkNode_SubtreesByTag"][insertTag="Humanlike_PreMain"]</xpath>
@@ -140,14 +140,14 @@
 		</value>
 	</Operation>
 
-	<!-- Prayer site: add Comp_PrayerSite and description note to all valid prayer site buildings -->
+	<!-- Contemplation site: add Comp_ContemplationSite and description note to all valid contemplation site buildings -->
 
-	<!-- Lectern (moralist-only prayer site, 1.5× conviction gain) -->
+	<!-- Lectern (moralist-only contemplation site, 1.5× conviction gain) -->
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/ThingDef[defName="Lectern"]/comps</xpath>
 		<value>
-			<li Class="EnhancedIdeology.CompProperties_PrayerSite">
-				<prayerGainLabel>1.5×</prayerGainLabel>
+			<li Class="EnhancedIdeology.CompProperties_ContemplationSite">
+				<contemplationGainLabel>1.5×</contemplationGainLabel>
 			</li>
 		</value>
 	</Operation>
@@ -156,17 +156,17 @@
 		<value>
 			<description>A slanted platform that holds a text in front of a speaker. Place it near the focus of rituals and speeches to extend the duration of their positive effects.
 
-Can be used as a prayer site by the moral guide. Prayer gain: 1.5×.</description>
+Can be used as a contemplation site by the moral guide. Contemplation gain: 1.5×.</description>
 		</value>
 	</Operation>
 
-	<!-- Reliquary (prayer site, 2× conviction gain; 4× with a matching relic) -->
+	<!-- Reliquary (contemplation site, 2× conviction gain; 4× with a matching relic) -->
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/ThingDef[defName="Reliquary"]/comps</xpath>
 		<value>
-			<li Class="EnhancedIdeology.CompProperties_PrayerSite">
-				<prayerGainLabel>2× (4× with matching relic)</prayerGainLabel>
-				<prayerGainReport>EB_PrayerSiteStatReportReliquary</prayerGainReport>
+			<li Class="EnhancedIdeology.CompProperties_ContemplationSite">
+				<contemplationGainLabel>2× (4× with matching relic)</contemplationGainLabel>
+				<contemplationGainReport>EB_ContemplationSiteStatReportReliquary</contemplationGainReport>
 			</li>
 		</value>
 	</Operation>
@@ -175,7 +175,7 @@ Can be used as a prayer site by the moral guide. Prayer gain: 1.5×.</descriptio
 		<value>
 			<description>A ceremonial building that protects and displays a relic. Relics are ancient objects venerated by some cultures, belief systems, or religions.
 
-Can be used as a prayer site. Prayer gain: 2× (4× with a matching relic).</description>
+Can be used as a contemplation site. Contemplation gain: 2× (4× with a matching relic).</description>
 		</value>
 	</Operation>
 
@@ -184,7 +184,7 @@ Can be used as a prayer site. Prayer gain: 2× (4× with a matching relic).</des
 		<xpath>/Defs/ThingDef[defName="Pew"]</xpath>
 		<value>
 			<comps>
-				<li Class="EnhancedIdeology.CompProperties_PrayerSite"/>
+				<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
 			</comps>
 		</value>
 	</Operation>
@@ -193,7 +193,7 @@ Can be used as a prayer site. Prayer gain: 2× (4× with a matching relic).</des
 		<value>
 			<description>A long bench where ritual participants can sit while listening to a speaker. Place it facing rituals and speeches to extend the duration of their positive effects.
 
-Can be used as a prayer site. Prayer gain: 1×.</description>
+Can be used as a contemplation site. Contemplation gain: 1×.</description>
 		</value>
 	</Operation>
 
@@ -202,16 +202,16 @@ Can be used as a prayer site. Prayer gain: 1×.</description>
 		<xpath>/Defs/ThingDef[defName="KneelSheet"]</xpath>
 		<value>
 			<comps>
-				<li Class="EnhancedIdeology.CompProperties_PrayerSite"/>
+				<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
 			</comps>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="KneelSheet"]/description</xpath>
 		<value>
-			<description>A sheet on which believers kneel while observing rituals, praying, or discussing.
+			<description>A sheet on which believers kneel while observing rituals, contemplating, or discussing.
 
-Can be used as a prayer site. Prayer gain: 1×.</description>
+Can be used as a contemplation site. Contemplation gain: 1×.</description>
 		</value>
 	</Operation>
 
@@ -220,16 +220,16 @@ Can be used as a prayer site. Prayer gain: 1×.</description>
 		<xpath>/Defs/ThingDef[defName="KneelPillow"]</xpath>
 		<value>
 			<comps>
-				<li Class="EnhancedIdeology.CompProperties_PrayerSite"/>
+				<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
 			</comps>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="KneelPillow"]/description</xpath>
 		<value>
-			<description>A pillow on which believers kneel while observing rituals, praying, or discussing.
+			<description>A pillow on which believers kneel while observing rituals, contemplating, or discussing.
 
-Can be used as a prayer site. Prayer gain: 1×.</description>
+Can be used as a contemplation site. Contemplation gain: 1×.</description>
 		</value>
 	</Operation>
 

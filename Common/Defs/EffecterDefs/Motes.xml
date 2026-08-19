@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <ThingDef ParentName="MoteBase">
-    <defName>EB_Mote_PrayerIcon</defName>
-    <thingClass>EnhancedIdeology.Mote_PrayerIcon</thingClass>
+    <defName>EB_Mote_ContemplationIcon</defName>
+    <thingClass>EnhancedIdeology.Mote_ContemplationIcon</thingClass>
     <altitudeLayer>MetaOverlays</altitudeLayer>
     <graphicData>
       <texPath>Things/Mote/Transparent</texPath>

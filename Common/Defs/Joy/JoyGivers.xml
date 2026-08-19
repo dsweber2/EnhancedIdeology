@@ -10,8 +10,8 @@
 	</JoyGiverDef>
 
 	<JoyGiverDef>
-		<defName>EB_Prayer</defName>
-		<giverClass>EnhancedIdeology.JoyGiver_Prayer</giverClass>
+		<defName>EB_Contemplation</defName>
+		<giverClass>EnhancedIdeology.JoyGiver_Contemplation</giverClass>
 		<baseChance>4</baseChance>
 		<jobDef>EB_Pray</jobDef>
 		<joyKind>Meditative</joyKind>

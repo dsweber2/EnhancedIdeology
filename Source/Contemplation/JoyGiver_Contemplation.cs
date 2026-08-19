@@ -3,7 +3,7 @@ using Verse.AI;
 namespace EnhancedIdeology;
 
 [HotSwappable]
-internal sealed class JoyGiver_Prayer : JoyGiver
+internal sealed class JoyGiver_Contemplation : JoyGiver
 {
     public override bool CanBeGivenTo(Pawn pawn)
     {
@@ -11,31 +11,31 @@ internal sealed class JoyGiver_Prayer : JoyGiver
             return false;
         if (!MeditationUtility.CanMeditateNow(pawn))
             return false;
-        if (!PrayerAllowedByPrecept(pawn))
+        if (!ContemplationAllowedByPrecept(pawn))
             return false;
         return FindLectern(pawn) != null
             || HasAnyWorshipRoom(pawn)
-            || FindStatuePrayerSite(pawn) != null
+            || FindStatueContemplationSite(pawn) != null
             || FindAccessibleImpressiveReliquary(pawn) != null;
     }
 
-    internal static bool PrayerAllowedByPrecept(Pawn pawn)
+    internal static bool ContemplationAllowedByPrecept(Pawn pawn)
     {
-        var precept = GetPrayerPrecept(pawn);
+        var precept = GetContemplationPrecept(pawn);
         if (precept == null)
             return true;
 
         var defName = precept.def.defName;
-        if (defName == "Prayer_Forbidden")
+        if (defName == "Contemplation_Forbidden")
             return false;
 
-        if (defName == "Prayer_Disapproved")
+        if (defName == "Contemplation_Disapproved")
         {
             var certainty = GetCertainty(pawn);
             return certainty < 0.25f;
         }
 
-        if (defName == "Prayer_Normal")
+        if (defName == "Contemplation_Normal")
         {
             var certainty = GetCertainty(pawn);
             if (certainty > 0.75f)
@@ -47,13 +47,13 @@ internal sealed class JoyGiver_Prayer : JoyGiver
         return true;
     }
 
-    private static Precept? GetPrayerPrecept(Pawn pawn)
+    private static Precept? GetContemplationPrecept(Pawn pawn)
     {
         if (pawn.Ideo == null)
             return null;
         foreach (var precept in pawn.Ideo.precepts)
         {
-            if (precept.def.issue?.defName == "EB_Prayer")
+            if (precept.def.issue?.defName == "EB_Contemplation")
                 return precept;
         }
         return null;
@@ -111,7 +111,7 @@ internal sealed class JoyGiver_Prayer : JoyGiver
             return null;
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
-            $"Prayer site search: {pawn} moralist={IsMoralist(pawn)} lectern={FindLectern(pawn)?.Label ?? "none"}");
+            $"Contemplation site search: {pawn} moralist={IsMoralist(pawn)} lectern={FindLectern(pawn)?.Label ?? "none"}");
 
         var job = TryBuildPrayJob(pawn);
         if (job != null)
@@ -137,7 +137,7 @@ internal sealed class JoyGiver_Prayer : JoyGiver
             {
                 disrespectedWarnedAt[pawn] = Find.TickManager.TicksGame;
                 Messages.Message(
-                    "EB_PrayerRoomDisrespected".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO")),
+                    "EB_ContemplationRoomDisrespected".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO")),
                     pawn, MessageTypeDefOf.CautionInput, historical: false);
             }
         }
@@ -163,7 +163,7 @@ internal sealed class JoyGiver_Prayer : JoyGiver
             var pew = FindPew(worshipRoom, pawn);
             if (pew != null)
             {
-                var altar = FindPrayerTarget(worshipRoom, pawn);
+                var altar = FindContemplationTarget(worshipRoom, pawn);
                 return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, pew.Value, altar);
             }
         }
@@ -173,7 +173,7 @@ internal sealed class JoyGiver_Prayer : JoyGiver
             return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, lectern, lectern);
 
         // Priority 3: statue/ideo building in any room
-        var statueSite = FindStatuePrayerSite(pawn);
+        var statueSite = FindStatueContemplationSite(pawn);
         if (statueSite != null)
             return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, statueSite.Value.cell, statueSite.Value.building);
 
@@ -223,8 +223,8 @@ internal sealed class JoyGiver_Prayer : JoyGiver
 
     // Non-altar ideo buildings (statues, etc.) in any room, subject to their own presenceDemand.
     // Returns the building + a free cell in the room. The building is reserved with a cap based on
-    // impressiveness so the number of simultaneous prayers scales with the room's quality.
-    internal static (Thing building, LocalTargetInfo cell)? FindStatuePrayerSite(Pawn pawn)
+    // impressiveness so the number of simultaneous contemplations scales with the room's quality.
+    internal static (Thing building, LocalTargetInfo cell)? FindStatueContemplationSite(Pawn pawn)
     {
         foreach (var room in pawn.Map.regionGrid.AllRooms)
         {
@@ -250,7 +250,7 @@ internal sealed class JoyGiver_Prayer : JoyGiver
                 }
                 if (thing.IsForbidden(pawn))
                     continue;
-                var cap = StatuePrayerCap(thing);
+                var cap = StatueContemplationCap(thing);
                 if (!pawn.CanReserve(thing, cap, 1))
                     continue;
                 var cell = FindRoomCell(room, thing, pawn);
@@ -261,8 +261,8 @@ internal sealed class JoyGiver_Prayer : JoyGiver
         return null;
     }
 
-    // Max concurrent prayers at a statue = 1 + impressiveness stage (0-6), so 1–7 pawns.
-    internal static int StatuePrayerCap(Thing thing)
+    // Max concurrent contemplations at a statue = 1 + impressiveness stage (0-6), so 1–7 pawns.
+    internal static int StatueContemplationCap(Thing thing)
     {
         var room = thing.GetRoom();
         if (room == null || room.PsychologicallyOutdoors)
@@ -338,8 +338,8 @@ internal sealed class JoyGiver_Prayer : JoyGiver
         return null;
     }
 
-    // Prefer altars; fall back to any ideo building in the room to face during prayer.
-    internal static LocalTargetInfo FindPrayerTarget(Room room, Pawn pawn)
+    // Prefer altars; fall back to any ideo building in the room to face during contemplation.
+    internal static LocalTargetInfo FindContemplationTarget(Room room, Pawn pawn)
     {
         Thing? fallback = null;
         foreach (var thing in room.ContainedAndAdjacentThings)

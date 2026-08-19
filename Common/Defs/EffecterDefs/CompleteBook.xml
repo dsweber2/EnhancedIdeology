@@ -8,7 +8,7 @@
                 <soundDef>EB_Interact_Write</soundDef>
             </li>
             <li>
-                <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+                <subEffecterClass>SubEffecter_ScontemplationContinuous</subEffecterClass>
                 <burstCount>2~4</burstCount>
                 <positionRadius>0.5</positionRadius>
                 <scale>1~1</scale>
@@ -17,7 +17,7 @@
                 <fleckDef>AirPuff</fleckDef>
             </li>
             <li>
-                <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+                <subEffecterClass>SubEffecter_ScontemplationContinuous</subEffecterClass>
                 <spawnLocType>OnTarget</spawnLocType>
                 <positionRadius>0.2</positionRadius>
                 <scale>0.5</scale>

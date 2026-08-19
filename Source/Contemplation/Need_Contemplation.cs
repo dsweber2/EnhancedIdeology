@@ -1,7 +1,7 @@
 namespace EnhancedIdeology;
 
 [HotSwappable]
-internal sealed class Need_Prayer : Need
+internal sealed class Need_Contemplation : Need
 {
     // Drains to empty in one game day; moral guide drains twice as fast.
     private const float BaseFallPerInterval = 1f / 400f;
@@ -9,19 +9,19 @@ internal sealed class Need_Prayer : Need
     private const float ThreshLow = 0.25f;
     private const float ThreshCritical = 0.1f;
 
-    public PrayerNeedCategory CurCategory
+    public ContemplationNeedCategory CurCategory
     {
         get
         {
             if (CurLevelPercentage <= ThreshCritical)
-                return PrayerNeedCategory.Critical;
+                return ContemplationNeedCategory.Critical;
             if (CurLevelPercentage <= ThreshLow)
-                return PrayerNeedCategory.Low;
-            return PrayerNeedCategory.Satisfied;
+                return ContemplationNeedCategory.Low;
+            return ContemplationNeedCategory.Satisfied;
         }
     }
 
-    public Need_Prayer(Pawn pawn) : base(pawn)
+    public Need_Contemplation(Pawn pawn) : base(pawn)
     {
         threshPercents = [ThreshCritical, ThreshLow, 0.75f];
     }
@@ -52,7 +52,7 @@ internal sealed class Need_Prayer : Need
         pawn.Ideo?.GetRole(pawn)?.def == PreceptDefOf.IdeoRole_Moralist;
 }
 
-internal enum PrayerNeedCategory
+internal enum ContemplationNeedCategory
 {
     Satisfied,
     Low,

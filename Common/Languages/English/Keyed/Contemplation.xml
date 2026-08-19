@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+    <EB_NoPewToPrayIn>{PAWN_nameDef} couldn't find a ritual seat to contemplate in for {IDEO_name}.</EB_NoPewToPrayIn>
+    <EB_ContemplationRoomDisrespected>{PAWN_nameDef}'s {IDEO_name} contemplation room is disrespected.</EB_ContemplationRoomDisrespected>
+
+    <EB_ContemplationSiteStatLabel>Contemplation gain</EB_ContemplationSiteStatLabel>
+    <EB_ContemplationSiteStatReport>How much conviction this building provides per contemplation session relative to the base rate.</EB_ContemplationSiteStatReport>
+    <EB_ContemplationSiteStatReportReliquary>How much conviction this building provides per contemplation session. Rises to 4× when a relic belonging to the pawn's own ideology is enshrined.</EB_ContemplationSiteStatReportReliquary>
+    <EB_ContemplationSiteInspect>Contemplation gain: {0}</EB_ContemplationSiteInspect>
+
+</LanguageData>

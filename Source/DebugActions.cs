@@ -119,9 +119,9 @@ internal static class DebugActions
             new LookTargets(initiator, recipient), MessageTypeDefOf.NeutralEvent, false);
     }
 
-    [DebugAction("Ideoligion", "Trigger prayer", actionType = DebugActionType.ToolMapForPawns,
+    [DebugAction("Ideoligion", "Trigger contemplation", actionType = DebugActionType.ToolMapForPawns,
         allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
-    private static void TriggerPrayer(Pawn pawn)
+    private static void TriggerContemplation(Pawn pawn)
     {
         if (pawn.Ideo == null || pawn.Map == null)
         {
@@ -129,29 +129,29 @@ internal static class DebugActions
             return;
         }
 
-        LogPrayerSiteDiagnosis(pawn);
+        LogContemplationSiteDiagnosis(pawn);
 
-        var job = JoyGiver_Prayer.TryBuildPrayJob(pawn);
+        var job = JoyGiver_Contemplation.TryBuildPrayJob(pawn);
         if (job == null)
         {
-            Messages.Message($"{pawn.LabelShort}: no valid prayer site found — see dev console for details.",
+            Messages.Message($"{pawn.LabelShort}: no valid contemplation site found — see dev console for details.",
                 new LookTargets(pawn), MessageTypeDefOf.RejectInput, false);
             return;
         }
 
         var siteName = job.targetA.HasThing ? job.targetA.Thing.LabelShort : "room cell";
         pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-        Messages.Message($"{pawn.LabelShort}: heading to pray at {siteName}.",
+        Messages.Message($"{pawn.LabelShort}: heading to contemplate at {siteName}.",
             new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
     }
 
-    private static void LogPrayerSiteDiagnosis(Pawn pawn)
+    private static void LogContemplationSiteDiagnosis(Pawn pawn)
     {
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"=== Prayer site diagnosis: {pawn.LabelShort} ({pawn.Ideo!.name}) ===");
-        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  isMoralist={JoyGiver_Prayer.IsMoralist(pawn)}  worshipRoom={JoyGiver_Prayer.FindWorshipRoom(pawn) != null}");
+        sb.AppendLine($"=== Contemplation site diagnosis: {pawn.LabelShort} ({pawn.Ideo!.name}) ===");
+        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  isMoralist={JoyGiver_Contemplation.IsMoralist(pawn)}  worshipRoom={JoyGiver_Contemplation.FindWorshipRoom(pawn) != null}");
 
-        sb.AppendLine("\n-- Lecterns (moralist prayer site) --");
+        sb.AppendLine("\n-- Lecterns (moralist contemplation site) --");
         foreach (var thing in pawn.Map!.listerThings.ThingsOfDef(ThingDefOf.Lectern))
         {
             sb.AppendLine($"  {thing.LabelShort}  forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}");
@@ -169,7 +169,7 @@ internal static class DebugActions
                 sb.AppendLine($"  {thing.LabelShort} ({thing.def.defName})  isAltar={thing.def.isAltar}  csIdeo={cs.Ideo?.name ?? "null"}  match={cs.Ideo == pawn.Ideo}");
                 if (!thing.def.isAltar && cs.Ideo == pawn.Ideo)
                 {
-                    var cap = JoyGiver_Prayer.StatuePrayerCap(thing);
+                    var cap = JoyGiver_Contemplation.StatueContemplationCap(thing);
                     sb.AppendLine($"    statueCap={cap}  canReserveCap={pawn.CanReserve(thing, cap, -1)}");
                 }
                 if (cs.SourcePrecept is Precept_Building pb && pb.presenceDemand != null)

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Issue -->
+  <IssueDef>
+    <defName>EB_Contemplation</defName>
+    <label>contemplation</label>
+    <iconPath>UI/Issues/EB_Contemplation</iconPath>
+  </IssueDef>
+  <!-- History event fired when a pawn completes a contemplation session -->
+  <HistoryEventDef>
+    <defName>EB_Contemplated</defName>
+    <label>contemplated</label>
+  </HistoryEventDef>
+  <!-- Need (only present when Contemplation_Required precept is active) -->
+  <NeedDef>
+    <defName>EB_Contemplation</defName>
+    <needClass>EnhancedIdeology.Need_Contemplation</needClass>
+    <label>contemplation</label>
+    <description>This pawn's ideology requires regular contemplation. Neglecting it erodes their sense of devotion.</description>
+    <showOnNeedList>true</showOnNeedList>
+    <onlyIfCausedByIdeo>true</onlyIfCausedByIdeo>
+    <baseLevel>1</baseLevel>
+    <listPriority>50</listPriority>
+  </NeedDef>
+  <!-- Precepts -->
+  <PreceptDef>
+    <defName>Contemplation_Required</defName>
+    <issue>EB_Contemplation</issue>
+    <label>required</label>
+    <description>Contemplation is a sacred obligation. Members must contemplate regularly, and the moral guide is expected to lead by example.</description>
+    <impact>High</impact>
+    <displayOrderInIssue>0</displayOrderInIssue>
+    <displayOrderInImpact>1000</displayOrderInImpact>
+    <enablesNeeds>
+      <li>EB_Contemplation</li>
+    </enablesNeeds>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Contemplated</eventDef>
+        <thought>EB_WitnessedContemplation_Approved</thought>
+        <doerMustBeMyIdeo>true</doerMustBeMyIdeo>
+      </li>
+      <li Class="PreceptComp_SituationalThought">
+        <thought>EB_ContemplationNeed</thought>
+        <description>Contemplation need satisfaction</description>
+      </li>
+    </comps>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Contemplation_Respected</defName>
+    <issue>EB_Contemplation</issue>
+    <label>respected</label>
+    <description>Contemplation is a meaningful practice, and those who contemplate regularly are held in higher regard.</description>
+    <impact>Medium</impact>
+    <displayOrderInIssue>10</displayOrderInIssue>
+    <displayOrderInImpact>100</displayOrderInImpact>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Contemplated</eventDef>
+        <thought>EB_WitnessedContemplation_Approved</thought>
+        <doerMustBeMyIdeo>true</doerMustBeMyIdeo>
+      </li>
+    </comps>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Contemplation_Normal</defName>
+    <issue>EB_Contemplation</issue>
+    <label>acceptable</label>
+    <description>Contemplation is a personal matter — neither encouraged nor discouraged.</description>
+    <impact>Low</impact>
+    <displayOrderInIssue>20</displayOrderInIssue>
+    <displayOrderInImpact>10</displayOrderInImpact>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Contemplation_Disapproved</defName>
+    <issue>EB_Contemplation</issue>
+    <label>disapproved</label>
+    <description>Contemplation is seen as weakness or superstition. Members who contemplate are viewed unfavorably.</description>
+    <impact>Medium</impact>
+    <displayOrderInIssue>30</displayOrderInIssue>
+    <displayOrderInImpact>100</displayOrderInImpact>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Contemplated</eventDef>
+        <thought>EB_WitnessedContemplation_Disapproved</thought>
+      </li>
+    </comps>
+  </PreceptDef>
+  <PreceptDef>
+    <defName>Contemplation_Forbidden</defName>
+    <issue>EB_Contemplation</issue>
+    <label>forbidden</label>
+    <description>Contemplation is strictly forbidden. Any member caught contemplating will be shunned.</description>
+    <impact>High</impact>
+    <displayOrderInIssue>40</displayOrderInIssue>
+    <displayOrderInImpact>1000</displayOrderInImpact>
+    <comps>
+      <li Class="PreceptComp_KnowsMemoryThought">
+        <eventDef>EB_Contemplated</eventDef>
+        <thought>EB_WitnessedContemplation_Forbidden</thought>
+      </li>
+    </comps>
+  </PreceptDef>
+  <!-- Thought: contemplation need (Required level) -->
+  <ThoughtDef>
+    <defName>EB_ContemplationNeed</defName>
+    <workerClass>EnhancedIdeology.ThoughtWorker_ContemplationNeed</workerClass>
+    <thoughtClass>Thought_Situational</thoughtClass>
+    <stages>
+      <li>
+        <label>contemplated regularly</label>
+        <description>I've been faithful in my contemplations. It brings me peace.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <li>
+        <label>contemplation neglected</label>
+        <description>I haven't found time to contemplate. My devotion is slipping.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>contemplation severely neglected</label>
+        <description>I've gone far too long without contemplation. I feel spiritually adrift.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <!-- Thoughts: witnessed contemplation -->
+  <ThoughtDef>
+    <defName>EB_WitnessedContemplation_Approved</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>6</stackLimit>
+    <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>contemplated devoutly</label>
+        <baseOpinionOffset>2</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_WitnessedContemplation_Disapproved</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>6</stackLimit>
+    <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>engaged in contemplation</label>
+        <baseOpinionOffset>-2</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>EB_WitnessedContemplation_Forbidden</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>3</stackLimit>
+    <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>defied the ban on contemplation</label>
+        <baseOpinionOffset>-7</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

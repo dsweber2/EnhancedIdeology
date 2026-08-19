@@ -10,7 +10,7 @@ internal sealed class JobDriver_Pray : JobDriver
 
     private const int ReinforcementIntervalTicks = GenDate.TicksPerHour;
     private const int SymbolMoteIntervalTicks = 90;
-    internal const float PrayerArc = 0.5f;
+    internal const float ContemplationArc = 0.5f;
     private const float ImpressivenessStageMax = 6f;
 
     // Exposed for tests: the diminishing-returns factor as conviction approaches its absolute ceiling.
@@ -21,23 +21,23 @@ internal sealed class JobDriver_Pray : JobDriver
     private LocalTargetInfo Altar => job.GetTarget(AltarInd);
 
     // Pew is a reliquary Thing → one-pawn reservation, InteractionCell path.
-    private bool IsReliquaryPrayer =>
+    private bool IsReliquaryContemplation =>
         Pew.HasThing && Pew.Thing.def == ThingDefOf.Reliquary;
 
-    // Moral guide praying at a lectern → single-pawn, InteractionCell path.
-    private bool IsLecternPrayer =>
+    // Moral guide contemplating at a lectern → single-pawn, InteractionCell path.
+    private bool IsLecternContemplation =>
         Pew.HasThing && Pew.Thing.def == ThingDefOf.Lectern;
 
     // Pew is a room cell, Altar is a non-altar ideo building → shared cap reservation on the statue.
-    private bool IsStatuePrayer =>
+    private bool IsStatueContemplation =>
         !Pew.HasThing && Altar.HasThing && !Altar.Thing.def.isAltar;
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
         if (!pawn.Reserve(Pew, job, 1, -1, null, errorOnFailed))
             return false;
-        if (IsStatuePrayer)
-            return pawn.Reserve(Altar, job, JoyGiver_Prayer.StatuePrayerCap(Altar.Thing), 1, null, errorOnFailed);
+        if (IsStatueContemplation)
+            return pawn.Reserve(Altar, job, JoyGiver_Contemplation.StatueContemplationCap(Altar.Thing), 1, null, errorOnFailed);
         return true;
     }
 
@@ -51,22 +51,22 @@ internal sealed class JobDriver_Pray : JobDriver
         var pathMode = Pew.HasThing ? PathEndMode.InteractionCell : PathEndMode.OnCell;
         yield return Toils_Goto.Goto(PewInd, pathMode);
 
-        var pray = ToilMaker.MakeToil("Pray");
-        pray.socialMode = RandomSocialMode.Off;
-        pray.defaultCompleteMode = ToilCompleteMode.Delay;
-        pray.defaultDuration = job.def.joyDuration;
-        pray.handlingFacing = true;
+        var contemplate = ToilMaker.MakeToil("Contemplate");
+        contemplate.socialMode = RandomSocialMode.Off;
+        contemplate.defaultCompleteMode = ToilCompleteMode.Delay;
+        contemplate.defaultDuration = job.def.joyDuration;
+        contemplate.handlingFacing = true;
 
-        pray.initAction = delegate
+        contemplate.initAction = delegate
         {
             if (Altar.IsValid)
                 pawn.rotationTracker.FaceCell(Altar.Cell);
         };
 
-        pray.FailOn(() => !MeditationUtility.CanMeditateNow(pawn));
-        pray.AddPreTickAction(PrayTick);
+        contemplate.FailOn(() => !MeditationUtility.CanMeditateNow(pawn));
+        contemplate.AddPreTickAction(PrayTick);
 
-        yield return pray;
+        yield return contemplate;
     }
 
     private const float NeedFillPerTick = 1f / GenDate.TicksPerHour;
@@ -77,16 +77,16 @@ internal sealed class JobDriver_Pray : JobDriver
             pawn.rotationTracker.FaceCell(Altar.Cell);
 
         if (pawn.IsHashIntervalTick(SymbolMoteIntervalTicks) && pawn.Ideo != null)
-            SpawnPrayerIcon(pawn);
+            SpawnContemplationIcon(pawn);
 
-        pawn.needs?.TryGetNeed<Need_Prayer>()?.Satisfy(NeedFillPerTick);
+        pawn.needs?.TryGetNeed<Need_Contemplation>()?.Satisfy(NeedFillPerTick);
 
         if (pawn.needs?.joy != null)
         {
             JoyUtility.JoyTickCheckEnd(pawn, 1, JoyTickFullJoyAction.None);
             if (pawn.needs.joy.CurLevelPercentage >= 1f)
             {
-                CompletePrayer();
+                CompleteContemplation();
                 EndJobWith(JobCondition.Succeeded);
                 return;
             }
@@ -96,19 +96,19 @@ internal sealed class JobDriver_Pray : JobDriver
             TryReinforceBeliefs();
     }
 
-    private void CompletePrayer()
+    private void CompleteContemplation()
     {
         if (pawn.Ideo == null)
             return;
         Find.HistoryEventsManager.RecordEvent(
-            new HistoryEvent(EnhancedIdeologyDefOf.EB_Prayed, pawn.Named(HistoryEventArgsNames.Doer)));
+            new HistoryEvent(EnhancedIdeologyDefOf.EB_Contemplated, pawn.Named(HistoryEventArgsNames.Doer)));
     }
 
-    private static void SpawnPrayerIcon(Pawn pawn)
+    private static void SpawnContemplationIcon(Pawn pawn)
     {
         if (!pawn.Position.ShouldSpawnMotesAt(pawn.Map))
             return;
-        var mote = (Mote_PrayerIcon)ThingMaker.MakeThing(EnhancedIdeologyDefOf.EB_Mote_PrayerIcon);
+        var mote = (Mote_ContemplationIcon)ThingMaker.MakeThing(EnhancedIdeologyDefOf.EB_Mote_ContemplationIcon);
         mote.exactPosition = pawn.DrawPos
             + new Vector3(0.35f, 0f, 0.35f)
             + new Vector3(Rand.Value, 0f, Rand.Value) * 0.1f;
@@ -137,30 +137,30 @@ internal sealed class JobDriver_Pray : JobDriver
         var strengthFactor = 1f - (stance.strength / IdeoTrackerData.AbsoluteMaxConvictionStrength);
         var room = pawn.Position.GetRoom(pawn.Map);
         var impressivenessFactor = ImpressivenessScore(room);
-        if (IsLecternPrayer)
+        if (IsLecternContemplation)
             impressivenessFactor = Math.Max(impressivenessFactor, 0.5f);
-        var fellowFactor = 1f + (FellowPrayerCount(pawn, room) * 0.1f);
+        var fellowFactor = 1f + (FellowContemplationCount(pawn, room) * 0.1f);
         var chance = strengthFactor * impressivenessFactor * fellowFactor;
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
-            $"Prayer check: {pawn} on {issue} str={stance.strength:F1} chance={chance:F3} (str={strengthFactor:F2} impress={impressivenessFactor:F2} fellows={fellowFactor:F2})");
+            $"Contemplation check: {pawn} on {issue} str={stance.strength:F1} chance={chance:F3} (str={strengthFactor:F2} impress={impressivenessFactor:F2} fellows={fellowFactor:F2})");
 
         if (Rand.Value > chance)
             return;
 
         var targetRank = IdeoTrackerData.HeldRank(pawn.Ideo, issue);
-        var arc = PrayerArc * ReliquaryArcMultiplier();
+        var arc = ContemplationArc * ReliquaryArcMultiplier();
         ConvictionMath.ApplyRitualPull(comp, pawn, issue, targetRank, IdeoTrackerData.AbsoluteMaxConvictionStrength, arc);
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
-            $"Prayer reinforced: {pawn} on {issue} toward rank {targetRank:F2}");
+            $"Contemplation reinforced: {pawn} on {issue} toward rank {targetRank:F2}");
     }
 
     private float ReliquaryArcMultiplier()
     {
-        if (IsLecternPrayer)
+        if (IsLecternContemplation)
             return 1.5f;
-        if (!IsReliquaryPrayer)
+        if (!IsReliquaryContemplation)
             return 1f;
         var container = Pew.Thing.TryGetComp<CompRelicContainer>();
         if (container?.ContainedThing?.StyleSourcePrecept is Precept_Relic rp && rp.ideo == pawn.Ideo)
@@ -176,7 +176,7 @@ internal sealed class JobDriver_Pray : JobDriver
         return stageIndex / ImpressivenessStageMax;
     }
 
-    private static int FellowPrayerCount(Pawn pawn, Room? room)
+    private static int FellowContemplationCount(Pawn pawn, Room? room)
     {
         if (room == null)
             return 0;

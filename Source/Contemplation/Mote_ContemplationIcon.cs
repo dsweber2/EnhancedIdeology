@@ -1,6 +1,6 @@
 namespace EnhancedIdeology;
 
-internal sealed class Mote_PrayerIcon : Mote
+internal sealed class Mote_ContemplationIcon : Mote
 {
     private Material? iconMat;
     private Vector3 velocity;
