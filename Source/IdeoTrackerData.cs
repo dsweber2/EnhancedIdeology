@@ -483,7 +483,11 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // The issue on which the pawn's stance most opposes `ideo` (the most negative per-issue opinion) - the belief
     // a preacher of `ideo` would target first when trying to convert this pawn. Returns null when the pawn opposes
     // nothing `ideo` preaches (every graded issue reads >= 0).
-    public IssueDef? MostOpposingIssue(Ideo ideo) => MostOpposingIssues(ideo, 1).FirstOrDefault();
+    public IssueDef? MostOpposingIssue(Ideo ideo)
+    {
+        var issues = MostOpposingIssues(ideo, 1);
+        return issues.Count > 0 ? issues[0] : null;
+    }
 
     // The `n` issues the pawn's stance most opposes about `ideo`, most-opposed first, dropping any that read
     // >= 0 (nothing to argue). Fewer than `n` are returned when the pawn opposes fewer than `n` of the ideo's
@@ -1168,7 +1172,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         var bestIdeo = Find.IdeoManager.IdeosListForReading
             .Where(ii => ii != Pawn.Ideo)
-            .MaxByWithFallback(ii => IdeoOpinion(ii));
+            .MaxByWithFallback(ii => IdeoOpinion(ii!));
 
         if (bestIdeo != null && IdeoOpinion(bestIdeo) > currentOpinion)
         {

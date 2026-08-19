@@ -53,7 +53,7 @@ internal static class BookUIUtility_DrawBenefits_Reroute
         float rowY = 0f;
         foreach (var (issue, stance, strength) in stances)
         {
-            var shiftPerQuadrum = "EnhancedIdeology.ShiftRatePerQuadrum".Translate((gainPerQuadrum * strength / IdeoTrackerData.MaxConvictionStrength).ToString("0.##"));
+            var shiftPerQuadrum = "EnhancedIdeology.ShiftRatePerQuadrum".Translate((gainPerQuadrum * strength / IdeoTrackerData.MaxConvictionStrength).ToString("0.##", CultureInfo.InvariantCulture));
             if (issue.Icon != null)
             {
                 var iconRect = new Rect(Indent, rowY + ((IssueRowHeight - IssueIconSize) / 2f), IssueIconSize, IssueIconSize);

@@ -81,7 +81,7 @@ internal sealed class JobDriver_Pray : JobDriver
 
         pawn.needs?.TryGetNeed<Need_Prayer>()?.Satisfy(NeedFillPerTick);
 
-        if (pawn.needs.joy != null)
+        if (pawn.needs?.joy != null)
         {
             JoyUtility.JoyTickCheckEnd(pawn, 1, JoyTickFullJoyAction.None);
             if (pawn.needs.joy.CurLevelPercentage >= 1f)

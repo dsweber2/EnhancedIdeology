@@ -87,6 +87,9 @@ public static class GenCollection
     }
 }
 
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class StaticConstructorOnStartupAttribute : Attribute { }
+
 public static class PawnsFinder
 {
     private static List<Pawn> _allPawns = [];

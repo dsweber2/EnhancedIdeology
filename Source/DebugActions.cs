@@ -179,7 +179,7 @@ internal static class DebugActions
                     if (demand.AppliesTo(pawn.Map))
                     {
                         var effRoom = demand.GetEffectiveRoom(thing);
-                        sb.Append($"  effectiveRoom={effRoom?.ID.ToString() ?? "null"}");
+                        sb.Append($"  effectiveRoom={effRoom?.ID.ToString(CultureInfo.InvariantCulture) ?? "null"}");
                         if (effRoom != null)
                             foreach (var req in demand.roomRequirements ?? [])
                                 sb.Append($"  [{req.GetType().Name}={req.MetOrDisabled(effRoom, pawn)}]");

@@ -84,7 +84,7 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
         return "[INITIATOR_nameDef] debated with [RECIPIENT_nameDef].";
     }
 
-    private string SentTemplateForPack(RulePackDef pack)
+    private static string SentTemplateForPack(RulePackDef pack)
     {
         if (pack == EnhancedIdeologyDefOf.EB_Sentence_InitiatorWon)
             return "[INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance \"[WINNING_STANCE_label]\".";

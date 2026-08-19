@@ -13,6 +13,10 @@
 		<AnalysisLevel>preview-all</AnalysisLevel>
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>5</WarningLevel>
+		<!-- CA1707: underscore names are standard RimWorld convention (Thought_X, JobDriver_X, etc.) -->
+		<!-- CA1812: RimWorld instantiates these classes via reflection; the compiler can't see the call site -->
+		<!-- CA1859: Harmony transpiler contract requires IEnumerable<CodeInstruction> return type -->
+		<NoWarn>CA1707;CA1812;CA1859</NoWarn>
 
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	</PropertyGroup>

@@ -120,7 +120,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
     }
 }
 
-public enum ConversionOutcome : byte
+public enum ConversionOutcome
 {
     Failure = 0,
     Breakdown = 1,

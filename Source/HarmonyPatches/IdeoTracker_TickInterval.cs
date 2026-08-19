@@ -7,7 +7,7 @@ namespace EnhancedIdeology.HarmonyPatches;
 #endif
 internal static class IdeoTracker_TickInterval
 {
-    private static readonly float CheckIntervalDays = GenTicks.TickLongInterval / 60000f;
+    private const float CheckIntervalDays = GenTicks.TickLongInterval / 60000f;
 
     private static void Postfix(Pawn_IdeoTracker __instance)
     {

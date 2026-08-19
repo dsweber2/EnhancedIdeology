@@ -159,7 +159,7 @@ public class Settings : ModSettings
 
     private static void MultiplierSlider(Listing_Standard listing, string labelKey, ref float value, float min, float max, float defaultValue)
     {
-        listing.Label(labelKey.Translate(value.ToString("0.0#") + "x"), tooltip: (labelKey + ".Tip").Translate());
+        listing.Label(labelKey.Translate(value.ToString("0.0#", CultureInfo.InvariantCulture) + "x"), tooltip: (labelKey + ".Tip").Translate());
         value = SliderWithDefault(listing, value, min, max, defaultValue);
     }
 

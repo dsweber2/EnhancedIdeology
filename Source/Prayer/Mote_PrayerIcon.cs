@@ -2,7 +2,7 @@ namespace EnhancedIdeology;
 
 internal sealed class Mote_PrayerIcon : Mote
 {
-    private Material iconMat;
+    private Material? iconMat;
     private Vector3 velocity;
 
     internal void Setup(Texture2D icon, Color iconColor)

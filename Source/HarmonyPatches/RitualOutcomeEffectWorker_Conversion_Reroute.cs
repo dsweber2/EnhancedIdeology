@@ -35,7 +35,7 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
         {
             if (startIdx == -1 && codes[ii].LoadsField(ideoCertaintyOffsetField))
                 startIdx = ii - 1; // step back to the ldloc outcome preceding the callvirt
-            if (endIdx == -1 && codes[ii].Calls(offsetCertainty))
+            if (codes[ii].Calls(offsetCertainty))
             {
                 endIdx = ii;
                 break;

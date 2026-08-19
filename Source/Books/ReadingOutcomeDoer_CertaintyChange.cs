@@ -161,7 +161,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 
     public override string GetBenefitsString(Pawn? reader = null)
     {
-        return "EnhancedIdeology.BookReadingBenefit".Translate(ideo.Named("IDEO"), (CertaintyGain(reader) * TypicalReadingTicksPerQuadrum).ToString("0.##"));
+        return "EnhancedIdeology.BookReadingBenefit".Translate(ideo.Named("IDEO"), (CertaintyGain(reader) * TypicalReadingTicksPerQuadrum).ToString("0.##", CultureInfo.InvariantCulture));
     }
 
     public float CertaintyGain(Pawn? reader = null)

@@ -3,7 +3,7 @@ namespace EnhancedIdeology;
 internal static class VegetarianUtils
 {
     public static bool IsVegetarian(Pawn pawn) =>
-        pawn.Ideo?.precepts.Any(p => p.def.defName.StartsWith("MeatEating_NonMeat")) ?? false;
+        pawn.Ideo?.precepts.Any(p => p.def.defName.StartsWith("MeatEating_NonMeat", StringComparison.Ordinal)) ?? false;
 
     public static bool IsLeather(ThingDef def) =>
         def.stuffProps?.categories?.Any(c => c.defName == "Leathery") ?? false;
