@@ -27,6 +27,7 @@ internal static class IdeoTracker_TickInterval
         if (pawn.IsHashIntervalTick(GenTicks.TickLongInterval))
             data.RecalculateRelationshipIdeoOpinions();
 
+        data.ApplyConvictionDecayIfNewDay();
         data.CertaintyChangeRecache(comp);
 
         if (pawn.IsHashIntervalTick(GenTicks.TickLongInterval))

@@ -76,12 +76,18 @@ public class ShimTickManager
     public int TicksGame;
 }
 
+public class ShimPlayLog
+{
+    public void Add(object entry) { }
+}
+
 public static class Find
 {
     public static ShimIdeoManager IdeoManager { get; set; } = new();
     public static ShimTickManager TickManager { get; set; } = new();
     public static ShimStoryteller Storyteller { get; set; } = new();
     public static HistoryEventsManager HistoryEventsManager { get; set; } = new();
+    public static ShimPlayLog PlayLog { get; set; } = new();
 }
 
 public static class Current

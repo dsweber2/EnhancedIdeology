@@ -3,7 +3,7 @@
 
     <MentalStateDef ParentName="BaseMentalState">
         <defName>EB_CrisisOfFaith</defName>
-        <stateClass>MentalState_WanderSad</stateClass>
+        <stateClass>EnhancedIdeology.MentalState_CrisisOfFaith</stateClass>
         <label>crisis of faith</label>
         <category>Misc</category>
         <colonistsOnly>true</colonistsOnly>

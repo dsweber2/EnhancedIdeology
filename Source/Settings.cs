@@ -5,9 +5,9 @@ public class Settings : ModSettings
     // Recommended defaults, in one place so the field initializer, the save/load fallback, and the "recommended"
     // tick drawn on each slider can never drift apart.
     private const float DefaultCertaintyDriftRate = 0.10f;
-    private const float DefaultDifficultyOffset = 0f;
-    private const float DefaultRelationalMaxRange = 0.12f;
-    private const float DefaultPracticeMaxRange = 0.15f;
+
+    private const float DefaultRelationalMaxRange = 0.25f;
+    private const float DefaultPracticeMaxRange = 0.25f;
     private const float DefaultConversionPace = 1f;
     private const float DefaultDebateConvictionChange = 1f;
     private const float DefaultConversionStancePull = 2f;
@@ -15,6 +15,7 @@ public class Settings : ModSettings
     private const float DefaultCrisisThreshold = 0.25f;
     private const float DefaultSaveCompatMinCertainty = 0.125f;
     private const float DefaultPreceptOppositionScale = 1f;
+    private const float DefaultConvictionDecayRate = 0.1f;
 
     private bool _debugInteractionWorkers;
     public bool DebugInteractionWorkers
@@ -26,10 +27,6 @@ public class Settings : ModSettings
     // How fast certainty relaxes toward its setpoint each day (dc/dt = k * (target - c)).
     private float _certaintyDriftRate = DefaultCertaintyDriftRate;
     public float CertaintyDriftRate => _certaintyDriftRate;
-
-    // Flat shift applied to every pawn's target certainty. Positive = faith is stickier.
-    private float _difficultyOffset = DefaultDifficultyOffset;
-    public float DifficultyOffset => _difficultyOffset;
 
     // Maximum certainty the co-religionist relational band can add or remove.
     private float _relationalMaxRange = DefaultRelationalMaxRange;
@@ -63,13 +60,13 @@ public class Settings : ModSettings
     private float _debateConvictionChange = DefaultDebateConvictionChange;
     public float DebateConvictionChange => _debateConvictionChange;
 
-    // How much harder a won directed conversion (a priest's action) pulls the recipient's stance than an ordinary
+    // How much harder a won directed conversion (a moral guide's action) pulls the recipient's stance than an ordinary
     // debate win. The recipient's most-opposed belief is dragged toward the preacher's rung by this multiple of the
     // per-debate pull; a lost conversion still shifts the preacher by the ordinary (1x) amount.
     private float _conversionStancePull = DefaultConversionStancePull;
     public float ConversionStancePull => _conversionStancePull;
 
-    // Fraction of certainty a pawn retains after a won conversion attempt (a priest's action). Temporary - it
+    // Fraction of certainty a pawn retains after a won conversion attempt (a moral guide's action). Temporary - it
     // drifts back toward their structural setpoint - but the dip makes them more likely to convert now and to
     // spontaneously switch afterwards. 0.8 = an 80% pawn drops to 64%.
     private float _conversionCertaintyKnock = DefaultConversionCertaintyKnock;
@@ -82,6 +79,10 @@ public class Settings : ModSettings
     private float _preceptOppositionScale = DefaultPreceptOppositionScale;
     public float PreceptOppositionScale => _preceptOppositionScale;
 
+    // Uniform per-quadrum drain on every issue conviction strength. Represents natural fading of belief without reinforcement.
+    private float _convictionDecayRate = DefaultConvictionDecayRate;
+    public float ConvictionDecayRate => _convictionDecayRate;
+
     private Vector2 _scrollPosition;
     private float _contentHeight = 600f;
 
@@ -91,7 +92,6 @@ public class Settings : ModSettings
 
         Scribe_Values.Look(ref _debugInteractionWorkers, "debugInteractionWorkers", false);
         Scribe_Values.Look(ref _certaintyDriftRate, "certaintyDriftRate", DefaultCertaintyDriftRate);
-        Scribe_Values.Look(ref _difficultyOffset, "difficultyOffset", DefaultDifficultyOffset);
         Scribe_Values.Look(ref _relationalMaxRange, "relationalMaxRange", DefaultRelationalMaxRange);
         Scribe_Values.Look(ref _practiceMaxRange, "practiceMaxRange", DefaultPracticeMaxRange);
         Scribe_Values.Look(ref _conversionPace, "conversionPace", DefaultConversionPace);
@@ -101,6 +101,7 @@ public class Settings : ModSettings
         Scribe_Values.Look(ref _crisisThreshold, "crisisThreshold", DefaultCrisisThreshold);
         Scribe_Values.Look(ref _saveCompatMinCertainty, "saveCompatMinCertainty", DefaultSaveCompatMinCertainty);
         Scribe_Values.Look(ref _preceptOppositionScale, "preceptOppositionScale", DefaultPreceptOppositionScale);
+        Scribe_Values.Look(ref _convictionDecayRate, "convictionDecayRate", DefaultConvictionDecayRate);
     }
 
     public void DoSettingsWindowContents(Rect inRect)
@@ -116,11 +117,11 @@ public class Settings : ModSettings
 
         Header(listingStandard, "EnhancedIdeology.Section.Certainty");
         PercentSlider(listingStandard, "EnhancedIdeology.CertaintyDriftRate", ref _certaintyDriftRate, 0.02f, 0.5f, DefaultCertaintyDriftRate);
-        PercentSlider(listingStandard, "EnhancedIdeology.DifficultyOffset", ref _difficultyOffset, -0.5f, 0.5f, DefaultDifficultyOffset);
         PercentSlider(listingStandard, "EnhancedIdeology.RelationalMaxRange", ref _relationalMaxRange, 0f, 0.5f, DefaultRelationalMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.PracticeMaxRange", ref _practiceMaxRange, 0f, 0.5f, DefaultPracticeMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.CrisisThreshold", ref _crisisThreshold, 0f, 0.5f, DefaultCrisisThreshold);
         PercentSlider(listingStandard, "EnhancedIdeology.SaveCompatMinCertainty", ref _saveCompatMinCertainty, 0f, 0.5f, DefaultSaveCompatMinCertainty);
+        RawSlider(listingStandard, "EnhancedIdeology.ConvictionDecayRate", ref _convictionDecayRate, 0f, 7.5f, DefaultConvictionDecayRate);
 
         Header(listingStandard, "EnhancedIdeology.Section.Conversion");
         MultiplierSlider(listingStandard, "EnhancedIdeology.DebateConvictionChange", ref _debateConvictionChange, 0.25f, 4f, DefaultDebateConvictionChange);
@@ -154,6 +155,12 @@ public class Settings : ModSettings
     private static void PercentSlider(Listing_Standard listing, string labelKey, ref float value, float min, float max, float defaultValue)
     {
         listing.Label(labelKey.Translate(value.ToStringPercent()), tooltip: (labelKey + ".Tip").Translate());
+        value = SliderWithDefault(listing, value, min, max, defaultValue);
+    }
+
+    private static void RawSlider(Listing_Standard listing, string labelKey, ref float value, float min, float max, float defaultValue)
+    {
+        listing.Label(labelKey.Translate(value.ToString("F2", CultureInfo.InvariantCulture)), tooltip: (labelKey + ".Tip").Translate());
         value = SliderWithDefault(listing, value, min, max, defaultValue);
     }
 

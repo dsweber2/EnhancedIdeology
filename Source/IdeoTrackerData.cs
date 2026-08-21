@@ -21,7 +21,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     public float CachedStructural { get; private set; }
     public float CachedRelational { get; private set; }
     public float CachedPractitional { get; private set; }
-    public float CachedDifficulty { get; private set; }
 
     // Top contributors to each band for the social-card tooltip; (label, certainty-fraction contribution).
     public readonly List<(string label, float pct)> StructuralContributors = [];
@@ -74,6 +73,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // pawns keep their played-in certainty.
     private bool certaintyInitialized;
 
+    // Last game day (TicksAbs / TicksPerDay) on which precept decay was applied. -1 = never.
+    private int _lastDecayDay = -1;
+
     // Transient: set when stances are seeded for a pawn that already has a played-in certainty (vanilla or old
     // EB save). On the next recache, issueStrength values are scaled so the structural band lands on
     // calibrationTargetCertainty rather than wherever random seeding happened to place it.
@@ -125,8 +127,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
     // Certainty is a first-order relaxation toward a setpoint (target certainty): dc/dt = k * (target - c).
     // The setpoint is the sum of three bands - structural (innate fit), relational (co-religionists) and
-    // practitional (current precept moods) - plus a difficulty offset. No upper cap: certainty can exceed 1
-    // when the pawn's structural fit is very strong.
+    // practitional (current precept moods).
+    // No hard upper cap: certainty can exceed 1 when structural fit is very strong.
     public void CertaintyChangeRecache(GameComponent_EnhancedIdeology comp)
     {
         // Sync extended certainty with any external write to vanilla (tests, reassure, book, entrench, etc.).
@@ -151,8 +153,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         // Practitional band: summed precept-thought mood, scaled by the user's max range.
         CachedPractitional = PractitionalBand(settings.PracticeMaxRange, PractitionalContributors);
 
-        CachedDifficulty = settings.DifficultyOffset;
-
         if (needsStanceCalibration)
         {
             needsStanceCalibration = false;
@@ -162,7 +162,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             CachedStructural = structural;
         }
 
-        var target = Mathf.Max(0f, structural + CachedRelational + CachedPractitional + settings.DifficultyOffset);
+        var target = Mathf.Max(0f, structural + CachedRelational + CachedPractitional);
         CachedTargetCertainty = target;
 
         // Seed a fresh pawn's certainty to their net setpoint the first time it is known - relationships and
@@ -322,6 +322,44 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         {
             opinion += 10;
             contributors?.Add((EnhancedIdeologyDefOf.Guilty.LabelCap, 10f));
+        }
+
+        // Cross-meme disagreements between opposing Mort's Ideologies memes.
+        var empiricist = EnhancedIdeologyDefOf.MI_Empiricist;
+        var faith = EnhancedIdeologyDefOf.MI_Faith;
+        if (empiricist != null && faith != null
+            && (pawnIdeo.HasMeme(empiricist) && ideo.HasMeme(faith)
+                || pawnIdeo.HasMeme(faith) && ideo.HasMeme(empiricist)))
+        {
+            opinion -= 5;
+            contributors?.Add((empiricist.LabelCap + " / " + faith.LabelCap, -5f));
+        }
+        var conservationist = EnhancedIdeologyDefOf.MI_Environmentalist;
+        var polluter = EnhancedIdeologyDefOf.MI_Industrialist;
+        if (conservationist != null && polluter != null
+            && (pawnIdeo.HasMeme(conservationist) && ideo.HasMeme(polluter)
+                || pawnIdeo.HasMeme(polluter) && ideo.HasMeme(conservationist)))
+        {
+            opinion -= 15;
+            contributors?.Add((conservationist.LabelCap + " / " + polluter.LabelCap, -15f));
+        }
+        var govLiberty = EnhancedIdeologyDefOf.MI_GovernmentLiberty;
+        var govAuthority = EnhancedIdeologyDefOf.MI_GovernmentAuthority;
+        if (govLiberty != null && govAuthority != null
+            && (pawnIdeo.HasMeme(govLiberty) && ideo.HasMeme(govAuthority)
+                || pawnIdeo.HasMeme(govAuthority) && ideo.HasMeme(govLiberty)))
+        {
+            opinion -= 10;
+            contributors?.Add((govLiberty.LabelCap + " / " + govAuthority.LabelCap, -10f));
+        }
+        var wealthEqual = EnhancedIdeologyDefOf.MI_WealthEquality;
+        var wealthStrat = EnhancedIdeologyDefOf.MI_WealthStratification;
+        if (wealthEqual != null && wealthStrat != null
+            && (pawnIdeo.HasMeme(wealthEqual) && ideo.HasMeme(wealthStrat)
+                || pawnIdeo.HasMeme(wealthStrat) && ideo.HasMeme(wealthEqual)))
+        {
+            opinion -= 10;
+            contributors?.Add((wealthEqual.LabelCap + " / " + wealthStrat.LabelCap, -10f));
         }
 
         // pawn trait compatibility
@@ -669,7 +707,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (naturalStructural <= 0f) return;
         var minCertainty = EnhancedIdeologyMod.Settings.SaveCompatMinCertainty;
         var targetCertainty = Mathf.Max(calibrationTargetCertainty, minCertainty);
-        var targetStructural = Mathf.Clamp01(targetCertainty - CachedRelational - CachedPractitional - CachedDifficulty);
+        var targetStructural = Mathf.Clamp01(targetCertainty - CachedRelational - CachedPractitional);
         var scale = targetStructural / naturalStructural;
         foreach (var issue in issueStrength.Keys.ToList())
             issueStrength[issue] = Mathf.Clamp(issueStrength[issue] * scale, MinConvictionStrength, AbsoluteMaxConvictionStrength);
@@ -920,12 +958,31 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
     }
 
+    // Drain all issue conviction strengths uniformly by the global decay rate, once per game day.
+    // Gates on _lastDecayDay so repeated rapid-tick calls are free.
+    internal void ApplyConvictionDecayIfNewDay()
+    {
+        var currentDay = GenTicks.TicksAbs / GenDate.TicksPerDay;
+        if (currentDay == _lastDecayDay) return;
+        _lastDecayDay = currentDay;
+
+        var drainPerDay = EnhancedIdeologyMod.Settings.ConvictionDecayRate / (GenDate.TicksPerSeason / (float)GenDate.TicksPerDay);
+        if (drainPerDay <= 0f) return;
+
+        EnsureIssueStancesSeeded();
+        foreach (var issue in issueStrength.Keys)
+            issueStrength[issue] = Mathf.Max(MinConvictionStrength, issueStrength[issue] - drainPerDay);
+
+        baseOpinionsDirty = true;
+    }
+
     public void ExposeData()
     {
         Scribe_References.Look(ref pawn, "pawn");
         // Default true: a save without this key predates spawn-seeding, so its pawns are already "initialized"
         // and must not have their played-in certainty overwritten on load.
         Scribe_Values.Look(ref certaintyInitialized, "certaintyInitialized", defaultValue: true);
+        Scribe_Values.Look(ref _lastDecayDay, "lastDecayDay", defaultValue: -1);
         // Default -1: signals "uninitialized" on load from an old save; lazy-initialized to vanilla Certainty.
         Scribe_Values.Look(ref _extendedCertainty, "extendedCertainty", defaultValue: -1f);
         Scribe_Collections.Look(ref baseIdeoOpinions, "baseIdeoOpinions", LookMode.Reference, LookMode.Value, ref cache1, ref cache5);
@@ -1163,6 +1220,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         var mood = Pawn.needs.mood;
         if (mood != null && mood.CurLevel < Pawn.mindState.mentalBreaker.BreakThresholdMinor)
         {
+            Find.PlayLog.Add(new PlayLogEntry_CrisisOfFaith(Pawn, CrisisOutcome.MoodBreak));
             Pawn.mindState.mentalBreaker.TryDoRandomMoodCausedMentalBreak();
             return;
         }
@@ -1180,6 +1238,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         SetExtendedCertainty(1.5f * crisisThreshold);
+
+        Find.PlayLog.Add(new PlayLogEntry_CrisisOfFaith(Pawn, CrisisOutcome.Wander));
 
         _ = Pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.EB_CrisisOfFaith);
     }
@@ -1278,6 +1338,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         // Keep current opinion of our old ideo by moving difference between new base and old base (certainty) into personal thoughts
         var oldBase = DetailedIdeoOpinion(oldIdeo!).BaseOpinion;
         AdjustPersonalOpinion(oldIdeo!, oldCertainty - oldBase);
+
+        Find.PlayLog.Add(new PlayLogEntry_Conversion(Pawn, newIdeo));
 
         if (!oldIdeoContains)
         {

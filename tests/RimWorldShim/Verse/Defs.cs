@@ -68,3 +68,9 @@ public sealed class DefOfAttribute : Attribute { }
 
 [AttributeUsage(AttributeTargets.Field)]
 public sealed class MayRequireIdeologyAttribute : Attribute { }
+
+[AttributeUsage(AttributeTargets.Field)]
+public sealed class MayRequireAttribute(string packageId) : Attribute
+{
+    public string PackageId { get; } = packageId;
+}

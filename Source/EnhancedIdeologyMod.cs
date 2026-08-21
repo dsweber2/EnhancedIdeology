@@ -15,6 +15,8 @@ internal sealed class EnhancedIdeologyMod : Mod
         var harmony = new Harmony(content.PackageId);
         harmony.PatchAll(Assembly.GetExecutingAssembly());
 
+        Compat_PeerPressure.Initialize();
+
         Message("Enhanced Ideology is now initialized!");
     }
 

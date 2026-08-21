@@ -71,6 +71,7 @@ public class Ideo
     public string name = string.Empty;
     public List<MemeDef> memes = [];
     public List<Precept> precepts = [];
+    public List<Precept> PreceptsListForReading => precepts;
 
     public bool HasMeme(MemeDef? meme) => meme != null && memes.Contains(meme);
 

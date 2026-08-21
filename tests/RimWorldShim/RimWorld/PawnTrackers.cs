@@ -54,8 +54,8 @@ public class Pawn_RelationTracker(Pawn pawn)
     private readonly Pawn _pawn = pawn;
     private readonly Dictionary<Pawn, float> _opinions = [];
 
-    public float OpinionOf(Pawn other)
-        => _opinions.GetValueOrDefault(other, 0f);
+    public int OpinionOf(Pawn other)
+        => (int)_opinions.GetValueOrDefault(other, 0f);
 
     public void SetOpinion(Pawn other, float value)
         => _opinions[other] = value;

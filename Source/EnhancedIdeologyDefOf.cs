@@ -38,12 +38,33 @@ internal static class EnhancedIdeologyDefOf
     [MayRequireIdeology]
     public static NeedDef EB_Contemplation;
     public static EffecterDef EB_CompleteBook;
+    public static InteractionDef EB_ConversionLog;
+    public static InteractionDef EB_CrisisOfFaithLog;
     public static InteractionDef EB_IdeologicalDebatePrecept;
     public static InteractionDef EB_IdeologicalDebateMeme;
     public static RulePackDef EB_Sentence_DebateWon;
     public static RulePackDef EB_Sentence_InitiatorWon;
     public static RulePackDef EB_Sentence_RecipientWon;
     public static RulePackDef EB_Sentence_DebateDraw;
+    // Mort's Ideologies: Empiricism and Faith (MortStrudel.MortIdeologySciFai)
+    [MayRequire("MortStrudel.MortIdeologySciFai")]
+    public static MemeDef MI_Empiricist;
+    [MayRequire("MortStrudel.MortIdeologySciFai")]
+    public static MemeDef MI_Faith;
+    // Mort's Ideologies: Conservationist and Polluter (MortStrudel.MortIdeologyEnv)
+    [MayRequire("MortStrudel.MortIdeologyEnv")]
+    public static MemeDef MI_Environmentalist;
+    [MayRequire("MortStrudel.MortIdeologyEnv")]
+    public static MemeDef MI_Industrialist;
+    // Mort's Ideologies: Political Compass (MortStrudel.MortIdeology)
+    [MayRequire("MortStrudel.MortIdeology")]
+    public static MemeDef MI_GovernmentLiberty;
+    [MayRequire("MortStrudel.MortIdeology")]
+    public static MemeDef MI_GovernmentAuthority;
+    [MayRequire("MortStrudel.MortIdeology")]
+    public static MemeDef MI_WealthEquality;
+    [MayRequire("MortStrudel.MortIdeology")]
+    public static MemeDef MI_WealthStratification;
     [MayRequireIdeology]
     public static PreceptDef IdeoDiversity_Approved;
     [MayRequireIdeology]

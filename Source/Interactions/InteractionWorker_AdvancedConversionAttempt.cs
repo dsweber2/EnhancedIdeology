@@ -78,11 +78,16 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
             // Preacher wins: the recipient's most-opposed stance is dragged toward the rung the preacher's faith
             // holds, at double the per-debate pull.
             var preacherRank = PreceptLadder.RankOf(initiatorIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
-            ConvictionMath.PullStance(comp, initiator, recipient, issue, preacherRank, EnhancedIdeologyMod.Settings.ConversionStancePull);
+            var opinion = recipient.relations.OpinionOf(initiator);
+            // Peer Pressure compatibility: liking the preacher amplifies both the belief shift and the certainty drop.
+            var stancePull = Compat_PeerPressure.AdjustStancePull(EnhancedIdeologyMod.Settings.ConversionStancePull, opinion);
+            ConvictionMath.PullStance(comp, initiator, recipient, issue, preacherRank, stancePull);
             // Temporary certainty knock so the recipient is more likely to switch now (a lower certainty lowers
             // their opinion of their own faith in the check below) and to spontaneously drift away afterwards.
             // SetExtendedCertainty is used so the knock applies immediately to the extended value that CheckConversion reads.
-            recipientTracker.SetExtendedCertainty(recipientTracker.ExtendedCertainty * EnhancedIdeologyMod.Settings.ConversionCertaintyKnock);
+            var rawKnock = EnhancedIdeologyMod.Settings.ConversionCertaintyKnock;
+            var knock = Compat_PeerPressure.AdjustCertaintyKnock(rawKnock, opinion);
+            recipientTracker.SetExtendedCertainty(recipientTracker.ExtendedCertainty * knock);
             return true;
         }
 

@@ -14,6 +14,14 @@ Each pawn tracks an opinion (0–100) of every ideology in the world, composed o
 
 Certainty is now *derived* from ideology opinion. A pawn who genuinely agrees with their faith's stances stays certain; one who has been argued into doubting them slowly drifts away.
 
+### Certainty dynamics
+
+Certainty relaxes toward a **setpoint** determined by the pawn's opinion of their own ideology. High opinion → setpoint near 1; low opinion → setpoint near 0. The rate of change is further modulated by:
+
+- **Mood and precept thoughts** — positive precept moodlets push the certainty setpoint up; sustained negative precepts push it down.
+- **Inactivity penalty** — ignoring precept rituals and activities for days at a time adds an extra certainty drain until the pawn participates again
+- **Relationships** — how much the pawn likes their co-ideologues amplifies or dampens both gains and losses
+
 ### Precept stances
 
 Rather than flat opinion offsets per precept, each pawn holds a **preferred stance per issue** (e.g., on execution: "Respected if guilty") with a conviction strength. Opinion of any ideology is computed from how far its stances are from the pawn's preferred stances — close agreement earns positive opinion, strong disagreement earns negative.
@@ -24,8 +32,8 @@ Traits influence starting conviction strength: iron-willed and steadfast pawns b
 
 There are three distinct conversion surfaces:
 
-- **Social conversion** (`ConvertIdeoAttempt`) — a directed debate over the single most-opposed issue between the two pawns; a preacher win shifts the listener's stance and may trigger conversion
-- **Ideological debate** (`IdeologicalDebatePrecept`) — a spontaneous match over a contested issue; a win shifts the loser's stance; a tie can entrench both pawns further; pawns with diversity-of-thought precepts enjoy a mood bonus from debating
+- **Social conversion** — a directed debate over the single most-opposed issue between the two pawns; a preacher win shifts the listener's stance and may trigger conversion
+- **Ideological debate** — a spontaneous match over a contested issue; a win shifts the loser's stance; a tie can entrench both pawns further; pawns with diversity-of-thought precepts enjoy a mood bonus from debating
 - **Moral guide Convert ability** — targets 1–4 of the recipient's most-opposed issues simultaneously; a single debate roll determines outcome; the cursor tooltip shows estimated success chance and target issues
 
 In all cases, events knock certainty and shift stances — the background tick then integrates whether conversion fires, rather than converting immediately on a roll.
@@ -50,6 +58,8 @@ Pawns who snap into the Iconoclast state will actively seek out ideology books a
 ## Compatibility
 
 Tested on RimWorld 1.6. Ideology DLC required. Royalty supported.
+
+**T's Conversion Staff** ([Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2890481507)) — compatible and synergistic. The staff's `ConversionPower` bonus applies to the convert ability as normal. Its `SocialIdeoSpreadFrequencyFactor` offset also increases the frequency of Enhanced Beliefs' ideological debates, so a moral guide with the staff will proselytize more aggressively.
 
 ## License
 

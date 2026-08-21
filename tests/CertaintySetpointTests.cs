@@ -9,7 +9,6 @@ public class CertaintySetpointTests : SeededTest
     {
         var settings = EnhancedIdeologyMod.Settings;
         var drift = settings.CertaintyDriftRate;
-        var difficulty = settings.DifficultyOffset;
         var relational = settings.RelationalMaxRange;
         var practice = settings.PracticeMaxRange;
         try
@@ -20,7 +19,6 @@ public class CertaintySetpointTests : SeededTest
         finally
         {
             settings.CertaintyDriftRate = drift;
-            settings.DifficultyOffset = difficulty;
             settings.RelationalMaxRange = relational;
             settings.PracticeMaxRange = practice;
         }
@@ -86,20 +84,6 @@ public class CertaintySetpointTests : SeededTest
     }
 
     [Fact]
-    public void Difficulty_ShiftsTargetByOffset()
-    {
-        // Pick a pawn whose bands leave the target well inside (0, 1) so the offset is not clamped.
-        float baseTarget = 0f;
-        float shifted = 0f;
-        WithSettings(s => s.DifficultyOffset = 0f, () =>
-            baseTarget = BuildCongregation(coReligionists: 0, opinionEach: 0f).tracker.CachedTargetCertainty);
-        WithSettings(s => s.DifficultyOffset = 0.15f, () =>
-            shifted = BuildCongregation(coReligionists: 0, opinionEach: 0f).tracker.CachedTargetCertainty);
-
-        Assert.Equal(baseTarget + 0.15f, shifted, precision: 5);
-    }
-
-    [Fact]
     public void DriftRateSetting_ScalesRate()
     {
         // A fresh pawn seeds to its setpoint (zero drift), so push certainty off-target first, then measure.
@@ -122,11 +106,11 @@ public class CertaintySetpointTests : SeededTest
     }
 
     [Fact]
-    public void Target_IsSumOfBandsPlusDifficulty()
+    public void Target_IsSumOfBands()
     {
         var (_, tracker, _) = BuildCongregation(coReligionists: 2, opinionEach: 50f);
         var expected = Mathf.Max(0f,
-            tracker.CachedStructural + tracker.CachedRelational + tracker.CachedPractitional + tracker.CachedDifficulty);
+            tracker.CachedStructural + tracker.CachedRelational + tracker.CachedPractitional);
 
         Assert.Equal(expected, tracker.CachedTargetCertainty, precision: 5);
     }

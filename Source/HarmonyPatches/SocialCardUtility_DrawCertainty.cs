@@ -43,7 +43,6 @@ internal static class SocialCardUtility_DrawCertainty
             tip += Band("EnhancedIdeology.CertaintyBandStructural", data.CachedStructural, data.StructuralContributors);
             tip += Band("EnhancedIdeology.CertaintyBandRelational", data.CachedRelational, data.RelationalContributors);
             tip += Band("EnhancedIdeology.CertaintyBandPractice", data.CachedPractitional, data.PractitionalContributors);
-            tip += "EnhancedIdeology.CertaintyBandDifficulty".Translate(Signed(data.CachedDifficulty));
 
             TooltipHandler.TipRegion(containerRect, tip);
         }

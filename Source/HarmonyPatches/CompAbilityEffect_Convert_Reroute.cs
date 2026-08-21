@@ -100,6 +100,10 @@ internal static class CompAbilityEffect_Convert_Tooltip
             guide.GetStatValue(StatDefOf.SocialImpact).ToStringPercent(),
             recipient.GetStatValue(StatDefOf.SocialImpact).ToStringPercent()));
 
+        var ppLine = Compat_PeerPressure.OpinionTooltipLine(guide, recipient);
+        if (ppLine != null)
+            sb.Append("\n" + ppLine);
+
         __result = sb.ToString();
         return false;
     }

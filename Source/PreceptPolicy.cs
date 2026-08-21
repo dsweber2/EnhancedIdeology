@@ -120,6 +120,18 @@ internal static class PreceptPolicy
         // override is needed either. See preceptPolicy.md "Order-fix candidates (verified)".
         "AM_FertilityIssue", "AM_LearningRate", "AM_LovinFrequency", "AM_Creep", "AM_Disfigurement",
         "VME_Illness", "VME_InsectJelly", "VME_Sweets", "VME_DumbLabor", "AM_OcularTrees",
+        // Anomaly DLC optional Moral issues (defNames assumed from vanilla naming conventions; verified against
+        // MechanoidLabor as a reference — degrade gracefully if Anomaly is not loaded).
+        "PsychicRituals", "VoidStudy", "Inhumanizing",
+        // Mort's Ideologies: Conservationist and Polluter (MortStrudel.MortIdeologyEnv).
+        // MI_PowerGeneration (two restriction-only rungs, no opposing pro-pollution rung) → PositiveOnly.
+        "MI_Pollution", "MI_ToxicWasteDumping",
+        // Mort's Ideologies: Political Compass (MortStrudel.MortIdeology).
+        // MI_Homelessness (single rung) → PositiveOnly. Empiricism/Faith and Menagerist issues → PositiveOnly.
+        "miHousingDistribution", "MI_Leader",
+        // Questing Meme (SirMashedPotato.QuestingMeme). Both issues have all rungs at displayOrderInIssue=10;
+        // order overrides establish the semantic axis.
+        "QuesterMeme_QuestComplete", "QuesterMeme_QuestFail",
     ];
     private static readonly HashSet<string> UniversalPositiveIssues = ["Charity"];
     // Special issues route through the special resolvers instead of the rung-distance model. VME_Leader /
@@ -129,6 +141,24 @@ internal static class PreceptPolicy
         ["PreferredXenotypes", "Weapons", "VME_Leader", "VME_Mood"];
     private static readonly HashSet<string> NAIssues =
         ["IdeoBuilding", "IdeoRelic", "IdeoRitualSeat", "Ritual", "MarriageName", "AM_Abilities"];
+    // Multi-rung issues confirmed as PositiveOnly: no genuine belief axis, so rung-distance structural opinion
+    // would be wrong. Listed here to suppress the startup warning for unclassified multi-rung issues.
+    private static readonly HashSet<string> KnownPositiveOnlyIssues =
+    [
+        // Vanilla / DLC.
+        "ApparelDesire", "Lighting", "Pain", "Research", "Proselytizing", "Blindness", "DarknessCombat",
+        "IdeoRole",
+        // EnhancedBeliefs (our own).
+        "EB_Contemplation",
+        // Alpha Memes.
+        "AM_Armour", "AM_Barracks", "AM_CombatProwess",
+        // Better Ideology? (BS_).
+        "BS_AlienAppearanceTolerance",
+        // Vanilla Memes Expanded.
+        "VME_AutomationEfficiency", "VME_CraftingQuality", "VME_CraftingSpeed", "VME_Death",
+        "VME_Junk", "VME_PermitCooldown", "VME_PermitHonorCost", "VME_Power",
+        "VME_PsychicSensitivity", "VME_PsyfocusGain", "VME_SkilledLabor",
+    ];
 
     // Rung defName order (permissive/pro -> forbidding/anti) for issues whose displayOrderInIssue scrambles
     // the axis once stacked (preceptPolicy.md "Reorder"). Rungs not listed keep their displayOrder, appended.
@@ -145,13 +175,29 @@ internal static class PreceptPolicy
             ["SpouseCount_Male_MaxOne", "SpouseCount_Male_MaxTwo", "SpouseCount_Male_MaxThree", "SpouseCount_Male_MaxFour", "SpouseCount_Male_Unlimited"],
         ["SpouseCount_Female"] =
             ["SpouseCount_Female_MaxOne", "SpouseCount_Female_MaxTwo", "SpouseCount_Female_MaxThree", "SpouseCount_Female_MaxFour", "SpouseCount_Female_Unlimited"],
+        // MI_BodyMod_Allowed (Political Compass) sits at displayOrderInIssue=30, after Abhorrent — insert it
+        // between Approved and OnlyBiological.
         ["BodyModification"] =
-            ["BodyMod_Approved", "VME_BodyMod_OnlyBiological", "BodyMod_Disapproved", "BodyMod_Abhorrent"],
+            ["BodyMod_Approved", "MI_BodyMod_Allowed", "VME_BodyMod_OnlyBiological", "BodyMod_Disapproved", "BodyMod_Abhorrent"],
+        // MI_DrugUse_Allowed (Political Compass) sits at displayOrderInIssue=40, beyond Prohibited — fix order.
+        ["DrugUse"] =
+            ["DrugUse_Essential", "MI_DrugUse_Allowed", "DrugUse_MedicalOrSocial", "DrugUse_MedicalOnly", "DrugUse_Prohibited", "DrugUse_Abhorrent"],
         ["OrganUse"] =
         [
             "OrganUse_Respected", "OrganUse_Acceptable", "VME_OrganUse_PostMortem", "OrganUse_HorribleSellOK",
             "OrganUse_HorribleNoSell", "OrganUse_Abhorrent", "AM_OrganUse_Torturous",
         ],
+        // Mort's Ideologies: both issues have two rungs each at displayOrderInIssue=0.
+        ["MI_Pollution"] = ["MI_Pollution_Preferred", "MI_Pollution_Despised"],
+        ["MI_ToxicWasteDumping"] = ["MI_ToxicWasteDumping_Respected", "MI_ToxicWasteDumping_Abhorrent"],
+        // Questing Meme: all rungs share displayOrderInIssue=10; order established by strictness.
+        ["QuesterMeme_QuestComplete"] =
+            ["QuesterMeme_QuestComplete_Respected", "QuesterMeme_QuestComplete_Honourable", "QuesterMeme_QuestComplete_Daring"],
+        ["QuesterMeme_QuestFail"] =
+            ["QuesterMeme_QuestFail_DontCare", "QuesterMeme_QuestFail_Disliked", "QuesterMeme_QuestFail_Disapproved", "QuesterMeme_QuestFail_Dishonorable"],
+        // Political Compass: all rungs share displayOrderInIssue=10/20/30; ordered as authoritarian spectrum.
+        ["MI_Leader"] =
+            ["MI_LeaderAnarchy", "MI_Elections_Required", "MI_LeaderCorporate", "MI_LeaderMonarchy", "MI_LeaderDictatorship"],
     };
 
     // Where the virtual Don't-care rung sits for each OPTIONAL Moral issue (preceptPolicy.md). Mandatory
@@ -194,6 +240,22 @@ internal static class PreceptPolicy
         ["VME_BookWriting"] = DontCareSpec.Between("VME_BookWriting_Disliked", "VME_BookWriting_Exalted"),
         ["VME_Travel"] = DontCareSpec.Between("VME_Travel_Desired", "VME_Travel_Despised"),
         ["VME_PermanentBases"] = DontCareSpec.Between("VME_PermanentBases_Desired", "VME_PermanentBases_Despised"),
+        // Anomaly DLC optional Moral issues. Defnames are assumed; DontCareSpec degrades to -1f (issue skipped)
+        // if Anomaly is not loaded. Placements assumed from the user-supplied ladder descriptions.
+        ["PsychicRituals"] = DontCareSpec.Between("PsychicRituals_Disapproved", "PsychicRituals_Exalted"),
+        ["VoidStudy"] = DontCareSpec.Between("VoidStudy_Inefficient", "VoidStudy_Efficient"),
+        ["Inhumanizing"] = DontCareSpec.Before("Inhumanizing_Required"),
+        // Mort's Ideologies (MortStrudel.MortIdeologyEnv): two opposing rungs per issue.
+        ["MI_Pollution"] = DontCareSpec.Between("MI_Pollution_Preferred", "MI_Pollution_Despised"),
+        ["MI_ToxicWasteDumping"] = DontCareSpec.Between("MI_ToxicWasteDumping_Respected", "MI_ToxicWasteDumping_Abhorrent"),
+        // Mort's Ideologies: Political Compass (MortStrudel.MortIdeology).
+        // The Ignored rung (order=20) is the explicit neutral midpoint on the equality/stratification axis.
+        ["miHousingDistribution"] = DontCareSpec.At("miHousingDistribution_Ignored"),
+        // DontCare sits between Democracy and Corporate — the moderate centre of the authoritarian spectrum.
+        ["MI_Leader"] = DontCareSpec.Between("MI_Elections_Required", "MI_LeaderCorporate"),
+        // Questing Meme (SirMashedPotato.QuestingMeme): no-opinion sits before the mildest positive stance.
+        ["QuesterMeme_QuestComplete"] = DontCareSpec.Before("QuesterMeme_QuestComplete_Respected"),
+        ["QuesterMeme_QuestFail"] = DontCareSpec.Before("QuesterMeme_QuestFail_DontCare"),
     };
 
     // Sim/test hook: register a category for an issue absent from the hardcoded tables (test ladders are Moral).
@@ -361,6 +423,21 @@ internal static class PreceptPolicy
     }
 
     private static bool SameRung(float a, float b) => Mathf.RoundToInt(a) == Mathf.RoundToInt(b);
+
+    [StaticConstructorOnStartup]
+    private static class Startup
+    {
+        static Startup()
+        {
+            foreach (var issue in DefDatabase<IssueDef>.AllDefs)
+            {
+                var rungCount = DefDatabase<PreceptDef>.AllDefs.Count(p => p.issue == issue);
+                if (rungCount >= 2 && CategoryOf(issue) == PreceptCategory.PositiveOnly
+                    && !KnownPositiveOnlyIssues.Contains(issue.defName))
+                    Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) — please let the author know to add it to PreceptPolicy.");
+            }
+        }
+    }
 
     // Cross-precept couplings (preceptPolicy.md "Interactions"): holding the keyed source precept makes an ideo
     // behave, on another issue, as if it took the induced stance - unless it already takes an explicit one.

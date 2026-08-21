@@ -52,6 +52,19 @@
 		</value>
 	</Operation>
 
+	<!-- Crisis pawn seeks contemplation or a religious book first; wanders if neither is available. -->
+	<Operation Class="PatchOperationInsert">
+		<xpath>Defs/ThinkTreeDef/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[@Class="ThinkNode_ConditionalMentalStates"][states/li[text()="Wander_Sad"]]</xpath>
+		<value>
+			<li Class="ThinkNode_ConditionalMentalStateClass">
+				<stateClass>EnhancedIdeology.MentalState_CrisisOfFaith</stateClass>
+				<subNodes>
+					<li Class="EnhancedIdeology.JobGiver_CrisisOfFaith" />
+				</subNodes>
+			</li>
+		</value>
+	</Operation>
+
 	<Operation Class="PatchOperationInsert">
 		<xpath>Defs/ThinkTreeDef/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[@Class="ThinkNode_ConditionalMentalStateClass"][stateClass="MentalState_Tantrum"]</xpath>
 		<value>
@@ -76,22 +89,14 @@
 	</Operation>
 
 
-	<!-- If VBE is active: suppress our desk and add our recipe to VBE's table instead -->
+	<!-- If VBE is active: also add our recipe to VBE's table -->
 	<Operation Class="PatchOperationConditional">
 		<xpath>/Defs/ThingDef[defName="VBE_WritersTable"]</xpath>
-		<match Class="PatchOperationSequence">
-			<success>Always</success>
-			<operations>
-				<li Class="PatchOperationRemove">
-					<xpath>/Defs/ThingDef[defName="EB_WritingDesk"]</xpath>
-				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook"]/recipeUsers</xpath>
-					<value>
-						<li>VBE_WritersTable</li>
-					</value>
-				</li>
-			</operations>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook"]/recipeUsers</xpath>
+			<value>
+				<li>VBE_WritersTable</li>
+			</value>
 		</match>
 	</Operation>
 
