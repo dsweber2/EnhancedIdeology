@@ -47,19 +47,14 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Recipient not humanlike. Returning 0.");
             return 0f;
         }
-        if (initiator.Ideo == recipient.Ideo)
-        {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Initiator and recipient have same ideo. Returning 0.");
-            return 0f;
-        }
         if (recipient.DevelopmentalStage.Baby())
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Recipient is a baby. Returning 0.");
             return 0f;
         }
-        if (initiator.skills.GetSkill(SkillDefOf.Social).TotallyDisabled)
+        if (initiator.WorkTagIsDisabled(WorkTags.Social))
         {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Initiator's social skill is totally disabled. Returning 0.");
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Initiator is incapable of social. Returning 0.");
             return 0f;
         }
         var spreadFactor = initiator.GetStatValue(StatDefOf.SocialIdeoSpreadFrequencyFactor);
@@ -86,10 +81,6 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         lastWinner = null;
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Interacted called: initiator={initiator}, recipient={recipient}");
-
-        // Ideo may have changed since this interaction was queued (same-tick double-conversion).
-        if (initiator.Ideo == recipient.Ideo)
-            return;
 
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var initiatorTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(initiator);
@@ -207,12 +198,14 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             $"({winnerPreceptsByIssue.Count} from winner, {loserIssues.Count} from loser): " +
             $"{string.Join(", ", allIssues.Select(i => i.defName))}");
 
+        var opinion = loser.relations.OpinionOf(winner);
+        var pull = Compat_PeerPressure.AdjustStancePull(MemeDebatePullMultiplier, opinion);
         foreach (var issue in allIssues)
         {
             var targetRank = winnerPreceptsByIssue.TryGetValue(issue, out var winnerPrecept)
                 ? PreceptLadder.RankOf(winnerPrecept)
                 : PreceptLadder.DontCareRank(issue);
-            ConvictionMath.PullStance(comp, winner, loser, issue, targetRank, MemeDebatePullMultiplier);
+            ConvictionMath.PullStance(comp, winner, loser, issue, targetRank, pull);
         }
 
         return (winner, loser);

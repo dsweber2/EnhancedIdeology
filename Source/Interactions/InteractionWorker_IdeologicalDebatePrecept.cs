@@ -71,9 +71,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Recipient is a baby. Returning 0.");
             return 0f;
         }
-        if (initiator.skills.GetSkill(SkillDefOf.Social).TotallyDisabled)
+        if (initiator.WorkTagIsDisabled(WorkTags.Social))
         {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Initiator's social skill is totally disabled. Returning 0.");
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Initiator is incapable of social. Returning 0.");
             return 0f;
         }
         var spreadFactor = initiator.GetStatValue(StatDefOf.SocialIdeoSpreadFrequencyFactor);
@@ -454,7 +454,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         }
         var issue = winnerPrecept.issue!;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}, winnerPrecept={winnerPrecept}");
-        ConvictionMath.PullStance(comp, winner, loser, issue, PreceptLadder.RankOf(winnerPrecept), 1f);
+        var opinion = loser.relations.OpinionOf(winner);
+        var pull = Compat_PeerPressure.AdjustStancePull(1f, opinion);
+        ConvictionMath.PullStance(comp, winner, loser, issue, PreceptLadder.RankOf(winnerPrecept), pull);
         return (winner, loser, issue, winnerPrecept);
     }
 }

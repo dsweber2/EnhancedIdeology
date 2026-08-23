@@ -16,6 +16,7 @@ public class Settings : ModSettings
     private const float DefaultSaveCompatMinCertainty = 0.125f;
     private const float DefaultPreceptOppositionScale = 1f;
     private const float DefaultConvictionDecayRate = 0.1f;
+    private const float DefaultConversionOpinionMultiplier = 1f;
 
     private bool _debugInteractionWorkers;
     public bool DebugInteractionWorkers
@@ -83,6 +84,11 @@ public class Settings : ModSettings
     private float _convictionDecayRate = DefaultConvictionDecayRate;
     public float ConvictionDecayRate => _convictionDecayRate;
 
+    // How much a pawn's opinion of the preacher amplifies a won conversion attempt. Mirrors Peer Pressure's
+    // formula: factor = 1 + 0.01 * opinion * multiplier. Not used when Peer Pressure is installed.
+    private float _conversionOpinionMultiplier = DefaultConversionOpinionMultiplier;
+    public float ConversionOpinionMultiplier => _conversionOpinionMultiplier;
+
     private Vector2 _scrollPosition;
     private float _contentHeight = 600f;
 
@@ -102,6 +108,7 @@ public class Settings : ModSettings
         Scribe_Values.Look(ref _saveCompatMinCertainty, "saveCompatMinCertainty", DefaultSaveCompatMinCertainty);
         Scribe_Values.Look(ref _preceptOppositionScale, "preceptOppositionScale", DefaultPreceptOppositionScale);
         Scribe_Values.Look(ref _convictionDecayRate, "convictionDecayRate", DefaultConvictionDecayRate);
+        Scribe_Values.Look(ref _conversionOpinionMultiplier, "conversionOpinionMultiplier", DefaultConversionOpinionMultiplier);
     }
 
     public void DoSettingsWindowContents(Rect inRect)
@@ -128,6 +135,7 @@ public class Settings : ModSettings
         MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionPace", ref _conversionPace, 0.25f, 4f, DefaultConversionPace);
         MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionStancePull", ref _conversionStancePull, 1f, 5f, DefaultConversionStancePull);
         PercentSlider(listingStandard, "EnhancedIdeology.ConversionCertaintyKnock", ref _conversionCertaintyKnock, 0.5f, 1f, DefaultConversionCertaintyKnock);
+        MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionOpinionMultiplier", ref _conversionOpinionMultiplier, 0f, 2f, DefaultConversionOpinionMultiplier);
 
         Header(listingStandard, "EnhancedIdeology.Section.Opinion");
         PercentSlider(listingStandard, "EnhancedIdeology.PreceptOppositionScale", ref _preceptOppositionScale, 0f, 1f, DefaultPreceptOppositionScale);

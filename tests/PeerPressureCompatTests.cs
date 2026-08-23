@@ -44,11 +44,12 @@ public class PeerPressureCompatTests : SeededTest, IDisposable
     }
 
     [Fact]
-    public void AdjustCertaintyKnock_Inactive_ReturnsUnchangedKnock()
+    public void AdjustCertaintyKnock_NoPP_NativeFormulaApplies()
     {
+        // Without PP, native formula runs at the default multiplier (1.0): opinion 100 → factor 2.0.
+        // factor = 1 + 0.01 * 100 * 1 = 2.0; adjustedKnock = 1 - 0.2 * 2 = 0.6
         Compat_PeerPressure.SetForTest(null);
-        var knock = 0.8f;
-        Assert.Equal(knock, Compat_PeerPressure.AdjustCertaintyKnock(knock, 100), 5);
+        Assert.Equal(0.6f, Compat_PeerPressure.AdjustCertaintyKnock(0.8f, 100), 5);
         Compat_PeerPressure.SetForTest(FakePPMultiplier);
     }
 

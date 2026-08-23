@@ -47,6 +47,14 @@
         </filter>
         <count>20</count>
       </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Dye</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
     </ingredients>
     <fixedIngredientFilter>
       <categories>
@@ -62,6 +70,7 @@
         <li>Plasteel</li>
         <li>Uranium</li>
         <li>Obsidian</li>
+        <li>Dye</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
@@ -126,6 +135,14 @@
         </filter>
         <count>10</count>
       </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Dye</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
     </ingredients>
     <fixedIngredientFilter>
       <categories>
@@ -144,6 +161,7 @@
         <li>Gold</li>
         <li>Silver</li>
         <li>Jade</li>
+        <li>Dye</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>

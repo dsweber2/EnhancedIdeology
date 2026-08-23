@@ -28,4 +28,6 @@
   <EnhancedIdeology.PreceptOppositionScale.Tip>How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. Opinion falls from full agreement at their own stance to this much opposition at the far end. 0 = indifferent to opposing stances; 100% = equal and opposite to their support for their own at the furthest extreme precept. </EnhancedIdeology.PreceptOppositionScale.Tip>
   <EnhancedIdeology.ConvictionDecayRate>Conviction decay: {0}/quadrum</EnhancedIdeology.ConvictionDecayRate>
   <EnhancedIdeology.ConvictionDecayRate.Tip>How much conviction strength all precepts lose per quadrum. 0 = no natural decay; 100% conviction is at a precept average of 20, max is 50.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Preacher likeability effect: {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>How much a pawn's opinion of a moral guide amplifies a won conversion attempt. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
 </LanguageData>

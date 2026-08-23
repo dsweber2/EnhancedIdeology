@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
+	<!-- Route vanilla prayer through our contemplation system. -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/JoyGiverDef[defName="Pray"]/giverClass</xpath>
+		<value>
+			<giverClass>EnhancedIdeology.JoyGiver_Contemplation</giverClass>
+		</value>
+	</Operation>
+
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/InteractionDef[defName="ConvertIdeoAttempt"]/workerClass</xpath>
 		<value>

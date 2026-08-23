@@ -187,6 +187,9 @@ internal static class PreceptPolicy
             "OrganUse_Respected", "OrganUse_Acceptable", "VME_OrganUse_PostMortem", "OrganUse_HorribleSellOK",
             "OrganUse_HorribleNoSell", "OrganUse_Abhorrent", "AM_OrganUse_Torturous",
         ],
+        // Anomaly DLC: no displayOrderInIssue set on any rung, all default to 0.
+        ["PsychicRituals"] = ["PsychicRituals_Exalted", "PsychicRituals_Disapproved", "PsychicRituals_Abhorrent"],
+        ["VoidStudy"] = ["VoidStudy_VeryEfficient", "VoidStudy_Efficient", "VoidStudy_Inefficient", "VoidStudy_VeryInefficient"],
         // Mort's Ideologies: both issues have two rungs each at displayOrderInIssue=0.
         ["MI_Pollution"] = ["MI_Pollution_Preferred", "MI_Pollution_Despised"],
         ["MI_ToxicWasteDumping"] = ["MI_ToxicWasteDumping_Respected", "MI_ToxicWasteDumping_Abhorrent"],

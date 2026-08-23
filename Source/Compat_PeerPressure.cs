@@ -40,13 +40,11 @@ internal static class Compat_PeerPressure
         EnhancedIdeologyMod.Message("Peer Pressure compatibility active.");
     }
 
-    // Returns the Peer Pressure opinion label for tooltips, or null if PP is not active.
+    // Returns the opinion amplification label for tooltips, or null if the factor is ≤1.
     internal static string? OpinionTooltipLine(Pawn initiator, Pawn recipient)
     {
-        if (_certaintyReductionOpinion == null)
-            return null;
         var opinion = recipient.relations.OpinionOf(initiator);
-        var factor = _certaintyReductionOpinion(opinion);
+        var factor = OpinionFactor(opinion);
         if (factor <= 1f)
             return null;
         return " -  " + "SP_OpinionOf".Translate(
@@ -56,23 +54,30 @@ internal static class Compat_PeerPressure
     }
 #endif
 
-    // Adjusts our certainty-knock multiplier to incorporate Peer Pressure's opinion factor.
-    // Peer Pressure multiplies the certainty REDUCTION by ppFactor; we multiply certainty ITSELF
-    // by knock, so: adjustedKnock = 1 - (1 - knock) * ppFactor
-    internal static float AdjustCertaintyKnock(float knock, int opinion)
+    // Returns the opinion amplification factor: PP's function when active, otherwise our native
+    // formula (1 + 0.01 * opinion * multiplier, clamped to ≥1). Mirrors PP's default formula
+    // exactly at the default multiplier of 1.0.
+    private static float OpinionFactor(int opinion)
+        => _certaintyReductionOpinion != null
+            ? _certaintyReductionOpinion(opinion)
+            : NativeFactor(opinion);
+
+    private static float NativeFactor(int opinion)
     {
-        if (_certaintyReductionOpinion == null)
-            return knock;
-        var ppFactor = _certaintyReductionOpinion(opinion);
-        return 1f - (1f - knock) * ppFactor;
+        var multiplier = EnhancedIdeologyMod.Settings.ConversionOpinionMultiplier;
+        return opinion > 0 ? 1f + 0.01f * opinion * multiplier : 1f;
     }
 
-    // Scales the stance pull multiplier by PP's opinion factor: liking the preacher makes the belief
-    // shift stronger, not just the certainty drop.
-    internal static float AdjustStancePull(float pull, int opinion)
+    // Adjusts our certainty-knock multiplier to incorporate the opinion factor.
+    // PP multiplies the certainty REDUCTION by factor; we multiply certainty ITSELF
+    // by knock, so: adjustedKnock = 1 - (1 - knock) * factor
+    internal static float AdjustCertaintyKnock(float knock, int opinion)
     {
-        if (_certaintyReductionOpinion == null)
-            return pull;
-        return pull * _certaintyReductionOpinion(opinion);
+        var factor = OpinionFactor(opinion);
+        return 1f - (1f - knock) * factor;
     }
+
+    // Scales the stance pull by the opinion factor: liking the preacher shifts beliefs harder.
+    internal static float AdjustStancePull(float pull, int opinion)
+        => pull * OpinionFactor(opinion);
 }

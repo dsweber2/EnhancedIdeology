@@ -14,6 +14,7 @@ internal sealed class ITab_Opinion : ITab
     private const float IdeoRowHeight = RowHeight;
     private const float IconTextGap = 2 * Padding;
     private const float ColumnGap = 2 * Padding;
+    private const float MaxRungWidth = 120f;
 
     // The left column grades each stance against a selected ideoligion: green where the pawn agrees with what
     // it preaches on that issue, red where they clash. Default selection is the pawn's own faith.
@@ -63,14 +64,15 @@ internal sealed class ITab_Opinion : ITab
         var stances = StanceRows(data, selected);
 
         var issueWidth = stances.Select(row => Text.CalcSize(row.issue.LabelCap).x).DefaultIfEmpty(0f).Max();
-        var rungWidth = stances.Select(row => Text.CalcSize(row.personalRung).x).DefaultIfEmpty(0f).Max();
+        var rungWidth = Mathf.Min(MaxRungWidth, stances.Select(row => Text.CalcSize(row.personalRung).x).DefaultIfEmpty(0f).Max());
+        var rowHeights = stances.Select(row => Mathf.Max(RowHeight, Text.CalcHeight(row.personalRung, rungWidth) + 2 * Padding)).ToList();
         var leftWidth = SmallPadding + IssueIconSize + SmallPadding + issueWidth + IconTextGap + rungWidth + IconTextGap + OpinionBarWidth + SmallPadding;
 
         var nameWidth = ideos.Select(ideo => Text.CalcSize(ideo.name).x).DefaultIfEmpty(0f).Max();
         var rightWidth = Padding + IconSize + IconTextGap + nameWidth + Padding + BarWidth;
 
         // Each column advances at its own row height, so the scroll region is sized to whichever runs taller.
-        var contentHeight = Math.Max(stances.Count * RowHeight, ideos.Count * IdeoRowHeight);
+        var contentHeight = Math.Max(rowHeights.Sum(), ideos.Count * IdeoRowHeight);
         var width = leftWidth + ColumnGap + rightWidth + (2 * Padding) + GenUI.ScrollBarWidth;
         var height = Math.Min(contentHeight, HeightForAtMostIdeoCount * IdeoRowHeight) + Text.LineHeight + (2 * Padding);
         size = new Vector2(width, height);
@@ -107,7 +109,7 @@ internal sealed class ITab_Opinion : ITab
         };
         Widgets.BeginScrollView(tabContentRect.AtZero(), ref scroll, viewRect, true);
 
-        DrawStanceColumn(data, stances, selected, issueWidth, rungWidth);
+        DrawStanceColumn(data, stances, selected, issueWidth, rungWidth, rowHeights);
         DrawIdeoColumn(data, ideos, selected, leftWidth + ColumnGap, nameWidth, width);
 
         Widgets.EndScrollView();
@@ -117,42 +119,46 @@ internal sealed class ITab_Opinion : ITab
     private void DrawStanceColumn(
         IdeoTrackerData data,
         List<(IssueDef issue, string personalRung, float opinion, string selectedRung, float strength)> stances,
-        Ideo selected, float issueWidth, float rungWidth)
+        Ideo selected, float issueWidth, float rungWidth, List<float> rowHeights)
     {
         // Structural fit is the mean of the per-issue opinions, so each issue's real contribution is its opinion
         // divided by the precept count - what actually moves the overall number, not the raw per-issue swing.
         var count = Math.Max(stances.Count, 1);
         var pos = Padding;
-        foreach (var (issue, personalRung, opinion, selectedRung, strength) in stances)
+        for (var ii = 0; ii < stances.Count; ii++)
         {
+            var (issue, personalRung, opinion, selectedRung, strength) = stances[ii];
+            var rowH = rowHeights[ii];
             var contribution = opinion / count;
+
             if (issue.Icon != null)
             {
-                var iconRect = new Rect(Padding, pos + ((IconSize - IssueIconSize) / 2), IssueIconSize, IssueIconSize);
+                var iconRect = new Rect(Padding, pos + (rowH - IssueIconSize) / 2f, IssueIconSize, IssueIconSize);
                 GUI.DrawTexture(iconRect, issue.Icon);
             }
 
             var labelX = Padding + IssueIconSize + SmallPadding;
             Text.Anchor = TextAnchor.MiddleLeft;
-            Widgets.Label(new Rect(labelX, pos, issueWidth, IconSize), issue.LabelCap);
+            Widgets.Label(new Rect(labelX, pos, issueWidth, rowH), issue.LabelCap);
 
             // The pawn's own rung, coloured by whether that stance agrees (green) or clashes (red) with the
             // selected ideoligion. Aimed at their own faith, red is exactly the drift a debate or book induced.
             var rungX = labelX + issueWidth + IconTextGap;
+            var rungTextH = Text.CalcHeight(personalRung, rungWidth);
             GUI.color = AgreementColor(opinion);
-            Widgets.Label(new Rect(rungX, pos, rungWidth, IconSize), personalRung);
-            GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
+            Widgets.Label(new Rect(rungX, pos + (rowH - rungTextH) / 2f, rungWidth, rungTextH), personalRung);
+            GUI.color = Color.white;
 
             // This issue's contribution to the pawn's structural fit with the selected ideoligion, coloured.
-            var opinionRect = new Rect(rungX + rungWidth + IconTextGap, pos, OpinionBarWidth, IconSize);
+            var opinionRect = new Rect(rungX + rungWidth + IconTextGap, pos, OpinionBarWidth, rowH);
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = AgreementColor(opinion);
             Widgets.Label(opinionRect, $"{strength:F1} ({Signed(contribution)})");
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
-            var rowRect = new Rect(Padding, pos, rungX + rungWidth + IconTextGap + OpinionBarWidth, IconSize);
+            var rowRect = new Rect(Padding, pos, rungX + rungWidth + IconTextGap + OpinionBarWidth, rowH);
             if (Mouse.IsOver(rowRect))
             {
                 Widgets.DrawHighlight(rowRect);
@@ -167,7 +173,7 @@ internal sealed class ITab_Opinion : ITab
                 TooltipHandler.TipRegion(rowRect, tip);
             }
 
-            pos += RowHeight;
+            pos += rowH;
         }
     }
 
@@ -175,7 +181,7 @@ internal sealed class ITab_Opinion : ITab
     {
         var pos = Padding;
         var ideoOpinions = ideos
-            .Select(ideo => (ideo, opinion: data.IdeoOpinion(ideo)))
+            .Select(ideo => (ideo, opinion: ideo == SelPawn.Ideo ? data.ExtendedCertainty : data.IdeoOpinion(ideo)))
             .OrderByDescending(entry => entry.ideo == SelPawn.Ideo)
             .ThenByDescending(entry => entry.opinion)
             .ToList();
@@ -231,16 +237,29 @@ internal sealed class ITab_Opinion : ITab
             {
                 Widgets.DrawHighlight(selectRect);
 
-                var opinionRundown = data.DetailedIdeoOpinion(ideo);
-                var tip = "EnhancedIdeology.PawnOpinionTooltip".Translate(SelPawn.Named("PAWN"), ideo.Named("IDEO"), opinion.ToStringPercent()) + "\n\n";
-                tip += "EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts".Translate(opinionRundown.BaseOpinion.ToStringPercent()) + "\n";
-                tip += "EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs".Translate(opinionRundown.PersonalOpinion.ToStringPercent()) + "\n";
-                tip += "EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships".Translate(opinionRundown.RelationshipOpinion.ToStringPercent()) + "\n";
-
-                if (Prefs.DevMode)
+                string tip;
+                if (ideo == SelPawn.Ideo)
                 {
-                    tip += "\n== Dev Mode details ==";
-                    tip += "\n" + opinionRundown.DevModeDetails;
+                    var certaintyChange = (data.CachedCertaintyChange >= 0f ? "+" : "") + data.CachedCertaintyChange.ToStringPercent();
+                    tip = "EnhancedIdeology.PawnCertaintyTooltip".Translate(SelPawn.Named("PAWN"), ideo.Named("IDEO"), data.ExtendedCertainty.ToStringPercent()) + "\n\n";
+                    tip += "EnhancedIdeology.CertaintyTarget".Translate(data.CachedTargetCertainty.ToStringPercent()) + "\n";
+                    tip += "EnhancedIdeology.CertainChangePerDay".Translate(certaintyChange) + "\n\n";
+                    tip += OpinionBand("EnhancedIdeology.CertaintyBandStructural", data.CachedStructural, data.StructuralContributors);
+                    tip += OpinionBand("EnhancedIdeology.CertaintyBandRelational", data.CachedRelational, data.RelationalContributors);
+                    tip += OpinionBand("EnhancedIdeology.CertaintyBandPractice", data.CachedPractitional, data.PractitionalContributors);
+                }
+                else
+                {
+                    var opinionRundown = data.DetailedIdeoOpinion(ideo);
+                    tip = "EnhancedIdeology.PawnOpinionTooltip".Translate(SelPawn.Named("PAWN"), ideo.Named("IDEO"), opinion.ToStringPercent()) + "\n\n";
+                    tip += "EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts".Translate(opinionRundown.BaseOpinion.ToStringPercent()) + "\n";
+                    tip += "EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs".Translate(opinionRundown.PersonalOpinion.ToStringPercent()) + "\n";
+                    tip += "EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships".Translate(opinionRundown.RelationshipOpinion.ToStringPercent()) + "\n";
+                    if (Prefs.DevMode)
+                    {
+                        tip += "\n== Dev Mode details ==";
+                        tip += "\n" + opinionRundown.DevModeDetails;
+                    }
                 }
 
                 TooltipHandler.TipRegion(selectRect, tip);
@@ -264,6 +283,17 @@ internal sealed class ITab_Opinion : ITab
     {
         var frac = opinion / IdeoTrackerData.MaxConvictionStrength;
         return (frac >= 0f ? "+" : "") + frac.ToStringPercent();
+    }
+
+    private static string SignedFraction(float fraction) =>
+        (fraction >= 0f ? "+" : "") + fraction.ToStringPercent();
+
+    private static string OpinionBand(string labelKey, float total, List<(string label, float pct)> contributors)
+    {
+        var text = labelKey.Translate(SignedFraction(total)) + "\n";
+        foreach (var (label, pct) in contributors.OrderByDescending(c => Math.Abs(c.pct)).Take(3))
+            text += $"    {label}: {SignedFraction(pct)}\n";
+        return text;
     }
 
     // Every issue either the pawn's own faith or the selected ideoligion takes a stance on, strongest first: the

@@ -20,7 +20,6 @@ internal sealed class JobDriver_CompleteReligiousBook : JobDriver
         yield return Toils_Haul.StartCarryThing(TargetIndex.A, putRemainderInQueue: false, subtractNumTakenFromJobCount: false, failIfStackCountLessThanJobCount: false, reserve: true, canTakeFromInventory: true);
         yield return GotoLectern();
         yield return StandAtLectern();
-        yield return Toils_Haul.PlaceHauledThingInCell(TargetIndex.B, null, false);
         yield return WriteBook();
     }
 
@@ -124,14 +123,12 @@ internal sealed class JobDriver_CompleteReligiousBook : JobDriver
 
     private void FinishWriteBookAction()
     {
-        if (Book != null)
+        var book = Book;
+        if (book != null && !book.Destroyed)
         {
-            Book.isOpen = false;
-        }
-
-        if (pawn.Downed)
-        {
-            _ = pawn.carryTracker.TryDropCarriedThing(pawn.Position, ThingPlaceMode.Near, out _);
+            book.isOpen = false;
+            if (pawn.carryTracker?.CarriedThing == book)
+                _ = pawn.carryTracker.TryDropCarriedThing(pawn.Position, ThingPlaceMode.Near, out _);
         }
     }
 

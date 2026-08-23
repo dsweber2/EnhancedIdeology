@@ -36,6 +36,12 @@ internal sealed class WorkGiver_CompleteReligiousBook : WorkGiver_Scanner
             return null;
         }
 
+        if (pawn.ideo.Certainty < 0.9f)
+        {
+            JobFailReason.Is("EnhancedIdeology.InsufficientCertaintyToWrite".Translate());
+            return null;
+        }
+
         if (book.Creator != null && book.Creator != pawn)
         {
             JobFailReason.Is("EnhancedIdeology.PawnIsNotAuthor".Translate(pawn.Named("PAWN")));

@@ -248,6 +248,46 @@ internal static class DebugActions
             new LookTargets(initiator, recipient), MessageTypeDefOf.NeutralEvent, false);
     }
 
+    [DebugAction("Ideoligion", "Trigger speech conversion", actionType = DebugActionType.ToolMapForPawns,
+        allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
+    private static void TriggerSpeechConversion(Pawn speaker)
+    {
+        if (speaker.Ideo == null)
+        {
+            Messages.Message($"{speaker.LabelShort} has no ideoligion.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var listeners = speaker.Map?.mapPawns.AllPawnsSpawned
+            .Where(pawn => pawn != speaker && pawn.RaceProps.Humanlike && pawn.Ideo != null
+                && pawn.Ideo != speaker.Ideo
+                && !pawn.DevelopmentalStage.Baby())
+            .OrderBy(pawn => pawn.Position.DistanceToSquared(speaker.Position))
+            .Take(5)
+            .ToList();
+
+        if (listeners == null || listeners.Count == 0)
+        {
+            Messages.Message($"No cross-ideo humanlike near {speaker.LabelShort}.",
+                MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var converted = new List<(Pawn pawn, Ideo from)>();
+        foreach (var listener in listeners)
+        {
+            var oldIdeo = listener.Ideo!;
+            if (HarmonyPatches.RitualOutcomeEffectWorker_Speech_Reroute.ForceApply(speaker, listener))
+                converted.Add((listener, oldIdeo));
+        }
+
+        var msg = converted.Count > 0
+            ? converted.Select(c => $"{c.pawn.LabelShort}: {c.from.name} → {c.pawn.Ideo!.name}").ToLineList("  ")
+            : "no conversions";
+        Messages.Message($"{speaker.LabelShort} speech conviction ({listeners.Count} listeners):\n{msg}",
+            new LookTargets(listeners), MessageTypeDefOf.NeutralEvent, false);
+    }
+
     [DebugAction("Ideoligion", "Set expectation override", actionType = DebugActionType.Action,
         allowedGameStates = AllowedGameStates.PlayingOnMap)]
     private static void SetExpectationOverride()

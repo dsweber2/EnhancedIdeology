@@ -104,8 +104,8 @@
   <!-- Thought: contemplation need (Required level) -->
   <ThoughtDef>
     <defName>EB_ContemplationNeed</defName>
-    <workerClass>EnhancedIdeology.ThoughtWorker_ContemplationNeed</workerClass>
     <thoughtClass>Thought_Situational</thoughtClass>
+    <workerClass>EnhancedIdeology.ThoughtWorker_ContemplationNeed</workerClass>
     <stages>
       <li>
         <label>contemplated regularly</label>

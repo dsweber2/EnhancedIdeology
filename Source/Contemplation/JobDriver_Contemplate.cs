@@ -32,6 +32,46 @@ internal sealed class JobDriver_Pray : JobDriver
     private bool IsStatueContemplation =>
         !Pew.HasThing && Altar.HasThing && !Altar.Thing.def.isAltar;
 
+
+    public override string GetReport()
+    {
+        var rate = ExpectedArcPerHour();
+        if (rate <= 0f)
+            return base.GetReport();
+        return "EB_ContemplationActivityReport".Translate(rate.ToString("F2", System.Globalization.CultureInfo.InvariantCulture));
+    }
+
+    private float ExpectedArcPerHour()
+    {
+        if (pawn.Ideo == null || pawn.Map == null)
+            return 0f;
+        var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
+        if (comp == null)
+            return 0f;
+        var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        var moralIssues = pawn.Ideo.precepts
+            .Where(pp => pp.def.issue != null && PreceptPolicy.CategoryOf(pp.def.issue) == PreceptCategory.Moral)
+            .Select(pp => pp.def.issue)
+            .Distinct()
+            .ToList();
+        if (moralIssues.Count == 0)
+            return 0f;
+        var stances = moralIssues
+            .Select(issue => tracker.IssueStances().FirstOrDefault(ss => ss.issue == issue))
+            .Where(ss => ss.issue != null)
+            .ToList();
+        var avgStrengthFactor = stances.Count > 0
+            ? stances.Average(ss => 1f - ss.strength / IdeoTrackerData.AbsoluteMaxConvictionStrength)
+            : 0f;
+        var room = pawn.Position.GetRoom(pawn.Map);
+        var impressivenessFactor = ImpressivenessScore(room);
+        if (IsLecternContemplation)
+            impressivenessFactor = Math.Max(impressivenessFactor, 0.5f);
+        var fellowFactor = 1f + (FellowContemplationCount(pawn, room) * 0.1f);
+        var arc = ContemplationArc * ReliquaryArcMultiplier();
+        return avgStrengthFactor * impressivenessFactor * fellowFactor * arc;
+    }
+
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
         if (!pawn.Reserve(Pew, job, 1, -1, null, errorOnFailed))

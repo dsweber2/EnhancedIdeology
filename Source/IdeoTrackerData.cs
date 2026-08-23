@@ -218,10 +218,13 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         float moodSum = 0;
         foreach (var thought in _tmpThoughts)
         {
-            if (thought.sourcePrecept != null || thought.def.Worker is ThoughtWorker_Precept)
-            {
-                moodSum += thought.MoodOffset();
-            }
+            if (thought.sourcePrecept == null && !(thought.def.Worker is ThoughtWorker_Precept))
+                continue;
+            var offset = thought.MoodOffset();
+            // A ritual from another faith enjoyed here is a pull away from your own, not toward it.
+            moodSum += thought.sourcePrecept != null && thought.sourcePrecept.ideo != Pawn.Ideo
+                ? -offset
+                : offset;
         }
 
         var band = GameComponent_EnhancedIdeology.PracticeIntensityCurve.Evaluate(moodSum) * maxRange;
@@ -230,11 +233,14 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         {
             foreach (var thought in _tmpThoughts)
             {
+                if (thought.sourcePrecept == null && !(thought.def.Worker is ThoughtWorker_Precept))
+                    continue;
                 var offset = thought.MoodOffset();
-                if (offset != 0f && (thought.sourcePrecept != null || thought.def.Worker is ThoughtWorker_Precept))
-                {
-                    contributors.Add((thought.LabelCap, band * (offset / moodSum)));
-                }
+                if (offset == 0f) continue;
+                var signedOffset = thought.sourcePrecept != null && thought.sourcePrecept.ideo != Pawn.Ideo
+                    ? -offset
+                    : offset;
+                contributors.Add((thought.LabelCap, band * (signedOffset / moodSum)));
             }
         }
 
@@ -970,7 +976,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (drainPerDay <= 0f) return;
 
         EnsureIssueStancesSeeded();
-        foreach (var issue in issueStrength.Keys)
+        foreach (var issue in issueStrength.Keys.ToList())
             issueStrength[issue] = Mathf.Max(MinConvictionStrength, issueStrength[issue] - drainPerDay);
 
         baseOpinionsDirty = true;
