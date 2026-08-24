@@ -124,7 +124,8 @@ internal sealed class JobDriver_Pray : JobDriver
         if (pawn.needs?.joy != null)
         {
             JoyUtility.JoyTickCheckEnd(pawn, 1, JoyTickFullJoyAction.None);
-            if (pawn.needs.joy.CurLevelPercentage >= 1f)
+            bool inCrisis = pawn.MentalStateDef == EnhancedIdeologyDefOf.EB_CrisisOfFaith;
+            if (!inCrisis && pawn.needs.joy.CurLevelPercentage >= 1f)
             {
                 CompleteContemplation();
                 EndJobWith(JobCondition.Succeeded);

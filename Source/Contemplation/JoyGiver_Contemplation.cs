@@ -16,7 +16,8 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         return FindLectern(pawn) != null
             || HasAnyWorshipRoom(pawn)
             || FindStatueContemplationSite(pawn) != null
-            || FindAccessibleImpressiveReliquary(pawn) != null;
+            || FindAccessibleImpressiveReliquary(pawn) != null
+            || FindWorshipRoomWithPew(pawn) != null;
     }
 
     internal static bool ContemplationAllowedByPrecept(Pawn pawn)
@@ -81,6 +82,31 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
                 return thing;
         }
         return null;
+    }
+
+    // Any worship room where the pawn can sit in a pew, regardless of altar ideo.
+    // Used as a fallback for guests whose ideo doesn't match any altar.
+    private static Room? FindWorshipRoomWithPew(Pawn pawn)
+    {
+        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        {
+            if (room.PsychologicallyOutdoors || room.Role != RoomRoleDefOf.WorshipRoom)
+                continue;
+            if (FindPew(room, pawn) != null)
+                return room;
+        }
+        return null;
+    }
+
+    // Returns the first altar in the room, regardless of ideo, for facing purposes.
+    private static LocalTargetInfo FindAnyAltarInRoom(Room room)
+    {
+        foreach (var thing in room.ContainedAndAdjacentThings)
+        {
+            if (thing.def.isAltar)
+                return thing;
+        }
+        return LocalTargetInfo.Invalid;
     }
 
     // Loose check: has a worship room with the pawn's altar, ignoring room requirements.
@@ -181,6 +207,18 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         var impressiveReliquary = FindAccessibleImpressiveReliquary(pawn);
         if (impressiveReliquary != null)
             return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, impressiveReliquary, impressiveReliquary);
+
+        // Priority 5: any worship room with a pew (guests whose ideo doesn't match any altar)
+        var guestRoom = FindWorshipRoomWithPew(pawn);
+        if (guestRoom != null)
+        {
+            var guestPew = FindPew(guestRoom, pawn);
+            if (guestPew != null)
+            {
+                var altar = FindAnyAltarInRoom(guestRoom);
+                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, guestPew.Value, altar);
+            }
+        }
 
         return null;
     }

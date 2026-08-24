@@ -162,10 +162,10 @@ internal sealed class ITab_Opinion : ITab
             if (Mouse.IsOver(rowRect))
             {
                 Widgets.DrawHighlight(rowRect);
-                var tip = "EnhancedIdeology.StanceTooltip".Translate(
+                string tip = "EnhancedIdeology.StanceTooltip".Translate(
                     SelPawn.Named("PAWN"), issue.LabelCap, personalRung,
                     $"{strength:F1} ({(strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent()})",
-                    selected.Named("IDEO"), selectedRung, Signed(contribution)).ToString();
+                    selected.Named("IDEO"), selectedRung, Signed(contribution));
                 if (Prefs.DevMode)
                 {
                     tip += $"\n[dev] vs {selected.name}: raw={opinion:F2}  " + data.IssueOpinionDebug(selected, issue);
