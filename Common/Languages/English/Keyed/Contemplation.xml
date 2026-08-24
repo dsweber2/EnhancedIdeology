@@ -7,8 +7,7 @@
     <EB_ContemplationActivityReport>contemplating (gain: {0}/hr)</EB_ContemplationActivityReport>
 
     <EB_ContemplationSiteStatLabel>Contemplation gain</EB_ContemplationSiteStatLabel>
-    <EB_ContemplationSiteStatReport>How much conviction this building provides per contemplation session relative to the base rate.</EB_ContemplationSiteStatReport>
-    <EB_ContemplationSiteStatReportReliquary>How much conviction this building provides per contemplation session. Rises to 4× when a relic belonging to the pawn's own ideology is enshrined.</EB_ContemplationSiteStatReportReliquary>
+    <EB_ContemplationSiteStatReport>Conviction reinforcement rate per hour during contemplation. Shown for the selected pawn, or as a base multiplier when no pawn is selected. Scales with room impressiveness and the pawn's current conviction strength. Additional +10% per fellow believer in the room.</EB_ContemplationSiteStatReport>
     <EB_ContemplationSiteInspect>Contemplation gain: {0}</EB_ContemplationSiteInspect>
 
 </LanguageData>

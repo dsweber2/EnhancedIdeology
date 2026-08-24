@@ -13,11 +13,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
             return false;
         if (!ContemplationAllowedByPrecept(pawn))
             return false;
-        return FindLectern(pawn) != null
-            || HasAnyWorshipRoom(pawn)
-            || FindStatueContemplationSite(pawn) != null
-            || FindAccessibleImpressiveReliquary(pawn) != null
-            || FindWorshipRoomWithPew(pawn) != null;
+        return FindSites(pawn).Count > 0;
     }
 
     internal static bool ContemplationAllowedByPrecept(Pawn pawn)
@@ -41,7 +37,6 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
             var certainty = GetCertainty(pawn);
             if (certainty > 0.75f)
                 return Rand.Value < 0.3f;
-            // Respected is ~1.5x more likely than Normal at the same certainty
             return Rand.Value < 0.65f;
         }
 
@@ -70,62 +65,96 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
     internal static bool IsMoralist(Pawn pawn) =>
         pawn.Ideo?.GetRole(pawn)?.def == PreceptDefOf.IdeoRole_Moralist;
 
-    internal static Thing? FindLectern(Pawn pawn)
+    // Normalized impressiveness (0–1) for a room, used in gain calculations.
+    internal static float ImpressivenessScore(Room? room)
     {
-        if (!IsMoralist(pawn))
-            return null;
-        foreach (var thing in pawn.Map.listerThings.ThingsOfDef(ThingDefOf.Lectern))
-        {
-            if (thing.IsForbidden(pawn))
-                continue;
-            if (pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None))
-                return thing;
-        }
-        return null;
+        if (room == null || room.PsychologicallyOutdoors)
+            return 0f;
+        return RoomStatDefOf.Impressiveness.GetScoreStageIndex(room.GetStat(RoomStatDefOf.Impressiveness)) / 6f;
     }
 
-    // Any worship room where the pawn can sit in a pew, regardless of altar ideo.
-    // Used as a fallback for guests whose ideo doesn't match any altar.
-    private static Room? FindWorshipRoomWithPew(Pawn pawn)
+    // Average conviction strength factor across all moral issues for a pawn.
+    internal static float AvgStrengthFactor(Pawn pawn)
     {
-        foreach (var room in pawn.Map.regionGrid.AllRooms)
-        {
-            if (room.PsychologicallyOutdoors || room.Role != RoomRoleDefOf.WorshipRoom)
-                continue;
-            if (FindPew(room, pawn) != null)
-                return room;
-        }
-        return null;
+        if (pawn.Ideo == null) return 0f;
+        var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
+        if (comp == null) return 0f;
+        var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        var moralIssues = pawn.Ideo.precepts
+            .Where(pp => pp.def.issue != null && PreceptPolicy.CategoryOf(pp.def.issue) == PreceptCategory.Moral)
+            .Select(pp => pp.def.issue)
+            .Distinct()
+            .ToList();
+        if (moralIssues.Count == 0) return 0f;
+        var stances = moralIssues
+            .Select(issue => tracker.IssueStances().FirstOrDefault(ss => ss.issue == issue))
+            .Where(ss => ss.issue != null)
+            .ToList();
+        return stances.Count > 0
+            ? stances.Average(ss => 1f - ss.strength / IdeoTrackerData.AbsoluteMaxConvictionStrength)
+            : 0f;
     }
 
-    // Returns the first altar in the room, regardless of ideo, for facing purposes.
-    private static LocalTargetInfo FindAnyAltarInRoom(Room room)
+    // Finds an altar in the room for the pawn to face.
+    // Prefers the pawn's own ideo; falls back to any altar (guests, cross-ideo visitors).
+    internal static LocalTargetInfo FindAltarForPawn(Room room, Pawn pawn)
     {
+        LocalTargetInfo? any = null;
         foreach (var thing in room.ContainedAndAdjacentThings)
         {
-            if (thing.def.isAltar)
+            if (!thing.def.isAltar) continue;
+            if (thing is ThingWithComps twc && twc.compStyleable?.SourcePrecept?.ideo == pawn.Ideo)
                 return thing;
+            any ??= thing;
         }
-        return LocalTargetInfo.Invalid;
+        return any ?? LocalTargetInfo.Invalid;
     }
 
-    // Loose check: has a worship room with the pawn's altar, ignoring room requirements.
-    // Kept separate so TryGiveJob can distinguish disrespected vs fully missing.
-    private static bool HasAnyWorshipRoom(Pawn pawn)
+    // Returns all reachable contemplation sites for the pawn, ordered by effective gain descending.
+    internal static List<ContemplationSite> FindSites(Pawn pawn)
     {
+        var sites = new List<ContemplationSite>();
+        if (pawn.Ideo == null || pawn.Map == null)
+            return sites;
+
         foreach (var room in pawn.Map.regionGrid.AllRooms)
         {
-            if (room.PsychologicallyOutdoors || room.Role != RoomRoleDefOf.WorshipRoom)
-                continue;
+            if (room.PsychologicallyOutdoors) continue;
             foreach (var thing in room.ContainedAndAdjacentThings)
             {
-                if (thing.def.isAltar
-                    && thing is ThingWithComps twc
-                    && twc.compStyleable?.SourcePrecept?.ideo == pawn.Ideo)
-                    return true;
+                var comp = thing.TryGetComp<Comp_ContemplationSite>();
+                if (comp == null) continue;
+                var site = comp.TryGetSite(pawn);
+                if (site.HasValue) sites.Add(site.Value);
             }
         }
-        return false;
+
+        // Non-altar ideo buildings (statues, monoliths, etc.) — no comp, scanned separately.
+        var statueSite = FindStatueContemplationSite(pawn);
+        if (statueSite.HasValue)
+        {
+            var room = statueSite.Value.building.GetRoom();
+            var gain = ImpressivenessScore(room) * AvgStrengthFactor(pawn) * JobDriver_Pray.ContemplationArc;
+            sites.Add(new ContemplationSite(statueSite.Value.cell, statueSite.Value.building, gain));
+        }
+
+        // Private room fallback: 0.25× arc, no altar to face.
+        var ownedRoom = pawn.ownership?.OwnedRoom;
+        if (ownedRoom != null && !ownedRoom.PsychologicallyOutdoors && ownedRoom.Role != RoomRoleDefOf.WorshipRoom)
+        {
+            var cell = ownedRoom.Cells
+                .Where(c => c.Standable(pawn.Map) && !c.IsForbidden(pawn)
+                    && pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.None))
+                .RandomElementWithFallback(IntVec3.Invalid);
+            if (cell.IsValid)
+            {
+                var gain = 0.25f * ImpressivenessScore(ownedRoom) * AvgStrengthFactor(pawn) * JobDriver_Pray.ContemplationArc;
+                sites.Add(new ContemplationSite(new LocalTargetInfo(cell), LocalTargetInfo.Invalid, gain));
+            }
+        }
+
+        sites.Sort((aa, bb) => bb.EffectiveGain.CompareTo(aa.EffectiveGain));
+        return sites;
     }
 
     private static readonly Dictionary<Pawn, int> noPewWarnedAt = [];
@@ -137,14 +166,17 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
             return null;
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
-            $"Contemplation site search: {pawn} moralist={IsMoralist(pawn)} lectern={FindLectern(pawn)?.Label ?? "none"}");
+            $"Contemplation site search: {pawn} moralist={IsMoralist(pawn)}");
 
         var job = TryBuildPrayJob(pawn);
         if (job != null)
             return job;
 
-        // Nothing usable — emit the most specific message
-        var worshipRoom = FindWorshipRoom(pawn);
+        // Suppress warnings for guests (they can't own worship rooms).
+        if (!pawn.IsColonist)
+            return null;
+
+        var worshipRoom = FindWorshipRoomWithValidAltar(pawn);
         if (worshipRoom != null)
         {
             if (!noPewWarnedAt.TryGetValue(pawn, out var lastWarn)
@@ -156,7 +188,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
                     pawn, MessageTypeDefOf.CautionInput, historical: false);
             }
         }
-        else if (HasAnyWorshipRoom(pawn))
+        else if (HasWorshipRoomAnyAltar(pawn))
         {
             if (!disrespectedWarnedAt.TryGetValue(pawn, out var lastDisrespect)
                 || Find.TickManager.TicksGame - lastDisrespect > GenDate.TicksPerDay)
@@ -170,98 +202,30 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         return null;
     }
 
-    // Core site-finding logic shared with JobGiver_PrayFromNeed (no warnings emitted).
+    // Core site-finding logic; shared with JobGiver_PrayFromNeed. No warnings emitted.
     internal static Job? TryBuildPrayJob(Pawn pawn)
     {
-        var lectern = FindLectern(pawn);
-
-        // Priority 1: worship room — reliquary first, then lectern (for moralist), then pew
-        var worshipRoom = FindWorshipRoom(pawn);
-        if (worshipRoom != null)
-        {
-            var reliquary = FindReliquary(worshipRoom, pawn);
-            if (reliquary != null)
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, reliquary, reliquary);
-
-            if (lectern != null)
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, lectern, lectern);
-
-            var pew = FindPew(worshipRoom, pawn);
-            if (pew != null)
-            {
-                var altar = FindContemplationTarget(worshipRoom, pawn);
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, pew.Value, altar);
-            }
-        }
-
-        // Priority 2: lectern when there's no worship room at all
-        if (lectern != null)
-            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, lectern, lectern);
-
-        // Priority 3: statue/ideo building in any room
-        var statueSite = FindStatueContemplationSite(pawn);
-        if (statueSite != null)
-            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, statueSite.Value.cell, statueSite.Value.building);
-
-        // Priority 4: reliquary in any sufficiently impressive room
-        var impressiveReliquary = FindAccessibleImpressiveReliquary(pawn);
-        if (impressiveReliquary != null)
-            return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, impressiveReliquary, impressiveReliquary);
-
-        // Priority 5: any worship room with a pew (guests whose ideo doesn't match any altar)
-        var guestRoom = FindWorshipRoomWithPew(pawn);
-        if (guestRoom != null)
-        {
-            var guestPew = FindPew(guestRoom, pawn);
-            if (guestPew != null)
-            {
-                var altar = FindAnyAltarInRoom(guestRoom);
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, guestPew.Value, altar);
-            }
-        }
-
-        return null;
+        var sites = FindSites(pawn);
+        if (sites.Count == 0) return null;
+        var best = WeightedRandom(sites);
+        return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_Pray, best.Seat, best.Altar);
     }
 
-    internal static Room? FindWorshipRoom(Pawn pawn)
+    private static ContemplationSite WeightedRandom(List<ContemplationSite> sites)
     {
-        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        var total = sites.Sum(ss => ss.EffectiveGain);
+        if (total <= 0f) return sites[0];
+        var roll = Rand.Value * total;
+        var cumulative = 0f;
+        foreach (var site in sites)
         {
-            if (!room.PsychologicallyOutdoors
-                && room.Role == RoomRoleDefOf.WorshipRoom
-                && RoomHasValidAltar(room, pawn))
-                return room;
+            cumulative += site.EffectiveGain;
+            if (roll <= cumulative) return site;
         }
-        return null;
+        return sites[^1];
     }
 
-    internal static bool RoomHasValidAltar(Room room, Pawn pawn)
-    {
-        foreach (var thing in room.ContainedAndAdjacentThings)
-        {
-            if (!thing.def.isAltar || thing is not ThingWithComps twc)
-                continue;
-            if (twc.compStyleable?.SourcePrecept?.ideo != pawn.Ideo)
-                continue;
-            if (twc.compStyleable.SourcePrecept is not Precept_Building pb)
-                continue;
-            var demand = pb.presenceDemand;
-            if (demand == null || !demand.AppliesTo(pawn.Map))
-                return true;
-            var effectiveRoom = demand.GetEffectiveRoom(thing);
-            if (effectiveRoom == null)
-                continue;
-            if (demand.roomRequirements.NullOrEmpty())
-                return true;
-            if (demand.roomRequirements.All(r => r.MetOrDisabled(effectiveRoom, pawn)))
-                return true;
-        }
-        return false;
-    }
-
-    // Non-altar ideo buildings (statues, etc.) in any room, subject to their own presenceDemand.
-    // Returns the building + a free cell in the room. The building is reserved with a cap based on
-    // impressiveness so the number of simultaneous contemplations scales with the room's quality.
+    // Non-altar ideo buildings (statues, monoliths): scanned across all rooms.
     internal static (Thing building, LocalTargetInfo cell)? FindStatueContemplationSite(Pawn pawn)
     {
         foreach (var room in pawn.Map.regionGrid.AllRooms)
@@ -299,7 +263,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         return null;
     }
 
-    // Max concurrent contemplations at a statue = 1 + impressiveness stage (0-6), so 1–7 pawns.
+    // Max concurrent contemplations at a statue, scaled by room impressiveness.
     internal static int StatueContemplationCap(Thing thing)
     {
         var room = thing.GetRoom();
@@ -308,7 +272,6 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         return 1 + (int)RoomStatDefOf.Impressiveness.GetScoreStageIndex(room.GetStat(RoomStatDefOf.Impressiveness));
     }
 
-    // Picks the nearest free cell in the room to the focus building, closest-first.
     private static LocalTargetInfo? FindRoomCell(Room room, Thing focus, Pawn pawn)
     {
         var focusPos = focus.Position;
@@ -323,71 +286,59 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         return null;
     }
 
-    // Reliquary in any room with impressiveness > 60 (single-pawn, Thing reservation).
-    internal static Thing? FindAccessibleImpressiveReliquary(Pawn pawn)
+    // Worship room where the pawn's altar's requirements are met (for warning logic only).
+    private static Room? FindWorshipRoomWithValidAltar(Pawn pawn)
     {
         foreach (var room in pawn.Map.regionGrid.AllRooms)
         {
-            if (room.PsychologicallyOutdoors)
-                continue;
-            if (room.GetStat(RoomStatDefOf.Impressiveness) <= 60f)
+            if (!room.PsychologicallyOutdoors
+                && room.Role == RoomRoleDefOf.WorshipRoom
+                && RoomHasValidAltar(room, pawn))
+                return room;
+        }
+        return null;
+    }
+
+    // Any worship room that contains at least one altar styled for the pawn's ideo,
+    // regardless of room requirements (for warning logic only).
+    private static bool HasWorshipRoomAnyAltar(Pawn pawn)
+    {
+        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        {
+            if (room.PsychologicallyOutdoors || room.Role != RoomRoleDefOf.WorshipRoom)
                 continue;
             foreach (var thing in room.ContainedAndAdjacentThings)
             {
-                if (thing.def != ThingDefOf.Reliquary)
-                    continue;
-                if (!thing.IsForbidden(pawn) && pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None))
-                    return thing;
+                if (thing.def.isAltar
+                    && thing is ThingWithComps twc
+                    && twc.compStyleable?.SourcePrecept?.ideo == pawn.Ideo)
+                    return true;
             }
         }
-        return null;
+        return false;
     }
 
-    internal static Thing? FindReliquary(Room room, Pawn pawn)
+    private static bool RoomHasValidAltar(Room room, Pawn pawn)
     {
         foreach (var thing in room.ContainedAndAdjacentThings)
         {
-            if (thing.def != ThingDefOf.Reliquary)
+            if (!thing.def.isAltar || thing is not ThingWithComps twc)
                 continue;
-            if (!thing.IsForbidden(pawn) && pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None))
-                return thing;
+            if (twc.compStyleable?.SourcePrecept?.ideo != pawn.Ideo)
+                continue;
+            if (twc.compStyleable.SourcePrecept is not Precept_Building pb)
+                continue;
+            var demand = pb.presenceDemand;
+            if (demand == null || !demand.AppliesTo(pawn.Map))
+                return true;
+            var effectiveRoom = demand.GetEffectiveRoom(thing);
+            if (effectiveRoom == null)
+                continue;
+            if (demand.roomRequirements.NullOrEmpty())
+                return true;
+            if (demand.roomRequirements.All(r => r.MetOrDisabled(effectiveRoom, pawn)))
+                return true;
         }
-        return null;
-    }
-
-    // Returns a specific unreserved cell on a ritual seat so multiple pawns can use the same bench.
-    internal static LocalTargetInfo? FindPew(Room room, Pawn pawn)
-    {
-        var seatDef = pawn.Ideo?.RitualSeatDef;
-        foreach (var thing in room.ContainedAndAdjacentThings)
-        {
-            if (seatDef != null && thing.def != seatDef)
-                continue;
-            if (seatDef == null && thing.TryGetComp<CompRitualSeat>() == null)
-                continue;
-            if (thing.IsForbidden(pawn))
-                continue;
-            foreach (var cell in thing.OccupiedRect())
-            {
-                if (pawn.CanReserveAndReach(cell, PathEndMode.OnCell, Danger.None))
-                    return new LocalTargetInfo(cell);
-            }
-        }
-        return null;
-    }
-
-    // Prefer altars; fall back to any ideo building in the room to face during contemplation.
-    internal static LocalTargetInfo FindContemplationTarget(Room room, Pawn pawn)
-    {
-        Thing? fallback = null;
-        foreach (var thing in room.ContainedAndAdjacentThings)
-        {
-            if (thing is not ThingWithComps twc || twc.compStyleable?.SourcePrecept?.ideo != pawn.Ideo)
-                continue;
-            if (thing.def.isAltar)
-                return thing;
-            fallback ??= thing;
-        }
-        return fallback ?? LocalTargetInfo.Invalid;
+        return false;
     }
 }

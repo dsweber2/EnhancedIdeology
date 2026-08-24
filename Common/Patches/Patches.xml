@@ -160,7 +160,7 @@
 		<xpath>/Defs/ThingDef[defName="Lectern"]/comps</xpath>
 		<value>
 			<li Class="EnhancedIdeology.CompProperties_ContemplationSite">
-				<contemplationGainLabel>1.5×</contemplationGainLabel>
+				<siteKind>Lectern</siteKind>
 			</li>
 		</value>
 	</Operation>
@@ -178,8 +178,7 @@ Can be used as a contemplation site by the moral guide. Contemplation gain: 1.5�
 		<xpath>/Defs/ThingDef[defName="Reliquary"]/comps</xpath>
 		<value>
 			<li Class="EnhancedIdeology.CompProperties_ContemplationSite">
-				<contemplationGainLabel>2× (4× with matching relic)</contemplationGainLabel>
-				<contemplationGainReport>EB_ContemplationSiteStatReportReliquary</contemplationGainReport>
+				<siteKind>Reliquary</siteKind>
 			</li>
 		</value>
 	</Operation>

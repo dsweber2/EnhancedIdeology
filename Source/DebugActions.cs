@@ -149,7 +149,8 @@ internal static class DebugActions
     {
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"=== Contemplation site diagnosis: {pawn.LabelShort} ({pawn.Ideo!.name}) ===");
-        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  isMoralist={JoyGiver_Contemplation.IsMoralist(pawn)}  worshipRoom={JoyGiver_Contemplation.FindWorshipRoom(pawn) != null}");
+        var sites = JoyGiver_Contemplation.FindSites(pawn);
+        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  isMoralist={JoyGiver_Contemplation.IsMoralist(pawn)}  sites={sites.Count}  bestGain={sites.FirstOrDefault().EffectiveGain:F3}");
 
         sb.AppendLine("\n-- Lecterns (moralist contemplation site) --");
         foreach (var thing in pawn.Map!.listerThings.ThingsOfDef(ThingDefOf.Lectern))

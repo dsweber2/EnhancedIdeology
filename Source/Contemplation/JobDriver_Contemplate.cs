@@ -11,8 +11,6 @@ internal sealed class JobDriver_Pray : JobDriver
     private const int ReinforcementIntervalTicks = GenDate.TicksPerHour;
     private const int SymbolMoteIntervalTicks = 90;
     internal const float ContemplationArc = 0.5f;
-    private const float ImpressivenessStageMax = 6f;
-
     // Exposed for tests: the diminishing-returns factor as conviction approaches its absolute ceiling.
     internal static float StrengthFactor(float strength) =>
         1f - (strength / IdeoTrackerData.AbsoluteMaxConvictionStrength);
@@ -32,6 +30,10 @@ internal sealed class JobDriver_Pray : JobDriver
     private bool IsStatueContemplation =>
         !Pew.HasThing && Altar.HasThing && !Altar.Thing.def.isAltar;
 
+    // Pew is a room cell, no altar → private room contemplation.
+    private bool IsPrivateRoomContemplation =>
+        !Pew.HasThing && !Altar.IsValid;
+
 
     public override string GetReport()
     {
@@ -45,31 +47,13 @@ internal sealed class JobDriver_Pray : JobDriver
     {
         if (pawn.Ideo == null || pawn.Map == null)
             return 0f;
-        var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
-        if (comp == null)
-            return 0f;
-        var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var moralIssues = pawn.Ideo.precepts
-            .Where(pp => pp.def.issue != null && PreceptPolicy.CategoryOf(pp.def.issue) == PreceptCategory.Moral)
-            .Select(pp => pp.def.issue)
-            .Distinct()
-            .ToList();
-        if (moralIssues.Count == 0)
-            return 0f;
-        var stances = moralIssues
-            .Select(issue => tracker.IssueStances().FirstOrDefault(ss => ss.issue == issue))
-            .Where(ss => ss.issue != null)
-            .ToList();
-        var avgStrengthFactor = stances.Count > 0
-            ? stances.Average(ss => 1f - ss.strength / IdeoTrackerData.AbsoluteMaxConvictionStrength)
-            : 0f;
         var room = pawn.Position.GetRoom(pawn.Map);
-        var impressivenessFactor = ImpressivenessScore(room);
+        var impressiveness = JoyGiver_Contemplation.ImpressivenessScore(room);
         if (IsLecternContemplation)
-            impressivenessFactor = Math.Max(impressivenessFactor, 0.5f);
+            impressiveness = Math.Max(impressiveness, 0.5f);
         var fellowFactor = 1f + (FellowContemplationCount(pawn, room) * 0.1f);
         var arc = ContemplationArc * ReliquaryArcMultiplier();
-        return avgStrengthFactor * impressivenessFactor * fellowFactor * arc;
+        return JoyGiver_Contemplation.AvgStrengthFactor(pawn) * impressiveness * fellowFactor * arc;
     }
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
@@ -177,7 +161,7 @@ internal sealed class JobDriver_Pray : JobDriver
 
         var strengthFactor = 1f - (stance.strength / IdeoTrackerData.AbsoluteMaxConvictionStrength);
         var room = pawn.Position.GetRoom(pawn.Map);
-        var impressivenessFactor = ImpressivenessScore(room);
+        var impressivenessFactor = JoyGiver_Contemplation.ImpressivenessScore(room);
         if (IsLecternContemplation)
             impressivenessFactor = Math.Max(impressivenessFactor, 0.5f);
         var fellowFactor = 1f + (FellowContemplationCount(pawn, room) * 0.1f);
@@ -201,20 +185,14 @@ internal sealed class JobDriver_Pray : JobDriver
     {
         if (IsLecternContemplation)
             return 1.5f;
+        if (IsPrivateRoomContemplation)
+            return 0.25f;
         if (!IsReliquaryContemplation)
             return 1f;
         var container = Pew.Thing.TryGetComp<CompRelicContainer>();
         if (container?.ContainedThing?.StyleSourcePrecept is Precept_Relic rp && rp.ideo == pawn.Ideo)
             return 4f;
         return 2f;
-    }
-
-    private static float ImpressivenessScore(Room? room)
-    {
-        if (room == null || room.PsychologicallyOutdoors)
-            return 0f;
-        var stageIndex = RoomStatDefOf.Impressiveness.GetScoreStageIndex(room.GetStat(RoomStatDefOf.Impressiveness));
-        return stageIndex / ImpressivenessStageMax;
     }
 
     private static int FellowContemplationCount(Pawn pawn, Room? room)
