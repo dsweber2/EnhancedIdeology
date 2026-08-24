@@ -6,6 +6,7 @@ global using System.Linq;
 global using HarmonyLib;
 
 global using RimWorld;
+global using RimWorld.Planet;
 
 global using UnityEngine;
 

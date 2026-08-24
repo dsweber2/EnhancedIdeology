@@ -66,6 +66,8 @@ internal static class EnhancedIdeologyDefOf
     [MayRequire("MortStrudel.MortIdeology")]
     public static MemeDef MI_WealthStratification;
     [MayRequireIdeology]
+    public static HediffDef EB_BrainwipeRecovery;
+    [MayRequireIdeology]
     public static PreceptDef IdeoDiversity_Approved;
     [MayRequireIdeology]
     public static PreceptDef IdeoDiversity_Respected;

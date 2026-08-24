@@ -126,7 +126,8 @@ internal static class ConvictionMath
             * conversionPower
             * loser.GetStatValue(StatDefOf.CertaintyLossFactor)
             * pullMultiplier
-            * apostacyResistance;
+            * apostacyResistance
+            * loserTracker.BrainwipeSusceptibilityMultiplier;
 
         var farRank = LadderExtremeAwayFrom(issue, targetRank);
         var (newRank, newStrength) = ValleyStep(loserStance.rank, loserStance.strength, targetRank, farRank, winnerStrength, stepLength);

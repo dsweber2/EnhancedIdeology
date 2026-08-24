@@ -2,6 +2,13 @@ using UnityEngine;
 
 namespace Verse;
 
+[Flags]
+public enum WorkTags
+{
+    None = 0,
+    Social = 1 << 0,
+}
+
 public struct LookTargets
 {
     public LookTargets(params Pawn[] pawns) { }

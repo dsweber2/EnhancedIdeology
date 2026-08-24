@@ -25,8 +25,6 @@ internal static class SocialCardUtility_DrawCertainty
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        var certaintyChangePerDay = data.CachedCertaintyChange;
-
         var extended = data.ExtendedCertainty;
         var barMax = Mathf.Max(1f, extended, data.CachedTargetCertainty);
 
@@ -34,7 +32,8 @@ internal static class SocialCardUtility_DrawCertainty
         {
             Widgets.DrawHighlight(containerRect);
 
-            var certaintyChange = (certaintyChangePerDay >= 0f ? "+" : "") + certaintyChangePerDay.ToStringPercent();
+            data.CertaintyChangeRecache(comp);
+            var certaintyChange = (data.CachedCertaintyChange >= 0f ? "+" : "") + data.CachedCertaintyChange.ToStringPercent();
 
             var tip = "EnhancedIdeology.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO"), extended.ToStringPercent()) + "\n\n";
             tip += "EnhancedIdeology.CertaintyTarget".Translate(data.CachedTargetCertainty.ToStringPercent()) + "\n";
@@ -73,9 +72,16 @@ internal static class SocialCardUtility_DrawCertainty
     {
         var text = labelKey.Translate(Signed(total)) + "\n";
 
-        foreach (var (label, pct) in contributors.OrderByDescending(c => Math.Abs(c.pct)).Take(3))
+        var ordered = contributors.OrderByDescending(c => Math.Abs(c.pct)).ToList();
+        foreach (var (label, pct) in ordered.Take(3))
         {
             text += $"    {label}: {Signed(pct)}\n";
+        }
+
+        if (ordered.Count > 3)
+        {
+            var remainder = ordered.Skip(3).Sum(c => c.pct);
+            text += $"    ({ordered.Count - 3} more: {Signed(remainder)})\n";
         }
 
         return text;

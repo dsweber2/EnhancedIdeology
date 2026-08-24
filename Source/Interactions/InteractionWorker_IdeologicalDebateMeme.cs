@@ -9,6 +9,9 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
     // Per-precept pull is weaker than a focused precept debate since multiple precepts are affected at once.
     private const float MemeDebatePullMultiplier = 0.5f;
 
+    // Brainwiped pawns are nearly incapable of holding their own in a debate.
+    private const float BrainwipeDebateRollFactor = 0.15f;
+
     internal static readonly SimpleCurve CompatibilityFactorCurve =
     [
         new CurvePoint(-1.5f, 0.1f),
@@ -157,6 +160,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         var socialImpact = pawn.GetStatValue(StatDefOf.SocialImpact);
         var certainty = pawn.ideo.Certainty;
         var result = rand * convPower / certaintyLoss * socialImpact * (1f + ((certainty - 0.6f) * 0.5f));
+        if (IdeoTrackerData.HasBrainwipeRecovery(pawn)) result *= BrainwipeDebateRollFactor;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"GetDebateRoll: pawn={pawn}, rand={rand}, convPower={convPower}, certaintyLoss={certaintyLoss}, socialImpact={socialImpact}, certainty={certainty}, result={result}");
         return result;
     }

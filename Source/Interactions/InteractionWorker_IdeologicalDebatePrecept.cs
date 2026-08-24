@@ -28,6 +28,10 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // than a decisive win for either side.
     internal const float DebateDrawThreshold = 0.1f;
 
+    // Penalty applied to the debate roll mean of a pawn in brainwipe recovery. At SD=0.75, a -3 shift gives the
+    // brainwiped pawn a ~0.3% chance of winning against an average opponent.
+    private const float BrainwipeDebatePenalty = 3.0f;
+
     internal static readonly SimpleCurve CompatibilityFactorCurve =
     [
         new CurvePoint(-1.5f, 0.1f),
@@ -247,7 +251,8 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     internal static float DebateRollMean(Pawn pawn)
     {
         var convPower = StatDefOf.ConversionPower.Worker.IsDisabledFor(pawn) ? 0f : pawn.GetStatValue(StatDefOf.ConversionPower);
-        return (convPower / 2f) + (IntellectualImpact(pawn) / 2f) + (pawn.GetStatValue(StatDefOf.SocialImpact) / 3f);
+        var penalty = IdeoTrackerData.HasBrainwipeRecovery(pawn) ? BrainwipeDebatePenalty : 0f;
+        return (convPower / 2f) + (IntellectualImpact(pawn) / 2f) + (pawn.GetStatValue(StatDefOf.SocialImpact) / 3f) - penalty;
     }
 
     internal static float GetDebateRoll(Pawn pawn)

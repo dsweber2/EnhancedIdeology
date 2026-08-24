@@ -291,8 +291,14 @@ internal sealed class ITab_Opinion : ITab
     private static string OpinionBand(string labelKey, float total, List<(string label, float pct)> contributors)
     {
         var text = labelKey.Translate(SignedFraction(total)) + "\n";
-        foreach (var (label, pct) in contributors.OrderByDescending(c => Math.Abs(c.pct)).Take(3))
+        var ordered = contributors.OrderByDescending(c => Math.Abs(c.pct)).ToList();
+        foreach (var (label, pct) in ordered.Take(3))
             text += $"    {label}: {SignedFraction(pct)}\n";
+        if (ordered.Count > 3)
+        {
+            var remainder = ordered.Skip(3).Sum(c => c.pct);
+            text += $"    ({ordered.Count - 3} more: {SignedFraction(remainder)})\n";
+        }
         return text;
     }
 

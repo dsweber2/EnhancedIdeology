@@ -3,6 +3,31 @@ using UnityEngine;
 
 namespace Verse;
 
+public class HediffCompProperties
+{
+    public Type? compClass;
+}
+
+public class HediffComp
+{
+    public HediffCompProperties props = new();
+}
+
+public class Hediff
+{
+    public T? TryGetComp<T>() where T : HediffComp => null;
+}
+
+public class HediffSet
+{
+    public Hediff? GetFirstHediffOfDef(RimWorld.HediffDef? def) => null;
+}
+
+public class Pawn_HealthTracker
+{
+    public readonly HediffSet hediffSet = new();
+}
+
 public class Pawn_NeedsTracker
 {
     public readonly Need_Mood mood = new();
@@ -49,6 +74,7 @@ public class Pawn
 
     public Pawn_IdeoTracker ideo;
     public Pawn_NeedsTracker needs = new();
+    public Pawn_HealthTracker health = new();
     public Pawn_RelationTracker relations;
     public Pawn_InteractionsTracker interactions = new();
     public Pawn_StoryTracker story = new();
@@ -76,6 +102,8 @@ public class Pawn
     public bool IsHashIntervalTick(int interval) => false;
 
     public bool Inhumanized() => false;
+
+    public bool WorkTagIsDisabled(WorkTags tag) => false;
 
     public float GetStatValue(StatDef def, bool applyPostProcess = true)
         => _stats.GetValueOrDefault(def, 1f);

@@ -13,6 +13,12 @@ public static class Mathf
     public static float Exp(float v) => MathF.Exp(v);
     public static float Round(float v) => MathF.Round(v);
     public static int RoundToInt(float v) => (int)MathF.Round(v);
+    public static float MoveTowards(float current, float target, float maxDelta)
+    {
+        var diff = target - current;
+        if (MathF.Abs(diff) <= maxDelta) return target;
+        return current + MathF.Sign(diff) * maxDelta;
+    }
 }
 
 public struct Vector3(float x, float y, float z)

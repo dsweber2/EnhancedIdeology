@@ -306,6 +306,30 @@ internal static class DebugActions
         Find.WindowStack.Add(new Dialog_DebugOptionListLister(options));
     }
 
+    [DebugAction("Ideoligion", "Trigger brainwipe stances", actionType = DebugActionType.ToolMapForPawns,
+        allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
+    private static void TriggerBrainwipe(Pawn pawn)
+    {
+        if (pawn.Ideo == null || pawn.DevelopmentalStage.Baby())
+        {
+            Messages.Message($"{pawn.LabelShort} cannot be brainwiped.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
+        var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        tracker.ApplyBrainwipe();
+        pawn.health.AddHediff(HediffMaker.MakeHediff(EnhancedIdeologyDefOf.EB_BrainwipeRecovery, pawn));
+
+        var stances = tracker.IssueStances()
+            .Select(s => $"{s.issue.LabelCap}: rank {s.rank:F1}, str {s.strength:F1}")
+            .ToLineList("  ");
+        Log.Message($"[EB] Brainwipe applied to {pawn.LabelShort}:\n{stances}");
+        Messages.Message($"{pawn.LabelShort}: brainwipe stances applied — see dev console for details.",
+            new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
+    }
+
     [DebugAction("Ideoligion", "Trigger crisis of faith", actionType = DebugActionType.ToolMapForPawns,
         allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
     private static void TriggerCrisisOfFaith(Pawn pawn)

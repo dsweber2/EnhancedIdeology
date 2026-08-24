@@ -53,6 +53,7 @@ public static class DefDatabase<T> where T : Def
 
 public class IssueDef : Def { }
 
+
 public class NeedDef : Def { }
 
 public class ThingDef : Def { }

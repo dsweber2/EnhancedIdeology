@@ -2,6 +2,8 @@ using Verse;
 
 namespace RimWorld;
 
+public class HediffDef : Def { }
+
 public class MemeDef : Def
 {
     public List<string> exclusionTags = [];
@@ -27,6 +29,7 @@ public abstract class PreceptComp { }
 public class Precept
 {
     public PreceptDef def = new();
+    public Ideo? ideo;
     // No TryGetComps instance method — EnhancedIdeologyUtilities provides the extension
 }
 
