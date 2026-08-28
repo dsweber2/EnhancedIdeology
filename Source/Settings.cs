@@ -122,23 +122,27 @@ public class Settings : ModSettings
         Listing_Standard listingStandard = new();
         listingStandard.Begin(new Rect(0f, 0f, viewRect.width, 100000f));
 
-        Header(listingStandard, "EnhancedIdeology.Section.Certainty");
+        Header(listingStandard, "EnhancedIdeology.Section.Ideoligion");
+        SubHeader(listingStandard, "EnhancedIdeology.SubSection.Belief");
         PercentSlider(listingStandard, "EnhancedIdeology.CertaintyDriftRate", ref _certaintyDriftRate, 0.02f, 0.5f, DefaultCertaintyDriftRate);
         PercentSlider(listingStandard, "EnhancedIdeology.RelationalMaxRange", ref _relationalMaxRange, 0f, 0.5f, DefaultRelationalMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.PracticeMaxRange", ref _practiceMaxRange, 0f, 0.5f, DefaultPracticeMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.CrisisThreshold", ref _crisisThreshold, 0f, 0.5f, DefaultCrisisThreshold);
-        PercentSlider(listingStandard, "EnhancedIdeology.SaveCompatMinCertainty", ref _saveCompatMinCertainty, 0f, 0.5f, DefaultSaveCompatMinCertainty);
-        RawSlider(listingStandard, "EnhancedIdeology.ConvictionDecayRate", ref _convictionDecayRate, 0f, 7.5f, DefaultConvictionDecayRate);
-
-        Header(listingStandard, "EnhancedIdeology.Section.Conversion");
-        MultiplierSlider(listingStandard, "EnhancedIdeology.DebateConvictionChange", ref _debateConvictionChange, 0.25f, 4f, DefaultDebateConvictionChange);
+        SubHeader(listingStandard, "EnhancedIdeology.SubSection.Conversion");
         MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionPace", ref _conversionPace, 0.25f, 4f, DefaultConversionPace);
+        MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionCertaintyKnock", ref _conversionCertaintyKnock, 0.5f, 1f, DefaultConversionCertaintyKnock);
+
+        Header(listingStandard, "EnhancedIdeology.Section.Precept");
+        SubHeader(listingStandard, "EnhancedIdeology.SubSection.Belief");
+        RawSlider(listingStandard, "EnhancedIdeology.ConvictionDecayRate", ref _convictionDecayRate, 0f, 7.5f, DefaultConvictionDecayRate);
+        PercentSlider(listingStandard, "EnhancedIdeology.PreceptOppositionScale", ref _preceptOppositionScale, 0f, 1f, DefaultPreceptOppositionScale);
+        SubHeader(listingStandard, "EnhancedIdeology.SubSection.Conversion");
         MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionStancePull", ref _conversionStancePull, 1f, 5f, DefaultConversionStancePull);
-        PercentSlider(listingStandard, "EnhancedIdeology.ConversionCertaintyKnock", ref _conversionCertaintyKnock, 0.5f, 1f, DefaultConversionCertaintyKnock);
+        MultiplierSlider(listingStandard, "EnhancedIdeology.DebateConvictionChange", ref _debateConvictionChange, 0.25f, 4f, DefaultDebateConvictionChange);
         MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionOpinionMultiplier", ref _conversionOpinionMultiplier, 0f, 2f, DefaultConversionOpinionMultiplier);
 
-        Header(listingStandard, "EnhancedIdeology.Section.Opinion");
-        PercentSlider(listingStandard, "EnhancedIdeology.PreceptOppositionScale", ref _preceptOppositionScale, 0f, 1f, DefaultPreceptOppositionScale);
+        Header(listingStandard, "EnhancedIdeology.Section.Compat");
+        PercentSlider(listingStandard, "EnhancedIdeology.SaveCompatMinCertainty", ref _saveCompatMinCertainty, 0f, 0.5f, DefaultSaveCompatMinCertainty);
 
         Header(listingStandard, "EnhancedIdeology.Section.Debug");
         listingStandard.CheckboxLabeled(
@@ -158,6 +162,15 @@ public class Settings : ModSettings
         listing.Label(labelKey.Translate());
         Text.Font = GameFont.Small;
         listing.GapLine();
+    }
+
+    private static void SubHeader(Listing_Standard listing, string labelKey)
+    {
+        listing.Gap();
+        var old = GUI.color;
+        GUI.color = new Color(1f, 1f, 1f, 0.5f);
+        listing.Label(labelKey.Translate());
+        GUI.color = old;
     }
 
     private static void PercentSlider(Listing_Standard listing, string labelKey, ref float value, float min, float max, float defaultValue)

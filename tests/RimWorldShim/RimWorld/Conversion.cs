@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace RimWorld;
 
+public class Caravan { }
+
 public class TraitRequirement
 {
     public TraitDef? def;

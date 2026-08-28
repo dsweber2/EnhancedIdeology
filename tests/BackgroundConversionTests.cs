@@ -154,7 +154,10 @@ public class BackgroundConversionTests : SeededTest
                 world.AddIdeo(own);
                 world.AddIdeo(alt);
 
-                var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0.4f).WithCertaintyLossFactor(factor).WithLabel("P").Build(world);
+                // Certainty must be above the highest effective crisis threshold across all tested factors
+                // (EffectiveCrisisThreshold = 0.25 * sqrt(factor); sqrt(3)*0.25 ≈ 0.433 < 0.5) so the crisis
+                // candidate never fires and the factor's effect stays cleanly linear.
+                var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0.5f).WithCertaintyLossFactor(factor).WithLabel("P").Build(world);
                 var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
                 tracker.SetIdeoBaseOpinion(alt, 60);
 

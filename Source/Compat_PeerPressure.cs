@@ -77,7 +77,7 @@ internal static class Compat_PeerPressure
         return 1f - (1f - knock) * factor;
     }
 
-    // Scales the stance pull by the opinion factor: liking the preacher shifts beliefs harder.
+    // Scales the stance pull by the opinion factor: liking the converter shifts beliefs harder.
     internal static float AdjustStancePull(float pull, int opinion)
         => pull * OpinionFactor(opinion);
 }

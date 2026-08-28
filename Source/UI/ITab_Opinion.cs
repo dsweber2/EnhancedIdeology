@@ -219,7 +219,7 @@ internal sealed class ITab_Opinion : ITab
             var fill = opinion / barMax;
             var certaintyBar = new Rect(barRect.x, barRect.y, barRect.width, barRect.height - CertaintyBar.MarkerHeight).ContractedBy(Padding);
             var filled = Widgets.FillableBar(certaintyBar, fill, Widgets.BarFullTexHor);
-            CertaintyBar.DrawThreshold(filled, EnhancedIdeologyMod.Settings.CrisisThreshold / barMax, fill);
+            CertaintyBar.DrawThreshold(filled, data.EffectiveCrisisThreshold() / barMax, fill);
             if (ideo == SelPawn.Ideo)
             {
                 CertaintyBar.DrawTargetMarker(filled, data.CachedTargetCertainty / barMax);

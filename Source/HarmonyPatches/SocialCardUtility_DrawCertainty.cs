@@ -56,7 +56,7 @@ internal static class SocialCardUtility_DrawCertainty
         var certaintyBar = new Rect(barRect.x, barRect.y, barRect.width, barRect.height - CertaintyBar.MarkerHeight);
         var filled = Widgets.FillableBar(certaintyBar, extended / barMax);
 
-        CertaintyBar.DrawThreshold(filled, EnhancedIdeologyMod.Settings.CrisisThreshold / barMax, extended / barMax);
+        CertaintyBar.DrawThreshold(filled, data.EffectiveCrisisThreshold() / barMax, extended / barMax);
         CertaintyBar.DrawTargetMarker(filled, data.CachedTargetCertainty / barMax);
 
         return false;

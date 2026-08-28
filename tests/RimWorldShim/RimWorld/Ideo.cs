@@ -4,12 +4,26 @@ namespace RimWorld;
 
 public class HediffDef : Def { }
 
+public class PreceptThingPair
+{
+    public PreceptDef? precept;
+    public Verse.ThingDef? thing;
+}
+
+public class PreceptsWithNoneChance
+{
+    public List<PreceptThingPair> preceptThingPairs = [];
+    public float noneChance;
+}
+
 public class MemeDef : Def
 {
     public List<string> exclusionTags = [];
     public List<TraitRequirement> agreeableTraits = [];
     public List<TraitRequirement> disagreeableTraits = [];
     public string? category;
+    public List<List<PreceptDef>> requireOne = [];
+    public PreceptsWithNoneChance? selectOneOrNone;
 }
 
 public class PreceptDef : Def

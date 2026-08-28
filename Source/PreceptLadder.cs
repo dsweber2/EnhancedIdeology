@@ -8,6 +8,8 @@ namespace EnhancedIdeology;
 // other rung on that issue is derived from rung distance rather than stored per precept.
 internal static class PreceptLadder
 {
+    private static readonly Dictionary<IssueDef, List<PreceptDef>> _rungsCache = [];
+
     // Stance rungs of an issue, permissive/pro -> forbidding/anti. This is the canonical filter vanilla's own
     // RandomizePrecepts uses (issue equality); reaction thoughts are ThoughtDefs, not PreceptDefs, so they
     // never pollute the ladder. Classic-mode default precepts (Lovin_Free, Cannibalism_Classic, ...) carry an
@@ -16,18 +18,27 @@ internal static class PreceptLadder
     // displayOrderInIssue scrambles the axis once stacked, a PreceptPolicy order override pins the sequence.
     public static List<PreceptDef> Rungs(IssueDef issue)
     {
+        if (_rungsCache.TryGetValue(issue, out var cached))
+            return cached;
+
         var rungs = DefDatabase<PreceptDef>.AllDefs.Where(precept => precept.issue == issue && !precept.classic);
+        List<PreceptDef> result;
 
         if (PreceptPolicy.OrderOverrides.TryGetValue(issue.defName, out var order))
         {
-            return [.. rungs.OrderBy(precept =>
+            result = [.. rungs.OrderBy(precept =>
             {
                 var ix = Array.IndexOf(order, precept.defName);
                 return ix >= 0 ? ix : order.Length + precept.displayOrderInIssue;
             })];
         }
+        else
+        {
+            result = [.. rungs.OrderBy(precept => precept.displayOrderInIssue)];
+        }
 
-        return [.. rungs.OrderBy(precept => precept.displayOrderInIssue)];
+        _rungsCache[issue] = result;
+        return result;
     }
 
     // Rank of a held stance within its issue ladder (index in the ordered rungs).

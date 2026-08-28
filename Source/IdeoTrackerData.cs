@@ -1120,7 +1120,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (currentDay == _lastDecayDay) return;
         _lastDecayDay = currentDay;
 
-        var drainPerDay = EnhancedIdeologyMod.Settings.ConvictionDecayRate / (GenDate.TicksPerSeason / (float)GenDate.TicksPerDay);
+        var lossFactor = Pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
+        var drainPerDay = EnhancedIdeologyMod.Settings.ConvictionDecayRate / (GenDate.TicksPerSeason / (float)GenDate.TicksPerDay) / lossFactor;
         if (drainPerDay <= 0f) return;
 
         EnsureIssueStancesSeeded();
@@ -1286,7 +1287,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             candidates.Add((ideo, (opinion - current) / opinion, opinion - current));
         }
 
-        AddCrisisCandidate(candidates, current, crisisWeight => crisisWeight / EnhancedIdeologyMod.Settings.CrisisThreshold);
+        var crisisThreshold = EffectiveCrisisThreshold();
+        AddCrisisCandidate(candidates, current, crisisThreshold, crisisWeight => crisisWeight / crisisThreshold);
 
         var index = SelectWeightedConversion(candidates);
         if (index < 0)
@@ -1342,8 +1344,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             candidates.Add((ideo, chance, opinion - current));
         }
 
-        AddCrisisCandidate(candidates, current,
-            crisisWeight => HazardConversionChance(crisisWeight / EnhancedIdeologyMod.Settings.CrisisThreshold, deltaDays, interval));
+        var crisisThreshold = EffectiveCrisisThreshold();
+        AddCrisisCandidate(candidates, current, crisisThreshold,
+            crisisWeight => HazardConversionChance(crisisWeight / crisisThreshold, deltaDays, interval));
 
         // CertaintyLossFactor scales the conversion/breakdown hazard: a resistant pawn (factor < 1) clings
         // to their faith, a fragile one (factor > 1) drifts away faster. Only the spontaneous path applies
@@ -1379,7 +1382,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             return;
         }
 
-        var crisisThreshold = EnhancedIdeologyMod.Settings.CrisisThreshold;
+        var crisisThreshold = EffectiveCrisisThreshold();
         var currentOpinion = IdeoOpinion(Pawn.Ideo!);
 
         var bestIdeo = Find.IdeoManager.IdeosListForReading
@@ -1401,9 +1404,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // Adds the crisis-of-faith pseudo-candidate (a null ideo) when the pawn now prefers doubt to their own
     // faith, i.e. their conviction has fallen below the crisis threshold. It competes in the same draw as the
     // real ideos with the same gap-based weight; only its chance differs between the one-shot and hazard paths.
-    private static void AddCrisisCandidate(List<(Ideo? ideo, float chance, float weight)> candidates, float current, Func<float, float> chanceOf)
+    private static void AddCrisisCandidate(List<(Ideo? ideo, float chance, float weight)> candidates, float current, float crisisThreshold, Func<float, float> chanceOf)
     {
-        var crisisThreshold = EnhancedIdeologyMod.Settings.CrisisThreshold;
         if (current >= crisisThreshold)
         {
             return;
@@ -1411,6 +1413,14 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         var weight = crisisThreshold - current;
         candidates.Add((null, chanceOf(weight), weight));
+    }
+
+    // CrisisThreshold scaled by sqrt(CertaintyLossFactor). sqrt dampens the raw stat: at 3x volatile the
+    // threshold rises to ~1.73x (e.g. 25% -> 43%), not the full 75% that a linear scale would produce.
+    internal float EffectiveCrisisThreshold()
+    {
+        var factor = Pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
+        return Mathf.Clamp01(EnhancedIdeologyMod.Settings.CrisisThreshold * Mathf.Sqrt(factor));
     }
 
     // Weighted conversion draw. First rolls the competing-risks probability that *any* candidate fires

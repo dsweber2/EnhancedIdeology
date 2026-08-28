@@ -91,10 +91,15 @@ public class Pawn
 
     public RimWorld.Ideo? Ideo => ideo.ideo;
 
+    // All sim pawns share one sentinel map so SameLocalGroup sees them as co-located.
+    private static readonly Map _simMap = new();
+
     public bool Spawned => false;
     public bool Destroyed => false;
     public bool IsPrisoner => false;
     public Map? Map => null;
+    public Map? MapHeld => _simMap;
+    public RimWorld.Caravan? GetCaravan() => null;
     public Vector3 DrawPos => Vector3.zero;
     public DevelopmentalStage DevelopmentalStage => DevelopmentalStage.Adult;
     public RaceProperties RaceProps => RaceProperties.Default;
