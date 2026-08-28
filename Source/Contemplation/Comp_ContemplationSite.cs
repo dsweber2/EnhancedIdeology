@@ -82,6 +82,10 @@ internal sealed class Comp_ContemplationSite : ThingComp
         var room = parent.GetRoom();
         if (room == null || room.PsychologicallyOutdoors || room.Role != RoomRoleDefOf.WorshipRoom)
             return null;
+        var hasMatchingAltar = room.ContainedAndAdjacentThings
+            .Any(t => t.def.isAltar && t is ThingWithComps twc && twc.compStyleable?.SourcePrecept?.ideo == pawn.Ideo);
+        if (!hasMatchingAltar)
+            return null;
         var altar = JoyGiver_Contemplation.FindAltarForPawn(room, pawn);
         foreach (var cell in parent.OccupiedRect().InRandomOrder())
         {

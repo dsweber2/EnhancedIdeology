@@ -156,4 +156,47 @@ public class IdeoTrackerTests : SeededTest
 
         Assert.Equal(0.65f, detail.BaseOpinion, precision: 4);
     }
+
+    [Fact]
+    public void DetailedIdeoOpinion_ForeignIdeo_AllPropertiesAccessible()
+    {
+        // Exercises PersonalOpinion, RelationshipOpinion, and DevModeDetails on the foreign-ideo path.
+        var world = new SimWorld();
+        world.Initialize();
+
+        var ownIdeo = new IdeoBuilder().WithName("Own").Build();
+        var foreignIdeo = new IdeoBuilder().WithName("Foreign").Build();
+        world.AddIdeo(ownIdeo);
+        world.AddIdeo(foreignIdeo);
+
+        var pawn = new PawnBuilder().WithIdeo(ownIdeo).WithCertainty(0.5f).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        var detail = tracker.DetailedIdeoOpinion(foreignIdeo);
+
+        // Just confirm all three numeric components are reachable and finite.
+        Assert.True(float.IsFinite(detail.BaseOpinion), $"BaseOpinion should be finite, got {detail.BaseOpinion}");
+        Assert.True(float.IsFinite(detail.PersonalOpinion), $"PersonalOpinion should be finite, got {detail.PersonalOpinion}");
+        Assert.True(float.IsFinite(detail.RelationshipOpinion), $"RelationshipOpinion should be finite, got {detail.RelationshipOpinion}");
+        _ = detail.DevModeDetails; // must not throw
+    }
+
+    [Fact]
+    public void DetailedIdeoOpinion_NoRelationship_RelationshipOpinionIsZero()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var ownIdeo = new IdeoBuilder().WithName("Own").Build();
+        var foreignIdeo = new IdeoBuilder().WithName("Foreign").Build();
+        world.AddIdeo(ownIdeo);
+        world.AddIdeo(foreignIdeo);
+
+        var pawn = new PawnBuilder().WithIdeo(ownIdeo).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        var detail = tracker.DetailedIdeoOpinion(foreignIdeo, noRelationship: true);
+
+        Assert.Equal(0f, detail.RelationshipOpinion);
+    }
 }

@@ -25,6 +25,13 @@ public class BookReadingTests : SeededTest
     }
 
     [Fact]
+    public void BookOutcomeProperties_DoerClass_IsReadingOutcomeDoer()
+    {
+        var props = new BookOutcomeProperties_CertaintyChange();
+        Assert.Equal(typeof(ReadingOutcomeDoer_CertaintyChange), props.DoerClass);
+    }
+
+    [Fact]
     public void CertaintyGain_NullReader_UsesQualityCurve()
     {
         // Normal quality → certaintyGainFromQuality.Evaluate(2) = 0.0009 → /100 = 0.000009

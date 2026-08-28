@@ -117,7 +117,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         if (pawn.Ideo == null || pawn.Map == null)
             return sites;
 
-        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        foreach (var room in pawn.Map.regionGrid.AllRooms.ToList())
         {
             if (room.PsychologicallyOutdoors) continue;
             foreach (var thing in room.ContainedAndAdjacentThings.ToList())
@@ -228,7 +228,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
     // Non-altar ideo buildings (statues, monoliths): scanned across all rooms.
     internal static (Thing building, LocalTargetInfo cell)? FindStatueContemplationSite(Pawn pawn)
     {
-        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        foreach (var room in pawn.Map.regionGrid.AllRooms.ToList())
         {
             if (room.PsychologicallyOutdoors)
                 continue;
@@ -289,7 +289,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
     // Worship room where the pawn's altar's requirements are met (for warning logic only).
     private static Room? FindWorshipRoomWithValidAltar(Pawn pawn)
     {
-        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        foreach (var room in pawn.Map.regionGrid.AllRooms.ToList())
         {
             if (!room.PsychologicallyOutdoors
                 && room.Role == RoomRoleDefOf.WorshipRoom
@@ -303,7 +303,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
     // regardless of room requirements (for warning logic only).
     private static bool HasWorshipRoomAnyAltar(Pawn pawn)
     {
-        foreach (var room in pawn.Map.regionGrid.AllRooms)
+        foreach (var room in pawn.Map.regionGrid.AllRooms.ToList())
         {
             if (room.PsychologicallyOutdoors || room.Role != RoomRoleDefOf.WorshipRoom)
                 continue;

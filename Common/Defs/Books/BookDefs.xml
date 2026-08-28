@@ -55,31 +55,6 @@
         <stuffCategories Inherit="false" />
     </ThingDef>
 
-    <ThingDef ParentName="UnfinishedBase">
-        <defName>EB_UnfinishedIdeobook</defName>
-        <thingClass>EnhancedIdeology.UnfinishedReligiousBook</thingClass>
-        <label>unfinished religious book</label>
-        <description>An unfinished religious book which must be completed by a moral guide.</description>
-        <statBases>
-            <Flammability>0.5</Flammability>
-        </statBases>
-        <graphicData>
-            <texPath>Things/Item/Book/Ideobook/Ideobook_Unfinished</texPath>
-            <graphicClass>Graphic_Single</graphicClass>
-            <drawSize>0.8</drawSize>
-        </graphicData>
-        <stuffCategories Inherit="false" />
-        <modExtensions>
-            <li Class="EnhancedIdeology.UnfinishedBookExtension">
-                <openGraphic>
-                    <texPath>Things/Item/Book/Ideobook/Ideobook_Open</texPath>
-                    <graphicClass>Graphic_Multi</graphicClass>
-                    <drawSize>0.7</drawSize>
-                </openGraphic>
-            </li>
-        </modExtensions>
-    </ThingDef>
-
     <HistoryEventDef>
         <defName>EB_DestroyedReligiousBook</defName>
         <label>destroyed religious book</label>
