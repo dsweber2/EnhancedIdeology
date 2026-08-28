@@ -352,6 +352,40 @@ public class DebateTests : SeededTest
         return (world, initiator, recipient, issue, initiatorIdeo);
     }
 
+    [Fact]
+    public void DebateMeme_WinnerHasDuplicatePreceptsForSameIssue_DoesNotThrow()
+    {
+        // Regression: a meme associated with two preceptDefs that share the same issue causes
+        // MemePreceptsFor to return duplicate issue keys, crashing ToDictionary in AdjustOpinions.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var topicMeme = new MemeBuilder().WithName("DupeMeme").Build();
+        var (issue, rungs) = SimIssues.Ladder("DupeIssue", "Rung0", "Rung1");
+        rungs[0].associatedMemes.Add(topicMeme);
+        rungs[1].associatedMemes.Add(topicMeme);
+
+        // Winner holds both rungs on the same issue — duplicates in MemePreceptsFor's output.
+        var winnerIdeo = new IdeoBuilder().WithName("DupeIdeo").AddMeme(topicMeme)
+            .AddPrecept(rungs[0]).AddPrecept(rungs[1]).Build();
+        var loserIdeo = new IdeoBuilder().WithName("NormalIdeo").AddMeme(topicMeme).AddPrecept(rungs[1]).Build();
+        world.AddIdeo(winnerIdeo);
+        world.AddIdeo(loserIdeo);
+
+        var initiator = new PawnBuilder()
+            .WithIdeo(winnerIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Winner").Build(world);
+        var recipient = new PawnBuilder()
+            .WithIdeo(loserIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Loser").Build(world);
+
+        var ex = Record.Exception(() =>
+            new InteractionWorker_IdeologicalDebateMeme().Interacted(
+                initiator, recipient, [], out _, out _, out _, out _));
+        Assert.Null(ex);
+    }
+
     private static float StanceRank(IdeoTrackerData tracker, IssueDef issue) =>
         tracker.IssueStances().First(s => s.issue == issue).rank;
 }

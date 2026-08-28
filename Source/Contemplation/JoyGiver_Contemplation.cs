@@ -120,7 +120,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         foreach (var room in pawn.Map.regionGrid.AllRooms)
         {
             if (room.PsychologicallyOutdoors) continue;
-            foreach (var thing in room.ContainedAndAdjacentThings)
+            foreach (var thing in room.ContainedAndAdjacentThings.ToList())
             {
                 var comp = thing.TryGetComp<Comp_ContemplationSite>();
                 if (comp == null) continue;
