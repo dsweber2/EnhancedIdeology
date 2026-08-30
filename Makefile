@@ -27,7 +27,3 @@ deploy:
 	rsync -a --delete 1.6/        $(RIMWORLD_MOD)/1.6/
 	rsync -a --delete Royalty/    $(RIMWORLD_MOD)/Royalty/
 	rsync -a --delete LICENSE     $(RIMWORLD_MOD)/LICENSE
-	rsync -a --delete About/      $(WORKSHOP_MOD)/About/
-	rsync -a --delete Common/     $(WORKSHOP_MOD)/Common/
-	rsync -a --delete 1.6/        $(WORKSHOP_MOD)/1.6/
-	rsync -a --delete Royalty/    $(WORKSHOP_MOD)/Royalty/
