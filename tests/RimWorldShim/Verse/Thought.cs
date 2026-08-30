@@ -18,6 +18,7 @@ public abstract class Thought
 public class MemoryThoughtHandler
 {
     public void TryGainMemory(ThoughtDef def, Pawn? otherPawn = null) { }
+    public void TryGainMemory(ThoughtDef def, Pawn? otherPawn, RimWorld.Precept? sourcePrecept) { }
 }
 
 public class ThoughtHandler

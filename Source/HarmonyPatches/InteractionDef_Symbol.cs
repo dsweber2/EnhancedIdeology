@@ -10,9 +10,10 @@ internal static class InteractionDef_Symbol
         {
             if (worker.topic != null)
             {
-                __result = worker.topic.Icon;
+                var icon = worker.topic.Icon ?? worker.initiatorIdeo?.Icon;
                 worker.topic = null;
-                return false;
+                worker.initiatorIdeo = null;
+                if (icon != null) { __result = icon; return false; }
             }
         }
 
@@ -20,9 +21,10 @@ internal static class InteractionDef_Symbol
         {
             if (worker2.topic != null)
             {
-                __result = worker2.topic.Icon;
+                var icon = worker2.topic.Icon ?? worker2.initiatorIdeo?.Icon;
                 worker2.topic = null;
-                return false;
+                worker2.initiatorIdeo = null;
+                if (icon != null) { __result = icon; return false; }
             }
         }
 

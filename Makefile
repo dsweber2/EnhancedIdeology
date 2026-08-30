@@ -1,4 +1,4 @@
-.PHONY: build deploy test logs preview preview-all
+.PHONY: build deploy release test logs preview preview-all
 
 build:
 	dotnet build Source/EnhancedIdeology.csproj
@@ -16,6 +16,9 @@ preview:
 
 preview-all:
 	@for svg in images/*.svg; do python3 scripts/svg_to_png.py "$$svg"; done
+
+release:
+	../release.sh Source/EnhancedIdeology.csproj About Common 1.6 Royalty LICENSE
 
 deploy:
 	rsync -a --delete About/      $(RIMWORLD_MOD)/About/

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <InspirationDef>
+        <defName>EB_ReligiousEnlightenment</defName>
+        <workerClass>EnhancedIdeology.InspirationWorker_ReligiousEnlightenment</workerClass>
+        <label>religious enlightenment</label>
+        <baseDurationDays>4</baseDurationDays>
+        <beginLetter>[PAWN_pronoun] feels a moment of divine clarity and is compelled to write a religious text.</beginLetter>
+        <beginLetterDef>PositiveEvent</beginLetterDef>
+        <baseInspectLine>Inspired: Religious enlightenment</baseInspectLine>
+        <endMessage>[PAWN_nameDef]'s moment of religious enlightenment has passed.</endMessage>
+        <requiredNonDisabledWorkTags>Intellectual</requiredNonDisabledWorkTags>
+        <minAge>10</minAge>
+    </InspirationDef>
+
+</Defs>

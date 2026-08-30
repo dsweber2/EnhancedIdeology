@@ -314,10 +314,35 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         float opinion = 0;
 
         // various global meme specific opinions
-        if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Supremacist))
+        var gestaltMeme = EnhancedIdeologyDefOf.VME_Gestalt;
+        var nationalistMeme = EnhancedIdeologyDefOf.VME_Nationalist;
+        var isolationistMeme = EnhancedIdeologyDefOf.VFEA_Isolationist;
+        var violentConversionMeme = EnhancedIdeologyDefOf.VME_ViolentConversion;
+        if (gestaltMeme != null && pawnIdeo.HasMeme(gestaltMeme))
         {
+            opinion -= 30;
+            contributors?.Add((gestaltMeme.LabelCap, -30f));
+        }
+        else if ((isolationistMeme != null && pawnIdeo.HasMeme(isolationistMeme))
+            || (violentConversionMeme != null && pawnIdeo.HasMeme(violentConversionMeme)))
+        {
+            var label = (isolationistMeme != null && pawnIdeo.HasMeme(isolationistMeme))
+                ? isolationistMeme.LabelCap
+                : violentConversionMeme!.LabelCap;
+            opinion -= 25;
+            contributors?.Add((label, -25f));
+        }
+        else if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Supremacist)
+            || pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Collectivist)
+            || (nationalistMeme != null && pawnIdeo.HasMeme(nationalistMeme)))
+        {
+            var label = pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Supremacist)
+                ? EnhancedIdeologyDefOf.Supremacist.LabelCap
+                : pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Collectivist)
+                    ? EnhancedIdeologyDefOf.Collectivist.LabelCap
+                    : nationalistMeme!.LabelCap;
             opinion -= 20;
-            contributors?.Add((EnhancedIdeologyDefOf.Supremacist.LabelCap, -20f));
+            contributors?.Add((label, -20f));
         }
         else if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Loyalist))
         {
@@ -328,6 +353,20 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         {
             opinion += 10;
             contributors?.Add((EnhancedIdeologyDefOf.Guilty.LabelCap, 10f));
+        }
+
+        // VME_Elders: elder pawns gain structural certainty in ideos that
+        // venerate the old (max +20 at age 70+).
+        var eldersMeme = EnhancedIdeologyDefOf.VME_Elders;
+        if (eldersMeme != null && ideo.HasMeme(eldersMeme))
+        {
+            var ageFactor = Mathf.Clamp01(Mathf.InverseLerp(50f, 70f, Pawn.ageTracker.AgeBiologicalYearsFloat));
+            if (ageFactor > 0f)
+            {
+                var eldersBonus = 20f * ageFactor;
+                opinion += eldersBonus;
+                contributors?.Add((eldersMeme.LabelCap, eldersBonus));
+            }
         }
 
         // Cross-meme disagreements between opposing Mort's Ideologies memes.
@@ -392,6 +431,63 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                         opinion -= 10;
                         contributors?.Add((trait.def?.LabelCap ?? meme.LabelCap, -10f));
                     }
+                }
+            }
+        }
+
+        // Diet gene bonuses: obligate herbivores/carnivores feel a strong pull
+        // toward ideos that share their dietary needs, and an extra pull toward
+        // the Vegan meme when herbivorous (there's no corresponding carnivorous
+        // meme, somehow).
+        var meatEatingIssue = DefDatabase<IssueDef>.GetNamedSilentFail("MeatEating");
+        if (meatEatingIssue != null)
+        {
+            if (PawnHasActiveGene(Pawn, EnhancedIdeologyDefOf.BS_Diet_Herbivore))
+            {
+                var ideoRank = HeldRank(ideo, meatEatingIssue);
+                var abhorrentRank = PreceptLadder.RankOfName(meatEatingIssue, "MeatEating_Abhorrent");
+                if (abhorrentRank >= 0 && ideoRank >= 0 && ideoRank <= abhorrentRank)
+                {
+                    opinion += 20;
+                    contributors?.Add(("EnhancedIdeology.DietGeneAntiMeat".Translate(), 20f));
+                }
+                if (EnhancedIdeologyDefOf.VME_Vegan != null && ideo.HasMeme(EnhancedIdeologyDefOf.VME_Vegan))
+                {
+                    opinion += 15;
+                    contributors?.Add((EnhancedIdeologyDefOf.VME_Vegan.LabelCap, 15f));
+                }
+            }
+            else if (PawnHasActiveGene(Pawn, EnhancedIdeologyDefOf.BS_Diet_Carnivore))
+            {
+                var ideoRank = HeldRank(ideo, meatEatingIssue);
+                var nonMeatDisapprovedRank = PreceptLadder.RankOfName(meatEatingIssue, "MeatEating_NonMeat_Disapproved");
+                if (nonMeatDisapprovedRank >= 0 && ideoRank >= nonMeatDisapprovedRank)
+                {
+                    opinion += 20;
+                    contributors?.Add(("EnhancedIdeology.DietGeneProMeat".Translate(), 20f));
+                }
+            }
+        }
+
+        // A pawn who is not a preferred xenotype for the target ideo faces a hard structural barrier:
+        // no fixed trait is more personal than your own race being deemed lesser by a faith.
+        if (ModsConfig.BiotechActive && Pawn.genes != null)
+        {
+            var preferredKeys = PreceptPolicy.PreferredXenotypeKeys(ideo);
+            if (preferredKeys.Count > 0)
+            {
+                var pawnKey = Pawn.genes.UniqueXenotype
+                    ? Pawn.genes.xenotypeName
+                    : Pawn.genes.Xenotype?.defName;
+                if (pawnKey != null && preferredKeys.Contains(pawnKey))
+                {
+                    opinion += 20;
+                    contributors?.Add(("EnhancedIdeology.XenotypePreferred".Translate(), 20f));
+                }
+                else if (pawnKey != null)
+                {
+                    opinion -= 35;
+                    contributors?.Add(("EnhancedIdeology.XenotypeDisapproved".Translate(), -35f));
                 }
             }
         }
@@ -731,8 +827,35 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             {
                 ApplyHeterodoxy();
             }
+            // Overrides after heterodoxy so the gene-driven stance is the final word.
+            ApplyDietGeneStanceOverride();
         }
     }
+
+    // Force the pawn's MeatEating stance to match their obligate diet gene.
+    // Herbivores land at Abhorrent, carnivores at NonMeat_Abhorrent, both with
+    // a strength draw of [8, 20].
+    private void ApplyDietGeneStanceOverride()
+    {
+        var meatEatingIssue = DefDatabase<IssueDef>.GetNamedSilentFail("MeatEating");
+        if (meatEatingIssue == null) return;
+
+        if (PawnHasActiveGene(Pawn, EnhancedIdeologyDefOf.BS_Diet_Herbivore))
+        {
+            var rank = PreceptLadder.RankOfName(meatEatingIssue, "MeatEating_Abhorrent");
+            if (rank >= 0)
+                SetIssueStance(meatEatingIssue, rank, Rand.Range(8f, 30f));
+        }
+        else if (PawnHasActiveGene(Pawn, EnhancedIdeologyDefOf.BS_Diet_Carnivore))
+        {
+            var rank = PreceptLadder.RankOfName(meatEatingIssue, "MeatEating_NonMeat_Abhorrent");
+            if (rank >= 0)
+                SetIssueStance(meatEatingIssue, rank, Rand.Range(8f, 30f));
+        }
+    }
+
+    private static bool PawnHasActiveGene(Pawn pawn, GeneDef? gene) =>
+        gene != null && (pawn.genes?.HasActiveGene(gene) ?? false);
 
     // Scale all issueStrength values so that the structural band lands on calibrationTargetCertainty rather than
     // wherever random seeding happened to place it. naturalStructural is the already-computed pre-scale value.

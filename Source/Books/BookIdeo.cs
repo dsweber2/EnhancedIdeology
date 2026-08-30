@@ -105,7 +105,10 @@ internal sealed class BookIdeo : Book
             }
 
             if (VegetarianUtils.IsVegetarian(worker) && VegetarianUtils.HasLeatherIngredient(this))
-                worker.needs?.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_WroteSacrilegousBinding);
+            {
+                var meatPrecept = worker.Ideo!.precepts.FirstOrDefault(p => p.def.defName.StartsWith("MeatEating_NonMeat", StringComparison.Ordinal));
+                worker.needs?.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_WroteSacrilegousBinding, null, meatPrecept);
+            }
 
             Ideo = worker.Ideo;
             GenerateBook(worker, GenTicks.TicksAbs);
@@ -249,13 +252,6 @@ internal sealed class BookIdeo : Book
 
         var def = patterns.RandomElementByWeight(entry => entry.weight).def;
         descriptionFlavor = IdeoDescriptionUtility.ResolveDescription(Ideo, def, true).text;
-
-        var topStances = Doer.IdeoStances().Take(3).ToList();
-        if (topStances.Count > 0)
-        {
-            var stanceList = topStances.Select(s => s.stance.LabelCap.ToString()).ToCommaList(useAnd: true);
-            descriptionFlavor += "\n\n" + "EnhancedIdeology.BookFocalStances".Translate(stanceList);
-        }
 
         description = GenerateFullDescription();
 

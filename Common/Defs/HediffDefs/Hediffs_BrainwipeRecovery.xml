@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <HediffDef>
+    <defName>EB_BrainwipeRecovery</defName>
+    <label>belief reformation</label>
+    <description>This person's beliefs were shattered by a psychic brainwipe. Their convictions are weak and unfocused, leaving them unusually open to ideological influence.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <initialSeverity>0.001</initialSeverity>
+    <defaultLabelColor>(0.6, 0.85, 1.0)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="EnhancedIdeology.HediffCompProperties_BrainwipeRecovery">
+        <susceptibilityMultiplier>2.5</susceptibilityMultiplier>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>

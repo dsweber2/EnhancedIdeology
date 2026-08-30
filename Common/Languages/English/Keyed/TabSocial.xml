@@ -9,4 +9,8 @@
     <EnhancedIdeology.CertaintyBandPractice>Practice (recent rites): {0}</EnhancedIdeology.CertaintyBandPractice>
     <EnhancedIdeology.CertaintyPreceptDecay>Precept decay: {0}/quadrum</EnhancedIdeology.CertaintyPreceptDecay>
     <EnhancedIdeology.CouplingPenalty>Opposed practices</EnhancedIdeology.CouplingPenalty>
+    <EnhancedIdeology.DietGeneAntiMeat>Obligate herbivore</EnhancedIdeology.DietGeneAntiMeat>
+    <EnhancedIdeology.DietGeneProMeat>Obligate carnivore</EnhancedIdeology.DietGeneProMeat>
+    <EnhancedIdeology.XenotypePreferred>Preferred xenotype</EnhancedIdeology.XenotypePreferred>
+    <EnhancedIdeology.XenotypeDisapproved>Disapproved xenotype</EnhancedIdeology.XenotypeDisapproved>
 </LanguageData>

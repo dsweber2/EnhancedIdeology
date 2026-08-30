@@ -204,7 +204,8 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 
         if (VegetarianUtils.IsVegetarian(reader) && BookHasLeather())
         {
-            reader.needs?.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ReadingLeatherboundBook);
+            var meatPrecept = reader.Ideo!.precepts.FirstOrDefault(p => p.def.defName.StartsWith("MeatEating_NonMeat", StringComparison.Ordinal));
+            reader.needs?.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ReadingLeatherboundBook, null, meatPrecept);
             factor *= 0.5f;
         }
 

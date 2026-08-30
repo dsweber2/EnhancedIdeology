@@ -3,6 +3,18 @@
 Enhanced Beliefs explicitly integrates with the following optional mods.
 When a supported mod isn't installed, all its content is safely skipped — no crashes, no issues.
 
+## Big and Small — Genes & More
+
+Obligate diet genes affect both ideo opinion and belief seeding.
+
+Pawns with the **Herbivore** gene (`BS_Diet_Herbivore`) gain a +20 structural opinion bonus toward ideos that hold a `Disapproved`, `Horrible`, or `Abhorrent` stance on meat eating.
+If the target ideo also carries the **Vegan** meme (VIE — Memes & Structures), an additional +15 is applied.
+On spawn, these pawns are seeded with a strong stance at `MeatEating_Abhorrent` (strength 8–20), applied after normal seeding and heterodoxy, so the gene-driven position is the final word.
+
+Pawns with the **Carnivore** gene (`BS_Diet_Carnivore`) get the mirror treatment: +20 toward ideos that hold a `NonMeat_Disapproved`, `NonMeat_Horrible`, or `NonMeat_Abhorrent` stance, and are seeded at `MeatEating_NonMeat_Abhorrent`.
+
+If Big and Small is not installed, all of the above is safely skipped.
+
 ## Alpha Memes
 
 Full support.

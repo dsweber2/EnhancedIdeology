@@ -4,7 +4,6 @@
     <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} conviction shift/qd</EnhancedIdeology.BookReadingBenefit>
     <EnhancedIdeology.BookBeliefsHeader>Beliefs advocated</EnhancedIdeology.BookBeliefsHeader>
     <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
-    <EnhancedIdeology.BookFocalStances>The work is particularly concerned with {0}.</EnhancedIdeology.BookFocalStances>
 
     <!-- Book burning/destruction -->
     <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Religious book destroyed</EnhancedIdeology.LetterReligiousBookDestroyedLabel>

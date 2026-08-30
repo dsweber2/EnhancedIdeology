@@ -5,6 +5,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
     public MemeDef? topic;
     public MemeDef? logTopic;
     public Pawn? lastWinner;
+    public Ideo? initiatorIdeo;
 
     // Per-precept pull is weaker than a focused precept debate since multiple precepts are affected at once.
     private const float MemeDebatePullMultiplier = 0.5f;
@@ -92,6 +93,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         var recipientIdeo = recipient.Ideo;
         if (initiatorIdeo == null || recipientIdeo == null) return;
 
+        this.initiatorIdeo = initiatorIdeo;
         topic = initiatorIdeo.memes.Union(recipientIdeo.memes).RandomElement();
         logTopic = topic;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate topic selected: {topic}");

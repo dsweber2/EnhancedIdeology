@@ -5,11 +5,14 @@ internal static class EnhancedIdeologyDefOf
 {
 #pragma warning disable CA2211, CS0649 // Ensured by DefOfAttribute
     public static MemeDef Supremacist;
+    public static MemeDef Collectivist;
     public static MemeDef Loyalist;
+    public static MemeDef Individualist;
     public static MemeDef Proselytizer;
     public static MemeDef Guilty;
     public static MentalStateDef EB_CrisisOfFaith;
     public static ThingDef EB_Ideobook;
+    public static InspirationDef EB_ReligiousEnlightenment;
     public static JobDef EB_Pray;
     public static ThingDef EB_Mote_ContemplationIcon;
     public static RecipeDef EB_WriteIdeobook;
@@ -18,6 +21,8 @@ internal static class EnhancedIdeologyDefOf
     public static ThoughtDef EB_ReligiousBookDestroyed;
     public static ThoughtDef EB_WroteSacrilegousBinding;
     public static ThoughtDef EB_ReadingLeatherboundBook;
+    public static ThoughtDef EB_CognitiveDissonance;
+    public static ThoughtDef EB_FaithReaffirmed;
     public static ThoughtDef EB_GoodDebate;
     public static ThoughtDef EB_BadDebate;
     [MayRequireIdeology]
@@ -44,6 +49,21 @@ internal static class EnhancedIdeologyDefOf
     public static RulePackDef EB_Sentence_InitiatorWon;
     public static RulePackDef EB_Sentence_RecipientWon;
     public static RulePackDef EB_Sentence_DebateDraw;
+    // Vanilla Ideology Expanded - Memes and Structures (VanillaExpanded.VMemesE)
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VME_Elders;
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VME_Gestalt;
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VME_Nationalist;
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VME_Egalitarian;
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VME_Emancipation;
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VFEA_Isolationist;
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VME_ViolentConversion;
     // Mort's Ideologies: Empiricism and Faith (MortStrudel.MortIdeologySciFai)
     [MayRequire("MortStrudel.MortIdeologySciFai")]
     public static MemeDef MI_Empiricist;
@@ -63,6 +83,14 @@ internal static class EnhancedIdeologyDefOf
     public static MemeDef MI_WealthEquality;
     [MayRequire("MortStrudel.MortIdeology")]
     public static MemeDef MI_WealthStratification;
+    // Big and Small - Genes & More (RedMattis.BigSmall.Core)
+    [MayRequire("RedMattis.BigSmall.Core")]
+    public static GeneDef BS_Diet_Herbivore;
+    [MayRequire("RedMattis.BigSmall.Core")]
+    public static GeneDef BS_Diet_Carnivore;
+    // Vanilla Ideology Expanded - Memes and Structures (VanillaExpanded.VMemesE) - Vegan meme
+    [MayRequire("VanillaExpanded.VMemesE")]
+    public static MemeDef VME_Vegan;
     [MayRequireIdeology]
     public static HediffDef EB_BrainwipeRecovery;
     [MayRequireIdeology]

@@ -133,7 +133,7 @@ internal static class PreceptPolicy
         // order overrides establish the semantic axis.
         "QuesterMeme_QuestComplete", "QuesterMeme_QuestFail",
     ];
-    private static readonly HashSet<string> UniversalPositiveIssues = ["Charity"];
+    private static readonly HashSet<string> UniversalPositiveIssues = ["Charity", "VME_Recreation"];
     // Special issues route through the special resolvers instead of the rung-distance model. VME_Leader /
     // VME_Mood are rank-based (categorical / hybrid, via TrySpecialOpinion); Weapons / PreferredXenotypes
     // compare whole precept payloads (via TryPayloadSpecialOpinion).
@@ -383,7 +383,7 @@ internal static class PreceptPolicy
         return true;
     }
 
-    private static List<string> PreferredXenotypeKeys(Ideo ideo) =>
+    internal static List<string> PreferredXenotypeKeys(Ideo ideo) =>
         ideo.precepts.OfType<Precept_Xenotype>()
             .Select(precept => precept.xenotype?.defName ?? precept.customXenotype?.name)
             .Where(key => key != null)

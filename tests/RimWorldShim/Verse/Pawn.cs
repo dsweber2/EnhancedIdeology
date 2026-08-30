@@ -57,6 +57,24 @@ public class Pawn_MindState
     public readonly MentalBreaker mentalBreaker = new();
 }
 
+public class Pawn_AgeTracker
+{
+    public float AgeBiologicalYearsFloat { get; set; } = 30f;
+}
+
+public class Pawn_GeneTracker
+{
+    private readonly HashSet<GeneDef> _activeGenes = [];
+
+    public bool HasActiveGene(GeneDef? gene) => gene != null && _activeGenes.Contains(gene);
+
+    public void AddGene(GeneDef gene) => _activeGenes.Add(gene);
+
+    public bool UniqueXenotype { get; set; } = false;
+    public string xenotypeName { get; set; } = string.Empty;
+    public RimWorld.XenotypeDef? Xenotype { get; set; }
+}
+
 public class RaceProperties
 {
     public bool Humanlike = true;
@@ -80,6 +98,8 @@ public class Pawn
     public Pawn_StoryTracker story = new();
     public Pawn_SkillTracker skills = new();
     public Pawn_MindState mindState = new();
+    public Pawn_AgeTracker ageTracker = new();
+    public Pawn_GeneTracker? genes;
 
     private readonly Dictionary<StatDef, float> _stats = [];
 

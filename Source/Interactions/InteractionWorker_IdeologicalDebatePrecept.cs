@@ -8,6 +8,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     public Pawn? lastWinner;
     public Pawn? lastLoser;
     public PreceptDef? lastWinnerPrecept;
+    public Ideo? initiatorIdeo;
 
     // A tie hardens both sides (design.md R3). Per pawn, base probability of digging in, the conviction points
     // gained on the contested issue, and the certainty gained - all before the same stat/jitter scaling.
@@ -114,6 +115,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var recipientIdeo = recipient.Ideo;
         if (initiatorIdeo == null || recipientIdeo == null) return;
 
+        this.initiatorIdeo = initiatorIdeo;
         topic = GetDebateTopic(initiatorIdeo, recipientIdeo, initiatorTracker, recipientTracker, initiator, recipient, out var initiatorPrecept, out var recipientPrecept);
         logTopic = topic;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate topic selected: {topic}");
@@ -367,15 +369,16 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
     private static void GainDiversityMemory(Pawn pawn, Pawn other)
     {
-        var thought = DiversityStance(pawn.Ideo!) switch
+        var thoughtDef = DiversityStance(pawn.Ideo!) switch
         {
             DiversityReaction.Tolerant => EnhancedIdeologyDefOf.EB_GoodDebate,
             DiversityReaction.Bigoted => EnhancedIdeologyDefOf.EB_BadDebate,
             _ => null,
         };
-        if (thought != null)
+        if (thoughtDef != null)
         {
-            pawn.needs.mood?.thoughts.memories.TryGainMemory(thought, other);
+            var precept = pawn.Ideo!.precepts.FirstOrDefault(p => p.def.issue?.defName == "IdeoDiversity");
+            pawn.needs.mood?.thoughts.memories.TryGainMemory(thoughtDef, other, precept);
         }
     }
 
@@ -437,7 +440,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         {
             return;
         }
-        pawn.needs.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ApostacyDebated);
+        var apostacyIssue = DefDatabase<IssueDef>.GetNamedSilentFail("Apostasy");
+        var precept = apostacyIssue != null ? pawn.Ideo!.precepts.FirstOrDefault(p => p.def.issue == apostacyIssue) : null;
+        pawn.needs.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ApostacyDebated, null, precept);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"ApplyApostacyAftermath: {pawn} gained EB_ApostacyDebated (strictness={EnhancedIdeologyUtilities.ApostacyStrictness(pawn.Ideo):F2})");
     }
 

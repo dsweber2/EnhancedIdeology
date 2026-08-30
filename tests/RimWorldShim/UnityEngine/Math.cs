@@ -13,6 +13,8 @@ public static class Mathf
     public static float Exp(float v) => MathF.Exp(v);
     public static float Round(float v) => MathF.Round(v);
     public static int RoundToInt(float v) => (int)MathF.Round(v);
+    public static float InverseLerp(float a, float b, float value)
+        => a == b ? 0f : Math.Clamp((value - a) / (b - a), 0f, 1f);
     public static float MoveTowards(float current, float target, float maxDelta)
     {
         var diff = target - current;

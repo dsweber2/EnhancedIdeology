@@ -51,6 +51,8 @@ public static class DefDatabase<T> where T : Def
     }
 }
 
+public class GeneDef : Def { }
+
 public class IssueDef : Def { }
 
 

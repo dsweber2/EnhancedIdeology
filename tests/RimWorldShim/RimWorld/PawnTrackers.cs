@@ -73,6 +73,8 @@ public class Pawn_InteractionsTracker
 
 public class MentalStateDef : Def { }
 
+public class InspirationDef : Verse.Def { }
+
 public class MentalStateHandler
 {
     public bool TryStartMentalState(MentalStateDef? def, string? reason = null, bool forceWake = false)
