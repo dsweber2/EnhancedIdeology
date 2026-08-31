@@ -69,7 +69,7 @@ internal sealed class ITab_Opinion : ITab
         var leftWidth = SmallPadding + IssueIconSize + SmallPadding + issueWidth + IconTextGap + rungWidth + IconTextGap + OpinionBarWidth + SmallPadding;
 
         var nameWidth = ideos.Select(ideo => Text.CalcSize(ideo.name).x).DefaultIfEmpty(0f).Max();
-        var rightWidth = Padding + IconSize + IconTextGap + nameWidth + Padding + BarWidth;
+        var rightWidth = Padding + IconSize + IconTextGap + nameWidth + (2 * Padding) + BarWidth;
 
         // Each column advances at its own row height, so the scroll region is sized to whichever runs taller.
         var contentHeight = Math.Max(rowHeights.Sum(), ideos.Count * IdeoRowHeight);

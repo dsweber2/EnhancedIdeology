@@ -1,4 +1,4 @@
-.PHONY: build deploy release test logs preview preview-all
+.PHONY: build deploy release test logs preview preview-all steam-page
 
 build:
 	dotnet build Source/EnhancedIdeology.csproj
@@ -16,6 +16,9 @@ preview:
 
 preview-all:
 	@for svg in images/*.svg; do python3 scripts/svg_to_png.py "$$svg"; done
+
+steam-page:
+	uv run scripts/md_to_bbcode.py
 
 release:
 	../release.sh Source/EnhancedIdeology.csproj About Common 1.6 Royalty LICENSE
