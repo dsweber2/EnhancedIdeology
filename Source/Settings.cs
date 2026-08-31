@@ -8,7 +8,7 @@ public class Settings : ModSettings
 
     private const float DefaultRelationalMaxRange = 0.25f;
     private const float DefaultPracticeMaxRange = 0.25f;
-    private const float DefaultConversionPace = 1f;
+    private const float DefaultConversionPace = 2f;
     private const float DefaultDebateConvictionChange = 1f;
     private const float DefaultConversionStancePull = 2f;
     private const float DefaultConversionCertaintyKnock = 0.8f;

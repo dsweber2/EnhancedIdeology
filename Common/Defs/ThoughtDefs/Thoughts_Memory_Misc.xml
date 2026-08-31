@@ -29,7 +29,6 @@
       </li>
     </stages>
   </ThoughtDef>
-
   <ThoughtDef>
     <defName>EB_ReadingLeatherboundBook</defName>
     <durationDays>0.08</durationDays>
@@ -42,7 +41,6 @@
       </li>
     </stages>
   </ThoughtDef>
-
   <!-- Diversity-of-thought debate aftermath. Social memories that also carry a mood stage, so
          one def both warms/cools opinion of the debate partner and lifts/dents mood. Gained per pawn whose faith
          appreciates (good) or is bigoted toward (bad) diversity of thought. -->
@@ -147,7 +145,7 @@
     <stages>
       <li>
         <label>cognitive dissonance</label>
-        <description>Something about that experience sits wrong with the truth of my faith.</description>
+        <description>I shouldn't be participating in other ideoligion's practices.</description>
         <baseMoodEffect>0</baseMoodEffect>
       </li>
     </stages>
@@ -166,7 +164,6 @@
       </li>
     </stages>
   </ThoughtDef>
-
   <!-- Situational social thought for strict-apostacy pawns: co-believers with noticeably lower certainty
        are seen as potential apostates and treated with contempt. -->
   <ThoughtDef>

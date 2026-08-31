@@ -15,6 +15,7 @@ static class MemoryThoughts_TryGainMemory
         var offset = newThought.MoodOffset();
 
         float counterMultiplier = 0f;
+        MemeDef? triggeringMeme = null;
 
         var gestalt = EnhancedIdeologyDefOf.VME_Gestalt;
         var nationalist = EnhancedIdeologyDefOf.VME_Nationalist;
@@ -23,22 +24,27 @@ static class MemoryThoughts_TryGainMemory
         var egalitarian = EnhancedIdeologyDefOf.VME_Egalitarian;
         var emancipation = EnhancedIdeologyDefOf.VME_Emancipation;
         if (gestalt != null && pawn.Ideo.HasMeme(gestalt))
-            counterMultiplier = -2f;
-        else if ((isolationist != null && pawn.Ideo.HasMeme(isolationist))
-            || (violentConversion != null && pawn.Ideo.HasMeme(violentConversion)))
-            counterMultiplier = -1.5f;
-        else if (pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Supremacist)
-            || pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Collectivist)
-            || (nationalist != null && pawn.Ideo.HasMeme(nationalist)))
-            counterMultiplier = -1f;
+            (counterMultiplier, triggeringMeme) = (-2f, gestalt);
+        else if (isolationist != null && pawn.Ideo.HasMeme(isolationist))
+            (counterMultiplier, triggeringMeme) = (-1.5f, isolationist);
+        else if (violentConversion != null && pawn.Ideo.HasMeme(violentConversion))
+            (counterMultiplier, triggeringMeme) = (-1.5f, violentConversion);
+        else if (pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Supremacist))
+            (counterMultiplier, triggeringMeme) = (-1f, EnhancedIdeologyDefOf.Supremacist);
+        else if (pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Collectivist))
+            (counterMultiplier, triggeringMeme) = (-1f, EnhancedIdeologyDefOf.Collectivist);
+        else if (nationalist != null && pawn.Ideo.HasMeme(nationalist))
+            (counterMultiplier, triggeringMeme) = (-1f, nationalist);
         else if (pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Loyalist))
-            counterMultiplier = -0.5f;
-        else if (pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Guilty)
-            || (egalitarian != null && pawn.Ideo.HasMeme(egalitarian))
-            || (emancipation != null && pawn.Ideo.HasMeme(emancipation)))
-            counterMultiplier = 0.5f;
+            (counterMultiplier, triggeringMeme) = (-0.5f, EnhancedIdeologyDefOf.Loyalist);
+        else if (pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Guilty))
+            (counterMultiplier, triggeringMeme) = (0.5f, EnhancedIdeologyDefOf.Guilty);
+        else if (egalitarian != null && pawn.Ideo.HasMeme(egalitarian))
+            (counterMultiplier, triggeringMeme) = (0.5f, egalitarian);
+        else if (emancipation != null && pawn.Ideo.HasMeme(emancipation))
+            (counterMultiplier, triggeringMeme) = (0.5f, emancipation);
         else if (pawn.Ideo.HasMeme(EnhancedIdeologyDefOf.Individualist))
-            counterMultiplier = 0.5f;
+            (counterMultiplier, triggeringMeme) = (0.5f, EnhancedIdeologyDefOf.Individualist);
 
         if (counterMultiplier == 0f) return;
 
@@ -49,9 +55,13 @@ static class MemoryThoughts_TryGainMemory
             ? EnhancedIdeologyDefOf.EB_CognitiveDissonance
             : EnhancedIdeologyDefOf.EB_FaithReaffirmed;
 
+        var sourcePrecept = triggeringMeme != null
+            ? pawn.Ideo.precepts.FirstOrDefault(pp => pp.def.associatedMemes?.Contains(triggeringMeme) == true)
+            : null;
+
         var counterThought = (Thought_CognitiveDissonance)ThoughtMaker.MakeThought(counterDef);
         counterThought.StoredMoodOffset = counterOffset;
-        counterThought.sourcePrecept = newThought.sourcePrecept;
+        counterThought.sourcePrecept = sourcePrecept;
         __instance.TryGainMemory(counterThought);
     }
 }

@@ -1389,7 +1389,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             return ConversionOutcome.Failure;
         }
 
-        var current = IdeoOpinion(Pawn.Ideo!);
+        // Use the higher of lived certainty and structural alignment as the bar: a pawn whose conviction
+        // hasn't caught up to their structural fit yet shouldn't be treated as a conversion target.
+        var current = Mathf.Max(IdeoOpinion(Pawn.Ideo!), CachedStructural);
         var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
         IEnumerable<Ideo> pool = whitelistIdeos
@@ -1447,7 +1449,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         var interval = EnhancedIdeologyMod.Settings.ConversionInterval;
-        var current = IdeoOpinion(Pawn.Ideo!);
+        // Use the higher of lived certainty and structural alignment as the bar: a pawn whose conviction
+        // hasn't caught up to their structural fit yet shouldn't be treated as a conversion target.
+        var current = Mathf.Max(IdeoOpinion(Pawn.Ideo!), CachedStructural);
         var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
         foreach (var ideo in Find.IdeoManager.IdeosListForReading)
@@ -1472,9 +1476,14 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             crisisWeight => HazardConversionChance(crisisWeight / crisisThreshold, deltaDays, interval));
 
         // CertaintyLossFactor scales the conversion/breakdown hazard: a resistant pawn (factor < 1) clings
-        // to their faith, a fragile one (factor > 1) drifts away faster. Only the spontaneous path applies
-        // it here - the acute-event callers already fold CertaintyLossFactor into the certainty they shed.
-        var index = SelectWeightedConversion(candidates, Pawn.GetStatValue(StatDefOf.CertaintyLossFactor));
+        // to their faith, a fragile one (factor > 1) drifts away faster. Certainty itself also damps the
+        // rate: a fully certain pawn (certainty >= 1) has no spontaneous drift; an uncertain one is
+        // proportionally more vulnerable. An ideo that condemns apostacy further resists spontaneous
+        // drift - same scaling as PullStance (0.25x at Abhorrent). Only the spontaneous path applies
+        // these - acute-event callers already fold CertaintyLossFactor into the certainty they shed.
+        var certaintyResistance = Mathf.Clamp01(1f - Mathf.Clamp01(ExtendedCertainty));
+        var apostacyResistance = 1f - (EnhancedIdeologyUtilities.ApostacyStrictness(Pawn.Ideo) * 0.75f);
+        var index = SelectWeightedConversion(candidates, Pawn.GetStatValue(StatDefOf.CertaintyLossFactor) * certaintyResistance * apostacyResistance);
         if (index < 0)
         {
             return;
