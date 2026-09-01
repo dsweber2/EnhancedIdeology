@@ -31,6 +31,7 @@ public static class ThoughtMaker
 
 public class MemoryThoughtHandler
 {
+    public List<Thought_Memory> Memories { get; } = [];
     public void TryGainMemory(ThoughtDef def, Pawn? otherPawn = null) { }
     public void TryGainMemory(ThoughtDef def, Pawn? otherPawn, RimWorld.Precept? sourcePrecept) { }
     public void TryGainMemory(Thought_Memory thought, Pawn? otherPawn = null) { }

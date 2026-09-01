@@ -15,12 +15,12 @@ static class MemoryThoughts_TryGainMemory
 
         if (newThought.sourcePrecept.ideo == pawn.Ideo)
         {
-            var issue = newThought.sourcePrecept.def.issue;
-            if (issue != null && Mathf.Abs(offset) > 0.01f)
+            if (newThought is Thought_MemeMemory memeThought && Mathf.Abs(offset) > 0.01f)
             {
-                var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
-                var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-                tracker.ShiftIssueStance(issue, 0f, 0f, offset * 0.01f);
+                memeThought.ConvictionDeltaPerTickLong = offset
+                    * pawn.GetStatValue(StatDefOf.CertaintyLossFactor)
+                    * EnhancedIdeologyMod.Settings.ConversionStancePull
+                    * GameComponent_EnhancedIdeology.MoodletConvictionScalar;
             }
             return;
         }

@@ -37,9 +37,31 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
     public PawnIdeoTracker PawnTracker { get; } = new();
     public IdeoPawnTracker IdeoTracker { get; } = new();
 
+    // Set so that an offset of 8 at default
+    internal const float MoodletConvictionScalar = 0.0007f;
+
     public override void GameComponentTick()
     {
         base.GameComponentTick();
+        if (Find.TickManager.TicksGame % GenTicks.TickLongInterval != 0) return;
+        ApplyMoodletConvictionShifts();
+    }
+
+    internal void ApplyMoodletConvictionShifts()
+    {
+        foreach (var (pawn, tracker) in PawnTracker)
+        {
+            var memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
+            if (memories == null) continue;
+            foreach (var thought in memories)
+            {
+                if (thought is not Thought_MemeMemory memeThought) continue;
+                if (memeThought.sourcePrecept?.ideo != pawn.Ideo) continue;
+                var issue = memeThought.sourcePrecept.def.issue;
+                if (issue == null || Mathf.Abs(memeThought.ConvictionDeltaPerTickLong) < 0.0001f) continue;
+                tracker.ShiftIssueStance(issue, 0f, 0f, memeThought.ConvictionDeltaPerTickLong);
+            }
+        }
     }
 
 #pragma warning disable IDE0079
