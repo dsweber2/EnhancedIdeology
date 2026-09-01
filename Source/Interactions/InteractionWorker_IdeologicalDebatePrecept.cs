@@ -424,8 +424,17 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var thought = initiatorConverted
             ? EnhancedIdeologyDefOf.EB_ProselytizerConverted
             : EnhancedIdeologyDefOf.EB_ProselytizerDebated;
-        initiator.needs.mood?.thoughts.memories.TryGainMemory(thought);
+        GainProselytizerMemory(initiator, thought);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"ApplyProselytizerAftermath: {initiator} gained {thought.defName}");
+    }
+
+    internal static void GainProselytizerMemory(Pawn pawn, ThoughtDef thoughtDef)
+    {
+        var precept = pawn.Ideo!.precepts.FirstOrDefault(p => p.def.associatedMemes?.Contains(EnhancedIdeologyDefOf.Proselytizer) == true);
+        var thought = (Thought_MemeMemory)ThoughtMaker.MakeThought(thoughtDef);
+        thought.sourcePrecept = precept;
+        thought.SourceMemeLabel = precept == null ? EnhancedIdeologyDefOf.Proselytizer.LabelCap : null;
+        pawn.needs.mood?.thoughts.memories.TryGainMemory(thought);
     }
 
     internal static void ApplyApostacyAftermath(Pawn initiator, Pawn recipient)

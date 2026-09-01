@@ -78,6 +78,7 @@
        actually converting someone. Both fire only when the initiator's ideo has the Proselytizer meme. -->
   <ThoughtDef>
     <defName>EB_ProselytizerDebated</defName>
+    <thoughtClass>EnhancedIdeology.Thought_MemeMemory</thoughtClass>
     <durationDays>3</durationDays>
     <stackLimit>3</stackLimit>
     <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
@@ -91,6 +92,7 @@
   </ThoughtDef>
   <ThoughtDef>
     <defName>EB_ProselytizerConverted</defName>
+    <thoughtClass>EnhancedIdeology.Thought_MemeMemory</thoughtClass>
     <durationDays>10</durationDays>
     <stackLimit>3</stackLimit>
     <stackedEffectMultiplier>0.6</stackedEffectMultiplier>
@@ -104,6 +106,7 @@
   </ThoughtDef>
   <ThoughtDef>
     <defName>EB_ProselytizerFailedConversion</defName>
+    <thoughtClass>EnhancedIdeology.Thought_MemeMemory</thoughtClass>
     <durationDays>3</durationDays>
     <stackLimit>3</stackLimit>
     <stackedEffectMultiplier>0.75</stackedEffectMultiplier>

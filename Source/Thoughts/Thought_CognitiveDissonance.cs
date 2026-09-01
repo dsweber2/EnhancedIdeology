@@ -1,6 +1,6 @@
 namespace EnhancedIdeology;
 
-public class Thought_CognitiveDissonance : Thought_Memory
+public class Thought_CognitiveDissonance : Thought_MemeMemory
 {
     public float StoredMoodOffset;
 

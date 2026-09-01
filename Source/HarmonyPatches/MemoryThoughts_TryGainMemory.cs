@@ -10,9 +10,20 @@ static class MemoryThoughts_TryGainMemory
         if (pawn?.Ideo == null) return;
         if (newThought is Thought_CognitiveDissonance) return;
         if (newThought.sourcePrecept?.ideo == null) return;
-        if (newThought.sourcePrecept.ideo == pawn.Ideo) return;
 
         var offset = newThought.MoodOffset();
+
+        if (newThought.sourcePrecept.ideo == pawn.Ideo)
+        {
+            var issue = newThought.sourcePrecept.def.issue;
+            if (issue != null && Mathf.Abs(offset) > 0.01f)
+            {
+                var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
+                var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+                tracker.ShiftIssueStance(issue, 0f, 0f, offset * 0.01f);
+            }
+            return;
+        }
 
         float counterMultiplier = 0f;
         MemeDef? triggeringMeme = null;
@@ -62,6 +73,7 @@ static class MemoryThoughts_TryGainMemory
         var counterThought = (Thought_CognitiveDissonance)ThoughtMaker.MakeThought(counterDef);
         counterThought.StoredMoodOffset = counterOffset;
         counterThought.sourcePrecept = sourcePrecept;
+        counterThought.SourceMemeLabel = sourcePrecept == null ? triggeringMeme?.LabelCap : null;
         __instance.TryGainMemory(counterThought);
     }
 }

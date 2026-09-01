@@ -21,7 +21,7 @@ steam-page:
 	uv run scripts/md_to_bbcode.py
 
 release:
-	../release.sh Source/EnhancedIdeology.csproj About Common 1.6 Royalty LICENSE
+	../release.sh Source/EnhancedIdeology.csproj $(ARGS)
 
 deploy:
 	rsync -a --delete About/      $(RIMWORLD_MOD)/About/

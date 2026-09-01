@@ -38,18 +38,14 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
             ref letterText, ref letterLabel, ref letterDef, ref lookTargets))
         {
             if (initiator.Ideo?.memes.Contains(EnhancedIdeologyDefOf.Proselytizer) == true)
-            {
-                initiator.needs.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ProselytizerConverted);
-            }
+                InteractionWorker_IdeologicalDebatePrecept.GainProselytizerMemory(initiator, EnhancedIdeologyDefOf.EB_ProselytizerConverted);
             return;
         }
 
         // 3) Handle failure/neutral outcomes
         HandleOutcome(initiator, recipient, extraSentencePacks, certaintyBefore);
         if (initiatorIdeo != recipientIdeo && initiator.Ideo?.memes.Contains(EnhancedIdeologyDefOf.Proselytizer) == true)
-        {
-            initiator.needs.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ProselytizerFailedConversion);
-        }
+            InteractionWorker_IdeologicalDebatePrecept.GainProselytizerMemory(initiator, EnhancedIdeologyDefOf.EB_ProselytizerFailedConversion);
     }
 
     // A directed conversion is an argument over the belief the recipient most opposes about the preacher's faith,
