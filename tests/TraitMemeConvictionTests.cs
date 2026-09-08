@@ -71,7 +71,7 @@ public class TraitMemeConvictionTests : SeededTest
         var with = SeededStrengthFor(meme, traitDef, out _);
         var without = SeededStrengthFor(meme, null, out _);
 
-        Assert.Equal(IdeoTrackerData.TraitMemeConvictionBonus, with - without, precision: 4);
+        Assert.Equal(ConvictionScale.TraitMemeConvictionBonus, with - without, precision: 4);
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class TraitMemeConvictionTests : SeededTest
         var without = SeededStrengthFor(meme, null, out _);
 
         // Clamped at MinConvictionStrength so the observable delta may be less than the full bonus.
-        var expectedWith = Math.Max(without - IdeoTrackerData.TraitMemeConvictionBonus, 0f);
+        var expectedWith = Math.Max(without - ConvictionScale.TraitMemeConvictionBonus, 0f);
         Assert.Equal(expectedWith, with, precision: 4);
     }
 
@@ -110,7 +110,7 @@ public class TraitMemeConvictionTests : SeededTest
         var (memeWith, otherWith) = TwoIssueStrengths(meme, traitDef);
         var (memeWithout, otherWithout) = TwoIssueStrengths(meme, null);
 
-        Assert.Equal(IdeoTrackerData.TraitMemeConvictionBonus, memeWith - memeWithout, precision: 4);
+        Assert.Equal(ConvictionScale.TraitMemeConvictionBonus, memeWith - memeWithout, precision: 4);
         Assert.Equal(otherWithout, otherWith, precision: 4);
     }
 }

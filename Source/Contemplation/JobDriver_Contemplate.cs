@@ -13,7 +13,7 @@ internal sealed class JobDriver_Pray : JobDriver
     internal const float ContemplationArc = 0.5f;
     // Exposed for tests: the diminishing-returns factor as conviction approaches its absolute ceiling.
     internal static float StrengthFactor(float strength) =>
-        1f - (strength / IdeoTrackerData.AbsoluteMaxConvictionStrength);
+        1f - (strength / ConvictionScale.AbsoluteMaxConvictionStrength);
 
     private LocalTargetInfo Pew => job.GetTarget(PewInd);
     private LocalTargetInfo Altar => job.GetTarget(AltarInd);
@@ -159,7 +159,7 @@ internal sealed class JobDriver_Pray : JobDriver
         if (stance.issue == null)
             return;
 
-        var strengthFactor = 1f - (stance.strength / IdeoTrackerData.AbsoluteMaxConvictionStrength);
+        var strengthFactor = 1f - (stance.strength / ConvictionScale.AbsoluteMaxConvictionStrength);
         var room = pawn.Position.GetRoom(pawn.Map);
         var impressivenessFactor = JoyGiver_Contemplation.ImpressivenessScore(room);
         if (IsLecternContemplation)
@@ -173,9 +173,9 @@ internal sealed class JobDriver_Pray : JobDriver
         if (Rand.Value > chance)
             return;
 
-        var targetRank = IdeoTrackerData.HeldRank(pawn.Ideo, issue);
+        var targetRank = IssueStanceTracker.HeldRank(pawn.Ideo, issue);
         var arc = ContemplationArc * ReliquaryArcMultiplier();
-        ConvictionMath.ApplyRitualPull(comp, pawn, issue, targetRank, IdeoTrackerData.AbsoluteMaxConvictionStrength, arc);
+        ConvictionMath.ApplyRitualPull(comp, pawn, issue, targetRank, ConvictionScale.AbsoluteMaxConvictionStrength, arc);
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
             $"Contemplation reinforced: {pawn} on {issue} toward rank {targetRank:F2}");

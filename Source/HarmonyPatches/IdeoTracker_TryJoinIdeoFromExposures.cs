@@ -49,17 +49,17 @@ internal static class IdeoTracker_TryJoinIdeoFromExposures
         float totalExposure)
     {
         var result = new List<(IssueDef, float, float)>();
-        var traitOffset = IdeoTrackerData.ConvictionOffsetFromTraits(pawn.story.traits.allTraits);
+        var traitOffset = IssueStanceTracker.ConvictionOffsetFromTraits(pawn.story.traits.allTraits);
 
         foreach (var issue in DefDatabase<IssueDef>.AllDefs)
         {
             float weightedRank = 0f;
             foreach (var weight in exposures)
-                weightedRank += IdeoTrackerData.HeldRank(weight.ideo, issue) * (weight.exposure / totalExposure);
+                weightedRank += IssueStanceTracker.HeldRank(weight.ideo, issue) * (weight.exposure / totalExposure);
 
             var strength = Mathf.Clamp(
-                Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.BaseConvictionMax) + traitOffset,
-                0f, IdeoTrackerData.AbsoluteMaxConvictionStrength);
+                Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax) + traitOffset,
+                0f, ConvictionScale.AbsoluteMaxConvictionStrength);
 
             result.Add((issue, weightedRank, strength));
         }

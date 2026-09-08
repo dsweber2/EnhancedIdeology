@@ -39,7 +39,7 @@ internal static class AbilityReassure
 
         foreach (var issue in issues)
         {
-            var orthodoxRank = IdeoTrackerData.HeldRank(recipientIdeo, issue);
+            var orthodoxRank = IssueStanceTracker.HeldRank(recipientIdeo, issue);
             ConvictionMath.PullStance(comp, guide, recipient, issue, orthodoxRank, 1f);
         }
 

@@ -91,7 +91,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
             .Where(ss => ss.issue != null)
             .ToList();
         return stances.Count > 0
-            ? stances.Average(ss => 1f - ss.strength / IdeoTrackerData.AbsoluteMaxConvictionStrength)
+            ? stances.Average(ss => 1f - ss.strength / ConvictionScale.AbsoluteMaxConvictionStrength)
             : 0f;
     }
 

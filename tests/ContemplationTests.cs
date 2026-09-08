@@ -18,11 +18,11 @@ public class ContemplationTests : SeededTest
 
         var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("Pawn").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var orthodoxRank = IdeoTrackerData.HeldRank(ideo, issue);
+        var orthodoxRank = IssueStanceTracker.HeldRank(ideo, issue);
         tracker.SetIssueStance(issue, orthodoxRank, 5f);
 
         ConvictionMath.ApplyRitualPull(world.Comp, pawn, issue, orthodoxRank,
-            IdeoTrackerData.AbsoluteMaxConvictionStrength, ContemplationArc);
+            ConvictionScale.AbsoluteMaxConvictionStrength, ContemplationArc);
 
         var after = tracker.IssueStances().First(ss => ss.issue == issue);
         Assert.True(after.strength > 5f, $"contemplation should increase conviction; got {after.strength}");
@@ -42,14 +42,14 @@ public class ContemplationTests : SeededTest
 
         var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("Pawn").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var orthodoxRank = IdeoTrackerData.HeldRank(ideo, issue);
+        var orthodoxRank = IssueStanceTracker.HeldRank(ideo, issue);
         tracker.SetIssueStance(issue, orthodoxRank, 5f);
 
         ConvictionMath.ApplyRitualPull(world.Comp, pawn, issue, orthodoxRank,
-            IdeoTrackerData.AbsoluteMaxConvictionStrength, ContemplationArc);
+            ConvictionScale.AbsoluteMaxConvictionStrength, ContemplationArc);
 
         var after = tracker.IssueStances().First(ss => ss.issue == issue);
-        Assert.True(after.strength < IdeoTrackerData.MaxConvictionStrength,
+        Assert.True(after.strength < ConvictionScale.MaxConvictionStrength,
             $"one contemplation session should not reach the normal conviction cap; got {after.strength}");
     }
 
@@ -66,14 +66,14 @@ public class ContemplationTests : SeededTest
 
         var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.9f).WithLabel("Pawn").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var orthodoxRank = IdeoTrackerData.HeldRank(ideo, issue);
-        tracker.SetIssueStance(issue, orthodoxRank, IdeoTrackerData.AbsoluteMaxConvictionStrength);
+        var orthodoxRank = IssueStanceTracker.HeldRank(ideo, issue);
+        tracker.SetIssueStance(issue, orthodoxRank, ConvictionScale.AbsoluteMaxConvictionStrength);
 
         ConvictionMath.ApplyRitualPull(world.Comp, pawn, issue, orthodoxRank,
-            IdeoTrackerData.AbsoluteMaxConvictionStrength, ContemplationArc);
+            ConvictionScale.AbsoluteMaxConvictionStrength, ContemplationArc);
 
         var after = tracker.IssueStances().First(ss => ss.issue == issue);
-        Assert.Equal(IdeoTrackerData.AbsoluteMaxConvictionStrength, after.strength);
+        Assert.Equal(ConvictionScale.AbsoluteMaxConvictionStrength, after.strength);
         Assert.Equal(orthodoxRank, after.rank, precision: 4);
     }
 
@@ -90,12 +90,12 @@ public class ContemplationTests : SeededTest
 
         var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("Pawn").Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var orthodoxRank = IdeoTrackerData.HeldRank(ideo, issue);
+        var orthodoxRank = IssueStanceTracker.HeldRank(ideo, issue);
         var heterodoxRank = orthodoxRank + 1f; // one rung off
         tracker.SetIssueStance(issue, heterodoxRank, 10f);
 
         ConvictionMath.ApplyRitualPull(world.Comp, pawn, issue, orthodoxRank,
-            IdeoTrackerData.AbsoluteMaxConvictionStrength, ContemplationArc);
+            ConvictionScale.AbsoluteMaxConvictionStrength, ContemplationArc);
 
         var after = tracker.IssueStances().First(ss => ss.issue == issue);
         Assert.True(after.rank < heterodoxRank,
@@ -109,7 +109,7 @@ public class ContemplationTests : SeededTest
     [InlineData(50f, 0f)]
     public void StrengthFactor_ScalesLinearlyToMax(float strength, float expected)
     {
-        var actual = 1f - (strength / IdeoTrackerData.AbsoluteMaxConvictionStrength);
+        var actual = 1f - (strength / ConvictionScale.AbsoluteMaxConvictionStrength);
         Assert.Equal(expected, actual, precision: 4);
     }
 }

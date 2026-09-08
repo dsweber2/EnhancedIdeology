@@ -164,7 +164,7 @@ internal sealed class ITab_Opinion : ITab
                 Widgets.DrawHighlight(rowRect);
                 string tip = "EnhancedIdeology.StanceTooltip".Translate(
                     SelPawn.Named("PAWN"), issue.LabelCap, personalRung,
-                    $"{strength:F1} ({(strength / IdeoTrackerData.MaxConvictionStrength).ToStringPercent()})",
+                    $"{strength:F1} ({(strength / ConvictionScale.MaxConvictionStrength).ToStringPercent()})",
                     selected.Named("IDEO"), selectedRung, Signed(contribution));
                 if (Prefs.DevMode)
                 {
@@ -281,7 +281,7 @@ internal sealed class ITab_Opinion : ITab
     // The opinion as a signed percentage of the full-conviction mark, e.g. "+80%" / "-40%".
     private static string Signed(float opinion)
     {
-        var frac = opinion / IdeoTrackerData.MaxConvictionStrength;
+        var frac = opinion / ConvictionScale.MaxConvictionStrength;
         return (frac >= 0f ? "+" : "") + frac.ToStringPercent();
     }
 

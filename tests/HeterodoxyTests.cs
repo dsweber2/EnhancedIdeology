@@ -21,7 +21,7 @@ public class HeterodoxyTests : SeededTest
     [Fact]
     public void HeterodoxyDisabled_EveryPawnHoldsTheOrthodoxRung()
     {
-        IdeoTrackerData.HeterodoxyMax = 0;
+        IssueStanceTracker.HeterodoxyMax = 0;
         var (world, ideo, issue) = SingleIssueFaith();
 
         for (var ii = 0; ii < 10; ii++)
@@ -35,7 +35,7 @@ public class HeterodoxyTests : SeededTest
     [Fact]
     public void HeterodoxyEnabled_SomePawnsDivergeAndTheirSelfFitDrops()
     {
-        IdeoTrackerData.HeterodoxyMax = IdeoTrackerData.DefaultHeterodoxyMax;
+        IssueStanceTracker.HeterodoxyMax = IssueStanceTracker.DefaultHeterodoxyMax;
         var (world, ideo, issue) = SingleIssueFaith();
 
         var divergent = 0;
@@ -66,7 +66,7 @@ public class HeterodoxyTests : SeededTest
     {
         // The payoff: a spawned dissenter and an orthodox believer of the same faith now hold different rungs
         // on the issue, so a same-faith debate has something to move. Build pawns until one of each turns up.
-        IdeoTrackerData.HeterodoxyMax = IdeoTrackerData.DefaultHeterodoxyMax;
+        IssueStanceTracker.HeterodoxyMax = IssueStanceTracker.DefaultHeterodoxyMax;
         var (world, ideo, issue) = SingleIssueFaith();
 
         IdeoTrackerData? orthodox = null;

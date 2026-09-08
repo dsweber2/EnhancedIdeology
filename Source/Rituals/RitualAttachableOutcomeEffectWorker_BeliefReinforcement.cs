@@ -50,12 +50,12 @@ internal sealed class RitualAttachableOutcomeEffectWorker_BeliefReinforcement : 
                 float targetRank, targetStrength;
                 if (outcome.positivityIndex > 0)
                 {
-                    targetRank = IdeoTrackerData.HeldRank(pawn.Ideo, issue);
-                    targetStrength = IdeoTrackerData.AbsoluteMaxConvictionStrength;
+                    targetRank = IssueStanceTracker.HeldRank(pawn.Ideo, issue);
+                    targetStrength = ConvictionScale.AbsoluteMaxConvictionStrength;
                 }
                 else
                 {
-                    targetRank = ConvictionMath.LadderExtremeAwayFrom(issue, IdeoTrackerData.HeldRank(pawn.Ideo, issue));
+                    targetRank = ConvictionMath.LadderExtremeAwayFrom(issue, IssueStanceTracker.HeldRank(pawn.Ideo, issue));
                     targetStrength = 0f;
                 }
 

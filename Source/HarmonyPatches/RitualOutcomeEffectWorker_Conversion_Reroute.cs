@@ -121,12 +121,12 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
             float targetRank, targetStrength;
             if (outcome.positivityIndex > 0)
             {
-                targetRank = IdeoTrackerData.HeldRank(ritualIdeo, issue);
-                targetStrength = IdeoTrackerData.AbsoluteMaxConvictionStrength;
+                targetRank = IssueStanceTracker.HeldRank(ritualIdeo, issue);
+                targetStrength = ConvictionScale.AbsoluteMaxConvictionStrength;
             }
             else
             {
-                targetRank = ConvictionMath.LadderExtremeAwayFrom(issue, IdeoTrackerData.HeldRank(convertee.Ideo!, issue));
+                targetRank = ConvictionMath.LadderExtremeAwayFrom(issue, IssueStanceTracker.HeldRank(convertee.Ideo!, issue));
                 targetStrength = 0f;
             }
 

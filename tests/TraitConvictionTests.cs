@@ -11,7 +11,7 @@ public class TraitConvictionTests : SeededTest
     [Fact]
     public void NoTraits_YieldsZeroOffset()
     {
-        Assert.Equal(0f, IdeoTrackerData.ConvictionOffsetFromTraits([]));
+        Assert.Equal(0f, IssueStanceTracker.ConvictionOffsetFromTraits([]));
     }
 
     // expectedFactor is the signed multiple of ConvictionPerTraitDegree the trait should yield, so the
@@ -27,8 +27,8 @@ public class TraitConvictionTests : SeededTest
     [InlineData("Neurotic", 2, -2f)]     // very neurotic
     public void SingleTrait_ShiftsOffsetByDegree(string defName, int degree, float expectedFactor)
     {
-        Assert.Equal(expectedFactor * IdeoTrackerData.ConvictionPerTraitDegree,
-            IdeoTrackerData.ConvictionOffsetFromTraits(Traits((defName, degree))), precision: 4);
+        Assert.Equal(expectedFactor * ConvictionScale.ConvictionPerTraitDegree,
+            IssueStanceTracker.ConvictionOffsetFromTraits(Traits((defName, degree))), precision: 4);
     }
 
     [Theory]
@@ -37,21 +37,21 @@ public class TraitConvictionTests : SeededTest
     public void PositiveNaturalMood_HasNoEffect(int degree)
     {
         // Only the down side of NaturalMood weakens conviction; optimist / sanguine leave it untouched.
-        Assert.Equal(0f, IdeoTrackerData.ConvictionOffsetFromTraits(Traits(("NaturalMood", degree))));
+        Assert.Equal(0f, IssueStanceTracker.ConvictionOffsetFromTraits(Traits(("NaturalMood", degree))));
     }
 
     [Fact]
     public void WeakeningTraits_Stack()
     {
         // Volatile (-2) + depressive (-2) + very neurotic (-2) compound to -6 degrees of weakening.
-        Assert.Equal(-6f * IdeoTrackerData.ConvictionPerTraitDegree, IdeoTrackerData.ConvictionOffsetFromTraits(
+        Assert.Equal(-6f * ConvictionScale.ConvictionPerTraitDegree, IssueStanceTracker.ConvictionOffsetFromTraits(
             Traits(("Nerves", -2), ("NaturalMood", -2), ("Neurotic", 2))), precision: 4);
     }
 
     [Fact]
     public void UnrelatedTraits_AreIgnored()
     {
-        Assert.Equal(1f * IdeoTrackerData.ConvictionPerTraitDegree, IdeoTrackerData.ConvictionOffsetFromTraits(
+        Assert.Equal(1f * ConvictionScale.ConvictionPerTraitDegree, IssueStanceTracker.ConvictionOffsetFromTraits(
             Traits(("Beauty", -2), ("Nerves", 1), ("Industriousness", 2))), precision: 4);
     }
 

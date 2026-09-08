@@ -79,7 +79,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
                     ? (Mathf.RoundToInt(stance.rank) == Mathf.RoundToInt(PreceptLadder.RankOf(precept))
                         ? stance.strength
                         : CensoredConviction)
-                    : Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.BaseConvictionMax);
+                    : Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax);
             }
             return;
         }
@@ -95,8 +95,8 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         {
             var issue = precept.issue!;
             issueStrength[issue] = focalIssues.Contains(issue)
-                ? Rand.Range(IdeoTrackerData.MaxConvictionStrength * 0.6f, IdeoTrackerData.MaxConvictionStrength)
-                : Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.MaxConvictionStrength * 0.3f);
+                ? Rand.Range(ConvictionScale.MaxConvictionStrength * 0.6f, ConvictionScale.MaxConvictionStrength)
+                : Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.MaxConvictionStrength * 0.3f);
         }
     }
 
@@ -113,7 +113,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
     {
         if (!issueStrength.TryGetValue(issue, out var strength))
         {
-            strength = Rand.Range(IdeoTrackerData.BaseConvictionMin, IdeoTrackerData.BaseConvictionMax);
+            strength = Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax);
             issueStrength[issue] = strength;
         }
 
@@ -231,7 +231,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         // more fervently argued position tugs harder, normalized so MaxConvictionStrength matches the old pull.
         foreach (var precept in MoralPrecepts(ideo))
         {
-            var pull = gain * SubversionPull * (BookStrength(precept.issue!) / IdeoTrackerData.MaxConvictionStrength);
+            var pull = gain * SubversionPull * (BookStrength(precept.issue!) / ConvictionScale.MaxConvictionStrength);
             tracker.ShiftIssueStance(precept.issue!, PreceptLadder.RankOf(precept), pull, 0f);
         }
     }

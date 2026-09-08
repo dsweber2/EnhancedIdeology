@@ -25,17 +25,17 @@ public class RitualReinforcementTests : SeededTest
             .Build(world);
 
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var orthodoxRank = IdeoTrackerData.HeldRank(ideo, issue);
+        var orthodoxRank = IssueStanceTracker.HeldRank(ideo, issue);
         var startStrength = 5f;
         tracker.SetIssueStance(issue, orthodoxRank, startStrength);
 
         var stepLength = ConvictionMath.RitualBaseArc * 2f; // great ritual (positivityIndex=2), CertaintyLossFactor=1
-        ConvictionMath.ApplyRitualPull(world.Comp, pawn, issue, orthodoxRank, IdeoTrackerData.AbsoluteMaxConvictionStrength, stepLength);
+        ConvictionMath.ApplyRitualPull(world.Comp, pawn, issue, orthodoxRank, ConvictionScale.AbsoluteMaxConvictionStrength, stepLength);
 
         var after = tracker.IssueStances().First(s => s.issue == issue);
         Assert.Equal(orthodoxRank, after.rank);
         Assert.True(after.strength > startStrength, "ritual should increase conviction");
-        Assert.True(after.strength <= IdeoTrackerData.MaxConvictionStrength,
-            $"a single great ritual step should not push conviction past the normal ceiling ({IdeoTrackerData.MaxConvictionStrength}). got {after.strength}");
+        Assert.True(after.strength <= ConvictionScale.MaxConvictionStrength,
+            $"a single great ritual step should not push conviction past the normal ceiling ({ConvictionScale.MaxConvictionStrength}). got {after.strength}");
     }
 }

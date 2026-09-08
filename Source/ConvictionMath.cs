@@ -78,7 +78,7 @@ internal static class ConvictionMath
             return floor + (amp * ((float)Math.Cosh(offset / width) - 1f));
         }
 
-        var rankWeight = IdeoTrackerData.MaxConvictionStrength / Mathf.Max(Mathf.Abs(rw - rm), ValleyMinGap);
+        var rankWeight = ConvictionScale.MaxConvictionStrength / Mathf.Max(Mathf.Abs(rw - rm), ValleyMinGap);
 
         var prevRank = ri;
         var prevStrength = Curve(ri);

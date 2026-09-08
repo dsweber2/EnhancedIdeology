@@ -85,8 +85,8 @@ public class StructuralOpinionTests : SeededTest
         var structural = tracker.StructuralIdeoOpinion(mirror);
 
         Assert.InRange(structural,
-            IdeoTrackerData.BaseConvictionMin * 5f,
-            Mathf.Min(IdeoTrackerData.BaseConvictionMax * 5f, 100f));
+            ConvictionScale.BaseConvictionMin * 5f,
+            Mathf.Min(ConvictionScale.BaseConvictionMax * 5f, 100f));
     }
 
     [Fact]

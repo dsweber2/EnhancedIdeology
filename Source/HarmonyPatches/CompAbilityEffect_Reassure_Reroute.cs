@@ -120,7 +120,7 @@ internal static class CompAbilityEffect_Reassure_Tooltip
             foreach (var issue in issues)
             {
                 var currentRank = stanceByIssue.TryGetValue(issue, out var cr) ? cr : 0f;
-                var orthodoxRank = IdeoTrackerData.HeldRank(recipient.Ideo, issue);
+                var orthodoxRank = IssueStanceTracker.HeldRank(recipient.Ideo, issue);
                 var rungs = PreceptLadder.Rungs(issue);
                 var currentIdx = Mathf.Clamp(Mathf.RoundToInt(currentRank), 0, rungs.Count - 1);
                 var orthodoxIdx = Mathf.Clamp(Mathf.RoundToInt(orthodoxRank), 0, rungs.Count - 1);

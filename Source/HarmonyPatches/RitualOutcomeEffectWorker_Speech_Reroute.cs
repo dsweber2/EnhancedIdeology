@@ -86,9 +86,9 @@ internal static class RitualOutcomeEffectWorker_Speech_Reroute
             var issue = precept.def.issue;
             if (issue == null || PreceptPolicy.CategoryOf(issue) != PreceptCategory.Moral)
                 continue;
-            var targetRank = IdeoTrackerData.HeldRank(targetIdeo, issue);
+            var targetRank = IssueStanceTracker.HeldRank(targetIdeo, issue);
             ConvictionMath.ApplyRitualPull(
-                comp, listener, issue, targetRank, IdeoTrackerData.AbsoluteMaxConvictionStrength, stepLength);
+                comp, listener, issue, targetRank, ConvictionScale.AbsoluteMaxConvictionStrength, stepLength);
         }
 
         var knock = Compat_PeerPressure.AdjustCertaintyKnock(

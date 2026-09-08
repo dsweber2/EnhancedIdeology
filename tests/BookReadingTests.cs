@@ -161,7 +161,7 @@ public class BookReadingTests : SeededTest
         var readerTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(reader);
         // Zero the reader's conviction on the issue first, so the tiny hardening is measured from 0 and free of
         // the float cancellation that subtracting two ~15-scale strengths would introduce.
-        readerTracker.ShiftIssueStance(issue, 0f, 0f, -IdeoTrackerData.AbsoluteMaxConvictionStrength);
+        readerTracker.ShiftIssueStance(issue, 0f, 0f, -ConvictionScale.AbsoluteMaxConvictionStrength);
         var before = readerTracker.IssueStances().First(stance => stance.issue == issue).strength;
 
         var gain = doer.CertaintyGain(reader);
@@ -199,7 +199,7 @@ public class BookReadingTests : SeededTest
         var reader = new PawnBuilder().WithIdeo(ideo).WithLabel("R").Build(world);
         var readerTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(reader);
         // Measure the faint hardening from a zeroed base, free of float cancellation on a ~15-scale strength.
-        readerTracker.ShiftIssueStance(issue, 0f, 0f, -IdeoTrackerData.AbsoluteMaxConvictionStrength);
+        readerTracker.ShiftIssueStance(issue, 0f, 0f, -ConvictionScale.AbsoluteMaxConvictionStrength);
         var before = readerTracker.IssueStances().First(stance => stance.issue == issue).strength;
 
         var gain = doer.CertaintyGain(reader);
