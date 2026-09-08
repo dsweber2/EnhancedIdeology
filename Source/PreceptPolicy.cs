@@ -132,6 +132,17 @@ internal static class PreceptPolicy
         // Questing Meme (SirMashedPotato.QuestingMeme). Both issues have all rungs at displayOrderInIssue=10;
         // order overrides establish the semantic axis.
         "QuesterMeme_QuestComplete", "QuesterMeme_QuestFail",
+        // Vanilla Vehicles Expanded (VVE): Indoors (STACKED with VVE_SmallSpaces_Horrible → OrderOverride),
+        // VVE_Driving/Flying/Sailing (Required→Forbidden axis, five rungs each).
+        "Indoors", "VVE_Driving", "VVE_Flying", "VVE_Sailing",
+        // Language Learning mod: Hatred→Condemned→Neutral→Encouraged→Exalted xenophilia axis.
+        "LanguageLearning",
+        // Romance on the Rim: permissiveness axes on relationship events. MarriageProposal rungs mix
+        // timing (LateMarriage/FlashMarriage) with control (Forbidden/Arranged) — no clean axis → PositiveOnly.
+        "RomanceOnTheRim_Issue_Breakup", "RomanceOnTheRim_Issue_RomanceAttempt",
+        "RomanceOnTheRim_Issue_Cheat",
+        // VME_BookWritingSpeed parallels VME_BookReadingSpeed (Increased/Decreased axis).
+        "VME_BookWritingSpeed",
     ];
     private static readonly HashSet<string> UniversalPositiveIssues = ["Charity", "VME_Recreation"];
     // Special issues route through the special resolvers instead of the rung-distance model. VME_Leader /
@@ -158,6 +169,16 @@ internal static class PreceptPolicy
         "VME_AutomationEfficiency", "VME_CraftingQuality", "VME_CraftingSpeed", "VME_Death",
         "VME_Junk", "VME_PermitCooldown", "VME_PermitHonorCost", "VME_Power",
         "VME_PsychicSensitivity", "VME_PsyfocusGain", "VME_SkilledLabor",
+        // Mort's Ideologies: Conservationist (MortStrudel.MortIdeologyEnv). Two restriction-only rungs,
+        // no opposing pro-pollution rung.
+        "MI_PowerGeneration",
+        // Vanilla Vehicles Expanded: pure performance modifiers (speed/repair-rate/fuel), no belief axis.
+        // RomanceOnTheRim_Issue_MarriageProposal mixes timing (LateMarriage/FlashMarriage) with control
+        // (Forbidden/Arranged) — no clean moral axis.
+        "VVE_Acceleration", "VVE_VehicleRepairs", "VVE_FuelEfficiency",
+        "RomanceOnTheRim_Issue_MarriageProposal",
+        // Not locally installed — safe PositiveOnly default pending ladder verification.
+        "VRE_AndroidsIssue", "SEX_Divorce",
     ];
 
     // Rung defName order (permissive/pro -> forbidding/anti) for issues whose displayOrderInIssue scrambles
@@ -201,6 +222,9 @@ internal static class PreceptPolicy
         // Political Compass: all rungs share displayOrderInIssue=10/20/30; ordered as authoritarian spectrum.
         ["MI_Leader"] =
             ["MI_LeaderAnarchy", "MI_Elections_Required", "MI_LeaderCorporate", "MI_LeaderMonarchy", "MI_LeaderDictatorship"],
+        // Indoors: VVE adds VVE_SmallSpaces_Horrible (no displayOrderInIssue) alongside the base-game
+        // Indoors_Acceptable (also no displayOrderInIssue). Both default to 0, so order is undefined — fix it.
+        ["Indoors"] = ["Indoors_Acceptable", "VVE_SmallSpaces_Horrible"],
     };
 
     // Where the virtual Don't-care rung sits for each OPTIONAL Moral issue (preceptPolicy.md). Mandatory
@@ -259,6 +283,20 @@ internal static class PreceptPolicy
         // Questing Meme (SirMashedPotato.QuestingMeme): no-opinion sits before the mildest positive stance.
         ["QuesterMeme_QuestComplete"] = DontCareSpec.Before("QuesterMeme_QuestComplete_Respected"),
         ["QuesterMeme_QuestFail"] = DontCareSpec.Before("QuesterMeme_QuestFail_DontCare"),
+        // Vanilla Vehicles Expanded: Indoors is STACKED between pro-indoor and anti-indoor rungs.
+        // VVE_Driving/Flying/Sailing: the Allowed rung (defaultSelectionWeight=1) is the explicit neutral.
+        ["Indoors"] = DontCareSpec.Between("Indoors_Acceptable", "VVE_SmallSpaces_Horrible"),
+        ["VVE_Driving"] = DontCareSpec.At("VVE_Driving_Allowed"),
+        ["VVE_Flying"] = DontCareSpec.At("VVE_Flying_Allowed"),
+        ["VVE_Sailing"] = DontCareSpec.At("VVE_Sailing_Allowed"),
+        // Language Learning: Neutral rung (defaultSelectionWeight=1) is the explicit centre.
+        ["LanguageLearning"] = DontCareSpec.At("LanguageLearning_Neutral"),
+        // Romance on the Rim: no opinion on cheating/breakups sits before the most permissive rung.
+        ["RomanceOnTheRim_Issue_Cheat"] = DontCareSpec.Before("RomanceOnTheRim_Cheat_Encouraged"),
+        ["RomanceOnTheRim_Issue_Breakup"] = DontCareSpec.Before("RomanceOnTheRim_Breakup_Encouraged"),
+        ["RomanceOnTheRim_Issue_RomanceAttempt"] = DontCareSpec.Before("RomanceOnTheRim_RomanceAttempt_Encouraged"),
+        // VME_BookWritingSpeed parallels VME_BookReadingSpeed.
+        ["VME_BookWritingSpeed"] = DontCareSpec.Between("VME_BookWritingSpeed_Increased", "VME_BookWritingSpeed_Decreased"),
     };
 
     // Sim/test hook: register a category for an issue absent from the hardcoded tables (test ladders are Moral).
@@ -437,7 +475,7 @@ internal static class PreceptPolicy
                 var rungCount = DefDatabase<PreceptDef>.AllDefs.Count(p => p.issue == issue);
                 if (rungCount >= 2 && CategoryOf(issue) == PreceptCategory.PositiveOnly
                     && !KnownPositiveOnlyIssues.Contains(issue.defName))
-                    Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) — please let the author know to add it to PreceptPolicy.");
+                    Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) — please let the author know the issue name and ideally the mod of origin.");
             }
         }
     }
