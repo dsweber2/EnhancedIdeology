@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text;
 
 namespace EnhancedIdeology;
@@ -6,6 +7,12 @@ namespace EnhancedIdeology;
 internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 {
     public const float PawnOpinionFactor = 0.02f;
+
+    private static readonly Stopwatch _profSw = new();
+    private static int _profCalls;
+    private static long _profStructural, _profRelational, _profPractitional;
+    private static long _profMemes, _profTraits, _profDietXeno, _profInduced, _profPerIssue, _profUniversal;
+    private const int ProfLogInterval = 500;
 
     private Pawn pawn = pawn;
     public Pawn Pawn => pawn;
@@ -143,15 +150,29 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         RelationalContributors.Clear();
         PractitionalContributors.Clear();
 
+        var profiling = Prefs.DevMode;
+        if (profiling) _profSw.Restart();
+
         // Structural band: innate fit of the pawn to their own ideo, from their per-issue precept stances.
         var structural = StructuralOpinionOf(Pawn.Ideo!, StructuralContributors) / 100f;
         CachedStructural = structural;
 
+        if (profiling) { _profStructural += _profSw.ElapsedTicks; _profSw.Restart(); }
+
         // Relational band: mean opinion of co-religionists, scaled by the user's max range.
         CachedRelational = RelationalBand(settings.RelationalMaxRange, RelationalContributors, comp);
 
+        if (profiling) { _profRelational += _profSw.ElapsedTicks; _profSw.Restart(); }
+
         // Practitional band: summed precept-thought mood, scaled by the user's max range.
         CachedPractitional = PractitionalBand(settings.PracticeMaxRange, PractitionalContributors);
+
+        if (profiling)
+        {
+            _profPractitional += _profSw.ElapsedTicks;
+            if (++_profCalls % ProfLogInterval == 0)
+                LogRecacheProfile();
+        }
 
         if (needsStanceCalibration)
         {
@@ -175,6 +196,21 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         CachedCertaintyChange = settings.CertaintyDriftRate * (target - ExtendedCertainty);
+    }
+
+    private static void LogRecacheProfile()
+    {
+        static string Ms(long ticks) => $"{ticks * 1000.0 / (Stopwatch.Frequency * ProfLogInterval):F3}ms";
+        var structural = _profMemes + _profTraits + _profDietXeno + _profInduced + _profPerIssue + _profUniversal;
+        Log.Message(
+            $"[EI Recache/{ProfLogInterval} calls] " +
+            $"structural={Ms(_profStructural)} (memes={Ms(_profMemes)} traits={Ms(_profTraits)} " +
+            $"dietXeno={Ms(_profDietXeno)} induced={Ms(_profInduced)} perIssue={Ms(_profPerIssue)} " +
+            $"universal={Ms(_profUniversal)} overhead={Ms(_profStructural - structural)}) " +
+            $"relational={Ms(_profRelational)} practitional={Ms(_profPractitional)}");
+        _profCalls = 0;
+        _profStructural = _profRelational = _profPractitional = 0;
+        _profMemes = _profTraits = _profDietXeno = _profInduced = _profPerIssue = _profUniversal = 0;
     }
 
     private float RelationalBand(float maxRange, List<(string label, float pct)> contributors, GameComponent_EnhancedIdeology comp)
@@ -312,6 +348,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         var pawnIdeo = Pawn.Ideo!;
         var start = contributors?.Count ?? 0;
         float opinion = 0;
+        var profiling = Prefs.DevMode;
+        var structSw = profiling ? Stopwatch.StartNew() : null;
 
         // various global meme specific opinions
         var gestaltMeme = EnhancedIdeologyDefOf.VME_Gestalt;
@@ -407,6 +445,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             contributors?.Add((wealthEqual.LabelCap + " / " + wealthStrat.LabelCap, -10f));
         }
 
+        if (structSw != null) { _profMemes += structSw.ElapsedTicks; structSw.Restart(); }
+
         // pawn trait compatibility
         foreach (var meme in ideo.memes)
         {
@@ -434,6 +474,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 }
             }
         }
+
+        if (structSw != null) { _profTraits += structSw.ElapsedTicks; structSw.Restart(); }
 
         // Diet gene bonuses: obligate herbivores/carnivores feel a strong pull
         // toward ideos that share their dietary needs, and an extra pull toward
@@ -492,6 +534,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             }
         }
 
+        if (structSw != null) { _profDietXeno += structSw.ElapsedTicks; structSw.Restart(); }
+
         // Structural precept fit: for each issue at least one of the two faiths takes a position on, how the
         // target ideo's stance compares to the pawn's own preferred stance, weighted by conviction, averaged
         // and scaled to 0-100 (R2). Issues neither faith holds are irrelevant - there is nothing to agree or
@@ -511,6 +555,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             .Where(issue => issue != null)
             .Concat(inducedTargets)
             .Distinct();
+        if (structSw != null) { _profInduced += structSw.ElapsedTicks; structSw.Restart(); }
         foreach (var issue in relevantIssues)
         {
             var perIssue = PerIssueOpinion(ideo, issue!, inducedTargets, oppositionScale, out var graded);
@@ -540,6 +585,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 }
             }
         }
+
+        if (structSw != null) { _profPerIssue += structSw.ElapsedTicks; structSw.Restart(); }
 
         // Universally-valued issues (Charity): a flat boost when the target ideo holds a stance on them,
         // regardless of the pawn's own view. Added after the Moral rescale so it is not averaged in.
@@ -571,6 +618,8 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
                 contributors[ii] = (contributors[ii].label, contributors[ii].pct / 100f);
             }
         }
+
+        if (structSw != null) _profUniversal += structSw.ElapsedTicks;
 
         return Mathf.Max(opinion, 0);
     }
