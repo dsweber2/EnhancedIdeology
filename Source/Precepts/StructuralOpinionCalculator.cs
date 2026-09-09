@@ -326,7 +326,11 @@ internal static class StructuralOpinionCalculator
         var t = maxDist > 0f ? Mathf.Abs(targetRank - pawnRank) / maxDist : 0f;
         var oppositionScale = EnhancedIdeologyMod.Settings.PreceptOppositionScale;
         var falloff = 1f - (t * (1f + oppositionScale));
-        var ladder = string.Join(", ", PreceptLadder.Rungs(issue).Select((precept, ix) => $"{ix}:{precept.defName}"));
+        var ladder = string.Join(", ", PreceptLadder.Rungs(issue)
+            .Select((precept, ix) => (rank: (float)ix, label: precept.defName))
+            .Append((rank: dontCare, label: "DontCare"))
+            .OrderBy(e => e.rank)
+            .Select(e => $"{e.rank:F1}:{e.label}"));
         return $"str={strength:F1} cat={PreceptPolicy.CategoryOf(issue)}"
             + $"\n  pawn={pawnRank:F2} target={targetRank:F2} rungs={rungCount} dontCare={dontCare:F2}"
             + $"\n  extent=[{minRank:F2},{maxRank:F2}] maxDist={maxDist:F2} t={t:F2}"

@@ -54,6 +54,16 @@ internal static class PreceptLadder
     public static float DontCareRank(IssueDef issue) =>
         PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : -1f;
 
+    // Classic precept for an issue that is NOT already a real ladder rung, or null if none exists.
+    // Used by display code so a silent stance shows its effective-default label (e.g. "One Only" for
+    // SpouseCount) rather than the generic "Don't care" string.
+    public static PreceptDef? ClassicFallback(IssueDef issue)
+    {
+        var rungs = Rungs(issue);
+        return DefDatabase<PreceptDef>.AllDefs
+            .FirstOrDefault(precept => precept.issue == issue && precept.classic && !rungs.Contains(precept));
+    }
+
     // Opinion of targetRank given the pawn prefers preferredRank with the given strength, over a ladder
     // spanning [minRank, maxRank] (extent includes the virtual Don't-care rung when the issue is absent-able).
     // Falloff is linear in rung distance: +strength at the preferred rung, falling to

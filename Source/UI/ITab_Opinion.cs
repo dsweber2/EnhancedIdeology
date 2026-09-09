@@ -26,6 +26,9 @@ internal sealed class ITab_Opinion : ITab
     // Which ideoligion the left column compares against; null (or an ideo no longer present) means the pawn's own.
     private static Ideo? selectedIdeo;
 
+    private enum StanceSort { ByStrength, ByContributionDesc, ByContributionAsc, ByIssueAsc, ByIssueDesc }
+    private static StanceSort stanceSort = StanceSort.ByStrength;
+
     // The pawn whose opinions were last recomputed for display, so we refresh once per pawn shown rather than
     // every frame. Cleared on open so reopening the same pawn's tab also refreshes.
     private static Pawn? recachedPawn;
@@ -82,13 +85,29 @@ internal sealed class ITab_Opinion : ITab
         var headerH = Text.LineHeight + Padding;
         Text.Anchor = TextAnchor.MiddleLeft;
 
-        // Three column labels in place of a single header for the stance side.
+        // Issue and Strength headers are sortable; Stance is a plain label.
         var issueColX = SmallPadding + IssueIconSize + SmallPadding;
-        Widgets.Label(new Rect(issueColX, 0f, issueWidth, headerH), "EnhancedIdeology.ColIssue".Translate());
+        var issueHeaderRect = new Rect(issueColX, 0f, issueWidth, headerH);
+        if (Mouse.IsOver(issueHeaderRect))
+            Widgets.DrawHighlight(issueHeaderRect);
+        var issueHeaderLabel = "EnhancedIdeology.ColIssue".Translate().ToString();
+        issueHeaderLabel += stanceSort switch { StanceSort.ByIssueAsc => " ▼", StanceSort.ByIssueDesc => " ▲", _ => "" };
+        Widgets.Label(issueHeaderRect, issueHeaderLabel);
+        if (Widgets.ButtonInvisible(issueHeaderRect))
+            stanceSort = stanceSort switch { StanceSort.ByIssueAsc => StanceSort.ByIssueDesc, StanceSort.ByIssueDesc => StanceSort.ByStrength, _ => StanceSort.ByIssueAsc };
+
         var rungColX = issueColX + issueWidth + IconTextGap;
         Widgets.Label(new Rect(rungColX, 0f, rungWidth, headerH), "EnhancedIdeology.ColStance".Translate());
+
         var strengthColX = rungColX + rungWidth + IconTextGap;
-        Widgets.Label(new Rect(strengthColX, 0f, OpinionBarWidth, headerH), "EnhancedIdeology.ColStrength".Translate());
+        var strengthHeaderRect = new Rect(strengthColX, 0f, OpinionBarWidth, headerH);
+        if (Mouse.IsOver(strengthHeaderRect))
+            Widgets.DrawHighlight(strengthHeaderRect);
+        var strengthHeaderLabel = "EnhancedIdeology.ColStrength".Translate().ToString();
+        strengthHeaderLabel += stanceSort switch { StanceSort.ByContributionDesc => " ▼", StanceSort.ByContributionAsc => " ▲", _ => "" };
+        Widgets.Label(strengthHeaderRect, strengthHeaderLabel);
+        if (Widgets.ButtonInvisible(strengthHeaderRect))
+            stanceSort = stanceSort switch { StanceSort.ByContributionDesc => StanceSort.ByContributionAsc, StanceSort.ByContributionAsc => StanceSort.ByStrength, _ => StanceSort.ByContributionDesc };
 
         // Right column header, with the selected ideo name appended when it differs from the pawn's own.
         var rightHeader = "EnhancedIdeology.IdeologyOpinions".Translate().ToString();
@@ -208,6 +227,8 @@ internal sealed class ITab_Opinion : ITab
                 Widgets.DrawHighlightSelected(selectRect);
             }
 
+            if (Mouse.IsOver(iconRect))
+                Widgets.DrawHighlight(iconRect);
             ideo.DrawIcon(iconRect);
             Text.Anchor = TextAnchor.MiddleLeft;
             Widgets.Label(textRect, ideo.name);
@@ -330,14 +351,24 @@ internal sealed class ITab_Opinion : ITab
                 SelectedRungLabel(selected, issue), stance.strength));
         }
 
-        return [.. rows.OrderByDescending(row => row.strength)];
+        var count = Math.Max(rows.Count, 1);
+        return stanceSort switch
+        {
+            StanceSort.ByContributionDesc => [.. rows.OrderByDescending(row => row.opinion / count)],
+            StanceSort.ByContributionAsc  => [.. rows.OrderBy(row => row.opinion / count)],
+            StanceSort.ByIssueAsc         => [.. rows.OrderBy(row => row.issue.LabelCap.ToString())],
+            StanceSort.ByIssueDesc        => [.. rows.OrderByDescending(row => row.issue.LabelCap.ToString())],
+            _                             => [.. rows.OrderByDescending(row => row.strength)],
+        };
     }
 
-    // The rung the selected ideoligion preaches on the issue, or Don't-care if it takes no explicit stance.
+    // The rung the selected ideoligion preaches on the issue, or the classic-precept label (e.g. "One Only"
+    // for SpouseCount) when that issue has a non-ladder classic default, or Don't-care as a last resort.
     private static string SelectedRungLabel(Ideo ideo, IssueDef issue)
     {
         var held = ideo.precepts.FirstOrDefault(precept => precept.def.issue == issue);
-        return held != null ? held.def.LabelCap : "EnhancedIdeology.StanceDontCare".Translate();
+        if (held != null) return held.def.LabelCap;
+        return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
     }
 
     private static string RungLabel(IssueDef issue, float rank)
@@ -345,7 +376,7 @@ internal sealed class ITab_Opinion : ITab
         var rungs = PreceptLadder.Rungs(issue);
         if (rank < 0f || rungs.Count == 0)
         {
-            return "EnhancedIdeology.StanceDontCare".Translate();
+            return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
         }
 
         return rungs[Mathf.Clamp(Mathf.RoundToInt(rank), 0, rungs.Count - 1)].LabelCap;
