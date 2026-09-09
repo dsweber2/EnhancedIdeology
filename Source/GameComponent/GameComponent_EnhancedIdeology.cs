@@ -64,18 +64,6 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
         }
     }
 
-#pragma warning disable IDE0079
-#pragma warning disable IDE0060 // Remove unused parameter
-    // TODO: This method seems... lacking. Investigate if it should be doing something more.
-#pragma warning disable CA1822 // Mark members as static
-    public float ConversionFactor(Pawn initiator, Pawn recipient)
-#pragma warning restore CA1822 // Mark members as static
-#pragma warning restore IDE0060 // Remove unused parameter
-#pragma warning restore IDE0079
-    {
-        return 1f;
-    }
-
     public void SetIdeo(Pawn pawn, Ideo ideo)
     {
         _ = PawnTracker.EnsurePawnHasIdeoTracker(pawn);
