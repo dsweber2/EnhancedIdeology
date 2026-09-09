@@ -163,6 +163,9 @@ internal static partial class PreceptPolicy
         "EB_Contemplation",
         // Alpha Memes.
         "AM_Armour", "AM_Barracks", "AM_CombatProwess",
+        // Comfort: base Ignored + AM_Comfort_DiscomfortPreferred are both anti-comfort rungs (no pro-comfort
+        // opposition). MiningYield: base High + AB_MiningYield_VeryHigh are yield bonuses at different levels.
+        "Comfort", "MiningYield",
         // Better Ideology? (BS_).
         "BS_AlienAppearanceTolerance",
         // Vanilla Memes Expanded.
