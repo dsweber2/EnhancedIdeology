@@ -11,6 +11,7 @@ internal static class EnhancedIdeologyDefOf
     public static MemeDef Proselytizer;
     public static MemeDef Guilty;
     public static MentalStateDef EB_CrisisOfFaith;
+    public static MentalStateDef EB_Iconoclast;
     public static ThingDef EB_Ideobook;
     public static InspirationDef EB_ReligiousEnlightenment;
     public static JobDef EB_Pray;

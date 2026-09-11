@@ -19,7 +19,7 @@ internal sealed class JobDriver_PlaceAndBurnUntilDestroyed : JobDriver
         yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch, true).FailOnSomeonePhysicallyInteracting(TargetIndex.A);
 
         yield return Toils_Haul.StartCarryThing(TargetIndex.A, canTakeFromInventory: true);
-        yield return Toils_Goto.GotoCell(pawn.Position.RandomAdjacentCell8Way().RandomAdjacentCell8Way(), PathEndMode.OnCell);
+        yield return Toils_Goto.GotoCell(FindPublicBurnSpot(pawn), PathEndMode.OnCell);
         yield return Toils_General.Wait(90);
         yield return Toils_Haul.DropCarriedThing();
         yield return Toils_Reserve.ReserveDestinationOrThing(TargetIndex.A);
@@ -41,6 +41,38 @@ internal sealed class JobDriver_PlaceAndBurnUntilDestroyed : JobDriver
         yield return Toils_Jump.JumpIf(tryIgniteAgain, () => !TargetThingA.IsBurning());
         yield return Toil_EnhancedIdeology.BurnBook().FailOn(() => !TargetThingA.IsBurning());
         yield return Toils_Jump.JumpIf(tryIgniteAgain, () => !TargetThingA.IsBurning() || !TargetThingA.Destroyed);
+    }
+
+    private static IntVec3 FindPublicBurnSpot(Pawn pawn)
+    {
+        var activeSpots = pawn.Map.gatherSpotLister.activeSpots;
+        if (activeSpots.Count > 0)
+        {
+            var nearest = activeSpots.MinBy(gs => gs.parent.Position.DistanceToSquared(pawn.Position));
+            return nearest.parent.Position;
+        }
+
+        var privateRoles = new HashSet<RoomRoleDef>
+        {
+            RoomRoleDefOf.Bedroom, RoomRoleDefOf.Barracks,
+            RoomRoleDefOf.PrisonCell, RoomRoleDefOf.PrisonBarracks,
+            RoomRoleDefOf.Hospital, RoomRoleDefOf.Workshop, RoomRoleDefOf.Laboratory,
+        };
+
+        var bestRoom = pawn.Map.regionGrid.AllRooms
+            .Where(r => r != null && r.ProperRoom && !r.PsychologicallyOutdoors && !privateRoles.Contains(r.Role))
+            .MaxByWithFallback(r => r!.CellCount);
+
+        if (bestRoom != null)
+        {
+            var cell = bestRoom.Cells
+                .Where(c => pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly))
+                .RandomElementWithFallback();
+            if (cell.IsValid)
+                return cell;
+        }
+
+        return pawn.Position.RandomAdjacentCell8Way().RandomAdjacentCell8Way();
     }
 
     private static Toil TryIgniteAgain()

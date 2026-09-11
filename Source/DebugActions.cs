@@ -331,6 +331,27 @@ internal static class DebugActions
             new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
     }
 
+    [DebugAction("Ideoligion", "Trigger iconoclast break", actionType = DebugActionType.ToolMapForPawns,
+        allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
+    private static void TriggerIconoclast(Pawn pawn)
+    {
+        if (pawn.Ideo == null || pawn.DevelopmentalStage.Baby())
+        {
+            Messages.Message($"{pawn.LabelShort} cannot have an iconoclast break.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        if (!pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.EB_Iconoclast, forceWake: true))
+        {
+            Messages.Message($"{pawn.LabelShort}: failed to start iconoclast state.",
+                new LookTargets(pawn), MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        Messages.Message($"{pawn.LabelShort}: iconoclast break triggered.",
+            new LookTargets(pawn), MessageTypeDefOf.NeutralEvent, false);
+    }
+
     [DebugAction("Ideoligion", "Trigger crisis of faith", actionType = DebugActionType.ToolMapForPawns,
         allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
     private static void TriggerCrisisOfFaith(Pawn pawn)
