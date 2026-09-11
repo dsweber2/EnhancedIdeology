@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>regelmatig gemediteerd</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Ik ben trouw geweest in mijn meditaties. Het brengt mij vrede.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>meditatie verwaarloosd</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Ik heb geen tijd gevonden om te mediteren. Mijn toewijding neemt af.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>meditatie ernstig verwaarloosd</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Ik ben veel te lang zonder meditatie geweest. Ik voel me spiritueel stuurloos.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>godvruchtig gemediteerd</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>in meditatie verzonken</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>het meditatieverbod getrotseerd</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>religieus boek vernietigd</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Ons religieuze boek werd vernietigd. Dat is absoluut onvergeeflijk.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>een heilige tekst ontwijd</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Ik heb een heilig boek in dierenhuid gebonden. Dat was fout.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>leren gebonden schrift lezen</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Deze heilige tekst is gebonden in dierenhuid. Het vasthouden ervan voelt fout.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>goed debat</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>We hadden een stimulerend debat over onze overtuigingen. Een ontmoeting van open geesten.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>ketterdebat</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Ik moest hun afwijkende overtuigingen weerleggen. Diversiteit van gedachte is een gif.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>het woord verspreid</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Ik heb gepleit voor de waarheid van mijn geloof. Wat de uitkomst ook zij, de poging zelf was een rechtvaardige daad.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>een ziel tot het geloof gebracht</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Ik heb iemand in het licht van ons geloof gebracht. Er is geen hogere roeping.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>bekering mislukt</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Ik probeerde iemand tot het geloof te brengen en mislukte. Ze blijven in hun onwetendheid.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>geloof betwist</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Ik moest de waarheid van mijn geloof verdedigen tegen een uitdager. Het feit dat ze het durfden te betwisten is al een belediging.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>cognitieve dissonantie</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Ik zou niet moeten deelnemen aan de praktijken van andere ideoligies.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>geloof herbevestigd</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Het zien van de manier van doen van een andere traditie herinnert mij eraan waarom ik mijn eigen pad waardeer.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>wankelende medegelovige</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>geloofloze medegelovige</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>afvallige medegelovige</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

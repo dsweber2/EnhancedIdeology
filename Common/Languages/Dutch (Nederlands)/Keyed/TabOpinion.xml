@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ideoligie</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Ideoligiemeningen</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Kwesties</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Kwestie</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Standpunt</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Kracht</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Maakt niet uit</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>Over de kwestie van {1} heeft {PAWN_nameDef} het standpunt {2} met overtuiging {3}. {IDEO_name} predikt {5}; {PAWN_nameDef}'s mening over dat standpunt: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}'s mening over {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Van geloofsprincipes en leefregels: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Van persoonlijke overtuigingen: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Van onderlinge relaties: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

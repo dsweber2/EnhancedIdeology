@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>Reducere temporară a certitudinii: {0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>Șansă de a câștiga dezbaterea: {0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>Șansă de convertire dacă câștigi: {0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>Credințe vizate (aleatoriu 1-{0} din):</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>Nu se opun niciunui aspect al credinței tale — nu există nimic de convertit.</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>Factori (tu față de ei):</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>Putere de conversie: {0} față de {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>Dezbatere intelectuală: {0} față de {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>Impact social: {0} față de {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

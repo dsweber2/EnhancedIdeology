@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 信念偏移/象</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>所倡导的信仰</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/象</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>宗教书籍被毁</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}，{IDEO}的重要宗教书籍，已被摧毁。{IDEO}的信徒对此将大为不满。</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>焚毁{BOOK}。此举将激怒{IDEO}的{IDEO_memberNamePlural}。</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>焚毁{BOOK}。</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>没有殖民者能销毁{BOOK}。</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>确定要让{PAWN}焚毁{BOOK}吗？此举将严重冒犯{IDEO}的所有{IDEO_memberNamePlural}。</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>确定要让{PAWN}焚毁{BOOK}吗？</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN}已销毁{BOOK}。此举严重冒犯了{IDEO}的{IDEO_memberNamePlural}。</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

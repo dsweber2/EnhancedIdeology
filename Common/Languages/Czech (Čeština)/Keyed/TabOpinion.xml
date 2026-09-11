@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ideobožství</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Názory na ideobožství</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Otázky</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Otázka</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Postoj</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Síla</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Nezáleží mi na tom</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>V otázce {1} má {PAWN_nameDef} postoj {2} s přesvědčením {3}. {IDEO_name} hlásá {5}; názor {PAWN_nameDef} na tento postoj: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>Názor {PAWN_nameDef} na {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Z přesvědčení a zásad: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Z osobních přesvědčení: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Z mezilidských vztahů: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

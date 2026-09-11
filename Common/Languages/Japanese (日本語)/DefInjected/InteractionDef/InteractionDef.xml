@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ConversionLog.label>改宗</EB_ConversionLog.label>
+  <EB_ConversionLog.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef]は新たな信仰に改宗した。</EB_ConversionLog.logRulesInitiator.rulesStrings.0>
+  <EB_CrisisOfFaithLog.label>信仰の危機</EB_CrisisOfFaithLog.label>
+  <EB_CrisisOfFaithLog.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef]は信仰の危機を経験した。</EB_CrisisOfFaithLog.logRulesInitiator.rulesStrings.0>
+  <EB_IdeologicalDebateMeme.label>ミームをめぐる思想的議論</EB_IdeologicalDebateMeme.label>
+  <EB_IdeologicalDebateMeme.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef]と[RECIPIENT_nameDef]はミームについて議論した。</EB_IdeologicalDebateMeme.logRulesInitiator.rulesStrings.0>
+  <EB_IdeologicalDebatePrecept.label>戒律をめぐる思想的議論</EB_IdeologicalDebatePrecept.label>
+  <EB_IdeologicalDebatePrecept.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef]と[RECIPIENT_nameDef]は信条について議論した。</EB_IdeologicalDebatePrecept.logRulesInitiator.rulesStrings.0>
+</LanguageData>

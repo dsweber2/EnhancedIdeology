@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Çeviri: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>İdeoloji</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Öğreti</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Uyumluluk</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Hata Ayıklama</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Kişisel iman dinamikleri</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>İhtidâ etkileri</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>İman kayma hızı: {0}/gün</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Bir karakterin imanının her gün hedefe ne kadar hızlı yaklaştığı. Yüksek değer = iman koşullara daha hızlı tepki verir. İnançları daha dinamik kılar.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>İlişkisel etki: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Bir karakterin din kardeşlerine dair görüşünün hedef imanı ne kadar artırabileceği ya da düşürebileceğinin üst sınırı.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>İbadet etkisi: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Öğreti ruh hallerinin (ritüeller, saygı, yasaklar vb.) hedef imanı ne kadar artırabileceği ya da düşürebileceğinin üst sınırı.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>İman krizi eşiği: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Bir karakterin imanı bunun altına düştüğünde iman krizi yaşayabilir. Yüksek değer = daha fazla kriz.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>İhtidâ hızı: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Karakterlerin uymayan bir inancı kendi kendine ne kadar hızlı terk ettiği, varsayılana göre. Yüksek değer = kendiliğinden ihtidâlar daha olası.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>İhtidâ girişiminde iman kaybı: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Ahlak rehberi bir ihtidâ tartışmasını kazandığında ama karakteri hemen döndüremediğinde, karakterin imanı bununla çarpılır. 1x = %80 imanlı karakter %80'de kalır; 0.8x = %80 imanlı karakter %64'e düşer. Düşük değer = ihtidâ girişimleri daha etkili.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>İnanç bozunması: {0}/çeyrek</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Tüm öğretilerin her çeyrekte ne kadar inanç gücü kaybedeceği. %100 inancın öğreti ortalaması 20 olduğunu, maksimumun 50 olduğunu unutmayın. Yüksek değer = inançları pekiştirme ihtiyacı daha güçlü.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Karşıt tutum muhalefeti: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Bir karakterin bir konudaki tam karşıt tutuma ne kadar güçlü muhalefet ettiği, inancının bir kesri olarak. %100'de, Yamyamlık: Onaylanmamış 12 olan bir karakter, Yamyamlık: Zorunlu (aç gözlü) hakkında -12 görüşe sahip olur. %0 = karşıt tutumlara kayıtsız; %100 = en uç karşıt öğretteki kendi desteğiyle eşit ve zıt.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>İhtidâ gücü: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Başarılı bir ihtidâ girişiminin (ahlak rehberinin yönlendirilmiş eylemi) bir karakterin inançlarını olağan bir girişimden ne kadar daha güçlü ittiği. Yüksek değer = daha hızlı ihtidâlar.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Tartışma inanç değişimi: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Kazanılan tek bir tartışmanın konudaki inancı varsayılana göre ne kadar hareket ettirdiği. Hem öğretiyi hem de o öğretideki inancı aynı anda değiştirir. Yüksek değer = her kazanılan tartışma daha çok ikna eder. Daha hızlı ihtidâlara yol açar.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Dostluk bonusu (ihtidâ): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Bir karakterin öğretisini değiştirmeye çalışan birine olan görüşünün etkiyi ne kadar artırdığı. 1x ve +100 görüşte, hem iman kaybı hem de inanç çekimi ikiye katlanır. 0x'te görüşün hiçbir etkisi yoktur. Peer Pressure yüklü olduğunda kullanılmaz — bunun yerine o modun kendi çarpan ayarı devreye girer.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Kayıt-yükleme minimum imanı: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Vanilla veya mod öncesi bir kayıt yüklendiğinde, imanı bunun altındaki karakterlerin inançları sıfır yerine en az bu hedefe tohumlanır. %0 imanlı bir karakterin hiç inanç olmadan kalmasını önler.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>GEL: Etkileşim İşçilerini Hata Ayıkla</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Geliştirici modu etkinken etkileşim işçileri için hata ayıklama günlüğünü etkinleştirir. Özellikle Enhanced Ideology hata ayıklamıyorsanız kapalı bırakmanızı öneririm.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

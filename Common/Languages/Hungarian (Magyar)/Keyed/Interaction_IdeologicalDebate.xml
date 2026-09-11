@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} ideológiai vitát kezdeményezett {PAWN2_labelShort}-val. Ez verekedésbe torkollott!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ideológiai áttérítés</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>{ISSUE_label} megvitatása után {CONVINCER_labelShort} meggyőzte {CONVINCED_labelShort}-t, hogy hagyja el a {OLDIDEO_name}-t és fogadja el a {NEWIDEO_name}-t.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

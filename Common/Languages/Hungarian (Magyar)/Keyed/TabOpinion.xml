@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ideológia</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Ideológiai vélemények</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Kérdések</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Kérdés</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Álláspont</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Erősség</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Mindegy</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>A {1} kérdésben {PAWN_nameDef} álláspontja {2}, meggyőződése {3}. A {IDEO_name} {5}-t hirdet; {PAWN_nameDef} véleménye erről az álláspontról: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef} véleménye a {IDEO_name}-ről: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Mémekből és előírásokból: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Személyes meggyőződésből: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Személyközi kapcsolatokból: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

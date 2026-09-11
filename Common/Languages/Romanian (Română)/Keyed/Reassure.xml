@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Reassure.CertaintyGain>Câștig certitudine la victorie: +{0}</EnhancedIdeology.Reassure.CertaintyGain>
+  <EnhancedIdeology.Reassure.SuccessChance>Șansă de a câștiga dezbaterea: {0}</EnhancedIdeology.Reassure.SuccessChance>
+  <EnhancedIdeology.Reassure.SelfTarget>Auto-reasigurare: succes garantat</EnhancedIdeology.Reassure.SelfTarget>
+  <EnhancedIdeology.Reassure.TargetBeliefs>Credințe de întărit (aleatoriu 1-{0} din):</EnhancedIdeology.Reassure.TargetBeliefs>
+  <EnhancedIdeology.Reassure.NoHeterodoxy>Credințele lor sunt deja ortodoxe — nu există nimic de întărit.</EnhancedIdeology.Reassure.NoHeterodoxy>
+  <EnhancedIdeology.Reassure.FailMessage>{0} nu a reușit să îl reasigure pe {1}.</EnhancedIdeology.Reassure.FailMessage>
+</LanguageData>

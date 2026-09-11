@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.PawnCertaintyTooltip>Certitudinea lui {PAWN_nameDef} în {IDEO_name}: {2}</EnhancedIdeology.PawnCertaintyTooltip>
+  <EnhancedIdeology.CertaintyTarget>Certitudine-țintă: {0}</EnhancedIdeology.CertaintyTarget>
+  <EnhancedIdeology.CertainChangePerDay>Derivând spre aceasta cu {0}/zi</EnhancedIdeology.CertainChangePerDay>
+  <EnhancedIdeology.CertaintyBandStructural>Structural (credințe și natură): {0}</EnhancedIdeology.CertaintyBandStructural>
+  <EnhancedIdeology.CertaintyBandRelational>Congregație: {0}</EnhancedIdeology.CertaintyBandRelational>
+  <EnhancedIdeology.CertaintyBandPractice>Practică (rituri recente): {0}</EnhancedIdeology.CertaintyBandPractice>
+  <EnhancedIdeology.CertaintyPreceptDecay>Degradare precept: {0}/quadrum</EnhancedIdeology.CertaintyPreceptDecay>
+  <EnhancedIdeology.CouplingPenalty>Practici opuse</EnhancedIdeology.CouplingPenalty>
+  <EnhancedIdeology.DietGeneAntiMeat>Ierbivore obligat</EnhancedIdeology.DietGeneAntiMeat>
+  <EnhancedIdeology.DietGeneProMeat>Carnivor obligat</EnhancedIdeology.DietGeneProMeat>
+  <EnhancedIdeology.XenotypePreferred>Xenotip preferat</EnhancedIdeology.XenotypePreferred>
+  <EnhancedIdeology.XenotypeDisapproved>Xenotip dezaprobat</EnhancedIdeology.XenotypeDisapproved>
+</LanguageData>

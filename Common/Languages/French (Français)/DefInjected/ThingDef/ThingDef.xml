@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>livre religieux</EB_Ideobook.label>
+  <EB_Ideobook.description>Un livre contenant des récits fictifs ou véridiques pour le plaisir et l'édification du lecteur.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>livre religieux inachevé</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Un livre religieux inachevé en cours de rédaction au bureau d'écriture.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>bureau d'écriture</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Un bureau pour rédiger des textes idéologiques. Seuls les colons ayant une conviction profonde en leurs croyances peuvent y écrire.</EB_WritingDesk.description>
+</LanguageData>

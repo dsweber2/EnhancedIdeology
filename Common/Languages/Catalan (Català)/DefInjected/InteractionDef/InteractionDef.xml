@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ConversionLog.label>conversió</EB_ConversionLog.label>
+  <EB_ConversionLog.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] s'ha convertit a una nova fe.</EB_ConversionLog.logRulesInitiator.rulesStrings.0>
+  <EB_CrisisOfFaithLog.label>crisi de fe</EB_CrisisOfFaithLog.label>
+  <EB_CrisisOfFaithLog.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] ha experimentat una crisi de fe.</EB_CrisisOfFaithLog.logRulesInitiator.rulesStrings.0>
+  <EB_IdeologicalDebateMeme.label>debat ideològic sobre mems</EB_IdeologicalDebateMeme.label>
+  <EB_IdeologicalDebateMeme.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] i [RECIPIENT_nameDef] han debatut sobre mems.</EB_IdeologicalDebateMeme.logRulesInitiator.rulesStrings.0>
+  <EB_IdeologicalDebatePrecept.label>debat ideològic sobre preceptes</EB_IdeologicalDebatePrecept.label>
+  <EB_IdeologicalDebatePrecept.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] i [RECIPIENT_nameDef] han debatut sobre creences.</EB_IdeologicalDebatePrecept.logRulesInitiator.rulesStrings.0>
+</LanguageData>

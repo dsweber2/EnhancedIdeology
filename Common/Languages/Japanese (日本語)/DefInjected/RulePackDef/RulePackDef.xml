@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Sentence_DebateWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef]は議論に勝った。</EB_Sentence_DebateWon.rulePack.rulesStrings.0>
+  <EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef]はより説得力があることを示した。</EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>
+  <EB_Sentence_RecipientWon.rulePack.rulesStrings.0>sent-&gt;[RECIPIENT_nameDef]はより説得力があることを示した。</EB_Sentence_RecipientWon.rulePack.rulesStrings.0>
+  <EB_Sentence_DebateDraw.rulePack.rulesStrings.0>sent-&gt;どちらも考えを変えなかった。</EB_Sentence_DebateDraw.rulePack.rulesStrings.0>
+</LanguageData>

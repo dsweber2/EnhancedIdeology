@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>religieus boek schrijven</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>Schrijf een religieus boek dat de overtuigingen van jouw ideoligie beschrijft. Vereist een hoge zekerheid in de eigen ideoligie (minimaal 90%).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>een religieus boek schrijven.</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>geïllustreerd religieus boek schrijven</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>Schrijf een geïllumineerd religieus boek versierd met edelstenen en inkten. De kwaliteit van de materialen vergroot de devotionele aspecten van het lezen ervan. Vereist een hoge zekerheid in de eigen ideoligie (minimaal 90%).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>religieus boek illustreren.</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

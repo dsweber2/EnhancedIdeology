@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Sentence_DebateWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef]이(가) 토론에서 이겼습니다.</EB_Sentence_DebateWon.rulePack.rulesStrings.0>
+  <EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef]이(가) 더 설득력 있음을 증명했습니다.</EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>
+  <EB_Sentence_RecipientWon.rulePack.rulesStrings.0>sent-&gt;[RECIPIENT_nameDef]이(가) 더 설득력 있음을 증명했습니다.</EB_Sentence_RecipientWon.rulePack.rulesStrings.0>
+  <EB_Sentence_DebateDraw.rulePack.rulesStrings.0>sent-&gt;아무도 견해를 바꾸지 않았습니다.</EB_Sentence_DebateDraw.rulePack.rulesStrings.0>
+</LanguageData>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>obligatorie</Contemplation_Required.label>
+  <Contemplation_Required.description>Meditația este o obligație sacră. Membrii trebuie să mediteze regulat, iar ghidul moral se așteaptă să conducă prin exemplu.</Contemplation_Required.description>
+  <Contemplation_Respected.label>respectată</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Meditația este o practică valoroasă, iar cei care meditează regulat sunt ținuți în mai mare considerație.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>acceptabilă</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Meditația este o chestiune personală — nici încurajată, nici descurajată.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>dezaprobată</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Meditația este văzută ca slăbiciune sau superstiție. Membrii care meditează sunt priviți nefavorabil.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>interzisă</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Meditația este strict interzisă. Orice membru prins meditând va fi ostracizat.</Contemplation_Forbidden.description>
+</LanguageData>

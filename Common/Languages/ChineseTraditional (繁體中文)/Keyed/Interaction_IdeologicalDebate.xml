@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}試圖與{PAWN2_labelShort}辯論理念觀點，此舉引發了社交衝突！</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>理念皈依</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>在辯論{ISSUE_label}後，{CONVINCER_labelShort}說服{CONVINCED_labelShort}放棄{OLDIDEO_name}，轉而信奉{NEWIDEO_name}。</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

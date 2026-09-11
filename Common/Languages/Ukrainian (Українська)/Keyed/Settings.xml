@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Переклад: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ідеологія</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Правило</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Сумісність</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Налагодження</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Динаміка особистої впевненості</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Ефекти навернення</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Швидкість дрейфу впевненості: {0}/день</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Наскільки швидко впевненість колоніста рухається до цілі кожного дня. Вище = віра реагує на обставини швидше. Робить переконання більш динамічними.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Реляційний вплив: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Максимальний вплив, який думка колоніста про одновірців може мати на цільову впевненість.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Вплив практики: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Максимальний вплив настрою від правил (ритуали, вшанування, табу тощо) на цільову впевненість.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Поріг кризи віри: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Коли впевненість колоніста падає нижче цього значення, може статися криза віри. Вище = більше криз.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Темп навернення: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Наскільки швидко колоністи самостійно покидають погано відповідну їм віру відносно стандарту. Вище = спонтанні навернення частіші.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Втрата впевненості при спробі навернення: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Коли моральний провідник виграє дебати про навернення, але не переконує одразу, впевненість помножується на це значення. 1x = колоніст з 80% впевненості залишається на 80%; 0.8x = падає до 64%. Нижче = спроби навернення ефективніші.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Спад переконань: {0}/квартал</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Наскільки сила переконань усіх правил знижується за квартал. 100% переконаність відповідає середньому 20, максимум — 50. Вище = більша потреба в підкріпленні переконань.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Протилежна позиція — опозиція: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Наскільки сильно колоніст заперечує протилежну крайню позицію, як частку від переконань. При 100%, колоніст із «Канібалізм: Засуджено 12» матиме думку -12 щодо «Канібалізм: Обов'язково». 0% = байдужість до протилежних позицій; 100% = рівна й протилежна підтримці власної крайньої позиції.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Сила навернення: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Наскільки сильніше успішна спроба навернення (цілеспрямована дія морального провідника) змінює переконання порівняно зі звичайною спробою. Вище = швидше навернення.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Зміна переконань у дебатах: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Наскільки далеко одна виграна суперечка змінює переконання з питання відносно стандарту. Одночасно зміщує і правило, і переконання в ньому. Вище = кожні виграні дебати переконують більше. Прискорює навернення.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Бонус дружби (навернення): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Наскільки думка колоніста про того, хто намагається змінити його правило, підсилює ефект. При 1x і думці +100 і зниження впевненості, і притягування переконань подвоюються. При 0x думка не має ефекту. Не використовується, якщо встановлено Peer Pressure — замість цього застосовується власний множник того мода.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Мінімальна впевненість при завантаженні: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>При завантаженні ванільного або доісторичного збереження колоністи з впевненістю нижче цього значення отримують переконання мінімум на цій позначці замість нуля. Запобігає тому, щоб колоніст з 0% впевненості залишився без жодних переконань.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Налагодження обробників взаємодій</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Вмикає журнал налагодження для обробників взаємодій у режимі розробника. Рекомендується вимкнути, якщо ви не налагоджуєте Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>必須</Contemplation_Required.label>
+  <Contemplation_Required.description>瞑想は神聖な義務である。信者は定期的に瞑想しなければならず、道徳的指導者は率先垂範が求められる。</Contemplation_Required.description>
+  <Contemplation_Respected.label>尊重</Contemplation_Respected.label>
+  <Contemplation_Respected.description>瞑想は意義深い実践であり、定期的に瞑想する者はより高く評価される。</Contemplation_Respected.description>
+  <Contemplation_Normal.label>許容</Contemplation_Normal.label>
+  <Contemplation_Normal.description>瞑想は個人的な問題であり——推奨も否定もされない。</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>不承認</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>瞑想は弱さや迷信と見なされる。瞑想する信者は不利な目で見られる。</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>禁止</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>瞑想は厳しく禁じられている。瞑想しているところを見つかった信者は追放される。</Contemplation_Forbidden.description>
+</LanguageData>

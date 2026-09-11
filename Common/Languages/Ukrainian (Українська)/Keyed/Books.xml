@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} — {1} зміна переконань/кварт.</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Відстоювані переконання</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/кварт.</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Релігійну книгу знищено</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, важливу релігійну книгу для {IDEO}, знищено. Послідовники {IDEO} будуть незадоволені.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Знищити {BOOK} спаленням. Це засмутить {IDEO_memberNamePlural} з {IDEO}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Знищити {BOOK} спаленням.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Жоден колоніст не може знищити {BOOK}.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Ви впевнені, що хочете змусити {PAWN} спалити {BOOK}? Це дуже засмутить усіх {IDEO_memberNamePlural} з {IDEO}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Ви впевнені, що хочете змусити {PAWN} спалити {BOOK}?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} знищив {BOOK}. Це дуже засмутило {IDEO_memberNamePlural} з {IDEO}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

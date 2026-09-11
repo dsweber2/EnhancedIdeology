@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} no ha pogut trobar un seient ritual on contemplar per a {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>La sala de contemplació de {IDEO_name} de {PAWN_nameDef} és desrespectada.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>contemplant (guany: {0}/h)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Guany de contemplació</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Taxa de reforç de la convicció per hora durant la contemplació. Es mostra per al peó seleccionat, o com a multiplicador base quan no hi ha cap peó seleccionat. Escala amb la impressivitat de la sala i la força de convicció actual del peó. +10% addicional per cada cocrient a la sala.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Guany de contemplació: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

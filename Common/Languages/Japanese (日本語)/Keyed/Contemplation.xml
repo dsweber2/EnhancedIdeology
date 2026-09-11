@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef}は{IDEO_name}のための瞑想用の儀式席を見つけられなかった。</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>{PAWN_nameDef}の{IDEO_name}瞑想室が冒涜されている。</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>瞑想中（獲得: {0}/時）</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>瞑想の獲得量</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>瞑想中の確信強化率（毎時）。選択中のポーンに対して表示、ポーン未選択時は基本倍率として表示。部屋の印象と現在の確信強度に応じてスケーリング。同じ部屋にいる同信者1人につき追加+10%。</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>瞑想獲得量: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

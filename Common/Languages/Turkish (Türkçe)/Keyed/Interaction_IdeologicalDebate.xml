@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}, {PAWN2_labelShort} ile ideolojik görüşler üzerine tartışmaya çalıştı. Bu sosyal bir kavgaya yol açtı!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>İdeolojik ihtidâ</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>{ISSUE_label} üzerine tartışmanın ardından {CONVINCER_labelShort}, {CONVINCED_labelShort}'ı {OLDIDEO_name}'i terk edip {NEWIDEO_name}'i benimsemeye ikna etti.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

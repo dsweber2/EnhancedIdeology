@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>定期的に瞑想した</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>瞑想に励んできた。心に平和をもたらしてくれる。</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>瞑想を怠っている</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>瞑想する時間が取れていない。信仰心が薄れていく。</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>瞑想を著しく怠っている</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>瞑想せずにあまりにも長い時間が過ぎた。精神的に漂流しているようだ。</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>敬虔に瞑想した</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>瞑想に従事した</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>瞑想禁止に背いた</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>聖典が破壊された</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>我々の聖典が破壊された。まったく許しがたいことだ。</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>聖典を汚した</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>聖典を動物の皮で装丁した。それは間違いだった。</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>革装丁の聖典を読んでいる</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>この聖典は動物の皮で装丁されている。手に持つだけで不快だ。</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>良い議論</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>信条について刺激的な議論をした。開かれた心の出会いだった。</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>異端的な議論</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>彼らの逸脱した信条を論駁しなければならなかった。思想の多様性は毒だ。</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>教えを広めた</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>信仰の真実のために議論した。結果がどうあれ、その試み自体が義なる行為だった。</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>魂を信仰に導いた</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>誰かを我々の信仰の光へと導いた。これ以上の使命はない。</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>改宗に失敗した</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>誰かを信仰に導こうとして失敗した。彼らは無知のままだ。</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>信仰に挑まれた</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>挑戦者に対して信仰の真実を守らなければならなかった。疑問を呈した事実自体が侮辱だ。</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>認知的不協和</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>他の思想の慣行に参加すべきではなかった。</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>信仰が再確認された</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>別の伝統のやり方を見て、自分の道を大切にする理由を思い出した。</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>揺らぐ同信者</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>信仰のない同信者</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>背教心を持つ同信者</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

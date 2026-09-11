@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>hiterősis</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>hiterősis</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} hiterősisben van.\n\n[PAWN_pronoun] a következő egy-két napot elmélkedéssel tölti, megkérdőjelezve [PAWN_possessive] hittételeit.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>{0} hiterősise elmúlt.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Mentális állapot: Hiterősis</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>képromboló</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} mentálisan összeomlott és képrombolóként viselkedik.\n\n[PAWN_pronoun] megpróbálja elégetni a vallásos könyveket.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} már nem viselkedik képrombolóként.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Mentális állapot: Képromboló</EB_Iconoclast.baseInspectLine>
+</LanguageData>

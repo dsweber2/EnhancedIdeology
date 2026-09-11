@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>regelmäßig Einkehr gehalten</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Ich war treu in meiner Einkehr. Es gibt mir Frieden.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>Einkehr vernachlässigt</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Ich habe keine Zeit zur Einkehr gefunden. Meine Frömmigkeit schwindet.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>Einkehr stark vernachlässigt</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Ich bin viel zu lange ohne Einkehr. Ich fühle mich spirituell verloren.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>fromm Einkehr gehalten</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>Einkehr gehalten</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>Einkehrverbot missachtet</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>religiöses Buch vernichtet</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Unser religiöses Buch wurde vernichtet. Das ist absolut unentschuldbar.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>heiligen Text entweiht</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Ich habe ein heiliges Buch in Tierhaut gebunden. Das war falsch.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>ledergeb. Schrift gelesen</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Dieser heilige Text ist in Tierhaut gebunden. Es fühlt sich falsch an, ihn zu halten.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>gute Debatte</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Wir hatten eine anregende Debatte über unsere Überzeugungen. Ein Treffen aufgeschlossener Geister.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>häretische Debatte</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Ich musste ihre abweichenden Überzeugungen widerlegen. Gedankenvielfalt ist ein Gift.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>das Wort verbreitet</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Ich habe für die Wahrheit meines Glaubens argumentiert. Was auch immer das Ergebnis war — der Versuch selbst war eine rechtschaffene Tat.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>eine Seele bekehrt</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Ich habe jemanden in das Licht unseres Glaubens gebracht. Es gibt keine höhere Berufung.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>Bekehrung gescheitert</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Ich habe versucht, jemanden zum Glauben zu bringen, und bin gescheitert. Sie verharren in ihrer Unwissenheit.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>Glaube herausgefordert</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Ich musste die Wahrheit meines Glaubens gegen einen Herausforderer verteidigen. Die bloße Tatsache, dass sie es wagten, ihn in Frage zu stellen, ist eine Beleidigung.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>kognitive Dissonanz</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Ich sollte nicht an den Praktiken anderer Ideoligionen teilnehmen.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>Glaube bestätigt</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Die Praktiken einer anderen Tradition zu sehen, erinnert mich daran, warum ich meinen eigenen Weg schätze.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>schwankender Mitgläubiger</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>glaubensloser Mitgläubiger</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>apostasiegeneigter Mitgläubiger</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

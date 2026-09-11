@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} не зміг знайти ритуального місця для споглядання заради {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>Кімнату для споглядання {PAWN_nameDef} ({IDEO_name}) не поважають.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>споглядає (приріст: {0}/год)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Приріст від споглядання</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Швидкість підсилення переконань за годину під час споглядання. Відображається для вибраного колоніста або як базовий множник, якщо нікого не вибрано. Залежить від вражаючості кімнати та поточної сили переконань колоніста. Додатково +10% за кожного вірянина у кімнаті.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Приріст від споглядання: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

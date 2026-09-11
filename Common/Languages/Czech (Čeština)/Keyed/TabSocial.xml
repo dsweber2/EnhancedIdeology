@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.PawnCertaintyTooltip>Jistota {PAWN_nameDef} ve víru {IDEO_name}: {2}</EnhancedIdeology.PawnCertaintyTooltip>
+  <EnhancedIdeology.CertaintyTarget>Cílová jistota: {0}</EnhancedIdeology.CertaintyTarget>
+  <EnhancedIdeology.CertainChangePerDay>Posun k cíli rychlostí {0}/den</EnhancedIdeology.CertainChangePerDay>
+  <EnhancedIdeology.CertaintyBandStructural>Strukturální (přesvědčení a povaha): {0}</EnhancedIdeology.CertaintyBandStructural>
+  <EnhancedIdeology.CertaintyBandRelational>Kongregace: {0}</EnhancedIdeology.CertaintyBandRelational>
+  <EnhancedIdeology.CertaintyBandPractice>Praxe (nedávné obřady): {0}</EnhancedIdeology.CertaintyBandPractice>
+  <EnhancedIdeology.CertaintyPreceptDecay>Rozpad zásad: {0}/quadrum</EnhancedIdeology.CertaintyPreceptDecay>
+  <EnhancedIdeology.CouplingPenalty>Protichůdné praktiky</EnhancedIdeology.CouplingPenalty>
+  <EnhancedIdeology.DietGeneAntiMeat>Povinný bylinkář</EnhancedIdeology.DietGeneAntiMeat>
+  <EnhancedIdeology.DietGeneProMeat>Povinný masožravec</EnhancedIdeology.DietGeneProMeat>
+  <EnhancedIdeology.XenotypePreferred>Preferovaný xenotyp</EnhancedIdeology.XenotypePreferred>
+  <EnhancedIdeology.XenotypeDisapproved>Neschválený xenotyp</EnhancedIdeology.XenotypeDisapproved>
+</LanguageData>

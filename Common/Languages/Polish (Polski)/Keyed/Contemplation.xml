@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} nie znalazł(a) miejsca rytualnego do medytacji dla {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>Sala medytacji {IDEO_name} dla {PAWN_nameDef} jest zbezczeszczona.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>medytacja (przyrost: {0}/godz)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Przyrost medytacji</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Tempo wzmacniania przekonań na godzinę podczas medytacji. Pokazywane dla wybranego piona lub jako bazowy mnożnik, gdy żaden pion nie jest wybrany. Skaluje się z imponującością pomieszczenia i aktualną siłą przekonań piona. Dodatkowe +10% za każdego współwyznawcę w pomieszczeniu.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Przyrost medytacji: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

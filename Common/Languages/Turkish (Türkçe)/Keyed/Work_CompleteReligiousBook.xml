@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologyMissingRole>İdeodinin gerekli '{ROLE}' rolü bulunmuyor.</EnhancedIdeology.IdeologyMissingRole>
+  <EnhancedIdeology.PawnMissingRequiredRole>{PAWN}, gerekli '{ROLE}' rolüne sahip değil.</EnhancedIdeology.PawnMissingRequiredRole>
+  <EnhancedIdeology.PawnIsNotAuthor>{PAWN}, kitabın yazarı değil.</EnhancedIdeology.PawnIsNotAuthor>
+  <EnhancedIdeology.BookIsNotForPawnIdeoligion>Bu kitap {PAWN_possessive} ideolojisi için değil.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
+  <EnhancedIdeology.NoFreeValidLecternFound>Çalışmak için kullanılabilir, erişilebilir bir kürsü bulunamadı.</EnhancedIdeology.NoFreeValidLecternFound>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Dini metin yazmak için iman %90'ın üzerinde olmalıdır.</EnhancedIdeology.InsufficientCertaintyToWrite>
+</LanguageData>

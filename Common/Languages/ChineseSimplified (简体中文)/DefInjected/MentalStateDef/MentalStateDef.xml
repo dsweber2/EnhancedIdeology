@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>信仰危机</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>信仰危机</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0}正在经历信仰危机。\n\n[PAWN_pronoun]将在接下来的一两天内沉思，质疑[PAWN_possessive]的信仰。</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>{0}的信仰危机已过去。</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>精神状态：信仰危机</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>偶像破坏者</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0}精神崩溃，正在充当偶像破坏者。\n\n[PAWN_pronoun]将尝试焚烧宗教书籍。</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0}不再充当偶像破坏者。</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>精神状态：偶像破坏者</EB_Iconoclast.baseInspectLine>
+</LanguageData>

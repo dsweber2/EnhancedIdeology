@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.PawnCertaintyTooltip>Certezza di {PAWN_nameDef} in {IDEO_name}: {2}</EnhancedIdeology.PawnCertaintyTooltip>
+  <EnhancedIdeology.CertaintyTarget>Certezza obiettivo: {0}</EnhancedIdeology.CertaintyTarget>
+  <EnhancedIdeology.CertainChangePerDay>Si avvicina a {0}/giorno</EnhancedIdeology.CertainChangePerDay>
+  <EnhancedIdeology.CertaintyBandStructural>Strutturale (credenze e natura): {0}</EnhancedIdeology.CertaintyBandStructural>
+  <EnhancedIdeology.CertaintyBandRelational>Congregazione: {0}</EnhancedIdeology.CertaintyBandRelational>
+  <EnhancedIdeology.CertaintyBandPractice>Pratica (riti recenti): {0}</EnhancedIdeology.CertaintyBandPractice>
+  <EnhancedIdeology.CertaintyPreceptDecay>Decadimento precetto: {0}/quadro</EnhancedIdeology.CertaintyPreceptDecay>
+  <EnhancedIdeology.CouplingPenalty>Pratiche in conflitto</EnhancedIdeology.CouplingPenalty>
+  <EnhancedIdeology.DietGeneAntiMeat>Erbivoro obbligato</EnhancedIdeology.DietGeneAntiMeat>
+  <EnhancedIdeology.DietGeneProMeat>Carnivoro obbligato</EnhancedIdeology.DietGeneProMeat>
+  <EnhancedIdeology.XenotypePreferred>Xenotipo preferito</EnhancedIdeology.XenotypePreferred>
+  <EnhancedIdeology.XenotypeDisapproved>Xenotipo disapprovato</EnhancedIdeology.XenotypeDisapproved>
+</LanguageData>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>kryzys wiary</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>kryzys wiary</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} przeżywa kryzys wiary.\n\n[PAWN_pronoun] spędzi następny dzień lub dwa na medytacji, kwestionując [PAWN_possessive] przekonania.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>Kryzys wiary {0} minął.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Stan psychiczny: Kryzys wiary</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>ikonoklasta</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} doznał(a) załamania i stał(a) się ikonoklastą.\n\n[PAWN_pronoun] będzie próbował(a) palić księgi religijne.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} nie jest już ikonoklastą.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Stan psychiczny: Ikonoklasta</EB_Iconoclast.baseInspectLine>
+</LanguageData>

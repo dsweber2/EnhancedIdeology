@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>обов'язково</Contemplation_Required.label>
+  <Contemplation_Required.description>Споглядання є священним обов'язком. Члени повинні споглядати регулярно, а моральний провідник зобов'язаний подавати приклад.</Contemplation_Required.description>
+  <Contemplation_Respected.label>шанована</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Споглядання є значущою практикою, і тих, хто споглядає регулярно, поважають більше.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>прийнятна</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Споглядання — особиста справа, яку ні заохочують, ні забороняють.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>засуджена</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Споглядання вважається слабкістю або забобоном. Членів, які споглядають, сприймають негативно.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>заборонена</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Споглядання суворо заборонене. Будь-якого члена, якого спіймають на спогляданні, уникатимуть.</Contemplation_Forbidden.description>
+</LanguageData>

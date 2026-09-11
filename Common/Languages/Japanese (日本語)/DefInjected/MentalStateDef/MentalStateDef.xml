@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>信仰の危機</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>信仰の危機</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0}は信仰の危機を迎えている。\n\n[PAWN_pronoun]は次の1〜2日間を瞑想に費やし、[PAWN_possessive]信条に疑問を抱くだろう。</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>{0}の信仰の危機は過ぎ去った。</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>精神状態: 信仰の危機</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>偶像破壊者</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0}は精神崩壊を起こし、偶像破壊者と化している。\n\n[PAWN_pronoun]は聖典を燃やそうとするだろう。</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0}はもはや偶像破壊者ではなくなった。</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>精神状態: 偶像破壊者</EB_Iconoclast.baseInspectLine>
+</LanguageData>

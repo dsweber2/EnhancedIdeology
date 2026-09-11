@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ideoligion</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Opinii ideoligion</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Probleme</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Problemă</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Poziție</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Putere</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Indiferent</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>Referitor la problema {1}, {PAWN_nameDef} are poziția {2} cu convingerea {3}. {IDEO_name} propovăduiește {5}; opinia lui {PAWN_nameDef} față de acea poziție: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>Opinia lui {PAWN_nameDef} față de {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Din meme și precepte: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Din credințe personale: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Din relații interpersonale: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

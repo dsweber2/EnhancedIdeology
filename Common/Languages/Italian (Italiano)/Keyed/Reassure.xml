@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Reassure.CertaintyGain>Guadagno certezza in caso di vittoria: +{0}</EnhancedIdeology.Reassure.CertaintyGain>
+  <EnhancedIdeology.Reassure.SuccessChance>Probabilità di vincere il dibattito: {0}</EnhancedIdeology.Reassure.SuccessChance>
+  <EnhancedIdeology.Reassure.SelfTarget>Auto-rassicurazione: successo garantito</EnhancedIdeology.Reassure.SelfTarget>
+  <EnhancedIdeology.Reassure.TargetBeliefs>Credenze da rafforzare (da 1 a {0} casuali tra):</EnhancedIdeology.Reassure.TargetBeliefs>
+  <EnhancedIdeology.Reassure.NoHeterodoxy>Le loro credenze sono già ortodosse - non c'è niente da rafforzare.</EnhancedIdeology.Reassure.NoHeterodoxy>
+  <EnhancedIdeology.Reassure.FailMessage>{0} non è riuscito a rassicurare {1}.</EnhancedIdeology.Reassure.FailMessage>
+</LanguageData>

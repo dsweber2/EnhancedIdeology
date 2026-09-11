@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>Réduction temporaire de la certitude : {0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>Chance de remporter le débat : {0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>Chance de convertir en cas de victoire : {0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>Croyances ciblées (1 à {0} au hasard parmi) :</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>Ils ne s'opposent à rien de ce que prêche votre foi — il n'y a rien à convertir.</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>Facteurs (vous contre eux) :</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>Pouvoir de conversion : {0} contre {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>Débat intellectuel : {0} contre {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>Impact social : {0} contre {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.PawnCertaintyTooltip>{PAWN_nameDef}의 {IDEO_name}에 대한 믿음: {2}</EnhancedIdeology.PawnCertaintyTooltip>
+  <EnhancedIdeology.CertaintyTarget>목표 믿음: {0}</EnhancedIdeology.CertaintyTarget>
+  <EnhancedIdeology.CertainChangePerDay>{0}/일 속도로 목표를 향해 변화 중</EnhancedIdeology.CertainChangePerDay>
+  <EnhancedIdeology.CertaintyBandStructural>구조적 (신념 및 본성): {0}</EnhancedIdeology.CertaintyBandStructural>
+  <EnhancedIdeology.CertaintyBandRelational>교인 공동체: {0}</EnhancedIdeology.CertaintyBandRelational>
+  <EnhancedIdeology.CertaintyBandPractice>실천 (최근 행사): {0}</EnhancedIdeology.CertaintyBandPractice>
+  <EnhancedIdeology.CertaintyPreceptDecay>규율 쇠퇴: {0}/분기</EnhancedIdeology.CertaintyPreceptDecay>
+  <EnhancedIdeology.CouplingPenalty>상충하는 실천</EnhancedIdeology.CouplingPenalty>
+  <EnhancedIdeology.DietGeneAntiMeat>의무적 초식</EnhancedIdeology.DietGeneAntiMeat>
+  <EnhancedIdeology.DietGeneProMeat>의무적 육식</EnhancedIdeology.DietGeneProMeat>
+  <EnhancedIdeology.XenotypePreferred>선호 이종 유형</EnhancedIdeology.XenotypePreferred>
+  <EnhancedIdeology.XenotypeDisapproved>불승인 이종 유형</EnhancedIdeology.XenotypeDisapproved>
+</LanguageData>

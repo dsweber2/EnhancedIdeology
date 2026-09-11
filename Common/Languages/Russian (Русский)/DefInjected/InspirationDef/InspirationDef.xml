@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>религиозное просветление</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] ощущает миг божественной ясности и вынужден написать религиозный текст.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Вдохновение: религиозное просветление</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>Миг религиозного просветления [PAWN_nameDef] миновал.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

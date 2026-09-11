@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Reassure.CertaintyGain>Kazanıldığında iman kazanımı: +{0}</EnhancedIdeology.Reassure.CertaintyGain>
+  <EnhancedIdeology.Reassure.SuccessChance>Tartışmayı kazanma ihtimali: {0}</EnhancedIdeology.Reassure.SuccessChance>
+  <EnhancedIdeology.Reassure.SelfTarget>Kendi kendini güçlendirme: kesin başarı</EnhancedIdeology.Reassure.SelfTarget>
+  <EnhancedIdeology.Reassure.TargetBeliefs>Pekiştirilecek inançlar (rastgele 1-{0} tanesi):</EnhancedIdeology.Reassure.TargetBeliefs>
+  <EnhancedIdeology.Reassure.NoHeterodoxy>İnançları zaten ortodoks — pekiştirilecek bir şey yok.</EnhancedIdeology.Reassure.NoHeterodoxy>
+  <EnhancedIdeology.Reassure.FailMessage>{0}, {1}'i güçlendirmeyi başaramadı.</EnhancedIdeology.Reassure.FailMessage>
+</LanguageData>

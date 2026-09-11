@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>Tijdelijke zekerheidsvermindering: {0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>Kans om het debat te winnen: {0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>Kans op bekering bij winst: {0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>Doelovertuigingen (willekeurig 1-{0} van):</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>Ze verzetten zich nergens tegen wat jouw geloof predikt - er valt niets te bekeren.</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>Factoren (jij vs. zij):</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>Bekeringskracht: {0} vs {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>Intellectueel debat: {0} vs {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>Sociale invloed: {0} vs {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

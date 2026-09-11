@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 信念變化/月</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>宣揚的信念</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/月</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>宗教書籍已被摧毀</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}，{IDEO}的重要宗教書籍，已遭摧毀。{IDEO}的信徒對此將深感不滿。</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>焚燒並摧毀{BOOK}。此舉將激怒{IDEO}的{IDEO_memberNamePlural}。</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>焚燒並摧毀{BOOK}。</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>沒有殖民者能夠摧毀{BOOK}。</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>確定要讓{PAWN}焚燒{BOOK}嗎？此舉將嚴重激怒{IDEO}所有的{IDEO_memberNamePlural}。</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>確定要讓{PAWN}焚燒{BOOK}嗎？</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN}已摧毀{BOOK}。此舉嚴重激怒了{IDEO}的{IDEO_memberNamePlural}。</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} meggyőződés-változás/negyed</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Hirdetett hittételek</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/negyed</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Vallásos könyv megsemmisült</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, a {IDEO} számára fontos vallásos könyv megsemmisült. A {IDEO} követői nem lesznek boldogok emiatt.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Semmisítsd meg {BOOK}-t elégetéssel. Ez felháborítja a {IDEO} tagjait: {IDEO_memberNamePlural}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Semmisítsd meg {BOOK}-t elégetéssel.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Egyetlen gyarmatos sem tudja megsemmisíteni {BOOK}-t.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Biztosan elégetted {PAWN}-val {BOOK}-t? Ez nagymértékben felháborítja a {IDEO} összes tagját: {IDEO_memberNamePlural}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Biztosan el akarod égettetni {PAWN}-val {BOOK}-t?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} megsemmisítette {BOOK}-t. Ez nagymértékben felháborította a {IDEO} tagjait: {IDEO_memberNamePlural}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

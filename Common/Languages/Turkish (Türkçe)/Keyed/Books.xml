@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} inanç değişimi/çeyrek</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Savunulan inançlar</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/çeyrek</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Dini kitap yok edildi</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{IDEO} için önemli bir dini kitap olan {BOOK} yok edildi. {IDEO} mensupları bundan memnun olmayacak.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>{BOOK}'u yakarak yok et. Bu, {IDEO} mensupları olan {IDEO_memberNamePlural}'ı rahatsız edecek.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>{BOOK}'u yakarak yok et.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Hiçbir kolonici {BOOK}'u yok edemez.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>{PAWN}'ı {BOOK}'u yakmaya göndermek istediğinizden emin misiniz? Bu, {IDEO}'nun tüm mensuplarını ({IDEO_memberNamePlural}) derinden rahatsız edecek.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>{PAWN}'ı {BOOK}'u yakmaya göndermek istediğinizden emin misiniz?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN}, {BOOK}'u yok etti. Bu, {IDEO}'nun mensuplarını ({IDEO_memberNamePlural}) derinden rahatsız etti.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

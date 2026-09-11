@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} спробував посперечатися про ідеологічні погляди з {PAWN2_labelShort}. Це призвело до соціальної сутички!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ідеологічне навернення</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>Після дебатів про {ISSUE_label}, {CONVINCER_labelShort} переконав {CONVINCED_labelShort} залишити {OLDIDEO_name} та прийняти {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

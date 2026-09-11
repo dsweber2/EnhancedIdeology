@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Tín ngưỡng</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Quan điểm tín ngưỡng</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Vấn đề</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Vấn đề</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Lập trường</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Sức mạnh</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Không quan tâm</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>Về vấn đề {1}, {PAWN_nameDef} giữ lập trường {2} với niềm tin {3}. {IDEO_name} rao giảng {5}; quan điểm của {PAWN_nameDef} về lập trường đó: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>Quan điểm của {PAWN_nameDef} về {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Từ kỷ vật và giới luật: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Từ niềm tin cá nhân: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Từ quan hệ cá nhân: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>contemplou regularmente</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Tenho sido fiel em minhas contemplações. Isso me traz paz.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>contemplação negligenciada</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Não encontrei tempo para contemplar. Minha devoção está escorregando.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>contemplação gravemente negligenciada</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Fiquei tempo demais sem contemplação. Sinto-me espiritualmente à deriva.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>contemplou devotamente</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>se envolveu em contemplação</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>desafiou a proibição de contemplação</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>livro religioso destruído</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Nosso livro religioso foi destruído. Isso é absolutamente imperdoável.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>profanou um texto sagrado</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Encadernei um livro sagrado em couro animal. Isso foi errado.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>lendo escritura encadernada em couro</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Este texto sagrado está encadernado em couro animal. Segurá-lo parece errado.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>bom debate</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Tivemos um debate estimulante sobre nossas crenças. Um encontro de mentes abertas.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>debate herético</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Tive que refutar suas crenças desviantes. A diversidade de pensamento é um veneno.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>difundiu a palavra</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Argumentei pela verdade da minha fé. Qualquer que seja o resultado, a tentativa em si foi um ato justo.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>trouxe uma alma à fé</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Trouxe alguém para a luz da nossa fé. Não há chamado maior.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>falhou em converter</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Tentei trazer alguém para a fé e falhei. Eles permanecem em sua ignorância.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>fé questionada</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Tive que defender a verdade da minha fé contra um questionador. O simples fato de terem ousado questioná-la é um insulto.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>dissonância cognitiva</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Não deveria estar participando das práticas de outra ideologia.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>fé reafirmada</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Ver o modo de fazer as coisas de outra tradição me lembra por que valorizo meu próprio caminho.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>correligionário vacilante</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>correligionário sem fé</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>correligionário de coração apóstata</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

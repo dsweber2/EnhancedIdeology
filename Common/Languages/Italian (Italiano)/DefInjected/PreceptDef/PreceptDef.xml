@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>obbligatoria</Contemplation_Required.label>
+  <Contemplation_Required.description>La meditazione è un obbligo sacro. I membri devono meditare regolarmente e la guida morale deve dare l'esempio.</Contemplation_Required.description>
+  <Contemplation_Respected.label>rispettata</Contemplation_Respected.label>
+  <Contemplation_Respected.description>La meditazione è una pratica significativa e coloro che meditano regolarmente sono tenuti in maggiore considerazione.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>accettabile</Contemplation_Normal.label>
+  <Contemplation_Normal.description>La meditazione è una questione personale — né incoraggiata né scoraggiata.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>disapprovata</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>La meditazione è vista come debolezza o superstizione. I membri che meditano sono visti sfavorevolmente.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>vietata</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>La meditazione è severamente vietata. Qualsiasi membro sorpreso a meditare sarà escluso dalla comunità.</Contemplation_Forbidden.description>
+</LanguageData>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.PawnCertaintyTooltip>Độ chắc chắn của {PAWN_nameDef} trong {IDEO_name}: {2}</EnhancedIdeology.PawnCertaintyTooltip>
+  <EnhancedIdeology.CertaintyTarget>Độ chắc chắn mục tiêu: {0}</EnhancedIdeology.CertaintyTarget>
+  <EnhancedIdeology.CertainChangePerDay>Đang dịch chuyển về phía đó ở {0}/ngày</EnhancedIdeology.CertainChangePerDay>
+  <EnhancedIdeology.CertaintyBandStructural>Cấu trúc (niềm tin &amp; bản chất): {0}</EnhancedIdeology.CertaintyBandStructural>
+  <EnhancedIdeology.CertaintyBandRelational>Cộng đoàn: {0}</EnhancedIdeology.CertaintyBandRelational>
+  <EnhancedIdeology.CertaintyBandPractice>Thực hành (nghi thức gần đây): {0}</EnhancedIdeology.CertaintyBandPractice>
+  <EnhancedIdeology.CertaintyPreceptDecay>Phân rã giới luật: {0}/quý</EnhancedIdeology.CertaintyPreceptDecay>
+  <EnhancedIdeology.CouplingPenalty>Thực hành đối lập</EnhancedIdeology.CouplingPenalty>
+  <EnhancedIdeology.DietGeneAntiMeat>Bắt buộc ăn chay</EnhancedIdeology.DietGeneAntiMeat>
+  <EnhancedIdeology.DietGeneProMeat>Bắt buộc ăn thịt</EnhancedIdeology.DietGeneProMeat>
+  <EnhancedIdeology.XenotypePreferred>Kiểu gen ngoại lai ưa thích</EnhancedIdeology.XenotypePreferred>
+  <EnhancedIdeology.XenotypeDisapproved>Kiểu gen ngoại lai không chấp nhận</EnhancedIdeology.XenotypeDisapproved>
+</LanguageData>

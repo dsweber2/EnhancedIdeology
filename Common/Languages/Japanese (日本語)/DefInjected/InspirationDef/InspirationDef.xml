@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>宗教的啓示</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun]は神聖な明晰さの瞬間を感じ、聖典を書かずにはいられなくなった。</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>鼓舞: 宗教的啓示</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>[PAWN_nameDef]の宗教的啓示の瞬間が過ぎ去った。</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

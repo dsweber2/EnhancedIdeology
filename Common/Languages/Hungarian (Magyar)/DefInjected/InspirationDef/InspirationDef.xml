@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>vallási megvilágosodás</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] isteni tisztánlátás pillanatát érzi, és vallásos szöveg írására kényszerül.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Ihletett: Vallási megvilágosodás</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>[PAWN_nameDef] vallási megvilágosodásának pillanata elmúlt.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

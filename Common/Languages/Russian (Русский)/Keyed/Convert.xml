@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>Временное снижение уверенности: {0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>Шанс выиграть спор: {0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>Шанс на обращение при победе: {0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>Целевые убеждения (случайные 1-{0} из):</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>Они не противятся ничему, что проповедует ваша вера — обращать не в чем.</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>Факторы (вы против них):</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>Сила обращения: {0} против {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>Интеллектуальный спор: {0} против {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>Социальное влияние: {0} против {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} zmiana przekonań/kw</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Głoszone poglądy</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/kw</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Zniszczono księgę religijną</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, ważna księga religijna ideologii {IDEO}, została zniszczona. Wyznawcy {IDEO} nie będą z tego zadowoleni.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Zniszcz {BOOK} przez spalenie. Rozgniewa to {IDEO_memberNamePlural} z {IDEO}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Zniszcz {BOOK} przez spalenie.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Żaden kolonista nie może zniszczyć {BOOK}.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Czy na pewno chcesz, żeby {PAWN} spalił(a) {BOOK}? Mocno rozgniewa to wszystkich {IDEO_memberNamePlural} z {IDEO}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Czy na pewno chcesz, żeby {PAWN} spalił(a) {BOOK}?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} zniszczył(a) {BOOK}. Mocno rozgniewało to {IDEO_memberNamePlural} z {IDEO}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

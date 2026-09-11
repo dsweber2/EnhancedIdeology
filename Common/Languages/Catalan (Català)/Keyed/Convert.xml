@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>Reducció temporal de la certesa: {0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>Probabilitat de guanyar el debat: {0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>Probabilitat de convertir si guanyeu: {0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>Creences objectiu (1-{0} aleatòries de):</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>No s'oposen a res del que predica la vostra fe; no hi ha res per convertir.</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>Factors (vós vs. ells):</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>Poder de conversió: {0} vs {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>Debat intel·lectual: {0} vs {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>Impacte social: {0} vs {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>临时认可度降低：{0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>赢得辩论的概率：{0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>赢得后转化的概率：{0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>目标信仰（随机1-{0}条）：</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>对方对你信仰所宣扬的内容毫无异议——无从转化。</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>影响因素（你 vs. 对方）：</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>教化能力：{0} vs {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>智识辩论：{0} vs {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>社交影响：{0} vs {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

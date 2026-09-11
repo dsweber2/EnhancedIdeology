@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Reassure.CertaintyGain>승리 시 믿음 획득: +{0}</EnhancedIdeology.Reassure.CertaintyGain>
+  <EnhancedIdeology.Reassure.SuccessChance>토론 승리 확률: {0}</EnhancedIdeology.Reassure.SuccessChance>
+  <EnhancedIdeology.Reassure.SelfTarget>자기 확신: 항상 성공</EnhancedIdeology.Reassure.SelfTarget>
+  <EnhancedIdeology.Reassure.TargetBeliefs>강화할 신념 (무작위 1~{0}개):</EnhancedIdeology.Reassure.TargetBeliefs>
+  <EnhancedIdeology.Reassure.NoHeterodoxy>상대방의 신념은 이미 정통입니다 - 강화할 것이 없습니다.</EnhancedIdeology.Reassure.NoHeterodoxy>
+  <EnhancedIdeology.Reassure.FailMessage>{0}이(가) {1}을(를) 설득하는 데 실패했습니다.</EnhancedIdeology.Reassure.FailMessage>
+</LanguageData>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ConversionLog.label>обращение</EB_ConversionLog.label>
+  <EB_ConversionLog.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] перешёл в новую веру.</EB_ConversionLog.logRulesInitiator.rulesStrings.0>
+  <EB_CrisisOfFaithLog.label>кризис веры</EB_CrisisOfFaithLog.label>
+  <EB_CrisisOfFaithLog.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] пережил кризис веры.</EB_CrisisOfFaithLog.logRulesInitiator.rulesStrings.0>
+  <EB_IdeologicalDebateMeme.label>идеологический спор о чертах</EB_IdeologicalDebateMeme.label>
+  <EB_IdeologicalDebateMeme.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] и [RECIPIENT_nameDef] спорили о чертах.</EB_IdeologicalDebateMeme.logRulesInitiator.rulesStrings.0>
+  <EB_IdeologicalDebatePrecept.label>идеологический спор о принципах</EB_IdeologicalDebatePrecept.label>
+  <EB_IdeologicalDebatePrecept.logRulesInitiator.rulesStrings.0>r_logentry-&gt;[INITIATOR_nameDef] и [RECIPIENT_nameDef] спорили об убеждениях.</EB_IdeologicalDebatePrecept.logRulesInitiator.rulesStrings.0>
+</LanguageData>

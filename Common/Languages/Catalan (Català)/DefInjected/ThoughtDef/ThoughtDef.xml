@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>contemplat regularment</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>He estat fidel en les meves contemplacions. Em porta pau.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>contemplació descuidada</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>No he trobat temps per contemplar. La meva devoció s'esmuny.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>contemplació greument descuidada</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>He passat massa temps sense contemplació. Em sento a la deriva espiritualment.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>contemplat devotament</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>s'ha dedicat a la contemplació</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>ha desafiat la prohibició de la contemplació</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>llibre religiós destruït</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>El nostre llibre religiós ha estat destruït. Això és absolutament inexcusable.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>ha profanat un text sagrat</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>He enquadernat un llibre sagrat amb pell animal. Això era incorrecte.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>llegint les escriptures en cuir</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Aquest text sagrat està enquadernat en pell animal. Tenir-lo a les mans em sembla incorrecte.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>bon debat</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Hem tingut un debat estimulant sobre les nostres creences. Una trobada de ments obertes.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>debat heretge</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>He hagut de refutar les seves creences desviades. La diversitat de pensament és un verí.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>ha difós la paraula</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>He defensat la veritat de la meva fe. Sigui quin sigui el resultat, l'intent en si mateix va ser un acte just.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>ha portat una ànima a la fe</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>He portat algú a la llum de la nostra fe. No hi ha vocació més gran.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>no ha pogut convertir</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>He intentat portar algú a la fe i he fracassat. Romanen en la seva ignorància.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>fe desafiada</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>He hagut de defensar la veritat de la meva fe davant un desafiador. El simple fet que s'atrevissin a qüestionar-la és un insult.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>dissonància cognitiva</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>No hauria de participar en les pràctiques d'altres ideoligions.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>fe reafirmada</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Veure la manera de fer les coses d'una altra tradició em recorda per què valoro el meu propi camí.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>correligionari vacil·lant</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>correligionari sense fe</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>correligionari d'esperit apòstata</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

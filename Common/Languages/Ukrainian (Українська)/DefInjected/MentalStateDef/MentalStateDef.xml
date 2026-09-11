@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>криза віри</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>криза віри</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} переживає кризу віри.\n\n[PAWN_pronoun] проведе наступний день-два у спогляданні, ставлячи під сумнів [PAWN_possessive] переконання.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>Криза віри {0} минула.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Психічний стан: Криза віри</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>іконоборець</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} зазнав психічного зриву та стає іконоборцем.\n\n[PAWN_pronoun] спробує спалити релігійні книги.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} більше не іконоборець.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Психічний стан: Іконоборець</EB_Iconoclast.baseInspectLine>
+</LanguageData>

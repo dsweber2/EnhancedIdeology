@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>理念</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>理念看法</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>議題</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>議題</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>立場</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>強度</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>無所謂</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>在{1}的議題上，{PAWN_nameDef}持有立場{2}，信念強度為{3}。{IDEO_name}宣揚{5}；{PAWN_nameDef}對該立場的看法：{6}。</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}對{IDEO_name}的看法：{2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>源自模因與戒律：{0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>源自個人信念：{0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>源自人際關係：{0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

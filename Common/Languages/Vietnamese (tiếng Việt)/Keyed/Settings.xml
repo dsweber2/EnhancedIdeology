@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Dịch thuật: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Tín ngưỡng</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Giới luật</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Tương thích</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Gỡ lỗi</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Động lực độ chắc chắn cá nhân</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Hiệu ứng cải đạo</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Tốc độ trôi dạt độ chắc chắn: {0}/ngày</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Tốc độ độ chắc chắn của nhân vật di chuyển về phía mục tiêu mỗi ngày. Cao hơn = đức tin phản ứng nhanh hơn với hoàn cảnh. Tạo ra niềm tin năng động hơn.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Ảnh hưởng quan hệ: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Mức tối đa mà quan điểm của nhân vật về đồng đạo có thể tăng hoặc giảm độ chắc chắn mục tiêu.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Ảnh hưởng thực hành: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Mức tối đa mà tâm trạng từ giới luật (từ nghi thức, tôn kính, điều cấm kỵ, v.v.) có thể tăng hoặc giảm độ chắc chắn mục tiêu.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Ngưỡng khủng hoảng đức tin: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Khi độ chắc chắn của nhân vật xuống dưới mức này, họ có thể bị khủng hoảng đức tin. Cao hơn = nhiều khủng hoảng hơn.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Tốc độ cải đạo: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Tốc độ nhân vật tự bỏ tín ngưỡng không phù hợp, so với mặc định. Cao hơn = cải đạo tự phát có nhiều khả năng xảy ra hơn.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Mất độ chắc chắn khi cố cải đạo: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Khi người hướng đạo thắng tranh luận cải đạo nhưng không lập tức thay đổi nhân vật, độ chắc chắn của họ được nhân với hệ số này. 1x = nhân vật 80% chắc chắn giữ nguyên ở 80%; 0.8x = nhân vật 80% giảm xuống 64%. Thấp hơn = lần cố cải đạo có tác động mạnh hơn.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Phân rã niềm tin: {0}/quý</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Mức độ sức mạnh niềm tin mà mọi giới luật mất đi mỗi quý. Lưu ý rằng 100% niềm tin tương ứng với mức trung bình giới luật là 20, tối đa là 50. Cao hơn = nhu cầu củng cố niềm tin mạnh hơn.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Phản đối lập trường đối lập: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Mức độ nhân vật phản đối lập trường ở thái cực đối lập của một vấn đề, theo tỷ lệ niềm tin của họ. Ở 100%, nhân vật với Ăn thịt người: Không chấp nhận 12 có quan điểm -12 về Ăn thịt người: Bắt buộc (điên cuồng). 0% = thờ ơ với lập trường đối lập; 100% = bằng nhau và đối lập với sự ủng hộ của họ cho giới luật thái cực xa nhất.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Sức mạnh cải đạo: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Mức độ một lần cải đạo thành công (hành động có chủ đích của người hướng đạo) tác động mạnh hơn lên niềm tin của nhân vật so với lần cải đạo thông thường. Cao hơn = cải đạo nhanh hơn.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Thay đổi niềm tin qua tranh luận: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Mức độ một lần thắng tranh luận thay đổi niềm tin về vấn đề đó, so với mặc định. Thay đổi đồng thời cả giới luật và niềm tin vào giới luật đó. Cao hơn = mỗi lần thắng tranh luận thuyết phục nhiều hơn. Dẫn đến cải đạo nhanh hơn.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Thưởng tình bạn (cải đạo): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Mức độ quan điểm của nhân vật về người cố thay đổi giới luật của họ khuếch đại hiệu ứng. Ở 1x và quan điểm +100, cả giảm độ chắc chắn và kéo niềm tin đều tăng gấp đôi. Ở 0x, quan điểm không có tác dụng. Không được dùng khi có mod Peer Pressure — thiết lập nhân số của mod đó sẽ thay thế.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Độ chắc chắn tối thiểu khi tải lưu: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Khi tải bản lưu gốc hoặc bản lưu trước khi có mod, nhân vật có độ chắc chắn dưới mức này sẽ được thiết lập niềm tin ở mức tối thiểu này thay vì bằng không. Ngăn nhân vật 0% độ chắc chắn không có niềm tin gì cả.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Gỡ lỗi Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Bật ghi nhật ký gỡ lỗi cho interaction workers khi chế độ dev đang hoạt động. Nên tắt tùy chọn này trừ khi đang gỡ lỗi cụ thể cho Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

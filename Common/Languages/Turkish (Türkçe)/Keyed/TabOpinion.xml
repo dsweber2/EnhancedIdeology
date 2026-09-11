@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>İdeoloji</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>İdeoloji Görüşleri</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Konular</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Konu</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Tutum</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Güç</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Umursamıyor</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>{1} konusunda {PAWN_nameDef}, {3} inançla {2} tutumunu benimsiyor. {IDEO_name}, {5}'i öğütlüyor; {PAWN_nameDef}'in bu tutuma dair görüşü: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}'in {IDEO_name} hakkındaki görüşü: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>İlkeler ve öğretilerden: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Kişisel inançlardan: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Kişilerarası ilişkilerden: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>scrivi libro religioso</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>Scrivi un libro religioso che descriva le credenze della tua ideoligione. Richiede un'elevata certezza nella propria ideoligione (almeno 90%).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>scrivendo un libro religioso.</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>scrivi libro religioso illustrato</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>Scrivi un libro religioso miniato adornato con gemme e inchiostri. La qualità dei materiali aumenta gli aspetti devozionali della lettura. Richiede un'elevata certezza nella propria ideoligione (almeno 90%).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>illustrando il libro religioso.</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>一時的な信仰度の低下: {0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>議論に勝つ確率: {0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>勝った場合の改宗確率: {0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>対象の信条（無作為に1〜{0}件）:</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>彼らはあなたの信仰が説くものに反対していない——改宗すべきものがない。</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>要因（あなた対相手）:</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>改宗力: {0} 対 {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>知的議論: {0} 対 {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>社会的影響: {0} 対 {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>napsat náboženskou knihu</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>Napište náboženskou knihu popisující přesvědčení vašeho ideobožství. Vyžaduje vysokou jistotu ve vlastní ideobožství (alespoň 90 %).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>píše náboženskou knihu.</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>napsat ilustrovanou náboženskou knihu</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>Napište iluminovanou náboženskou knihu zdobenou drahokamy a inkousty. Kvalita materiálů zvyšuje pobožnostní aspekty jejího čtení. Vyžaduje vysokou jistotu ve vlastní ideobožství (alespoň 90 %).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>ilustruje náboženskou knihu.</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

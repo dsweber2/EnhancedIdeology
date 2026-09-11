@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ideoligión</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Opiniones sobre ideoligión</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Temas</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Tema</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Postura</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Fuerza</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>No importa</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>En el tema de {1}, {PAWN_nameDef} tiene la postura {2} con convicción {3}. {IDEO_name} predica {5}; la opinión de {PAWN_nameDef} sobre esa postura: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>Opinión de {PAWN_nameDef} sobre {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>De memes y preceptos: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>De creencias personales: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>De relaciones interpersonales: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

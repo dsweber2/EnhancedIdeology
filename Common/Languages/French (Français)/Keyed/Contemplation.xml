@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} n'a pas trouvé de siège rituel pour se recueillir pour {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>La salle de recueillement de {PAWN_nameDef} pour {IDEO_name} est profanée.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>en recueillement (gain : {0}/h)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Gain de recueillement</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Taux de renforcement de la conviction par heure durant le recueillement. Affiché pour le colon sélectionné, ou comme multiplicateur de base sans sélection. Varie selon l'impressionnance de la pièce et la force de conviction actuelle du colon. +10% supplémentaires par coreligionnaire présent.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Gain de recueillement : {0}</EB_ContemplationSiteInspect>
+</LanguageData>

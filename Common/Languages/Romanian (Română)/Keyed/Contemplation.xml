@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} nu a găsit un loc ritual pentru meditație în {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>Camera de meditație {IDEO_name} a lui {PAWN_nameDef} este profanată.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>meditând (câștig: {0}/oră)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Câștig meditație</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Rata de întărire a convingerii pe oră în timpul meditației. Afișat pentru personajul selectat, sau ca multiplicator de bază când nu este selectat niciun personaj. Se scalează cu impresionabilitatea camerei și cu puterea curentă a convingerii personajului. +10% suplimentar per coreligionar în cameră.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Câștig meditație: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

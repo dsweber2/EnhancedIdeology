@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>종교 서적</EB_Ideobook.label>
+  <EB_Ideobook.description>독자의 즐거움과 교화를 위한 허구 또는 실제 이야기가 담긴 책.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>미완성 종교 서적</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>글쓰기 책상에서 작성 중인 미완성 종교 서적.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>글쓰기 책상</EB_WritingDesk.label>
+  <EB_WritingDesk.description>사상적 텍스트를 작성하기 위한 책상. 신념에 깊은 확신을 가진 정착민만 여기서 글을 쓸 수 있습니다.</EB_WritingDesk.description>
+</LanguageData>

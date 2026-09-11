@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Идеолигия</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Мнения об идеолигии</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Вопросы</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Вопрос</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Позиция</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Сила</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Всё равно</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>По вопросу {1} {PAWN_nameDef} занимает позицию {2} с убеждённостью {3}. {IDEO_name} проповедует {5}; мнение {PAWN_nameDef} об этой позиции: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>Мнение {PAWN_nameDef} об {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>От черт и принципов: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>От личных убеждений: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>От межличностных отношений: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

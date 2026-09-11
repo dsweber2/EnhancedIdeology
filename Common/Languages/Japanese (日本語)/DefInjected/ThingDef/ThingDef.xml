@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>聖典</EB_Ideobook.label>
+  <EB_Ideobook.description>読者の喜びと教化のために、架空または実際の物語を収めた書物。</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>未完成の聖典</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>執筆台で書かれている途中の聖典。</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>執筆台</EB_WritingDesk.label>
+  <EB_WritingDesk.description>思想的な文章を書くための机。信条に深い確信を持つ入植者のみが執筆できる。</EB_WritingDesk.description>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef}이(가) {IDEO_name}을(를) 위해 명상할 행사 좌석을 찾을 수 없었습니다.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>{PAWN_nameDef}의 {IDEO_name} 명상 공간이 존중받지 못하고 있습니다.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>명상 중 (획득: {0}/시)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>명상 획득량</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>명상 중 시간당 확신 강화율. 선택된 폰에 대해 표시되며, 폰이 선택되지 않은 경우 기본 배수로 표시됩니다. 방의 인상도와 폰의 현재 확신 강도에 따라 달라집니다. 같은 공간에 있는 동료 신도 1명당 추가 +10%.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>명상 획득량: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

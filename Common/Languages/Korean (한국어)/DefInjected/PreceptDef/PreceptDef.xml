@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>필수</Contemplation_Required.label>
+  <Contemplation_Required.description>명상은 신성한 의무입니다. 구성원은 정기적으로 명상해야 하며, 도덕적 지도자는 솔선수범해야 합니다.</Contemplation_Required.description>
+  <Contemplation_Respected.label>존중됨</Contemplation_Respected.label>
+  <Contemplation_Respected.description>명상은 의미 있는 수행이며, 정기적으로 명상하는 사람들은 더 높이 평가받습니다.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>허용됨</Contemplation_Normal.label>
+  <Contemplation_Normal.description>명상은 개인적인 문제입니다 — 권장되지도 만류되지도 않습니다.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>불승인</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>명상은 나약함 또는 미신으로 여겨집니다. 명상하는 구성원은 부정적으로 평가됩니다.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>금지됨</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>명상은 엄격히 금지됩니다. 명상을 하다 발각된 구성원은 배척당할 것입니다.</Contemplation_Forbidden.description>
+</LanguageData>

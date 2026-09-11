@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 확신 변화/분기</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>지지하는 신념</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/분기</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>종교 서적 파괴됨</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{IDEO}의 중요한 종교 서적인 {BOOK}이(가) 파괴되었습니다. {IDEO}의 신도들은 이를 달가워하지 않을 것입니다.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>{BOOK}을(를) 불태워 파괴합니다. 이는 {IDEO}의 {IDEO_memberNamePlural}을(를) 화나게 할 것입니다.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>{BOOK}을(를) 불태워 파괴합니다.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>어떤 정착민도 {BOOK}을(를) 파괴할 수 없습니다.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>{PAWN}에게 {BOOK}을(를) 불태우게 하시겠습니까? 그렇게 하면 {IDEO}의 모든 {IDEO_memberNamePlural}이(가) 크게 화를 낼 것입니다.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>{PAWN}에게 {BOOK}을(를) 불태우게 하시겠습니까?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN}이(가) {BOOK}을(를) 파괴했습니다. 이로 인해 {IDEO}의 {IDEO_memberNamePlural}이(가) 크게 화를 냈습니다.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

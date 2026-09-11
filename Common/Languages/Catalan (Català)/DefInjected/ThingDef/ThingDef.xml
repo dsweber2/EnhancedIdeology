@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>llibre religiós</EB_Ideobook.label>
+  <EB_Ideobook.description>Un llibre que conté històries fictícies o reals per al plaer i l'edificació del lector.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>llibre religiós inacabat</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Un llibre religiós inacabat que s'està escrivint a l'escriptori.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>escriptori d'escriptura</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Un escriptori per compondre textos ideològics. Només els colons amb una convicció profunda en les seves creences poden escriure-hi.</EB_WritingDesk.description>
+</LanguageData>

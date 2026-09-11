@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>crise de foi</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>crise de foi</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} traverse une crise de foi.\n\n[PAWN_pronoun] passera le ou les prochains jours en recueillement, remettant en question [PAWN_possessive] croyances.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>La crise de foi de {0} est passée.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>État mental : Crise de foi</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>iconoclaste</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} a eu une crise mentale et agit en iconoclaste.\n\n[PAWN_pronoun] va tenter de brûler des livres religieux.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} n'est plus dans un état iconoclaste.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>État mental : Iconoclaste</EB_Iconoclast.baseInspectLine>
+</LanguageData>

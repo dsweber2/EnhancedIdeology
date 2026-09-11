@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>必須</Contemplation_Required.label>
+  <Contemplation_Required.description>冥想是神聖的義務。成員必須定期冥想，而道德引導者更應以身作則。</Contemplation_Required.description>
+  <Contemplation_Respected.label>受尊重</Contemplation_Respected.label>
+  <Contemplation_Respected.description>冥想是一種有意義的修行，定期冥想者備受推崇。</Contemplation_Respected.description>
+  <Contemplation_Normal.label>可接受</Contemplation_Normal.label>
+  <Contemplation_Normal.description>冥想是個人事務——不加鼓勵，也不加阻止。</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>不贊同</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>冥想被視為軟弱或迷信。進行冥想的成員將受到負面看待。</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>禁止</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>冥想被嚴格禁止。任何被發現冥想的成員將遭到排斥。</Contemplation_Forbidden.description>
+</LanguageData>

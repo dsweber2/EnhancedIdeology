@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} a încercat să dezbată vederi ideologice cu {PAWN2_labelShort}. Aceasta a dus la o ceartă!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Conversie ideologică</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>După dezbaterea despre {ISSUE_label}, {CONVINCER_labelShort} l-a convins pe {CONVINCED_labelShort} să abandoneze {OLDIDEO_name} și să îmbrățișeze {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

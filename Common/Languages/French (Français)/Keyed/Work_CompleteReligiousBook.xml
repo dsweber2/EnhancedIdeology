@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologyMissingRole>L'idéoligion n'a pas le rôle « {ROLE} » requis.</EnhancedIdeology.IdeologyMissingRole>
+  <EnhancedIdeology.PawnMissingRequiredRole>{PAWN} n'a pas le rôle « {ROLE} » requis.</EnhancedIdeology.PawnMissingRequiredRole>
+  <EnhancedIdeology.PawnIsNotAuthor>{PAWN} n'est pas l'auteur du livre.</EnhancedIdeology.PawnIsNotAuthor>
+  <EnhancedIdeology.BookIsNotForPawnIdeoligion>Ce livre n'appartient pas à l'idéologie de {PAWN_possessive}.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
+  <EnhancedIdeology.NoFreeValidLecternFound>Aucun lutrin disponible et accessible trouvé.</EnhancedIdeology.NoFreeValidLecternFound>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>La certitude doit dépasser 90% pour rédiger des textes religieux.</EnhancedIdeology.InsufficientCertaintyToWrite>
+</LanguageData>

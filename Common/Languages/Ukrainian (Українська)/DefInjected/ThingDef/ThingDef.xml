@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>релігійна книга</EB_Ideobook.label>
+  <EB_Ideobook.description>Книга, що містить вигадані або правдиві оповіді для задоволення та просвіти читача.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>незакінчена релігійна книга</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Незакінчена релігійна книга, яку пишуть за письмовим столом.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>письмовий стіл</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Стіл для складання ідеологічних текстів. Писати за ним можуть лише колоністи з глибокою впевненістю у своїх переконаннях.</EB_WritingDesk.description>
+</LanguageData>

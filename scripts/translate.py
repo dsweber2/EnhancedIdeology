@@ -18,8 +18,10 @@ Translation helper for EnhancedIdeology.
 from __future__ import annotations
 
 import argparse
+import io
 import re
 import sys
+import tarfile
 import xml.etree.ElementTree as ET
 from collections import defaultdict
 from dataclasses import dataclass
@@ -29,6 +31,30 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFS_DIR = ROOT / "Common" / "Defs"
 LANGS_DIR = ROOT / "Common" / "Languages"
 TRANSLATIONS_DIR = ROOT / "translations"
+
+RIMWORLD_DATA = Path.home() / ".local/share/Steam/steamapps/common/RimWorld/Data"
+
+# Vanilla Keyed keys that anchor game-specific terminology.
+# Format: key → human-readable note for the glossary header.
+GLOSSARY_ANCHOR_KEYS: tuple[str, ...] = (
+    "Colonist",
+    "Certainty",
+    "Memes",
+    "MemesLower",
+    "Precept",
+    "Precepts",
+    "Ritual",
+    "Rituals",
+    "Ideo",
+    "Period1Quadrum",
+    "PeriodQuadrums",
+    "BeliefInIdeo",
+    "LetterLabelConvertIdeoAttempt_Success",
+    "AbilityIdeoConvertBreakdownLabel",
+    "CertaintyInIdeo",
+    "ReformIdeoligion",
+    "IdeoConversionTarget",
+)
 
 # Tags whose text content is directly translatable.
 LEAF_FIELDS: frozenset[str] = frozenset({
@@ -77,8 +103,103 @@ def main() -> None:
     gen.add_argument("--input", required=True)
     gen.add_argument("--target", help="Override target language from template header")
 
+    gl = subs.add_parser("glossary", help="Extract vanilla game terminology for a target language")
+    gl.add_argument("--target", required=True, help="Target language folder name (e.g. 'German (Deutsch)')")
+    gl.add_argument("--output", help="Output path (default: stdout)")
+
     args = parser.parse_args()
-    {"extract": cmd_extract, "generate": cmd_generate}[args.cmd](args)
+    {"extract": cmd_extract, "generate": cmd_generate, "glossary": cmd_glossary}[args.cmd](args)
+
+
+# ---------------------------------------------------------------------------
+# glossary
+# ---------------------------------------------------------------------------
+
+def _keyed_from_dir(lang_dir: Path) -> dict[str, str]:
+    """Load all Keyed XML entries from a directory-based language folder."""
+    out: dict[str, str] = {}
+    keyed_dir = lang_dir / "Keyed"
+    if not keyed_dir.is_dir():
+        return out
+    for path in keyed_dir.glob("*.xml"):
+        try:
+            root = ET.parse(path).getroot()
+        except ET.ParseError:
+            continue
+        for child in root:
+            if callable(child.tag):
+                continue
+            text = (child.text or "").strip()
+            if text:
+                out[child.tag] = text
+    return out
+
+
+def _keyed_from_tar(tar_path: Path) -> dict[str, str]:
+    """Load all Keyed XML entries from a language .tar archive."""
+    out: dict[str, str] = {}
+    if not tar_path.exists():
+        return out
+    with tarfile.open(tar_path, "r") as tf:
+        for member in tf.getmembers():
+            if not member.name.startswith("Keyed/") or not member.name.endswith(".xml"):
+                continue
+            fobj = tf.extractfile(member)
+            if fobj is None:
+                continue
+            try:
+                root = ET.parse(io.BytesIO(fobj.read())).getroot()
+            except ET.ParseError:
+                continue
+            for child in root:
+                if callable(child.tag):
+                    continue
+                text = (child.text or "").strip()
+                if text:
+                    out[child.tag] = text
+    return out
+
+
+def _load_vanilla_keyed(lang_name: str) -> dict[str, str]:
+    """Merge Keyed entries from Core + Ideology DLC for the given language name."""
+    merged: dict[str, str] = {}
+    for dlc in ("Core", "Ideology"):
+        dlc_langs = RIMWORLD_DATA / dlc / "Languages"
+        # Directory form (used for English)
+        lang_dir = dlc_langs / lang_name
+        if lang_dir.is_dir():
+            merged.update(_keyed_from_dir(lang_dir))
+            continue
+        # Tar form
+        tar_path = dlc_langs / f"{lang_name}.tar"
+        merged.update(_keyed_from_tar(tar_path))
+    return merged
+
+
+def cmd_glossary(args) -> None:
+    en_terms = _load_vanilla_keyed("English")
+    target_terms = _load_vanilla_keyed(args.target)
+
+    lines = [
+        f"# Vanilla terminology glossary: {args.target}",
+        "",
+        "Use these translations for game-specific terms to match vanilla consistency.",
+        "Format markers like `{PAWN}`, `{0}`, etc. must be preserved as-is.",
+        "",
+        "| key | English | Translation |",
+        "|-----|---------|-------------|",
+    ]
+    for key in GLOSSARY_ANCHOR_KEYS:
+        en_val = en_terms.get(key, "")
+        tgt_val = target_terms.get(key, "*(not found)*")
+        lines.append(f"| `{key}` | {_esc(en_val)} | {_esc(tgt_val)} |")
+
+    output = "\n".join(lines) + "\n"
+    if args.output:
+        Path(args.output).write_text(output, encoding="utf-8")
+        print(f"wrote {args.output}", file=sys.stderr)
+    else:
+        print(output)
 
 
 # ---------------------------------------------------------------------------
@@ -250,7 +371,7 @@ def _write_md(entries: list[Entry], source: str, target: str, path: Path, author
 def _parse_md(path: Path) -> tuple[str, str, str, list[Entry]]:
     text = path.read_text(encoding="utf-8")
     source, target = "English", ""
-    mm = re.search(r":\s*(\w+)\s*→\s*(\w+)", text)
+    mm = re.search(r":\s*(.+?)\s*→\s*(.+?)\s*-->", text)
     if mm:
         source, target = mm.group(1), mm.group(2)
     author = ""

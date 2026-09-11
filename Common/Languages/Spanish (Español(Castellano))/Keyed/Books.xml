@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} cambio de convicción/cu</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Creencias defendidas</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/cu</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Libro religioso destruido</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, un importante libro religioso de {IDEO}, ha sido destruido. Los seguidores de {IDEO} no estarán contentos.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Destruir {BOOK} quemándolo. Esto perturbará a los {IDEO_memberNamePlural} de {IDEO}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Destruir {BOOK} quemándolo.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Ningún colono puede destruir {BOOK}.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>¿Seguro que quieres que {PAWN} queme {BOOK}? Esto perturbará enormemente a todos los {IDEO_memberNamePlural} de {IDEO}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>¿Seguro que quieres que {PAWN} queme {BOOK}?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} ha destruido {BOOK}. Esto ha perturbado enormemente a los {IDEO_memberNamePlural} de {IDEO}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} nem talált szertartási ülőhelyet a {IDEO_name} elmélkedéséhez.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>{PAWN_nameDef} {IDEO_name} elmélkedőszobája nem megfelelő állapotban van.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>elmélkedik (nyereség: {0}/óra)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Elmélkedési nyereség</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Elmélkedés közbeni meggyőződés-erősítési ráta óránként. A kiválasztott karakter értékét mutatja, vagy alap-szorzóként jelenik meg, ha nincs karakter kiválasztva. A szoba lenyűgözőségével és a karakter meggyőződés-erősségével arányos. Minden további hívő jelenléte +10%-ot ad a szobában.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Elmélkedési nyereség: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

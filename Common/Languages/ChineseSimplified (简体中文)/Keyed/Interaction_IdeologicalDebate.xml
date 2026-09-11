@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}试图与{PAWN2_labelShort}就意识形态观点展开辩论，结果引发了肢体冲突！</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>意识形态教化</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>在就{ISSUE_label}展开辩论后，{CONVINCER_labelShort}说服{CONVINCED_labelShort}放弃了{OLDIDEO_name}，转而信仰{NEWIDEO_name}。</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

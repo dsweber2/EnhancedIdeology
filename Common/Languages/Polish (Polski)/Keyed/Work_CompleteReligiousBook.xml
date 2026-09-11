@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologyMissingRole>Ideologia nie posiada wymaganej roli „{ROLE}".</EnhancedIdeology.IdeologyMissingRole>
+  <EnhancedIdeology.PawnMissingRequiredRole>{PAWN} nie posiada wymaganej roli „{ROLE}".</EnhancedIdeology.PawnMissingRequiredRole>
+  <EnhancedIdeology.PawnIsNotAuthor>{PAWN} nie jest autorem tej księgi.</EnhancedIdeology.PawnIsNotAuthor>
+  <EnhancedIdeology.BookIsNotForPawnIdeoligion>Ta księga nie należy do ideologii {PAWN_possessive}.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
+  <EnhancedIdeology.NoFreeValidLecternFound>Nie znaleziono dostępnego pulpitu do pracy.</EnhancedIdeology.NoFreeValidLecternFound>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Pewność musi przekraczać 90%, aby pisać teksty religijne.</EnhancedIdeology.InsufficientCertaintyToWrite>
+</LanguageData>

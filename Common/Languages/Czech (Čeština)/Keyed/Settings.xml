@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Překlad: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideobožství</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Zásada</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Kompatibilita</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Ladění</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dynamika osobní jistoty</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Efekty konverze</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Rychlost posunu jistoty: {0}/den</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Jak rychle se jistota pawna každý den přibližuje k cíli. Vyšší = víra reaguje rychleji na okolnosti. Přináší dynamičtější přesvědčení.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Vztahový vliv: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Maximální vliv, o který může názor pawna na spoluvěřící zvýšit nebo snížit cílovou jistotu.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Vliv praxe: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Maximální vliv, o který mohou nálady ze zásad (rituály, uctívání, tabu atd.) zvýšit nebo snížit cílovou jistotu.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Práh krize víry: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Pokud jistota pawna klesne pod tuto hodnotu, může dojít ke krizi víry. Vyšší = více krizí.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Tempo konverze: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Jak rychle pawni sami opouštějí nevyhovující víru, relativně k výchozí hodnotě. Vyšší = spontánní konverze jsou pravděpodobnější.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Ztráta jistoty při pokusu o konverzi: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Když morální průvodce vyhraje konverzní debatu, ale pawn se okamžitě nepřevede, jeho jistota se vynásobí touto hodnotou. 1× = pawn s 80% jistotou zůstane na 80 %; 0,8× = pawn s 80% jistotou klesne na 64 %. Nižší = pokusy o konverzi jsou účinnější.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Rozpad přesvědčení: {0}/quadrum</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>O kolik sílá přesvědčení všech zásad klesá za quadrum. Pozn.: 100% přesvědčení odpovídá průměru zásad 20, maximum je 50. Vyšší = silnější potřeba posilovat přesvědčení.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Odpor k opačnému postoji: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Jak silně pawn odporuje postoji na opačném konci škály problému, jako zlomek jeho přesvědčení. Při 100 % má pawn s Kanibalismus: Neschváleno 12 názor -12 na Kanibalismus: Povinné (hladový). 0 % = lhostejný k opačným postojům; 100 % = stejně silný, ale opačný k podpoře vlastní krajní zásady.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Síla konverze: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>O kolik silněji tlačí úspěšný pokus o konverzi (řízená akce morálního průvodce) přesvědčení pawna než běžný pokus. Vyšší = rychlejší konverze.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Změna přesvědčení v debatě: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Jak daleko posune jeden vyhraný argument přesvědčení v dané otázce, relativně k výchozí hodnotě. Posune zároveň zásadu i přesvědčení v ní. Vyšší = každá vyhraná debata přesvědčí více. Vede k rychlejším konverzím.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bonus přátelství (konverze): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>O kolik násobí názor pawna na osobu snažící se změnit jeho zásadu daný efekt. Při 1× a názoru +100 se zdvojnásobí jak snížení jistoty, tak tah přesvědčení. Při 0× nemá názor žádný efekt. Nepoužívá se, pokud je nainstalován Peer Pressure – přebírá vlastní nastavení násobitele tohoto modu.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Minimální jistota při načtení uložené hry: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Při načtení základní nebo předmodové uložené hry mají pawni s jistotou pod touto hodnotou přesvědčení nastaveno alespoň na tuto cílovou hodnotu místo nuly. Zabraňuje tomu, aby pawn s 0% jistotou zůstal zcela bez přesvědčení.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Ladění interakčních workerů</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Povolí ladící protokolování pro interakční workery při aktivním vývojářském režimu. Doporučujeme ponechat vypnuté, pokud neladíte přímo Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

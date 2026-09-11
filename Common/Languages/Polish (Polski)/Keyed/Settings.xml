@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Tłumaczenie: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideologia</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Zasada</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Kompatybilność</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Debugowanie</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dynamika osobistej pewności</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Efekty nawrócenia</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Tempo dryftu pewności: {0}/dzień</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Jak szybko pewność piona zbliża się każdego dnia do celu. Wyższe = wiara reaguje szybciej na okoliczności. Sprzyja bardziej dynamicznym przekonaniom.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Wpływ relacyjny: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Maksymalny wpływ opinii piona o współwyznawcach na jego docelową pewność (w górę lub w dół).</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Wpływ praktyki: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Maksymalny wpływ nastrojów z zasad (rytuały, cześć, tabu itp.) na docelową pewność (w górę lub w dół).</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Próg kryzysu wiary: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Gdy pewność piona spadnie poniżej tej wartości, może dojść do załamania kryzysu wiary. Wyższe = więcej kryzysów.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Tempo nawrócenia: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Jak szybko piony same porzucają słabo pasującą wiarę, względem wartości domyślnej. Wyższe = spontaniczne nawrócenia są częstsze.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Utrata pewności przy próbie nawrócenia: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Gdy przewodnik moralny wygra debatę nawrócenia, ale pion natychmiast nie zmienia wiary, jego pewność jest mnożona przez tę wartość. 1x = pion o 80% pewności pozostaje na 80%; 0,8x = spada do 64%. Niższe = próby nawrócenia mają większy efekt.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Zanik przekonań: {0}/kwartał</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>O ile zmniejsza się siła przekonań wszystkich zasad na kwartał. 100% przekonań odpowiada średniej zasady wynoszącej 20, maksimum to 50. Wyższe = większa potrzeba umacniania wiary.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Sprzeciw wobec przeciwnej postawy: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Jak silnie pion sprzeciwia się postawie na przeciwnym krańcu kwestii, jako ułamek jego przekonań. Przy 100%, pion z Kanibalizm: Nieakceptowany 12 ma opinię -12 wobec Kanibalizm: Wymagany (żarłoczny). 0% = obojętny na przeciwne postawy; 100% = równy i przeciwny do wsparcia własnej skrajnej zasady.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Siła nawrócenia: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>O ile silniej udana próba nawrócenia (ukierunkowane działanie przewodnika moralnego) przesuwa przekonania piona niż zwykła próba. Wyższe = szybsze nawrócenia.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Zmiana przekonań w debacie: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>O ile jeden wygrany argument przesuwa pogląd w danej kwestii, względem wartości domyślnej. Przesuwa jednocześnie zasadę i przekonanie w tej zasadzie. Wyższe = każda wygrana debata bardziej przekonuje. Prowadzi do szybszych nawróceń.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bonus przyjaźni (nawrócenie): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>O ile opinia piona o osobie próbującej zmienić jego zasadę wzmacnia efekt. Przy 1x i opinii +100 zarówno obniżka pewności, jak i przyciąganie przekonań są podwojone. Przy 0x opinia nie ma żadnego efektu. Nie używane, gdy zainstalowany jest Peer Pressure — zamiast tego przejmuje własne ustawienie mnożnika tamtego moda.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Minimalna pewność przy wczytaniu: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Przy wczytywaniu zwykłego zapisu lub zapisu sprzed moda, piony o pewności poniżej tej wartości otrzymują ziarno przekonań co najmniej na tym poziomie zamiast zera. Zapobiega pozostawieniu piona bez żadnych przekonań przy pewności 0%.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Debugowanie pracowników interakcji</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Włącza logowanie debugowania dla pracowników interakcji w trybie deweloperskim. Zalecam pozostawienie wyłączone, chyba że debugujesz konkretnie Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

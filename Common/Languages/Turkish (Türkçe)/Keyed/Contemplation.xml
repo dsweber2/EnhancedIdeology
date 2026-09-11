@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef}, {IDEO_name} için tefekkür edecek ritüel koltuğu bulamadı.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>{PAWN_nameDef}'in {IDEO_name} tefekkür odası saygısızlığa uğruyor.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>tefekkür ediyor (kazanım: {0}/sa)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Tefekkür kazanımı</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Tefekkür sırasında saatte inanç pekiştirme oranı. Seçili karakter için gösterilir; karakter seçili değilse temel çarpan olarak gösterilir. Odanın etkileyiciliğine ve karakterin mevcut inanç gücüne göre ölçeklenir. Odadaki her din kardeşi için ek +%10.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Tefekkür kazanımı: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>khủng hoảng đức tin</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>khủng hoảng đức tin</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} đang trải qua khủng hoảng đức tin.\n\n[PAWN_pronoun] sẽ dành một đến hai ngày tới trong thiền định, đặt câu hỏi về niềm tin của [PAWN_possessive].</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>Cuộc khủng hoảng đức tin của {0} đã qua.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Trạng thái tâm lý: Khủng hoảng đức tin</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>kẻ phá tượng</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} bị rối loạn tâm lý và đang hành xử như kẻ phá tượng.\n\n[PAWN_pronoun] sẽ cố thiêu đốt sách tôn giáo.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} không còn hành xử như kẻ phá tượng nữa.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Trạng thái tâm lý: Kẻ phá tượng</EB_Iconoclast.baseInspectLine>
+</LanguageData>

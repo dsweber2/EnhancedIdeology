@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>libro religioso</EB_Ideobook.label>
+  <EB_Ideobook.description>Un libro contenente storie fittizie o vere per il piacere e l'edificazione del lettore.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>libro religioso incompiuto</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Un libro religioso incompiuto in fase di scrittura alla scrivania.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>scrivania</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Una scrivania per comporre testi ideologici. Solo i coloni con profonda convinzione nelle proprie credenze possono scrivervi.</EB_WritingDesk.description>
+</LanguageData>

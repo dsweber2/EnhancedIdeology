@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>obrigatória</Contemplation_Required.label>
+  <Contemplation_Required.description>A contemplação é uma obrigação sagrada. Os membros devem contemplar regularmente, e o guia moral deve dar o exemplo.</Contemplation_Required.description>
+  <Contemplation_Respected.label>respeitada</Contemplation_Respected.label>
+  <Contemplation_Respected.description>A contemplação é uma prática significativa, e aqueles que contemplam regularmente são tidos em maior estima.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>aceitável</Contemplation_Normal.label>
+  <Contemplation_Normal.description>A contemplação é um assunto pessoal — nem encorajada nem desencorajada.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>desaprovada</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>A contemplação é vista como fraqueza ou superstição. Membros que contemplam são vistos desfavoravelmente.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>proibida</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>A contemplação é estritamente proibida. Qualquer membro flagrado contemplando será ostracizado.</Contemplation_Forbidden.description>
+</LanguageData>

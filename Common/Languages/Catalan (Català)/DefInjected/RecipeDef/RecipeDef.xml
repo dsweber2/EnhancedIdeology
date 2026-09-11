@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>escriure llibre religiós</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>Escriu un llibre religiós que detalli les creences de la teva ideoligió. Requereix una alta certesa en la pròpia ideoligió (almenys el 90%).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>escrivint un llibre religiós.</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>escriure llibre religiós il·lustrat</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>Escriu un llibre religiós il·luminat adornat amb gemmes i tintes. La qualitat dels materials augmenta els aspectes devocionals de llegir-lo. Requereix una alta certesa en la pròpia ideoligió (almenys el 90%).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>il·lustrant un llibre religiós.</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

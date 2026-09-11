@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} não encontrou um assento ritual para contemplação de {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>O quarto de contemplação de {IDEO_name} de {PAWN_nameDef} está sendo desrespeitado.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>contemplando (ganho: {0}/h)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Ganho de contemplação</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Taxa de reforço de convicção por hora durante a contemplação. Exibido para o colono selecionado, ou como multiplicador base quando nenhum colono está selecionado. Escala com a imponência do cômodo e a força de convicção atual do colono. +10% adicional por cada correligionário no cômodo.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Ganho de contemplação: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>обязательно</Contemplation_Required.label>
+  <Contemplation_Required.description>Созерцание — священный долг. Члены должны созерцать регулярно, а моральный наставник обязан подавать пример.</Contemplation_Required.description>
+  <Contemplation_Respected.label>уважаемо</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Созерцание — значимая практика, и те, кто созерцают регулярно, пользуются большим уважением.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>допустимо</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Созерцание — личное дело, которое ни поощряется, ни порицается.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>неодобряемо</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Созерцание считается слабостью или суеверием. На членов, практикующих его, смотрят неодобрительно.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>запрещено</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Созерцание строго запрещено. Любой член, уличённый в созерцании, будет подвергнут бойкоту.</Contemplation_Forbidden.description>
+</LanguageData>

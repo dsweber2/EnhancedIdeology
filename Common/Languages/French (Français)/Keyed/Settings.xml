@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Traduction : claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Idéologie</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Précepte</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Compatibilité</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Débogage</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dynamique de certitude personnelle</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Effets de conversion</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Taux de dérive de la certitude : {0}/jour</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Vitesse à laquelle la certitude d'un colon se rapproche de sa cible chaque jour. Plus élevé = la foi réagit plus vite aux circonstances. Rend les croyances plus dynamiques.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Influence relationnelle : ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>L'effet maximal que l'opinion d'un colon envers ses coreligionnaires peut avoir sur sa certitude cible.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Influence de la pratique : ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>L'effet maximal que les humeurs liées aux préceptes (rituels, vénération, tabous, etc.) peuvent avoir sur la certitude cible.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Seuil de crise de foi : {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Quand la certitude d'un colon tombe en dessous de ce seuil, il peut vivre une crise de foi. Plus élevé = plus de crises.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Rythme de conversion : {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Vitesse à laquelle les colons abandonnent d'eux-mêmes une foi mal adaptée, par rapport au défaut. Plus élevé = conversions spontanées plus fréquentes.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Perte de certitude lors d'une tentative de conversion : {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Quand un guide moral remporte un débat de conversion sans convertir immédiatement, la certitude est multipliée par cette valeur. 1x = un colon à 80% reste à 80% ; 0,8x = il tombe à 64%. Plus bas = tentatives plus percutantes.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Déclin de la conviction : {0}/saison</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Perte de conviction de tous les préceptes par saison. Notez que 100% de conviction correspond à une moyenne de précepte de 20, le maximum étant 50. Plus élevé = besoin plus fort de renforcer les croyances.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Opposition à la stance adverse : {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Force avec laquelle un colon s'oppose à la stance extrême opposée, en fraction de sa conviction. À 100%, un colon avec Cannibalisme : Désapprouvé 12 a une opinion de -12 envers Cannibalisme : Requis (vorace). 0% = indifférent aux stances opposées ; 100% = opposition égale et inverse à son soutien pour son propre précepte extrême.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Force de conversion : {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Force supplémentaire exercée sur les croyances d'un colon par une tentative de conversion réussie (action ciblée d'un guide moral) par rapport à une tentative ordinaire. Plus élevé = conversions plus rapides.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Changement de conviction par débat : {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Distance parcourue par un argument remporté sur la croyance liée à un sujet, par rapport au défaut. Modifie simultanément le précepte et la conviction associée. Plus élevé = chaque débat gagné convainc davantage. Mène à des conversions plus rapides.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bonus d'amitié (conversion) : {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Amplification de l'effet par l'opinion d'un colon envers celui qui tente de modifier son précepte. À 1x et opinion +100, le choc de certitude et l'attraction de croyance sont tous deux doublés. À 0x, l'opinion n'a aucun effet. Non utilisé si Peer Pressure est installé — le paramètre de ce mod prend alors le relais.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Certitude minimale à la reprise de sauvegarde : {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Au chargement d'une sauvegarde vanilla ou antérieure au mod, les colons dont la certitude est inférieure à cette valeur voient leurs croyances initialisées à ce seuil minimum plutôt qu'à zéro. Évite qu'un colon à 0% de certitude se retrouve sans aucune conviction.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV : Débogage des travailleurs d'interaction</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Active la journalisation de débogage pour les travailleurs d'interaction en mode développeur. Laissez désactivé sauf si vous déboguez Enhanced Ideology spécifiquement.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

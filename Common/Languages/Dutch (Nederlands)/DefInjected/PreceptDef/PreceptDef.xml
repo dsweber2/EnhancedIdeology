@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>verplicht</Contemplation_Required.label>
+  <Contemplation_Required.description>Meditatie is een heilige verplichting. Leden moeten regelmatig mediteren, en de morele gids wordt geacht het goede voorbeeld te geven.</Contemplation_Required.description>
+  <Contemplation_Respected.label>gerespecteerd</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Meditatie is een zinvolle praktijk, en degenen die regelmatig mediteren worden hoger aangeslagen.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>aanvaardbaar</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Meditatie is een persoonlijke aangelegenheid — noch aangemoedigd, noch ontmoedigd.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>afgekeurd</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Meditatie wordt gezien als zwakte of bijgeloof. Leden die mediteren worden ongunstig bekeken.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>verboden</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Meditatie is strikt verboden. Elk lid dat betrapt wordt op mediteren zal worden gemeden.</Contemplation_Forbidden.description>
+</LanguageData>

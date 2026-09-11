@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>정기적으로 명상함</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>명상에 충실해 왔습니다. 평화를 가져다줍니다.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>명상 소홀</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>명상할 시간을 찾지 못했습니다. 헌신이 흔들리고 있습니다.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>명상 심각하게 소홀</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>너무 오랫동안 명상을 하지 않았습니다. 영적으로 표류하는 느낌입니다.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>독실하게 명상함</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>명상에 임함</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>명상 금지를 어김</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>종교 서적 파괴됨</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>우리의 종교 서적이 파괴되었습니다. 절대 용납할 수 없는 일입니다.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>성스러운 텍스트를 더럽힘</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>성서를 동물 가죽으로 제본했습니다. 그것은 잘못된 일이었습니다.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>가죽 제본 경전 읽기</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>이 성서는 동물 가죽으로 제본되어 있습니다. 들고 있으니 거북합니다.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>좋은 토론</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>우리의 신념에 대해 자극적인 토론을 나눴습니다. 열린 마음의 만남이었습니다.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>이단적 토론</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>그들의 이단적 신념을 반박해야 했습니다. 사상의 다양성은 독입니다.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>말씀 전파</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>내 사상의 진리를 위해 논쟁했습니다. 결과가 어떻든, 시도 자체가 의로운 행동이었습니다.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>영혼을 사상으로 인도함</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>누군가를 우리 사상의 빛으로 인도했습니다. 이보다 더 위대한 소명은 없습니다.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>교화 실패</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>누군가를 사상으로 인도하려 했지만 실패했습니다. 그들은 무지 속에 남아 있습니다.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>믿음에 도전받음</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>도전자에 맞서 내 사상의 진리를 지켜야 했습니다. 감히 의심했다는 사실 자체가 모욕입니다.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>인지 부조화</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>다른 사상의 행사에 참여해서는 안 됩니다.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>믿음 재확인</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>다른 전통의 방식을 보면서 내 자신의 길을 소중히 여기는 이유를 상기시켜줍니다.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>흔들리는 동료 신도</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>믿음 없는 동료 신도</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>배교 심성의 동료 신도</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

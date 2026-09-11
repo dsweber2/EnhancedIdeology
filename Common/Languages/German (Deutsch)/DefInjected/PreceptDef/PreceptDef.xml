@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>Pflicht</Contemplation_Required.label>
+  <Contemplation_Required.description>Einkehr ist eine heilige Pflicht. Die Mitglieder müssen regelmäßig Einkehr halten, und der Moralführer soll mit gutem Beispiel vorangehen.</Contemplation_Required.description>
+  <Contemplation_Respected.label>respektiert</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Einkehr ist eine bedeutungsvolle Praxis, und diejenigen, die regelmäßig Einkehr halten, werden höher geachtet.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>akzeptabel</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Einkehr ist eine persönliche Angelegenheit — weder gefördert noch entmutigt.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>missbilligt</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Einkehr wird als Schwäche oder Aberglaube angesehen. Mitglieder, die Einkehr halten, werden ungünstig betrachtet.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>verboten</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Einkehr ist streng verboten. Jedes Mitglied, das bei der Einkehr erwischt wird, wird gemieden.</Contemplation_Forbidden.description>
+</LanguageData>

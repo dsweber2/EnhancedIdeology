@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>obligatòria</Contemplation_Required.label>
+  <Contemplation_Required.description>La contemplació és una obligació sagrada. Els membres han de contemplar regularment, i s'espera que el guia moral doni exemple.</Contemplation_Required.description>
+  <Contemplation_Respected.label>respectada</Contemplation_Respected.label>
+  <Contemplation_Respected.description>La contemplació és una pràctica significativa, i aquells que contemplen regularment gaudeixen d'un major respecte.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>acceptable</Contemplation_Normal.label>
+  <Contemplation_Normal.description>La contemplació és un assumpte personal: ni s'anima ni es desaconsella.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>desaprovada</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>La contemplació es considera una debilitat o superstició. Els membres que contemplen són vistos desfavorablement.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>prohibida</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>La contemplació està estrictament prohibida. Qualsevol membre sorprès contemplant serà rebutjat.</Contemplation_Forbidden.description>
+</LanguageData>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>thiền định thường xuyên</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Tôi đã trung thành với các buổi thiền định của mình. Nó mang lại cho tôi sự bình an.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>bỏ bê thiền định</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Tôi chưa tìm được thời gian để thiền định. Lòng sùng đạo của tôi đang phai nhạt.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>bỏ bê thiền định nghiêm trọng</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Tôi đã quá lâu không thiền định. Tôi cảm thấy trôi dạt về mặt tâm linh.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>thiền định thành kính</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>tham gia thiền định</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>vi phạm lệnh cấm thiền định</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>sách tôn giáo bị hủy</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Sách tôn giáo của chúng ta bị hủy. Điều đó hoàn toàn không thể tha thứ.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>xúc phạm văn bản thiêng liêng</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Tôi đã đóng bìa một cuốn sách thánh bằng da động vật. Điều đó là sai.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>đọc kinh sách bìa da</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Văn bản thánh này được đóng bìa bằng da động vật. Cầm nó cảm thấy sai trái.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>cuộc tranh luận hay</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Chúng tôi đã có một cuộc tranh luận kích thích về niềm tin của mình. Một cuộc gặp gỡ của những tâm hồn cởi mở.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>tranh luận dị giáo</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Tôi phải bác bỏ niềm tin lệch lạc của họ. Sự đa dạng tư tưởng là một thứ độc hại.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>truyền đạo</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Tôi đã biện luận cho sự thật của đức tin mình. Dù kết quả thế nào, bản thân hành động đó đã là một việc làm chính đáng.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>đưa một linh hồn vào đức tin</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Tôi đã đưa ai đó vào ánh sáng của đức tin chúng ta. Không có sứ mệnh nào cao cả hơn.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>thất bại trong việc cải đạo</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Tôi đã cố đưa ai đó vào đức tin và thất bại. Họ vẫn còn trong sự vô minh của mình.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>đức tin bị thách thức</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Tôi phải bảo vệ sự thật của đức tin mình trước kẻ thách thức. Thực tế họ dám đặt câu hỏi đã là một sự xúc phạm.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>bất hòa nhận thức</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Tôi không nên tham gia các thực hành của tín ngưỡng khác.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>đức tin được củng cố</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Thấy cách làm của một truyền thống khác nhắc nhở tôi lý do tại sao tôi trân trọng con đường của mình.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>đồng đạo đang dao động</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>đồng đạo thiếu đức tin</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>đồng đạo lòng bội đạo</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

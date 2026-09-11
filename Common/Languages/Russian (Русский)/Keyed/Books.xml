@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} — {1} сдвиг убеждённости/кв</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Отстаиваемые убеждения</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/кв</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Религиозная книга уничтожена</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, важная религиозная книга для {IDEO}, была уничтожена. Последователи {IDEO} будут недовольны.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Уничтожить {BOOK}, сжёгши его. Это расстроит {IDEO_memberNamePlural} из {IDEO}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Уничтожить {BOOK}, сжёгши его.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Ни один поселенец не может уничтожить {BOOK}.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Вы уверены, что хотите, чтобы {PAWN} сжёг {BOOK}? Это крайне расстроит всех {IDEO_memberNamePlural} из {IDEO}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Вы уверены, что хотите, чтобы {PAWN} сжёг {BOOK}?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} уничтожил {BOOK}. Это крайне расстроило {IDEO_memberNamePlural} из {IDEO}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

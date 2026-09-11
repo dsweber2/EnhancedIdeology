@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>信仰危機</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>信仰危機</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0}正在經歷信仰危機。\n\n[PAWN_pronoun]將在接下來一兩天內沉浸於冥想，質疑[PAWN_possessive]的信念。</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>{0}的信仰危機已然平息。</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>精神狀態：信仰危機</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>毀像者</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0}精神崩潰，化身毀像者。\n\n[PAWN_pronoun]將嘗試焚燒宗教書籍。</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0}不再是毀像者了。</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>精神狀態：毀像者</EB_Iconoclast.baseInspectLine>
+</LanguageData>

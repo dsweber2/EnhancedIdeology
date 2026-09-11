@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologyMissingRole>La ideoligión no tiene el rol '{ROLE}' requerido.</EnhancedIdeology.IdeologyMissingRole>
+  <EnhancedIdeology.PawnMissingRequiredRole>{PAWN} no tiene el rol '{ROLE}' requerido.</EnhancedIdeology.PawnMissingRequiredRole>
+  <EnhancedIdeology.PawnIsNotAuthor>{PAWN} no es el autor del libro.</EnhancedIdeology.PawnIsNotAuthor>
+  <EnhancedIdeology.BookIsNotForPawnIdeoligion>El libro no pertenece a la ideoligión de {PAWN_possessive}.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
+  <EnhancedIdeology.NoFreeValidLecternFound>No se encontró ningún atril disponible y accesible para trabajar.</EnhancedIdeology.NoFreeValidLecternFound>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>La certeza debe superar el 90% para escribir textos religiosos.</EnhancedIdeology.InsufficientCertaintyToWrite>
+</LanguageData>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>pravidelně kontemploval</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Byl jsem věrný ve svých kontemplacích. Přináší mi to klid.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>kontemplace zanedbána</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Nenašel jsem čas na kontemplaci. Moje oddanost slábne.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>kontemplace vážně zanedbána</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Příliš dlouho jsem nekontemploval. Cítím se duchovně ztracený.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>zbožně kontemploval</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>věnoval se kontemplaci</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>porušil zákaz kontemplace</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>náboženská kniha zničena</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Naše náboženská kniha byla zničena. To je naprosto nepřijatelné.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>znesvětil posvátný text</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Svázal jsem svatou knihu do zvířecí kůže. To bylo špatné.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>čtení Písma v kožené vazbě</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Tento posvátný text je vázán ve zvířecí kůži. Držet ho v rukou je nepříjemné.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>dobrá debata</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Vedli jsme podnětnou debatu o našich přesvědčeních. Setkání otevřených myslí.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>kacířská debata</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Musel jsem vyvrátit jejich odchylná přesvědčení. Různorodost myšlení je jed.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>šířil slovo</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Hájil jsem pravdu své víry. Ať byl výsledek jakýkoli, samotný pokus byl spravedlivým činem.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>přivedl duši k víře</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Přivedl jsem někoho do světla naší víry. Není většího poslání.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>nepodařilo se obrátit</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Snažil jsem se přivést někoho k víře a neuspěl. Zůstávají ve své nevědomosti.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>víra zpochybněna</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Musel jsem hájit pravdu své víry proti zpochybňovateli. Již samotný fakt, že si dovolili ji zpochybnit, je urážka.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>kognitivní disonance</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Neměl bych se účastnit praktik jiných ideobožství.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>víra potvrzena</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Vidět způsob, jakým jedná jiná tradice, mi připomíná, proč si vážím vlastní cesty.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>váhavý spoluvěřící</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>nevěrný spoluvěřící</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>apostata v srdci spoluvěřící</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

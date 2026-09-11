@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologyMissingRole>Ideoligionul nu are rolul '{ROLE}' necesar.</EnhancedIdeology.IdeologyMissingRole>
+  <EnhancedIdeology.PawnMissingRequiredRole>{PAWN} nu are rolul '{ROLE}' necesar.</EnhancedIdeology.PawnMissingRequiredRole>
+  <EnhancedIdeology.PawnIsNotAuthor>{PAWN} nu este autorul cărții.</EnhancedIdeology.PawnIsNotAuthor>
+  <EnhancedIdeology.BookIsNotForPawnIdeoligion>Cartea nu este pentru ideoligionul lui {PAWN_possessive}.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
+  <EnhancedIdeology.NoFreeValidLecternFound>Nu s-a găsit niciun pupitru disponibil și accesibil pentru lucru.</EnhancedIdeology.NoFreeValidLecternFound>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Certitudinea trebuie să fie peste 90% pentru a scrie texte religioase.</EnhancedIdeology.InsufficientCertaintyToWrite>
+</LanguageData>

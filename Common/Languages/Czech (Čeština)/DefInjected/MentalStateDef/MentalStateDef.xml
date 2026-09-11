@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>krize víry</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>krize víry</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} prochází krizí víry.\n\n[PAWN_pronoun] stráví příští den nebo dva v kontemplaci a bude zpochybňovat [PAWN_possessive] přesvědčení.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>Krize víry {0} pominula.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Duševní stav: Krize víry</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>ikonoklast</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} měl psychický kolaps a chová se jako ikonoklast.\n\n[PAWN_pronoun] se pokusí pálit náboženské knihy.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} se již nechová jako ikonoklast.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Duševní stav: Ikonoklast</EB_Iconoclast.baseInspectLine>
+</LanguageData>

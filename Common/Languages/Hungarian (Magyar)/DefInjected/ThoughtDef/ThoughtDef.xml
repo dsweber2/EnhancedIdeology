@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>rendszeresen elmélkedett</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Hűséges voltam elmélkedéseimben. Békét hoz nekem.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>elmélkedés elhanyagolva</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Nem találtam időt az elmélkedésre. Odaadásom csúszik.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>elmélkedés súlyosan elhanyagolva</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Túl sokáig voltam elmélkedés nélkül. Lelkileg elveszettnek érzem magam.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>áhítatosan elmélkedett</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>elmélkedésbe merült</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>megszegte az elmélkedési tilalmat</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>vallásos könyv megsemmisült</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Vallásos könyvünket megsemmisítették. Ez teljesen megbocsáthatatlan.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>megszentségtelenített egy szent szöveget</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Állati bőrbe kötöttem egy szent könyvet. Ez helytelen volt.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>bőrkötéses szentírást olvas</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Ez a szent szöveg állati bőrbe van kötve. Rosszul esik tartani.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>jó vita</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Serkentő vitát folytattunk hittételeinkről. Nyitott elmék találkozása volt.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>eretnek vita</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Cáfolnom kellett az eltévelyedett nézeteiket. A gondolatok sokfélesége méreg.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>terjesztette az igét</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Érvekkel képviseltem hitem igazságát. Bármi legyen az eredmény, maga a kísérlet igaz tett volt.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>lelket hozott a hitbe</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Valakit a hitünk fényébe hoztam. Nincs nagyobb hivatás.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>sikertelen volt az áttérítés</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Megpróbáltam valakit a hithez vezérelni, és kudarcot vallottam. Tudatlanságukban maradnak.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>hit megkérdőjelezve</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Meg kellett védeni hitem igazságát egy kihívóval szemben. Már az is sértés, hogy merték megkérdőjelezni.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>kognitív disszonancia</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Nem kellene más ideológia szertartásaiban részt vennem.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>hit megerősítve</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Egy másik hagyomány módszereit látva emlékeztet, miért értékelem a saját utamat.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>ingadozó hittestvér</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>hitetlen hittestvér</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>hitehagyott lelkű hittestvér</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

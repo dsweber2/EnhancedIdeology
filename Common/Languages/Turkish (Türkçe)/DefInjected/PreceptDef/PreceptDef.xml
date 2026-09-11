@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>zorunlu</Contemplation_Required.label>
+  <Contemplation_Required.description>Tefekkür kutsal bir yükümlülüktür. Üyeler düzenli olarak tefekkür etmeli, ahlak rehberi ise örnek göstererek önderlik etmelidir.</Contemplation_Required.description>
+  <Contemplation_Respected.label>saygın</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Tefekkür anlamlı bir uygulamadır ve düzenli tefekkür edenler daha yüksek saygınlık görür.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>kabul edilebilir</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Tefekkür kişisel bir meseledir — ne teşvik edilir ne de caydırılır.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>onaylanmayan</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Tefekkür zayıflık ya da batıl inanç olarak görülür. Tefekkür eden üyeler olumsuz değerlendirilir.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>yasak</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Tefekkür kesinlikle yasaktır. Tefekkür ederken yakalanan her üye dışlanır.</Contemplation_Forbidden.description>
+</LanguageData>

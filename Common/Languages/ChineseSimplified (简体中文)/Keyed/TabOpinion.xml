@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>文化</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>文化看法</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>议题</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>议题</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>立场</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>强度</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>无所谓</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>在{1}议题上，{PAWN_nameDef}持有立场{2}，信念强度为{3}。{IDEO_name}宣扬{5}；{PAWN_nameDef}对该立场的看法：{6}。</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}对{IDEO_name}的看法：{2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>来自模因与戒律：{0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>来自个人信仰：{0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>来自人际关系：{0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

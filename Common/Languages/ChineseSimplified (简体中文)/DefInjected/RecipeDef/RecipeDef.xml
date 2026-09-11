@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>撰写宗教书籍</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>撰写一本详述文化信仰的宗教书籍。要求对自身文化有高度认可度（至少90%）。</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>正在撰写宗教书籍。</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>撰写插图宗教书籍</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>撰写一本以宝石和彩墨装饰的彩绘宗教书籍。材料质量越高，阅读时的虔诚效果越强。要求对自身文化有高度认可度（至少90%）。</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>正在为宗教书籍绘制插图。</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

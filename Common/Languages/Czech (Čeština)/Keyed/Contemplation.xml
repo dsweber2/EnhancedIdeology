@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} nenašel rituální místo ke kontemplaci pro {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>Kontemplační místnost {PAWN_nameDef} pro {IDEO_name} je zneuctěna.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>kontemplace (zisk: {0}/hod)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Zisk z kontemplace</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Rychlost posilování přesvědčení za hodinu během kontemplace. Zobrazeno pro vybraného pawna, nebo jako základní násobitel, pokud není žádný vybrán. Závisí na působivosti místnosti a aktuální síle přesvědčení pawna. Dalších +10 % za každého spoluvěřícího v místnosti.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Zisk z kontemplace: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

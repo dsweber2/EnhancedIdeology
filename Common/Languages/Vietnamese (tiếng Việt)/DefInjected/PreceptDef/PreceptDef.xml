@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>bắt buộc</Contemplation_Required.label>
+  <Contemplation_Required.description>Thiền định là nghĩa vụ thiêng liêng. Các thành viên phải thiền định thường xuyên, và người hướng đạo phải gương mẫu đi đầu.</Contemplation_Required.description>
+  <Contemplation_Respected.label>được tôn trọng</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Thiền định là một thực hành có ý nghĩa, và những người thiền định thường xuyên được đánh giá cao hơn.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>chấp nhận được</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Thiền định là chuyện cá nhân — không được khuyến khích cũng không bị phản đối.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>không chấp nhận</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Thiền định bị coi là yếu đuối hoặc mê tín. Những thành viên thiền định bị nhìn nhận không tốt.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>bị cấm</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Thiền định bị nghiêm cấm. Bất kỳ thành viên nào bị bắt gặp thiền định sẽ bị xa lánh.</Contemplation_Forbidden.description>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>sách tôn giáo</EB_Ideobook.label>
+  <EB_Ideobook.description>Một cuốn sách chứa những câu chuyện hư cấu hoặc có thật để mang lại niềm vui và sự giáo dục cho người đọc.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>sách tôn giáo chưa hoàn thành</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Một cuốn sách tôn giáo chưa hoàn thành đang được viết tại bàn viết.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>bàn viết</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Một chiếc bàn để soạn thảo văn bản tư tưởng. Chỉ những cư dân có niềm tin sâu sắc mới có thể viết tại đây.</EB_WritingDesk.description>
+</LanguageData>

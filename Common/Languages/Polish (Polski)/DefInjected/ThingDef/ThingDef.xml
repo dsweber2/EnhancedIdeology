@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>księga religijna</EB_Ideobook.label>
+  <EB_Ideobook.description>Księga zawierająca fikcyjne lub prawdziwe opowieści dla przyjemności i pouczenia czytelnika.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>niedokończona księga religijna</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Niedokończona księga religijna pisana przy biurku.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>biurko do pisania</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Biurko do układania tekstów ideologicznych. Tylko koloniści z głębokim przekonaniem w swoje wierzenia mogą przy nim pisać.</EB_WritingDesk.description>
+</LanguageData>

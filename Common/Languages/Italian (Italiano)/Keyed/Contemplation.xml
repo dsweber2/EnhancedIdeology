@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} non ha trovato un posto rituale in cui meditare per {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>La stanza di meditazione {IDEO_name} di {PAWN_nameDef} è profanata.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>meditando (guadagno: {0}/h)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Guadagno meditazione</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Velocità di rinforzo della convinzione all'ora durante la meditazione. Mostrato per il pedone selezionato, o come moltiplicatore base se nessun pedone è selezionato. Scala con la maestosità della stanza e la forza di convinzione attuale del pedone. +10% aggiuntivo per ogni correligionario nella stanza.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Guadagno meditazione: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

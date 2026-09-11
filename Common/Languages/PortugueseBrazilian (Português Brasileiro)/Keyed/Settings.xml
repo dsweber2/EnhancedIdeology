@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Tradução: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideologia</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Preceito</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Compatibilidade</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Depuração</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dinâmica de certeza pessoal</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Efeitos de conversão</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Taxa de deriva de certeza: {0}/dia</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Quão rápido a certeza de um colono se move em direção ao alvo a cada dia. Maior = a fé reage mais rapidamente às circunstâncias. Torna as crenças mais dinâmicas.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Influência relacional: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>O máximo que a opinião de um colono sobre seus correligionários pode elevar ou reduzir sua certeza alvo.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Influência da prática: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>O máximo que os humores de preceito (de rituais, veneração, tabus, etc.) podem elevar ou reduzir a certeza alvo.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Limiar de crise de fé: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Quando a certeza de um colono cai abaixo disso, ele pode ter uma crise de fé. Maior = mais crises.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Ritmo de conversão: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Quão rapidamente os colonos abandonam uma fé mal adequada por conta própria, em relação ao padrão. Maior = conversões espontâneas são mais prováveis.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Perda de certeza por tentativa de conversão: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Quando um guia moral vence um debate de conversão mas não converte o colono imediatamente, a certeza dele é multiplicada por isso. 1x = um colono com 80% de certeza permanece em 80%; 0,8x = um colono com 80% cai para 64%. Menor = tentativas de conversão mais impactantes.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Decaimento de convicção: {0}/trimestre</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Quanto de força de convicção todos os preceitos perdem por trimestre. Note que 100% de convicção está em uma média de preceito de 20, máximo é 50. Maior = necessidade mais forte de reforçar crenças.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Oposição a postura contrária: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Quão fortemente um colono se opõe à postura no extremo oposto de uma questão, como fração de sua convicção. A 100%, um colono com Canibalismo: Desaprovado 12 tem opinião -12 de Canibalismo: Obrigatório (voraz). 0% = indiferente a posturas opostas; 100% = igual e oposta ao seu apoio à própria postura no preceito extremo mais distante.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Força de conversão: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Quanto mais forte uma tentativa de conversão bem-sucedida (ação direcionada de um guia moral) empurra as crenças de um colono do que uma tentativa comum. Maior = conversões mais rápidas.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Mudança de convicção por debate: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Quanto um único argumento vencido move a crença na questão, em relação ao padrão. Muda tanto o preceito quanto a convicção naquele preceito simultaneamente. Maior = cada debate vencido persuade mais. Leva a conversões mais rápidas.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bônus de amizade (conversão): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Quanto a opinião de um colono sobre alguém tentando mudar seu preceito amplifica o efeito. Em 1x e opinião +100, tanto o golpe de certeza quanto a atração de crença são dobrados. Em 0x, a opinião não tem efeito. Não usado quando Pressão de Grupo está instalado — a configuração de multiplicador do próprio mod assume o controle.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Certeza mínima ao carregar save: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Ao carregar um save vanilla ou anterior ao mod, colonos com certeza abaixo desse valor têm suas crenças iniciadas com pelo menos esse alvo em vez de zero. Evita que um colono com 0% de certeza fique sem nenhuma convicção.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Depurar Trabalhadores de Interação</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Habilita log de depuração para trabalhadores de interação quando o modo dev está ativo. Sugiro deixar desligado a menos que esteja depurando o Enhanced Ideology especificamente.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

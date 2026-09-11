@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>religieuze verlichting</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] ervaart een moment van goddelijke helderheid en voelt de drang om een religieuze tekst te schrijven.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Geïnspireerd: Religieuze verlichting</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>[PAWN_nameDef]'s moment van religieuze verlichting is voorbij.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

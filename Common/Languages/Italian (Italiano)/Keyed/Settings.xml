@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Traduzione: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideoligione</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Precetto</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Compatibilità</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Debug</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dinamiche di certezza personale</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Effetti di conversione</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Velocità di deriva della certezza: {0}/giorno</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Quanto velocemente la certezza di un pedone si avvicina al suo obiettivo ogni giorno. Più alto = la fede reagisce più velocemente alle circostanze. Rende le credenze più dinamiche.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Influenza relazionale: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Il massimo con cui l'opinione di un pedone sui propri correligionari può aumentare o diminuire la certezza obiettivo.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Influenza della pratica: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Il massimo con cui gli stati d'animo da precetto (da rituali, venerazione, tabù, ecc.) possono aumentare o diminuire la certezza obiettivo.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Soglia di crisi di fede: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Quando la certezza di un pedone scende sotto questo valore, potrebbe avere un crollo per crisi di fede. Più alto = più crisi.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Ritmo di conversione: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Quanto velocemente i pedoni abbandonano da soli una fede poco adatta, rispetto all'impostazione predefinita. Più alto = le conversioni spontanee sono più probabili.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Perdita di certezza per tentativo di conversione: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Quando una guida morale vince un dibattito di conversione ma non converte immediatamente il pedone, la sua certezza viene moltiplicata per questo valore. 1x = un pedone all'80% di certezza rimane all'80%; 0,8x = scende al 64%. Più basso = i tentativi di conversione sono più incisivi.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Decadimento della convinzione: {0}/quadro</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Quanta forza di convinzione perdono tutti i precetti per quadro. Nota: 100% di convinzione corrisponde a una media di precetto di 20, massimo 50. Più alto = maggiore necessità di rafforzare le credenze.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Opposizione alla posizione contraria: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Quanto fortemente un pedone si oppone alla posizione all'estremo opposto di una questione, come frazione della sua convinzione. Al 100%, un pedone con Cannibalismo: Disapprovato 12 ha opinione -12 di Cannibalismo: Obbligatorio (famelico). 0% = indifferente alle posizioni opposte; 100% = uguale e contrario al suo sostegno per la propria posizione al precetto estremo più lontano.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Forza di conversione: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Quanto più intensamente un tentativo di conversione riuscito (azione diretta di una guida morale) spinge le credenze di un pedone rispetto a un tentativo ordinario. Più alto = conversioni più rapide.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Variazione di convinzione nel dibattito: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Quanto sposta una singola argomentazione vinta la credenza sulla questione, rispetto all'impostazione predefinita. Modifica sia il precetto che la convinzione in quel precetto simultaneamente. Più alto = ogni dibattito vinto persuade di più. Porta a conversioni più rapide.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bonus amicizia (conversione): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Quanto l'opinione di un pedone su chi cerca di cambiare il suo precetto amplifica l'effetto. A 1x e opinione +100, sia la riduzione di certezza che la spinta alla credenza sono raddoppiate. A 0x, l'opinione non ha effetto. Non usato quando Peer Pressure è installato — viene usata invece l'impostazione del moltiplicatore di quella mod.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Certezza minima al caricamento: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Al caricamento di un salvataggio vanilla o pre-mod, i pedoni con certezza inferiore a questo valore hanno le loro credenze inizializzate almeno a questo obiettivo invece di zero. Evita che un pedone con 0% di certezza rimanga senza alcuna convinzione.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Lavoratori Interazione</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Abilita il logging di debug per i lavoratori di interazione quando la modalità sviluppatore è attiva. Si consiglia di lasciarlo disattivato a meno che non si stia eseguendo il debug specificamente di Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

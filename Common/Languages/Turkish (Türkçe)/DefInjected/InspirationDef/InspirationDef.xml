@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>dini aydınlanma</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] ilahi bir açıklık anı hissediyor ve dini bir metin yazmaya yöneldiğini hissediyor.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>İlhamlı: Dini aydınlanma</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>[PAWN_nameDef]'in dini aydınlanma anı geçti.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

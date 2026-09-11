@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>giác ngộ tôn giáo</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] cảm nhận một khoảnh khắc sáng suốt thần thánh và bị thôi thúc viết một văn bản tôn giáo.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Cảm hứng: Giác ngộ tôn giáo</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>Khoảnh khắc giác ngộ tôn giáo của [PAWN_nameDef] đã qua.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

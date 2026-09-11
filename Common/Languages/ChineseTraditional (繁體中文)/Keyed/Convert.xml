@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Convert.CertaintyKnock>暫時感悟降低：{0}</EnhancedIdeology.Convert.CertaintyKnock>
+  <EnhancedIdeology.Convert.SuccessChance>贏得辯論的機率：{0}</EnhancedIdeology.Convert.SuccessChance>
+  <EnhancedIdeology.Convert.ConversionChance>贏得辯論後皈依的機率：{0}</EnhancedIdeology.Convert.ConversionChance>
+  <EnhancedIdeology.Convert.TargetBeliefs>目標信念（隨機1至{0}項）：</EnhancedIdeology.Convert.TargetBeliefs>
+  <EnhancedIdeology.Convert.NoOpposition>他們對你信仰所宣揚的一切均無異議——無可轉化之處。</EnhancedIdeology.Convert.NoOpposition>
+  <EnhancedIdeology.Convert.Factors>影響因素（你 vs. 他們）：</EnhancedIdeology.Convert.Factors>
+  <EnhancedIdeology.Convert.Factor.ConversionPower>皈依力量：{0} vs {1}</EnhancedIdeology.Convert.Factor.ConversionPower>
+  <EnhancedIdeology.Convert.Factor.Intellectual>智識辯論：{0} vs {1}</EnhancedIdeology.Convert.Factor.Intellectual>
+  <EnhancedIdeology.Convert.Factor.Social>社交影響：{0} vs {1}</EnhancedIdeology.Convert.Factor.Social>
+</LanguageData>

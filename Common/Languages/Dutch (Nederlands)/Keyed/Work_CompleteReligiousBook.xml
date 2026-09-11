@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologyMissingRole>Ideoligie heeft de vereiste '{ROLE}'-rol niet.</EnhancedIdeology.IdeologyMissingRole>
+  <EnhancedIdeology.PawnMissingRequiredRole>{PAWN} heeft de vereiste '{ROLE}'-rol niet.</EnhancedIdeology.PawnMissingRequiredRole>
+  <EnhancedIdeology.PawnIsNotAuthor>{PAWN} is niet de auteur van het boek.</EnhancedIdeology.PawnIsNotAuthor>
+  <EnhancedIdeology.BookIsNotForPawnIdeoligion>Het boek is niet voor {PAWN_possessive} ideoligie.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
+  <EnhancedIdeology.NoFreeValidLecternFound>Geen beschikbare, toegankelijke lessenaar gevonden om aan te werken.</EnhancedIdeology.NoFreeValidLecternFound>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Zekerheid moet boven 90% zijn om religieuze teksten te schrijven.</EnhancedIdeology.InsufficientCertaintyToWrite>
+</LanguageData>

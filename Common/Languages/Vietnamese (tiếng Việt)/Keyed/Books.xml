@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} thay đổi niềm tin/quý</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Niềm tin được đề cao</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/quý</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Sách tôn giáo bị hủy</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, một cuốn sách tôn giáo quan trọng của {IDEO}, đã bị hủy. Các tín đồ của {IDEO} sẽ không vui vẻ gì.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Hủy {BOOK} bằng cách thiêu đốt. Điều này sẽ làm phật lòng {IDEO_memberNamePlural} của {IDEO}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Hủy {BOOK} bằng cách thiêu đốt.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Không có cư dân nào có thể hủy {BOOK}.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Bạn có chắc muốn {PAWN} thiêu đốt {BOOK}? Điều này sẽ làm phật lòng tất cả {IDEO_memberNamePlural} của {IDEO}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Bạn có chắc muốn {PAWN} thiêu đốt {BOOK}?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} đã hủy {BOOK}. Điều này đã làm phật lòng sâu sắc {IDEO_memberNamePlural} của {IDEO}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

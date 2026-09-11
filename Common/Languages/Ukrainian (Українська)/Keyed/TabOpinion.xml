@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ідеологія</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Думки про ідеологію</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Питання</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Питання</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Позиція</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Сила</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Байдуже</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>З питання {1}, {PAWN_nameDef} займає позицію {2} з переконанням {3}. {IDEO_name} проповідує {5}; думка {PAWN_nameDef} щодо цієї позиції: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>Думка {PAWN_nameDef} про {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Від рис та правил: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Від особистих переконань: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Від міжособистісних стосунків: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

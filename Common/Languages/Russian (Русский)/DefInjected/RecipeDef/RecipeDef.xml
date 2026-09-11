@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>написать религиозную книгу</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>Написать религиозную книгу, подробно описывающую убеждения вашей идеолигии. Требует высокой уверенности в своей идеолигии (не менее 90%).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>пишет религиозную книгу.</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>написать иллюстрированную религиозную книгу</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>Написать иллюминированную религиозную книгу, украшенную самоцветами и чернилами. Качество материалов усиливает духовный эффект от её чтения. Требует высокой уверенности в своей идеолигии (не менее 90%).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>иллюстрирует религиозную книгу.</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

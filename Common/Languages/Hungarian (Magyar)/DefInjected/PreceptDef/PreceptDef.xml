@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>kötelező</Contemplation_Required.label>
+  <Contemplation_Required.description>Az elmélkedés szent kötelesség. A tagoknak rendszeresen elmélkedniük kell, és az erkölcsi vezető köteles jó példával elöl járni.</Contemplation_Required.description>
+  <Contemplation_Respected.label>tisztelt</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Az elmélkedés értelmes gyakorlat, és azokat, akik rendszeresen elmélkednek, nagyobb tisztelet övezi.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>elfogadható</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Az elmélkedés személyes ügy – sem nem ösztönzik, sem nem tiltják.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>nem javasolt</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Az elmélkedést gyengeségnek vagy babonának tekintik. Az elmélkedő tagokat kedvezőtlenül ítélik meg.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>tiltott</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Az elmélkedés szigorúan tilos. Minden elmélkedésen ért tagot kiközösítenek.</Contemplation_Forbidden.description>
+</LanguageData>

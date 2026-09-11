@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>翻譯：claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>理念</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>戒律</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>相容性</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>除錯</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>個人感悟動態</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>皈依效果</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>感悟漂移速率：{0}/天</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>棋子感悟每天朝目標移動的速度。數值越高，信仰對環境反應越快，信念也越動態。</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>人際影響：±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>棋子對同信徒的看法能夠提升或降低目標感悟的最大幅度。</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>實踐影響：±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>戒律情緒（源自儀式、崇敬、禁忌等）能夠提升或降低目標感悟的最大幅度。</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>信仰危機閾值：{0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>當棋子感悟低於此值時，可能爆發信仰危機崩潰。數值越高，危機越頻繁。</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>皈依速度：{0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>棋子自發放棄不合適信仰的速度，相對於預設值。數值越高，自發皈依越可能發生。</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>皈依嘗試感悟損失：{0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>當道德引導者贏得皈依辯論但棋子未立即轉變時，其感悟乘以此係數。1倍＝感悟80%的棋子維持80%；0.8倍＝感悟80%的棋子降至64%。數值越低，皈依嘗試影響越大。</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>信念衰退：{0}/月</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>所有戒律每月損失的信念強度。注意：平均戒律值20對應100%信念，最大值為50。數值越高，強化信念的需求越迫切。</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>對立立場反對度：{0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>棋子反對某議題極端對立立場的強度，以其信念的分數表示。100%時，持「食人：不贊同12」的棋子對「食人：必須（飢渴）」的看法為-12。0%＝對對立立場漠然；100%＝與自身在最極端戒律的支持等量反對。</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>皈依強度：{0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>成功的皈依嘗試（道德引導者的定向行動）相較於普通皈依嘗試，更有力地推動棋子信念的程度。數值越高，皈依越迅速。</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>辯論信念變化：{0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>單次勝利的辯論在議題上推動信念的幅度，相對於預設值。同時改變戒律及對該戒律的信念。數值越高，每次勝利辯論的說服力越強，皈依也越迅速。</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>友誼加成（皈依）：{0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>棋子對試圖改變其戒律者的看法放大效果的程度。1倍且看法+100時，感悟衝擊與信念牽引均翻倍。0倍時，看法無任何效果。安裝「同伴壓力」模組時此設定無效——改由該模組自身的倍率設定接管。</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>存檔載入最低感悟：{0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>載入原版或模組前的存檔時，感悟低於此值的棋子，其信念目標至少設為此值而非零。防止感悟0%的棋子完全失去所有信念。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>開發：除錯互動工作器</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>在開發者模式啟用時，為互動工作器啟用除錯紀錄。建議除非專門除錯「Enhanced Ideology」，否則保持關閉。</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} не смог найти ритуальное место для созерцания во имя {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>Комната созерцания {PAWN_nameDef} ({IDEO_name}) осквернена.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>созерцание (прирост: {0}/ч)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Прирост от созерцания</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Скорость укрепления убеждённости в час во время созерцания. Показывается для выбранного персонажа или как базовый множитель, если персонаж не выбран. Зависит от впечатляющести комнаты и текущей силы убеждённости персонажа. Дополнительно +10% за каждого единоверца в комнате.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Прирост от созерцания: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

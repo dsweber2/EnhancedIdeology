@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Fordítás: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideológia</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Előírás</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Kompatibilitás</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Hibakeresés</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Személyes meggyőződés dinamikája</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Áttérítési hatások</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Meggyőződés-sodródási ráta: {0}/nap</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Milyen gyorsan közelít egy karakter meggyőződése a célértékhez naponta. Magasabb = a hit gyorsabban reagál a körülményekre. Dinamikusabb hittételeket eredményez.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Kapcsolati hatás: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Legfeljebb ennyivel emelheti vagy csökkentheti egy karakter hittestvéreiről alkotott véleménye a célmeggyőződését.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Gyakorlati hatás: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Legfeljebb ennyivel emelheti vagy csökkentheti az előírásokból eredő hangulat (szertartások, tisztelet, tabuk stb.) a célmeggyőződést.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Hiterősis-küszöb: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Ha egy karakter meggyőződése ez alá esik, hiterősis történhet. Magasabb = több krízis.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Áttérítési ütem: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Milyen gyorsan hagynak fel a karakterek önként egy nem illő hittel az alapértékhez képest. Magasabb = spontán áttérések valószínűbbek.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Áttérítési kísérlet meggyőződés-vesztesége: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Ha az erkölcsi vezető megnyeri az áttérítési vitát, de a karakter nem tér át azonnal, a meggyőződésük ezzel szorzódik. 1x = egy 80%-os meggyőződésű karakter 80%-on marad; 0,8x = 80%-ról 64%-ra esik. Alacsonyabb = az áttérítési kísérletek hatásosabbak.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Meggyőződés-kopás: {0}/negyed</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Mennyit veszítenek az összes előírás meggyőződés-erősségéből negyed évenként. Megjegyzés: 100%-os meggyőződés egy 20-as előírás-átlagot jelent, a maximum 50. Magasabb = erősebb igény a hittételek megerősítésére.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Ellentétes álláspont ellenállása: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Milyen erősen ellenzi egy karakter a kérdés ellentétes szélső álláspontját, meggyőződésük töredékeként. 100%-nál egy Kannibalizmus: Nem javasolt 12 értékű karakter véleménye -12 a Kannibalizmus: Kötelező (falánk) álláspontra. 0% = közömbös az ellentétes álláspontok iránt; 100% = egyenlő és ellentétes a saját álláspont támogatásával a legszélső előírásnál.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Áttérítési erősség: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Mennyivel erősebben tolja egy sikeres áttérítési kísérlet (erkölcsi vezető irányított cselekvése) a karakter hitét, mint egy közönséges kísérlet. Magasabb = gyorsabb áttérések.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Vita meggyőződés-változása: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Mennyire mozdítja el a kérdésben a hitet egyetlen megnyert érv az alapértékhez képest. Egyidejűleg változtatja az előírást és az abban lévő meggyőződést. Magasabb = minden megnyert vita jobban győz meg. Gyorsabb áttérésekhez vezet.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Barátsági bónusz (áttérítés): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Mennyivel erősíti a hatást egy karakter véleménye arról, aki meg akarja változtatni az előírását. 1x értéknél és +100 véleménynél mind a meggyőződés-csökkenés, mind a hittétel-vonzás megduplázódik. 0x értéknél a véleménynek nincs hatása. Nem használható, ha a Peer Pressure mod telepítve van – helyette az a mod saját szorzó-beállítása lép életbe.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Mentés-betöltés minimális meggyőződése: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Vanilla vagy mod előtti mentés betöltésekor az ez alatti meggyőződésű karakterek hitét legalább erre a célértékre állítja nulla helyett. Megakadályozza, hogy egy 0%-os meggyőződésű karakter teljesen meggyőződés nélkül maradjon.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>FEJ: Interakciós munkások hibakeresése</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Engedélyezi az interakciós munkások hibakeresési naplózását, ha a fejlesztői mód aktív. Javasolt kikapcsolt állapotban hagyni, kivéve ha kifejezetten az Enhanced Ideology-t hibakeresed.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

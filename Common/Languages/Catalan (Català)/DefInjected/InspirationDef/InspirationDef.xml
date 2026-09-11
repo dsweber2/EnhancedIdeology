@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>il·luminació religiosa</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] sent un moment de claredat divina i se sent impulsat a escriure un text religiós.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Inspirat: Il·luminació religiosa</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>El moment d'il·luminació religiosa de [PAWN_nameDef] ha passat.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_BeliefReinforcement.label>信条強化</EB_BeliefReinforcement.label>
+  <EB_BeliefReinforcement.effectDesc>参加者の確信が正統へと強化される。</EB_BeliefReinforcement.effectDesc>
+  <EB_BeliefReinforcement.letterInfoText>儀式により参加者の確信が深まった。</EB_BeliefReinforcement.letterInfoText>
+</LanguageData>

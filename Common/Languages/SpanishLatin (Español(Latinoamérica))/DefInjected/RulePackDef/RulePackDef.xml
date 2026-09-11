@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Sentence_DebateWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef] ganó el debate.</EB_Sentence_DebateWon.rulePack.rulesStrings.0>
+  <EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef] resultó más persuasivo/a.</EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>
+  <EB_Sentence_RecipientWon.rulePack.rulesStrings.0>sent-&gt;[RECIPIENT_nameDef] resultó más persuasivo/a.</EB_Sentence_RecipientWon.rulePack.rulesStrings.0>
+  <EB_Sentence_DebateDraw.rulePack.rulesStrings.0>sent-&gt;Ninguno cambió su punto de vista.</EB_Sentence_DebateDraw.rulePack.rulesStrings.0>
+</LanguageData>

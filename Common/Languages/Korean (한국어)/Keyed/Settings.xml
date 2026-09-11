@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>번역: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>사상</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>규율</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>호환성</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>디버그</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>개인 믿음 역학</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>교화 효과</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>믿음 변화율: {0}/일</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>폰의 믿음이 매일 목표를 향해 얼마나 빠르게 이동하는지. 높을수록 = 믿음이 상황에 더 빠르게 반응합니다. 더 역동적인 신념을 만들어냅니다.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>관계적 영향: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>같은 사상을 가진 동료들에 대한 폰의 의견이 목표 믿음을 높이거나 낮출 수 있는 최대 범위.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>실천 영향: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>규율 감정(행사, 숭배, 금기 등에서)이 목표 믿음을 높이거나 낮출 수 있는 최대 범위.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>신앙의 위기 임계값: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>폰의 믿음이 이 값 아래로 떨어지면 신앙의 위기가 발생할 수 있습니다. 높을수록 = 위기가 더 자주 발생합니다.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>교화 속도: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>폰이 잘 맞지 않는 사상을 스스로 얼마나 빠르게 떠나는지, 기본값 대비. 높을수록 = 자발적 교화가 더 일어나기 쉽습니다.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>교화 시도 믿음 손실: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>도덕적 지도자가 교화 토론에서 이겼지만 폰이 즉시 전향하지 않을 때, 믿음에 이 값을 곱합니다. 1x = 80% 믿음의 폰은 80%를 유지; 0.8x = 80% 믿음의 폰은 64%로 하락. 낮을수록 = 교화 시도의 영향이 더 큽니다.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>확신 쇠퇴: {0}/분기</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>모든 규율이 분기당 잃는 확신 강도. 100% 확신은 규율 평균 20이며, 최대는 50입니다. 높을수록 = 신념을 강화해야 할 필요성이 더 강합니다.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>반대 입장 반감: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>폰이 어떤 문제의 정반대 극단 입장에 얼마나 강하게 반대하는지, 확신의 비율로. 100%에서, 식인: 불승인 12를 가진 폰은 식인: 필수(탐식)에 대해 -12 의견을 가집니다. 0% = 반대 입장에 무관심; 100% = 가장 극단적인 규율에서 자신의 지지와 동등하고 반대.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>교화 강도: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>성공적인 교화 시도(도덕적 지도자의 직접 행동)가 일반 교화 시도보다 폰의 신념을 얼마나 더 강하게 밀어붙이는지. 높을수록 = 더 빠른 교화.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>토론 확신 변화: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>하나의 토론 승리가 해당 문제에 대한 신념을 기본값 대비 얼마나 움직이는지. 규율과 해당 규율의 확신을 동시에 이동시킵니다. 높을수록 = 각 토론 승리의 설득력이 더 강합니다. 더 빠른 교화로 이어집니다.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>우정 보너스 (교화): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>규율을 바꾸려는 사람에 대한 폰의 의견이 효과를 얼마나 증폭시키는지. 1x이고 의견 +100일 때, 믿음 손실과 신념 당김 모두 두 배가 됩니다. 0x에서는 의견이 효과가 없습니다. Peer Pressure 모드가 설치되어 있을 때는 사용되지 않습니다 — 해당 모드의 고유 배수 설정이 대신 적용됩니다.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>저장-불러오기 최소 믿음: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>바닐라 또는 모드 이전 저장 파일을 불러올 때, 믿음이 이 값보다 낮은 폰의 신념이 0 대신 최소한 이 목표값으로 설정됩니다. 0% 믿음의 폰이 아무런 확신 없이 남겨지는 것을 방지합니다.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>개발: 상호작용 워커 디버그</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>개발자 모드가 활성화되어 있을 때 상호작용 워커의 디버그 로깅을 활성화합니다. Enhanced Ideology를 직접 디버그하지 않는 한 끄는 것을 권장합니다.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

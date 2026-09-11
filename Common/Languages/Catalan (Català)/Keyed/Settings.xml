@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Traducció: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideoligió</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Precepte</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Compatibilitat</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Depuració</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dinàmica de certesa personal</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Efectes de la conversió</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Taxa de deriva de la certesa: {0}/dia</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Velocitat a la qual la certesa d'un peó s'acosta al seu objectiu cada dia. Més alt = la fe reacciona més ràpidament a les circumstàncies. Genera creences més dinàmiques.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Influència relacional: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>El màxim que l'opinió d'un peó sobre els seus correligionaris pot augmentar o disminuir la seva certesa objectiu.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Influència de la pràctica: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>El màxim que els estats d'ànim dels preceptes (de rituals, veneració, tabús, etc.) poden augmentar o disminuir la certesa objectiu.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Llindar de crisi de fe: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Quan la certesa d'un peó cau per sota d'aquest valor, pot tenir una crisi de fe. Més alt = més crisis.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Ritme de conversió: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Velocitat a la qual els peons abandonen espontàniament una fe poc adequada, en relació al valor predeterminat. Més alt = conversions espontànies més probables.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Pèrdua de certesa per intent de conversió: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Quan un guia moral guanya un debat de conversió però no canvia el peó immediatament, la seva certesa es multiplica per aquest valor. 1x = un peó amb 80% de certesa es queda al 80%; 0,8x = cau al 64%. Més baix = intents de conversió més impactants.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Decaïment de la convicció: {0}/quàdrum</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Quanta força de convicció perden tots els preceptes per quàdrum. Nota: el 100% de convicció correspon a una mitjana de preceptes de 20; el màxim és 50. Més alt = necessitat més forta de reforçar les creences.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Oposició a la postura contrària: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Amb quina força s'oposa un peó a la postura de l'extrem oposat d'un tema, com a fracció de la seva convicció. Al 100%, un peó amb Canibalisme: Desaprovat 12 té opinió -12 de Canibalisme: Obligatori (voraç). 0% = indiferent a les postures oposades; 100% = igual i oposat al suport de la pròpia al precepte extrem més allunyat.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Força de conversió: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Quant més fort empeny les creences d'un peó un intent de conversió exitós (acció dirigida d'un guia moral) que un intent ordinari. Més alt = conversions més ràpides.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Canvi de convicció en debat: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Fins a on mou la creença en el tema un sol argument guanyat, en relació al valor predeterminat. Desplaça alhora el precepte i la convicció en aquell precepte. Més alt = cada debat guanyat persuadeix més. Condueix a conversions més ràpides.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bonus d'amistat (conversió): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Fins a quin punt l'opinió d'un peó sobre algú que intenta canviar el seu precepte amplifica l'efecte. A 1x i opinió +100, tant la reducció de certesa com l'atracció de creença es doblen. A 0x, l'opinió no té cap efecte. No s'utilitza quan Peer Pressure està instal·lat: en aquell cas s'utilitza el multiplicador d'aquell mod.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Certesa mínima en carregar: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>En carregar una partida estàndard o anterior al mod, els peons amb certesa per sota d'aquest valor reben com a mínim aquest objectiu en lloc de zero. Evita que un peó amb 0% de certesa quedi sense cap convicció.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Depura Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Activa el registre de depuració per als interaction workers quan el mode de desenvolupament és actiu. Es recomana deixar-ho desactivat tret que s'estigui depurant Enhanced Ideology específicament.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

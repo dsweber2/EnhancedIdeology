@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>регулярно медитировал</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Я был верен своим созерцаниям. Это приносит мне покой.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>созерцание заброшено</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Я не нашёл времени для созерцания. Моя преданность ослабевает.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>созерцание сильно заброшено</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Я слишком долго обходился без созерцания. Я чувствую духовное опустошение.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>благочестиво медитировал</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>занимался созерцанием</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>нарушил запрет на созерцание</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>религиозная книга уничтожена</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Наша религиозная книга была уничтожена. Это абсолютно непростительно.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>осквернил священный текст</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Я переплёл священную книгу в шкуру животного. Это было неправильно.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>читает священное писание в кожаном переплёте</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Этот священный текст переплётен в шкуру животного. Держать его в руках неприятно.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>хороший спор</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>У нас был увлекательный спор о наших убеждениях. Встреча открытых умов.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>еретический спор</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Мне пришлось опровергать их отклоняющиеся убеждения. Разнообразие мыслей — яд.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>нёс слово</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Я отстаивал истинность своей веры. Каков бы ни был результат, сама попытка была праведным делом.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>привёл душу к вере</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Я привёл кого-то в свет нашей веры. Нет призвания выше.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>не смог обратить</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Я пытался привести кого-то к вере и потерпел неудачу. Они остаются в своём невежестве.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>вера подверглась испытанию</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Мне пришлось защищать истину своей веры от оппонента. Сам факт, что они осмелились поставить её под сомнение, — оскорбление.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>когнитивный диссонанс</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Мне не следует участвовать в практиках чужой идеолигии.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>вера подтверждена</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Наблюдая за тем, как поступают в другой традиции, я вспоминаю, почему ценю свой путь.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>колеблющийся единоверец</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>безверный единоверец</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>вероотступнический единоверец</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>náboženská kniha</EB_Ideobook.label>
+  <EB_Ideobook.description>Kniha obsahující fiktivní nebo pravdivé příběhy pro potěšení a vzdělání čtenáře.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>nedokončená náboženská kniha</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Nedokončená náboženská kniha, která je právě psána u psacího stolu.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>psací stůl</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Stůl pro psaní ideologických textů. Mohou u něj psát pouze kolonisté s hlubokým přesvědčením ve svou víru.</EB_WritingDesk.description>
+</LanguageData>

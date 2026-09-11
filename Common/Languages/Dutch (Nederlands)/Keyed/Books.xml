@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} overtuigingsverschuiving/kw</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Verdedigde overtuigingen</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/kw</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Religieus boek vernietigd</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, een belangrijk religieus boek voor {IDEO}, is vernietigd. Aanhangers van {IDEO} zullen hier niet blij mee zijn.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Vernietig {BOOK} door het te verbranden. Dit zal {IDEO_memberNamePlural} van {IDEO} verontrusten.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Vernietig {BOOK} door het te verbranden.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Geen enkele kolonist kan {BOOK} vernietigen.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Weet je zeker dat je {PAWN} {BOOK} wilt laten verbranden? Dit zal alle {IDEO_memberNamePlural} van {IDEO} zeer verontrusten.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Weet je zeker dat je {PAWN} {BOOK} wilt laten verbranden?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} heeft {BOOK} vernietigd. Dit heeft alle {IDEO_memberNamePlural} van {IDEO} zeer verontrust.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

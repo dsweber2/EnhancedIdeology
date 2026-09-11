@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>scrie carte religioasă</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>Scrie o carte religioasă detaliind credințele ideoligionului tău. Necesită certitudine ridicată în ideoligionul propriu (cel puțin 90%).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>scriind o carte religioasă.</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>scrie carte religioasă ilustrată</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>Scrie o carte religioasă iluminată, ornată cu pietre prețioase și cerneală. Calitatea materialelor sporește aspectele devoționale ale citirii ei. Necesită certitudine ridicată în ideoligionul propriu (cel puțin 90%).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>ilustrând cartea religioasă.</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

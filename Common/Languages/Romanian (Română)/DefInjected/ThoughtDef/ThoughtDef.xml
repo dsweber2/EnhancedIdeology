@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>a meditat regulat</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Am fost fidel în meditațiile mele. Îmi aduce pace.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>meditație neglijată</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Nu am găsit timp să meditez. Devotamentul meu slăbește.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>meditație sever neglijată</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Am trecut mult prea mult timp fără meditație. Mă simt pierdut spiritual.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>a meditat evlavios</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>s-a angajat în meditație</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>a sfidат interdicția de meditație</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>carte religioasă distrusă</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Cartea noastră religioasă a fost distrusă. Asta este absolut de neiertat.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>a profanat un text sacru</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Am legat o carte sfântă în piele de animal. A fost greșit.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>citind scripturi legate în piele</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Acest text sfânt este legat în piele de animal. A-l ține în mână pare greșit.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>dezbatere bună</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Am avut o dezbatere stimulantă despre credințele noastre. O întâlnire de minți deschise.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>dezbatere eretică</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>A trebuit să le resping credințele deviante. Diversitatea gândirii este o otravă.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>a răspândit cuvântul</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Am susținut adevărul credinței mele. Indiferent de rezultat, tentativa în sine a fost un act drept.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>a adus un suflet la credință</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Am adus pe cineva în lumina credinței noastre. Nu există o chemare mai mare.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>nu a reușit să convertească</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Am încercat să aduc pe cineva la credință și am eșuat. Rămân în ignoranța lor.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>credință contestată</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>A trebuit să apăr adevărul credinței mele împotriva unui contestatar. Simplul fapt că au îndrăznit să o pună sub semnul întrebării este o insultă.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>disonanță cognitivă</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Nu ar trebui să particip la practicile altor ideoligioni.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>credință reafirmată</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Văzând modul altei tradiții de a face lucrurile îmi amintește de ce îmi prețuiesc propriul drum.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>coreligionar șovăielnic</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>coreligionar fără credință</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>coreligionar cu inimă apostat</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

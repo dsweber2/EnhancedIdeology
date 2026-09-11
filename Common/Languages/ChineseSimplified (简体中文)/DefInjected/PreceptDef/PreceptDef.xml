@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>必须</Contemplation_Required.label>
+  <Contemplation_Required.description>沉思是神圣的义务。成员必须定期沉思，道德向导应以身作则。</Contemplation_Required.description>
+  <Contemplation_Respected.label>受尊重</Contemplation_Respected.label>
+  <Contemplation_Respected.description>沉思是有意义的修行，定期沉思者备受尊崇。</Contemplation_Respected.description>
+  <Contemplation_Normal.label>可接受</Contemplation_Normal.label>
+  <Contemplation_Normal.description>沉思是个人事务——不予鼓励，也不予阻止。</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>不赞成</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>沉思被视为软弱或迷信。进行沉思的成员将受到负面评价。</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>禁止</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>沉思被严格禁止。任何被发现沉思的成员将遭到排斥。</Contemplation_Forbidden.description>
+</LanguageData>

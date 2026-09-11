@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>geloofskrisis</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>geloofskrisis</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} heeft een geloofskrisis.\n\n[PAWN_pronoun] zal de komende dag of twee in meditatie doorbrengen en [PAWN_possessive] overtuigingen in twijfel trekken.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>{0}'s geloofskrisis is voorbij.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Geestestoestand: Geloofskrisis</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>beeldenstormer</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} heeft een mentale breuk gehad en gedraagt zich als een beeldenstormer.\n\n[PAWN_pronoun] zal proberen religieuze boeken te verbranden.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} gedraagt zich niet langer als een beeldenstormer.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Geestestoestand: Beeldenstormer</EB_Iconoclast.baseInspectLine>
+</LanguageData>

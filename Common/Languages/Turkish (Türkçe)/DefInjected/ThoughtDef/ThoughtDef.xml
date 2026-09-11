@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>düzenli tefekkür etti</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Tefekkürlerimde sadık oldum. Bu bana huzur veriyor.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>tefekkür ihmal edildi</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Tefekkür için zaman bulamadım. İbadetime olan bağlılığım zayıflıyor.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>tefekkür ağır biçimde ihmal edildi</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Çok uzun süredir tefekkür etmedim. Ruhsal açıdan sürükleniyorum.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>dindar bir şekilde tefekkür etti</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>tefekküre katıldı</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>tefekkür yasağını çiğnedi</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>dini kitap yok edildi</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Dini kitabımız yok edildi. Bu kesinlikle affedilemez.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>kutsal metni kirletti</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Kutsal kitabı hayvan derisine ciltledim. Bu yanlıştı.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>deri ciltli kutsal metin okuyor</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Bu kutsal metin hayvan derisine ciltlenmiş. Tutmak yanlış hissettiriyor.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>iyi tartışma</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>İnançlarımız hakkında canlandırıcı bir tartışma yaptık. Açık zihinlerin buluşması.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>sapkın tartışma</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Sapkın inançlarını çürütmek zorunda kaldım. Düşünce çeşitliliği bir zehirdir.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>mesajı yaydı</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>İnancımın gerçeği için tartıştım. Sonuç ne olursa olsun, bu girişimin kendisi doğru bir eylemdi.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>bir ruhu inanca kazandırdı</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Birini inancımızın ışığına kavuştutdum. Bundan büyük bir çağrı yoktur.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>dönüştüremedi</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Birini inanca kazandırmaya çalıştım ve başarısız oldum. Cahilliklerinde kalmaya devam ediyorlar.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>iman sorgulandı</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>İnancımın gerçeğini bir meydan okuyucuya karşı savunmak zorunda kaldım. Sorgulamaya cüret etmeleri başlı başına bir hakarettir.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>bilişsel çelişki</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Başka bir ideodinin uygulamalarına katılmamalıyım.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>iman pekiştirildi</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Başka bir geleneğin yapış biçimini görmek, kendi yoluma neden değer verdiğimi hatırlatıyor.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>kararsız din kardeşi</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>imansız din kardeşi</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>mürted kalpli din kardeşi</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>релігійне просвітлення</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] відчуває мить божественної ясності і відчуває потяг написати релігійний текст.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Натхнення: Релігійне просвітлення</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>Мить релігійного просвітлення [PAWN_nameDef] минула.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

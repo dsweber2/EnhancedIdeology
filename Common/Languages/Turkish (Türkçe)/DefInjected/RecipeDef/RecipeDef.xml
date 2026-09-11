@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_WriteIdeobook.label>dini kitap yaz</EB_WriteIdeobook.label>
+  <EB_WriteIdeobook.description>İdeolojinizin inançlarını anlatan bir dini kitap yazın. İdeodine yüksek iman gerektirir (en az %90).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.jobString>dini kitap yazıyor.</EB_WriteIdeobook.jobString>
+  <EB_WriteIllustratedIdeobook.label>resimli dini kitap yaz</EB_WriteIllustratedIdeobook.label>
+  <EB_WriteIllustratedIdeobook.description>Mücevherler ve mürekkeple süslenmiş aydınlatılmış bir dini kitap yazın. Malzeme kalitesi okuma deneyiminin ibadet boyutunu artırır. İdeodine yüksek iman gerektirir (en az %90).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.jobString>dini kitabı resimlendiriyor.</EB_WriteIllustratedIdeobook.jobString>
+</LanguageData>

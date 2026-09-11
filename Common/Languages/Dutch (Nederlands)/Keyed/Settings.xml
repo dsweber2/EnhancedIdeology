@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Vertaling: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideoligie</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Leefregel</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Compatibiliteit</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Debug</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Persoonlijke zekerheidsprocessen</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Bekeringsinvloeden</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Zekerheidsafwijkingstempo: {0}/dag</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Hoe snel de zekerheid van een pion per dag naar het doelniveau beweegt. Hoger = geloof reageert sneller op omstandigheden. Zorgt voor dynamischere overtuigingen.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Relationele invloed: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Het maximum waarmee de mening van een pion over medegelovigen de doelzekerheid kan verhogen of verlagen.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Praktijkinvloed: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Het maximum waarmee leefregelstemming (van rituelen, verering, taboes, enz.) de doelzekerheid kan verhogen of verlagen.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Drempel geloofskrisis: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Wanneer de zekerheid van een pion hieronder daalt, kan een geloofskrisis optreden. Hoger = meer crises.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Bekeringtempo: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Hoe snel pionnen vanzelf een slecht passend geloof verlaten, ten opzichte van de standaardwaarde. Hoger = spontane bekeringen zijn waarschijnlijker.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Zekerheidsverlies bij bekeringspoging: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Wanneer een morele gids een bekeringsdebat wint maar de pion niet direct bekeert, wordt diens zekerheid hiermee vermenigvuldigd. 1x = een pion met 80% zekerheid blijft op 80%; 0,8x = een pion met 80% zekerheid daalt naar 64%. Lager = bekeringspogingen hebben meer impact.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Overtuigingsafname: {0}/quadrum</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Hoeveel overtuigingskracht alle leefregels per quadrum verliezen. Merk op dat 100% overtuiging overeenkomt met een leefregelsgemiddelde van 20; maximum is 50. Hoger = grotere behoefte om overtuigingen te versterken.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Tegengesteld-standpunt verzet: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Hoe sterk een pion het tegenovergestelde standpunt op een kwestie afwijst, als fractie van diens overtuiging. Bij 100% heeft een pion met Kannibalisme: Afgekeurd 12 een mening van -12 over Kannibalisme: Verplicht (vraatzuchtig). 0% = onverschillig voor tegengestelde standpunten; 100% = gelijk en tegengesteld aan hun steun voor eigen standpunt bij het verste uiterste leefregel.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Bekeringskracht: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Hoeveel sterker een geslaagde bekeringspoging (gerichte actie van een morele gids) de overtuigingen van een pion verandert dan een gewone bekeringspoging. Hoger = snellere bekeringen.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Overtuigingsverandering door debat: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Hoe ver één gewonnen argument de overtuiging over een kwestie verschuift, ten opzichte van standaard. Verschuift zowel de leefregel als de overtuiging in die leefregel tegelijk. Hoger = elk gewonnen debat overtuigt meer. Leidt tot snellere bekeringen.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Vriendschapsbonus (bekering): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Hoeveel de mening van een pion over iemand die diens leefregel wil veranderen het effect versterkt. Bij 1x en mening +100 worden zowel de zekerheidsklap als de geloofsaantrekking verdubbeld. Bij 0x heeft mening geen effect. Niet gebruikt wanneer Peer Pressure is geïnstalleerd — de vermenigvuldigingsinstelling van die mod neemt het dan over.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Minimum zekerheid bij laden: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Bij het laden van een standaard- of pre-mod opgeslagen spel krijgen pionnen met zekerheid onder dit niveau hun overtuigingen ingesteld op minimaal dit doelniveau in plaats van nul. Voorkomt dat een pion met 0% zekerheid helemaal zonder overtuigingen achterblijft.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Interactiewerkers</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Schakelt debug-logboekregistratie in voor interactiewerkers wanneer de ontwikkelaarsmodus actief is. Laat dit uit tenzij je specifiek Enhanced Ideology debugt.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

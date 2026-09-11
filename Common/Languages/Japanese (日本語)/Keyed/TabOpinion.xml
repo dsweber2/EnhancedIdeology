@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>思想</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>思想への評価</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>問題</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>問題</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>姿勢</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>強度</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>無関心</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>{1}の問題について、{PAWN_nameDef}は確信{3}で姿勢{2}をとっている。{IDEO_name}は{5}を説く。{PAWN_nameDef}のその姿勢への評価: {6}。</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}の{IDEO_name}への評価: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>ミームと戒律から: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>個人の信条から: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>対人関係から: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>wymagana</Contemplation_Required.label>
+  <Contemplation_Required.description>Medytacja jest świętym obowiązkiem. Członkowie muszą regularnie medytować, a przewodnik moralny powinien dawać przykład.</Contemplation_Required.description>
+  <Contemplation_Respected.label>szanowana</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Medytacja jest wartościową praktyką, a ci, którzy medytują regularnie, są wyżej cenieni.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>akceptowalna</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Medytacja jest sprawą osobistą — ani zachęcaną, ani zniechęcaną.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>nieakceptowana</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Medytacja jest postrzegana jako słabość lub zabobon. Członkowie, którzy medytują, są oceniani negatywnie.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>zakazana</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Medytacja jest surowo zakazana. Każdy członek przyłapany na medytacji zostanie wykluczony.</Contemplation_Forbidden.description>
+</LanguageData>

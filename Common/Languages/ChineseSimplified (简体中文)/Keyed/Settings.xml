@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>翻译：claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>文化</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>戒律</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>兼容性</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>调试</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>个人认可度动态</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>教化效果</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>认可度漂移速率：{0}/天</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>棋子的认可度每天向目标值靠近的速度。越高表示信仰对环境的反应越快，信仰变化更为动态。</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>关系影响：±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>棋子对同信徒的看法能够提升或降低目标认可度的最大幅度。</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>实践影响：±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>戒律情绪（来自仪式、崇拜、禁忌等）能够提升或降低目标认可度的最大幅度。</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>信仰危机阈值：{0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>当棋子的认可度低于此值时，可能发生信仰危机崩溃。越高则危机越频繁。</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>教化速度：{0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>棋子自发放弃不适合信仰的速度（相对于默认值）。越高则自发转化越容易发生。</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>教化尝试认可度损失：{0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>道德向导赢得教化辩论但未立即转化棋子时，对方认可度乘以此系数。1倍=认可度80%的棋子保持80%；0.8倍=认可度80%的棋子降至64%。越低则教化尝试影响越大。</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>信念衰减：{0}/象</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>所有戒律每象损失的信念强度。注意：100%信念对应戒律平均值20，上限为50。越高则越需要强化信仰。</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>对立立场反对度：{0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>棋子对某议题极端对立立场的反对强度，以其信念的分数表示。100%时，持有"食人：不赞成 12"的棋子对"食人：必须（饥渴）"的看法为-12。0%=对对立立场漠不关心；100%=与其对最极端戒律的支持等量且相反。</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>教化强度：{0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>一次成功的教化尝试（道德向导的定向行动）比普通转化尝试更有力地推动棋子信仰改变的程度。越高则教化越快。</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>辩论信念变化：{0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>单次赢得的辩论使该议题信仰移动的程度（相对于默认值）。同时改变戒律及其信念强度。越高则每次赢得的辩论说服力越强，教化速度越快。</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>友谊加成（教化）：{0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>棋子对试图改变其戒律者的看法对效果的放大程度。1倍且好感度+100时，认可度降低和信仰牵引均翻倍。0倍时好感度无效果。安装"同伴压力"模组时不生效——改由该模组自身的倍率设置接管。</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>存档兼容最低认可度：{0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>加载原版或模组前存档时，认可度低于此值的棋子将以此值为最低目标播种信念，而非归零。防止0%认可度的棋子完全失去一切信念。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>开发：调试交互处理器</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>开发模式激活时启用交互处理器的调试日志。建议保持关闭，除非专门调试"增强意识形态"模组。</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

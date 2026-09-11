@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>medytował regularnie</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Byłem wierny swoim medytacjom. Przynoszą mi spokój.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>medytacja zaniedbana</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Nie znalazłem czasu na medytację. Moja pobożność słabnie.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>medytacja mocno zaniedbana</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Zbyt długo nie medytowałem. Czuję się duchowo zagubiony.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>medytował pobożnie</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>zajął się medytacją</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>złamał zakaz medytacji</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>zniszczono księgę religijną</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Nasza księga religijna została zniszczona. To absolutnie niedopuszczalne.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>zbezcześcił święty tekst</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Oprawiłem świętą księgę w skórę zwierzęcą. To było złe.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>czyta pismo w skórzanej oprawie</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Ten święty tekst jest oprawiony w skórę zwierzęcą. Trzymanie go jest złe.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>dobra debata</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Mieliśmy stymulującą debatę o naszych przekonaniach. Spotkanie otwartych umysłów.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>heretycka debata</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Musiałem obalić ich odbiegające przekonania. Różnorodność myśli to trucizna.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>głosił słowo</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Przekonywałem do prawdy swojej wiary. Niezależnie od wyniku, sama próba była prawym czynem.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>przyprowadził duszę do wiary</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Przyprowadziłem kogoś do światła naszej wiary. Nie ma wyższego powołania.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>nieudana próba nawrócenia</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Próbowałem przyprowadzić kogoś do wiary i zawiodłem. Pozostają w swojej ignorancji.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>wiara zakwestionowana</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Musiałem bronić prawdy swojej wiary przed wyzywającym. Sam fakt, że odważył się ją kwestionować, jest obelgą.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>dysonans poznawczy</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Nie powinienem uczestniczyć w praktykach innej ideologii.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>wiara potwierdzona</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Widząc sposób działania innej tradycji, przypominam sobie, dlaczego cenię własną ścieżkę.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>chwiejący się współwyznawca</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>niewierny współwyznawca</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>współwyznawca o duszy odstępcy</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

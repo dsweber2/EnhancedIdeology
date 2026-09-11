@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>宗教書籍</EB_Ideobook.label>
+  <EB_Ideobook.description>一本包含虛構或真實故事的書籍，供讀者愉悅身心並獲得啟迪。</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>未完成的宗教書籍</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>一本正在書桌上撰寫中的未完成宗教書籍。</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>書桌</EB_WritingDesk.label>
+  <EB_WritingDesk.description>用於撰寫理念文本的書桌。只有對信仰有深厚信念的殖民者才能在此寫作。</EB_WritingDesk.description>
+</LanguageData>

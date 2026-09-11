@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Traducere: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideoligion</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Precept</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Compatibilitate</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Depanare</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dinamica certitudinii personale</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Efecte de conversie</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Rata de derivă a certitudinii: {0}/zi</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Cât de repede se deplasează certitudinea unui personaj spre țintă în fiecare zi. Mai mare = credința reacționează mai rapid la circumstanțe. Creează credințe mai dinamice.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Influență relațională: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Cât de mult poate crește sau scădea opinia unui personaj față de coreligionarii săi certitudinea-țintă.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Influență practică: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Cât de mult pot stările de precepte (din ritualuri, venerație, tabuuri etc.) crește sau scădea certitudinea-țintă.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Prag criză de credință: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Când certitudinea unui personaj scade sub acest prag, poate suferi o criză de credință. Mai mare = mai multe crize.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Ritm de conversie: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Cât de repede abandonează personajele de la sine o credință nepotrivită, față de implicit. Mai mare = conversii spontane mai probabile.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Pierdere certitudine la tentativă de conversie: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Când un ghid moral câștigă o dezbatere de conversie fără a converti imediat personajul, certitudinea acestuia este înmulțită cu aceasta. 1x = un personaj cu 80% certitudine rămâne la 80%; 0,8x = un personaj cu 80% certitudine scade la 64%. Mai mic = tentative de conversie mai impactante.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Degradare convingere: {0}/quadrum</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Cât de multă putere a convingerii pierd toate preceptele pe quadrum. Rețineți că 100% convingere corespunde unei medii de precepte de 20, maximum este 50. Mai mare = nevoie mai puternică de a întări credințele.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Opoziție față de poziție opusă: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Cât de puternic se opune un personaj poziției de la extrema opusă a unei probleme, ca fracțiune din convingerea sa. La 100%, un personaj cu Canibalism: Dezaprobat 12 are opinia -12 față de Canibalism: Obligatoriu (lacom). 0% = indiferent față de pozițiile opuse; 100% = egal și opus sprijinului pentru propria poziție la preceptul de extremă maximă.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Putere de conversie: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Cât de mult mai puternic împinge o tentativă de conversie reușită (acțiunea direcționată a unui ghid moral) credințele unui personaj față de o tentativă obișnuită. Mai mare = conversii mai rapide.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Schimbare convingere în dezbatere: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Cât de mult deplasează un singur argument câștigat credința pe acea problemă, față de implicit. Modifică atât preceptul cât și convingerea în acel precept simultan. Mai mare = fiecare dezbatere câștigată persuadează mai mult. Duce la conversii mai rapide.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bonus prietenie (conversie): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Cât de mult amplifică opinia unui personaj față de cel care încearcă să îi schimbe preceptul efectul. La 1x și opinie +100, atât reducerea certitudinii cât și atracția de credință sunt dublate. La 0x, opinia nu are efect. Neutilizat când Peer Pressure este instalat — setarea multiplicatorului propriu al acelui mod preia controlul.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Certitudine minimă la încărcare salvare: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>La încărcarea unei salvări vanilla sau anterioare modului, personajele cu certitudinea sub acest prag au credințele inițializate la cel puțin această țintă în loc de zero. Previne ca un personaj cu 0% certitudine să rămână fără nicio convingere.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Depanare Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Activează jurnalizarea de depanare pentru interaction workers când modul dev este activ. Recomand să lăsați dezactivat dacă nu depanați specific Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

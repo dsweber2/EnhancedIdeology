@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - dérive de conviction {1}/saison</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Croyances défendues</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/saison</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Livre religieux détruit</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, un livre religieux important pour {IDEO}, a été détruit. Les fidèles de {IDEO} ne seront pas contents.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Détruire {BOOK} en le brûlant. Cela bouleversera les {IDEO_memberNamePlural} de {IDEO}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Détruire {BOOK} en le brûlant.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Aucun colon ne peut détruire {BOOK}.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Êtes-vous sûr de vouloir faire brûler {BOOK} par {PAWN} ? Cela bouleversera profondément tous les {IDEO_memberNamePlural} de {IDEO}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Êtes-vous sûr de vouloir faire brûler {BOOK} par {PAWN} ?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} a détruit {BOOK}. Cela a profondément bouleversé les {IDEO_memberNamePlural} de {IDEO}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

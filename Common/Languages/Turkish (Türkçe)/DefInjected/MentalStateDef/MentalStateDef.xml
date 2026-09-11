@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>iman krizi</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>iman krizi</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} bir iman krizi yaşıyor.\n\n[PAWN_pronoun] önümüzdeki bir iki günü [PAWN_possessive] inançlarını sorgulayarak tefekkürde geçirecek.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>{0}'in iman krizi geçti.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Zihinsel durum: İman krizi</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>ikonoklast</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} bir ruhsal çöküş yaşadı ve ikonoklast oluyor.\n\n[PAWN_pronoun] dini kitapları yakmaya çalışacak.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} artık ikonoklast değil.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Zihinsel durum: İkonoklast</EB_Iconoclast.baseInspectLine>
+</LanguageData>

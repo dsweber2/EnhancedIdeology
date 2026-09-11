@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologyMissingRole>Az ideológiából hiányzik a szükséges '{ROLE}' szerep.</EnhancedIdeology.IdeologyMissingRole>
+  <EnhancedIdeology.PawnMissingRequiredRole>{PAWN} nem rendelkezik a szükséges '{ROLE}' szereppel.</EnhancedIdeology.PawnMissingRequiredRole>
+  <EnhancedIdeology.PawnIsNotAuthor>{PAWN} nem a könyv szerzője.</EnhancedIdeology.PawnIsNotAuthor>
+  <EnhancedIdeology.BookIsNotForPawnIdeoligion>A könyv nem {PAWN_possessive} ideológiájához tartozik.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
+  <EnhancedIdeology.NoFreeValidLecternFound>Nem található szabad, elérhető felolvasóállvány a munkához.</EnhancedIdeology.NoFreeValidLecternFound>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>A vallásos szövegek írásához a meggyőződésnek 90% fölé kell emelkednie.</EnhancedIdeology.InsufficientCertaintyToWrite>
+</LanguageData>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}이(가) {PAWN2_labelShort}와(과) 사상적 관점에 대해 토론을 시도했습니다. 이것이 싸움으로 이어졌습니다!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>사상적 교화</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>{ISSUE_label}에 대한 토론 끝에, {CONVINCER_labelShort}이(가) {CONVINCED_labelShort}을(를) 설득하여 {OLDIDEO_name}을(를) 버리고 {NEWIDEO_name}을(를) 받아들이게 했습니다.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} no encontró un asiento ritual donde contemplar para {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>La sala de contemplación de {IDEO_name} de {PAWN_nameDef} está irrespetada.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>contemplando (ganancia: {0}/h)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Ganancia de contemplación</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Tasa de refuerzo de convicción por hora durante la contemplación. Se muestra para el peón seleccionado, o como multiplicador base si no hay peón seleccionado. Escala con la impresionante del cuarto y la fuerza de convicción actual del peón. +10% adicional por cada creyente en la sala.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Ganancia de contemplación: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

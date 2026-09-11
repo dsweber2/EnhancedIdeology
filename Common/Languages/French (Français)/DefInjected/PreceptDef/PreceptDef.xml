@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>obligatoire</Contemplation_Required.label>
+  <Contemplation_Required.description>Le recueillement est une obligation sacrée. Les membres doivent se recueillir régulièrement, et le guide moral est attendu comme exemple.</Contemplation_Required.description>
+  <Contemplation_Respected.label>respecté</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Le recueillement est une pratique significative, et ceux qui se recueillent régulièrement sont tenus en haute estime.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>acceptable</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Le recueillement est une affaire personnelle — ni encouragé ni découragé.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>désapprouvé</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Le recueillement est perçu comme une faiblesse ou une superstition. Les membres qui se recueillent sont mal vus.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>interdit</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Le recueillement est strictement interdit. Tout membre surpris en train de se recueillir sera mis à l'écart.</Contemplation_Forbidden.description>
+</LanguageData>

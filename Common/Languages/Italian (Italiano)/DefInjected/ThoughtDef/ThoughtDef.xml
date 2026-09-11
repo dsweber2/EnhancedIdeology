@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>meditato regolarmente</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Sono stato fedele nelle mie meditazioni. Mi porta pace.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>meditazione trascurata</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Non ho trovato il tempo di meditare. La mia devozione sta vacillando.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>meditazione gravemente trascurata</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>È passato troppo tempo senza meditare. Mi sento spiritualmente alla deriva.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>meditato devotamente</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>si è dedicato alla meditazione</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>ha violato il divieto di meditazione</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>libro religioso distrutto</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Il nostro libro religioso è stato distrutto. È assolutamente ingiustificabile.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>profanato un testo sacro</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Ho rilegato un libro sacro in pelle animale. Era sbagliato.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>leggendo le scritture rilegate in cuoio</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Questo testo sacro è rilegato in pelle animale. Tenerlo in mano sembra sbagliato.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>buon dibattito</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Abbiamo avuto un dibattito stimolante sulle nostre credenze. Un incontro di menti aperte.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>dibattito eretico</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Ho dovuto confutare le loro credenze deviate. La diversità di pensiero è un veleno.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>diffuso la parola</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Ho sostenuto la verità della mia fede. Qualunque sia il risultato, il tentativo stesso è stato un atto giusto.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>portato un'anima alla fede</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Ho portato qualcuno alla luce della nostra fede. Non c'è vocazione più grande.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>mancata conversione</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Ho cercato di portare qualcuno alla fede e ho fallito. Rimangono nella loro ignoranza.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>fede messa alla prova</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Ho dovuto difendere la verità della mia fede contro chi la sfidava. Il solo fatto che abbiano osato metterla in discussione è un insulto.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>dissonanza cognitiva</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Non dovrei partecipare alle pratiche di un'altra ideoligione.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>fede riaffermata</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Vedere il modo di fare delle altre tradizioni mi ricorda perché apprezzo il mio percorso.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>correligionario esitante</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>correligionario senza fede</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>correligionario dal cuore apostata</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

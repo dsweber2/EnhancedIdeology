@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>criză de credință</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>criză de credință</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0} traversează o criză de credință.\n\n[PAWN_pronoun] va petrece următoarea zi sau două în meditație, punând sub semnul întrebării credințele [PAWN_possessive].</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>Criza de credință a lui {0} a trecut.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>Stare mentală: Criză de credință</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>iconoclast</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0} a suferit o prăbușire mentală și se comportă ca un iconoclast.\n\n[PAWN_pronoun] va încerca să ardă cărți religioase.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0} nu mai este iconoclast.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>Stare mentală: Iconoclast</EB_Iconoclast.baseInspectLine>
+</LanguageData>

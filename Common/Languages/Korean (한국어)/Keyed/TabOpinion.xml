@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>사상</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>사상 의견</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>쟁점</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>쟁점</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>입장</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>강도</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>무관심</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>{1} 쟁점에 대해, {PAWN_nameDef}은(는) 확신 {3}으로 {2} 입장을 가지고 있습니다. {IDEO_name}은(는) {5}을(를) 가르칩니다; 그 입장에 대한 {PAWN_nameDef}의 의견: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}의 {IDEO_name}에 대한 의견: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>가르침과 규율에서: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>개인 신념에서: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>대인 관계에서: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

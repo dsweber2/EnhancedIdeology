@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Перевод: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Идеолигия</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Принцип</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Совместимость</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Отладка</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Динамика личной уверенности</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Эффекты обращения</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Скорость дрейфа уверенности: {0}/день</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Насколько быстро уверенность персонажа движется к целевому значению каждый день. Выше = вера быстрее реагирует на обстоятельства. Делает убеждения более динамичными.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Реляционное влияние: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Максимальное влияние мнения персонажа о своих единоверцах на целевую уверенность.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Влияние практики: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Максимальное влияние настроений от принципов (ритуалы, почитание, табу и т. д.) на целевую уверенность.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Порог кризиса веры: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Когда уверенность персонажа падает ниже этого значения, у него может случиться кризис веры. Выше = чаще кризисы.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Темп обращения: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Насколько быстро персонажи самостоятельно отказываются от плохо подходящей веры относительно стандарта. Выше = спонтанные обращения более вероятны.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Потеря уверенности при попытке обращения: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Когда моральный наставник побеждает в споре об обращении, но не переворачивает персонажа немедленно, его уверенность умножается на это значение. 1x = персонаж с 80% уверенностью остаётся на 80%; 0.8x = персонаж с 80% падает до 64%. Ниже = попытки обращения более действенны.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Угасание убеждённости: {0}/квартал</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Насколько ослабевает убеждённость во всех принципах за квартал. Заметьте: 100% убеждённость соответствует среднему значению принципа 20, максимум — 50. Выше = сильнее нужда в подкреплении убеждений.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Противостояние противоположным позициям: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Насколько сильно персонаж противится позиции на противоположном полюсе вопроса, как доля его убеждённости. При 100% персонаж с «Каннибализм: Неодобряемый 12» имеет мнение -12 о «Каннибализм: Обязательный (ненасытный)». 0% = безразличие к противоположным позициям; 100% = равное и противоположное поддержке своей позиции при крайнем принципе.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Сила обращения: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Насколько сильнее успешная попытка обращения (целенаправленное действие морального наставника) сдвигает убеждения персонажа по сравнению с обычной попыткой. Выше = быстрее обращения.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Изменение убеждённости в споре: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Насколько далеко один выигранный аргумент сдвигает убеждение по вопросу относительно стандарта. Одновременно смещает и принцип, и убеждённость в нём. Выше = каждый выигранный спор убеждает сильнее. Ведёт к ускорению обращений.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Бонус дружбы (обращение): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Насколько мнение персонажа о том, кто пытается изменить его принцип, усиливает эффект. При 1x и мнении +100 и снижение уверенности, и притяжение убеждения удваиваются. При 0x мнение не влияет. Не используется при установленном моде Peer Pressure — вместо него действует настройка множителя из того мода.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Минимальная уверенность при загрузке: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>При загрузке стандартного сохранения или сохранения без мода, персонажи с уверенностью ниже этого значения получают убеждения минимум до этого целевого значения вместо нуля. Предотвращает ситуацию, когда персонаж с 0% уверенности остаётся совсем без убеждений.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>РАЗР.: Отладка обработчиков взаимодействий</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Включает отладочное протоколирование для обработчиков взаимодействий в режиме разработчика. Рекомендуется оставить выключенным, если вы специально не отлаживаете Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

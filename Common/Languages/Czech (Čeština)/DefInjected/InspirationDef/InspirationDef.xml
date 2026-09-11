@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>náboženské osvícení</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] cítí okamžik božské jasnosti a je nucen napsat náboženský text.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Inspirován: Náboženské osvícení</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>Okamžik náboženského osvícení [PAWN_nameDef] pominul.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

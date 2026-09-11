@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>종교적 깨달음</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun]은(는) 신성한 명료함의 순간을 느끼고 종교적 텍스트를 써야 한다는 충동을 느낍니다.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>영감: 종교적 깨달음</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>[PAWN_nameDef]의 종교적 깨달음의 순간이 지나갔습니다.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

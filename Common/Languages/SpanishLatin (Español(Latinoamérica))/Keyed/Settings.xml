@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Traducción: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideoligión</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Precepto</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Compatibilidad</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Depuración</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Dinámica de certeza personal</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Efectos de conversión</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Tasa de deriva de certeza: {0}/día</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Qué tan rápido se mueve la certeza de un peón hacia su objetivo cada día. Mayor = la fe reacciona más rápido a las circunstancias. Produce creencias más dinámicas.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Influencia relacional: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>El máximo en que la opinión de un peón sobre sus correligionarios puede elevar o reducir su certeza objetivo.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Influencia de práctica: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>El máximo en que los estados de ánimo de los preceptos (rituales, veneración, tabúes, etc.) pueden elevar o reducir la certeza objetivo.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Umbral de crisis de fe: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Cuando la certeza de un peón cae por debajo de esto, puede sufrir una crisis de fe. Mayor = más crisis.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Ritmo de conversión: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Qué tan rápido los peones abandonan una fe que no les cuadra por cuenta propia, relativo al valor predeterminado. Mayor = las conversiones espontáneas son más probables.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Pérdida de certeza en intento de conversión: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Cuando un guía moral gana un debate de conversión pero no convierte al peón de inmediato, su certeza se multiplica por esto. 1x = un peón con 80% de certeza se queda en 80%; 0.8x = cae a 64%. Menor = los intentos de conversión son más impactantes.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Decaimiento de convicción: {0}/cuadrun</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Cuánta fuerza de convicción pierden todos los preceptos por cuadrun. Nota: 100% de convicción equivale a un promedio de precepto de 20; el máximo es 50. Mayor = mayor necesidad de reforzar las creencias.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Oposición de postura contraria: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Qué tan fuertemente un peón se opone a la postura del extremo opuesto de un tema, como fracción de su convicción. Al 100%, un peón con Canibalismo: Desaprobado 12 tiene opinión -12 de Canibalismo: Requerido (voraz). 0% = indiferente a posturas opuestas; 100% = igual y opuesto a su apoyo propio en el precepto más extremo.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Fuerza de conversión: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Qué tanto más fuerte empuja las creencias de un peón un intento de conversión exitoso (acción dirigida del guía moral) frente a uno ordinario. Mayor = conversiones más rápidas.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Cambio de convicción en debate: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Qué tanto mueve la creencia sobre el tema un solo argumento ganado, relativo al valor predeterminado. Desplaza tanto el precepto como la convicción simultáneamente. Mayor = cada debate ganado persuade más. Lleva a conversiones más rápidas.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Bono de amistad (conversión): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Cuánto amplifica el efecto la opinión de un peón sobre quien intenta cambiar su precepto. A 1x y opinión +100, tanto el golpe de certeza como el jalón de creencia se duplican. A 0x, la opinión no tiene efecto. No se usa cuando está instalado Peer Pressure — ese mod usa su propio multiplicador.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Certeza mínima al cargar partida: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Al cargar una partida vanilla o anterior al mod, los peones con certeza por debajo de esto tienen sus creencias inicializadas al menos a este objetivo en lugar de cero. Evita que un peón con 0% de certeza quede sin convicción alguna.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>DEV: Depurar trabajadores de interacción</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Activa el registro de depuración para los trabajadores de interacción cuando el modo dev está activo. Se recomienda dejarlo desactivado a menos que estés depurando Enhanced Ideology específicamente.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Sentence_DebateWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef] tartışmayı kazandı.</EB_Sentence_DebateWon.rulePack.rulesStrings.0>
+  <EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>sent-&gt;[INITIATOR_nameDef] daha ikna edici olduğunu kanıtladı.</EB_Sentence_InitiatorWon.rulePack.rulesStrings.0>
+  <EB_Sentence_RecipientWon.rulePack.rulesStrings.0>sent-&gt;[RECIPIENT_nameDef] daha ikna edici olduğunu kanıtladı.</EB_Sentence_RecipientWon.rulePack.rulesStrings.0>
+  <EB_Sentence_DebateDraw.rulePack.rulesStrings.0>sent-&gt;Hiçbiri görüşünü değiştirmedi.</EB_Sentence_DebateDraw.rulePack.rulesStrings.0>
+</LanguageData>

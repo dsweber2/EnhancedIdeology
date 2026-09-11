@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>iluminare religioasă</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] simte un moment de claritate divină și este constrâns să scrie un text religios.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Inspirat: Iluminare religioasă</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>Momentul de iluminare religioasă al lui [PAWN_nameDef] a trecut.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ReligiousEnlightenment.label>illuminazione religiosa</EB_ReligiousEnlightenment.label>
+  <EB_ReligiousEnlightenment.beginLetter>[PAWN_pronoun] sente un momento di chiarezza divina ed è spinto a scrivere un testo religioso.</EB_ReligiousEnlightenment.beginLetter>
+  <EB_ReligiousEnlightenment.baseInspectLine>Ispirato: Illuminazione religiosa</EB_ReligiousEnlightenment.baseInspectLine>
+  <EB_ReligiousEnlightenment.endMessage>Il momento di illuminazione religiosa di [PAWN_nameDef] è passato.</EB_ReligiousEnlightenment.endMessage>
+</LanguageData>

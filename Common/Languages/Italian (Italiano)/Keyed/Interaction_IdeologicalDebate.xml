@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} ha cercato di dibattere le opinioni ideologiche con {PAWN2_labelShort}. Questo ha portato a una rissa!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
+  <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Conversione ideologica</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
+  <EnhancedIdeology.LetterIdeologicalDebateConversionText>Dopo aver dibattuto {ISSUE_label}, {CONVINCER_labelShort} ha convinto {CONVINCED_labelShort} ad abbandonare {OLDIDEO_name} e abbracciare {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+</LanguageData>

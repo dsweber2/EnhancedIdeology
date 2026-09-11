@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} không tìm được chỗ ngồi nghi thức để thiền định cho {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>Phòng thiền định {IDEO_name} của {PAWN_nameDef} bị xúc phạm.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>đang thiền định (thu: {0}/giờ)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Hiệu quả thiền định</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Tốc độ củng cố niềm tin mỗi giờ khi thiền định. Hiển thị cho nhân vật được chọn, hoặc là hệ số nhân cơ bản khi không có nhân vật nào được chọn. Tăng theo mức độ ấn tượng của phòng và sức mạnh niềm tin hiện tại của nhân vật. Thêm +10% cho mỗi đồng đạo trong phòng.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Hiệu quả thiền định: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

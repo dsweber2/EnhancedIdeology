@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} kon geen rituele zitplaats vinden om in te mediteren voor {IDEO_name}.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>{PAWN_nameDef}'s {IDEO_name} meditatieruimte wordt niet gerespecteerd.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>mediterend (winst: {0}/uur)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Meditatiebonus</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Versterkingssnelheid van overtuiging per uur tijdens meditatie. Weergegeven voor de geselecteerde pion, of als basisvermenigvuldiger wanneer geen pion is geselecteerd. Schaalt met de indrukwekkendheid van de kamer en de huidige overtuigingskracht van de pion. Extra +10% per medegelovige in de kamer.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Meditatiebonus: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

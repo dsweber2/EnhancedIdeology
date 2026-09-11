@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - 確信変化 {1}/節</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>提唱する信条</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/節</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>聖典が破壊された</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{IDEO}にとって重要な聖典{BOOK}が破壊された。{IDEO}の信者はこれを喜ばないだろう。</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>{BOOK}を焼いて破壊する。{IDEO}の{IDEO_memberNamePlural}を怒らせることになる。</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>{BOOK}を焼いて破壊する。</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>{BOOK}を破壊できる入植者がいない。</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>{PAWN}に{BOOK}を焼かせますか？これにより{IDEO}の{IDEO_memberNamePlural}全員が大きく傷つくことになります。</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>{PAWN}に{BOOK}を焼かせますか？</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN}は{BOOK}を破壊した。{IDEO}の{IDEO_memberNamePlural}は大きく傷ついた。</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

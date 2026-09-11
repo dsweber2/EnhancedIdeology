@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>定期沉思</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>我一直忠实地进行沉思，这给我带来了平静。</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>忽视了沉思</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>我没有找到时间沉思，我的虔诚正在消退。</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>严重忽视了沉思</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>我已经太久没有沉思了，感到精神上漂泊无依。</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>虔诚地沉思</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>参与了沉思</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>违反了沉思禁令</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>宗教书籍遭到毁坏</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>我们的宗教书籍遭到毁坏，这绝对无可宽恕。</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>玷污了圣典</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>我用兽皮装订了一本圣书，那是错误的。</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>阅读皮革装订的经典</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>这本圣典用兽皮装订，握持它令人感到不安。</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>良好的辩论</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>我们就信仰进行了一场激烈的辩论，是开放思想的交流。</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>异端辩论</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>我不得不驳斥他们的异端信仰，思想多元化是毒药。</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>传播信仰</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>我为信仰的真理而辩论。无论结果如何，此举本身便是正义之举。</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>引领灵魂入信</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>我将某人引领到我们信仰的光明之中，没有比这更崇高的使命了。</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>教化失败</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>我试图引领某人入信，但失败了，他们仍沉浸在无知之中。</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>信仰受到挑战</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>我不得不对挑战者捍卫信仰的真理，他们胆敢质疑本身便是一种侮辱。</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>认知失调</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>我不应该参与其他文化的仪式实践。</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>信仰得到重申</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>看到另一传统的处事方式，让我想起了为何我珍视自己的道路。</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>动摇的同信徒</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>无信的同信徒</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>心怀叛教的同信徒</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

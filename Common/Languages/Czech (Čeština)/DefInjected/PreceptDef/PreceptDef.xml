@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <Contemplation_Required.label>povinná</Contemplation_Required.label>
+  <Contemplation_Required.description>Kontemplace je posvátnou povinností. Členové musí kontemplovat pravidelně a morální průvodce má jít příkladem.</Contemplation_Required.description>
+  <Contemplation_Respected.label>ctěná</Contemplation_Respected.label>
+  <Contemplation_Respected.description>Kontemplace je smysluplnou praxí a ti, kdo kontemplují pravidelně, jsou ve větší vážnosti.</Contemplation_Respected.description>
+  <Contemplation_Normal.label>přijatelná</Contemplation_Normal.label>
+  <Contemplation_Normal.description>Kontemplace je osobní záležitostí – není ani podporována, ani odrazována.</Contemplation_Normal.description>
+  <Contemplation_Disapproved.label>neschválená</Contemplation_Disapproved.label>
+  <Contemplation_Disapproved.description>Kontemplace je považována za slabost nebo pověru. Členové, kteří kontemplují, jsou vnímáni nepříznivě.</Contemplation_Disapproved.description>
+  <Contemplation_Forbidden.label>zakázaná</Contemplation_Forbidden.label>
+  <Contemplation_Forbidden.description>Kontemplace je přísně zakázána. Každý člen přistižený při kontemplaci bude vyobcován.</Contemplation_Forbidden.description>
+</LanguageData>

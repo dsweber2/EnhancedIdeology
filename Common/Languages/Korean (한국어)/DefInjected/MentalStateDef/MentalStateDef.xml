@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_CrisisOfFaith.label>신앙의 위기</EB_CrisisOfFaith.label>
+  <EB_CrisisOfFaith.beginLetterLabel>신앙의 위기</EB_CrisisOfFaith.beginLetterLabel>
+  <EB_CrisisOfFaith.beginLetter>{0}이(가) 신앙의 위기를 겪고 있습니다.\n\n[PAWN_pronoun]은(는) 앞으로 하루 이틀간 명상하며 [PAWN_possessive] 신념에 의문을 품을 것입니다.</EB_CrisisOfFaith.beginLetter>
+  <EB_CrisisOfFaith.recoveryMessage>{0}의 신앙의 위기가 지나갔습니다.</EB_CrisisOfFaith.recoveryMessage>
+  <EB_CrisisOfFaith.baseInspectLine>정신 상태: 신앙의 위기</EB_CrisisOfFaith.baseInspectLine>
+  <EB_Iconoclast.label>성상파괴자</EB_Iconoclast.label>
+  <EB_Iconoclast.beginLetter>{0}이(가) 정신적 붕괴를 겪고 성상파괴 행동을 보이고 있습니다.\n\n[PAWN_pronoun]은(는) 종교 서적을 불태우려 할 것입니다.</EB_Iconoclast.beginLetter>
+  <EB_Iconoclast.recoveryMessage>{0}은(는) 더 이상 성상파괴 행동을 하지 않습니다.</EB_Iconoclast.recoveryMessage>
+  <EB_Iconoclast.baseInspectLine>정신 상태: 성상파괴자</EB_Iconoclast.baseInspectLine>
+</LanguageData>

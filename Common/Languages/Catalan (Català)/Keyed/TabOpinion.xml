@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ideoligió</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Opinions sobre la ideoligió</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Temes</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Tema</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Postura</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Força</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Indiferent</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>Sobre el tema de {1}, {PAWN_nameDef} té la postura {2} amb convicció {3}. {IDEO_name} predica {5}; opinió de {PAWN_nameDef} sobre aquesta postura: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>Opinió de {PAWN_nameDef} sobre {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>De mems i preceptes: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>De creences personals: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>De relacions interpersonals: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

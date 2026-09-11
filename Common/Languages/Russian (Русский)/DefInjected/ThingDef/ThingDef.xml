@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>религиозная книга</EB_Ideobook.label>
+  <EB_Ideobook.description>Книга, содержащая вымышленные или истинные истории для удовольствия и назидания читателя.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>незаконченная религиозная книга</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Незаконченная религиозная книга, пишущаяся за письменным столом.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>письменный стол</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Стол для составления идеологических текстов. Только поселенцы с глубокой убеждённостью в своих верованиях могут писать за ним.</EB_WritingDesk.description>
+</LanguageData>

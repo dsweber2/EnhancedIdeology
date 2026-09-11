@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>dini kitap</EB_Ideobook.label>
+  <EB_Ideobook.description>Okuyucunun zevki ve eğitimi için kurgusal veya gerçek hikayeler içeren bir kitap.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>tamamlanmamış dini kitap</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Yazı masasında yazılmakta olan tamamlanmamış bir dini kitap.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>yazı masası</EB_WritingDesk.label>
+  <EB_WritingDesk.description>İdeolojik metinler yazmak için bir masa. Yalnızca inançlarına derin imanla bağlı koloniciler burada yazabilir.</EB_WritingDesk.description>
+</LanguageData>

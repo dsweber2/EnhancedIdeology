@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>定期進行冥想</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>我一直忠實地進行冥想，這給我帶來了平靜。</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>冥想被忽視</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>我一直找不到時間冥想，我的虔誠正在消退。</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>冥想嚴重被忽視</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>我已太久沒有冥想了，我感到精神上漂泊無依。</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>虔誠地冥想</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>進行了冥想</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>無視冥想禁令</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>宗教書籍遭到摧毀</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>我們的宗教書籍遭到摧毀，這絕對不可原諒。</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>褻瀆了神聖文本</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>我用獸皮裝訂了一本聖書，那是錯誤的。</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>閱讀皮革裝訂的經文</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>這部聖典以獸皮裝訂，拿在手中感覺有違道義。</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>良好的辯論</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>我們就信念進行了一場精彩刺激的辯論，是開放心靈的相遇。</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>異端辯論</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>我不得不駁斥他們偏離正道的信念。思想多樣性是一種毒素。</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>傳播信仰</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>我為信仰的真理而辯，無論結果如何，這份嘗試本身就是正義之舉。</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>引領靈魂皈依</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>我將某人帶入我們信仰的光明之中，沒有比這更崇高的召喚了。</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>皈依失敗</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>我嘗試引領某人皈依卻失敗了，他們仍沉浸在無知之中。</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>信仰受到挑戰</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>我不得不抵禦挑戰者，捍衛信仰的真理。他們竟敢質疑，這本身就是一種侮辱。</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>認知失調</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>我不應該參與其他理念的活動。</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>信仰得到肯定</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>看到另一傳統的做事方式，提醒了我為何珍視自己的道路。</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>動搖的同信徒</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>失去信仰的同信徒</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>心懷叛道的同信徒</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>

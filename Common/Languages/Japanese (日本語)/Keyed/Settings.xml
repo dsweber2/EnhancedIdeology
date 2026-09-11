@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>翻訳: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>思想</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>戒律</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>互換性</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>デバッグ</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>個人の信仰度の動態</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>改宗の効果</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>信仰度の変動率: {0}/日</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>ポーンの信仰度が毎日目標値に向かって動く速さ。高いほど信仰が状況に素早く反応する。より動的な信条をもたらす。</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>関係的影響: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>同信者への評価が目標信仰度を上下させる最大量。</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>実践的影響: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>戒律のムード（儀式・崇拝・タブーなど）が目標信仰度を上下させる最大量。</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>信仰の危機の閾値: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>ポーンの信仰度がこれを下回ると、信仰の危機による精神崩壊が起きる可能性がある。高いほど危機が多くなる。</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>改宗ペース: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>ポーンが自発的に合わない信仰を捨てる速さ（デフォルト比）。高いほど自発的な改宗が起こりやすい。</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>改宗試みによる信仰度低下: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>道徳的指導者が改宗議論に勝ってもポーンがすぐに改宗しない場合、信仰度がこの値で乗算される。1x=80%信仰度のポーンが80%のまま。0.8x=80%が64%に低下。低いほど改宗試みの影響が大きい。</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>確信の減衰: {0}/節</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>全戒律が節ごとに失う確信強度。100%確信は戒律平均20、最大50。高いほど信条強化の必要性が高まる。</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>対立姿勢への反発: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>ポーンが問題の反対極端の姿勢にどれだけ強く反発するか（確信の割合）。100%では、食人：不承認12のポーンは食人：必須（貪欲）に対して-12の評価を持つ。0%=対立姿勢に無関心、100%=自分の最遠極端戒律への支持と等しく反対。</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>改宗強度: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>成功した改宗試み（道徳的指導者の指示行動）が通常の改宗試みよりもポーンの信条をどれだけ強く押し進めるか。高いほど改宗が速い。</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>議論による確信の変化: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>1度の勝利した議論が問題に対する信条をどれだけ動かすか（デフォルト比）。戒律とその確信の両方を同時に変化させる。高いほど各議論の説得力が高まる。改宗が速くなる。</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>友好ボーナス（改宗）: {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>戒律を変えようとしている相手への評価が効果をどれだけ増幅するか。1xかつ評価+100では、信仰度低下と信条引力の両方が2倍になる。0xでは評価は効果なし。「仲間の圧力」MODがインストールされている場合は使用されず、そのMODの倍率設定が代わりに適用される。</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>セーブ読込時の最低信仰度: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>バニラまたはMOD導入前のセーブを読み込む際、信仰度がこれを下回るポーンの信条はゼロの代わりに最低限この目標値に設定される。信仰度0%のポーンが確信を一切持たない状態になるのを防ぐ。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>開発: インタラクションワーカーのデバッグ</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>開発モード有効時にインタラクションワーカーのデバッグログを有効にする。Enhanced Ideologyのデバッグ以外ではオフにすることを推奨する。</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

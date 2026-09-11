@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - schimbare convingere {1}/qd</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Credințe susținute</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Carte religioasă distrusă</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, o carte religioasă importantă pentru {IDEO}, a fost distrusă. Adepții lui {IDEO} nu vor fi fericiți.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>Distruge {BOOK} prin ardere. Aceasta îi va supăra pe {IDEO_memberNamePlural} lui {IDEO}.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>Distruge {BOOK} prin ardere.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Niciun colonist nu poate distruge {BOOK}.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Ești sigur că vrei ca {PAWN} să ardă {BOOK}? Aceasta îi va supăra profund pe toți {IDEO_memberNamePlural} lui {IDEO}.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Ești sigur că vrei ca {PAWN} să ardă {BOOK}?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} a distrus {BOOK}. Aceasta i-a supărat profund pe {IDEO_memberNamePlural} lui {IDEO}.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

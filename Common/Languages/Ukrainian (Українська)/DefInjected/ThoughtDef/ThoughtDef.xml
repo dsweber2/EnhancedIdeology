@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_ContemplationNeed.stages.0.label>споглядав регулярно</EB_ContemplationNeed.stages.0.label>
+  <EB_ContemplationNeed.stages.0.description>Я був вірний своїм спогляданням. Це приносить мені спокій.</EB_ContemplationNeed.stages.0.description>
+  <EB_ContemplationNeed.stages.1.label>споглядання занедбане</EB_ContemplationNeed.stages.1.label>
+  <EB_ContemplationNeed.stages.1.description>Я не знаходив часу для споглядання. Моя відданість слабшає.</EB_ContemplationNeed.stages.1.description>
+  <EB_ContemplationNeed.stages.2.label>споглядання дуже занедбане</EB_ContemplationNeed.stages.2.label>
+  <EB_ContemplationNeed.stages.2.description>Я надто довго обходився без споглядання. Я відчуваю духовну втрату.</EB_ContemplationNeed.stages.2.description>
+  <EB_WitnessedContemplation_Approved.stages.0.label>споглядав побожно</EB_WitnessedContemplation_Approved.stages.0.label>
+  <EB_WitnessedContemplation_Disapproved.stages.0.label>займався спогляданням</EB_WitnessedContemplation_Disapproved.stages.0.label>
+  <EB_WitnessedContemplation_Forbidden.stages.0.label>порушив заборону на споглядання</EB_WitnessedContemplation_Forbidden.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.label>релігійну книгу знищено</EB_ReligiousBookDestroyed.stages.0.label>
+  <EB_ReligiousBookDestroyed.stages.0.description>Нашу релігійну книгу знищено. Це абсолютно неприпустимо.</EB_ReligiousBookDestroyed.stages.0.description>
+  <EB_WroteSacrilegousBinding.stages.0.label>осквернив священний текст</EB_WroteSacrilegousBinding.stages.0.label>
+  <EB_WroteSacrilegousBinding.stages.0.description>Я оправив священну книгу в шкіру тварини. Це було неправильно.</EB_WroteSacrilegousBinding.stages.0.description>
+  <EB_ReadingLeatherboundBook.stages.0.label>читає священне писання в шкіряній оправі</EB_ReadingLeatherboundBook.stages.0.label>
+  <EB_ReadingLeatherboundBook.stages.0.description>Цей священний текст оправлений у шкіру тварини. Тримати його в руках — неправильно.</EB_ReadingLeatherboundBook.stages.0.description>
+  <EB_GoodDebate.stages.0.label>хороші дебати</EB_GoodDebate.stages.0.label>
+  <EB_GoodDebate.stages.0.description>Ми провели жваві дебати про наші переконання. Зустріч відкритих розумів.</EB_GoodDebate.stages.0.description>
+  <EB_BadDebate.stages.0.label>єретичні дебати</EB_BadDebate.stages.0.label>
+  <EB_BadDebate.stages.0.description>Мені довелося спростовувати їхні єретичні переконання. Різноманітність думок — це отрута.</EB_BadDebate.stages.0.description>
+  <EB_ProselytizerDebated.stages.0.label>поширив слово</EB_ProselytizerDebated.stages.0.label>
+  <EB_ProselytizerDebated.stages.0.description>Я відстоював істину своєї віри. Яким би не був результат, сама спроба була праведним вчинком.</EB_ProselytizerDebated.stages.0.description>
+  <EB_ProselytizerConverted.stages.0.label>привів душу до віри</EB_ProselytizerConverted.stages.0.label>
+  <EB_ProselytizerConverted.stages.0.description>Я привів когось у світло нашої віри. Немає вищого покликання.</EB_ProselytizerConverted.stages.0.description>
+  <EB_ProselytizerFailedConversion.stages.0.label>не зміг навернути</EB_ProselytizerFailedConversion.stages.0.label>
+  <EB_ProselytizerFailedConversion.stages.0.description>Я намагався привести когось до віри і зазнав невдачі. Вони залишаються у своєму невіданні.</EB_ProselytizerFailedConversion.stages.0.description>
+  <EB_ApostacyDebated.stages.0.label>віру оскаржили</EB_ApostacyDebated.stages.0.label>
+  <EB_ApostacyDebated.stages.0.description>Мені довелося захищати істину своєї віри від опонента. Сам факт того, що вони насмілилися поставити її під сумнів, — образа.</EB_ApostacyDebated.stages.0.description>
+  <EB_CognitiveDissonance.stages.0.label>когнітивний дисонанс</EB_CognitiveDissonance.stages.0.label>
+  <EB_CognitiveDissonance.stages.0.description>Я не повинен брати участь у практиках інших ідеологій.</EB_CognitiveDissonance.stages.0.description>
+  <EB_FaithReaffirmed.stages.0.label>віру підтверджено</EB_FaithReaffirmed.stages.0.label>
+  <EB_FaithReaffirmed.stages.0.description>Спостерігаючи за традиціями інших, я нагадую собі, чому ціную власний шлях.</EB_FaithReaffirmed.stages.0.description>
+  <EB_LowCertaintyCoBeliever.stages.0.label>нестійкий одновірець</EB_LowCertaintyCoBeliever.stages.0.label>
+  <EB_LowCertaintyCoBeliever.stages.1.label>невірний одновірець</EB_LowCertaintyCoBeliever.stages.1.label>
+  <EB_LowCertaintyCoBeliever.stages.2.label>відступник серцем одновірець</EB_LowCertaintyCoBeliever.stages.2.label>
+</LanguageData>
