@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_NoPewToPrayIn>{PAWN_nameDef} konnte keinen Ritualplatz für Kontemplation im Rahmen von {IDEO_name} finden.</EB_NoPewToPrayIn>
+  <EB_ContemplationRoomDisrespected>Der Kontemplationsraum von {PAWN_nameDef} für {IDEO_name} wird nicht respektiert.</EB_ContemplationRoomDisrespected>
+  <EB_ContemplationActivityReport>kontemplierend (Gewinn: {0}/Std)</EB_ContemplationActivityReport>
+  <EB_ContemplationSiteStatLabel>Kontemplationsgewinn</EB_ContemplationSiteStatLabel>
+  <EB_ContemplationSiteStatReport>Rate der Überzeugungsbekräftigung pro Stunde während der Kontemplation. Für den ausgewählten Kolonisten angezeigt, oder als Basismultiplikator, wenn kein Kolonist ausgewählt ist. Skaliert mit der Raumbeeindrucklichkeit und der aktuellen Überzeugungsstärke des Kolonisten. Zusätzliche +10% pro Mitgläubigem im Raum.</EB_ContemplationSiteStatReport>
+  <EB_ContemplationSiteInspect>Kontemplationsgewinn: {0}</EB_ContemplationSiteInspect>
+</LanguageData>

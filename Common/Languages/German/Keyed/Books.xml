@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} Überzeugungsverschiebung/Qu</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookBeliefsHeader>Vertretene Überzeugungen</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.ShiftRatePerQuadrum>{0}/Qu</EnhancedIdeology.ShiftRatePerQuadrum>
+  <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Religiöses Buch vernichtet</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
+  <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, ein wichtiges religiöses Buch für {IDEO}, wurde vernichtet. Die Anhänger von {IDEO} werden darüber nicht erfreut sein.</EnhancedIdeology.LetterReligiousBookDestroyedText>
+  <EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>{BOOK} durch Verbrennen vernichten. Dies wird die {IDEO_memberNamePlural} von {IDEO} verärgern.</EnhancedIdeology.DestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.DestroyBookByBurningIt>{BOOK} durch Verbrennen vernichten.</EnhancedIdeology.DestroyBookByBurningIt>
+  <EnhancedIdeology.NoColonistCanDestroy>Kein Kolonist kann {BOOK} vernichten.</EnhancedIdeology.NoColonistCanDestroy>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>Soll {PAWN} wirklich {BOOK} verbrennen? Dies wird alle {IDEO_memberNamePlural} von {IDEO} sehr verärgern.</EnhancedIdeology.ConfirmDestroyBookByBurningItUpsetIdeo>
+  <EnhancedIdeology.ConfirmDestroyBookByBurningIt>Soll {PAWN} wirklich {BOOK} verbrennen?</EnhancedIdeology.ConfirmDestroyBookByBurningIt>
+  <EnhancedIdeology.BookBurningSuccess>{PAWN} hat {BOOK} vernichtet. Dies hat alle {IDEO_memberNamePlural} von {IDEO} sehr verärgert.</EnhancedIdeology.BookBurningSuccess>
+</LanguageData>

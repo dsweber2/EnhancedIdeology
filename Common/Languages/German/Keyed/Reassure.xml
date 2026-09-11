@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.Reassure.CertaintyGain>Gewissheitsgewinn bei Sieg: +{0}</EnhancedIdeology.Reassure.CertaintyGain>
+  <EnhancedIdeology.Reassure.SuccessChance>Chance, die Debatte zu gewinnen: {0}</EnhancedIdeology.Reassure.SuccessChance>
+  <EnhancedIdeology.Reassure.SelfTarget>Selbstbestätigung: garantierter Erfolg</EnhancedIdeology.Reassure.SelfTarget>
+  <EnhancedIdeology.Reassure.TargetBeliefs>Zu bekräftigende Überzeugungen (zufällig 1-{0} davon):</EnhancedIdeology.Reassure.TargetBeliefs>
+  <EnhancedIdeology.Reassure.NoHeterodoxy>Ihre Überzeugungen sind bereits orthodox – es gibt nichts zu bekräftigen.</EnhancedIdeology.Reassure.NoHeterodoxy>
+  <EnhancedIdeology.Reassure.FailMessage>{0} konnte {1} nicht bestätigen.</EnhancedIdeology.Reassure.FailMessage>
+</LanguageData>

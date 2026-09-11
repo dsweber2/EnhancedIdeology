@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TabOpinion>Ideologie</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.IdeologyOpinions>Ideologiemeinungen</EnhancedIdeology.IdeologyOpinions>
+  <EnhancedIdeology.BeliefsHeader>Fragen</EnhancedIdeology.BeliefsHeader>
+  <EnhancedIdeology.ColIssue>Frage</EnhancedIdeology.ColIssue>
+  <EnhancedIdeology.ColStance>Haltung</EnhancedIdeology.ColStance>
+  <EnhancedIdeology.ColStrength>Stärke</EnhancedIdeology.ColStrength>
+  <EnhancedIdeology.StanceDontCare>Gleichgültig</EnhancedIdeology.StanceDontCare>
+  <EnhancedIdeology.StanceTooltip>Zur Frage {1} hat {PAWN_nameDef} die Haltung {2} mit Überzeugung {3}. {IDEO_name} predigt {5}; {PAWN_nameDef}s Meinung zu dieser Haltung: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}s Meinung über {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
+  <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Aus Memes und Geboten: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
+  <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Aus persönlichen Überzeugungen: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>
+  <EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>Aus zwischenmenschlichen Beziehungen: {0}</EnhancedIdeology.PawnOptionToolTip.FromInterpersonalRelationships>
+</LanguageData>

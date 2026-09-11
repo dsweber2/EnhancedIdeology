@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.TranslationCredit>Übersetzung: claude</EnhancedIdeology.TranslationCredit>
+  <EnhancedIdeology.Section.Ideoligion>Ideologie</EnhancedIdeology.Section.Ideoligion>
+  <EnhancedIdeology.Section.Precept>Gebot</EnhancedIdeology.Section.Precept>
+  <EnhancedIdeology.Section.Compat>Kompatibilität</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Debug>Debug</EnhancedIdeology.Section.Debug>
+  <EnhancedIdeology.SubSection.Belief>Persönliche Gewissheitsdynamik</EnhancedIdeology.SubSection.Belief>
+  <EnhancedIdeology.SubSection.Conversion>Bekehrungseffekte</EnhancedIdeology.SubSection.Conversion>
+  <EnhancedIdeology.CertaintyDriftRate>Gewissheitsverschiebungsrate: {0}/Tag</EnhancedIdeology.CertaintyDriftRate>
+  <EnhancedIdeology.CertaintyDriftRate.Tip>Wie schnell sich die Gewissheit eines Kolonisten täglich auf ihren Zielwert zubewegt. Höher = der Glaube reagiert schneller auf die Umstände. Sorgt für dynamischere Überzeugungen.</EnhancedIdeology.CertaintyDriftRate.Tip>
+  <EnhancedIdeology.RelationalMaxRange>Beziehungseinfluss: ±{0}</EnhancedIdeology.RelationalMaxRange>
+  <EnhancedIdeology.RelationalMaxRange.Tip>Das Maximum, um das die Meinung eines Kolonisten über seine Glaubensgeschwister die Zielgewissheit erhöhen oder senken kann.</EnhancedIdeology.RelationalMaxRange.Tip>
+  <EnhancedIdeology.PracticeMaxRange>Praxiseinfluss: ±{0}</EnhancedIdeology.PracticeMaxRange>
+  <EnhancedIdeology.PracticeMaxRange.Tip>Das Maximum, um das die Gebotsstimmungen (aus Ritualen, Verehrung, Tabus usw.) die Zielgewissheit erhöhen oder senken können.</EnhancedIdeology.PracticeMaxRange.Tip>
+  <EnhancedIdeology.CrisisThreshold>Glaubenskrisenschwelle: {0}</EnhancedIdeology.CrisisThreshold>
+  <EnhancedIdeology.CrisisThreshold.Tip>Wenn die Gewissheit eines Kolonisten darunter fällt, kann er einen Glaubenskrisen-Zusammenbruch erleiden. Höher = mehr Krisen.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.ConversionPace>Bekehrungstempo: {0}</EnhancedIdeology.ConversionPace>
+  <EnhancedIdeology.ConversionPace.Tip>Wie schnell Kolonisten von selbst einen schlecht passenden Glauben aufgeben, relativ zur Standardeinstellung. Höher = spontane Bekehrungen sind wahrscheinlicher.</EnhancedIdeology.ConversionPace.Tip>
+  <EnhancedIdeology.ConversionCertaintyKnock>Gewissheitsverlust bei Bekehrungsversuch: {0}</EnhancedIdeology.ConversionCertaintyKnock>
+  <EnhancedIdeology.ConversionCertaintyKnock.Tip>Wenn ein Moralführer eine Bekehrungsdebatte gewinnt, aber den Kolonisten nicht sofort bekehrt, wird dessen Gewissheit mit diesem Wert multipliziert. 1x = ein 80%-gewisser Kolonist bleibt bei 80%; 0,8x = er fällt auf 64%. Niedriger = Bekehrungsversuche wirkungsvoller.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
+  <EnhancedIdeology.ConvictionDecayRate>Überzeugungsverfall: {0}/Quartal</EnhancedIdeology.ConvictionDecayRate>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Wie stark die Überzeugungsstärke aller Gebote pro Quartal abnimmt. Hinweis: 100% Überzeugung entspricht einem Gebotsdurchschnitt von 20, Maximum ist 50. Höher = stärkerer Bedarf, Überzeugungen zu festigen.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.PreceptOppositionScale>Entgegengesetzte Haltung: {0}</EnhancedIdeology.PreceptOppositionScale>
+  <EnhancedIdeology.PreceptOppositionScale.Tip>Wie stark ein Kolonist die Haltung am entgegengesetzten Extrem einer Frage ablehnt, als Bruchteil seiner Überzeugung. Bei 100% und Überzeugung 12 für ein missbilligtes Gebot beträgt die Meinung -12 gegenüber dem entgegengesetzten Pflichtgebot. 0% = gleichgültig gegenüber entgegengesetzten Haltungen; 100% = gleich und entgegengesetzt wie die Unterstützung für die eigene Haltung am weitesten Extrem.</EnhancedIdeology.PreceptOppositionScale.Tip>
+  <EnhancedIdeology.ConversionStancePull>Bekehrungsstärke: {0}</EnhancedIdeology.ConversionStancePull>
+  <EnhancedIdeology.ConversionStancePull.Tip>Wie viel stärker ein erfolgreicher Bekehrungsversuch (eine gezielte Aktion eines Moralführers) die Überzeugungen eines Kolonisten verschiebt als ein gewöhnlicher Bekehrungsversuch. Höher = schnellere Bekehrungen.</EnhancedIdeology.ConversionStancePull.Tip>
+  <EnhancedIdeology.DebateConvictionChange>Debatten-Überzeugungsänderung: {0}</EnhancedIdeology.DebateConvictionChange>
+  <EnhancedIdeology.DebateConvictionChange.Tip>Wie weit ein einziges gewonnenes Argument die Überzeugung zu einer Frage verschiebt, relativ zur Standardeinstellung. Verschiebt gleichzeitig sowohl das Gebot als auch die Überzeugung darin. Höher = jede gewonnene Debatte überzeugt mehr. Führt zu schnelleren Bekehrungen.</EnhancedIdeology.DebateConvictionChange.Tip>
+  <EnhancedIdeology.ConversionOpinionMultiplier>Freundschaftsbonus (Bekehrung): {0}</EnhancedIdeology.ConversionOpinionMultiplier>
+  <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Wie sehr die Meinung eines Kolonisten über jemanden, der versucht, sein Gebot zu ändern, die Wirkung verstärkt. Bei 1x und Meinung +100 werden sowohl der Gewissheitsverlust als auch die Überzeugungsverschiebung verdoppelt. Bei 0x hat die Meinung keinen Effekt. Wird nicht verwendet, wenn Peer Pressure installiert ist — dort übernimmt die eigene Multiplikatoreinstellung dieses Mods.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
+  <EnhancedIdeology.SaveCompatMinCertainty>Speicher-Kompatibilität: Mindestgewissheit: {0}</EnhancedIdeology.SaveCompatMinCertainty>
+  <EnhancedIdeology.SaveCompatMinCertainty.Tip>Beim Laden eines Vanilla- oder Vor-Mod-Spielstands erhalten Kolonisten, deren Gewissheit darunter liegt, mindestens diesen Zielwert anstatt Null. Verhindert, dass ein Kolonist mit 0% Gewissheit ohne jegliche Überzeugungen zurückbleibt.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.DebugInteractionWorkers>ENTW: Interaction Workers debuggen</EnhancedIdeology.DebugInteractionWorkers>
+  <EnhancedIdeology.DebugInteractionWorkers.Tip>Aktiviert Debug-Protokollierung für Interaction Workers, wenn der Entwicklermodus aktiv ist. Empfohlen: deaktiviert lassen, außer beim Debuggen von Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
+</LanguageData>

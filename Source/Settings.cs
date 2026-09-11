@@ -122,6 +122,7 @@ public class Settings : ModSettings
         Listing_Standard listingStandard = new();
         listingStandard.Begin(new Rect(0f, 0f, viewRect.width, 100000f));
 
+        TranslationCredit(listingStandard);
         Header(listingStandard, "EnhancedIdeology.Section.Ideoligion");
         SubHeader(listingStandard, "EnhancedIdeology.SubSection.Belief");
         PercentSlider(listingStandard, "EnhancedIdeology.CertaintyDriftRate", ref _certaintyDriftRate, 0.02f, 0.5f, DefaultCertaintyDriftRate);
@@ -162,6 +163,16 @@ public class Settings : ModSettings
         listing.Label(labelKey.Translate());
         Text.Font = GameFont.Small;
         listing.GapLine();
+    }
+
+    private static void TranslationCredit(Listing_Standard listing)
+    {
+        var old = GUI.color;
+        GUI.color = new Color(1f, 1f, 1f, 0.4f);
+        Text.Font = GameFont.Tiny;
+        listing.Label("EnhancedIdeology.TranslationCredit".Translate());
+        Text.Font = GameFont.Small;
+        GUI.color = old;
     }
 
     private static void SubHeader(Listing_Standard listing, string labelKey)

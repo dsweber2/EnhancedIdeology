@@ -85,7 +85,8 @@ Original art is from Elseud for the mod preview as well as the original icons an
 DetVisor made the included book textures, which I also traced into the writing tables.
 
 Thanks to Joseasoler and Densevoid for the Peer Pressure mod, which I have integrated here. Can't believe that's not Vanilla.
-
+#### Translation
+At the moment it's all Claude. I will happily accept corrections or new languages; I've compacted the text to translate here: If you give me a form like that translated that would be ideal.
 ### Legal
 Creative Commons 4.0
 

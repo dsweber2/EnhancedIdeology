@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EB_Ideobook.label>religiöses Buch</EB_Ideobook.label>
+  <EB_Ideobook.description>Ein Buch mit fiktiven oder wahren Geschichten zum Vergnügen und zur Erbauung des Lesers.</EB_Ideobook.description>
+  <EB_UnfinishedDeskIdeobook.label>unvollendetes religiöses Buch</EB_UnfinishedDeskIdeobook.label>
+  <EB_UnfinishedDeskIdeobook.description>Ein unvollendetes religiöses Buch, das am Schreibtisch verfasst wird.</EB_UnfinishedDeskIdeobook.description>
+  <EB_WritingDesk.label>Schreibtisch</EB_WritingDesk.label>
+  <EB_WritingDesk.description>Ein Tisch zum Verfassen ideologischer Texte. Nur Kolonisten mit tiefer Überzeugung in ihrem Glauben können daran schreiben.</EB_WritingDesk.description>
+</LanguageData>
