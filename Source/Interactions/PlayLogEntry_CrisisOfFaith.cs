@@ -28,12 +28,15 @@ internal sealed class PlayLogEntry_CrisisOfFaith : PlayLogEntry_InteractionSingl
         GrammarRequest request = GenerateGrammarRequest();
         request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", initiator, request.Constants));
 
-        var template = outcome == CrisisOutcome.MoodBreak
-            ? "[INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery."
-            : "[INITIATOR_nameDef] experienced a crisis of faith.";
+        string key = outcome == CrisisOutcome.MoodBreak
+            ? "EnhancedIdeology.CrisisLog.MoodBreak"
+            : "EnhancedIdeology.CrisisLog.Wander";
 
-        request.Rules.Add(new Rule_String("r_logentry", template));
-        var text = GrammarResolver.Resolve("r_logentry", request, "crisis of faith", forceLog);
+        request.Rules.Add(new Rule_String("r_logentry", key.Translate()));
+        if (LanguageDatabase.defaultLanguage.TryGetTextFromKey(key, out var english))
+            request.Rules.Add(new Rule_String("r_logentry_en", english));
+
+        var text = GrammarResolver.Resolve("r_logentry", request, "crisis of faith", forceLog, "r_logentry_en");
         Rand.PopState();
         return text;
     }

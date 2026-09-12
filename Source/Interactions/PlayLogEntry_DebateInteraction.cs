@@ -66,8 +66,9 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
                 AddPawnRules(ref request);
                 // Inject rich sentence rule directly; XML packs have simplified grammar for
                 // the vanilla/Interaction Bubbles path which lacks our custom symbols.
-                request.Rules.Add(new Rule_String(pack.FirstRuleKeyword, SentTemplateForPack(pack)));
-                text += " " + GrammarResolver.Resolve(pack.FirstRuleKeyword, request, "extraSentencePack", forceLog, pack.FirstUntranslatedRuleKeyword);
+                InjectSentenceRules(ref request, pack);
+                text += " " + GrammarResolver.Resolve(pack.FirstRuleKeyword, request, "extraSentencePack", forceLog,
+                    SentKeyForPack(pack) != null ? "sent_en" : pack.FirstUntranslatedRuleKeyword);
             }
         }
 

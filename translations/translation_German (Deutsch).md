@@ -50,6 +50,13 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort} versuchte, ideologische Ansichten mit {PAWN2_labelShort} zu debattieren. Dies führte zu einem Streit! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | Ideologische Bekehrung |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | Nach einer Debatte über {ISSUE_label} überzeugte {CONVINCER_labelShort} {CONVINCED_labelShort} dazu, {OLDIDEO_name} aufzugeben und {NEWIDEO_name} anzunehmen. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. |  |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. |  |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. |  |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". |  |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". |  |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. |  |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. |  |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +213,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | legt TargetA zum Verbrennen auf den Boden. |
 | `EB_Pray.reportString` | contemplating. | in Einkehr. |
 

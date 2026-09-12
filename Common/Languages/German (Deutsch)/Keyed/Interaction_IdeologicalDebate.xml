@@ -4,4 +4,13 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} versuchte, ideologische Ansichten mit {PAWN2_labelShort} zu debattieren. Dies führte zu einem Streit!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ideologische Bekehrung</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>Nach einer Debatte über {ISSUE_label} überzeugte {CONVINCER_labelShort} {CONVINCED_labelShort} dazu, {OLDIDEO_name} aufzugeben und {NEWIDEO_name} anzunehmen.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] debattierte mit [RECIPIENT_nameDef] über die Glaubensgrundlage [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] debattierte mit [RECIPIENT_nameDef] über [TOPIC_label].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] debattierte mit [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] bewegte [RECIPIENT_nameDef] hin zur Haltung „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] bewegte [INITIATOR_nameDef] hin zur Haltung „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] war überzeugender.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Keine Seite änderte ihre Meinung.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] erlebte eine Glaubenskrise.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]s Glaubenskrise verstärkte [INITIATOR_possessive] Elend.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

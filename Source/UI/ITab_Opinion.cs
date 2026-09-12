@@ -67,7 +67,7 @@ internal sealed class ITab_Opinion : ITab
         var stances = StanceRows(data, selected);
 
         var issueWidth = stances.Select(row => Text.CalcSize(row.issue.LabelCap).x).DefaultIfEmpty(0f).Max();
-        var rungWidth = Mathf.Min(MaxRungWidth, stances.Select(row => Text.CalcSize(row.personalRung).x).DefaultIfEmpty(0f).Max());
+        const float rungWidth = MaxRungWidth;
         var rowHeights = stances.Select(row => Mathf.Max(RowHeight, Text.CalcHeight(row.personalRung, rungWidth) + 2 * Padding)).ToList();
         var leftWidth = SmallPadding + IssueIconSize + SmallPadding + issueWidth + IconTextGap + rungWidth + IconTextGap + OpinionBarWidth + SmallPadding;
 
