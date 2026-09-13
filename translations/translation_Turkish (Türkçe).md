@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort}, {PAWN2_labelShort} ile ideolojik görüşler üzerine tartışmaya çalıştı. Bu sosyal bir kavgaya yol açtı! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | İdeolojik ihtidâ |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | {ISSUE_label} üzerine tartışmanın ardından {CONVINCER_labelShort}, {CONVINCED_labelShort}'ı {OLDIDEO_name}'i terk edip {NEWIDEO_name}'i benimsemeye ikna etti. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef], [RECIPIENT_nameDef] ile [TOPIC_label] ilkesi üzerine tartıştı. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef], [RECIPIENT_nameDef] ile [TOPIC_label] öğretisi üzerine tartıştı. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef], [RECIPIENT_nameDef] ile tartıştı. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef], [RECIPIENT_nameDef]'ı "[WINNING_STANCE_label]" tutumuna doğru yöneltti. |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef], [INITIATOR_nameDef]'ı "[WINNING_STANCE_label]" tutumuna doğru yöneltti. |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] daha ikna edici olduğunu kanıtladı. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Hiçbiri görüşünü değiştirmedi. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | {0} ile tartışıyor |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] bir iman krizi yaşadı. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]'in iman krizi [INITIATOR_possessive] ıstırabını daha da artırdı. |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetA'yı yakmak için yere bırakıyor. |
 | `EB_Pray.reportString` | contemplating. | tefekkür ediyor. |
 

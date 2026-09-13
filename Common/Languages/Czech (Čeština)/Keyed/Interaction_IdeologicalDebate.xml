@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} se pokusil debatovat o ideologických názorech s {PAWN2_labelShort}. To vedlo ke společenské hádce!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ideologická konverze</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>Po debatě o {ISSUE_label} přesvědčil {CONVINCER_labelShort} {CONVINCED_labelShort}, aby opustil {OLDIDEO_name} a přijal {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] debatoval s [RECIPIENT_nameDef] o přesvědčení [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] debatoval o [TOPIC_label] s [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] debatoval s [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] přiblížil [RECIPIENT_nameDef] k postoji „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] přiblížil [INITIATOR_nameDef] k postoji „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] se ukázal přesvědčivějším.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Nikdo svůj názor nezměnil.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Debatuje s {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] prožil krizi víry.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>Krize víry [INITIATOR_nameDef] prohloubila [INITIATOR_possessive] trápení.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

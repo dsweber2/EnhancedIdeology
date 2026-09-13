@@ -11,6 +11,7 @@
   <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] bewegte [INITIATOR_nameDef] hin zur Haltung „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] war überzeugender.</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>Keine Seite änderte ihre Meinung.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Debattiert mit {0}</EnhancedIdeology.JobReport_Debating>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] erlebte eine Glaubenskrise.</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]s Glaubenskrise verstärkte [INITIATOR_possessive] Elend.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

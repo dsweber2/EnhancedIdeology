@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} ha intentat debatre opinions ideològiques amb {PAWN2_labelShort}. Això ha acabat en baralla!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Conversió ideològica</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>Després de debatre sobre {ISSUE_label}, {CONVINCER_labelShort} ha convençut {CONVINCED_labelShort} d'abandonar {OLDIDEO_name} i abraçar {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] ha debatut amb [RECIPIENT_nameDef] sobre el mem [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] ha debatut [TOPIC_label] amb [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] ha debatut amb [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] ha apropat [RECIPIENT_nameDef] a la postura "[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] ha apropat [INITIATOR_nameDef] a la postura "[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] ha resultat més persuasiu.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Cap dels dos ha canviat de parer.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Debatent amb {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] ha experimentat una crisi de fe.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>La crisi de fe de [INITIATOR_nameDef] ha agreujat la misèria de [INITIATOR_possessive].</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

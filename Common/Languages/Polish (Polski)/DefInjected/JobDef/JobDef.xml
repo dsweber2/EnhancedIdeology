@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>krzyczy na TargetA o ideologii.</EB_IconoclastDebate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>kładzie TargetA na ziemię, żeby spalić.</EB_PlaceAndBurnUntilDestroyed.reportString>
   <EB_Pray.reportString>medytuje.</EB_Pray.reportString>
 </LanguageData>

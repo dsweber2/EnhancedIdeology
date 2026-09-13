@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} спробував посперечатися про ідеологічні погляди з {PAWN2_labelShort}. Це призвело до соціальної сутички!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ідеологічне навернення</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>Після дебатів про {ISSUE_label}, {CONVINCER_labelShort} переконав {CONVINCED_labelShort} залишити {OLDIDEO_name} та прийняти {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] дискутував з [RECIPIENT_nameDef] про рису [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] дискутував про [TOPIC_label] з [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] дискутував з [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] схилив [RECIPIENT_nameDef] до позиції «[WINNING_STANCE_label]».</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] схилив [INITIATOR_nameDef] до позиції «[WINNING_STANCE_label]».</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] виявився переконливішим.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Жоден не змінив своєї думки.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Дискутує з {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] пережив кризу віри.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>Криза віри [INITIATOR_nameDef] посилила [INITIATOR_possessive] страждання.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

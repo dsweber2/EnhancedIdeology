@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}は{PAWN2_labelShort}と思想的な議論をしようとした。これにより口論になった！</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>思想的改宗</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>{ISSUE_label}について議論した末、{CONVINCER_labelShort}は{CONVINCED_labelShort}を説得し、{OLDIDEO_name}を捨てて{NEWIDEO_name}を受け入れさせた。</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef]はミーム[TOPIC_label]について[RECIPIENT_nameDef]と議論した。</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef]は[TOPIC_label]について[RECIPIENT_nameDef]と議論した。</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef]は[RECIPIENT_nameDef]と議論した。</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef]は[RECIPIENT_nameDef]を「[WINNING_STANCE_label]」の立場へと近づけた。</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef]は[INITIATOR_nameDef]を「[WINNING_STANCE_label]」の立場へと近づけた。</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef]の方がより説得力があった。</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>どちらも考えを変えなかった。</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>{0}と議論中</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef]は信仰の危機を経験した。</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]の信仰の危機が[INITIATOR_possessive]苦悩をさらに深めた。</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} a încercat să dezbată vederi ideologice cu {PAWN2_labelShort}. Aceasta a dus la o ceartă!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Conversie ideologică</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>După dezbaterea despre {ISSUE_label}, {CONVINCER_labelShort} l-a convins pe {CONVINCED_labelShort} să abandoneze {OLDIDEO_name} și să îmbrățișeze {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] a dezbătut cu [RECIPIENT_nameDef] despre meme-ul [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] a dezbătut [TOPIC_label] cu [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] a dezbătut cu [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] l-a apropiat pe [RECIPIENT_nameDef] de poziția „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] l-a apropiat pe [INITIATOR_nameDef] de poziția „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] s-a dovedit mai convingător.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Niciunul nu și-a schimbat opinia.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Dezbătând cu {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] a trăit o criză de credință.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>Criza de credință a lui [INITIATOR_nameDef] i-a agravat suferința [INITIATOR_possessive].</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

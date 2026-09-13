@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort}は{PAWN2_labelShort}と思想的な議論をしようとした。これにより口論になった！ |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | 思想的改宗 |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | {ISSUE_label}について議論した末、{CONVINCER_labelShort}は{CONVINCED_labelShort}を説得し、{OLDIDEO_name}を捨てて{NEWIDEO_name}を受け入れさせた。 |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef]はミーム[TOPIC_label]について[RECIPIENT_nameDef]と議論した。 |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef]は[TOPIC_label]について[RECIPIENT_nameDef]と議論した。 |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef]は[RECIPIENT_nameDef]と議論した。 |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef]は[RECIPIENT_nameDef]を「[WINNING_STANCE_label]」の立場へと近づけた。 |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef]は[INITIATOR_nameDef]を「[WINNING_STANCE_label]」の立場へと近づけた。 |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef]の方がより説得力があった。 |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | どちらも考えを変えなかった。 |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | {0}と議論中 |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef]は信仰の危機を経験した。 |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]の信仰の危機が[INITIATOR_possessive]苦悩をさらに深めた。 |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetAを地面に置いて燃やしている。 |
 | `EB_Pray.reportString` | contemplating. | 瞑想中。 |
 

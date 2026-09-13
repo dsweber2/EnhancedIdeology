@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort} ha intentat debatre opinions ideològiques amb {PAWN2_labelShort}. Això ha acabat en baralla! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | Conversió ideològica |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | Després de debatre sobre {ISSUE_label}, {CONVINCER_labelShort} ha convençut {CONVINCED_labelShort} d'abandonar {OLDIDEO_name} i abraçar {NEWIDEO_name}. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef] ha debatut amb [RECIPIENT_nameDef] sobre el mem [TOPIC_label]. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] ha debatut [TOPIC_label] amb [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] ha debatut amb [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef] ha apropat [RECIPIENT_nameDef] a la postura "[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef] ha apropat [INITIATOR_nameDef] a la postura "[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] ha resultat més persuasiu. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Cap dels dos ha canviat de parer. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | Debatent amb {0} |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] ha experimentat una crisi de fe. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | La crisi de fe de [INITIATOR_nameDef] ha agreujat la misèria de [INITIATOR_possessive]. |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | col·locant TargetA a terra per cremar. |
 | `EB_Pray.reportString` | contemplating. | contemplant. |
 

@@ -7,17 +7,17 @@ The initial implementation is from Smartkar's Enhanced Beliefs, with some update
 ---
 ## Certainty
 
-![Info_Certainty](Infographics/Info_Certainty.png) (insert image of the social tool-tip here)
+![Info_Certainty](https://images.steamusercontent.com/ugc/16395313985291272682/A3EFBBC3E8F819594B6B86D943DE611ACB2483D6/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 
 Certainty is a (normally) slow moving drifts towards a target set by three bands:
 
-- **Structural**: how well the ideoligion's stances on issues fit this pawn's own beliefs. The main driver. The pawn has preferred precepts for each issue and a strength for each. Debates, books, rituals, and contemplation shift per-issue stances over time.
+- **Structural**: how well the ideoligion's stances on issues fit this pawn's own beliefs, it's their opinion on the ideoligion (see bleow).
 - **Relational**: how the pawn feels about their co-religionists. If they get along well they'll reinforce each other's beliefs.
 - **Practitional**: whether the pawn is actually practicing. Precept moodlets push this up; regularly performing rituals and activities, abstaining from forbidden foods, wearing encouraged clothing, and generally acting in line with the ideoligion increases certainty.
 ---
 ## Ideoligion Opinions
 
-![Info_Opinions](Infographics/Info_Opinions.png) (insert image of the opinions tab here)
+![Info_Opinions](https://images.steamusercontent.com/ugc/11981801783309351549/759C3B3B5AA76F75001B3814B1E6C8F73C3131D6/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 
 A pawn's opinion of an ideolgion, or Structural fit comes from three things:
 
@@ -27,14 +27,13 @@ A pawn's opinion of an ideolgion, or Structural fit comes from three things:
 
 ---
 ## Contemplation
-Contemplation is a new type of recreation that deepens a pawns certainty in their precepts and associated issue. During recreation (or when their ideoligion requires it) they'll seek out somewhere to sit and reflect:
-(insert image of a couple of praying pawns)
-More sanctified places like worship rooms, reliquaries (with or without a relic) or ideoligious statues reinforce beliefs more strongly.
+![Info_Contemplation](https://images.steamusercontent.com/ugc/15011342002304492908/B29C6E525BCD7C212E1ECBEE56DABE34F59215C1/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
+Contemplation is a new type of recreation that deepens a pawns certainty in their precepts. During recreation (or more frequently if their ideoligion has it as a precept making it a need) they'll seek out somewhere to sit and reflect. More sanctified places like worship rooms, reliquaries (with or without a relic) or ideoligious statues reinforce beliefs more strongly, with the impressiveness of the room increasing the strength gain.
 
 ---
 ## Debates, conversion and Crises of Faith
 
-(image of pawns debating a precept)
+![Info_Debates](https://images.steamusercontent.com/ugc/15846418937295764847/13A7CD1D36F7BED3E6769789C81684FC83AA1E7F/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 There are three ways beliefs change through interaction:
 
 **Social conversion**: any pawn with sufficient social skill can try to convert any other social pawn. They will focus on a single issue where they disagree most sharply. If the initiator succeeds, the listener shifts their stance on that issue and if they have a higher opinion of the speaker's ideoligion they may instantaneously convert. Prisoner conversion uses exactly the same mechanics, just more intentionally applied.
@@ -49,7 +48,7 @@ The result could be a mental break, a switch of ideoligions, or a long period of
 ---
 ## Ideoligion books
 
-![Info_Books](Infographics/Info_Books.png) (pawns reading and a pawn writing)
+![Info_Books](https://images.steamusercontent.com/ugc/16283911562514376382/2DA48114CBC430029CA40933F554A655A4FD30C9/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 
 Books are tied to a specific ideoligion and carry per-issue conviction strengths, seeded from the author's own ideosyncratic stances. The more certain the author and the more impressive the materials, the stronger the effect.
 ### Iconoclasm 

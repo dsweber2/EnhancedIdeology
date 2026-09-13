@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} a tenté de débattre de points de vue idéologiques avec {PAWN2_labelShort}. Cela a dégénéré en bagarre !</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Conversion idéologique</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>Après avoir débattu de {ISSUE_label}, {CONVINCER_labelShort} a convaincu {CONVINCED_labelShort} d'abandonner {OLDIDEO_name} pour embrasser {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] a débattu avec [RECIPIENT_nameDef] du mème [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] a débattu de [TOPIC_label] avec [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] a débattu avec [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] a rapproché [RECIPIENT_nameDef] de la position « [WINNING_STANCE_label] ».</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] a rapproché [INITIATOR_nameDef] de la position « [WINNING_STANCE_label] ».</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] s'est montré plus convaincant.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Aucun des deux n'a changé d'avis.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Débat avec {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] a traversé une crise de foi.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>La crise de foi de [INITIATOR_nameDef] a aggravé [INITIATOR_possessive] détresse.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

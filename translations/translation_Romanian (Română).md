@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort} a încercat să dezbată vederi ideologice cu {PAWN2_labelShort}. Aceasta a dus la o ceartă! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | Conversie ideologică |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | După dezbaterea despre {ISSUE_label}, {CONVINCER_labelShort} l-a convins pe {CONVINCED_labelShort} să abandoneze {OLDIDEO_name} și să îmbrățișeze {NEWIDEO_name}. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef] a dezbătut cu [RECIPIENT_nameDef] despre meme-ul [TOPIC_label]. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] a dezbătut [TOPIC_label] cu [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] a dezbătut cu [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef] l-a apropiat pe [RECIPIENT_nameDef] de poziția „[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef] l-a apropiat pe [INITIATOR_nameDef] de poziția „[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] s-a dovedit mai convingător. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Niciunul nu și-a schimbat opinia. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | Dezbătând cu {0} |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] a trăit o criză de credință. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Criza de credință a lui [INITIATOR_nameDef] i-a agravat suferința [INITIATOR_possessive]. |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | hărțuind TargetA despre ideologie. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | plasând TargetA pe pământ pentru ardere. |
 | `EB_Pray.reportString` | contemplating. | meditând. |
 

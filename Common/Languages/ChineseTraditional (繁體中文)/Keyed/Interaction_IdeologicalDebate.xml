@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}試圖與{PAWN2_labelShort}辯論理念觀點，此舉引發了社交衝突！</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>理念皈依</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>在辯論{ISSUE_label}後，{CONVINCER_labelShort}說服{CONVINCED_labelShort}放棄{OLDIDEO_name}，轉而信奉{NEWIDEO_name}。</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef]與[RECIPIENT_nameDef]就模因[TOPIC_label]展開辯論。</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef]與[RECIPIENT_nameDef]就[TOPIC_label]展開辯論。</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef]與[RECIPIENT_nameDef]展開辯論。</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef]引導[RECIPIENT_nameDef]趨向立場「[WINNING_STANCE_label]」。</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef]引導[INITIATOR_nameDef]趨向立場「[WINNING_STANCE_label]」。</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef]更具說服力。</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>雙方均未改變立場。</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>正與{0}辯論</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef]陷入了信仰危機。</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]的信仰危機加深了[INITIATOR_possessive]的痛苦。</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

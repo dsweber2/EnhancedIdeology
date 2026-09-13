@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort} попытался обсудить идеологические взгляды с {PAWN2_labelShort}. Это привело к социальной ссоре! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | Идеологическое обращение |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | Обсудив {ISSUE_label}, {CONVINCER_labelShort} убедил {CONVINCED_labelShort} отказаться от {OLDIDEO_name} и принять {NEWIDEO_name}. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef] спорил с [RECIPIENT_nameDef] о черте [TOPIC_label]. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] обсуждал [TOPIC_label] с [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] спорил с [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef] склонил [RECIPIENT_nameDef] к позиции «[WINNING_STANCE_label]». |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef] склонил [INITIATOR_nameDef] к позиции «[WINNING_STANCE_label]». |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] оказался убедительнее. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Никто не изменил своей позиции. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | Спорит с {0} |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] пережил кризис веры. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Кризис веры [INITIATOR_nameDef] усугубил [INITIATOR_possessive] страдания. |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | кладёт TargetA на землю для сжигания. |
 | `EB_Pray.reportString` | contemplating. | медитирует. |
 

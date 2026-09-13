@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} ideológiai vitát kezdeményezett {PAWN2_labelShort}-val. Ez verekedésbe torkollott!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ideológiai áttérítés</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>{ISSUE_label} megvitatása után {CONVINCER_labelShort} meggyőzte {CONVINCED_labelShort}-t, hogy hagyja el a {OLDIDEO_name}-t és fogadja el a {NEWIDEO_name}-t.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] vitázott [RECIPIENT_nameDef]-vel a [TOPIC_label] méméről.</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] vitázott [TOPIC_label]-ről [RECIPIENT_nameDef]-vel.</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] vitázott [RECIPIENT_nameDef]-vel.</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] közelebb vitte [RECIPIENT_nameDef]-t a(z) „[WINNING_STANCE_label]" állásponthoz.</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] közelebb vitte [INITIATOR_nameDef]-t a(z) „[WINNING_STANCE_label]" állásponthoz.</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] meggyőzőbbnek bizonyult.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Egyikük sem változtatott véleményén.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Vitázik {0}-val</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] hiterősist élt át.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef] hiterősis súlyosbította [INITIATOR_possessive] nyomorát.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

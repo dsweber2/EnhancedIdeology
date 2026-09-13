@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort} cố tranh luận quan điểm tư tưởng với {PAWN2_labelShort}. Điều này dẫn đến xung đột xã hội! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | Cải đạo tư tưởng |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | Sau khi tranh luận về {ISSUE_label}, {CONVINCER_labelShort} đã thuyết phục {CONVINCED_labelShort} từ bỏ {OLDIDEO_name} và theo {NEWIDEO_name}. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef] tranh luận với [RECIPIENT_nameDef] về kỷ vật [TOPIC_label]. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] tranh luận về [TOPIC_label] với [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] tranh luận với [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef] đã thuyết phục [RECIPIENT_nameDef] hướng đến lập trường "[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef] đã thuyết phục [INITIATOR_nameDef] hướng đến lập trường "[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] tỏ ra thuyết phục hơn. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Không ai thay đổi quan điểm. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | Đang tranh luận với {0} |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] đã trải qua một cuộc khủng hoảng đức tin. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Cuộc khủng hoảng đức tin của [INITIATOR_nameDef] làm trầm trọng thêm nỗi khốn khổ của [INITIATOR_possessive]. |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | đặt TargetA xuống đất để thiêu đốt. |
 | `EB_Pray.reportString` | contemplating. | đang thiền định. |
 

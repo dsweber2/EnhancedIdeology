@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort}试图与{PAWN2_labelShort}就意识形态观点展开辩论，结果引发了肢体冲突！ |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | 意识形态教化 |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | 在就{ISSUE_label}展开辩论后，{CONVINCER_labelShort}说服{CONVINCED_labelShort}放弃了{OLDIDEO_name}，转而信仰{NEWIDEO_name}。 |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef]与[RECIPIENT_nameDef]就模因[TOPIC_label]展开辩论。 |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef]与[RECIPIENT_nameDef]就[TOPIC_label]展开辩论。 |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef]与[RECIPIENT_nameDef]展开辩论。 |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef]使[RECIPIENT_nameDef]向立场"[WINNING_STANCE_label]"靠近。 |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef]使[INITIATOR_nameDef]向立场"[WINNING_STANCE_label]"靠近。 |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef]更具说服力。 |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | 双方均未改变立场。 |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | 正在与{0}辩论 |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef]经历了信仰危机。 |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]的信仰危机加剧了[INITIATOR_possessive]的痛苦。 |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | 将TargetA放置于地面焚烧。 |
 | `EB_Pray.reportString` | contemplating. | 沉思中。 |
 

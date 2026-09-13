@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}, {PAWN2_labelShort} ile ideolojik görüşler üzerine tartışmaya çalıştı. Bu sosyal bir kavgaya yol açtı!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>İdeolojik ihtidâ</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>{ISSUE_label} üzerine tartışmanın ardından {CONVINCER_labelShort}, {CONVINCED_labelShort}'ı {OLDIDEO_name}'i terk edip {NEWIDEO_name}'i benimsemeye ikna etti.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef], [RECIPIENT_nameDef] ile [TOPIC_label] ilkesi üzerine tartıştı.</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef], [RECIPIENT_nameDef] ile [TOPIC_label] öğretisi üzerine tartıştı.</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef], [RECIPIENT_nameDef] ile tartıştı.</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef], [RECIPIENT_nameDef]'ı "[WINNING_STANCE_label]" tutumuna doğru yöneltti.</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef], [INITIATOR_nameDef]'ı "[WINNING_STANCE_label]" tutumuna doğru yöneltti.</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] daha ikna edici olduğunu kanıtladı.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Hiçbiri görüşünü değiştirmedi.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>{0} ile tartışıyor</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] bir iman krizi yaşadı.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]'in iman krizi [INITIATOR_possessive] ıstırabını daha da artırdı.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

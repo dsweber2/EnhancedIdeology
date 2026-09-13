@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort}试图与{PAWN2_labelShort}就意识形态观点展开辩论，结果引发了肢体冲突！</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>意识形态教化</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>在就{ISSUE_label}展开辩论后，{CONVINCER_labelShort}说服{CONVINCED_labelShort}放弃了{OLDIDEO_name}，转而信仰{NEWIDEO_name}。</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef]与[RECIPIENT_nameDef]就模因[TOPIC_label]展开辩论。</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef]与[RECIPIENT_nameDef]就[TOPIC_label]展开辩论。</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef]与[RECIPIENT_nameDef]展开辩论。</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef]使[RECIPIENT_nameDef]向立场"[WINNING_STANCE_label]"靠近。</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef]使[INITIATOR_nameDef]向立场"[WINNING_STANCE_label]"靠近。</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef]更具说服力。</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>双方均未改变立场。</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>正在与{0}辩论</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef]经历了信仰危机。</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]的信仰危机加剧了[INITIATOR_possessive]的痛苦。</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort}이(가) {PAWN2_labelShort}와(과) 사상적 관점에 대해 토론을 시도했습니다. 이것이 싸움으로 이어졌습니다! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | 사상적 교화 |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | {ISSUE_label}에 대한 토론 끝에, {CONVINCER_labelShort}이(가) {CONVINCED_labelShort}을(를) 설득하여 {OLDIDEO_name}을(를) 버리고 {NEWIDEO_name}을(를) 받아들이게 했습니다. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef]이(가) [RECIPIENT_nameDef]와(과) 가르침 [TOPIC_label]에 대해 토론했습니다. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef]이(가) [RECIPIENT_nameDef]와(과) [TOPIC_label]에 대해 토론했습니다. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef]이(가) [RECIPIENT_nameDef]와(과) 토론했습니다. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef]이(가) [RECIPIENT_nameDef]를 "[WINNING_STANCE_label]" 입장으로 이끌었습니다. |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef]이(가) [INITIATOR_nameDef]를 "[WINNING_STANCE_label]" 입장으로 이끌었습니다. |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef]이(가) 더 설득력 있음을 증명했습니다. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | 아무도 견해를 바꾸지 않았습니다. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | {0}와(과) 토론 중 |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef]이(가) 신앙의 위기를 경험했습니다. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]의 신앙의 위기가 [INITIATOR_possessive] 고통을 가중시켰습니다. |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetA를 불태우기 위해 바닥에 놓는 중. |
 | `EB_Pray.reportString` | contemplating. | 명상 중. |
 

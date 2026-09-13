@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} cố tranh luận quan điểm tư tưởng với {PAWN2_labelShort}. Điều này dẫn đến xung đột xã hội!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Cải đạo tư tưởng</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>Sau khi tranh luận về {ISSUE_label}, {CONVINCER_labelShort} đã thuyết phục {CONVINCED_labelShort} từ bỏ {OLDIDEO_name} và theo {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] tranh luận với [RECIPIENT_nameDef] về kỷ vật [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] tranh luận về [TOPIC_label] với [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] tranh luận với [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] đã thuyết phục [RECIPIENT_nameDef] hướng đến lập trường "[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] đã thuyết phục [INITIATOR_nameDef] hướng đến lập trường "[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] tỏ ra thuyết phục hơn.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Không ai thay đổi quan điểm.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Đang tranh luận với {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] đã trải qua một cuộc khủng hoảng đức tin.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>Cuộc khủng hoảng đức tin của [INITIATOR_nameDef] làm trầm trọng thêm nỗi khốn khổ của [INITIATOR_possessive].</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

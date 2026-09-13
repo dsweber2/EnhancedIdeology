@@ -3,4 +3,16 @@
     <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
     <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Ideological conversion</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
     <EnhancedIdeology.LetterIdeologicalDebateConversionText>After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+    <!-- Log entry templates — [bracket] symbols are grammar resolver tokens, preserve them exactly -->
+    <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+    <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+    <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] debated with [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+    <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.InitiatorMoved>
+    <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
+    <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] proved more persuasive.</EnhancedIdeology.DebateSent.WinnerPersuasive>
+    <EnhancedIdeology.DebateSent.Draw>Neither changed their view.</EnhancedIdeology.DebateSent.Draw>
+    <EnhancedIdeology.JobReport_Debating>Debating {0}</EnhancedIdeology.JobReport_Debating>
+    <!-- Crisis of faith log entry templates -->
+    <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] experienced a crisis of faith.</EnhancedIdeology.CrisisLog.Wander>
+    <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

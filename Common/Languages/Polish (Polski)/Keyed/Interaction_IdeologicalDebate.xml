@@ -4,4 +4,14 @@
   <EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>{PAWN1_labelShort} próbował(a) debatować o poglądach ideologicznych z {PAWN2_labelShort}. Doprowadziło to do kłótni!</EnhancedIdeology.IdeologicalDebateOutcomeSocialFight>
   <EnhancedIdeology.LetterLabelIdeologicalDebateConversion>Nawrócenie ideologiczne</EnhancedIdeology.LetterLabelIdeologicalDebateConversion>
   <EnhancedIdeology.LetterIdeologicalDebateConversionText>Po debacie o {ISSUE_label}, {CONVINCER_labelShort} przekonał(a) {CONVINCED_labelShort} do porzucenia {OLDIDEO_name} i przyjęcia {NEWIDEO_name}.</EnhancedIdeology.LetterIdeologicalDebateConversionText>
+  <EnhancedIdeology.DebateLog.AboutMeme>[INITIATOR_nameDef] debatował(a) z [RECIPIENT_nameDef] o poglądzie [TOPIC_label].</EnhancedIdeology.DebateLog.AboutMeme>
+  <EnhancedIdeology.DebateLog.AboutPrecept>[INITIATOR_nameDef] debatował(a) o [TOPIC_label] z [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.AboutPrecept>
+  <EnhancedIdeology.DebateLog.Generic>[INITIATOR_nameDef] debatował(a) z [RECIPIENT_nameDef].</EnhancedIdeology.DebateLog.Generic>
+  <EnhancedIdeology.DebateSent.InitiatorMoved>[INITIATOR_nameDef] skłonił(a) [RECIPIENT_nameDef] ku postawie „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.InitiatorMoved>
+  <EnhancedIdeology.DebateSent.RecipientMoved>[RECIPIENT_nameDef] skłonił(a) [INITIATOR_nameDef] ku postawie „[WINNING_STANCE_label]".</EnhancedIdeology.DebateSent.RecipientMoved>
+  <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] okazał(a) się bardziej przekonujący(-a).</EnhancedIdeology.DebateSent.WinnerPersuasive>
+  <EnhancedIdeology.DebateSent.Draw>Żadna ze stron nie zmieniła zdania.</EnhancedIdeology.DebateSent.Draw>
+  <EnhancedIdeology.JobReport_Debating>Debatuje z {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] przeżył(a) kryzys wiary.</EnhancedIdeology.CrisisLog.Wander>
+  <EnhancedIdeology.CrisisLog.MoodBreak>Kryzys wiary [INITIATOR_nameDef] pogłębił(a) [INITIATOR_possessive] nieszczęście.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

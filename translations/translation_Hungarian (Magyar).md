@@ -50,6 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort} ideológiai vitát kezdeményezett {PAWN2_labelShort}-val. Ez verekedésbe torkollott! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | Ideológiai áttérítés |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | {ISSUE_label} megvitatása után {CONVINCER_labelShort} meggyőzte {CONVINCED_labelShort}-t, hogy hagyja el a {OLDIDEO_name}-t és fogadja el a {NEWIDEO_name}-t. |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef] vitázott [RECIPIENT_nameDef]-vel a [TOPIC_label] méméről. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] vitázott [TOPIC_label]-ről [RECIPIENT_nameDef]-vel. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] vitázott [RECIPIENT_nameDef]-vel. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef] közelebb vitte [RECIPIENT_nameDef]-t a(z) „[WINNING_STANCE_label]" állásponthoz. |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef] közelebb vitte [INITIATOR_nameDef]-t a(z) „[WINNING_STANCE_label]" állásponthoz. |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] meggyőzőbbnek bizonyult. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Egyikük sem változtatott véleményén. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | Vitázik {0}-val |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] hiterősist élt át. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef] hiterősis súlyosbította [INITIATOR_possessive] nyomorát. |
 
 ## Keyed/Reassure.xml
 
@@ -206,6 +216,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetA-t a földre helyezi, hogy elégesse. |
 | `EB_Pray.reportString` | contemplating. | elmélkedik. |
 
