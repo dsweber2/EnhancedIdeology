@@ -7,4 +7,9 @@
   <EB_WriteIllustratedIdeobook.label>napsat ilustrovanou náboženskou knihu</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>Napište iluminovanou náboženskou knihu zdobenou drahokamy a inkousty. Kvalita materiálů zvyšuje pobožnostní aspekty jejího čtení. Vyžaduje vysokou jistotu ve vlastní ideobožství (alespoň 90 %).</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>ilustruje náboženskou knihu.</EB_WriteIllustratedIdeobook.jobString>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>stránky (Textil, Kůže nebo Dřevo, bez vlny)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>vazba (Kůže nebo Kov)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>stránky (Textil, Kůže nebo Dřevo, bez vlny)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>vazba (Kůže nebo Kov)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>vzácné materiály</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

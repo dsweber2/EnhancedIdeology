@@ -7,4 +7,9 @@
   <EB_WriteIllustratedIdeobook.label>撰写插图宗教书籍</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>撰写一本以宝石和彩墨装饰的彩绘宗教书籍。材料质量越高，阅读时的虔诚效果越强。要求对自身文化有高度认可度（至少90%）。</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>正在为宗教书籍绘制插图。</EB_WriteIllustratedIdeobook.jobString>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>书页（纺织品、皮革或木材，不含羊毛）</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>封面（皮革或金属）</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>书页（纺织品、皮革或木材，不含羊毛）</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>封面（皮革或金属）</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>贵重材料</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

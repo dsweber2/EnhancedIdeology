@@ -19,6 +19,19 @@ public static class MessageTypeDefOf
     public static readonly MessageTypeDef PositiveEvent = new() { defName = "PositiveEvent" };
     public static readonly MessageTypeDef NegativeEvent = new() { defName = "NegativeEvent" };
     public static readonly MessageTypeDef RejectInput = new() { defName = "RejectInput" };
+    public static readonly MessageTypeDef ThreatSmall = new() { defName = "ThreatSmall" };
+}
+
+public class TaleDef : Verse.Def { }
+
+public static class TaleDefOf
+{
+    public static readonly TaleDef SocialFight = new() { defName = "SocialFight" };
+}
+
+public static class TaleRecorder
+{
+    public static void RecordTale(TaleDef def, params object[] args) { }
 }
 
 public static class Messages

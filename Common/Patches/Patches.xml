@@ -79,6 +79,7 @@
 			<li Class="ThinkNode_ConditionalMentalStateClass">
 				<stateClass>EnhancedIdeology.MentalState_Iconoclast</stateClass>
 				<subNodes>
+					<li Class="EnhancedIdeology.JobGiver_IconoclastFireGuard" />
 					<li Class="EnhancedIdeology.JobGiver_Iconoclast" />
 					<li Class="ThinkNode_PrioritySorter">
 						<subNodes>
@@ -96,6 +97,23 @@
 		</value>
 	</Operation>
 
+
+	<!-- ArrestedDebater: wander in place only, no food/sleep — pawn debates from MentalStateTick directly.
+	     JobGiver_WanderAnywhere uses pawn.Position as root so it always gives a job even in a prison cell.
+	     This sets the InMentalState tag, which blocks MainColonistBehaviorCore (food/sleep). -->
+	<Operation Class="PatchOperationInsert">
+		<xpath>Defs/ThinkTreeDef/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[@Class="ThinkNode_ConditionalMentalStateClass"][stateClass="EnhancedIdeology.MentalState_Iconoclast"]</xpath>
+		<value>
+			<li Class="ThinkNode_ConditionalMentalState">
+				<state>EB_ArrestedDebater</state>
+				<subNodes>
+					<li Class="JobGiver_WanderAnywhere">
+						<maxDanger>Deadly</maxDanger>
+					</li>
+				</subNodes>
+			</li>
+		</value>
+	</Operation>
 
 	<!-- If VBE is active: also add our recipe to VBE's table -->
 	<Operation Class="PatchOperationConditional">

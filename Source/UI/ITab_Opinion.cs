@@ -14,7 +14,7 @@ internal sealed class ITab_Opinion : ITab
     private const float IdeoRowHeight = RowHeight;
     private const float IconTextGap = 2 * Padding;
     private const float ColumnGap = 2 * Padding;
-    private const float MaxRungWidth = 120f;
+    private const float MaxRungWidth = 1f;
 
     // The left column grades each stance against a selected ideoligion: green where the pawn agrees with what
     // it preaches on that issue, red where they clash. Default selection is the pawn's own faith.

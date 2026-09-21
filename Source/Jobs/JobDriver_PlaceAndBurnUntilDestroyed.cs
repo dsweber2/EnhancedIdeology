@@ -19,17 +19,19 @@ internal sealed class JobDriver_PlaceAndBurnUntilDestroyed : JobDriver
         yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch, true).FailOnSomeonePhysicallyInteracting(TargetIndex.A);
 
         yield return Toils_Haul.StartCarryThing(TargetIndex.A, canTakeFromInventory: true);
-        yield return Toils_Goto.GotoCell(FindPublicBurnSpot(pawn), PathEndMode.OnCell);
+        var burnCell = job.targetB.IsValid ? job.targetB.Cell : FindPublicBurnSpot(pawn);
+        yield return Toils_Goto.GotoCell(burnCell, PathEndMode.ClosestTouch);
         yield return Toils_General.Wait(90);
         yield return Toils_Haul.DropCarriedThing();
         yield return Toils_Reserve.ReserveDestinationOrThing(TargetIndex.A);
+        yield return StepAdjacentToTarget(); // step off the book cell after dropping
         yield return Toils_General.Wait(90);
 
         var tryIgniteAgain = TryIgniteAgain();
         yield return tryIgniteAgain;
 
-        yield return Toils_Goto.GotoCell(pawn.Position.RandomAdjacentCell8Way().RandomAdjacentCell8Way(), PathEndMode.OnCell);
-        yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+        yield return DebateNearestBystander();
+        yield return StepAdjacentToTarget(); // approach for ignition without standing on the book
         var tryStartIgnite = ToilMaker.MakeToil("TryStartIgnite");
         tryStartIgnite.initAction = delegate
         {
@@ -43,24 +45,74 @@ internal sealed class JobDriver_PlaceAndBurnUntilDestroyed : JobDriver
         yield return Toils_Jump.JumpIf(tryIgniteAgain, () => !TargetThingA.IsBurning() || !TargetThingA.Destroyed);
     }
 
+    private static Toil DebateNearestBystander()
+    {
+        var toil = ToilMaker.MakeToil("DebateNearestBystander");
+        toil.defaultDuration = 90;
+        toil.defaultCompleteMode = ToilCompleteMode.Delay;
+        toil.handlingFacing = true;
+        toil.initAction = delegate
+        {
+            var actor = toil.actor;
+            actor.Map.mapPawns.AllPawnsSpawned
+                .Where(p => p != actor && p.RaceProps.Humanlike && !p.Dead && !p.Downed
+                            && actor.CanReach(p, PathEndMode.Touch, Danger.Deadly))
+                .TryMinBy(p => p.Position.DistanceToSquared(actor.Position), out var nearest);
+            if (nearest != null)
+            {
+                if (!actor.WorkTagIsDisabled(WorkTags.Social))
+                    actor.interactions.TryInteractWith(nearest, EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept);
+                actor.rotationTracker.FaceTarget(nearest);
+                // Step toward the nearest pawn so the iconoclast isn't standing on the dropped book.
+                actor.pather.StartPath(nearest, PathEndMode.Touch);
+            }
+            else
+            {
+                // No one nearby — step to any adjacent standable cell.
+                var bookCell = actor.jobs.curJob.GetTarget(TargetIndex.A).Cell;
+                GenAdj.CardinalDirections
+                    .Select(d => bookCell + d)
+                    .Where(c => c.IsValid && c.Standable(actor.Map)
+                                && actor.CanReach(c, PathEndMode.OnCell, Danger.Deadly))
+                    .TryMinBy(c => c.DistanceToSquared(actor.Position), out var stepCell);
+                if (stepCell.IsValid)
+                    actor.pather.StartPath(stepCell, PathEndMode.OnCell);
+            }
+        };
+        return toil;
+    }
+
+    // Moves the pawn to the closest standable cell adjacent to TargetThingA, never on it.
+    private static Toil StepAdjacentToTarget()
+    {
+        var toil = ToilMaker.MakeToil("StepAdjacentToTarget");
+        toil.initAction = delegate
+        {
+            var actor = toil.actor;
+            var book = actor.jobs.curJob.GetTarget(TargetIndex.A).Thing;
+            if (book == null || !book.Spawned) return;
+            GenAdj.CellsAdjacent8Way(book)
+                .Where(c => c.Standable(actor.Map) && actor.CanReach(c, PathEndMode.OnCell, Danger.Deadly))
+                .TryMinBy(c => c.DistanceToSquared(actor.Position), out var cell);
+            if (cell.IsValid)
+                actor.pather.StartPath(cell, PathEndMode.OnCell);
+        };
+        toil.defaultCompleteMode = ToilCompleteMode.PatherArrival;
+        return toil;
+    }
+
+    private static readonly HashSet<RoomRoleDef> PrivateRoles =
+    [
+        RoomRoleDefOf.Bedroom, RoomRoleDefOf.Barracks,
+        RoomRoleDefOf.PrisonCell, RoomRoleDefOf.PrisonBarracks,
+        RoomRoleDefOf.Hospital, RoomRoleDefOf.Workshop, RoomRoleDefOf.Laboratory,
+    ];
+
     private static IntVec3 FindPublicBurnSpot(Pawn pawn)
     {
-        var activeSpots = pawn.Map.gatherSpotLister.activeSpots;
-        if (activeSpots.Count > 0)
-        {
-            var nearest = activeSpots.MinBy(gs => gs.parent.Position.DistanceToSquared(pawn.Position));
-            return nearest.parent.Position;
-        }
-
-        var privateRoles = new HashSet<RoomRoleDef>
-        {
-            RoomRoleDefOf.Bedroom, RoomRoleDefOf.Barracks,
-            RoomRoleDefOf.PrisonCell, RoomRoleDefOf.PrisonBarracks,
-            RoomRoleDefOf.Hospital, RoomRoleDefOf.Workshop, RoomRoleDefOf.Laboratory,
-        };
-
+        // Prefer indoor public rooms; gather spots (often outdoor) are a last resort.
         var bestRoom = pawn.Map.regionGrid.AllRooms
-            .Where(r => r != null && r.ProperRoom && !r.PsychologicallyOutdoors && !privateRoles.Contains(r.Role))
+            .Where(r => r != null && r.ProperRoom && !r.PsychologicallyOutdoors && !PrivateRoles.Contains(r.Role))
             .MaxByWithFallback(r => r!.CellCount);
 
         if (bestRoom != null)
@@ -68,8 +120,15 @@ internal sealed class JobDriver_PlaceAndBurnUntilDestroyed : JobDriver
             var cell = bestRoom.Cells
                 .Where(c => pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly))
                 .RandomElementWithFallback();
-            if (cell.IsValid)
-                return cell;
+            if (cell.IsValid) return cell;
+        }
+
+        // Last resort: nearest outdoor gather spot.
+        var activeSpots = pawn.Map.gatherSpotLister.activeSpots;
+        if (activeSpots.Count > 0)
+        {
+            var nearest = activeSpots.MinBy(gs => gs.parent.Position.DistanceToSquared(pawn.Position));
+            return nearest.parent.Position;
         }
 
         return pawn.Position.RandomAdjacentCell8Way().RandomAdjacentCell8Way();

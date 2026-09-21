@@ -275,9 +275,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         return issues.Count > 0 ? issues[0] : null;
     }
 
-    // The `n` issues the pawn's stance most opposes about `ideo`, most-opposed first, dropping any >= 0.
-    // Fallback when pawn agrees with everything: `n` weakest agreements. If guideTracker is supplied,
-    // issues where the guide holds weaker conviction are excluded.
+    // The `n` issues the pawn's stance most opposes about `ideo`, sampled proportionally to opposition
+    // magnitude via exponential racing (-log(U)/w). If guideTracker is supplied, issues where the guide
+    // holds weaker conviction are excluded. Falls back to all eligible issues when nothing opposes.
     public IReadOnlyList<IssueDef> MostOpposingIssues(Ideo ideo, int n, IdeoTrackerData? guideTracker = null)
     {
         EnsureIssueStancesSeeded();
@@ -287,22 +287,19 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         var scored = ideo.precepts.Select(precept => precept.def.issue)
             .Where(issue => issue != null).Distinct()
-            .Select(issue => (issue: issue!, opinion: StructuralOpinionCalculator.PerIssueOpinion(Stances, Pawn.Ideo!, ideo, issue!, inducedTargets, oppositionScale, out var graded), graded))
-            .Where(entry => entry.graded)
+            .Select(issue => (issue: issue!, opinion: StructuralOpinionCalculator.PerIssueOpinion(
+                Stances, Pawn.Ideo!, ideo, issue!, inducedTargets, oppositionScale, out var graded), graded))
+            .Where(entry => entry.graded
+                && StructuralOpinionCalculator.WorthTargeting(Stances, entry.issue,
+                    IssueStanceTracker.HeldRank(ideo, entry.issue), guideTracker?.Stances))
             .ToList();
 
-        var opposing = scored
-            .Where(entry => entry.opinion < 0f && StructuralOpinionCalculator.WorthTargeting(Stances, entry.issue, IssueStanceTracker.HeldRank(ideo, entry.issue), guideTracker?.Stances))
-            .OrderBy(entry => entry.opinion)
-            .Take(n)
-            .Select(entry => entry.issue)
-            .ToList();
+        var pool = scored.Any(e => e.opinion < 0f)
+            ? scored.Where(e => e.opinion < 0f).ToList()
+            : scored;
 
-        if (opposing.Count > 0) return opposing;
-
-        return scored
-            .Where(entry => StructuralOpinionCalculator.WorthTargeting(Stances, entry.issue, IssueStanceTracker.HeldRank(ideo, entry.issue), guideTracker?.Stances))
-            .OrderBy(entry => entry.opinion)
+        return pool
+            .OrderBy(entry => -Mathf.Log(Rand.Value) / Mathf.Max(-entry.opinion, float.Epsilon))
             .Take(n)
             .Select(entry => entry.issue)
             .ToList();

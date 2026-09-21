@@ -7,4 +7,9 @@
   <EB_WriteIllustratedIdeobook.label>illuminiertes religiöses Buch schreiben</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>Ein illuminiertes religiöses Buch schreiben, geschmückt mit Edelsteinen und Tinten. Die Qualität der Materialien steigert die andächtige Wirkung beim Lesen. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%).</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>illustriert ein religiöses Buch.</EB_WriteIllustratedIdeobook.jobString>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>Seiten (Textilien, Leder oder Holz, keine Wolle)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>Einband (Leder oder Metall)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>Seiten (Textilien, Leder oder Holz, keine Wolle)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>Einband (Leder oder Metall)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>Wertvolle Materialien</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

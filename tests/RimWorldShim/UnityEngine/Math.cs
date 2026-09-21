@@ -11,6 +11,7 @@ public static class Mathf
     public static float Sqrt(float v) => MathF.Sqrt(v);
     public static float Pow(float b, float p) => MathF.Pow(b, p);
     public static float Exp(float v) => MathF.Exp(v);
+    public static float Log(float v) => MathF.Log(v);
     public static float Round(float v) => MathF.Round(v);
     public static int RoundToInt(float v) => (int)MathF.Round(v);
     public static float InverseLerp(float a, float b, float value)

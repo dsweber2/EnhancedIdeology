@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] resultó más persuasivo. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Ninguno cambió su postura. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Debatiendo con {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Retenido en debate por {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] experimentó una crisis de fe. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | La crisis de fe de [INITIATOR_nameDef] agravó la miseria de [INITIATOR_possessive]. |
 
@@ -154,6 +155,22 @@
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | El libro no pertenece a la ideoligión de {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | No se encontró ningún atril disponible y accesible para trabajar. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | La certeza debe superar el 90% para escribir textos religiosos. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | páginas (Textil, Cuero o Madera, sin lana) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | cubierta (Cuero o Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | páginas (Textil, Cuero o Madera, sin lana) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | cubierta (Cuero o Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | materiales preciosos |
+| `EB_WriteIdeobook.label` | write religious book | escribir libro religioso |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Escribe un libro religioso que detalla las creencias de tu ideoligión. Requiere alta certeza en la propia ideoligión (al menos el 90%). |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | escribiendo un libro religioso. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | escribir libro religioso ilustrado |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Escribe un libro religioso iluminado adornado con gemas y tintas. La calidad de los materiales aumenta los aspectos devocionales de su lectura. Requiere alta certeza en la propia ideoligión (al menos el 90%). |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ilustrando libro religioso. |
 
 ## DefInjected/ThingDef
 
@@ -308,17 +325,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | correligionario vacilante |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | correligionario sin fe |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | correligionario de corazón apóstata |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | escribir libro religioso |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Escribe un libro religioso que detalla las creencias de tu ideoligión. Requiere alta certeza en la propia ideoligión (al menos el 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | escribiendo un libro religioso. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | escribir libro religioso ilustrado |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Escribe un libro religioso iluminado adornado con gemas y tintas. La calidad de los materiales aumenta los aspectos devocionales de su lectura. Requiere alta certeza en la propia ideoligión (al menos el 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ilustrando libro religioso. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

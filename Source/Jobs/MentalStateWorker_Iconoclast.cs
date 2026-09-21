@@ -1,4 +1,4 @@
-﻿using Verse.AI;
+using Verse.AI;
 
 namespace EnhancedIdeology;
 
@@ -6,18 +6,9 @@ internal sealed class MentalStateWorker_Iconoclast : MentalStateWorker
 {
     public override bool StateCanOccur(Pawn pawn)
     {
-        return base.StateCanOccur(pawn) &&
-#if !v1_5
-            GenClosest.ClosestThing_Global_Reachable(
-#else
-            GenClosest.ClosestThing_Global_Reachable_NewTemp(
-#endif
-                pawn.Position,
-                pawn.Map,
-                pawn.Map.listerThings.AllThings,
-                PathEndMode.Touch,
-                TraverseParms.For(pawn),
-                validator: t => t is BookIdeo,
-                canLookInHaulableSources: true) != null;
+        if (!base.StateCanOccur(pawn)) return false;
+        return MentalState_Iconoclast.FindClosestReachable(pawn, t => t is BookIdeo b && b.Ideo == pawn.Ideo) != null
+            || MentalState_Iconoclast.FindClosestReachable(pawn, t => t.IsRelic() || t.TryGetComp<CompRelicContainer>() != null) != null
+            || MentalState_Iconoclast.FindClosestReachable(pawn, t => MentalState_Iconoclast.IsIdeoligicalStructure(t)) != null;
     }
 }

@@ -6,7 +6,7 @@ namespace EnhancedIdeology.Tests;
 public class AbilityConversionTests : SeededTest
 {
     [Fact]
-    public void MostOpposingIssues_ReturnsOnlyOpposedIssues_Ordered_CappedAtN()
+    public void MostOpposingIssues_ReturnsOnlyOpposedIssues_CappedAtN()
     {
         var (world, guide, recipient, opposed, agree) = BundleFaiths();
         var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
@@ -19,11 +19,11 @@ public class AbilityConversionTests : SeededTest
             Assert.Contains(issue, all);
         }
 
-        // The cap trims to n while keeping the most-opposed first.
+        // The cap trims to n; weighted sampling so the exact subset varies, but all members are opposed.
         var capped = recipientTracker.MostOpposingIssues(guide.Ideo!, 2);
         Assert.Equal(2, capped.Count);
-        Assert.Equal(all[0], capped[0]);
-        Assert.Equal(all[1], capped[1]);
+        foreach (var issue in capped)
+            Assert.Contains(issue, opposed);
     }
 
     [Fact]

@@ -7,4 +7,9 @@
   <EB_WriteIllustratedIdeobook.label>geïllustreerd religieus boek schrijven</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>Schrijf een geïllumineerd religieus boek versierd met edelstenen en inkten. De kwaliteit van de materialen vergroot de devotionele aspecten van het lezen ervan. Vereist een hoge zekerheid in de eigen ideoligie (minimaal 90%).</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>religieus boek illustreren.</EB_WriteIllustratedIdeobook.jobString>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>pagina's (Textiel, Leer of Hout, geen wol)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>omslag (Leer of Metaal)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>pagina's (Textiel, Leer of Hout, geen wol)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>omslag (Leer of Metaal)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>kostbare materialen</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

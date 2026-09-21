@@ -7,4 +7,9 @@
   <EB_WriteIllustratedIdeobook.label>삽화 종교 서적 작성</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>보석과 잉크로 장식된 채식 종교 서적을 작성합니다. 재료의 품질이 읽기의 헌신적 측면을 높입니다. 자신의 사상에 대한 높은 믿음(최소 90%)이 필요합니다.</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>종교 서적 삽화 작업 중.</EB_WriteIllustratedIdeobook.jobString>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>페이지 (직물, 가죽 또는 나무, 양모 제외)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>표지 (가죽 또는 금속)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>페이지 (직물, 가죽 또는 나무, 양모 제외)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>표지 (가죽 또는 금속)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>귀중한 재료</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

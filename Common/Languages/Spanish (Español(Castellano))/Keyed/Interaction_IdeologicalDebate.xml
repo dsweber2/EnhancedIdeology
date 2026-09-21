@@ -12,6 +12,7 @@
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] resultó más persuasivo.</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>Ninguno cambió su postura.</EnhancedIdeology.DebateSent.Draw>
   <EnhancedIdeology.JobReport_Debating>Debatiendo con {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.DraftDisabled_HeldInDebate>Retenido en debate por {0}</EnhancedIdeology.DraftDisabled_HeldInDebate>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] experimentó una crisis de fe.</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>La crisis de fe de [INITIATOR_nameDef] agravó la miseria de [INITIATOR_possessive].</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

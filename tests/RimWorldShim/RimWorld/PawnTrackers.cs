@@ -73,10 +73,17 @@ public class Pawn_InteractionsTracker
 
 public class MentalStateDef : Def { }
 
+public static class MentalStateDefOf
+{
+    public static readonly MentalStateDef SocialFighting = new() { defName = "SocialFighting" };
+}
+
 public class InspirationDef : Verse.Def { }
 
 public class MentalStateHandler
 {
-    public bool TryStartMentalState(MentalStateDef? def, string? reason = null, bool forceWake = false)
+    public bool TryStartMentalState(MentalStateDef? def, string? reason = null, bool forced = false,
+        bool forceWake = false, bool causedByMood = false, Verse.Pawn? otherPawn = null,
+        bool transitionSilently = false)
         => false;
 }

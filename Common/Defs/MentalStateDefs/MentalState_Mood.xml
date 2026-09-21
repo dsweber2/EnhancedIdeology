@@ -34,6 +34,7 @@
 
     <MentalStateDef ParentName="Tantrum">
         <defName>EB_Iconoclast</defName>
+        <recoverFromCaptured>false</recoverFromCaptured>
         <stateClass>EnhancedIdeology.MentalState_Iconoclast</stateClass>
         <workerClass>EnhancedIdeology.MentalStateWorker_Iconoclast</workerClass>
         <label>iconoclast</label>
@@ -44,6 +45,40 @@
         <recoveryMessage>{0} is no longer being an iconoclast.</recoveryMessage>
         <baseInspectLine>Mental state: Iconoclast</baseInspectLine>
         <allowBeatfire>false</allowBeatfire>
+        <blockInteractionInitiationExcept>
+            <li>Insult</li>
+            <li>EB_IdeologicalDebatePrecept</li>
+        </blockInteractionInitiationExcept>
+        <blockInteractionRecipientExcept>
+            <li>Insult</li>
+            <li>EB_IdeologicalDebatePrecept</li>
+        </blockInteractionRecipientExcept>
+    </MentalStateDef>
+
+
+    <MentalStateDef ParentName="BaseMentalState">
+        <defName>EB_ArrestedDebater</defName>
+        <stateClass>EnhancedIdeology.MentalState_ArrestedDebater</stateClass>
+        <workerClass>EnhancedIdeology.MentalStateWorker_ArrestedDebater</workerClass>
+        <label>defiant rant</label>
+        <category>Misc</category>
+        <recoverFromCaptured>false</recoverFromCaptured>
+        <recoverFromSleep>false</recoverFromSleep>
+        <prisonersCanDo>true</prisonersCanDo>
+        <minTicksBeforeRecovery>40000</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>60000</maxTicksBeforeRecovery>
+        <recoveryMtbDays>0.25</recoveryMtbDays>
+        <recoveryMessage>{0} has exhausted their ideological fury.</recoveryMessage>
+        <baseInspectLine>Mental state: Defiant rant</baseInspectLine>
+        <nameColor>(0.98,0.48,0.16)</nameColor>
+        <blockInteractionInitiationExcept>
+            <li>Insult</li>
+            <li>EB_IdeologicalDebatePrecept</li>
+        </blockInteractionInitiationExcept>
+        <blockInteractionRecipientExcept>
+            <li>Insult</li>
+            <li>EB_IdeologicalDebatePrecept</li>
+        </blockInteractionRecipientExcept>
     </MentalStateDef>
 
 </Defs>

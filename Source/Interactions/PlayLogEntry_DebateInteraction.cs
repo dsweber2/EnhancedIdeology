@@ -39,15 +39,15 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
         {
             // Inject r_logentry directly so logRulesInitiator (used by vanilla/Interaction Bubbles
             // without our custom symbols) doesn't compete with the rich topic-aware version.
-            request.Rules.Add(new Rule_String("r_logentry", RlogentryTemplate()));
+            InjectLogentryRules(ref request);
             AddPawnRules(ref request);
-            text = GrammarResolver.Resolve("r_logentry", request, "interaction from initiator", forceLog);
+            text = GrammarResolver.Resolve("r_logentry", request, "interaction from initiator", forceLog, "r_logentry_en");
         }
         else if (pov == recipient)
         {
-            request.Rules.Add(new Rule_String("r_logentry", RlogentryTemplate()));
+            InjectLogentryRules(ref request);
             AddPawnRules(ref request);
-            text = GrammarResolver.Resolve("r_logentry", request, "interaction from recipient", forceLog);
+            text = GrammarResolver.Resolve("r_logentry", request, "interaction from recipient", forceLog, "r_logentry_en");
         }
         else
         {
@@ -76,28 +76,48 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
         return text;
     }
 
-    private string RlogentryTemplate()
+    private void InjectLogentryRules(ref GrammarRequest request)
     {
-        if (debateMemeTopic != null)
-            return "[INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label].";
-        if (debateTopic != null)
-            return "[INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef].";
-        return "[INITIATOR_nameDef] debated with [RECIPIENT_nameDef].";
+        string key = RlogentryKey();
+        request.Rules.Add(new Rule_String("r_logentry", key.Translate()));
+        // English fallback: Translate() returns obfuscated text in dev mode for untranslated keys,
+        // which garbles the [bracket] tokens. The default-language lookup always returns clean text.
+        if (LanguageDatabase.defaultLanguage.TryGetTextFromKey(key, out var english))
+            request.Rules.Add(new Rule_String("r_logentry_en", english));
     }
 
-    private static string SentTemplateForPack(RulePackDef pack)
+    private static void InjectSentenceRules(ref GrammarRequest request, RulePackDef pack)
+    {
+        string? key = SentKeyForPack(pack);
+        if (key == null)
+        {
+            request.Rules.Add(new Rule_String(pack.FirstRuleKeyword,
+                pack.RulesImmediate?.FirstOrDefault()?.Generate() ?? string.Empty));
+            return;
+        }
+        request.Rules.Add(new Rule_String(pack.FirstRuleKeyword, key.Translate()));
+        if (LanguageDatabase.defaultLanguage.TryGetTextFromKey(key, out var english))
+            request.Rules.Add(new Rule_String("sent_en", english));
+    }
+
+    private string RlogentryKey()
+    {
+        if (debateMemeTopic != null) return "EnhancedIdeology.DebateLog.AboutMeme";
+        if (debateTopic != null) return "EnhancedIdeology.DebateLog.AboutPrecept";
+        return "EnhancedIdeology.DebateLog.Generic";
+    }
+
+    private static string? SentKeyForPack(RulePackDef pack)
     {
         if (pack == EnhancedIdeologyDefOf.EB_Sentence_InitiatorWon)
-            return "[INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance \"[WINNING_STANCE_label]\".";
+            return "EnhancedIdeology.DebateSent.InitiatorMoved";
         if (pack == EnhancedIdeologyDefOf.EB_Sentence_RecipientWon)
-            return "[RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance \"[WINNING_STANCE_label]\".";
+            return "EnhancedIdeology.DebateSent.RecipientMoved";
         if (pack == EnhancedIdeologyDefOf.EB_Sentence_DebateWon)
-            return "[WINNER_nameDef] proved more persuasive.";
+            return "EnhancedIdeology.DebateSent.WinnerPersuasive";
         if (pack == EnhancedIdeologyDefOf.EB_Sentence_DebateDraw)
-            return "Neither changed their view.";
-        // Unknown pack — fall back to the pack's own first rule text.
-        // Won't have custom symbols but avoids a hard crash.
-        return pack.RulesImmediate?.FirstOrDefault()?.Generate() ?? string.Empty;
+            return "EnhancedIdeology.DebateSent.Draw";
+        return null;
     }
 
     private GrammarRequest BuildRequest()
@@ -107,7 +127,11 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
         return request;
     }
 
-    public override Color? IconColorFromPOV(Thing pov) => initiatorIdeo?.Color;
+    public override Texture2D IconFromPOV(Thing pov) =>
+        debateTopic?.Icon ?? debateMemeTopic?.Icon ?? base.IconFromPOV(pov);
+
+    public override Color? IconColorFromPOV(Thing pov) =>
+        debateMemeTopic != null ? initiatorIdeo?.Color : null;
 
     private void InjectDebateSymbols(ref GrammarRequest request)
     {

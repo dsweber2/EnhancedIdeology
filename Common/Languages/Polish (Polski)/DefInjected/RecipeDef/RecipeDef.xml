@@ -7,4 +7,9 @@
   <EB_WriteIllustratedIdeobook.label>napisz ilustrowaną księgę religijną</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>Napisz iluminowaną księgę religijną ozdobioną klejnotami i atramentami. Jakość materiałów wzmacnia dewocyjne aspekty jej czytania. Wymaga wysokiej pewności w swojej ideologii (co najmniej 90%).</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>ilustruje księgę religijną.</EB_WriteIllustratedIdeobook.jobString>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>strony (Tkaniny, Skóra lub Drewno, bez wełny)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>okładka (Skóra lub Metal)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>strony (Tkaniny, Skóra lub Drewno, bez wełny)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>okładka (Skóra lub Metal)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>cenne materiały</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

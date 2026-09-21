@@ -4,7 +4,7 @@ internal sealed class JoyGiver_IdeologicalDebate : JoyGiver_SocialRelax
 {
     public override bool CanBeGivenTo(Pawn pawn)
     {
-        if (!base.CanBeGivenTo(pawn) || pawn.Ideo == null)
+        if (!base.CanBeGivenTo(pawn) || pawn.Ideo == null || pawn.WorkTagIsDisabled(WorkTags.Social))
             return false;
 
         return pawn.Ideo.HasPrecept(EnhancedIdeologyDefOf.IdeoDiversity_Approved)

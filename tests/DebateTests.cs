@@ -386,6 +386,85 @@ public class DebateTests : SeededTest
         Assert.Null(ex);
     }
 
+    // --- Iconoclast topic-selection tests ---
+
+    [Fact]
+    public void Iconoclast_CrossIdeo_MostRankOpposedIssueSelected()
+    {
+        // Two issues: IssueA has a rank gap (iconoclast at rung 0, target at rung 1) and IssueB has no rank gap
+        // (both at rung 0). The iconoclast has artificially high conviction on IssueB to verify it cannot
+        // override the rank-gap primary key.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (issueA, rungsA) = SimIssues.Ladder("IconoIssueA", "A0", "A1");
+        var (issueB, rungsB) = SimIssues.Ladder("IconoIssueB", "B0", "B1");
+
+        var iconoIdeo   = new IdeoBuilder().WithName("IconoIdeo").AddPrecept(rungsA[0]).AddPrecept(rungsB[0]).Build();
+        var targetIdeo  = new IdeoBuilder().WithName("TargetIdeo").AddPrecept(rungsA[1]).AddPrecept(rungsB[0]).Build();
+        world.AddIdeo(iconoIdeo);
+        world.AddIdeo(targetIdeo);
+
+        var iconoclast = new PawnBuilder().WithIdeo(iconoIdeo).WithCertainty(1f).WithConversionPower(5f)
+            .WithSocialImpact(2f).WithLabel("Iconoclast").Build(world);
+        var target = new PawnBuilder().WithIdeo(targetIdeo).WithCertainty(0.5f).WithConversionPower(0.1f)
+            .WithLabel("Target").Build(world);
+
+        // Bump iconoclast conviction on IssueB well above IssueA — the distractor.
+        var iconoTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(iconoclast);
+        iconoTracker.ShiftIssueStance(issueB, 0f, 0f, +80f);
+
+        iconoclast.MentalState = new MentalState_Iconoclast { pawn = iconoclast };
+
+        var worker = new InteractionWorker_IdeologicalDebatePrecept();
+        worker.Interacted(iconoclast, target, [], out _, out _, out _, out _);
+
+        Assert.Equal(issueA, worker.logTopic);
+    }
+
+    [Fact]
+    public void Iconoclast_SameIdeo_WeakestRecipientBeliefSelected()
+    {
+        // Same ideo, two issues, no rank gap. The iconoclast should target whichever issue the recipient
+        // holds most weakly (lowest conviction), not the issue the iconoclast is most fervent about.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (issueA, rungsA) = SimIssues.Ladder("SameIconoA", "SA0", "SA1");
+        var (issueB, rungsB) = SimIssues.Ladder("SameIconoB", "SB0", "SB1");
+
+        var sharedIdeo = new IdeoBuilder().WithName("SameIdeo").AddPrecept(rungsA[0]).AddPrecept(rungsB[0]).Build();
+        world.AddIdeo(sharedIdeo);
+
+        var iconoclast = new PawnBuilder().WithIdeo(sharedIdeo).WithCertainty(1f).WithConversionPower(5f)
+            .WithSocialImpact(2f).WithLabel("Iconoclast").Build(world);
+        var target = new PawnBuilder().WithIdeo(sharedIdeo).WithCertainty(0.5f).WithConversionPower(0.1f)
+            .WithLabel("Target").Build(world);
+
+        var iconoTracker  = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(iconoclast);
+        var targetTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(target);
+
+        // Iconoclast is equally fervent on both issues.
+        iconoTracker.ShiftIssueStance(issueA, 0f, 0f, +50f);
+        iconoTracker.ShiftIssueStance(issueB, 0f, 0f, +50f);
+
+        // Recipient holds IssueA very weakly, IssueB with moderate conviction.
+        // Both gaps must exceed DebateStrengthGap (5) to pass the Disagree filter.
+        var baseA = targetTracker.IssueStances().First(s => s.issue == issueA).strength;
+        var baseB = targetTracker.IssueStances().First(s => s.issue == issueB).strength;
+        targetTracker.ShiftIssueStance(issueA, 0f, 0f, -baseA + 2f);  // crush to near-zero conviction
+        targetTracker.ShiftIssueStance(issueB, 0f, 0f, -baseB + 12f); // moderate conviction
+
+        iconoclast.MentalState = new MentalState_Iconoclast { pawn = iconoclast };
+
+        var worker = new InteractionWorker_IdeologicalDebatePrecept();
+        worker.Interacted(iconoclast, target, [], out _, out _, out _, out _);
+
+        Assert.Equal(issueA, worker.logTopic);
+    }
+
     private static float StanceRank(IdeoTrackerData tracker, IssueDef issue) =>
         tracker.IssueStances().First(s => s.issue == issue).rank;
 }

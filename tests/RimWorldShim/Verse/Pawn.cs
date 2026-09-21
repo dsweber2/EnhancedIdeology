@@ -40,6 +40,11 @@ public class Need_Mood
     public readonly ThoughtHandler thoughts = new();
 }
 
+public class MentalState
+{
+    public Pawn pawn = null!;
+}
+
 public class MentalBreaker
 {
     public float BreakThresholdMinor = 0.2f;
@@ -123,6 +128,8 @@ public class Pawn
     public Vector3 DrawPos => Vector3.zero;
     public DevelopmentalStage DevelopmentalStage => DevelopmentalStage.Adult;
     public RaceProperties RaceProps => RaceProperties.Default;
+
+    public MentalState? MentalState { get; set; }
 
     public bool IsHashIntervalTick(int interval) => false;
 

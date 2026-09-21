@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>páginas (Textil, Cuero o Madera, sin lana)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>cubierta (Cuero o Metal)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>páginas (Textil, Cuero o Madera, sin lana)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>cubierta (Cuero o Metal)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>materiales preciosos</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
   <EB_WriteIdeobook.label>escribir libro religioso</EB_WriteIdeobook.label>
   <EB_WriteIdeobook.description>Escribe un libro religioso que detalla las creencias de tu ideoligión. Requiere alta certeza en la propia ideoligión (al menos el 90%).</EB_WriteIdeobook.description>
   <EB_WriteIdeobook.jobString>escribiendo un libro religioso.</EB_WriteIdeobook.jobString>

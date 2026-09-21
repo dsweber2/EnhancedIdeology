@@ -31,6 +31,9 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 - `TryInteractWith_DebateLog.cs` — adds debate play-log entry after interaction resolves
 - `InteractionDef_Symbol.cs` — patches grammar symbol resolution for debate log entries
 
+**ArrestedDebater needs blocking:**
+- `ArrestedDebater_BlockNeeds.cs` — zeroes `GetPriority` for `JobGiver_GetRest` and `JobGiver_GetFood` when pawn is in `EB_ArrestedDebater`; ensures the pawn neither sleeps nor eats during the defiant rant
+
 **Misc:**
 - `Ideo_Constructor.cs` — postfix to initialize EB ideo state on construction
 - `ExpectationsUtility_Override.cs` — overrides expectation thresholds based on certainty

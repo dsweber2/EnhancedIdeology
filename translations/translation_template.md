@@ -50,6 +50,17 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! |  |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion |  |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. |  |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. |  |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. |  |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. |  |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". |  |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". |  |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. |  |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. |  |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} |  |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} |  |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. |  |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. |  |
 
 ## Keyed/Reassure.xml
 
@@ -145,6 +156,22 @@
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. |  |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. |  |
 
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) |  |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) |  |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) |  |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) |  |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials |  |
+| `EB_WriteIdeobook.label` | write religious book |  |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). |  |
+| `EB_WriteIdeobook.jobString` | writing a religious book. |  |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book |  |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). |  |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. |  |
+
 ## DefInjected/ThingDef
 
 | key | source | translation |
@@ -206,6 +233,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. |  |
 | `EB_Pray.reportString` | contemplating. |  |
 
@@ -297,17 +325,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer |  |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer |  |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer |  |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book |  |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). |  |
-| `EB_WriteIdeobook.jobString` | writing a religious book. |  |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book |  |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). |  |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. |  |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

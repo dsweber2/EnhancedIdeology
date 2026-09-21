@@ -12,6 +12,7 @@
     <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] proved more persuasive.</EnhancedIdeology.DebateSent.WinnerPersuasive>
     <EnhancedIdeology.DebateSent.Draw>Neither changed their view.</EnhancedIdeology.DebateSent.Draw>
     <EnhancedIdeology.JobReport_Debating>Debating {0}</EnhancedIdeology.JobReport_Debating>
+    <EnhancedIdeology.DraftDisabled_HeldInDebate>Held in debate by {0}</EnhancedIdeology.DraftDisabled_HeldInDebate>
     <!-- Crisis of faith log entry templates -->
     <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] experienced a crisis of faith.</EnhancedIdeology.CrisisLog.Wander>
     <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery.</EnhancedIdeology.CrisisLog.MoodBreak>

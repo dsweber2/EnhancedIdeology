@@ -73,6 +73,13 @@ SKIP_TAGS: frozenset[str] = frozenset({
     "disallowedCategories",
 })
 
+# Broader leaf set for the hardcoded-string check (superset of LEAF_FIELDS).
+BROAD_LEAF_FIELDS: frozenset[str] = LEAF_FIELDS | {"customSummary"}
+
+# Structural tags with no human-readable text even under broad scan.
+# Notably omits: ingredients, fixedIngredientFilter, filter.
+BROAD_SKIP_TAGS: frozenset[str] = SKIP_TAGS - {"ingredients", "fixedIngredientFilter", "filter"}
+
 
 @dataclass
 class Entry:
@@ -107,8 +114,10 @@ def main() -> None:
     gl.add_argument("--target", required=True, help="Target language folder name (e.g. 'German (Deutsch)')")
     gl.add_argument("--output", help="Output path (default: stdout)")
 
+    subs.add_parser("check", help="Check for hardcoded strings not in the translation pipeline")
+
     args = parser.parse_args()
-    {"extract": cmd_extract, "generate": cmd_generate, "glossary": cmd_glossary}[args.cmd](args)
+    {"extract": cmd_extract, "generate": cmd_generate, "glossary": cmd_glossary, "check": cmd_check}[args.cmd](args)
 
 
 # ---------------------------------------------------------------------------
@@ -203,11 +212,40 @@ def cmd_glossary(args) -> None:
 
 
 # ---------------------------------------------------------------------------
+# check
+# ---------------------------------------------------------------------------
+
+def cmd_check(_args) -> None:
+    narrow_keys = {ee.key for ee in _load_defs()}
+    english_definjected_keys = _load_definjected_keys("English")
+    covered = narrow_keys | english_definjected_keys
+    broad_entries = _load_defs_broad()
+
+    missing = [ee for ee in broad_entries if ee.key not in covered]
+
+    if not missing:
+        print("ok: all translatable strings are in the pipeline")
+        return
+
+    by_type: dict[str, list[Entry]] = defaultdict(list)
+    for ee in missing:
+        by_type[ee.section].append(ee)
+
+    print(f"found {len(missing)} hardcoded string(s) not in translation pipeline:\n")
+    for def_type, type_entries in sorted(by_type.items()):
+        print(f"  {def_type}:")
+        for ee in type_entries:
+            print(f"    {ee.key!r}: {ee.source!r}")
+
+    sys.exit(1)
+
+
+# ---------------------------------------------------------------------------
 # extract
 # ---------------------------------------------------------------------------
 
 def cmd_extract(args) -> None:
-    entries = _load_keyed(args.source) + _load_defs()
+    entries = _load_keyed(args.source) + _load_definjected_entries(args.source) + _load_defs()
 
     existing: dict[str, str] = {}
     if args.prefill and args.target:
@@ -306,6 +344,103 @@ def _walk(elem, path: str, results: list[tuple[str, str]]) -> None:
     for child in elem:
         if not callable(child.tag):
             _walk(child, f"{path}.{child.tag}", results)
+
+
+def _load_defs_broad() -> list[Entry]:
+    """Like _load_defs but with a wider field/container scan for gap detection."""
+    entries: list[Entry] = []
+    for path in sorted(DEFS_DIR.rglob("*.xml")):
+        try:
+            root = ET.parse(path).getroot()
+        except ET.ParseError as exc:
+            print(f"warning: {path}: {exc}", file=sys.stderr)
+            continue
+        if root.tag != "Defs":
+            continue
+        for def_elem in root:
+            if callable(def_elem.tag):
+                continue
+            if def_elem.get("Abstract") == "True":
+                continue
+            def_type = def_elem.tag
+            name_elem = def_elem.find("defName")
+            if name_elem is None or not (name_elem.text or "").strip():
+                continue
+            def_name = name_elem.text.strip()
+            results: list[tuple[str, str]] = []
+            for child in def_elem:
+                if callable(child.tag) or child.tag == "defName":
+                    continue
+                _walk_broad(child, child.tag, results)
+            for rel_path, text in results:
+                entries.append(Entry("def", def_type, f"{def_name}.{rel_path}", text))
+    return entries
+
+
+def _walk_broad(elem, path: str, results: list[tuple[str, str]]) -> None:
+    tag = elem.tag
+    if callable(tag) or tag in BROAD_SKIP_TAGS:
+        return
+
+    if tag in BROAD_LEAF_FIELDS:
+        text = (elem.text or "").strip()
+        if text:
+            results.append((path, text))
+        return
+
+    children = [cc for cc in elem if not callable(cc.tag)]
+
+    # List container: all children are <li>, index them numerically.
+    if children and all(cc.tag == "li" for cc in children):
+        for ii, li_elem in enumerate(children):
+            _walk_broad(li_elem, f"{path}.{ii}", results)
+        return
+
+    for child in children:
+        _walk_broad(child, f"{path}.{child.tag}", results)
+
+
+def _load_definjected_entries(lang: str) -> list[Entry]:
+    """Load DefInjected XML files for a language as translation Entries."""
+    out: list[Entry] = []
+    di_dir = LANGS_DIR / lang / "DefInjected"
+    if not di_dir.is_dir():
+        return out
+    for def_type_dir in sorted(di_dir.iterdir()):
+        if not def_type_dir.is_dir():
+            continue
+        def_type = def_type_dir.name
+        for path in sorted(def_type_dir.glob("*.xml")):
+            try:
+                root = ET.parse(path).getroot()
+            except ET.ParseError as exc:
+                print(f"warning: {path}: {exc}", file=sys.stderr)
+                continue
+            for child in root:
+                if callable(child.tag):
+                    continue
+                text = (child.text or "").strip()
+                if text:
+                    out.append(Entry("def", def_type, child.tag, text))
+    return out
+
+
+def _load_definjected_keys(lang: str) -> set[str]:
+    """Return all keys present in a language's DefInjected XML files."""
+    out: set[str] = set()
+    di_dir = LANGS_DIR / lang / "DefInjected"
+    if not di_dir.is_dir():
+        return out
+    for path in di_dir.rglob("*.xml"):
+        try:
+            root = ET.parse(path).getroot()
+        except ET.ParseError:
+            continue
+        for child in root:
+            if callable(child.tag):
+                continue
+            out.add(child.tag)
+    return out
 
 
 def _load_existing(lang: str) -> dict[str, str]:

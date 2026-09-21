@@ -2,6 +2,12 @@
 <Defs>
 
     <JobDef>
+        <defName>EB_IconoclastDebate</defName>
+        <driverClass>EnhancedIdeology.JobDriver_IconoclastDebate</driverClass>
+        <reportString>haranguing TargetA about ideology.</reportString>
+    </JobDef>
+
+    <JobDef>
         <defName>EB_PlaceAndBurnUntilDestroyed</defName>
         <driverClass>EnhancedIdeology.JobDriver_PlaceAndBurnUntilDestroyed</driverClass>
         <reportString>placing TargetA on the ground to burn.</reportString>

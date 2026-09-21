@@ -12,6 +12,7 @@ internal static class EnhancedIdeologyDefOf
     public static MemeDef Guilty;
     public static MentalStateDef EB_CrisisOfFaith;
     public static MentalStateDef EB_Iconoclast;
+    public static MentalStateDef EB_ArrestedDebater;
     public static ThingDef EB_Ideobook;
     public static InspirationDef EB_ReligiousEnlightenment;
     public static JobDef EB_Pray;
@@ -19,6 +20,7 @@ internal static class EnhancedIdeologyDefOf
     public static RecipeDef EB_WriteIdeobook;
     public static RecipeDef EB_WriteIllustratedIdeobook;
     public static JobDef EB_PlaceAndBurnUntilDestroyed;
+    public static JobDef EB_IconoclastDebate;
     public static ThoughtDef EB_ReligiousBookDestroyed;
     public static ThoughtDef EB_WroteSacrilegousBinding;
     public static ThoughtDef EB_ReadingLeatherboundBook;

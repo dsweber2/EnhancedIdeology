@@ -232,7 +232,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
         {
             if (room.PsychologicallyOutdoors)
                 continue;
-            foreach (var thing in room.ContainedAndAdjacentThings)
+            foreach (var thing in room.ContainedAndAdjacentThings.ToList())
             {
                 if (thing.def.isAltar || thing is not ThingWithComps twc)
                     continue;

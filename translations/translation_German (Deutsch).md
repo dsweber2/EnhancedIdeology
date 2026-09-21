@@ -50,13 +50,16 @@
 | `EnhancedIdeology.IdeologicalDebateOutcomeSocialFight` | {PAWN1_labelShort} tried to debate ideological views with {PAWN2_labelShort}. This led to a social fight! | {PAWN1_labelShort} versuchte, ideologische Ansichten mit {PAWN2_labelShort} zu debattieren. Dies führte zu einem Streit! |
 | `EnhancedIdeology.LetterLabelIdeologicalDebateConversion` | Ideological conversion | Ideologische Bekehrung |
 | `EnhancedIdeology.LetterIdeologicalDebateConversionText` | After debating {ISSUE_label}, {CONVINCER_labelShort} convinced {CONVINCED_labelShort} to abandon {OLDIDEO_name} and embrace {NEWIDEO_name}. | Nach einer Debatte über {ISSUE_label} überzeugte {CONVINCER_labelShort} {CONVINCED_labelShort} dazu, {OLDIDEO_name} aufzugeben und {NEWIDEO_name} anzunehmen. |
-| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. |  |
-| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. |  |
-| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. |  |
-| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". |  |
-| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". |  |
-| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. |  |
-| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. |  |
+| `EnhancedIdeology.DebateLog.AboutMeme` | [INITIATOR_nameDef] debated [RECIPIENT_nameDef] about the meme [TOPIC_label]. | [INITIATOR_nameDef] debattierte mit [RECIPIENT_nameDef] über die Glaubensgrundlage [TOPIC_label]. |
+| `EnhancedIdeology.DebateLog.AboutPrecept` | [INITIATOR_nameDef] debated [TOPIC_label] with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] debattierte mit [RECIPIENT_nameDef] über [TOPIC_label]. |
+| `EnhancedIdeology.DebateLog.Generic` | [INITIATOR_nameDef] debated with [RECIPIENT_nameDef]. | [INITIATOR_nameDef] debattierte mit [RECIPIENT_nameDef]. |
+| `EnhancedIdeology.DebateSent.InitiatorMoved` | [INITIATOR_nameDef] moved [RECIPIENT_nameDef] towards stance "[WINNING_STANCE_label]". | [INITIATOR_nameDef] bewegte [RECIPIENT_nameDef] hin zur Haltung „[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.RecipientMoved` | [RECIPIENT_nameDef] moved [INITIATOR_nameDef] towards stance "[WINNING_STANCE_label]". | [RECIPIENT_nameDef] bewegte [INITIATOR_nameDef] hin zur Haltung „[WINNING_STANCE_label]". |
+| `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] war überzeugender. |
+| `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Keine Seite änderte ihre Meinung. |
+| `EnhancedIdeology.JobReport_Debating` | Debating {0} | Debattiert mit {0} |
+| `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] erlebte eine Glaubenskrise. |
+| `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]s Glaubenskrise verstärkte [INITIATOR_possessive] Elend. |
 
 ## Keyed/Reassure.xml
 
@@ -152,6 +155,22 @@
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Kein verfügbares, zugängliches Pult zum Arbeiten gefunden. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Der Glaube muss über 90% liegen, um religiöse Texte zu schreiben. |
 
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) |  |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) |  |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) |  |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) |  |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials |  |
+| `EB_WriteIdeobook.label` | write religious book | religiöses Buch schreiben |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Ein religiöses Buch schreiben, das die Überzeugungen der eigenen Ideologie beschreibt. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%). |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | schreibt ein religiöses Buch. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | illuminiertes religiöses Buch schreiben |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Ein illuminiertes religiöses Buch schreiben, geschmückt mit Edelsteinen und Tinten. Die Qualität der Materialien steigert die andächtige Wirkung beim Lesen. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%). |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | illustriert ein religiöses Buch. |
+
 ## DefInjected/ThingDef
 
 | key | source | translation |
@@ -213,7 +232,7 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | beschimpft TargetA wegen ihrer Ideologie. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | legt TargetA zum Verbrennen auf den Boden. |
 | `EB_Pray.reportString` | contemplating. | in Einkehr. |
 
@@ -305,17 +324,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | schwankender Mitgläubiger |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | glaubensloser Mitgläubiger |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | apostasiegeneigter Mitgläubiger |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | religiöses Buch schreiben |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Ein religiöses Buch schreiben, das die Überzeugungen der eigenen Ideologie beschreibt. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | schreibt ein religiöses Buch. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | illuminiertes religiöses Buch schreiben |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Ein illuminiertes religiöses Buch schreiben, geschmückt mit Edelsteinen und Tinten. Die Qualität der Materialien steigert die andächtige Wirkung beim Lesen. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | illustriert ein religiöses Buch. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 
