@@ -221,9 +221,13 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var recipientStances = recipientTracker.IssueStances()
             .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
 
+        // Issues without a seeded stance (PreceptCategory.NA: buildings, ritual seats, naming) aren't a belief
+        // axis and never get a personal stance recorded, so excluding them here is just staying in sync with
+        // IssueStanceTracker.EnsureSeeded rather than a bespoke category check.
         var sharedIssues = initiatorIdeo.precepts.Select(p => p.def.issue)
             .Intersect(recipientIdeo.precepts.Select(p => p.def.issue))
-            .Distinct();
+            .Distinct()
+            .Where(issue => initiatorStances.ContainsKey(issue!) && recipientStances.ContainsKey(issue!));
 
         var conflictingIssues = sharedIssues
             .Select(issue => (

@@ -263,8 +263,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     public float IssueOpinionToward(Ideo ideo, IssueDef issue)
     {
         EnsureIssueStancesSeeded();
-        var inducedTargets = new HashSet<IssueDef>(
-            PreceptPolicy.InducedIssues(Pawn.Ideo!).Concat(PreceptPolicy.InducedIssues(ideo)));
+        var inducedTargets = StructuralOpinionCalculator.InducedTargets(Stances, ideo);
         return StructuralOpinionCalculator.PerIssueOpinion(
             Stances, Pawn.Ideo!, ideo, issue, inducedTargets, EnhancedIdeologyMod.Settings.PreceptOppositionScale, out _);
     }
@@ -278,11 +277,12 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // The `n` issues the pawn's stance most opposes about `ideo`, sampled proportionally to opposition
     // magnitude via exponential racing (-log(U)/w). If guideTracker is supplied, issues where the guide
     // holds weaker conviction are excluded. Falls back to all eligible issues when nothing opposes.
-    public IReadOnlyList<IssueDef> MostOpposingIssues(Ideo ideo, int n, IdeoTrackerData? guideTracker = null)
+    // `stable` skips the random draw and orders strictly by opposition magnitude instead, so repeated
+    // calls against unchanged stances (e.g. a tooltip re-rendered every frame) return the same list.
+    public IReadOnlyList<IssueDef> MostOpposingIssues(Ideo ideo, int n, IdeoTrackerData? guideTracker = null, bool stable = false)
     {
         EnsureIssueStancesSeeded();
-        var inducedTargets = new HashSet<IssueDef>(
-            PreceptPolicy.InducedIssues(Pawn.Ideo!).Concat(PreceptPolicy.InducedIssues(ideo)));
+        var inducedTargets = StructuralOpinionCalculator.InducedTargets(Stances, ideo);
         var oppositionScale = EnhancedIdeologyMod.Settings.PreceptOppositionScale;
 
         var scored = ideo.precepts.Select(precept => precept.def.issue)
@@ -297,6 +297,16 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         var pool = scored.Any(e => e.opinion < 0f)
             ? scored.Where(e => e.opinion < 0f).ToList()
             : scored;
+
+        if (stable)
+        {
+            return pool
+                .OrderBy(entry => entry.opinion)
+                .ThenBy(entry => entry.issue.defName)
+                .Take(n)
+                .Select(entry => entry.issue)
+                .ToList();
+        }
 
         return pool
             .OrderBy(entry => -Mathf.Log(Rand.Value) / Mathf.Max(-entry.opinion, float.Epsilon))
@@ -318,8 +328,11 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         EnsureIssueStancesSeeded();
 
+        // Issues without a seeded stance (PreceptCategory.NA: buildings, ritual seats, naming) aren't a belief
+        // axis and never get a personal stance recorded, so they're excluded here to stay in sync with
+        // IssueStanceTracker.EnsureSeeded.
         var ideoIssues = Pawn.Ideo!.precepts.Select(precept => precept.def.issue)
-            .Where(issue => issue != null).Distinct()
+            .Where(issue => issue != null && PreceptPolicy.CategoryOf(issue) != PreceptCategory.NA).Distinct()
             .Select(issue => issue!)
             .ToList();
 

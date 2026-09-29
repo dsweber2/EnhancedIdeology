@@ -34,6 +34,68 @@ public class StructuralOpinionTests : SeededTest
     }
 
     [Fact]
+    public void LoyaltyMeme_AppliesToOtherFaithsOnly_NotTheOwnStructuralBand()
+    {
+        // A Loyalist faith sours its members on other faiths, but their fit with their own faith is unchanged:
+        // an otherwise-identical pawn in a non-Loyalist faith has the same own-ideo structural band.
+        EnhancedIdeologyMod.Settings.CrisisThreshold = 0f;
+        var loyalistMeme = new MemeDef { defName = "Loyalist" };
+        EnhancedIdeologyDefOf.Loyalist = loyalistMeme;
+
+        var (issue, rungs) = SimIssues.Ladder("Generosity", "Selfish", "Generous");
+
+        float OwnStructural(bool loyalist)
+        {
+            Rand.SetSeed(1);
+            var world = new SimWorld();
+            world.Initialize();
+            var builder = new IdeoBuilder().WithName("Own").AddPrecept(rungs[1], issue, displayOrderInIssue: 10);
+            if (loyalist)
+                _ = builder.AddMeme(loyalistMeme);
+            var own = builder.Build();
+            world.AddIdeo(own);
+            var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0.5f).WithLabel("P").Build(world);
+            var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+            tracker.CertaintyChangeRecache(world.Comp);
+            return tracker.CachedStructural;
+        }
+
+        var plain = OwnStructural(loyalist: false);
+        Assert.True(plain > 0f, $"precondition: own structural band should be positive, got {plain}");
+        Assert.Equal(plain, OwnStructural(loyalist: true), precision: 5);
+    }
+
+    [Fact]
+    public void StructuralOpinion_OfAnIdeo_DoesNotDependOnWhichFaithThePawnIsIn()
+    {
+        // The pawn's side of the comparison is their stances, not their faith's precepts: switching faiths
+        // (stances unchanged) must not move the structural score of either ideo. Faith B also holds an issue
+        // faith A is silent on, which used to widen the averaged issue set only while the pawn was in B.
+        var world = new SimWorld();
+        world.Initialize();
+        var (shared, sharedRungs) = SimIssues.Ladder("Shared", "Low", "Mid", "High");
+        var (extra, extraRungs) = SimIssues.Ladder("Extra", "Low", "High");
+        var ideoA = new IdeoBuilder().WithName("A").AddPrecept(sharedRungs[2], shared, displayOrderInIssue: 20).Build();
+        var ideoB = new IdeoBuilder().WithName("B")
+            .AddPrecept(sharedRungs[0], shared, displayOrderInIssue: 0)
+            .AddPrecept(extraRungs[1], extra, displayOrderInIssue: 10).Build();
+        world.AddIdeo(ideoA);
+        world.AddIdeo(ideoB);
+        var pawn = new PawnBuilder().WithIdeo(ideoA).WithCertainty(0.5f).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        _ = tracker.IssueStances().ToList();
+
+        var scoreAInA = StructuralOpinionCalculator.Compute(pawn, tracker.Stances, ideoA, null);
+        var scoreBInA = StructuralOpinionCalculator.Compute(pawn, tracker.Stances, ideoB, null);
+        pawn.ideo.SetIdeo(ideoB);
+        var scoreAInB = StructuralOpinionCalculator.Compute(pawn, tracker.Stances, ideoA, null);
+        var scoreBInB = StructuralOpinionCalculator.Compute(pawn, tracker.Stances, ideoB, null);
+
+        Assert.Equal(scoreAInA, scoreAInB, precision: 4);
+        Assert.Equal(scoreBInA, scoreBInB, precision: 4);
+    }
+
+    [Fact]
     public void StructuralIdeoOpinion_ForeignHoldsDistantStance_IsLowerThanMatchingStance()
     {
         // Two foreign ideos on the same issue ladder: one holds the pawn's own preferred rung, the other the

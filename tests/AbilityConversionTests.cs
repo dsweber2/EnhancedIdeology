@@ -124,6 +124,64 @@ public class AbilityConversionTests : SeededTest
         Assert.True(harsh > gentle, $"A harsher knock should raise the conversion chance. gentle={gentle}, harsh={harsh}");
     }
 
+    // A low-certainty pawn who still fits their own faith structurally: the setup where the old structural floor
+    // and the crisis candidate made the tooltip's chance a large overestimate.
+    private static (IdeoTrackerData tracker, Ideo target) StructurallyFitLowCertainty(float certainty, float targetOpinion)
+    {
+        var world = new SimWorld();
+        world.Initialize();
+        var (issue, rungs) = SimIssues.Ladder("Generosity", "Selfish", "Generous");
+        var own = new IdeoBuilder().WithName("Own").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        var target = new IdeoBuilder().WithName("Target").Build();
+        world.AddIdeo(own);
+        world.AddIdeo(target);
+        var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(certainty).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.CertaintyChangeRecache(world.Comp);
+        tracker.SetExtendedCertainty(certainty);
+        tracker.SetIdeoBaseOpinion(target, targetOpinion * 100f);
+        return (tracker, target);
+    }
+
+    [Fact]
+    public void ConversionChanceAfterKnock_MatchesTheActualDraw()
+    {
+        // The tooltip preview must equal the real knock + CheckConversion(noBreakdown) rate, even when the pawn's
+        // structural fit exceeds their opinion of the target and certainty is under the crisis threshold.
+        const float certainty = 0.1f;
+        const float targetOpinion = 0.3f;
+        const int trials = 4000;
+        var knock = EnhancedIdeologyMod.Settings.ConversionCertaintyKnock;
+
+        var (probe, probeTarget) = StructurallyFitLowCertainty(certainty, targetOpinion);
+        Assert.True(probe.CachedStructural > certainty, $"precondition: structural {probe.CachedStructural} should exceed certainty");
+        var predicted = probe.ConversionChanceAfterKnock(probeTarget, knock);
+
+        var converts = 0;
+        for (var ii = 0; ii < trials; ii++)
+        {
+            var (tracker, target) = StructurallyFitLowCertainty(certainty, targetOpinion);
+            tracker.SetExtendedCertainty(tracker.ExtendedCertainty * knock);
+            if (tracker.CheckConversion(target, noBreakdown: true) == ConversionOutcome.Success) converts++;
+        }
+
+        var observed = converts / (float)trials;
+        Assert.True(predicted > 0.5f, $"a 0.3 opinion vs 0.08 knocked certainty should be a likely convert, predicted {predicted}");
+        Assert.Equal(predicted, observed, 0.03f);
+    }
+
+    [Fact]
+    public void CheckConversion_NoBreakdown_CrisisNeverStealsTheDraw()
+    {
+        // Certainty 0 with a strongly-preferred target: the draw fires with certainty, and without the crisis
+        // candidate every fire must land on the target.
+        for (var ii = 0; ii < 200; ii++)
+        {
+            var (tracker, target) = StructurallyFitLowCertainty(certainty: 0f, targetOpinion: 0.6f);
+            Assert.Equal(ConversionOutcome.Success, tracker.CheckConversion(target, noBreakdown: true));
+        }
+    }
+
     // Guide preaches rung 0 on three "opposed" issues (recipient sits at the far rung) plus one "agree" issue
     // (recipient shares rung 0). Extreme SocialImpact args force the debate roll's direction.
     private static (SimWorld world, Pawn guide, Pawn recipient, IReadOnlyList<IssueDef> opposed, IssueDef agree) BundleFaiths(

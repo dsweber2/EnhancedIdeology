@@ -202,16 +202,23 @@ internal static partial class PreceptPolicy
         return null;
     }
 
-    // Total directional-penalty magnitude the source ideo levies against the target ideo, given a way to
-    // read how strongly the source ideo holds each source issue (its conviction on it).
-    internal static float CouplingPenalty(Ideo source, Ideo target, Func<IssueDef, float> convictionOf)
+    // Every issue some coupling can induce a stance on. Issues whose mod is not loaded are skipped.
+    internal static IEnumerable<IssueDef> InducibleIssues() =>
+        InducedByPrecept.Values
+            .Select(induced => DefDatabase<IssueDef>.GetNamedSilentFail(induced.TargetIssue))
+            .OfType<IssueDef>()
+            .Distinct();
+
+    // Total directional-penalty magnitude levied against the target ideo by a believer who holds the source
+    // precepts `holdsSource` accepts, given how strongly they hold each source issue (their conviction on it).
+    internal static float CouplingPenalty(Func<PreceptDef, bool> holdsSource, Ideo target, Func<IssueDef, float> convictionOf)
     {
         float penalty = 0f;
         foreach (var (sourcePrecept, targetPrecept) in CouplingPenalties)
         {
-            var held = source.precepts.FirstOrDefault(precept => precept.def.defName == sourcePrecept);
-            if (held != null && target.precepts.Any(precept => precept.def.defName == targetPrecept))
-                penalty += convictionOf(held.def.issue!);
+            var source = DefDatabase<PreceptDef>.GetNamedSilentFail(sourcePrecept);
+            if (source != null && holdsSource(source) && target.precepts.Any(precept => precept.def.defName == targetPrecept))
+                penalty += convictionOf(source.issue!);
         }
         return penalty;
     }

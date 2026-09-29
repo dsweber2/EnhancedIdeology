@@ -35,7 +35,9 @@ internal static class Pawn_ExposeData
         {
             if (data != null)
             {
-                if (data.Pawn is not Pawn pawn || (pawn != __instance && !pawn.Dead))
+                // The pawn reference only resolves after cross-refs, so check it once loading is finished.
+                if (Scribe.mode == LoadSaveMode.PostLoadInit
+                    && (data.Pawn is not Pawn pawn || (pawn != __instance && !pawn.Dead)))
                 {
                     EnhancedIdeologyMod.Warning($"Tried to scribe IdeoTrackerData for pawn {__instance} but "
                         + $"the data is for pawn {data.Pawn?.ToString() ?? "[null]"}. "

@@ -42,13 +42,15 @@ internal static class AbilityConversion
 
         if (guideRoll > recipientRoll)
         {
+            var opinionBefore = recipientTracker.IdeoOpinion(guideIdeo);
             foreach (var issue in issues)
             {
                 var guideRank = PreceptLadder.RankOf(guideIdeo.precepts.Select(precept => precept.def).First(def => def.issue == issue));
                 ConvictionMath.PullStance(comp, guide, recipient, issue, guideRank, 1f);
             }
 
-            recipientTracker.SetExtendedCertainty(recipientTracker.ExtendedCertainty * EnhancedIdeologyMod.Settings.ConversionCertaintyKnock);
+            var certaintyBefore = recipientTracker.ExtendedCertainty;
+            recipientTracker.SetExtendedCertainty(certaintyBefore * EnhancedIdeologyMod.Settings.ConversionCertaintyKnock);
             return recipientTracker.CheckConversion(guideIdeo, noBreakdown: true) == ConversionOutcome.Success;
         }
 

@@ -21,11 +21,11 @@ internal static class InteractionDef_Symbol
         {
             if (worker2.topic != null)
             {
-                __result = worker2.topic.Icon;
+                var icon = worker2.topic.Icon ?? worker2.initiatorIdeo?.Icon;
                 worker2.topic = null;
                 worker2.topicPrecept = null;
                 worker2.initiatorIdeo = null;
-                return false;
+                if (icon != null) { __result = icon; return false; }
             }
         }
 

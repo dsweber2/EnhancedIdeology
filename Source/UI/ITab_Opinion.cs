@@ -14,7 +14,7 @@ internal sealed class ITab_Opinion : ITab
     private const float IdeoRowHeight = RowHeight;
     private const float IconTextGap = 2 * Padding;
     private const float ColumnGap = 2 * Padding;
-    private const float MaxRungWidth = 1f;
+    private const float MaxRungWidth = 120f;
 
     // The left column grades each stance against a selected ideoligion: green where the pawn agrees with what
     // it preaches on that issue, red where they clash. Default selection is the pawn's own faith.
@@ -67,7 +67,7 @@ internal sealed class ITab_Opinion : ITab
         var stances = StanceRows(data, selected);
 
         var issueWidth = stances.Select(row => Text.CalcSize(row.issue.LabelCap).x).DefaultIfEmpty(0f).Max();
-        const float rungWidth = MaxRungWidth;
+        var rungWidth = Mathf.Min(MaxRungWidth, stances.Select(row => Text.CalcSize(row.personalRung).x).DefaultIfEmpty(0f).Max());
         var rowHeights = stances.Select(row => Mathf.Max(RowHeight, Text.CalcHeight(row.personalRung, rungWidth) + 2 * Padding)).ToList();
         var leftWidth = SmallPadding + IssueIconSize + SmallPadding + issueWidth + IconTextGap + rungWidth + IconTextGap + OpinionBarWidth + SmallPadding;
 

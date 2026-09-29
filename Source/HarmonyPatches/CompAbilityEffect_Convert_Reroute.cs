@@ -66,7 +66,7 @@ internal static class CompAbilityEffect_Convert_Tooltip
         var recipientTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
         var guideTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(guide);
         var knock = EnhancedIdeologyMod.Settings.ConversionCertaintyKnock;
-        var issues = recipientTracker.MostOpposingIssues(guide.Ideo, AbilityConversion.MaxBundleIssues, guideTracker);
+        var issues = recipientTracker.MostOpposingIssues(guide.Ideo, AbilityConversion.MaxBundleIssues, guideTracker, stable: true);
 
         var sb = new StringBuilder();
         sb.AppendLine("EnhancedIdeology.Convert.CertaintyKnock".Translate((1f - knock).ToStringPercent()));

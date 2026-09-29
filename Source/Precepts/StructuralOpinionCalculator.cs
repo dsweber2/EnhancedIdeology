@@ -27,46 +27,11 @@ internal static class StructuralOpinionCalculator
         var profiling = Prefs.DevMode;
         var structSw = profiling ? Stopwatch.StartNew() : null;
 
-        // Global meme-specific opinions.
-        var gestaltMeme = EnhancedIdeologyDefOf.VME_Gestalt;
-        var nationalistMeme = EnhancedIdeologyDefOf.VME_Nationalist;
-        var isolationistMeme = EnhancedIdeologyDefOf.VFEA_Isolationist;
-        var violentConversionMeme = EnhancedIdeologyDefOf.VME_ViolentConversion;
-        if (gestaltMeme != null && pawnIdeo.HasMeme(gestaltMeme))
+        // Loyalty memes of the pawn's own faith set their attitude toward other faiths, so the own ideo is exempt.
+        if (ideo != pawnIdeo && LoyaltyMemeOpinion(pawnIdeo) is { } loyalty)
         {
-            opinion -= 30;
-            contributors?.Add((gestaltMeme.LabelCap, -30f));
-        }
-        else if ((isolationistMeme != null && pawnIdeo.HasMeme(isolationistMeme))
-            || (violentConversionMeme != null && pawnIdeo.HasMeme(violentConversionMeme)))
-        {
-            var label = (isolationistMeme != null && pawnIdeo.HasMeme(isolationistMeme))
-                ? isolationistMeme.LabelCap
-                : violentConversionMeme!.LabelCap;
-            opinion -= 25;
-            contributors?.Add((label, -25f));
-        }
-        else if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Supremacist)
-            || pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Collectivist)
-            || (nationalistMeme != null && pawnIdeo.HasMeme(nationalistMeme)))
-        {
-            var label = pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Supremacist)
-                ? EnhancedIdeologyDefOf.Supremacist.LabelCap
-                : pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Collectivist)
-                    ? EnhancedIdeologyDefOf.Collectivist.LabelCap
-                    : nationalistMeme!.LabelCap;
-            opinion -= 20;
-            contributors?.Add((label, -20f));
-        }
-        else if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Loyalist))
-        {
-            opinion -= 10;
-            contributors?.Add((EnhancedIdeologyDefOf.Loyalist.LabelCap, -10f));
-        }
-        else if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Guilty))
-        {
-            opinion += 10;
-            contributors?.Add((EnhancedIdeologyDefOf.Guilty.LabelCap, 10f));
+            opinion += loyalty.offset;
+            contributors?.Add((loyalty.label, loyalty.offset));
         }
 
         // VME_Elders: elder pawns gain structural certainty in ideos that venerate the old (max +20 at 70+).
@@ -200,18 +165,18 @@ internal static class StructuralOpinionCalculator
 
         if (structSw != null) { ProfDietXeno += structSw.ElapsedTicks; structSw.Restart(); }
 
-        // Structural precept fit: for each issue at least one of the two faiths takes a position on, how the
-        // target ideo's stance compares to the pawn's own preferred stance, weighted by conviction, averaged
-        // and scaled to 0-100 (R2). Issues neither faith holds are irrelevant.
+        // Structural precept fit: for each issue the target ideo takes a position on or the pawn holds a stance
+        // on, how the target's stance compares to the pawn's preferred stance, weighted by conviction, averaged
+        // and scaled to 0-100 (R2). Issues neither side holds are irrelevant. The pawn side comes from their
+        // stances, not their current faith, so an ideo scores the same whether it is theirs or not.
         var oppositionScale = EnhancedIdeologyMod.Settings.PreceptOppositionScale;
         var preceptStart = contributors?.Count ?? 0;
         float preceptSum = 0;
         int issueCount = 0;
-        var inducedTargets = new HashSet<IssueDef>(
-            PreceptPolicy.InducedIssues(pawnIdeo).Concat(PreceptPolicy.InducedIssues(ideo)));
-        var relevantIssues = pawnIdeo.precepts.Select(precept => precept.def.issue)
-            .Concat(ideo.precepts.Select(precept => precept.def.issue))
+        var inducedTargets = InducedTargets(stances, ideo);
+        var relevantIssues = ideo.precepts.Select(precept => precept.def.issue)
             .Where(issue => issue != null)
+            .Concat(stances.IssueStances().Select(stance => stance.issue).Where(issue => HoldsStance(stances, issue)))
             .Concat(inducedTargets)
             .Distinct();
         if (structSw != null) { ProfInduced += structSw.ElapsedTicks; structSw.Restart(); }
@@ -249,7 +214,10 @@ internal static class StructuralOpinionCalculator
         }
 
         // Directional coupling penalties: flat hit scaled by conviction on the offending issue.
-        var couplingPenalty = PreceptPolicy.CouplingPenalty(pawnIdeo, ideo, issue => stances.GetStrength(issue));
+        var couplingPenalty = PreceptPolicy.CouplingPenalty(
+            precept => Mathf.Abs(stances.GetRank(precept.issue!) - PreceptLadder.RankOf(precept)) <= 0.5f,
+            ideo,
+            issue => stances.GetStrength(issue));
         if (couplingPenalty != 0f)
         {
             opinion -= couplingPenalty;
@@ -265,6 +233,42 @@ internal static class StructuralOpinionCalculator
 
         return Mathf.Max(opinion, 0);
     }
+
+    // Flat offset the pawn's faith applies to every other faith, from the strongest loyalty meme it holds.
+    // Null when it holds none.
+    private static (string label, float offset)? LoyaltyMemeOpinion(Ideo pawnIdeo)
+    {
+        var gestaltMeme = EnhancedIdeologyDefOf.VME_Gestalt;
+        var nationalistMeme = EnhancedIdeologyDefOf.VME_Nationalist;
+        var isolationistMeme = EnhancedIdeologyDefOf.VFEA_Isolationist;
+        var violentConversionMeme = EnhancedIdeologyDefOf.VME_ViolentConversion;
+        if (gestaltMeme != null && pawnIdeo.HasMeme(gestaltMeme))
+            return (gestaltMeme.LabelCap, -30f);
+        if (isolationistMeme != null && pawnIdeo.HasMeme(isolationistMeme))
+            return (isolationistMeme.LabelCap, -25f);
+        if (violentConversionMeme != null && pawnIdeo.HasMeme(violentConversionMeme))
+            return (violentConversionMeme.LabelCap, -25f);
+        if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Supremacist))
+            return (EnhancedIdeologyDefOf.Supremacist.LabelCap, -20f);
+        if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Collectivist))
+            return (EnhancedIdeologyDefOf.Collectivist.LabelCap, -20f);
+        if (nationalistMeme != null && pawnIdeo.HasMeme(nationalistMeme))
+            return (nationalistMeme.LabelCap, -20f);
+        if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Loyalist))
+            return (EnhancedIdeologyDefOf.Loyalist.LabelCap, -10f);
+        if (pawnIdeo.HasMeme(EnhancedIdeologyDefOf.Guilty))
+            return (EnhancedIdeologyDefOf.Guilty.LabelCap, 10f);
+        return null;
+    }
+
+    // Issues graded on the rung ladder even when not Moral: those the target ideo takes an induced stance on,
+    // plus inducible issues the pawn holds a stance on. Depends on the pawn's stances, not their membership.
+    internal static HashSet<IssueDef> InducedTargets(IssueStanceTracker stances, Ideo targetIdeo) =>
+        [.. PreceptPolicy.InducedIssues(targetIdeo), .. PreceptPolicy.InducibleIssues().Where(issue => HoldsStance(stances, issue))];
+
+    // True when the pawn's stance on `issue` is off the Don't-care rung, i.e. they hold a belief about it.
+    private static bool HoldsStance(IssueStanceTracker stances, IssueDef issue) =>
+        Mathf.Abs(stances.GetRank(issue) - PreceptLadder.DontCareRank(issue)) > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon;
 
     // Raw per-issue opinion (roughly +/-strength) the pawn holds toward `targetIdeo`'s stance on `issue`.
     // Moral issues and coupled targets grade by rung distance; Special issues carry bespoke categorical logic.

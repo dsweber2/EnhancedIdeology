@@ -57,6 +57,33 @@ public class BackgroundConversionTests : SeededTest
     }
 
     [Fact]
+    public void BackgroundConversion_StructuralFitAboveTheAlternative_DoesNotBlockDrift()
+    {
+        // The bar is lived certainty, not structural fit: a pawn at 0.05 certainty who structurally fits their
+        // faith better than they like the alternative still drifts toward it.
+        EnhancedIdeologyMod.Settings.CrisisThreshold = 0f;
+        var world = new SimWorld();
+        world.Initialize();
+        var (issue, rungs) = SimIssues.Ladder("Generosity", "Selfish", "Generous");
+        var own = new IdeoBuilder().WithName("Own").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        var alt = new IdeoBuilder().WithName("Alt").Build();
+        world.AddIdeo(own);
+        world.AddIdeo(alt);
+        var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0.05f).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.CertaintyChangeRecache(world.Comp);
+        tracker.SetExtendedCertainty(0.05f);
+        var altOpinion = tracker.CachedStructural * 0.9f;
+        tracker.SetIdeoBaseOpinion(alt, altOpinion * 100f);
+        Assert.True(altOpinion > 0.05f, $"precondition: alternative {altOpinion} should beat certainty");
+
+        for (var day = 0; day < 100 && pawn.Ideo == own; day++)
+            tracker.TryBackgroundConversion(1f);
+
+        Assert.Equal(alt, pawn.Ideo);
+    }
+
+    [Fact]
     public void Hazard_IsFrequencyIndependent()
     {
         // The whole point: sampling the same span more finely gives the same total probability.

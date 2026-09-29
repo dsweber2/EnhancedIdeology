@@ -60,6 +60,7 @@ internal sealed class IssueStanceTracker
         foreach (var issue in DefDatabase<IssueDef>.AllDefs)
         {
             if (_strength.ContainsKey(issue)) continue;
+            if (PreceptPolicy.CategoryOf(issue) == PreceptCategory.NA) continue;
             memeOffsets ??= TraitMemeConvictionOffsets();
             _preferredRank[issue] = HeldRank(_pawn.Ideo!, issue);
             _strength[issue] = Mathf.Clamp(

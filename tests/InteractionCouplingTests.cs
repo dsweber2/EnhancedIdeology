@@ -4,6 +4,10 @@ namespace EnhancedIdeology.Tests;
 // precept implies a stance on another issue, and directional penalties for single-rung target issues.
 public class InteractionCouplingTests : SeededTest
 {
+    // A believer who holds exactly the precepts of `ideo`.
+    private static Func<PreceptDef, bool> HeldBy(Ideo ideo) =>
+        precept => ideo.precepts.Any(held => held.def == precept);
+
     [Fact]
     public void InducedRank_TreesDesired_ImpliesDisapprovingTreeCutting()
     {
@@ -50,8 +54,8 @@ public class InteractionCouplingTests : SeededTest
         var enhancer = new IdeoBuilder().WithName("Enhancers").AddPrecept(mlRungs[0]).Build();
 
         // The despiser sours on the enhancer, scaled by their conviction on the mechanoid issue; not mutual.
-        Assert.Equal(12f, PreceptPolicy.CouplingPenalty(despiser, enhancer, _ => 12f));
-        Assert.Equal(0f, PreceptPolicy.CouplingPenalty(enhancer, despiser, _ => 12f));
+        Assert.Equal(12f, PreceptPolicy.CouplingPenalty(HeldBy(despiser), enhancer, _ => 12f));
+        Assert.Equal(0f, PreceptPolicy.CouplingPenalty(HeldBy(enhancer), despiser, _ => 12f));
     }
 
     [Fact]
@@ -67,9 +71,9 @@ public class InteractionCouplingTests : SeededTest
 
         // Appreciating diversity sours a faith on any xenotype supremacist, scaled by conviction; the neutral
         // diversity rung does not, and the direction is one-way.
-        Assert.Equal(9f, PreceptPolicy.CouplingPenalty(tolerant, supremacist, _ => 9f));
-        Assert.Equal(0f, PreceptPolicy.CouplingPenalty(neutral, supremacist, _ => 9f));
-        Assert.Equal(0f, PreceptPolicy.CouplingPenalty(supremacist, tolerant, _ => 9f));
+        Assert.Equal(9f, PreceptPolicy.CouplingPenalty(HeldBy(tolerant), supremacist, _ => 9f));
+        Assert.Equal(0f, PreceptPolicy.CouplingPenalty(HeldBy(neutral), supremacist, _ => 9f));
+        Assert.Equal(0f, PreceptPolicy.CouplingPenalty(HeldBy(supremacist), tolerant, _ => 9f));
     }
 
     [Fact]

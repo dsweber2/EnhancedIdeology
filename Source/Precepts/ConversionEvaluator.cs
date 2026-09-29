@@ -13,19 +13,23 @@ internal static class ConversionEvaluator
         return opinion > current ? (opinion - current) / opinion : 0f;
     }
 
-    // Read-only preview of the conversion chance toward `target` after a won attempt applies its certainty
-    // knock (Certainty *= knock). Folds in the knock but not the stance pull; ignores competing ideos and
-    // the crisis candidate, so it is an estimate, not the exact draw.
+    // Read-only preview of CheckConversion(target, noBreakdown: true) after a won attempt applies its certainty
+    // knock (Certainty *= knock). The knock scales only the certainty term of the own-ideo opinion, not the
+    // personal or relationship terms. Exact for the draw itself; the stance pull before the draw is not included.
     internal static float ConversionChanceAfterKnock(IdeoTrackerData data, Ideo target, float knock)
     {
+        var own = data.DetailedIdeoOpinion(data.Pawn.Ideo!);
+        var current = Mathf.Max((own.BaseOpinion * knock) + own.PersonalOpinion + own.RelationshipOpinion, 0f);
         var opinion = data.IdeoOpinion(target);
-        var current = data.IdeoOpinion(data.Pawn.Ideo!) * knock;
         return opinion > current ? (opinion - current) / opinion : 0f;
     }
 
     // Discrete, one-shot conversion driven by acute social pressure (debates, directed attempts). The pawn's
     // real ideos and a "crisis of faith" pseudo-candidate compete in one weighted draw; if the crisis wins,
-    // that is the IdeoChange breakdown. No time integration here — the event itself is the occurrence.
+    // that is the IdeoChange breakdown. With noBreakdown the crisis candidate is not added, so it cannot take
+    // draws from the real candidates. No time integration here — the event itself is the occurrence.
+    // The bar is the lived own-ideo opinion (certainty plus personal and relationship terms) - the value the
+    // player sees. The structural band only moves certainty through the setpoint, never the bar directly.
     internal static ConversionOutcome CheckConversion(
         IdeoTrackerData data,
         Ideo? priorityIdeo = null,
@@ -37,9 +41,7 @@ internal static class ConversionEvaluator
         if (!ModLister.CheckIdeology("Ideoligion conversion") || pawn.DevelopmentalStage.Baby() || Find.IdeoManager.classicMode)
             return ConversionOutcome.Failure;
 
-        // Use the higher of lived certainty and structural alignment as the bar: a pawn whose conviction
-        // hasn't caught up to their structural fit yet shouldn't be treated as a conversion target.
-        var current = Mathf.Max(data.IdeoOpinion(pawn.Ideo!), data.CachedStructural);
+        var current = data.IdeoOpinion(pawn.Ideo!);
         var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
         IEnumerable<Ideo> pool = whitelistIdeos
@@ -57,18 +59,17 @@ internal static class ConversionEvaluator
         }
 
         var crisisThreshold = EffectiveCrisisThreshold(data);
-        AddCrisisCandidate(candidates, current, crisisThreshold, w => w / crisisThreshold);
+        if (!noBreakdown)
+            AddCrisisCandidate(candidates, current, crisisThreshold, w => w / crisisThreshold);
 
         var index = SelectWeightedConversion(candidates);
+        LogCheckConversion(data, priorityIdeo, noBreakdown, current, crisisThreshold, candidates, index);
         if (index < 0)
             return ConversionOutcome.Failure;
 
         var chosen = candidates[index].ideo;
         if (chosen == null)
         {
-            if (noBreakdown)
-                return ConversionOutcome.Failure;
-
             TriggerCrisisOfFaith(data);
             return ConversionOutcome.Breakdown;
         }
@@ -90,7 +91,7 @@ internal static class ConversionEvaluator
         }
 
         var interval = EnhancedIdeologyMod.Settings.ConversionInterval;
-        var current = Mathf.Max(data.IdeoOpinion(pawn.Ideo!), data.CachedStructural);
+        var current = data.IdeoOpinion(pawn.Ideo!);
         var candidates = new List<(Ideo? ideo, float chance, float weight)>();
 
         foreach (var ideo in Find.IdeoManager.IdeosListForReading)
@@ -248,6 +249,9 @@ internal static class ConversionEvaluator
         data.SetExtendedCertainty(newCertainty);
         data.Opinions.PersonalIdeoOpinions[newIdeo] = 0;
 
+        // Recache first: before it, the old ideo's cached base is still the old certainty (its value while
+        // it was the own ideo), so the offset below would always be zero.
+        data.RecacheAllBaseOpinions();
         var oldBase = data.DetailedIdeoOpinion(oldIdeo!).BaseOpinion;
         data.AdjustPersonalOpinion(oldIdeo!, oldCertainty - oldBase);
 
@@ -260,7 +264,7 @@ internal static class ConversionEvaluator
                 pawn.Named(HistoryEventArgsNames.Doer),
                 newIdeo.Named(HistoryEventArgsNames.Ideo)));
         }
+    }
 
-        data.RecacheAllBaseOpinions();
     }
 }

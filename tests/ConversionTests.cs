@@ -251,6 +251,36 @@ public class ConversionTests : SeededTest
         Assert.Equal(clashStanceBefore, tracker.IssueStances().First(stance => stance.issue == clash).rank);
     }
 
+    [Fact]
+    public void Conversion_OldIdeoOpinion_StaysAtTheCertaintyItHadWhenLeft()
+    {
+        // After converting, the pawn's opinion of the faith they left is their certainty at the moment they
+        // left it, carried as a personal offset over the old faith's structural opinion.
+        EnhancedIdeologyMod.Settings.CrisisThreshold = 0f;
+        const float certainty = 0.2f;
+        for (var ii = 0; ii < 50; ii++)
+        {
+            var world = new SimWorld();
+            world.Initialize();
+            var own = new IdeoBuilder().WithName("Own").Build();
+            var alt = new IdeoBuilder().WithName("Alt").Build();
+            world.AddIdeo(own);
+            world.AddIdeo(alt);
+            var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(certainty).WithLabel("P").Build(world);
+            var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+            tracker.SetIdeoBaseOpinion(alt, 90);
+
+            if (tracker.CheckConversion(alt, noBreakdown: true) != ConversionOutcome.Success)
+                continue;
+
+            Assert.Equal(alt, pawn.Ideo);
+            Assert.Equal(certainty, tracker.IdeoOpinion(own), 3);
+            return;
+        }
+
+        Assert.Fail("a 0.9 alternative against 0.2 certainty should convert within 50 tries");
+    }
+
     // An initiator whose faith preaches rung 0 vs a recipient whose faith preaches the far rung on one shared Moral
     // issue. By default the initiator is a dominant debater (high ConversionPower and SocialImpact) so the roll is
     // a reliable win; the loss test flips the stats so the recipient dominates instead.
