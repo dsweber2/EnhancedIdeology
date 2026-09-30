@@ -266,5 +266,33 @@ internal static class ConversionEvaluator
         }
     }
 
+    private static void LogCheckConversion(
+        IdeoTrackerData data,
+        Ideo? priorityIdeo,
+        bool noBreakdown,
+        float current,
+        float crisisThreshold,
+        List<(Ideo? ideo, float chance, float weight)> candidates,
+        int index)
+    {
+        if (!EnhancedIdeologyMod.Settings.DebugInteractionWorkers)
+            return;
+
+        var pawn = data.Pawn;
+        var own = data.DetailedIdeoOpinion(pawn.Ideo!);
+        var survival = candidates.Aggregate(1f, (acc, candidate) => acc * (1f - candidate.chance));
+        var candidateText = candidates.Count == 0
+            ? "none"
+            : string.Join("; ", candidates.Select(candidate => candidate.ideo == null
+                ? $"CRISIS chance={candidate.chance:F3} weight={candidate.weight:F3}"
+                : $"{candidate.ideo} opinion={data.IdeoOpinion(candidate.ideo):F3} chance={candidate.chance:F3} weight={candidate.weight:F3}"));
+        var chosenText = index < 0 ? "nothing fired" : candidates[index].ideo?.ToString() ?? "CRISIS";
+
+        EnhancedIdeologyMod.Debug(
+            $"CheckConversion: pawn={pawn}, priority={priorityIdeo?.ToString() ?? "none"}, noBreakdown={noBreakdown}, " +
+            $"current={current:F3} (certainty={own.BaseOpinion:F3}, personal={own.PersonalOpinion:+0.000;-0.000}, " +
+            $"relationships={own.RelationshipOpinion:+0.000;-0.000}), " +
+            $"structural={data.CachedStructural:F3}, setpoint={data.CachedTargetCertainty:F3}, crisisThreshold={crisisThreshold:F3}, " +
+            $"candidates=[{candidateText}], fireChance={1f - survival:F3}, result={chosenText}");
     }
 }

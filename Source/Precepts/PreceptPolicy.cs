@@ -143,6 +143,10 @@ internal static partial class PreceptPolicy
         "RomanceOnTheRim_Issue_Cheat",
         // VME_BookWritingSpeed parallels VME_BookReadingSpeed (Increased/Decreased axis).
         "VME_BookWritingSpeed",
+        // Man's-name <-> woman's-name spectrum (mandatory -> no Don't-care, like SpouseCount). UsuallyMans is
+        // classic-only (no real Ideology-selectable equivalent) but is kept in the ladder via
+        // IncludeClassicInLadder purely to anchor the spacing; see OrderOverrides.
+        "MarriageName",
     ];
     private static readonly HashSet<string> UniversalPositiveIssues = ["Charity", "VME_Recreation"];
     // Special issues route through the special resolvers instead of the rung-distance model. VME_Leader /
@@ -151,7 +155,10 @@ internal static partial class PreceptPolicy
     private static readonly HashSet<string> SpecialIssues =
         ["PreferredXenotypes", "Weapons", "VME_Leader", "VME_Mood"];
     private static readonly HashSet<string> NAIssues =
-        ["IdeoBuilding", "IdeoRelic", "IdeoRitualSeat", "Ritual", "MarriageName", "AM_Abilities"];
+        ["IdeoBuilding", "IdeoRelic", "IdeoRitualSeat", "Ritual", "AM_Abilities"];
+    // Issues whose classic-only precept is not a duplicate of a real ladder rung (see PreceptLadder.Rungs) and
+    // must stay in the ladder to keep rank spacing correct, even though no real ideology can ever hold it.
+    internal static readonly HashSet<string> IncludeClassicInLadder = ["MarriageName"];
     // Multi-rung issues confirmed as PositiveOnly: no genuine belief axis, so rung-distance structural opinion
     // would be wrong. Listed here to suppress the startup warning for unclassified multi-rung issues.
     private static readonly HashSet<string> KnownPositiveOnlyIssues =
@@ -199,6 +206,11 @@ internal static partial class PreceptPolicy
             ["SpouseCount_Male_MaxOne", "SpouseCount_Male_MaxTwo", "SpouseCount_Male_MaxThree", "SpouseCount_Male_MaxFour", "SpouseCount_Male_Unlimited"],
         ["SpouseCount_Female"] =
             ["SpouseCount_Female_MaxOne", "SpouseCount_Female_MaxTwo", "SpouseCount_Female_MaxThree", "SpouseCount_Female_MaxFour", "SpouseCount_Female_Unlimited"],
+        // Man's-name <-> woman's-name spectrum. UsuallyMans is classic-only but genuinely occupies the "one
+        // step off the man's extreme" slot mirroring UsuallyWomans - dropping it would wrongly compress
+        // Random/KeepNames off the true center.
+        ["MarriageName"] =
+            ["MarriageName_AlwaysMans", "MarriageName_UsuallyMans", "MarriageName_Random", "MarriageName_KeepNames", "MarriageName_UsuallyWomans", "MarriageName_AlwaysWomans"],
         // MI_BodyMod_Allowed (Political Compass) sits at displayOrderInIssue=30, after Abhorrent — insert it
         // between Approved and OnlyBiological.
         ["BodyModification"] =

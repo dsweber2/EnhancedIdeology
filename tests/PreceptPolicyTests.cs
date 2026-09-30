@@ -11,6 +11,7 @@ public class PreceptPolicyTests : SeededTest
         Assert.Equal(PreceptCategory.UniversalPositive, PreceptPolicy.CategoryOf(new IssueDef { defName = "Charity" }));
         Assert.Equal(PreceptCategory.Special, PreceptPolicy.CategoryOf(new IssueDef { defName = "PreferredXenotypes" }));
         Assert.Equal(PreceptCategory.NA, PreceptPolicy.CategoryOf(new IssueDef { defName = "IdeoBuilding" }));
+        Assert.Equal(PreceptCategory.Moral, PreceptPolicy.CategoryOf(new IssueDef { defName = "MarriageName" }));
     }
 
     [Fact]
@@ -48,6 +49,41 @@ public class PreceptPolicyTests : SeededTest
         // An issue with no override keeps plain display-order sorting.
         var (issue, _) = SimIssues.Ladder("Diet", "A", "B", "C");
         Assert.Equal(new[] { "A", "B", "C" }, PreceptLadder.Rungs(issue).Select(p => p.defName));
+    }
+
+    [Fact]
+    public void MarriageName_LadderIncludesClassicUsuallyMans()
+    {
+        var issue = new IssueDef { defName = "MarriageName" };
+        var defs = new Dictionary<string, PreceptDef>();
+        foreach (var (name, order, classic) in new (string, int, bool)[]
+        {
+            ("MarriageName_AlwaysMans", 40, false), ("MarriageName_UsuallyMans", 0, true),
+            ("MarriageName_Random", 0, false), ("MarriageName_KeepNames", 10, false),
+            ("MarriageName_UsuallyWomans", 20, false), ("MarriageName_AlwaysWomans", 30, false),
+        })
+        {
+            var def = new PreceptDef { defName = name, issue = issue, displayOrderInIssue = order, classic = classic };
+            SimIssues.Register(def);
+            defs[name] = def;
+        }
+
+        // UsuallyMans is classic-only (no real Ideology-selectable equivalent) but must stay in the ladder
+        // (PreceptPolicy.IncludeClassicInLadder) to anchor the spacing correctly.
+        Assert.Equal(
+            new[]
+            {
+                "MarriageName_AlwaysMans", "MarriageName_UsuallyMans", "MarriageName_Random",
+                "MarriageName_KeepNames", "MarriageName_UsuallyWomans", "MarriageName_AlwaysWomans",
+            },
+            PreceptLadder.Rungs(issue).Select(p => p.defName));
+
+        // Ranks 0-5: Random/KeepNames (2/3) sit symmetric around the true center, rather than being squeezed
+        // off-center by silently dropping the unselectable UsuallyMans slot.
+        Assert.Equal(0f, PreceptLadder.RankOf(defs["MarriageName_AlwaysMans"]));
+        Assert.Equal(2f, PreceptLadder.RankOf(defs["MarriageName_Random"]));
+        Assert.Equal(3f, PreceptLadder.RankOf(defs["MarriageName_KeepNames"]));
+        Assert.Equal(5f, PreceptLadder.RankOf(defs["MarriageName_AlwaysWomans"]));
     }
 
     [Fact]

@@ -14,14 +14,17 @@ internal static class PreceptLadder
     // RandomizePrecepts uses (issue equality); reaction thoughts are ThoughtDefs, not PreceptDefs, so they
     // never pollute the ladder. Classic-mode default precepts (Lovin_Free, Cannibalism_Classic, ...) carry an
     // issue but are the no-ideology fallback, duplicating a real rung; they are excluded so they do not add a
-    // phantom rung that shifts every real rank and skews the opinion falloff. For issues whose
+    // phantom rung that shifts every real rank and skews the opinion falloff. PreceptPolicy.IncludeClassicInLadder
+    // lists the rare exception where the classic rung is NOT a duplicate (e.g. MarriageName_UsuallyMans has no
+    // real Ideology-selectable equivalent) and must stay to keep spacing correct. For issues whose
     // displayOrderInIssue scrambles the axis once stacked, a PreceptPolicy order override pins the sequence.
     public static List<PreceptDef> Rungs(IssueDef issue)
     {
         if (_rungsCache.TryGetValue(issue, out var cached))
             return cached;
 
-        var rungs = DefDatabase<PreceptDef>.AllDefs.Where(precept => precept.issue == issue && !precept.classic);
+        var rungs = DefDatabase<PreceptDef>.AllDefs.Where(precept => precept.issue == issue
+            && (!precept.classic || PreceptPolicy.IncludeClassicInLadder.Contains(issue.defName)));
         List<PreceptDef> result;
 
         if (PreceptPolicy.OrderOverrides.TryGetValue(issue.defName, out var order))
