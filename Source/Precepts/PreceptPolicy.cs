@@ -158,7 +158,11 @@ internal static partial class PreceptPolicy
         ["IdeoBuilding", "IdeoRelic", "IdeoRitualSeat", "Ritual", "AM_Abilities"];
     // Issues whose classic-only precept is not a duplicate of a real ladder rung (see PreceptLadder.Rungs) and
     // must stay in the ladder to keep rank spacing correct, even though no real ideology can ever hold it.
-    internal static readonly HashSet<string> IncludeClassicInLadder = ["MarriageName"];
+    internal static readonly HashSet<string> IncludeClassicInLadder =
+    [
+        "MarriageName", "InsectMeat", "Corpses", "NutrientPasteEating",
+        "SpouseCount_Male", "SpouseCount_Female", "Nudity_Male", "Nudity_Female",
+    ];
     // Multi-rung issues confirmed as PositiveOnly: no genuine belief axis, so rung-distance structural opinion
     // would be wrong. Listed here to suppress the startup warning for unclassified multi-rung issues.
     private static readonly HashSet<string> KnownPositiveOnlyIssues =
@@ -202,6 +206,19 @@ internal static partial class PreceptPolicy
         ],
         ["AnimalSlaughter"] =
             ["AM_AnimalSlaughter_Desired", "AnimalSlaughter_Disapproved", "AnimalSlaughter_Horrible", "AnimalSlaughter_Prohibited"],
+        // Corpses_Ugly (classic) and Corpses_DontCare tie at displayOrderInIssue=10 - break the tie explicitly
+        // rather than leaning on DefDatabase iteration order (mod-load-order dependent).
+        ["Corpses"] = ["Corpses_Ugly", "Corpses_DontCare", "AM_Corpses_Sublime"],
+        // AM_InsectMeatEating_Required (AlphaMemes), InsectMeatEating_Loved (Ideology), and
+        // VME_InsectMeatEating_DontCare (VIE-M&S) all sit at displayOrderInIssue=0 - fix the pro->neutral order.
+        // Despised_Classic is classic-only but is the only rung between neutral and Sacrilegious (modCompat.md).
+        ["InsectMeat"] =
+        [
+            "AM_InsectMeatEating_Required", "InsectMeatEating_Loved", "VME_InsectMeatEating_DontCare",
+            "InsectMeatEating_Despised_Classic", "VME_InsectMeatEating_Sacrilegious",
+        ],
+        // MaxOne is classic-only; kept alive via IncludeClassicInLadder (without it, this override was dead
+        // code - Rungs() filtered MaxOne out before the override ever ran).
         ["SpouseCount_Male"] =
             ["SpouseCount_Male_MaxOne", "SpouseCount_Male_MaxTwo", "SpouseCount_Male_MaxThree", "SpouseCount_Male_MaxFour", "SpouseCount_Male_Unlimited"],
         ["SpouseCount_Female"] =
@@ -218,11 +235,29 @@ internal static partial class PreceptPolicy
         // MI_DrugUse_Allowed (Political Compass) sits at displayOrderInIssue=40, beyond Prohibited — fix order.
         ["DrugUse"] =
             ["DrugUse_Essential", "MI_DrugUse_Allowed", "DrugUse_MedicalOrSocial", "DrugUse_MedicalOnly", "DrugUse_Prohibited", "DrugUse_Abhorrent"],
+        // AM_OrganUse_Torturous ("harvesting a still-living enemy's organs... should be encouraged") is a
+        // pro-harvest extreme, not anti - belongs beyond Respected, not tacked on after Abhorrent.
         ["OrganUse"] =
         [
-            "OrganUse_Respected", "OrganUse_Acceptable", "VME_OrganUse_PostMortem", "OrganUse_HorribleSellOK",
-            "OrganUse_HorribleNoSell", "OrganUse_Abhorrent", "AM_OrganUse_Torturous",
+            "AM_OrganUse_Torturous", "OrganUse_Respected", "OrganUse_Acceptable", "VME_OrganUse_PostMortem",
+            "OrganUse_HorribleSellOK", "OrganUse_HorribleNoSell", "OrganUse_Abhorrent",
         ],
+        // Bonding_Disapproved (Ideology) and AM_Bonding_Abhorrent (AlphaMemes) both default to order 0.
+        ["Bonding"] = ["Bonding_Disapproved", "AM_Bonding_Abhorrent"],
+        // Eclipse_Beautiful (Ideology) and VME_Eclipse_Despised (VIE-M&S) both default to order 0.
+        ["Eclipse"] = ["Eclipse_Beautiful", "VME_Eclipse_Despised"],
+        // AM_FungusEating_Required (AlphaMemes) and FungusEating_Preferred (Ideology) both default to order 0.
+        ["FungusEating"] =
+            ["AM_FungusEating_Required", "FungusEating_Preferred", "VME_FungusEating_DontCare", "FungusEating_Despised"],
+        // GauranlenConnection_Strong (Ideology) and AM_GauranlenConnection_Forbidden (AlphaMemes) both
+        // default to order 0.
+        ["GauranlenConnection"] = ["GauranlenConnection_Strong", "AM_GauranlenConnection_Forbidden"],
+        // Ranching_Central/AM_Ranching_CattleCentered tie at default order 0; raw order otherwise interleaves
+        // VME_Ranching_Disliked (anti, order 10) before VME_Ranching_Nomadic (pro, order 30).
+        ["Ranching"] =
+            ["Ranching_Central", "AM_Ranching_CattleCentered", "VME_Ranching_Nomadic", "VME_Ranching_Disliked"],
+        // Trees_Desired (Ideology) and AM_Trees_Despised (AlphaMemes) both default to order 0.
+        ["Trees"] = ["Trees_Desired", "AM_Trees_Despised"],
         // Anomaly DLC: no displayOrderInIssue set on any rung, all default to 0.
         ["PsychicRituals"] = ["PsychicRituals_Exalted", "PsychicRituals_Disapproved", "PsychicRituals_Abhorrent"],
         ["VoidStudy"] = ["VoidStudy_VeryEfficient", "VoidStudy_Efficient", "VoidStudy_Inefficient", "VoidStudy_VeryInefficient"],
@@ -276,6 +311,13 @@ internal static partial class PreceptPolicy
         ["AM_AnimalRelease"] = DontCareSpec.Between("AM_AnimalRelease_Discouraged", "AM_AnimalRelease_Encouraged"),
         ["VME_Expectations"] = DontCareSpec.Between("VME_Expectations_High", "VME_Expectations_Low"),
         ["AM_Rain"] = DontCareSpec.Between("AM_Rain_Disliked", "AM_Rain_Blessed"),
+        ["Eclipse"] = DontCareSpec.Between("Eclipse_Beautiful", "VME_Eclipse_Despised"),
+        ["GauranlenConnection"] = DontCareSpec.Between("GauranlenConnection_Strong", "AM_GauranlenConnection_Forbidden"),
+        ["Trees"] = DontCareSpec.Between("Trees_Desired", "AM_Trees_Despised"),
+        // Central/CattleCentered/Nomadic are all degrees of pro-ranching culture (Central even mandates not
+        // eating plants); only Disliked is anti. True indifference sits at the boundary between the mildest
+        // pro rung and the anti one, not "before Central" (which would read silence as itself mildly pro).
+        ["Ranching"] = DontCareSpec.Between("VME_Ranching_Nomadic", "VME_Ranching_Disliked"),
         ["VME_Aurora"] = DontCareSpec.Between("VME_Aurora_Amazing", "VME_Aurora_Despised"),
         ["VME_BookReading"] = DontCareSpec.Between("VME_BookReading_Desired", "VME_BookReading_Disliked"),
         ["VME_BookReadingSpeed"] = DontCareSpec.Between("VME_BookReadingSpeed_Increased", "VME_BookReadingSpeed_Decreased"),
