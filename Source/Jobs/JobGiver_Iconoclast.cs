@@ -42,15 +42,15 @@ internal sealed class JobGiver_Iconoclast : ThinkNode_JobGiver
             if (!pawn.Position.InHorDistOf(mentalState.agitationCell, AgitationArrivalRadius))
                 return JobMaker.MakeJob(JobDefOf.Goto, mentalState.agitationCell);
 
-            // Debate someone in the room.
-            var debateTarget = FindDebateTargetNear(pawn);
+            // Debate someone nearby; if nobody is nearby, go to the closest pawn on the map.
+            var debateTarget = FindDebateTarget(pawn);
             if (debateTarget != null)
             {
                 mentalState.agitationDebatesLeft--;
-                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_IconoclastDebate, debateTarget);
+                return JobMaker.MakeJob(EnhancedIdeologyDefOf.EB_IconoclastAgitate, debateTarget);
             }
 
-            // Nobody nearby right now — linger and try again next tick.
+            // Nobody reachable right now — linger and try again next tick.
             var linger = JobMaker.MakeJob(JobDefOf.Wait_Wander);
             linger.expiryInterval = 120;
             pawn.mindState.nextMoveOrderIsWait = true;
@@ -75,21 +75,30 @@ internal sealed class JobGiver_Iconoclast : ThinkNode_JobGiver
         return null;
     }
 
-    private static Pawn? FindDebateTargetNear(Pawn pawn)
+    // Region-wise search: distance follows walls and doors, not a straight line.
+    // Prefer a nearby pawn of another ideo; else take the closest pawn on the map.
+    private static Pawn? FindDebateTarget(Pawn pawn)
     {
-        var candidates = pawn.Map.mapPawns.AllPawnsSpawned
-            .Where(p => p != pawn
-                && p.RaceProps.Humanlike
-                && !p.DevelopmentalStage.Baby()
-                && !p.Downed
-                && !p.Dead
-                && p.Awake()
-                && p.Position.InHorDistOf(pawn.Position, DebateSearchRadius)
-                && pawn.CanReach(p, PathEndMode.Touch, Danger.Deadly))
-            .ToList();
+        bool IsCandidate(Thing t) =>
+            t is Pawn p
+            && p != pawn
+            && p.RaceProps.Humanlike
+            && !p.DevelopmentalStage.Baby()
+            && !p.Downed
+            && !p.Dead
+            && p.Awake();
 
-        if (candidates.TryMinBy(p => p.Position.DistanceToSquared(pawn.Position) + (p.Ideo == pawn.Ideo ? 0f : 1000f), out var best))
-            return best;
-        return null;
+        Pawn? Closest(float maxDistance, Predicate<Thing> validator) =>
+            (Pawn?)GenClosest.ClosestThingReachable(
+                pawn.Position,
+                pawn.Map,
+                ThingRequest.ForGroup(ThingRequestGroup.Pawn),
+                PathEndMode.Touch,
+                TraverseParms.For(pawn, Danger.Deadly),
+                maxDistance,
+                validator);
+
+        return Closest(DebateSearchRadius, t => IsCandidate(t) && ((Pawn)t).Ideo != pawn.Ideo)
+            ?? Closest(9999f, IsCandidate);
     }
 }

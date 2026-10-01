@@ -21,6 +21,7 @@ internal static class EnhancedIdeologyDefOf
     public static RecipeDef EB_WriteIllustratedIdeobook;
     public static JobDef EB_PlaceAndBurnUntilDestroyed;
     public static JobDef EB_IconoclastDebate;
+    public static JobDef EB_IconoclastAgitate;
     public static ThoughtDef EB_ReligiousBookDestroyed;
     public static ThoughtDef EB_WroteSacrilegousBinding;
     public static ThoughtDef EB_ReadingLeatherboundBook;
