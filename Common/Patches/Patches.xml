@@ -19,7 +19,7 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators</xpath>
 		<value>
-			<li Class="EnhancedIdeology.StockGenerator_IdeoBook">
+			<li Class="StockGenerator_SingleDef">
 				<thingDef>EB_Ideobook</thingDef>
 				<countRange>0~2</countRange>
 			</li>
@@ -27,11 +27,11 @@
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
-		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators</xpath>
+		<xpath>/Defs/TraderKindDef[defName="Orbital_Exotic"]/stockGenerators</xpath>
 		<value>
-			<li Class="EnhancedIdeology.StockGenerator_IdeoBook">
+			<li Class="StockGenerator_SingleDef">
 				<thingDef>EB_Ideobook</thingDef>
-				<countRange>0~2</countRange>
+				<countRange>0~1</countRange>
 			</li>
 		</value>
 	</Operation>
@@ -39,7 +39,7 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
 		<value>
-			<li Class="EnhancedIdeology.StockGenerator_IdeoBook">
+			<li Class="StockGenerator_SingleDef">
 				<thingDef>EB_Ideobook</thingDef>
 				<countRange>1~2</countRange>
 			</li>

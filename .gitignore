@@ -11,3 +11,4 @@ analysis/*
 coverage/*
 images/*.png
 tmp/*
+.worktrees/

@@ -19,7 +19,7 @@
 - `GameComponent/` — game-level pawn↔ideo tracker registry; entry point for patches needing `GetTracker(pawn)`
 - `Interactions/` — debate, conversion, and reassure interaction workers; play-log entries
 - `HarmonyPatches/` — Harmony patches on vanilla entry points; grouped by system (tick, certainty, conversion, UI, misc)
-- `Books/` — religious book type (`BookIdeo`), reading outcomes, burning mechanics, trader stock
+- `Books/` — religious book type (`BookIdeo`), reading outcomes, burning mechanics
 - `Contemplation/` — contemplation need, job, site, and visuals
 - `Jobs/` — mental states and job givers for crisis-of-faith and iconoclast
 - `Rituals/` — ritual outcome effect workers

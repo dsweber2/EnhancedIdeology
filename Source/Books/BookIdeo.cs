@@ -3,8 +3,6 @@ using Verse.Grammar;
 
 using static RimWorld.IdeoFoundation_Deity;
 
-using RimWorld.Planet;
-
 namespace EnhancedIdeology;
 
 internal sealed class BookIdeo : Book
@@ -157,18 +155,6 @@ internal sealed class BookIdeo : Book
         {
             RegenerateName(Ideo);
         }
-    }
-
-    // Ensure that traders get their book ideo
-    public override void PostGeneratedForTrader(TraderKindDef trader, PlanetTile forTile, Faction forFaction)
-    {
-        base.PostGeneratedForTrader(trader, forTile, forFaction);
-
-        Ideo ??= forFaction == null || forFaction.ideos == null
-                ? Find.IdeoManager.IdeosListForReading.RandomElement()
-                : forFaction.ideos.PrimaryIdeo;
-
-        RegenerateName(Ideo);
     }
 
     // Checks for null ideos in case something goes wrong
