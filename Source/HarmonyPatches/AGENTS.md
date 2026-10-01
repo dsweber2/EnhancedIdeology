@@ -38,7 +38,11 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 - `Ideo_Constructor.cs` — postfix to initialize EB ideo state on construction
 - `ExpectationsUtility_Override.cs` — overrides expectation thresholds based on certainty
 - `Bill_PawnAllowedToStartAnew.cs` — certainty gate on the "start anew" bill
-- `MemoryThoughts_TryGainMemory.cs` — intercepts meme memory gain to attach `ConvictionDeltaPerTickLong`
+- `MemoryThoughts_TryGainMemory.cs` — intercepts meme memory gain to attach `ConvictionDeltaPerTickLong`; prefix assigns the relic precept as `sourcePrecept` on vanilla relic thoughts
+
+**Relics** (logic in `Relics/RelicConviction`):
+- `ThingStyleHelper_SetEverSeenByPlayer.cs` — first player sighting of a relic triggers `ApplyFindBoost`
+- `Precept_Relic_NotifyThingLost.cs` — transpiler restricting relic lost/destroyed thoughts and letter to followers of the relic's ideo
 - `PsychicRitualToil_Brainwipe_Start.cs` — hooks brainwipe start to reset stances
 - `WorkGiver_DoBill_LeatherRestriction.cs` — enforces vegetarian/carnivore leather crafting restrictions
 - `GenRecipe_MakeRecipeProducts_QualityBoost.cs` — quality bonus for crafting religious books

@@ -96,6 +96,7 @@ public class Pawn
     public string LabelShort => Label;
 
     public Pawn_IdeoTracker ideo;
+    public bool Dead;
     public Pawn_NeedsTracker needs = new();
     public Pawn_HealthTracker health = new();
     public Pawn_RelationTracker relations;

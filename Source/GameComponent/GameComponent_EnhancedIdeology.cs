@@ -55,6 +55,11 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
             if (memories == null) continue;
             foreach (var thought in memories)
             {
+                if (RelicConviction.IsRelicThought(thought.def))
+                {
+                    RelicConviction.ApplyMoodletShift(pawn, tracker, thought);
+                    continue;
+                }
                 if (thought is not Thought_MemeMemory memeThought) continue;
                 if (memeThought.sourcePrecept is not { } precept || precept.ideo != pawn.Ideo) continue;
                 var issue = precept.def.issue;

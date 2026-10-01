@@ -48,6 +48,10 @@ public static class PawnUtility
 public static class ThoughtDefOf
 {
     public static readonly Verse.ThoughtDef FailedConvertIdeoAttemptResentment = new() { defName = "FailedConvertIdeoAttemptResentment" };
+    public static readonly Verse.ThoughtDef RelicLost = new() { defName = "RelicLost" };
+    public static readonly Verse.ThoughtDef RelicDestroyed = new() { defName = "RelicDestroyed" };
+    public static readonly Verse.ThoughtDef RelicsCollected = new() { defName = "RelicsCollected" };
+    public static readonly Verse.ThoughtDef RelicAtRitual = new() { defName = "RelicAtRitual" };
 }
 
 public class HistoryEventDef : Def { }

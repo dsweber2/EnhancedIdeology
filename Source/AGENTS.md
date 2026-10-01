@@ -23,6 +23,7 @@
 - `Contemplation/` — contemplation need, job, site, and visuals
 - `Jobs/` — mental states and job givers for crisis-of-faith and iconoclast
 - `Rituals/` — ritual outcome effect workers
+- `Relics/` — conviction effects of finding relics and of vanilla relic thoughts
 - `Thoughts/` — custom thought classes and workers
 - `UI/` — certainty bar widget and opinion inspect tab
 

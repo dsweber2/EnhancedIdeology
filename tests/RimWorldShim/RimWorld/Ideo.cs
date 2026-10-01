@@ -77,6 +77,8 @@ public class CustomXenotype
     public string name = string.Empty;
 }
 
+public class Precept_Relic : Precept { }
+
 public class Precept_Xenotype : Precept
 {
     public XenotypeDef? xenotype;

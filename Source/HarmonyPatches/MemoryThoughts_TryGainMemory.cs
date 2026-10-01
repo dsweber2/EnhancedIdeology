@@ -4,6 +4,13 @@ namespace EnhancedIdeology;
     typeof(Thought_Memory), typeof(Pawn))]
 static class MemoryThoughts_TryGainMemory
 {
+    // Set before the merge check, so that a repeated relic thought groups with the one already present.
+    static void Prefix(MemoryThoughtHandler __instance, Thought_Memory newThought)
+    {
+        if (newThought.sourcePrecept == null && RelicConviction.IsRelicThought(newThought.def))
+            newThought.sourcePrecept = RelicConviction.SourceFor(__instance.pawn);
+    }
+
     static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought)
     {
         var pawn = newThought.pawn;
