@@ -3,17 +3,17 @@ namespace EnhancedIdeology.Tests;
 public class IdeoTrackerTests : SeededTest
 {
     [Fact]
-    public void GetIdeoPawns_ZeroPawnIdeo_ReturnsEmptyWithoutRecursion()
+    public void GetIdeoPawns_UnregisteredZeroPawnIdeo_ReturnsEmptyWithoutRecursion()
     {
-        // Regression: AddIdeo must pre-register so GetIdeoPawns doesn't recurse when no pawns match
+        // An ideo the component has not seen, with no members, used to recurse until stack overflow.
         var world = new SimWorld();
         world.Initialize();
         var ideo = new IdeoBuilder().WithName("Empty").Build();
-        world.AddIdeo(ideo);
 
         var result = world.Comp.GetIdeoPawns(ideo);
 
         Assert.Empty(result);
+        Assert.True(world.Comp.IdeoTracker.ContainsIdeo(ideo));
     }
 
     [Fact]

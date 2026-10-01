@@ -1,9 +1,15 @@
+using System.Runtime.CompilerServices;
+
 namespace EnhancedIdeology.HarmonyPatches;
 
 // Scribing data in a postfix to ensure that no junk data is saved
 [HarmonyPatch(typeof(Pawn), nameof(Pawn.ExposeData))]
 internal static class Pawn_ExposeData
 {
+    // Pawns deep-saved inside another mod's GameComponent load before this mod's component exists.
+    // Their data waits here until PostLoadInit, when the component is present.
+    private static readonly ConditionalWeakTable<Pawn, IdeoTrackerData> pendingData = new();
+
     private static void Postfix(Pawn __instance)
     {
         if (__instance.ideo == null)
@@ -14,9 +20,15 @@ internal static class Pawn_ExposeData
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         if (comp == null)
         {
-            EnhancedIdeologyMod.ErrorOnce($"Pawn_ExposeData: GameComponent_EnhancedIdeology is null. "
-                + "This should not happen. Please report this issue and any related logs.",
-                typeof(Pawn_ExposeData).GetHashCode() + typeof(GameComponent_EnhancedIdeology).GetHashCode());
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                IdeoTrackerData? loaded = null;
+                Scribe_Deep.Look(ref loaded, "EB_IdeoTrackerData", __instance);
+                if (loaded != null)
+                {
+                    pendingData.AddOrUpdate(__instance, loaded);
+                }
+            }
             return;
         }
         var pawnTracker = comp.PawnTracker;
@@ -28,6 +40,11 @@ internal static class Pawn_ExposeData
             return;
         }
         var data = pawnTracker.TryGetIdeoTracker(__instance);
+        if (data == null && Scribe.mode == LoadSaveMode.PostLoadInit && pendingData.TryGetValue(__instance, out var pending))
+        {
+            _ = pendingData.Remove(__instance);
+            data = pending;
+        }
 
         Scribe_Deep.Look(ref data, "EB_IdeoTrackerData", __instance);
 

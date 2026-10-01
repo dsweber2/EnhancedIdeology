@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsTestProject>true</IsTestProject>
-    <DefineConstants>$(DefineConstants);v1_6</DefineConstants>
+    <DefineConstants>$(DefineConstants);TESTS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="10.0.1">
@@ -22,6 +22,38 @@
     <Compile Remove="RimWorldShim/**/*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../simulator/EnhancedIdeology.Sim/EnhancedIdeology.Sim.csproj" />
+    <ProjectReference Include="RimWorldShim/RimWorldShim.csproj" />
+  </ItemGroup>
+  <!-- Real mod source, compiled against the RimWorld shim. -->
+  <ItemGroup>
+    <Compile Include="../Source/GameComponent/GameComponent_EnhancedIdeology.cs" />
+    <Compile Include="../Source/GameComponent/GameComponent_EnhancedIdeology_PawnTracker.cs" />
+    <Compile Include="../Source/GameComponent/GameComponent_EnhancedIdeology_IdeoPawnTracker.cs" />
+    <Compile Include="../Source/Tracker/ConvictionScale.cs" />
+    <Compile Include="../Source/Tracker/IssueStanceTracker.cs" />
+    <Compile Include="../Source/Tracker/CertaintyTracker.cs" />
+    <Compile Include="../Source/Tracker/OpinionCache.cs" />
+    <Compile Include="../Source/Precepts/StructuralOpinionCalculator.cs" />
+    <Compile Include="../Source/Precepts/ConversionEvaluator.cs" />
+    <Compile Include="../Source/Tracker/IdeoTrackerData.cs" />
+    <Compile Include="../Source/Precepts/PreceptLadder.cs" />
+    <Compile Include="../Source/Precepts/PreceptPolicy.cs" />
+    <Compile Include="../Source/Precepts/PreceptPolicy.Resolvers.cs" />
+    <Compile Include="../Source/Interactions/InteractionWorker_AdvancedConversionAttempt.cs" />
+    <Compile Include="../Source/Interactions/AbilityConversion.cs" />
+    <Compile Include="../Source/Precepts/ConvictionMath.cs" />
+    <Compile Include="../Source/Interactions/AbilityReassure.cs" />
+    <Compile Include="../Source/Interactions/InteractionWorker_IdeologicalDebateMeme.cs" />
+    <Compile Include="../Source/Interactions/InteractionWorker_IdeologicalDebatePrecept.cs" />
+    <Compile Include="../Source/EnhancedIdeologyDefOf.cs" />
+    <Compile Include="../Source/EnhancedIdeologyUtilities.cs" />
+    <Compile Include="../Source/HotSwappableAttribute.cs" />
+    <Compile Include="../Source/GlobalSuppressions.cs" />
+    <Compile Include="../Source/Books/ReadingOutcomeDoer_CertaintyChange.cs" />
+    <Compile Include="../Source/Compat_PeerPressure.cs" />
+    <Compile Include="../Source/HediffComp_BrainwipeRecovery.cs" />
+    <Compile Include="../Source/Thoughts/Thought_MemeMemory.cs" />
+    <Compile Include="../Source/Thoughts/Thought_CognitiveDissonance.cs" />
+    <Compile Include="../Source/HarmonyPatches/IdeoTracker_TickInterval.cs" />
   </ItemGroup>
 </Project>

@@ -122,7 +122,7 @@ public class Pawn
     public bool Spawned => false;
     public bool Destroyed => false;
     public bool IsPrisoner => false;
-    public Map? Map => null;
+    public Map? Map => _simMap;
     public Map? MapHeld => _simMap;
     public RimWorld.Caravan? GetCaravan() => null;
     public Vector3 DrawPos => Vector3.zero;
@@ -130,8 +130,13 @@ public class Pawn
     public RaceProperties RaceProps => RaceProperties.Default;
 
     public MentalState? MentalState { get; set; }
+    public bool InMentalState => MentalState != null;
 
-    public bool IsHashIntervalTick(int interval) => false;
+    // Mirrors Verse.Gen: a fixed per-thing offset staggers interval work across pawns.
+    public int HashOffset() => PawnId * 7919;
+    public int HashOffsetTicks() => Find.TickManager.TicksGame + HashOffset();
+    public bool IsHashIntervalTick(int interval) => HashOffsetTicks() % interval == 0;
+    public bool IsHashIntervalTick(int interval, int delta) => Math.Abs(HashOffsetTicks() % interval) < delta;
 
     public bool Inhumanized() => false;
 

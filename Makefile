@@ -7,8 +7,8 @@ test:
 	dotnet test tests/EnhancedIdeology.Tests.csproj
 
 logs:
-	@mkdir -p simulator/cache
-	cp "$(RIMWORLD_LOG)" "simulator/cache/$$(date +%Y%m%d_%H%M%S)_logs.txt"
+	@mkdir -p cache
+	cp "$(RIMWORLD_LOG)" "cache/$$(date +%Y%m%d_%H%M%S)_logs.txt"
 
 # Usage: make preview SVG=images/foo.svg
 preview:

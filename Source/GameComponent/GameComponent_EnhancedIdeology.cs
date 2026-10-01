@@ -56,8 +56,8 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
             foreach (var thought in memories)
             {
                 if (thought is not Thought_MemeMemory memeThought) continue;
-                if (memeThought.sourcePrecept?.ideo != pawn.Ideo) continue;
-                var issue = memeThought.sourcePrecept.def.issue;
+                if (memeThought.sourcePrecept is not { } precept || precept.ideo != pawn.Ideo) continue;
+                var issue = precept.def.issue;
                 if (issue == null || Mathf.Abs(memeThought.ConvictionDeltaPerTickLong) < 0.0001f) continue;
                 tracker.ShiftIssueStance(issue, 0f, 0f, memeThought.ConvictionDeltaPerTickLong);
             }
@@ -118,15 +118,16 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
             return pawnList;
         }
 
+        pawnList = IdeoTracker.EnsureIdeoHasPawnTracker(ideo);
         foreach (var pawn in PawnsFinder.All_AliveOrDead)
         {
-            if (pawn.Ideo == ideo)
+            if (pawn.Ideo == ideo && !pawnList.Contains(pawn))
             {
-                IdeoTracker.EnsureIdeoPawnTrackerHasPawn(ideo, pawn);
+                pawnList.Add(pawn);
             }
         }
 
-        return GetIdeoPawns(ideo);
+        return pawnList;
     }
 }
 

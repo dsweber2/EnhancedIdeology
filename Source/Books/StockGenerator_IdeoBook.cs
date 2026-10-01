@@ -1,8 +1,4 @@
-﻿#if v1_5
-using PlanetTile = int;
-#else
-using RimWorld.Planet;
-#endif
+﻿using RimWorld.Planet;
 
 namespace EnhancedIdeology;
 

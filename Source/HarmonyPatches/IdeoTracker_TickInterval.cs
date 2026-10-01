@@ -1,20 +1,18 @@
 namespace EnhancedIdeology.HarmonyPatches;
 
-#if v1_5
-[HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTick))]
-#else
 [HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTickInterval))]
-#endif
 internal static class IdeoTracker_TickInterval
 {
     private const float CheckIntervalDays = GenTicks.TickLongInterval / 60000f;
 
-    private static void Postfix(Pawn_IdeoTracker __instance)
+    // Vanilla calls this every `delta` ticks (1 on screen, up to 15 off screen), not every tick.
+    // The interval checks use the delta overload, so each window fires once even when its exact tick is skipped.
+    internal static void Postfix(Pawn_IdeoTracker __instance, int delta)
     {
         var pawn = __instance.pawn;
 
-        // Fast exit: skip all lookups the 499/500 ticks where nothing fires.
-        if (!pawn.IsHashIntervalTick(GenTicks.TickRareInterval))
+        // Fast exit: skip all lookups on the calls where nothing fires.
+        if (!pawn.IsHashIntervalTick(GenTicks.TickRareInterval, delta))
             return;
 
         if (pawn.Destroyed || pawn.Map == null || __instance.ideo == null || Find.IdeoManager.classicMode)
@@ -23,14 +21,16 @@ internal static class IdeoTracker_TickInterval
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
+        var longTick = pawn.IsHashIntervalTick(GenTicks.TickLongInterval, delta);
+
         // Refresh relationship opinions before recaching so the relational band uses fresh data.
-        if (pawn.IsHashIntervalTick(GenTicks.TickLongInterval))
+        if (longTick)
             data.RecalculateRelationshipIdeoOpinions();
 
         data.ApplyConvictionDecayIfNewDay();
         data.CertaintyChangeRecache(comp);
 
-        if (pawn.IsHashIntervalTick(GenTicks.TickLongInterval))
+        if (longTick)
         {
             data.AdvanceExtendedCertainty(CheckIntervalDays);
             if (!pawn.InMentalState)

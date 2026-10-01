@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text;
 
 namespace EnhancedIdeology;
@@ -7,12 +6,6 @@ namespace EnhancedIdeology;
 internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 {
     public const float PawnOpinionFactor = 0.02f;
-
-    private static readonly Stopwatch _profSw = new();
-    private static int _profCalls;
-    private static long _profStructural, _profRelational, _profPractitional;
-    // Sub-profiling for structural computation lives in StructuralOpinionCalculator as internal static fields.
-    private const int ProfLogInterval = 500;
 
     private Pawn pawn = pawn;
     public Pawn Pawn => pawn;
@@ -71,28 +64,14 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         Certainty.RelationalContributors.Clear();
         Certainty.PractitionalContributors.Clear();
 
-        var profiling = Prefs.DevMode;
-        if (profiling) _profSw.Restart();
-
         // Structural band: innate fit of the pawn to their own ideo, from their per-issue precept stances.
         var structural = StructuralOpinionOf(Pawn.Ideo!, Certainty.StructuralContributors) / 100f;
-
-        if (profiling) { _profStructural += _profSw.ElapsedTicks; _profSw.Restart(); }
 
         // Relational band: mean opinion of co-religionists, scaled by the user's max range.
         var relational = RelationalBand(settings.RelationalMaxRange, Certainty.RelationalContributors, comp);
 
-        if (profiling) { _profRelational += _profSw.ElapsedTicks; _profSw.Restart(); }
-
         // Practitional band: summed precept-thought mood, scaled by the user's max range.
         var practitional = PractitionalBand(settings.PracticeMaxRange, Certainty.PractitionalContributors);
-
-        if (profiling)
-        {
-            _profPractitional += _profSw.ElapsedTicks;
-            if (++_profCalls % ProfLogInterval == 0)
-                LogRecacheProfile();
-        }
 
         Certainty.SetBands(structural, relational, practitional);
 
@@ -104,25 +83,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         Certainty.FinalizeRecache(structural, settings.CertaintyDriftRate);
-    }
-
-    private static void LogRecacheProfile()
-    {
-        static string Ms(long ticks) => $"{ticks * 1000.0 / (Stopwatch.Frequency * ProfLogInterval):F3}ms";
-        var subTotal = StructuralOpinionCalculator.ProfMemes + StructuralOpinionCalculator.ProfTraits
-            + StructuralOpinionCalculator.ProfDietXeno + StructuralOpinionCalculator.ProfInduced
-            + StructuralOpinionCalculator.ProfPerIssue + StructuralOpinionCalculator.ProfUniversal;
-        Log.Message(
-            $"[EI Recache/{ProfLogInterval} calls] " +
-            $"structural={Ms(_profStructural)} (memes={Ms(StructuralOpinionCalculator.ProfMemes)} traits={Ms(StructuralOpinionCalculator.ProfTraits)} " +
-            $"dietXeno={Ms(StructuralOpinionCalculator.ProfDietXeno)} induced={Ms(StructuralOpinionCalculator.ProfInduced)} perIssue={Ms(StructuralOpinionCalculator.ProfPerIssue)} " +
-            $"universal={Ms(StructuralOpinionCalculator.ProfUniversal)} overhead={Ms(_profStructural - subTotal)}) " +
-            $"relational={Ms(_profRelational)} practitional={Ms(_profPractitional)}");
-        _profCalls = 0;
-        _profStructural = _profRelational = _profPractitional = 0;
-        StructuralOpinionCalculator.ProfMemes = StructuralOpinionCalculator.ProfTraits = 0;
-        StructuralOpinionCalculator.ProfDietXeno = StructuralOpinionCalculator.ProfInduced = 0;
-        StructuralOpinionCalculator.ProfPerIssue = StructuralOpinionCalculator.ProfUniversal = 0;
     }
 
     private float RelationalBand(float maxRange, List<(string label, float pct)> contributors, GameComponent_EnhancedIdeology comp)

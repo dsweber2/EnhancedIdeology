@@ -42,6 +42,9 @@ public class Pawn_IdeoTracker(Pawn pawn)
         ideo = newIdeo;
     }
 
+    // Patch target only; the sim does not run vanilla certainty integration.
+    public void IdeoTrackerTickInterval(int delta) { }
+
     public float ApplyCertaintyChangeFactor(float delta)
         => delta * pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
 

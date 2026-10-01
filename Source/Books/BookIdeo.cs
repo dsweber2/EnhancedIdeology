@@ -3,11 +3,7 @@ using Verse.Grammar;
 
 using static RimWorld.IdeoFoundation_Deity;
 
-#if v1_5
-using PlanetTile = int;
-#else
 using RimWorld.Planet;
-#endif
 
 namespace EnhancedIdeology;
 

@@ -30,11 +30,7 @@ internal sealed class MentalState_Iconoclast : MentalState
     // Give up the mental state after being foiled for this many cumulative ticks (~1 in-game day).
     internal const int FoiledGiveUpTicks = 60000;
 
-#if v1_5
-    public override void MentalStateTick()
-#else
     public override void MentalStateTick(int delta)
-#endif
     {
         if (pawn.IsPrisonerOfColony)
         {
@@ -102,7 +98,7 @@ internal sealed class MentalState_Iconoclast : MentalState
             }
 
             var nearTarget = pawn.Position.InHorDistOf(target!.Position, JobGiver_IconoclastFireGuard.FireGuardRadius);
-            if ((target.IsBurning() || nearTarget) && pawn.IsHashIntervalTick(30))
+            if ((target.IsBurning() || nearTarget) && pawn.IsHashIntervalTick(30, delta))
             {
                 if (debateTargets.Count == 0)
                 {
@@ -151,22 +147,14 @@ internal sealed class MentalState_Iconoclast : MentalState
         }
 
         if (debateTargets.Count > 0 || fightTarget != null)
-#if v1_5
-            foiledTicks++;
-#else
             foiledTicks += delta;
-#endif
         if (foiledTicks >= FoiledGiveUpTicks)
         {
             RecoverFromState();
             return;
         }
 
-#if v1_5
-        base.MentalStateTick();
-#else
         base.MentalStateTick(delta);
-#endif
     }
 
     public override void PostEnd()
@@ -266,11 +254,7 @@ internal sealed class MentalState_Iconoclast : MentalState
     }
 
     internal static Thing? FindClosestReachable(Pawn pawn, Predicate<Thing> validator) =>
-#if !v1_5
         GenClosest.ClosestThing_Global_Reachable(
-#else
-        GenClosest.ClosestThing_Global_Reachable_NewTemp(
-#endif
             pawn.Position,
             pawn.Map,
             pawn.Map.listerThings.AllThings,

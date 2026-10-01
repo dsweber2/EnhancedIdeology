@@ -9,25 +9,9 @@ internal sealed class MentalState_ArrestedDebater : MentalState
 
     public override bool AllowRestingInBed => false;
 
-    public override void PostStart(string reason)
-    {
-        base.PostStart(reason);
-        Log.Message($"[EB] ArrestedDebater PostStart: {pawn.LabelShort} prisoner={pawn.IsPrisonerOfColony} spawned={pawn.Spawned}");
-    }
-
-    public override void PostEnd()
-    {
-        Log.Message($"[EB] ArrestedDebater PostEnd: {pawn.LabelShort} curJob={pawn.CurJobDef?.defName ?? "null"}");
-        base.PostEnd();
-    }
-
-#if v1_5
-    public override void MentalStateTick()
-#else
     public override void MentalStateTick(int delta)
-#endif
     {
-        if (pawn.IsHashIntervalTick(DebateIntervalTicks))
+        if (pawn.IsHashIntervalTick(DebateIntervalTicks, delta))
         {
             var target = FindDebateTarget();
             if (target != null)
@@ -51,11 +35,7 @@ internal sealed class MentalState_ArrestedDebater : MentalState
                 }
             }
         }
-#if v1_5
-        base.MentalStateTick();
-#else
         base.MentalStateTick(delta);
-#endif
     }
 
     private Pawn? FindDebateTarget()

@@ -209,14 +209,23 @@ Can be used as a contemplation site. Contemplation gain: 2× (4× with a matchin
 		</value>
 	</Operation>
 
-	<!-- Pew (no existing comps) -->
-	<Operation Class="PatchOperationAdd">
-		<xpath>/Defs/ThingDef[defName="Pew"]</xpath>
-		<value>
-			<comps>
+	<!-- Pew -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="Pew"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="Pew"]/comps</xpath>
+			<value>
 				<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
-			</comps>
-		</value>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="Pew"]</xpath>
+			<value>
+				<comps>
+					<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
+				</comps>
+			</value>
+		</nomatch>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="Pew"]/description</xpath>
@@ -227,14 +236,23 @@ Can be used as a contemplation site. Contemplation gain: 1×.</description>
 		</value>
 	</Operation>
 
-	<!-- KneelSheet (no existing comps) -->
-	<Operation Class="PatchOperationAdd">
-		<xpath>/Defs/ThingDef[defName="KneelSheet"]</xpath>
-		<value>
-			<comps>
+	<!-- KneelSheet -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="KneelSheet"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="KneelSheet"]/comps</xpath>
+			<value>
 				<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
-			</comps>
-		</value>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="KneelSheet"]</xpath>
+			<value>
+				<comps>
+					<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
+				</comps>
+			</value>
+		</nomatch>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="KneelSheet"]/description</xpath>
@@ -245,14 +263,23 @@ Can be used as a contemplation site. Contemplation gain: 1×.</description>
 		</value>
 	</Operation>
 
-	<!-- KneelPillow (no existing comps) -->
-	<Operation Class="PatchOperationAdd">
-		<xpath>/Defs/ThingDef[defName="KneelPillow"]</xpath>
-		<value>
-			<comps>
+	<!-- KneelPillow -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="KneelPillow"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="KneelPillow"]/comps</xpath>
+			<value>
 				<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
-			</comps>
-		</value>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="KneelPillow"]</xpath>
+			<value>
+				<comps>
+					<li Class="EnhancedIdeology.CompProperties_ContemplationSite"/>
+				</comps>
+			</value>
+		</nomatch>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="KneelPillow"]/description</xpath>

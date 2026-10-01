@@ -35,4 +35,4 @@ Infrastructure and entry points that don't belong to a single subsystem:
 - `HediffComp_BrainwipeRecovery.cs` — hediff comp for brainwipe susceptibility multiplier
 - `Compat_PeerPressure.cs` — peer-pressure mod compatibility shim
 - `DebugActions.cs` — dev-mode debug action menu entries
-- `HotSwappableAttribute.cs`, `GlobalSuppressions.cs`, `globalusings.cs`, `ConditionalWeakTable.cs` — infrastructure
+- `HotSwappableAttribute.cs`, `GlobalSuppressions.cs`, `globalusings.cs` — infrastructure

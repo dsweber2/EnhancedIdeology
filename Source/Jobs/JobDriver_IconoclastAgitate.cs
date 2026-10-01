@@ -24,10 +24,7 @@ internal sealed class JobDriver_IconoclastAgitate : JobDriver
 
         var harangue = ToilMaker.MakeToil("IconoclastHarangue");
         harangue.initAction = () =>
-        {
-            var debated = pawn.interactions.TryInteractWith(Recipient, EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept);
-            Log.Message($"[EB] Iconoclast {pawn.LabelShort} agitating {Recipient.LabelShort}: debated={debated}");
-        };
+            pawn.interactions.TryInteractWith(Recipient, EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept);
         harangue.defaultDuration = HarangueTicks;
         harangue.defaultCompleteMode = ToilCompleteMode.Delay;
         harangue.handlingFacing = true;

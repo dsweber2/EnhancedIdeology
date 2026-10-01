@@ -27,12 +27,10 @@ internal sealed class EnhancedIdeologyMod : Mod
         Settings.DoSettingsWindowContents(inRect);
     }
 
-#if DEBUG
     public override string SettingsCategory()
     {
         return Content.Name;
     }
-#endif
 
     public static void Message(string msg)
     {
@@ -50,6 +48,10 @@ internal sealed class EnhancedIdeologyMod : Mod
     [Conditional("DEBUG")]
     public static void Debug(string message)
     {
+        if (!Prefs.DevMode)
+        {
+            return;
+        }
         Log.ResetMessageCount();
         DevMessage(message);
     }
@@ -57,10 +59,9 @@ internal sealed class EnhancedIdeologyMod : Mod
     [Conditional("DEBUG")]
     public static void DebugIf(bool condition, string message)
     {
-        Log.ResetMessageCount();
         if (condition)
         {
-            DevMessage(message);
+            Debug(message);
         }
     }
 

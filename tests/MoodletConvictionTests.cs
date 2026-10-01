@@ -125,4 +125,21 @@ public class MoodletConvictionTests : SeededTest
         var after = tracker.IssueStances().First(s => s.issue == issue);
         Assert.Equal(startStrength + 0.5f, after.strength, precision: 4);
     }
+
+    [Fact]
+    public void PreceptlessThought_OnPawnWithoutIdeo_IsSkipped()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var ideo = new IdeoBuilder().WithName("TestIdeo").Build();
+        world.AddIdeo(ideo);
+
+        var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
+        world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        pawn.ideo.ideo = null;
+        pawn.needs.mood.thoughts.memories.Memories.Add(new Thought_MemeMemory { ConvictionDeltaPerTickLong = 0.5f });
+
+        world.Comp.ApplyMoodletConvictionShifts();
+    }
 }

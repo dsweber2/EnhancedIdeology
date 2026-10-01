@@ -18,7 +18,7 @@ internal static class Compat_PeerPressure
     // Test-only injection point — lets unit tests exercise the math without a real PP assembly.
     internal static void SetForTest(Func<int, float>? fn) => _certaintyReductionOpinion = fn;
 
-#if SIM
+#if TESTS
     internal static void Initialize() { }
 
     internal static string? OpinionTooltipLine(Pawn initiator, Pawn recipient) => null;

@@ -1,9 +1,11 @@
 global using System;
 global using System.Collections.Generic;
+global using System.Globalization;
 global using System.Linq;
 global using RimWorld;
 global using UnityEngine;
 global using Verse;
 global using EnhancedIdeology;
-global using EnhancedIdeology.Sim;
+global using EnhancedIdeology.Tests.Support;
+global using HarmonyLib;
 global using Xunit;

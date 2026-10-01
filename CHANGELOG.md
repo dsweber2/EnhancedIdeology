@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2]
+
+Initial release of Enhanced Ideology.
+
+## Enhanced Beliefs history
+
+The entries below are from Enhanced Beliefs (Updated), the mod that Enhanced Ideology forked from.
+They do not describe Enhanced Ideology.
+
 ## [0.4.3] - 2025-09-11
 
 ### Fixed

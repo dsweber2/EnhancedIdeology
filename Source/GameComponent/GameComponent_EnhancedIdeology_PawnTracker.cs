@@ -1,7 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-#if !v1_5
 using System.Runtime.CompilerServices;
-#endif
 
 namespace EnhancedIdeology;
 

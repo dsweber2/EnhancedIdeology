@@ -22,11 +22,7 @@ internal sealed class JobGiver_CrisisOfFaith : ThinkNode_JobGiver
 
     private static BookIdeo? FindReadableReligiousBook(Pawn pawn)
     {
-#if !v1_5
         return GenClosest.ClosestThing_Global_Reachable(
-#else
-        return GenClosest.ClosestThing_Global_Reachable_NewTemp(
-#endif
             pawn.Position,
             pawn.Map,
             pawn.Map.listerThings.AllThings,

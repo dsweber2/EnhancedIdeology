@@ -3,9 +3,9 @@
 Harmony patches on vanilla entry points. Each file patches one or a small cluster of related methods.
 
 **Lifecycle / tick:**
-- `IdeoTracker_TickInterval.cs` — tick hook: advances certainty drift, fires `TryBackgroundConversion`, applies conviction decay
+- `IdeoTracker_TickInterval.cs` — tick hook: advances certainty drift, fires `TryBackgroundConversion`, applies conviction decay; interval checks take vanilla's `delta` (1.6 ticks pawns every 1–15 ticks); also compiled into the tests (`TickScheduleTests`)
 - `PawnComponentsUtility_Initialize.cs` — attaches `IdeoTrackerData` on pawn spawn
-- `Pawn_ExposeData.cs` — syncs tracker on save/load
+- `Pawn_ExposeData.cs` — syncs tracker on save/load; holds data for pawns loaded before the game component exists (other mods' components) until PostLoadInit
 - `PawnGenerator_Generate.cs` — seeds initial stances on pawn generation
 - `BackCompatibility_TypeMigration.cs` — handles save-file type renames from namespace migrations
 

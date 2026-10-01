@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace EnhancedIdeology;
 
 // Certainty-independent structural opinion (0-100) a pawn holds toward an ideo. Shared by the
@@ -8,9 +6,6 @@ namespace EnhancedIdeology;
 internal static class StructuralOpinionCalculator
 {
     private const float UniversalPositiveBonus = 5f;
-
-    // Dev-mode sub-profiling for the structural computation; reset by IdeoTrackerData.LogRecacheProfile.
-    internal static long ProfMemes, ProfTraits, ProfDietXeno, ProfInduced, ProfPerIssue, ProfUniversal;
 
     // Compute the structural opinion (0-100) that `pawn` holds toward `ideo`. If `contributors` is
     // supplied, each term is appended (in certainty-fraction units) for the tooltip breakdown.
@@ -24,8 +19,6 @@ internal static class StructuralOpinionCalculator
         var pawnIdeo = pawn.Ideo!;
         var start = contributors?.Count ?? 0;
         float opinion = 0;
-        var profiling = Prefs.DevMode;
-        var structSw = profiling ? Stopwatch.StartNew() : null;
 
         // Loyalty memes of the pawn's own faith set their attitude toward other faiths, so the own ideo is exempt.
         if (ideo != pawnIdeo && LoyaltyMemeOpinion(pawnIdeo) is { } loyalty)
@@ -85,7 +78,6 @@ internal static class StructuralOpinionCalculator
             contributors?.Add((wealthEqual.LabelCap + " / " + wealthStrat.LabelCap, -10f));
         }
 
-        if (structSw != null) { ProfMemes += structSw.ElapsedTicks; structSw.Restart(); }
 
         // Pawn trait compatibility with target ideo's memes.
         foreach (var meme in ideo.memes)
@@ -107,7 +99,6 @@ internal static class StructuralOpinionCalculator
                     }
         }
 
-        if (structSw != null) { ProfTraits += structSw.ElapsedTicks; structSw.Restart(); }
 
         // Diet gene bonuses: obligate herbivores/carnivores feel a strong pull toward ideos that share
         // their dietary needs, and an extra pull toward the Vegan meme when herbivorous.
@@ -163,7 +154,6 @@ internal static class StructuralOpinionCalculator
             }
         }
 
-        if (structSw != null) { ProfDietXeno += structSw.ElapsedTicks; structSw.Restart(); }
 
         // Structural precept fit: for each issue the target ideo takes a position on or the pawn holds a stance
         // on, how the target's stance compares to the pawn's preferred stance, weighted by conviction, averaged
@@ -179,7 +169,6 @@ internal static class StructuralOpinionCalculator
             .Concat(stances.IssueStances().Select(stance => stance.issue).Where(issue => HoldsStance(stances, issue)))
             .Concat(inducedTargets)
             .Distinct();
-        if (structSw != null) { ProfInduced += structSw.ElapsedTicks; structSw.Restart(); }
 
         foreach (var issue in relevantIssues)
         {
@@ -200,7 +189,6 @@ internal static class StructuralOpinionCalculator
                     contributors[ii] = (contributors[ii].label, contributors[ii].pct * 5f / issueCount);
         }
 
-        if (structSw != null) { ProfPerIssue += structSw.ElapsedTicks; structSw.Restart(); }
 
         // Universally-valued issues (Charity): a flat boost when the target ideo holds a stance on them.
         foreach (var issue in DefDatabase<IssueDef>.AllDefs)
@@ -229,7 +217,6 @@ internal static class StructuralOpinionCalculator
             for (var ii = start; ii < contributors.Count; ii++)
                 contributors[ii] = (contributors[ii].label, contributors[ii].pct / 100f);
 
-        if (structSw != null) ProfUniversal += structSw.ElapsedTicks;
 
         return Mathf.Max(opinion, 0);
     }
