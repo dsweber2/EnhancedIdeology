@@ -1,7 +1,7 @@
 namespace EnhancedIdeology;
 
 // Ritual side-effect: all participants' per-issue stances are nudged toward their ideo's orthodox rank and
-// toward maximum conviction (design.md R3). Quality scales the effect: positive outcomes harden belief,
+// toward maximum conviction (docs/design.md "Belief change"). Quality scales the effect: positive outcomes harden belief,
 // negative outcomes erode it (moving toward heterodoxy and doubt). The step uses the same conviction-valley
 // arc as debates, so conviction craters through the muddled middle before recovering at the new rung.
 //

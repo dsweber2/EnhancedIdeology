@@ -1,6 +1,6 @@
 namespace EnhancedIdeology;
 
-// The moral-guide Convert ability, reworked (design.md R3) into a player-directed bundle of normal-strength
+// The moral-guide Convert ability, reworked (docs/design.md "Belief change") into a player-directed bundle of normal-strength
 // conversions resolved on a single debate roll: mostly a high-skill pawn firing several ordinary conversions at
 // once. Kept free of Harmony/ability types so it compiles into the simulator; the gizmo wiring (messages, sound,
 // tooltip) lives in the CompAbilityEffect_Convert Harmony patch.

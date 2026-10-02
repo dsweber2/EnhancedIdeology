@@ -129,10 +129,11 @@ public class DebateTests : SeededTest
     }
 
     [Fact]
-    public void DebatePrecept_NoSharedIssue_IsANoOp()
+    public void DebatePrecept_InitiatorOnlyIssue_IsDebated_RecipientOnlyIssueIsNot()
     {
-        // Two cross-ideo pawns whose ideos cover entirely different issues: GetDebateTopic falls back to null
-        // and neither pawn's stance moves.
+        // Two cross-ideo pawns whose ideos cover entirely different issues. The initiator raises the issue their
+        // own ideo covers and wins, so the recipient slides toward rung 0 on it. The issue only the recipient's
+        // ideo covers is never raised and does not move.
         var world = new SimWorld();
         world.Initialize();
         Rand.SetSeed(1);
@@ -152,12 +153,50 @@ public class DebateTests : SeededTest
             .WithLabel("Recip").Build(world);
 
         var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
-        var before = StanceRank(recipientTracker, issueB);
+        var beforeA = StanceRank(recipientTracker, issueA);
+        var beforeB = StanceRank(recipientTracker, issueB);
 
-        new InteractionWorker_IdeologicalDebatePrecept().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+        var worker = new InteractionWorker_IdeologicalDebatePrecept();
+        worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
 
-        var after = StanceRank(recipientTracker, issueB);
-        Assert.Equal(before, after);
+        Assert.Equal(issueA, worker.logTopic);
+        Assert.True(StanceRank(recipientTracker, issueA) > beforeA,
+            $"Expected recipient to slide toward rung 0 on IssueA. before={beforeA}, after={StanceRank(recipientTracker, issueA)}");
+        Assert.Equal(beforeB, StanceRank(recipientTracker, issueB));
+    }
+
+    [Fact]
+    public void DebatePrecept_RecipientIdeoSilent_RecipientWinPullsTowardDontCare()
+    {
+        // The recipient's ideo has no precept on the topic, so the recipient's personal stance is seeded at the
+        // default "Don't care" rung at -1. A recipient win slides the initiator from rung 1 toward it.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (issue, rungs) = SimIssues.Ladder("SilentIssue", "S0", "S1");
+        var initiatorIdeo = new IdeoBuilder().WithName("Opinionated").AddPrecept(rungs[1]).Build();
+        var recipientIdeo = new IdeoBuilder().WithName("Silent").Build();
+        world.AddIdeo(initiatorIdeo);
+        world.AddIdeo(recipientIdeo);
+
+        var initiator = new PawnBuilder()
+            .WithIdeo(initiatorIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Init").Build(world);
+        var recipient = new PawnBuilder()
+            .WithIdeo(recipientIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Recip").Build(world);
+
+        var initiatorTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(initiator);
+        var before = StanceRank(initiatorTracker, issue);
+
+        var worker = new InteractionWorker_IdeologicalDebatePrecept();
+        worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        Assert.Equal(recipient, worker.lastWinner);
+        Assert.Null(worker.lastWinnerPrecept);
+        Assert.True(StanceRank(initiatorTracker, issue) < before,
+            $"Expected initiator to slide toward Don't care. before={before}, after={StanceRank(initiatorTracker, issue)}");
     }
 
     [Fact]
@@ -463,6 +502,111 @@ public class DebateTests : SeededTest
         worker.Interacted(iconoclast, target, [], out _, out _, out _, out _);
 
         Assert.Equal(issueA, worker.logTopic);
+    }
+
+    [Fact]
+    public void DebatePrecept_WinnerArguesPersonalStance_NotIdeoRung()
+    {
+        // The recipient's ideo holds rung 3, but the recipient personally sits at rung 0. The initiator holds
+        // rung 2. A recipient win pulls the initiator down toward rung 0, not up toward the ideo's rung 3.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (issue, rungs) = SimIssues.Ladder("DriftIssue", "D0", "D1", "D2", "D3");
+        var initiatorIdeo = new IdeoBuilder().WithName("DriftInit").AddPrecept(rungs[2]).Build();
+        var recipientIdeo = new IdeoBuilder().WithName("DriftRecip").AddPrecept(rungs[3]).Build();
+        world.AddIdeo(initiatorIdeo);
+        world.AddIdeo(recipientIdeo);
+
+        var initiator = new PawnBuilder()
+            .WithIdeo(initiatorIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Init").Build(world);
+        var recipient = new PawnBuilder()
+            .WithIdeo(recipientIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Recip").Build(world);
+
+        var initiatorTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(initiator);
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var recipientStrength = recipientTracker.IssueStances().First(s => s.issue == issue).strength;
+        recipientTracker.SetIssueStance(issue, 0f, recipientStrength);
+        var before = StanceRank(initiatorTracker, issue);
+
+        var worker = new InteractionWorker_IdeologicalDebatePrecept();
+        worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        Assert.Equal(recipient, worker.lastWinner);
+        Assert.Equal(rungs[0], worker.lastWinnerPrecept);
+        Assert.True(StanceRank(initiatorTracker, issue) < before,
+            $"Expected initiator to slide toward the recipient's personal rung 0. before={before}, after={StanceRank(initiatorTracker, issue)}");
+    }
+
+    [Fact]
+    public void TopicWeight_FullLadderGap_ScoresTwentyPlusConvictionGap()
+    {
+        // Four rungs plus the default "Don't care" rung at -1: span is 4.
+        var (issue, _) = SimIssues.Ladder("WeightFull", "WF0", "WF1", "WF2", "WF3");
+
+        var weight = InteractionWorker_IdeologicalDebatePrecept.TopicWeight(issue, (-1f, 10f), (3f, 4f));
+
+        Assert.Equal(26f, weight, 3);
+    }
+
+    [Fact]
+    public void TopicWeight_PartialGap_ScalesByLadderSpan()
+    {
+        var (issue, _) = SimIssues.Ladder("WeightPartial", "WP0", "WP1", "WP2", "WP3");
+
+        var weight = InteractionWorker_IdeologicalDebatePrecept.TopicWeight(issue, (0f, 8f), (1f, 8f));
+
+        Assert.Equal(5f, weight, 3);
+    }
+
+    [Fact]
+    public void TopicWeight_SameRung_IsConvictionGapOnly()
+    {
+        var (issue, _) = SimIssues.Ladder("WeightSame", "WS0", "WS1");
+
+        var weight = InteractionWorker_IdeologicalDebatePrecept.TopicWeight(issue, (1f, 3f), (1f, 9f));
+
+        Assert.Equal(6f, weight, 3);
+    }
+
+    [Fact]
+    public void DebatePrecept_FavoursWiderDisagreement()
+    {
+        // Cross-ideo pawns on two four-rung issues: a full-ladder gap on WideIssue against a one-rung gap on
+        // NarrowIssue. Proportional sampling picks the wide issue roughly 20:5 over the narrow one.
+        var (wideIssue, wideRungs) = SimIssues.Ladder("WideIssue", "W0", "W1", "W2", "W3");
+        var (narrowIssue, narrowRungs) = SimIssues.Ladder("NarrowIssue", "N0", "N1", "N2", "N3");
+        var wideCount = 0;
+        const int trials = 200;
+
+        for (var ii = 0; ii < trials; ii++)
+        {
+            var world = new SimWorld();
+            world.Initialize();
+            Rand.SetSeed(ii);
+
+            var initiatorIdeo = new IdeoBuilder().WithName($"WideA{ii}")
+                .AddPrecept(wideRungs[0]).AddPrecept(narrowRungs[0]).Build();
+            var recipientIdeo = new IdeoBuilder().WithName($"WideB{ii}")
+                .AddPrecept(wideRungs[3]).AddPrecept(narrowRungs[1]).Build();
+            world.AddIdeo(initiatorIdeo);
+            world.AddIdeo(recipientIdeo);
+
+            var initiator = new PawnBuilder().WithIdeo(initiatorIdeo).WithLabel("Init").Build(world);
+            var recipient = new PawnBuilder().WithIdeo(recipientIdeo).WithLabel("Recip").Build(world);
+
+            var worker = new InteractionWorker_IdeologicalDebatePrecept();
+            worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
+            if (worker.logTopic == wideIssue)
+            {
+                wideCount++;
+            }
+        }
+
+        Assert.InRange(wideCount, trials * 0.6, trials * 0.95);
     }
 
     private static float StanceRank(IdeoTrackerData tracker, IssueDef issue) =>

@@ -1,6 +1,6 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers the cross-precept "Interactions" couplings (preceptPolicy.md): induced stances, where holding one
+// Covers the cross-precept "Interactions" couplings (docs/preceptPolicy.md): induced stances, where holding one
 // precept implies a stance on another issue, and directional penalties for single-rung target issues.
 public class InteractionCouplingTests : SeededTest
 {

@@ -1,7 +1,7 @@
 namespace EnhancedIdeology;
 
 // Special-opinion resolvers and cross-precept coupling tables for PreceptPolicy.
-// See preceptPolicy.md "Special" and "Interactions" sections.
+// See docs/preceptPolicy.md "Special" and "Interactions" sections.
 internal static partial class PreceptPolicy
 {
     // The rungs of VME_Mood that clash with everything (including each other) rather than sitting on the

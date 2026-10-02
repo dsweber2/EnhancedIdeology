@@ -319,7 +319,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             Certainty.ScheduleCalibration(Pawn.ideo.Certainty);
     }
 
-    // Persuasion write-path (design.md R2). Nudge the pawn's personal stance on `issue`: slide the
+    // Persuasion write-path (docs/design.md "Belief change"). Nudge the pawn's personal stance on `issue`: slide the
     // preferred rung a `pull` fraction (0-1) of the remaining gap toward `targetRank`, and shift conviction
     // by `strengthDelta` points. This is how debates and books move belief - the personal preferred rung
     // drifts away from the pawn's own ideo toward whatever is being argued, eroding structural fit with their

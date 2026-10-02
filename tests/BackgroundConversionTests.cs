@@ -1,7 +1,7 @@
 namespace EnhancedIdeology.Tests;
 
 // Covers the spontaneous (background) conversion path: the relative-preference probability, the
-// time-integrated hazard, and the pace setting. See design.md R1.
+// time-integrated hazard, and the pace setting. See docs/design.md "Conversion".
 public class BackgroundConversionTests : SeededTest
 {
     private static void WithPace(float pace, Action body)

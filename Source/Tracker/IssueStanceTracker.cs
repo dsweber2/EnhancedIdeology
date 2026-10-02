@@ -89,7 +89,7 @@ internal sealed class IssueStanceTracker
         return PreceptPolicy.InducedRank(ideo, issue) ?? PreceptLadder.DontCareRank(issue);
     }
 
-    // Per-pawn shift to conviction strength from personality traits (design.md R2, 2b).
+    // Per-pawn shift to conviction strength from personality traits (docs/design.md "Strength").
     internal static float ConvictionOffsetFromTraits(IEnumerable<Trait> traits)
     {
         var offset = 0f;

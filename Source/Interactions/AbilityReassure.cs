@@ -1,6 +1,6 @@
 namespace EnhancedIdeology;
 
-// The moral-guide Reassure ability, reworked (design.md R3) as conversion's same-ideo mirror: pulls the
+// The moral-guide Reassure ability, reworked (docs/design.md "Belief change") as conversion's same-ideo mirror: pulls the
 // target's stances toward their own ideo's orthodox rungs (hardening belief) and nudges certainty up on a
 // won debate roll. Self-targeting (self-reassurance) bypasses the roll and always succeeds.
 [HotSwappable]

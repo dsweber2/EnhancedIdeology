@@ -1,6 +1,6 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers the trait-conviction shift to per-issue strength (design.md R2, 2b): strong-willed pawns hold
+// Covers the trait-conviction shift to per-issue strength (docs/design.md "Strength"): strong-willed pawns hold
 // beliefs more firmly, anxious / pessimistic / neurotic ones more weakly. The offset logic is pure, so it
 // is tested directly; a single integration test confirms it is actually wired into seeding.
 public class TraitConvictionTests : SeededTest

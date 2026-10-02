@@ -3,7 +3,7 @@
 build:
 	dotnet build Source/EnhancedIdeology.csproj
 
-test:
+test: build
 	dotnet test tests/EnhancedIdeology.Tests.csproj
 
 logs:

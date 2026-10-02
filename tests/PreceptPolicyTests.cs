@@ -1,7 +1,7 @@
 namespace EnhancedIdeology.Tests;
 
 // Covers the PreceptPolicy resolver: category classification, the rung-order fix for scrambled stacks, and
-// how the category gates structural opinion (preceptPolicy.md).
+// how the category gates structural opinion (docs/preceptPolicy.md).
 public class PreceptPolicyTests : SeededTest
 {
     [Fact]

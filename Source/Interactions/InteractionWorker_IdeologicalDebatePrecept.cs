@@ -14,7 +14,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // Iconoclast mental break: multiplies draw fight chance. Passionate certainty gives a roll bonus.
     internal const float IconoclastRollBonus = 0.5f;
 
-    // A tie hardens both sides (design.md R3). Per pawn, base probability of digging in, the conviction points
+    // A tie hardens both sides (docs/design.md "Belief change"). Per pawn, base probability of digging in, the conviction points
     // gained on the contested issue, and the certainty gained - all before the same stat/jitter scaling.
     private const float DebateEntrenchBaseChance = 0.2f;
     private const float DebateEntrenchStrengthGain = 1f;
@@ -128,21 +128,16 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         if (initiatorIdeo == null || recipientIdeo == null) return;
 
         this.initiatorIdeo = initiatorIdeo;
-        topic = GetDebateTopic(initiatorIdeo, recipientIdeo, initiatorTracker, recipientTracker, initiator, recipient, out var initiatorPrecept, out var recipientPrecept);
+        topic = GetDebateTopic(initiatorIdeo, recipientIdeo, initiatorTracker, recipientTracker, initiator, out var initiatorPrecept);
         logTopic = topic;
         topicPrecept = initiatorPrecept;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate topic selected: {topic}");
-        if (initiatorPrecept == null)
+        if (topic == null || initiatorPrecept == null)
         {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "No initiator precept found. Exiting.");
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "No debate topic found. Exiting.");
             return;
         }
-        if (recipientPrecept == null)
-        {
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "No recipient precept found. Exiting.");
-            return;
-        }
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Initiator's precept: {initiatorPrecept}, recipient's precept: {recipientPrecept}");
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Initiator's precept: {initiatorPrecept}");
 
         var initiatorRoll = GetDebateRoll(initiator);
         var recipientRoll = GetDebateRoll(recipient);
@@ -154,7 +149,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         if (Math.Abs(initiatorRoll - recipientRoll) <= drawThreshold)
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
-            if (HandleDraw(interaction, initiator, recipient, initiatorTracker, recipientTracker, [initiatorPrecept], [recipientPrecept]))
+            if (HandleDraw(interaction, initiator, recipient, initiatorTracker, recipientTracker, [topic], [topic]))
             {
                 EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight). Exiting.");
                 return;
@@ -164,7 +159,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         else
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is not a draw. Adjusting opinions.");
-            var (winner, loser, issue, winnerPrecept) = AdjustOpinions(initiator, recipient, comp, initiatorPrecept, recipientPrecept, initiatorRoll, recipientRoll);
+            var (winner, loser, issue, winnerPrecept) = AdjustOpinions(initiator, recipient, comp, topic, initiatorRoll, recipientRoll);
             lastWinner = winner;
             lastLoser = loser;
 
@@ -201,7 +196,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             }
         }
 
-        // Precept-driven social aftermath, evaluated per pawn on every non-fight outcome (design.md R3).
+        // Precept-driven social aftermath, evaluated per pawn on every non-fight outcome (docs/design.md "Belief change").
         ApplyDiversityAftermath(initiator, recipient);
         ApplyApostacyAftermath(initiator, recipient);
         ApplyProselytizerAftermath(initiator, crossIdeo: initiatorIdeo != recipientIdeo,
@@ -211,8 +206,8 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     private static IssueDef? GetDebateTopic(
         Ideo initiatorIdeo, Ideo recipientIdeo,
         IdeoTrackerData initiatorTracker, IdeoTrackerData recipientTracker,
-        Pawn initiator, Pawn recipient,
-        out PreceptDef? initiatorPrecept, out PreceptDef? recipientPrecept)
+        Pawn initiator,
+        out PreceptDef? initiatorPrecept)
     {
         // Conviction is per pawn, not per precept, so pull each pawn's own stance on every issue. Two same-faith
         // pawns share every precept; what they can argue about is how firmly they each hold it.
@@ -221,30 +216,25 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var recipientStances = recipientTracker.IssueStances()
             .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
 
+        // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
+        // them. Each side argues from their personal stance (see AdjustOpinions).
         // Issues without a seeded stance (PreceptCategory.NA: buildings, ritual seats, naming) aren't a belief
         // axis and never get a personal stance recorded, so excluding them here is just staying in sync with
         // IssueStanceTracker.EnsureSeeded rather than a bespoke category check.
-        var sharedIssues = initiatorIdeo.precepts.Select(p => p.def.issue)
-            .Intersect(recipientIdeo.precepts.Select(p => p.def.issue))
-            .Distinct()
-            .Where(issue => initiatorStances.ContainsKey(issue!) && recipientStances.ContainsKey(issue!));
-
-        var conflictingIssues = sharedIssues
-            .Select(issue => (
-                issue,
-                initiatorPrecept: GetPreceptForTopic(initiatorIdeo, issue, initiator),
-                recipientPrecept: GetPreceptForTopic(recipientIdeo, issue, recipient)
-            ))
-            .Where(ip =>
-                ip.initiatorPrecept != null &&
-                Disagree(initiatorStances[ip.issue!], recipientStances[ip.issue!]))
+        var conflictingIssues = initiatorIdeo.precepts
+            .Select(p => p.def)
+            .Where(def => def.issue != null
+                && initiatorStances.ContainsKey(def.issue)
+                && recipientStances.ContainsKey(def.issue)
+                && Disagree(initiatorStances[def.issue], recipientStances[def.issue]))
+            .GroupBy(def => def.issue)
+            .Select(group => group.First())
             .ToList();
 
         if (conflictingIssues.Count == 0)
         {
             EnhancedIdeologyMod.Warning("GetDebateTopic: No conflicting topics found. Exiting.");
             initiatorPrecept = null;
-            recipientPrecept = null;
             return null;
         }
 
@@ -252,18 +242,27 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         // sampled proportionally to opposition magnitude via exponential racing (-log(U)/w).
         if (initiator.MentalState is MentalState_Iconoclast)
         {
-            var best = conflictingIssues.MinBy(ip =>
+            initiatorPrecept = conflictingIssues.MinBy(def =>
             {
-                var w = Mathf.Max(-initiatorTracker.IssueOpinionToward(recipientIdeo, ip.issue!), float.Epsilon);
+                var w = Mathf.Max(-initiatorTracker.IssueOpinionToward(recipientIdeo, def.issue), float.Epsilon);
                 return -Mathf.Log(Rand.Value) / w;
             });
-            initiatorPrecept = best.initiatorPrecept;
-            recipientPrecept = best.recipientPrecept;
-            return best.issue;
+            return initiatorPrecept.issue;
         }
 
-        (var selectedIssue2, initiatorPrecept, recipientPrecept) = conflictingIssues.RandomElement();
-        return selectedIssue2;
+        // Sample proportionally to how far apart the two pawns are on each issue, via exponential racing.
+        initiatorPrecept = conflictingIssues.MinBy(def =>
+            -Mathf.Log(Rand.Value) / TopicWeight(def.issue, initiatorStances[def.issue], recipientStances[def.issue]));
+        return initiatorPrecept.issue;
+    }
+
+    // Rung gap as a fraction of the full ladder span, scaled to the 0-20 conviction range, plus the conviction gap.
+    // The span includes the virtual "Don't care" rung when it sits below rung 0. A single-rung ladder has no
+    // span, so it is clamped to 1 to keep the weight finite.
+    internal static float TopicWeight(IssueDef issue, (float rank, float strength) a, (float rank, float strength) b)
+    {
+        var span = PreceptLadder.Rungs(issue).Count - 1 - Mathf.Min(0f, PreceptLadder.DontCareRank(issue));
+        return (Mathf.Abs(a.rank - b.rank) / Mathf.Max(span, 1f) * 20f) + Mathf.Abs(a.strength - b.strength);
     }
 
     // A topic is worth debating when the two pawns' personal stances differ: either a different rung (cross-faith,
@@ -271,16 +270,6 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     private static bool Disagree((float rank, float strength) a, (float rank, float strength) b) =>
         Mathf.Abs(a.rank - b.rank) > DebateRankEpsilon
         || Mathf.Abs(a.strength - b.strength) > DebateStrengthGap;
-
-    private static PreceptDef? GetPreceptForTopic(Ideo ideo, IssueDef? topic, Pawn pawn)
-    {
-        var precept = ideo.precepts.Select(p => p.def).FirstOrDefault(d => d.issue == topic);
-        if (precept == null)
-        {
-            EnhancedIdeologyMod.Error($"Could not find precept for {pawn} on topic {topic}. This should not happen.");
-        }
-        return precept;
-    }
 
     // intellectual impact ranges from 0 to ~2.2 (integer-stepped by the /100)
     internal static float IntellectualImpact(Pawn pawn) => pawn.skills.GetSkill(SkillDefOf.Intellectual).Level * 11 / 100;
@@ -366,8 +355,8 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         Pawn recipient,
         IdeoTrackerData initiatorTracker,
         IdeoTrackerData recipientTracker,
-        IEnumerable<PreceptDef> initiatorPrecepts,
-        IEnumerable<PreceptDef> recipientPrecepts)
+        IEnumerable<IssueDef> initiatorIssues,
+        IEnumerable<IssueDef> recipientIssues)
     {
         float socialFightChance;
         if (initiator.MentalState is MentalState_Iconoclast || recipient.MentalState is MentalState_Iconoclast)
@@ -417,10 +406,10 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         // Neither side backs down, so each digs in. A pawn entrenches with a probability that rises with
         // intelligence (a smarter arguer rationalizes the stalemate into vindication) and with how shaky their
         // faith already is; digging in strengthens conviction on the contested issue and nudges certainty up.
-        foreach (var precept in initiatorPrecepts)
-            TryEntrench(initiator, initiatorTracker, precept);
-        foreach (var precept in recipientPrecepts)
-            TryEntrench(recipient, recipientTracker, precept);
+        foreach (var issue in initiatorIssues)
+            TryEntrench(initiator, initiatorTracker, issue);
+        foreach (var issue in recipientIssues)
+            TryEntrench(recipient, recipientTracker, issue);
 
         // Pin the interloper: MentalState_Iconoclast.MentalStateTick re-interrupts their job every 15 ticks
         // so they can't make progress on firefighting/repair between debate rounds.
@@ -431,7 +420,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         return false;
     }
 
-    internal static void TryEntrench(Pawn pawn, IdeoTrackerData tracker, PreceptDef precept)
+    internal static void TryEntrench(Pawn pawn, IdeoTrackerData tracker, IssueDef issue)
     {
         var entrenchChance = DebateEntrenchBaseChance
             * (0.75f + (pawn.skills.GetSkill(SkillDefOf.Intellectual).Level * 0.05f))
@@ -445,9 +434,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         // A resistant pawn (CertaintyLossFactor < 1) also hardens less; fold it in so entrenchment mirrors the
         // fragility scaling the rest of the debate uses.
         var strengthGain = DebateEntrenchStrengthGain * pawn.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
-        tracker.ShiftIssueStance(precept.issue!, 0f, 0f, strengthGain);
+        tracker.ShiftIssueStance(issue, 0f, 0f, strengthGain);
         pawn.ideo.Certainty = Mathf.Clamp01(pawn.ideo.Certainty + (DebateEntrenchCertaintyGain * (0.8f + (Rand.Value * 0.4f))));
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"TryEntrench: {pawn} dug in (+{strengthGain} conviction on {precept.issue}).");
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"TryEntrench: {pawn} dug in (+{strengthGain} conviction on {issue}).");
     }
 
     // Diversity-of-thought aftermath: how a pawn feels about the person they just debated depends on their
@@ -548,27 +537,20 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"ApplyApostacyAftermath: {pawn} gained EB_ApostacyDebated (strictness={EnhancedIdeologyUtilities.ApostacyStrictness(pawn.Ideo):F2})");
     }
 
-    private static (Pawn winner, Pawn loser, IssueDef issue, PreceptDef winnerPrecept) AdjustOpinions(Pawn initiator, Pawn recipient, GameComponent_EnhancedIdeology comp, PreceptDef initiatorPrecept, PreceptDef recipientPrecept, float initiatorRoll, float recipientRoll)
+    // The loser is pulled toward the winner's personal stance, not the winner's ideo position. The returned
+    // precept is the rung nearest that stance, for the play log; it is null at "Don't care" or off the ladder.
+    private static (Pawn winner, Pawn loser, IssueDef issue, PreceptDef? winnerPrecept) AdjustOpinions(Pawn initiator, Pawn recipient, GameComponent_EnhancedIdeology comp, IssueDef issue, float initiatorRoll, float recipientRoll)
     {
-        Pawn winner, loser;
-        PreceptDef winnerPrecept;
-        if (initiatorRoll > recipientRoll)
-        {
-            winner = initiator;
-            loser = recipient;
-            winnerPrecept = initiatorPrecept;
-        }
-        else
-        {
-            winner = recipient;
-            loser = initiator;
-            winnerPrecept = recipientPrecept;
-        }
-        var issue = winnerPrecept.issue!;
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}, winnerPrecept={winnerPrecept}");
+        var (winner, loser) = initiatorRoll > recipientRoll ? (initiator, recipient) : (recipient, initiator);
+        var targetRank = comp.PawnTracker.EnsurePawnHasIdeoTracker(winner).IssueStances().First(stance => stance.issue == issue).rank;
+        var rungs = PreceptLadder.Rungs(issue);
+        var nearestRung = Mathf.RoundToInt(targetRank);
+        var winnerPrecept = nearestRung >= 0 && nearestRung < rungs.Count ? rungs[nearestRung] : null;
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"AdjustOpinions: winner={winner}, loser={loser}, targetRank={targetRank}, winnerPrecept={winnerPrecept}");
+
         var opinion = loser.relations.OpinionOf(winner);
         var pull = Compat_PeerPressure.AdjustStancePull(DebateWinPullMultiplier, opinion);
-        ConvictionMath.PullStance(comp, winner, loser, issue, PreceptLadder.RankOf(winnerPrecept), pull);
+        ConvictionMath.PullStance(comp, winner, loser, issue, targetRank, pull);
         return (winner, loser, issue, winnerPrecept);
     }
 }

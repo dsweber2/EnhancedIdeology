@@ -3,7 +3,7 @@ namespace EnhancedIdeology;
 // Where the virtual "no opinion" rung sits for an optional Moral issue, expressed relative to named neighbour
 // rungs rather than a literal rank so it survives ladder reordering and load order. Resolved against the live
 // (reordered) ladder; a referenced rung absent from the ladder (mod not loaded) resolves to -1f and the spec
-// degrades gracefully (see Resolve). See preceptPolicy.md's "Don't-care placement rule".
+// degrades gracefully (see Resolve). See docs/preceptPolicy.md's "Don't-care placement rule".
 internal readonly struct DontCareSpec
 {
     private enum Kind { Between, Before, After, At }
@@ -45,7 +45,7 @@ internal readonly struct DontCareSpec
     }
 }
 
-// A stance one issue's precept induces on another (preceptPolicy.md "Interactions"): holding the source
+// A stance one issue's precept induces on another (docs/preceptPolicy.md "Interactions"): holding the source
 // precept makes an ideo behave, on the target issue, as if it took the given rung - unless it already takes an
 // explicit stance there. The induced rank is resolved against the live target ladder so it survives
 // reordering; a "beyond" spec deliberately sits past the ladder end to read as an extreme.
@@ -80,7 +80,7 @@ internal readonly struct InducedStance
     };
 }
 
-// How an issue contributes to opinion (preceptPolicy.md). Only Moral issues feed the structural
+// How an issue contributes to opinion (docs/preceptPolicy.md). Only Moral issues feed the structural
 // rung-distance model; everything else is inert on the structural read path.
 internal enum PreceptCategory
 {
@@ -92,7 +92,7 @@ internal enum PreceptCategory
 }
 
 // Per-issue opinion policy: category classification plus the rung-order fixes the Moral issues need where
-// stacking scrambles displayOrderInIssue. Keyed by defName so it survives load order. See preceptPolicy.md.
+// stacking scrambles displayOrderInIssue. Keyed by defName so it survives load order. See docs/preceptPolicy.md.
 internal static partial class PreceptPolicy
 {
     // Everything not listed defaults to PositiveOnly (0 structural). This is the curated Moral set.
@@ -104,20 +104,20 @@ internal static partial class PreceptPolicy
         "InsectMeat", "NutrientPasteEating", "BodyModification", "Raiding", "AutonomousWeapons", "Fishing",
         "GrowthVat", "Skullspike", "Bloodfeeders", "Biosculpting", "Bonding", "Trees", "RoughLiving",
         "GauranlenConnection", "Eclipse", "Ranching", "Mining", "TreeCutting",
-        // Multi-rung mod issues with a genuine value axis (preceptPolicy.md "Mod issues"). Single-rung and
+        // Multi-rung mod issues with a genuine value axis (docs/preceptPolicy.md "Mod issues"). Single-rung and
         // mechanical (*Speed/*Yield/perk) mod issues fall through to the PositiveOnly default.
         "VME_Alcohol", "VME_Violence", "VME_Recreation", "VME_KillingWithFire", "VME_LeatherApparel",
         "VME_Scars", "VME_Elders", "VME_Royalty", "VME_Mechanoids", "VME_Insectoids",
         "VME_Fire", "VME_Firefighting", "VME_TaintedApparel", "VME_TatteredApparel", "AM_Religion",
         "AM_AnimalRelease",
-        // Lifestyle/aesthetic mod issues David gave an explicit Don't-care placement (preceptPolicy.md).
+        // Lifestyle/aesthetic mod issues David gave an explicit Don't-care placement (docs/preceptPolicy.md).
         "VME_Expectations", "AM_Rain", "VME_Aurora", "VME_BookReading", "VME_BookReadingSpeed",
         "VME_BookWriting", "VME_Travel", "VME_PermanentBases",
         // Mod Moral issues with a defaultSelectionWeight rung: every ideo resolves to a real rung (silent ->
         // that default, usually the centred neutral), so the -1 Don't-care default is never consulted and no
         // entry is needed. Verified each ladder is monotonic on its belief axis (a couple - VME_Recreation,
         // VME_Illness - are reversed, but OpinionOnPrecept is symmetric under axis reflection), so no order
-        // override is needed either. See preceptPolicy.md "Order-fix candidates (verified)".
+        // override is needed either. See docs/preceptPolicy.md "Order-fix candidates (verified)".
         "AM_FertilityIssue", "AM_LearningRate", "AM_LovinFrequency", "AM_Creep", "AM_Disfigurement",
         "VME_Illness", "VME_InsectJelly", "VME_Sweets", "VME_DumbLabor", "AM_OcularTrees",
         // Anomaly DLC optional Moral issues (defNames assumed from vanilla naming conventions; verified against
@@ -196,7 +196,7 @@ internal static partial class PreceptPolicy
     ];
 
     // Rung defName order (permissive/pro -> forbidding/anti) for issues whose displayOrderInIssue scrambles
-    // the axis once stacked (preceptPolicy.md "Reorder"). Rungs not listed keep their displayOrder, appended.
+    // the axis once stacked (docs/preceptPolicy.md "Reorder"). Rungs not listed keep their displayOrder, appended.
     public static readonly Dictionary<string, string[]> OrderOverrides = new()
     {
         ["MeatEating"] =
@@ -211,7 +211,7 @@ internal static partial class PreceptPolicy
         ["Corpses"] = ["Corpses_Ugly", "Corpses_DontCare", "AM_Corpses_Sublime"],
         // AM_InsectMeatEating_Required (AlphaMemes), InsectMeatEating_Loved (Ideology), and
         // VME_InsectMeatEating_DontCare (VIE-M&S) all sit at displayOrderInIssue=0 - fix the pro->neutral order.
-        // Despised_Classic is classic-only but is the only rung between neutral and Sacrilegious (modCompat.md).
+        // Despised_Classic is classic-only but is the only rung between neutral and Sacrilegious (docs/modCompat.md).
         ["InsectMeat"] =
         [
             "AM_InsectMeatEating_Required", "InsectMeatEating_Loved", "VME_InsectMeatEating_DontCare",
@@ -277,7 +277,7 @@ internal static partial class PreceptPolicy
         ["Indoors"] = ["Indoors_Acceptable", "VVE_SmallSpaces_Horrible"],
     };
 
-    // Where the virtual Don't-care rung sits for each OPTIONAL Moral issue (preceptPolicy.md). Mandatory
+    // Where the virtual Don't-care rung sits for each OPTIONAL Moral issue (docs/preceptPolicy.md). Mandatory
     // issues never go silent, so they carry no entry; an unlisted issue defaults to -1f (permissive extreme).
     // Keyed by IssueDef.defName; each spec is neighbour-keyed and resolved against the reordered ladder.
     public static readonly Dictionary<string, DontCareSpec> DontCare = new()

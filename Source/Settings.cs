@@ -74,7 +74,7 @@ public class Settings : ModSettings
     public float ConversionCertaintyKnock => _conversionCertaintyKnock;
 
     // How strongly a pawn opposes the stance at the opposite extreme of an issue's ladder, as a fraction of
-    // their conviction (design.md R2). Opinion falls linearly from +strength at their own rung to
+    // their conviction (docs/design.md "Opinion of a rung"). Opinion falls linearly from +strength at their own rung to
     // -oppositionScale·strength at the far end, crossing zero at 1/(1+oppositionScale) of the way out.
     // 0 = they merely grow indifferent toward opposite stances; 1 = full opposition. Higher = less tolerant.
     private float _preceptOppositionScale = DefaultPreceptOppositionScale;

@@ -1,6 +1,6 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers the per-issue precept ladder and the distance-based opinion falloff (design.md R2).
+// Covers the per-issue precept ladder and the distance-based opinion falloff (docs/design.md "Opinion of a rung").
 public class PreceptLadderTests : SeededTest
 {
     private static PreceptDef Rung(IssueDef issue, string name, int order)

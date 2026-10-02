@@ -1,6 +1,6 @@
 namespace EnhancedIdeology;
 
-// Per-issue precept "ladder" and the distance-based opinion falloff (design.md R2).
+// Per-issue precept "ladder" and the distance-based opinion falloff (docs/design.md "Opinion of a rung").
 //
 // An issue (IssueDef) is a ladder of mutually-exclusive stance precepts ordered by
 // PreceptDef.displayOrderInIssue. Rank 0 = lowest order = most permissive/approving; the top rank is
@@ -73,7 +73,7 @@ internal static class PreceptLadder
     // -oppositionScale·strength at the FARTHER ladder end (t = 1), crossing zero at 1/(1+oppositionScale) of
     // the way out. The nearer extreme comes out softer, scaled by its shorter distance - it is closer to the
     // pawn's view. oppositionScale (0-1) sets how strongly the far extreme is opposed: 0 fades to mere
-    // indifference there, 1 is full opposition. (design.md R2)
+    // indifference there, 1 is full opposition. (docs/design.md "Opinion of a rung")
     public static float OpinionOnPrecept(
         float preferredRank, float targetRank, float minRank, float maxRank, float strength, float oppositionScale)
     {

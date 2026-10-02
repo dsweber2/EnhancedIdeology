@@ -12,3 +12,5 @@ coverage/*
 images/*.png
 tmp/*
 .worktrees/
+.tmp/
+decompiled/

@@ -2,6 +2,9 @@
 
 xunit tests that run the real mod source against a hand-written RimWorld stand-in. Run with `make test`.
 
+Tests target net8, but the mod compiles against Unity's Mono BCL (shipped in `Krafs.Rimworld.Ref`), which lacks newer APIs such as `DistinctBy`.
+`make test` runs `make build` first so an API the game does not have fails the build, not only in game.
+
 - `EnhancedIdeology.Tests.csproj` — `<Compile Include>`s selected files from `../Source/` directly. To test a new source file, add it there; every RimWorld member it touches must exist in the shim.
 - `RimWorldShim/` — fake `Verse`/`RimWorld`/`UnityEngine` types with the same names and signatures as the game. Only members the compiled source uses. `Pawn.IsHashIntervalTick` mirrors vanilla's hash-offset maths.
 - `Support/` — test-side replacements and builders:

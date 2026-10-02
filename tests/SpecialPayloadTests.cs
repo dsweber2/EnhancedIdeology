@@ -1,6 +1,6 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers the payload-based Special issues (preceptPolicy.md "Special"): Weapons (noble/despised pairs) and
+// Covers the payload-based Special issues (docs/preceptPolicy.md "Special"): Weapons (noble/despised pairs) and
 // PreferredXenotypes (overlapping vs disjoint preferences), which compare whole precept payloads rather than
 // a rung on a ladder.
 public class SpecialPayloadTests : SeededTest
