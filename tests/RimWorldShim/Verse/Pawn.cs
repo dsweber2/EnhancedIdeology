@@ -121,6 +121,9 @@ public class Pawn
     private static readonly Map _simMap = new();
 
     public bool Spawned => false;
+    public bool Downed => false;
+    public IntVec3 Position => default;
+    public JobDef? CurJobDef { get; set; }
     public bool Destroyed => false;
     public bool IsPrisoner => false;
     public Map? Map => _simMap;

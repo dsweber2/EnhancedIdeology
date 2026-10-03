@@ -24,7 +24,8 @@
     <li>ludeon.rimworld.royalty</li>
     <li>ludeon.rimworld.ideology</li>
   </loadAfter>
-  <description>Vanilla ideology certainty is more or less time averaged mood. This mod replaces it with a set of opinions on issues tied to practices surrounding those beliefs. The initial implementation is from Smartkar's Enhanced Beliefs, with some updates and rework by Ilyvion to get it into 1.6, and art by Elseud and DetVisor. This has diverged sufficiently however that I thought it best to consider it a different mod.
-Each pawn develops an opinion of every ideology they encounter — shaped by their opinions on execution, slavery, drug use, and a dozen other issues. Whether they stay faithful or drift away is determined by reinforcing those opinions, not just by whether they're happy or stressed and being pestered by moral guide.
+  <description>Vanilla ideology certainty is more or less time averaged mood. This mod replaces it with a set of opinions on issues tied to practices surrounding those beliefs. The initial implementation is from Smartkar's Enhanced Beliefs, but has diverged sufficiently however that I thought it best to consider it a different mod.
+
+Each pawn develops an opinion of every ideology, shaped by their opinions on execution, slavery, drug use, etc. Whether they stay faithful or swap is determined by reinforcing those opinions, not just by whether they're happy or stressed and being pestered by moral guide.
 </description>
 </ModMetaData>

@@ -120,6 +120,9 @@ The derivation and plots are in `analysis/conviction_valley.py`.
 - **Debates** between pawns pick an issue they disagree on, from the issues the initiator's ideo takes a position on.
   Wider disagreements come up more often: each issue is weighted by its rung gap (as a fraction of the ladder, scaled to 20) plus its conviction gap.
   Both pawns argue from their personal stance, not their ideo's position, so a decisive win pulls the loser toward the winner's own belief.
+  Pawns that can see and hear a decisive debate are pulled toward the winner too, at a quarter of the normal pull.
+  A winner from a Proselytizer faith doubles that onlooker pull, and onlookers with a high certainty loss factor move further.
+  Pawns whose faith approves of diversity can choose debating as recreation; while they do, most of their social interactions become debates.
   A draw can make either pawn dig in (more likely for intelligent pawns and those with shakier faith) or start a social fight.
   The diversity precept decides whether each pawn enjoys or resents the argument.
 - **Conversion attempts** (socializing and prisoner conversion) argue the single issue the target most opposes, at twice the normal pull.

@@ -19,6 +19,15 @@
         <reportString>placing TargetA on the ground to burn.</reportString>
     </JobDef>
 
+    <!-- Vanilla social relax under its own def, so the debate interaction can tell a pawn relaxes by debating. -->
+    <JobDef>
+        <defName>EB_DebateRelax</defName>
+        <driverClass>JobDriver_SocialRelax</driverClass>
+        <reportString>debating ideology.</reportString>
+        <joyDuration>4000</joyDuration>
+        <joyKind>Social</joyKind>
+    </JobDef>
+
     <JobDef>
         <defName>EB_Pray</defName>
         <driverClass>EnhancedIdeology.JobDriver_Pray</driverClass>

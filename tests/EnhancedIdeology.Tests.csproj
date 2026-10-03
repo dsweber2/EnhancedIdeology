@@ -45,6 +45,7 @@
     <Compile Include="../Source/Interactions/AbilityReassure.cs" />
     <Compile Include="../Source/Interactions/InteractionWorker_IdeologicalDebateMeme.cs" />
     <Compile Include="../Source/Interactions/InteractionWorker_IdeologicalDebatePrecept.cs" />
+    <Compile Include="../Source/Interactions/DebateOnlookers.cs" />
     <Compile Include="../Source/EnhancedIdeologyDefOf.cs" />
     <Compile Include="../Source/EnhancedIdeologyUtilities.cs" />
     <Compile Include="../Source/HotSwappableAttribute.cs" />

@@ -15,5 +15,6 @@ Social interaction workers, ability workers, and play-log entries. The debate wo
 - `InteractionWorker_IdeologicalDebateMeme.cs` — meme debate; `CompatibilityFactorCurve` shapes persuasion by meme-overlap
 - `InteractionWorker_AdvancedConversionAttempt.cs` — directed conversion attempt; resolves debate then calls `CheckConversion`
 - `AbilityConversion.cs` / `AbilityReassure.cs` — psycast ability logic; `RollTargetIssues`, `Resolve`
-- `JoyGiver_IdeologicalDebate.cs` — AI joy-path trigger for debates
+- `JoyGiver_IdeologicalDebate.cs` — joy giver for `EB_DebateRelax` (vanilla social relax under its own JobDef); while a pawn runs it, the precept debate weight is multiplied by `DebateRelaxWeightFactor`
+- `DebateOnlookers.cs` — after a decisive precept or meme debate, `Sway` finds pawns in hearing range with line of sight and calls `SwayWitness`, a reduced `PullStance` toward the winner's personal stance
 - `PlayLogEntry_Conversion.cs`, `PlayLogEntry_CrisisOfFaith.cs`, `PlayLogEntry_DebateInteraction.cs` — play-log entries for audit trail

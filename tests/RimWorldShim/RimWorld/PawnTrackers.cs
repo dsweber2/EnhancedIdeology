@@ -90,3 +90,8 @@ public class MentalStateHandler
         bool transitionSilently = false)
         => false;
 }
+
+public static class RestUtility
+{
+    public static bool Awake(this Pawn pawn) => true;
+}

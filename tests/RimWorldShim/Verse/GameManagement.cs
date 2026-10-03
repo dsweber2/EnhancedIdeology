@@ -60,7 +60,25 @@ public class Game
         => _components[typeof(T)] = component;
 }
 
-public class Map { }
+public class Map
+{
+    public readonly MapPawns mapPawns = new();
+}
+
+public class MapPawns
+{
+    public IReadOnlyList<Pawn> AllPawnsSpawned => [];
+}
+
+public struct IntVec3
+{
+    public bool InHorDistOf(IntVec3 otherLoc, float maxDist) => true;
+}
+
+public static class GenSight
+{
+    public static bool LineOfSight(IntVec3 start, IntVec3 end, Map map) => true;
+}
 
 public enum DevelopmentalStage { Newborn = 0, Baby = 1, Child = 2, Adult = 3 }
 

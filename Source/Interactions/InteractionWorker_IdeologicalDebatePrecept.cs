@@ -11,6 +11,10 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     public PreceptDef? lastWinnerPrecept;
     public Ideo? initiatorIdeo;
 
+    // Weight multiplier while the initiator relaxes by debating (EB_DebateRelax). Vanilla chitchat has weight 1, so
+    // 0.03 base x 30 makes about half of that pawn's interactions a debate.
+    internal const float DebateRelaxWeightFactor = 30f;
+
     // Iconoclast mental break: multiplies draw fight chance. Passionate certainty gives a roll bonus.
     internal const float IconoclastRollBonus = 0.5f;
 
@@ -92,11 +96,25 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Initiator is incapable of social. Returning 0.");
             return 0f;
         }
+        if (recipient.Ideo == null)
+        {
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Recipient has no ideo. Returning 0.");
+            return 0f;
+        }
+        var pawnTracker = Current.Game.GetComponent<GameComponent_EnhancedIdeology>().PawnTracker;
+        if (ConflictingPrecepts(initiator.Ideo,
+                StanceMap(pawnTracker.EnsurePawnHasIdeoTracker(initiator)),
+                StanceMap(pawnTracker.EnsurePawnHasIdeoTracker(recipient))).Count == 0)
+        {
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "No debatable issue. Returning 0.");
+            return 0f;
+        }
         var spreadFactor = initiator.GetStatValue(StatDefOf.SocialIdeoSpreadFrequencyFactor);
         var compatibility = initiator.relations.CompatibilityWith(recipient);
         var curveEval = CompatibilityFactorCurve.Evaluate(compatibility);
-        var result = 0.03f * spreadFactor * curveEval;
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Returning weight: {result} (spreadFactor={spreadFactor}, compatibility={compatibility}, curveEval={curveEval})");
+        var relaxFactor = initiator.CurJobDef == EnhancedIdeologyDefOf.EB_DebateRelax ? DebateRelaxWeightFactor : 1f;
+        var result = 0.03f * spreadFactor * curveEval * relaxFactor;
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Returning weight: {result} (spreadFactor={spreadFactor}, compatibility={compatibility}, curveEval={curveEval}, relaxFactor={relaxFactor})");
         return result;
     }
 
@@ -209,27 +227,9 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         Pawn initiator,
         out PreceptDef? initiatorPrecept)
     {
-        // Conviction is per pawn, not per precept, so pull each pawn's own stance on every issue. Two same-faith
-        // pawns share every precept; what they can argue about is how firmly they each hold it.
-        var initiatorStances = initiatorTracker.IssueStances()
-            .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
-        var recipientStances = recipientTracker.IssueStances()
-            .ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
-
-        // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
-        // them. Each side argues from their personal stance (see AdjustOpinions).
-        // Issues without a seeded stance (PreceptCategory.NA: buildings, ritual seats, naming) aren't a belief
-        // axis and never get a personal stance recorded, so excluding them here is just staying in sync with
-        // IssueStanceTracker.EnsureSeeded rather than a bespoke category check.
-        var conflictingIssues = initiatorIdeo.precepts
-            .Select(p => p.def)
-            .Where(def => def.issue != null
-                && initiatorStances.ContainsKey(def.issue)
-                && recipientStances.ContainsKey(def.issue)
-                && Disagree(initiatorStances[def.issue], recipientStances[def.issue]))
-            .GroupBy(def => def.issue)
-            .Select(group => group.First())
-            .ToList();
+        var initiatorStances = StanceMap(initiatorTracker);
+        var recipientStances = StanceMap(recipientTracker);
+        var conflictingIssues = ConflictingPrecepts(initiatorIdeo, initiatorStances, recipientStances);
 
         if (conflictingIssues.Count == 0)
         {
@@ -255,6 +255,29 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             -Mathf.Log(Rand.Value) / TopicWeight(def.issue, initiatorStances[def.issue], recipientStances[def.issue]));
         return initiatorPrecept.issue;
     }
+
+    // Conviction is per pawn, not per precept, so each pawn's own stance on every issue is what gets compared.
+    // Two same-faith pawns share every precept; what they can argue about is how firmly they each hold it.
+    private static Dictionary<IssueDef, (float rank, float strength)> StanceMap(IdeoTrackerData tracker) =>
+        tracker.IssueStances().ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
+
+    // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
+    // them. Each side argues from their personal stance (see AdjustOpinions).
+    // Issues without a seeded stance (PreceptCategory.NA: buildings, ritual seats, naming) aren't a belief
+    // axis and never get a personal stance recorded, so excluding them here is just staying in sync with
+    // IssueStanceTracker.EnsureSeeded rather than a bespoke category check.
+    private static List<PreceptDef> ConflictingPrecepts(
+        Ideo initiatorIdeo,
+        Dictionary<IssueDef, (float rank, float strength)> initiatorStances,
+        Dictionary<IssueDef, (float rank, float strength)> recipientStances) =>
+        [.. initiatorIdeo.precepts
+            .Select(p => p.def)
+            .Where(def => def.issue != null
+                && initiatorStances.ContainsKey(def.issue)
+                && recipientStances.ContainsKey(def.issue)
+                && Disagree(initiatorStances[def.issue], recipientStances[def.issue]))
+            .GroupBy(def => def.issue)
+            .Select(group => group.First())];
 
     // Rung gap as a fraction of the full ladder span, scaled to the 0-20 conviction range, plus the conviction gap.
     // The span includes the virtual "Don't care" rung when it sits below rung 0. A single-rung ladder has no
@@ -551,6 +574,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var opinion = loser.relations.OpinionOf(winner);
         var pull = Compat_PeerPressure.AdjustStancePull(DebateWinPullMultiplier, opinion);
         ConvictionMath.PullStance(comp, winner, loser, issue, targetRank, pull);
+        DebateOnlookers.Sway(comp, winner, loser, [issue]);
         return (winner, loser, issue, winnerPrecept);
     }
 }

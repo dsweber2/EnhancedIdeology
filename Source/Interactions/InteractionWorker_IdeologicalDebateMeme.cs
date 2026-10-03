@@ -211,6 +211,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         {
             ConvictionMath.PullStance(comp, winner, loser, issue, winnerStances[issue], pull);
         }
+        DebateOnlookers.Sway(comp, winner, loser, allIssues);
 
         return (winner, loser);
     }

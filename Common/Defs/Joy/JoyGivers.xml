@@ -5,7 +5,7 @@
 		<defName>EB_IdeologicalDebate</defName>
 		<giverClass>EnhancedIdeology.JoyGiver_IdeologicalDebate</giverClass>
 		<baseChance>3</baseChance>
-		<jobDef>SocialRelax</jobDef>
+		<jobDef>EB_DebateRelax</jobDef>
 		<joyKind>Social</joyKind>
 	</JoyGiverDef>
 

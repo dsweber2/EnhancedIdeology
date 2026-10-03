@@ -234,7 +234,9 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. |  |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. |  |
+| `EB_DebateRelax.reportString` | debating ideology. |  |
 | `EB_Pray.reportString` | contemplating. |  |
 
 ## DefInjected/WorkGiverDef
@@ -258,6 +260,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. |  |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. |  |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast |  |
+| `EB_ArrestedDebater.label` | defiant rant |  |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. |  |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant |  |
 
 ## DefInjected/IssueDef
 

@@ -16,6 +16,7 @@ internal static class EnhancedIdeologyDefOf
     public static ThingDef EB_Ideobook;
     public static InspirationDef EB_ReligiousEnlightenment;
     public static JobDef EB_Pray;
+    public static JobDef EB_DebateRelax;
     public static ThingDef EB_Mote_ContemplationIcon;
     public static RecipeDef EB_WriteIdeobook;
     public static RecipeDef EB_WriteIllustratedIdeobook;
