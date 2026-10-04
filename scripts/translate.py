@@ -6,13 +6,13 @@
 Translation helper for EnhancedIdeology.
 
     # Generate a blank German template:
-    uv run scripts/translate.py extract --source English --target German
+    uv run scripts/translate.py extract --source English --target "German (Deutsch)"
 
     # Pre-fill template from existing partial translation:
-    uv run scripts/translate.py extract --source English --target German --prefill
+    uv run scripts/translate.py extract --source English --target "German (Deutsch)" --prefill
 
     # Write XML files from a filled-in template:
-    uv run scripts/translate.py generate --input translation_German.md
+    uv run scripts/translate.py generate --input "translations/translation_German (Deutsch).md"
 """
 
 from __future__ import annotations

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>страницы (Ткань, Кожа или Дерево, без шерсти)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>обложка (Кожа или Металл)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>страницы (Ткань, Кожа или Дерево, без шерсти)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>обложка (Кожа или Металл)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>ценные материалы</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
   <EB_WriteIdeobook.label>написать религиозную книгу</EB_WriteIdeobook.label>
   <EB_WriteIdeobook.description>Написать религиозную книгу, подробно описывающую убеждения вашей идеолигии. Требует высокой уверенности в своей идеолигии (не менее 90%).</EB_WriteIdeobook.description>
   <EB_WriteIdeobook.jobString>пишет религиозную книгу.</EB_WriteIdeobook.jobString>
   <EB_WriteIllustratedIdeobook.label>написать иллюстрированную религиозную книгу</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>Написать иллюминированную религиозную книгу, украшенную самоцветами и чернилами. Качество материалов усиливает духовный эффект от её чтения. Требует высокой уверенности в своей идеолигии (не менее 90%).</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>иллюстрирует религиозную книгу.</EB_WriteIllustratedIdeobook.jobString>
-  <EB_WriteIdeobook.ingredients.0.filter.customSummary>страницы (Ткань, Кожа или Дерево, без шерсти)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
-  <EB_WriteIdeobook.ingredients.1.filter.customSummary>обложка (Кожа или Металл)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>страницы (Ткань, Кожа или Дерево, без шерсти)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>обложка (Кожа или Металл)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>ценные материалы</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

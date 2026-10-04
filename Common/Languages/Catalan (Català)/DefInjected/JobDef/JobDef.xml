@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>arengant TargetA sobre ideologia.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>arengant TargetA sobre ideologia.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>col·locant TargetA a terra per cremar.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>debatent sobre ideologia.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>contemplant.</EB_Pray.reportString>
 </LanguageData>

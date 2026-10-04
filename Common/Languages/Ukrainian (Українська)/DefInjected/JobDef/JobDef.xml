@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>відчитує TargetA через ідеологію.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>відчитує TargetA через ідеологію.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>кладе ціль на землю для спалення.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>сперечається про ідеологію.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>споглядає.</EB_Pray.reportString>
 </LanguageData>

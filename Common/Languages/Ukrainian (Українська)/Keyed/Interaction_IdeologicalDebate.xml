@@ -12,6 +12,7 @@
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] виявився переконливішим.</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>Жоден не змінив своєї думки.</EnhancedIdeology.DebateSent.Draw>
   <EnhancedIdeology.JobReport_Debating>Дискутує з {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.DraftDisabled_HeldInDebate>Втягнутий у суперечку з {0}</EnhancedIdeology.DraftDisabled_HeldInDebate>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] пережив кризу віри.</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>Криза віри [INITIATOR_nameDef] посилила [INITIATOR_possessive] страждання.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

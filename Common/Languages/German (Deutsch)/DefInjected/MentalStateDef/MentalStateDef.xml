@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} erlitt einen Nervenzusammenbruch und ist jetzt ein Ikonoklast.\n\n[PAWN_pronoun] wird versuchen, religiöse Bücher zu verbrennen.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} ist kein Ikonoklast mehr.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Geisteszustand: Ikonoklast</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>trotzige Tirade</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} hat den ideologischen Zorn erschöpft.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Geisteszustand: Trotzige Tirade</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

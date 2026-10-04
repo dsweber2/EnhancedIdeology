@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] war überzeugender. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Keine Seite änderte ihre Meinung. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Debattiert mit {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Von {0} in einer Debatte festgehalten |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] erlebte eine Glaubenskrise. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]s Glaubenskrise verstärkte [INITIATOR_possessive] Elend. |
 
@@ -159,11 +160,11 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) |  |
-| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) |  |
-| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) |  |
-| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) |  |
-| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials |  |
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | Seiten (Textilien, Leder oder Holz, keine Wolle) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | Einband (Leder oder Metall) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | Seiten (Textilien, Leder oder Holz, keine Wolle) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | Einband (Leder oder Metall) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | Wertvolle Materialien |
 | `EB_WriteIdeobook.label` | write religious book | religiöses Buch schreiben |
 | `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Ein religiöses Buch schreiben, das die Überzeugungen der eigenen Ideologie beschreibt. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%). |
 | `EB_WriteIdeobook.jobString` | writing a religious book. | schreibt ein religiöses Buch. |
@@ -233,7 +234,9 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | beschimpft TargetA wegen ihrer Ideologie. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | beschimpft TargetA wegen ihrer Ideologie. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | legt TargetA zum Verbrennen auf den Boden. |
+| `EB_DebateRelax.reportString` | debating ideology. | debattiert über Ideologie. |
 | `EB_Pray.reportString` | contemplating. | in Einkehr. |
 
 ## DefInjected/WorkGiverDef
@@ -257,6 +260,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} erlitt einen Nervenzusammenbruch und ist jetzt ein Ikonoklast.\n\n[PAWN_pronoun] wird versuchen, religiöse Bücher zu verbrennen. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} ist kein Ikonoklast mehr. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Geisteszustand: Ikonoklast |
+| `EB_ArrestedDebater.label` | defiant rant | trotzige Tirade |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} hat den ideologischen Zorn erschöpft. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Geisteszustand: Trotzige Tirade |
 
 ## DefInjected/IssueDef
 

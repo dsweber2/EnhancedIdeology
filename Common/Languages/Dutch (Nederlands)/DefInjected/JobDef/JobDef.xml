@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>TargetA de les lezen over ideologie.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>TargetA de les lezen over ideologie.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>TargetA op de grond plaatsen om te verbranden.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>debatteren over ideologie.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>mediterend.</EB_Pray.reportString>
 </LanguageData>

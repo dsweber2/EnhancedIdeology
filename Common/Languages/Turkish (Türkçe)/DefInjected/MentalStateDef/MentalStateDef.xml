@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} bir ruhsal çöküş yaşadı ve ikonoklast oluyor.\n\n[PAWN_pronoun] dini kitapları yakmaya çalışacak.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} artık ikonoklast değil.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Zihinsel durum: İkonoklast</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>meydan okuyan nutuk</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} ideolojik öfkesini tüketti.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Zihinsel durum: Meydan okuyan nutuk</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

@@ -12,6 +12,7 @@
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] se ukázal přesvědčivějším.</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>Nikdo svůj názor nezměnil.</EnhancedIdeology.DebateSent.Draw>
   <EnhancedIdeology.JobReport_Debating>Debatuje s {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.DraftDisabled_HeldInDebate>Zadržen v debatě od {0}</EnhancedIdeology.DraftDisabled_HeldInDebate>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] prožil krizi víry.</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>Krize víry [INITIATOR_nameDef] prohloubila [INITIATOR_possessive] trápení.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

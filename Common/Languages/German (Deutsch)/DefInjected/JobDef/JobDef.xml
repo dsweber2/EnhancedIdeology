@@ -2,6 +2,8 @@
 <!-- Author: claude -->
 <LanguageData>
   <EB_IconoclastDebate.reportString>beschimpft TargetA wegen ihrer Ideologie.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>beschimpft TargetA wegen ihrer Ideologie.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>legt TargetA zum Verbrennen auf den Boden.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>debattiert über Ideologie.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>in Einkehr.</EB_Pray.reportString>
 </LanguageData>

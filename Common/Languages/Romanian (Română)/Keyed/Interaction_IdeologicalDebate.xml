@@ -12,6 +12,7 @@
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] s-a dovedit mai convingător.</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>Niciunul nu și-a schimbat opinia.</EnhancedIdeology.DebateSent.Draw>
   <EnhancedIdeology.JobReport_Debating>Dezbătând cu {0}</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.DraftDisabled_HeldInDebate>Reținut în dezbatere de {0}</EnhancedIdeology.DraftDisabled_HeldInDebate>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] a trăit o criză de credință.</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>Criza de credință a lui [INITIATOR_nameDef] i-a agravat suferința [INITIATOR_possessive].</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

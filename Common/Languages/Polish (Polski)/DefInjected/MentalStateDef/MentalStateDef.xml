@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} doznał(a) załamania i stał(a) się ikonoklastą.\n\n[PAWN_pronoun] będzie próbował(a) palić księgi religijne.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} nie jest już ikonoklastą.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Stan psychiczny: Ikonoklasta</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>buntownicza tyrada</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} wyczerpuje swój ideologiczny gniew.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Stan psychiczny: Buntownicza tyrada</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

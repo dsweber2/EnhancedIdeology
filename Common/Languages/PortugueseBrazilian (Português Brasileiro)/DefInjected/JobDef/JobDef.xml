@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>arengando TargetA sobre ideologia.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>arengando TargetA sobre ideologia.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>colocando TargetA no chão para queimar.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>debatendo ideologia.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>contemplando.</EB_Pray.reportString>
 </LanguageData>

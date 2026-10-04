@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} mentálisan összeomlott és képrombolóként viselkedik.\n\n[PAWN_pronoun] megpróbálja elégetni a vallásos könyveket.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} már nem viselkedik képrombolóként.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Mentális állapot: Képromboló</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>dacos kirohanás</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} kiadta magából az ideológiai dühét.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Mentális állapot: Dacos kirohanás</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

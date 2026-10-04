@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>kioktatja TargetA-t az ideológiáról.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>kioktatja TargetA-t az ideológiáról.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>TargetA-t a földre helyezi, hogy elégesse.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>ideológiáról vitázik.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>elmélkedik.</EB_Pray.reportString>
 </LanguageData>

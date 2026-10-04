@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>TargetAに思想について説教している。</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>TargetAに思想について説教している。</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>TargetAを地面に置いて燃やしている。</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>思想について議論中。</EB_DebateRelax.reportString>
   <EB_Pray.reportString>瞑想中。</EB_Pray.reportString>
 </LanguageData>

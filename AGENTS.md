@@ -15,13 +15,13 @@ Language files live in `Common/Languages/{Lang}/`. English is the source of trut
 ```bash
 # refresh both standing templates (run this after adding new strings):
 uv run scripts/translate.py extract --source English --author dsweber2
-uv run scripts/translate.py extract --source English --target German --prefill
+uv run scripts/translate.py extract --source English --target "German (Deutsch)" --prefill
 
-# start a brand-new language (--author defaults to "claude"):
-uv run scripts/translate.py extract --source English --target French
+# start a brand-new language (--author defaults to "claude"); --target must match the vanilla folder name exactly:
+uv run scripts/translate.py extract --source English --target "French (Français)"
 
 # write XML files from a filled-in template:
-uv run scripts/translate.py generate --input translations/translation_French.md
+uv run scripts/translate.py generate --input "translations/translation_French (Français).md"
 ```
 
 The template is a markdown file with `| key | source | translation |` tables — fill the translation column (human or LLM), then run generate. `--prefill` reads any existing XML files for that language and pre-populates the translation column so prior work is preserved. `--author` embeds a credit line near the top of the template and in the generated XML files.

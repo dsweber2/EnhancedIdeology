@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} teve um colapso mental e está sendo um iconoclasta.\n\n[PAWN_pronoun] vai tentar queimar livros religiosos.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} não está mais sendo um iconoclasta.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Estado mental: Iconoclasta</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>discurso desafiador</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} esgotou sua fúria ideológica.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Estado mental: Discurso desafiador</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

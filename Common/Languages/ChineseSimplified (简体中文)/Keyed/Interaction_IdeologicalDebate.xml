@@ -12,6 +12,7 @@
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef]更具说服力。</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>双方均未改变立场。</EnhancedIdeology.DebateSent.Draw>
   <EnhancedIdeology.JobReport_Debating>正在与{0}辩论</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.DraftDisabled_HeldInDebate>被{0}困在辩论中</EnhancedIdeology.DraftDisabled_HeldInDebate>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef]经历了信仰危机。</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]的信仰危机加剧了[INITIATOR_possessive]的痛苦。</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

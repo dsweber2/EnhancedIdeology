@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} a eu une crise mentale et agit en iconoclaste.\n\n[PAWN_pronoun] va tenter de brûler des livres religieux.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} n'est plus dans un état iconoclaste.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>État mental : Iconoclaste</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>diatribe insoumise</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} a épuisé sa fureur idéologique.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>État mental : Diatribe insoumise</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

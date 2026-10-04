@@ -12,6 +12,7 @@
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef] daha ikna edici olduğunu kanıtladı.</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>Hiçbiri görüşünü değiştirmedi.</EnhancedIdeology.DebateSent.Draw>
   <EnhancedIdeology.JobReport_Debating>{0} ile tartışıyor</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.DraftDisabled_HeldInDebate>{0} tarafından tartışmada tutuluyor</EnhancedIdeology.DraftDisabled_HeldInDebate>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef] bir iman krizi yaşadı.</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]'in iman krizi [INITIATOR_possessive] ıstırabını daha da artırdı.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

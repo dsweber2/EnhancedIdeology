@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} зазнав психічного зриву та стає іконоборцем.\n\n[PAWN_pronoun] спробує спалити релігійні книги.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} більше не іконоборець.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Психічний стан: Іконоборець</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>зухвала тирада</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} вичерпує свою ідеологічну лють.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Психічний стан: Зухвала тирада</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

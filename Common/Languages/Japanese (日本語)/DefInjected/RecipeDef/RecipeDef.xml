@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>ページ（テキスタイル、革または木材、羊毛は不可）</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>表紙（革または金属）</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>ページ（テキスタイル、革または木材、羊毛は不可）</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>表紙（革または金属）</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>貴重な素材</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
   <EB_WriteIdeobook.label>聖典を書く</EB_WriteIdeobook.label>
   <EB_WriteIdeobook.description>自身の思想の信条を詳述した聖典を書く。思想への高い信仰度（90%以上）が必要。</EB_WriteIdeobook.description>
   <EB_WriteIdeobook.jobString>聖典を執筆中。</EB_WriteIdeobook.jobString>
   <EB_WriteIllustratedIdeobook.label>彩飾聖典を書く</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>宝石とインクで飾られた彩飾聖典を書く。素材の品質が読書時の信仰的側面を高める。思想への高い信仰度（90%以上）が必要。</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>聖典を彩飾中。</EB_WriteIllustratedIdeobook.jobString>
-  <EB_WriteIdeobook.ingredients.0.filter.customSummary>ページ（テキスタイル、革または木材、羊毛は不可）</EB_WriteIdeobook.ingredients.0.filter.customSummary>
-  <EB_WriteIdeobook.ingredients.1.filter.customSummary>表紙（革または金属）</EB_WriteIdeobook.ingredients.1.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>ページ（テキスタイル、革または木材、羊毛は不可）</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>表紙（革または金属）</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>貴重な素材</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

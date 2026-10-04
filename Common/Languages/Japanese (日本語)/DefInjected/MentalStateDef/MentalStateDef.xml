@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0}は精神崩壊を起こし、偶像破壊者と化している。\n\n[PAWN_pronoun]は聖典を燃やそうとするだろう。</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0}はもはや偶像破壊者ではなくなった。</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>精神状態: 偶像破壊者</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>反抗的な熱弁</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0}は思想的な激情を出し尽くした。</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>精神状態: 反抗的な熱弁</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

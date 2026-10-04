@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} a suferit o prăbușire mentală și se comportă ca un iconoclast.\n\n[PAWN_pronoun] va încerca să ardă cărți religioase.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} nu mai este iconoclast.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Stare mentală: Iconoclast</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>tiradă sfidătoare</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} și-a epuizat furia ideologică.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Stare mentală: Tiradă sfidătoare</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

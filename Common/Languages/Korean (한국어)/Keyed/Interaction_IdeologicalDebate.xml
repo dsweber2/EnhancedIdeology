@@ -12,6 +12,7 @@
   <EnhancedIdeology.DebateSent.WinnerPersuasive>[WINNER_nameDef]이(가) 더 설득력 있음을 증명했습니다.</EnhancedIdeology.DebateSent.WinnerPersuasive>
   <EnhancedIdeology.DebateSent.Draw>아무도 견해를 바꾸지 않았습니다.</EnhancedIdeology.DebateSent.Draw>
   <EnhancedIdeology.JobReport_Debating>{0}와(과) 토론 중</EnhancedIdeology.JobReport_Debating>
+  <EnhancedIdeology.DraftDisabled_HeldInDebate>{0}에게 논쟁에 붙잡혀 있음</EnhancedIdeology.DraftDisabled_HeldInDebate>
   <EnhancedIdeology.CrisisLog.Wander>[INITIATOR_nameDef]이(가) 신앙의 위기를 경험했습니다.</EnhancedIdeology.CrisisLog.Wander>
   <EnhancedIdeology.CrisisLog.MoodBreak>[INITIATOR_nameDef]의 신앙의 위기가 [INITIATOR_possessive] 고통을 가중시켰습니다.</EnhancedIdeology.CrisisLog.MoodBreak>
 </LanguageData>

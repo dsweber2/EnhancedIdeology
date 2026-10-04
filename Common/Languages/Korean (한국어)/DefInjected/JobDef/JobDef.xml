@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>TargetA에게 이념에 대해 열변을 토하는 중.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>TargetA에게 이념에 대해 열변을 토하는 중.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>TargetA를 불태우기 위해 바닥에 놓는 중.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>이념 토론 중.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>명상 중.</EB_Pray.reportString>
 </LanguageData>

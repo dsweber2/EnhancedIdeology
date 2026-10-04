@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_WriteIdeobook.ingredients.0.filter.customSummary>сторінки (Тканина, Шкіра або Дерево, без вовни)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIdeobook.ingredients.1.filter.customSummary>обкладинка (Шкіра або Метал)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>сторінки (Тканина, Шкіра або Дерево, без вовни)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>обкладинка (Шкіра або Метал)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
+  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>цінні матеріали</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
   <EB_WriteIdeobook.label>написати релігійну книгу</EB_WriteIdeobook.label>
   <EB_WriteIdeobook.description>Написати релігійну книгу, що детально описує переконання вашої ідеології. Потрібна висока впевненість в ідеології (не менше 90%).</EB_WriteIdeobook.description>
   <EB_WriteIdeobook.jobString>пише релігійну книгу.</EB_WriteIdeobook.jobString>
   <EB_WriteIllustratedIdeobook.label>написати ілюстровану релігійну книгу</EB_WriteIllustratedIdeobook.label>
   <EB_WriteIllustratedIdeobook.description>Написати ілюміновану релігійну книгу, прикрашену коштовним камінням та чорнилом. Якість матеріалів підвищує духовний ефект читання. Потрібна висока впевненість в ідеології (не менше 90%).</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>ілюструє релігійну книгу.</EB_WriteIllustratedIdeobook.jobString>
-  <EB_WriteIdeobook.ingredients.0.filter.customSummary>сторінки (Тканина, Шкіра або Дерево, без вовни)</EB_WriteIdeobook.ingredients.0.filter.customSummary>
-  <EB_WriteIdeobook.ingredients.1.filter.customSummary>обкладинка (Шкіра або Метал)</EB_WriteIdeobook.ingredients.1.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>сторінки (Тканина, Шкіра або Дерево, без вовни)</EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>обкладинка (Шкіра або Метал)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
-  <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>цінні матеріали</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
 </LanguageData>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>sermonne TargetA sur l'idéologie.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>sermonne TargetA sur l'idéologie.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>pose TargetA au sol pour le brûler.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>débat d'idéologie.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>en recueillement.</EB_Pray.reportString>
 </LanguageData>

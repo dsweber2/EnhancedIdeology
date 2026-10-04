@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} получил нервный срыв и стал иконоборцем.\n\n[PAWN_pronoun] попытается сжечь религиозные книги.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} больше не является иконоборцем.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Психическое состояние: иконоборец</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>вызывающая тирада</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} исчерпывает свою идеологическую ярость.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Психическое состояние: вызывающая тирада</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

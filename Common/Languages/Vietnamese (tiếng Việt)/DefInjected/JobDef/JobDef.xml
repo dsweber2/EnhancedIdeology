@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>đang lên lớp TargetA về hệ tư tưởng.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>đang lên lớp TargetA về hệ tư tưởng.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>đặt TargetA xuống đất để thiêu đốt.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>đang tranh luận về hệ tư tưởng.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>đang thiền định.</EB_Pray.reportString>
 </LanguageData>

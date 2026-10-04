@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>TargetA'ya ideoloji hakkında nutuk çekiyor.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>TargetA'ya ideoloji hakkında nutuk çekiyor.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>TargetA'yı yakmak için yere bırakıyor.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>ideoloji tartışıyor.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>tefekkür ediyor.</EB_Pray.reportString>
 </LanguageData>

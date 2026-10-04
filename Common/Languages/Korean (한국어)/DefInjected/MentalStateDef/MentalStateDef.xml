@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0}이(가) 정신적 붕괴를 겪고 성상파괴 행동을 보이고 있습니다.\n\n[PAWN_pronoun]은(는) 종교 서적을 불태우려 할 것입니다.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0}은(는) 더 이상 성상파괴 행동을 하지 않습니다.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>정신 상태: 성상파괴자</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>반항적 열변</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0}의 이념적 분노가 모두 사그라들었습니다.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>정신 상태: 반항적 열변</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

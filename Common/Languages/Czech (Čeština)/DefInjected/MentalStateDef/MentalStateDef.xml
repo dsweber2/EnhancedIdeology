@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} měl psychický kolaps a chová se jako ikonoklast.\n\n[PAWN_pronoun] se pokusí pálit náboženské knihy.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} se již nechová jako ikonoklast.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Duševní stav: Ikonoklast</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>vzdorovitá tiráda</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} vyčerpal svou ideologickou zuřivost.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Duševní stav: Vzdorovitá tiráda</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

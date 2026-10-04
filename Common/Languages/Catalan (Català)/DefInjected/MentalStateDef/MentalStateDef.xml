@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} ha tingut una crisi mental i s'ha tornat iconoclasta.\n\n[PAWN_pronoun] intentarà cremar llibres religiosos.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} ja no és un iconoclasta.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Estat mental: Iconoclasta</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>arenga desafiant</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} ha esgotat la seva fúria ideològica.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Estat mental: Arenga desafiant</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

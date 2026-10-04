@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0}精神崩溃，正在充当偶像破坏者。\n\n[PAWN_pronoun]将尝试焚烧宗教书籍。</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0}不再充当偶像破坏者。</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>精神状态：偶像破坏者</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>抗命激辩</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0}的理念怒火已经耗尽。</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>精神状态：抗命激辩</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

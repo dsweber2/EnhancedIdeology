@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Author: claude -->
 <LanguageData>
+  <EB_IconoclastDebate.reportString>正就理念训斥TargetA。</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>正就理念训斥TargetA。</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>将TargetA放置于地面焚烧。</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>辩论理念中。</EB_DebateRelax.reportString>
   <EB_Pray.reportString>沉思中。</EB_Pray.reportString>
 </LanguageData>

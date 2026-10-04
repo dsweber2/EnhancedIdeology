@@ -2,6 +2,8 @@
 <!-- Author: claude -->
 <LanguageData>
   <EB_IconoclastDebate.reportString>krzyczy na TargetA o ideologii.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>krzyczy na TargetA o ideologii.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>kładzie TargetA na ziemię, żeby spalić.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>debatuje o ideologii.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>medytuje.</EB_Pray.reportString>
 </LanguageData>

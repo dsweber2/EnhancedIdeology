@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} bị rối loạn tâm lý và đang hành xử như kẻ phá tượng.\n\n[PAWN_pronoun] sẽ cố thiêu đốt sách tôn giáo.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} không còn hành xử như kẻ phá tượng nữa.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Trạng thái tâm lý: Kẻ phá tượng</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>tràng đả kích thách thức</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} đã trút hết cơn phẫn nộ tư tưởng.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Trạng thái tâm lý: Tràng đả kích thách thức</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

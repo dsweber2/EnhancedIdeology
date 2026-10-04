@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0}精神崩潰，化身毀像者。\n\n[PAWN_pronoun]將嘗試焚燒宗教書籍。</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0}不再是毀像者了。</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>精神狀態：毀像者</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>抗命激辯</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0}的理念怒火已經耗盡。</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>精神狀態：抗命激辯</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

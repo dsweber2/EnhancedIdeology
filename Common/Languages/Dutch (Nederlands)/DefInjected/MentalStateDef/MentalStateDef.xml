@@ -10,4 +10,7 @@
   <EB_Iconoclast.beginLetter>{0} heeft een mentale breuk gehad en gedraagt zich als een beeldenstormer.\n\n[PAWN_pronoun] zal proberen religieuze boeken te verbranden.</EB_Iconoclast.beginLetter>
   <EB_Iconoclast.recoveryMessage>{0} gedraagt zich niet langer als een beeldenstormer.</EB_Iconoclast.recoveryMessage>
   <EB_Iconoclast.baseInspectLine>Geestestoestand: Beeldenstormer</EB_Iconoclast.baseInspectLine>
+  <EB_ArrestedDebater.label>opstandige tirade</EB_ArrestedDebater.label>
+  <EB_ArrestedDebater.recoveryMessage>{0} heeft de ideologische woede uitgeraasd.</EB_ArrestedDebater.recoveryMessage>
+  <EB_ArrestedDebater.baseInspectLine>Geestestoestand: Opstandige tirade</EB_ArrestedDebater.baseInspectLine>
 </LanguageData>

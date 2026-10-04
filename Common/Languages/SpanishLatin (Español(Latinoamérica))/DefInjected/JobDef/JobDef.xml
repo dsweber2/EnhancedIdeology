@@ -2,6 +2,8 @@
 <!-- Author: claude -->
 <LanguageData>
   <EB_IconoclastDebate.reportString>arengando a TargetA sobre ideología.</EB_IconoclastDebate.reportString>
+  <EB_IconoclastAgitate.reportString>arengando a TargetA sobre ideología.</EB_IconoclastAgitate.reportString>
   <EB_PlaceAndBurnUntilDestroyed.reportString>colocando TargetA en el suelo para quemarlo.</EB_PlaceAndBurnUntilDestroyed.reportString>
+  <EB_DebateRelax.reportString>debatiendo sobre ideología.</EB_DebateRelax.reportString>
   <EB_Pray.reportString>contemplando.</EB_Pray.reportString>
 </LanguageData>
