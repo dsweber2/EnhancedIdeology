@@ -53,6 +53,13 @@
 		</value>
 	</Operation>
 
+	<Operation Class="PatchOperationInsert">
+		<xpath>Defs/WorldObjectDef[defName="Caravan"]/inspectorTabs/li[text()="WITab_Caravan_Social"]</xpath>
+		<value>
+			<li>EnhancedIdeology.WITab_Caravan_Opinion</li>
+		</value>
+	</Operation>
+
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/ThinkTreeDef/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[@Class="ThinkNode_ConditionalMentalStates"][states/li[text()="Wander_Sad"]]/states</xpath>
 		<value>

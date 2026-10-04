@@ -15,7 +15,10 @@ internal static class IdeoTracker_TickInterval
         if (!pawn.IsHashIntervalTick(GenTicks.TickRareInterval, delta))
             return;
 
-        if (pawn.Destroyed || pawn.Map == null || __instance.ideo == null || Find.IdeoManager.classicMode)
+        // Caravan members have no map but must still drift. Suspended pawns (cryptosleep) are frozen, although
+        // vanilla still calls this tick for them.
+        if (pawn.Destroyed || pawn.Suspended || (pawn.MapHeld == null && !pawn.IsCaravanMember())
+            || __instance.ideo == null || Find.IdeoManager.classicMode)
             return;
 
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();

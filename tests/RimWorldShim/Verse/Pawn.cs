@@ -129,6 +129,8 @@ public class Pawn
     public Map? Map => _simMap;
     public Map? MapHeld => _simMap;
     public RimWorld.Caravan? GetCaravan() => null;
+    public bool IsCaravanMember() => false;
+    public bool Suspended => false;
     public Vector3 DrawPos => Vector3.zero;
     public DevelopmentalStage DevelopmentalStage => DevelopmentalStage.Adult;
     public RaceProperties RaceProps => RaceProperties.Default;
