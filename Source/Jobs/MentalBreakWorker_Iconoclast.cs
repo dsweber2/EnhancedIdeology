@@ -8,6 +8,7 @@ internal sealed class MentalBreakWorker_Iconoclast : MentalBreakWorker
 {
     public override float CommonalityFor(Pawn pawn, bool moodCaused = false)
     {
+        if (Find.IdeoManager.classicMode) return 0f;
         var certainty = GetCertainty(pawn);
         var factor = Mathf.Max(0f, 1f - certainty);
         return base.CommonalityFor(pawn, moodCaused) * factor / 0.55f;

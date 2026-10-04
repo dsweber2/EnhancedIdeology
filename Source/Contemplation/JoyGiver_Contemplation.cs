@@ -3,10 +3,13 @@ using Verse.AI;
 namespace EnhancedIdeology;
 
 [HotSwappable]
-internal sealed class JoyGiver_Contemplation : JoyGiver
+// Replaces vanilla prayer. Classic mode has no belief system, so it keeps vanilla prayer.
+internal sealed class JoyGiver_Contemplation : JoyGiver_InPrivateRoom
 {
     public override bool CanBeGivenTo(Pawn pawn)
     {
+        if (Find.IdeoManager.classicMode)
+            return base.CanBeGivenTo(pawn);
         if (!base.CanBeGivenTo(pawn) || pawn.Ideo == null || pawn.Map == null)
             return false;
         if (!MeditationUtility.CanMeditateNow(pawn))
@@ -160,8 +163,13 @@ internal sealed class JoyGiver_Contemplation : JoyGiver
     private static readonly Dictionary<Pawn, int> noPewWarnedAt = [];
     private static readonly Dictionary<Pawn, int> disrespectedWarnedAt = [];
 
+    public override Job? TryGiveJobWhileInBed(Pawn pawn) =>
+        Find.IdeoManager.classicMode ? base.TryGiveJobWhileInBed(pawn) : null;
+
     public override Job? TryGiveJob(Pawn pawn)
     {
+        if (Find.IdeoManager.classicMode)
+            return base.TryGiveJob(pawn);
         if (pawn.Ideo == null || pawn.Map == null)
             return null;
 

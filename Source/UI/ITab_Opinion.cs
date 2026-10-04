@@ -382,7 +382,7 @@ internal sealed class ITab_Opinion : ITab
         return rungs[Mathf.Clamp(Mathf.RoundToInt(rank), 0, rungs.Count - 1)].LabelCap;
     }
 
-    // Only show tab for pawns with an ideology
-    public override bool Hidden => SelPawn?.Ideo is null;
-    public override bool IsVisible => SelPawn?.Ideo is not null;
+    // Only show tab for pawns with an ideology. Classic mode has no certainty or stances to show.
+    public override bool Hidden => !IsVisible;
+    public override bool IsVisible => SelPawn?.Ideo is not null && !Find.IdeoManager.classicMode;
 }

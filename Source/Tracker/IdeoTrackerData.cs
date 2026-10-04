@@ -333,8 +333,10 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     internal static bool HasBrainwipeRecovery(Pawn pawn) =>
         pawn.health.hediffSet.GetFirstHediffOfDef(EnhancedIdeologyDefOf.EB_BrainwipeRecovery) != null;
 
+    // Classic mode has no belief system: stances stay as seeded and nothing reads them.
     public void ShiftIssueStance(IssueDef issue, float targetRank, float pull, float strengthDelta)
     {
+        if (Find.IdeoManager.classicMode) return;
         EnsureIssueStancesSeeded();
         Stances.ShiftStance(issue, targetRank, pull, strengthDelta, BrainwipeSusceptibilityMultiplier);
         Opinions.MarkDirty();
@@ -345,6 +347,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     // along the curve — unlike ShiftIssueStance's independent deltas.
     public void SetIssueStance(IssueDef issue, float rank, float strength)
     {
+        if (Find.IdeoManager.classicMode) return;
         EnsureIssueStancesSeeded();
         Stances.SetStance(issue, rank, strength);
         Opinions.MarkDirty();

@@ -14,6 +14,7 @@ internal static class EnhancedIdeologyDefOf
     public static MentalStateDef EB_Iconoclast;
     public static MentalStateDef EB_ArrestedDebater;
     public static ThingDef EB_Ideobook;
+    public static ThingDef EB_WritingDesk;
     public static InspirationDef EB_ReligiousEnlightenment;
     public static JobDef EB_Pray;
     public static JobDef EB_DebateRelax;

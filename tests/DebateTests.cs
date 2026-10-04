@@ -425,6 +425,44 @@ public class DebateTests : SeededTest
         Assert.Null(ex);
     }
 
+    [Fact]
+    public void DebateMeme_TopicMemeHasNaIssuePrecept_DoesNotThrow()
+    {
+        // Regression: a ritual precept tied to the topic meme carries the NA "Ritual" issue, which never gets a
+        // seeded stance, so looking up the winner's stance on it threw KeyNotFoundException.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var topicMeme = new MemeBuilder().WithName("RitualMeme").Build();
+        var (_, ritualRungs) = SimIssues.Ladder("Ritual", "SomeRitual");
+        PreceptPolicy.RegisterCategory("Ritual", PreceptCategory.NA);
+        ritualRungs[0].associatedMemes.Add(topicMeme);
+        var (issue, rungs) = SimIssues.Ladder("RitualMemeIssue", "Rung0", "Rung1");
+        rungs[0].associatedMemes.Add(topicMeme);
+        rungs[1].associatedMemes.Add(topicMeme);
+
+        var winnerIdeo = new IdeoBuilder().WithName("RitualIdeo").AddMeme(topicMeme)
+            .AddPrecept(ritualRungs[0]).AddPrecept(rungs[0]).Build();
+        var loserIdeo = new IdeoBuilder().WithName("PlainIdeo").AddMeme(topicMeme).AddPrecept(rungs[1]).Build();
+        world.AddIdeo(winnerIdeo);
+        world.AddIdeo(loserIdeo);
+
+        var initiator = new PawnBuilder()
+            .WithIdeo(winnerIdeo).WithCertainty(1f).WithConversionPower(5f).WithSocialImpact(2f)
+            .WithLabel("Winner").Build(world);
+        var recipient = new PawnBuilder()
+            .WithIdeo(loserIdeo).WithCertainty(0.3f).WithConversionPower(0.1f)
+            .WithLabel("Loser").Build(world);
+
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var before = StanceRank(recipientTracker, issue);
+
+        new InteractionWorker_IdeologicalDebateMeme().Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        Assert.True(StanceRank(recipientTracker, issue) < before);
+    }
+
     // --- Iconoclast topic-selection tests ---
 
     [Fact]
