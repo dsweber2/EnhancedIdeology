@@ -147,6 +147,10 @@ The derivation and plots are in `analysis/conviction_valley.py`.
   A mood is a vote on the faith's rung, not on the pawn's own: a good mood pulls toward the faith's rung, a bad mood pulls the stance away from the faith's rung toward a firm dissent (strength 15): an orthodox stance toward a random end of the ladder, a heterodox one further out on its own side.
   Loyalty memes turn the good mood from another faith's practices into cognitive dissonance.
 - **Relics** strengthen every follower on all of the faith's moral issues when found; relic moods act like precept moods.
+- **Reforming** a fluid ideoligion moves the faith's rungs, not the believers.
+  A believer who was orthodox on a changed issue jumps straight to the new rung at half their conviction, rather than walking the conviction valley.
+  Orthodoxy is judged per issue, so a pawn who dissents on one issue still follows the reform on the others.
+  Heterodox stances stay where they are: a reform toward a dissenter brings them into line for free, and one away from them pushes them further out.
 
 ## Conversion
 

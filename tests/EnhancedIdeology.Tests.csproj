@@ -58,5 +58,6 @@
     <Compile Include="../Source/Thoughts/Thought_CognitiveDissonance.cs" />
     <Compile Include="../Source/HarmonyPatches/IdeoTracker_TickInterval.cs" />
     <Compile Include="../Source/Relics/RelicConviction.cs" />
+    <Compile Include="../Source/Precepts/IdeoReform.cs" />
   </ItemGroup>
 </Project>

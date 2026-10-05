@@ -14,7 +14,7 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 - `IdeoTracker_SetIdeo.cs` — syncs `GameComponent` membership maps on ideo swap
 - `IdeoTracker_TryJoinIdeoFromExposures.cs` — reroutes child ideo assignment to opinion-weighted `CheckConversion`
 - `IdeoChangeBreak_Start.cs` — suppresses vanilla ideo-change mental break when EB handles it
-- `FluidIdeoTracker_Reformed.cs` — hooks fluid ideo reform to reseed stances
+- `FluidIdeoTracker_Reformed.cs` — snapshots held ranks on `Notify_PreReform`; on `Notify_Reformed` carries orthodox believers to the moved rungs (`Precepts/IdeoReform`) and recaches base opinions
 - `TraitSet_TraitAdded.cs` / `TraitSet_TraitRemoved.cs` — invalidate `OpinionCache` on trait change
 
 **Conversion / ritual reroutes:**

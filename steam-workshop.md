@@ -21,7 +21,7 @@ Certainty is a slow moving drift towards a target set by three bands:
 
 A pawn's opinion of an ideolgion, or Structural fit comes from three things:
 
-- **Issue stances**: each pawn holds a preferred position on each issue (e.g. "execution: Respected if guilty") with a conviction strength. They favour ideoligions whose precepts match and oppose those that don't, weighted by conviction. Traits set the starting point; interactions and moodlets shape them over time. Concretely, this contributes `mean(strength/20) * 100`.
+- **Issue stances**: each pawn holds a preferred position on each issue (e.g. "execution: Respected if guilty") with a conviction strength. They favour ideoligions whose precepts match and oppose those that don't, weighted by conviction. Traits and a pawn's starting ideoligion initialize issue stances, while interactions and moodlets shape them over time. Concretely, this contributes `mean(strength/20) * 100`.
 - **Personality fit**: some memes list traits they agree or disagree with. A Nudist pawn in a ideoligion that venerates Flesh Purity structurally fits better; the same pawn in a Transhumanist ideoligion fits worse.
 - **Inter-faith relations**: memes that are explicitly about other beliefs (e.g. supremacist, loyalist or guilty memes) apply flat opinion modifiers to all outside ideoligions.
 
@@ -36,9 +36,9 @@ Contemplation is a new type of recreation that deepens a pawns certainty in thei
 ![Info_Debates](https://images.steamusercontent.com/ugc/15846418937295764847/13A7CD1D36F7BED3E6769789C81684FC83AA1E7F/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 There are three ways beliefs change through interaction:
 
-**Social conversion**: any pawn that can do social work can try to convert any other pawn. They will focus on a single issue where they disagree most sharply. If the initiator succeeds, the listener shifts their stance on that issue and if their opinion of the speaker's ideoligion exceeds their certainty they may instantaneously convert. Prisoner conversion just spams this with more regularity.
+**Social conversion**: any pawn that can do social work can try to convert any other pawn. They will focus on a single issue where they disagree most sharply. If the initiator succeeds, the listener shifts their stance on that issue and if their opinion of the speaker's ideoligion exceeds their certainty they may instantaneously convert. Prisoner conversion just spams this with more regularity. Make sure your warden has either high social or intellectual, or both.
 
-**Ideological debate**: spontaneous arguments over contested issues or memes. A win shifts the loser's stance on the issue or meme's associated issues; a draw can actually entrench both sides. Pawns with the diversity-of-thought precept enjoy a mood bonus just from debating, while apostates hate losing.
+**Ideological debate**: spontaneous arguments over contested issues or memes. A win shifts the loser's stance on the issue or meme's associated issues; a draw can actually entrench both sides. Pawns with the diversity-of-thought precept enjoy a mood bonus just from debating, while Loyalists hate losing.
 
 **Moral guide Convert ability**: Like a social conversion but more intense. Targets 1–4 of the recipient's most-contested issues, and similarly can lead to spontaneous conversion. See the tooltip for some details.
 
@@ -51,7 +51,6 @@ Beyond these, a pawn who holds a higher opinion of another ideoligion than their
 
 Books are tied to a specific ideoligion and carry per-issue conviction strengths, seeded from the author's own ideosyncratic stances. The more certain the author and the more impressive the materials, the stronger the effect.
 ### Iconoclasm 
-
 Low certainty pawns who snap into the Iconoclast mental break hunt for ideoligion books anywhere on the map, drag them somewhere clear, place them on the ground, and burn them, debating loudly against other pawns and trying to pick a fight. If there are no books, they'll try to destroy a relic or an altar.
 
 ---
