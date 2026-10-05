@@ -70,6 +70,31 @@ public class IdeoReformTests : SeededTest
     }
 
     [Fact]
+    public void Schismatic_CarriesOrthodoxStancesToSplitIdeo()
+    {
+        var (world, ideo, issue, rungs) = Setup();
+        var (otherIssue, otherRungs) = SimIssues.Ladder("IssueB", "B0", "B1", "B2");
+        ideo.precepts.Add(new Precept { def = otherRungs[1], ideo = ideo });
+        var split = new IdeoBuilder().WithName("Split").AddPrecept(rungs[2]).AddPrecept(otherRungs[2]).Build();
+        world.AddIdeo(split);
+
+        var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.SetIssueStance(issue, PreceptLadder.RankOf(rungs[1]), 20f);
+        tracker.SetIssueStance(otherIssue, PreceptLadder.RankOf(otherRungs[0]), 20f);
+
+        var oldHeldRanks = IdeoReform.HeldRanks(ideo);
+        pawn.ideo.SetIdeo(split);
+        world.Comp.SetIdeo(pawn, split);
+        IdeoReform.CarryOrthodoxStances(tracker, split, oldHeldRanks);
+
+        var (rank, strength) = Stance(tracker, issue);
+        Assert.Equal(PreceptLadder.RankOf(rungs[2]), rank);
+        Assert.Equal(10f, strength, 4);
+        Assert.Equal((PreceptLadder.RankOf(otherRungs[0]), 20f), Stance(tracker, otherIssue));
+    }
+
+    [Fact]
     public void OtherIdeoFollower_Untouched()
     {
         var (world, ideo, issue, rungs) = Setup();

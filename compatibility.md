@@ -84,6 +84,13 @@ The ideobook writing recipe is added to VBE's writers table when both mods are a
 
 Integrated, but prefers the settings from Peer Pressure if both mods are active.
 
+## [Vanilla Ideology Expanded — Splits and Schisms](https://steamcommunity.com/sharedfiles/filedetails/?id=2573138902)
+
+Colonists who split off into the new ideoligion take its beliefs with them.
+On each issue where a colonist held their old faith's position, they move to the new faith's position at half their conviction.
+Where they already disagreed with the old faith, their personal belief stays as it was.
+This is the same rule Enhanced Ideology uses when a fluid ideoligion is reformed.
+
 ## [Conversion staff](https://steamcommunity.com/sharedfiles/filedetails/?id=2890481507)
 Works because it modifies base stats that we just use
 ## [Combat Extended](https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044)

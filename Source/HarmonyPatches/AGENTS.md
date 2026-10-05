@@ -35,6 +35,9 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 **ArrestedDebater needs blocking:**
 - `ArrestedDebater_BlockNeeds.cs` — zeroes `GetPriority` for `JobGiver_GetRest` and `JobGiver_GetFood` when pawn is in `EB_ArrestedDebater`; ensures the pawn neither sleeps nor eats during the defiant rant
 
+**Mod compat:**
+- `VIESAS_SchismStances.cs` — Splits and Schisms: on `Window_ConfigureIdeo.Close`, carries split-off colonists' orthodox stances to the new ideo (`Precepts/IdeoReform`); skipped when the mod is absent
+
 **Misc:**
 - `Ideo_Constructor.cs` — postfix to initialize EB ideo state on construction
 - `ExpectationsUtility_Override.cs` — overrides expectation thresholds based on certainty

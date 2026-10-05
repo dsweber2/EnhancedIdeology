@@ -151,6 +151,8 @@ The derivation and plots are in `analysis/conviction_valley.py`.
   A believer who was orthodox on a changed issue jumps straight to the new rung at half their conviction, rather than walking the conviction valley.
   Orthodoxy is judged per issue, so a pawn who dissents on one issue still follows the reform on the others.
   Heterodox stances stay where they are: a reform toward a dissenter brings them into line for free, and one away from them pushes them further out.
+- **Schisms** (Vanilla Ideology Expanded - Splits and Schisms) follow the same rule for the colonists who split off.
+  The old ideoligion's rungs count as the "before" and the new ideoligion's rungs as the "after".
 
 ## Conversion
 
