@@ -3,6 +3,7 @@ namespace Verse;
 public class ThoughtDef : Def
 {
     public ThoughtWorker? Worker;
+    public Type thoughtClass = typeof(Thought_Memory);
 }
 
 public abstract class ThoughtWorker { }
@@ -25,16 +26,27 @@ public class Thought_Memory : Thought
 
 public static class ThoughtMaker
 {
-    public static Thought_Memory MakeThought(ThoughtDef def) => new();
-    public static Thought_Memory MakeThought(ThoughtDef def, RimWorld.Precept? sourcePrecept) => new() { sourcePrecept = sourcePrecept };
+    public static Thought_Memory MakeThought(ThoughtDef def)
+    {
+        var thought = (Thought_Memory)Activator.CreateInstance(def.thoughtClass)!;
+        thought.def = def;
+        return thought;
+    }
+
+    public static Thought_Memory MakeThought(ThoughtDef def, RimWorld.Precept? sourcePrecept)
+    {
+        var thought = MakeThought(def);
+        thought.sourcePrecept = sourcePrecept;
+        return thought;
+    }
 }
 
 public class MemoryThoughtHandler
 {
     public List<Thought_Memory> Memories { get; } = [];
-    public void TryGainMemory(ThoughtDef def, Pawn? otherPawn = null) { }
-    public void TryGainMemory(ThoughtDef def, Pawn? otherPawn, RimWorld.Precept? sourcePrecept) { }
-    public void TryGainMemory(Thought_Memory thought, Pawn? otherPawn = null) { }
+    public void TryGainMemory(ThoughtDef def, Pawn? otherPawn = null) => Memories.Add(ThoughtMaker.MakeThought(def));
+    public void TryGainMemory(ThoughtDef def, Pawn? otherPawn, RimWorld.Precept? sourcePrecept) => Memories.Add(ThoughtMaker.MakeThought(def, sourcePrecept));
+    public void TryGainMemory(Thought_Memory thought, Pawn? otherPawn = null) => Memories.Add(thought);
 }
 
 public class ThoughtHandler

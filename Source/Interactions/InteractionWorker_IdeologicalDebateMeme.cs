@@ -150,7 +150,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
 
         InteractionWorker_IdeologicalDebatePrecept.ApplyDiversityAftermath(initiator, recipient);
         InteractionWorker_IdeologicalDebatePrecept.ApplyApostacyAftermath(initiator, recipient);
-        InteractionWorker_IdeologicalDebatePrecept.ApplyProselytizerAftermath(initiator, crossIdeo: true,
+        InteractionWorker_IdeologicalDebatePrecept.ApplyProselytizerAftermath(initiator, crossIdeo: initiatorIdeo != recipientIdeo,
             initiatorConverted: lastWinner == initiator && letterDef == LetterDefOf.PositiveEvent);
     }
 

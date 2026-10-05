@@ -6,7 +6,7 @@ Tests target net8, but the mod compiles against Unity's Mono BCL (shipped in `Kr
 `make test` runs `make build` first so an API the game does not have fails the build, not only in game.
 
 - `EnhancedIdeology.Tests.csproj` — `<Compile Include>`s selected files from `../Source/` directly. To test a new source file, add it there; every RimWorld member it touches must exist in the shim.
-- `RimWorldShim/` — fake `Verse`/`RimWorld`/`UnityEngine` types with the same names and signatures as the game. Only members the compiled source uses. `Pawn.IsHashIntervalTick` mirrors vanilla's hash-offset maths.
+- `RimWorldShim/` — fake `Verse`/`RimWorld`/`UnityEngine` types with the same names and signatures as the game. Only members the compiled source uses. `Pawn.IsHashIntervalTick` mirrors vanilla's hash-offset maths. `TryGainMemory` stores into `Memories` and `ThoughtMaker` honours `ThoughtDef.thoughtClass`, so tests can assert which moodlets a pawn got. `Caravan.AddPawn` sets `Pawn.GetCaravan()`.
 - `Support/` — test-side replacements and builders:
   - `EnhancedIdeologyModStub.cs` — stands in for `EnhancedIdeologyMod` and `Settings` (`SimSettings`); any setting the source reads must exist here
   - `HarmonyStubs.cs` — no-op Harmony attributes so patch classes compile
