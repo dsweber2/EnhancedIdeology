@@ -9,9 +9,10 @@ internal sealed class MentalBreakWorker_Iconoclast : MentalBreakWorker
     public override float CommonalityFor(Pawn pawn, bool moodCaused = false)
     {
         if (Find.IdeoManager.classicMode) return 0f;
-        var certainty = GetCertainty(pawn);
-        var factor = Mathf.Max(0f, 1f - certainty);
-        return base.CommonalityFor(pawn, moodCaused) * factor / 0.55f;
+        // A small congregation gives the pawn nothing to rebel against.
+        if (pawn.Ideo is not { } ideo || ideo.ColonistBelieverCountCached < Ideo.MinBelieversToEnableObligations) return 0f;
+        var certaintyFactor = Mathf.Max(0f, 1f - GetCertainty(pawn));
+        return base.CommonalityFor(pawn, moodCaused) * certaintyFactor;
     }
 
     private static float GetCertainty(Pawn pawn)

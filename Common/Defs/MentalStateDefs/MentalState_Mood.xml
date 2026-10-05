@@ -28,7 +28,7 @@
         <defName>EB_Iconoclast</defName>
         <mentalState>EB_Iconoclast</mentalState>
         <workerClass>EnhancedIdeology.MentalBreakWorker_Iconoclast</workerClass>
-        <baseCommonality>0.333</baseCommonality>
+        <baseCommonality>0.111</baseCommonality>
         <intensity>Major</intensity>
     </MentalBreakDef>
 
