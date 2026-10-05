@@ -100,6 +100,7 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
             return;
         }
 
+        var converteeTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(convertee);
         var baseStep = ConvictionMath.RitualBaseArc
             * Math.Abs(outcome.positivityIndex)
             * convertee.GetStatValue(StatDefOf.CertaintyLossFactor);
@@ -126,8 +127,9 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
             }
             else
             {
-                targetRank = ConvictionMath.LadderExtremeAwayFrom(issue, IssueStanceTracker.HeldRank(convertee.Ideo!, issue));
-                targetStrength = 0f;
+                targetRank = ConvictionMath.AwayFromFaithRank(
+                    issue, IssueStanceTracker.HeldRank(convertee.Ideo!, issue), converteeTracker.IssueStances().First(s => s.issue == issue).rank);
+                targetStrength = ConvictionScale.AwayFromFaithStrength;
             }
 
             ConvictionMath.ApplyRitualPull(comp, convertee, issue, targetRank, targetStrength, baseStep * ConversionRitualMultiplier);
@@ -135,7 +137,6 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
 
         if (outcome.positivityIndex > 0)
         {
-            var converteeTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(convertee);
             converteeTracker.CheckConversion(ritualIdeo, noBreakdown: true);
         }
     }

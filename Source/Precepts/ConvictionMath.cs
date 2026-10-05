@@ -31,6 +31,33 @@ internal static class ConvictionMath
         return (towardRank - 0f) >= (top - towardRank) ? 0f : top;
     }
 
+    // Ladder end that a pull against the faith's rung aims at.
+    // A stance that leans off the faith's rung aims at the end on that side, so that it is never pulled through the
+    // faith's rung. Only a stance exactly on the faith's rung picks a random side. After one step it leans, so
+    // repeated pulls keep the same side. A stance past the end of the ladder (Don't-care at -1) stays where it is.
+    internal static float AwayFromFaithRank(IssueDef issue, float heldRank, float pawnRank)
+    {
+        var top = PreceptLadder.Rungs(issue).Count - 1;
+        bool towardLow;
+        if (pawnRank != heldRank)
+        {
+            towardLow = pawnRank < heldRank;
+        }
+        else if (heldRank <= 0f)
+        {
+            towardLow = false;
+        }
+        else if (heldRank >= top)
+        {
+            towardLow = true;
+        }
+        else
+        {
+            towardLow = Rand.Bool;
+        }
+        return towardLow ? Mathf.Min(0f, pawnRank) : Mathf.Max(top, pawnRank);
+    }
+
     // Amplitude that makes a cosh arm hang from (vertex, floor) with zero slope, passing through (anchorRank, anchorStrength).
     private static float ArmAmplitude(float anchorRank, float anchorStrength, float vertex, float floor, float width)
     {
@@ -155,27 +182,15 @@ internal static class ConvictionMath
 
     // A mood from a practice of the pawn's faith is a vote on the faith's rung, not on the pawn's own rung.
     // A good mood pulls the stance toward the faith's rung at full conviction.
-    // A bad mood weakens an orthodox stance in place, and pushes a heterodox stance further out on its own side.
-    // The away target is on the pawn's side, so that a pawn is never pulled through the faith's rung.
-    // The arc length is |strengthDelta|, so for an orthodox pawn the strength changes by exactly that amount.
+    // A bad mood pulls the stance away from the faith's rung toward a firm dissent, like a bad ritual.
+    // The arc length is |strengthDelta|, so for an orthodox pawn a good mood is a strength gain of exactly that amount.
     internal static void ApplyMoodPull(IdeoTrackerData tracker, Ideo ideo, IssueDef issue, float strengthDelta)
     {
         var stance = tracker.IssueStances().First(s => s.issue == issue);
         var heldRank = IssueStanceTracker.HeldRank(ideo, issue);
-        float targetRank, targetStrength;
-        if (strengthDelta > 0f)
-        {
-            (targetRank, targetStrength) = (heldRank, ConvictionScale.AbsoluteMaxConvictionStrength);
-        }
-        else if (Mathf.Abs(stance.rank - heldRank) < ValleyMinGap)
-        {
-            (targetRank, targetStrength) = (heldRank, ConvictionScale.MinConvictionStrength);
-        }
-        else
-        {
-            var top = PreceptLadder.Rungs(issue).Count - 1;
-            (targetRank, targetStrength) = (stance.rank < heldRank ? 0f : top, ConvictionScale.AbsoluteMaxConvictionStrength);
-        }
+        var (targetRank, targetStrength) = strengthDelta > 0f
+            ? (heldRank, ConvictionScale.AbsoluteMaxConvictionStrength)
+            : (AwayFromFaithRank(issue, heldRank, stance.rank), ConvictionScale.AwayFromFaithStrength);
 
         var farRank = LadderExtremeAwayFrom(issue, targetRank);
         var stepLength = Mathf.Abs(strengthDelta) * tracker.BrainwipeSusceptibilityMultiplier;

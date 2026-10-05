@@ -15,6 +15,8 @@ public static class Rand
 
     public static bool Chance(float probability) => Value < probability;
 
+    public static bool Bool => Value < 0.5f;
+
     public static float Gaussian(float centerX = 0f, float widthFactor = 1f)
     {
         float value = Value;

@@ -12,6 +12,8 @@ internal static class ConvictionScale
     public const float MaxConvictionStrength = 20f;
     // Hard ceiling enforced by all stance-write paths.
     public const float AbsoluteMaxConvictionStrength = 50f;
+    // Target strength of a pull away from the faith's rung (bad moods, bad rituals): a firm, not a fanatical, dissent.
+    internal const float AwayFromFaithStrength = 15f;
     internal const float ConvictionPerTraitDegree = 3f;
     internal const float TraitMemeConvictionBonus = 10f;
 }

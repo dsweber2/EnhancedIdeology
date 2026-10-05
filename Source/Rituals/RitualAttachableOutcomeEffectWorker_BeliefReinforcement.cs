@@ -32,6 +32,7 @@ internal sealed class RitualAttachableOutcomeEffectWorker_BeliefReinforcement : 
                 continue;
             }
 
+            var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
             var baseStep = ConvictionMath.RitualBaseArc
                 * Math.Abs(outcome.positivityIndex)
                 * pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
@@ -55,8 +56,9 @@ internal sealed class RitualAttachableOutcomeEffectWorker_BeliefReinforcement : 
                 }
                 else
                 {
-                    targetRank = ConvictionMath.LadderExtremeAwayFrom(issue, IssueStanceTracker.HeldRank(pawn.Ideo, issue));
-                    targetStrength = 0f;
+                    targetRank = ConvictionMath.AwayFromFaithRank(
+                        issue, IssueStanceTracker.HeldRank(pawn.Ideo, issue), tracker.IssueStances().First(s => s.issue == issue).rank);
+                    targetStrength = ConvictionScale.AwayFromFaithStrength;
                 }
 
                 ConvictionMath.ApplyRitualPull(comp, pawn, issue, targetRank, targetStrength, stepLength);

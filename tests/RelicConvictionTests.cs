@@ -80,11 +80,28 @@ public class RelicConvictionTests : SeededTest
         Assert.Equal(corpseBefore, issues.Select(issue => Strength(corpseTracker, issue)).ToList());
     }
 
-    [Theory]
-    [InlineData(15f)]
-    [InlineData(-5f)]
-    public void MoodletShift_SpreadsMoodEquivalentDeltaAcrossMoralIssues(float moodOffset)
+    [Fact]
+    public void MoodletShift_BadMood_PullsEveryMoralIssueOffFaithRung()
     {
+        var (world, ideo, relic, issues, _) = Setup();
+        var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        var before = issues.Select(issue => tracker.IssueStances().First(stance => stance.issue == issue)).ToList();
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(relic, -5f, ThoughtDefOf.RelicLost));
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        foreach (var (issue, ii) in issues.Select((issue, ii) => (issue, ii)))
+        {
+            var after = tracker.IssueStances().First(stance => stance.issue == issue);
+            Assert.NotEqual(before[ii].rank, after.rank);
+        }
+    }
+
+    [Fact]
+    public void MoodletShift_GoodMood_SpreadsMoodEquivalentDeltaAcrossMoralIssues()
+    {
+        const float moodOffset = 15f;
         var (world, ideo, relic, issues, _) = Setup();
         var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);

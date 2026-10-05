@@ -26,32 +26,52 @@ public class MoodletConvictionTests : SeededTest
         * EnhancedIdeologyMod.Settings.ConversionStancePull
         * GameComponent_EnhancedIdeology.MoodletConvictionScalar;
 
-    [Theory]
-    [InlineData(8f)]
-    [InlineData(-8f)]
-    public void VanillaPreceptMemory_ShiftsIssueStrength(float moodOffset)
+    [Fact]
+    public void VanillaPreceptMemory_GoodMood_RaisesStrengthByDelta()
     {
         var (world, pawn, tracker, issue, precept) = Setup();
         var before = Strength(tracker, issue);
 
-        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, moodOffset));
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 8f));
         world.Comp.ApplyMoodletConvictionShifts();
 
-        Assert.Equal(before + ExpectedDelta(moodOffset), Strength(tracker, issue), precision: 5);
+        Assert.Equal(before + ExpectedDelta(8f), Strength(tracker, issue), precision: 5);
     }
 
-    [Theory]
-    [InlineData(8f)]
-    [InlineData(-8f)]
-    public void SituationalPreceptThought_ShiftsIssueStrength(float moodOffset)
+    [Fact]
+    public void VanillaPreceptMemory_BadMood_LowersStrength()
     {
         var (world, pawn, tracker, issue, precept) = Setup();
         var before = Strength(tracker, issue);
 
-        pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = moodOffset });
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -8f));
         world.Comp.ApplyMoodletConvictionShifts();
 
-        Assert.Equal(before + ExpectedDelta(moodOffset), Strength(tracker, issue), precision: 5);
+        Assert.True(Strength(tracker, issue) < before);
+    }
+
+    [Fact]
+    public void SituationalPreceptThought_GoodMood_RaisesStrengthByDelta()
+    {
+        var (world, pawn, tracker, issue, precept) = Setup();
+        var before = Strength(tracker, issue);
+
+        pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = 8f });
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.Equal(before + ExpectedDelta(8f), Strength(tracker, issue), precision: 5);
+    }
+
+    [Fact]
+    public void SituationalPreceptThought_BadMood_LowersStrength()
+    {
+        var (world, pawn, tracker, issue, precept) = Setup();
+        var before = Strength(tracker, issue);
+
+        pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = -8f });
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.True(Strength(tracker, issue) < before);
     }
 
     [Fact]
@@ -173,15 +193,32 @@ public class MoodletConvictionTests : SeededTest
     }
 
     [Fact]
-    public void OrthodoxPawn_BadMood_WeakensWithoutLeavingRung()
+    public void OrthodoxPawn_RepeatedBadMoods_KeepOneSide()
+    {
+        var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 2f);
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -30f));
+
+        var offsets = new List<float>();
+        for (var ii = 0; ii < 20; ii++)
+        {
+            world.Comp.ApplyMoodletConvictionShifts();
+            offsets.Add(Rank(tracker, issue) - 2f);
+        }
+
+        Assert.All(offsets, offset => Assert.Equal(Math.Sign(offsets[0]), Math.Sign(offset)));
+        Assert.True(Math.Abs(offsets[^1]) > Math.Abs(offsets[0]));
+    }
+
+    [Fact]
+    public void OrthodoxPawn_BadMood_LeavesRungAndWeakens()
     {
         var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 2f);
 
-        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -8f));
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -30f));
         world.Comp.ApplyMoodletConvictionShifts();
 
+        Assert.NotEqual(2f, Rank(tracker, issue));
         Assert.True(Strength(tracker, issue) < 10f);
-        Assert.Equal(2f, Rank(tracker, issue), precision: 2);
     }
 
     [Fact]

@@ -38,4 +38,46 @@ public class RitualReinforcementTests : SeededTest
         Assert.True(after.strength <= ConvictionScale.MaxConvictionStrength,
             $"a single great ritual step should not push conviction past the normal ceiling ({ConvictionScale.MaxConvictionStrength}). got {after.strength}");
     }
+
+    // Faith on rung 2 of 0..4, the ladder midpoint.
+    [Theory]
+    [InlineData(1f, 0f)]
+    [InlineData(3f, 4f)]
+    [InlineData(1.99f, 0f)]
+    [InlineData(2.01f, 4f)]
+    [InlineData(-1f, -1f)]
+    public void AwayFromFaithRank_LeaningPawn_AimsAtLadderEndOnOwnSide(float pawnRank, float expectedRank)
+    {
+        var (issue, _) = SimIssues.Ladder("AwayIssue", "R0", "R1", "R2", "R3", "R4");
+
+        Assert.Equal(expectedRank, ConvictionMath.AwayFromFaithRank(issue, 2f, pawnRank));
+    }
+
+    [Fact]
+    public void AwayFromFaithRank_DontCarePawnPastFaithEnd_StaysPut()
+    {
+        var (issue, _) = SimIssues.Ladder("AwayIssue", "R0", "R1", "R2", "R3", "R4");
+
+        Assert.Equal(-1f, ConvictionMath.AwayFromFaithRank(issue, 0f, -1f));
+    }
+
+    [Fact]
+    public void AwayFromFaithRank_OrthodoxPawnOnMiddleRung_PicksBothEnds()
+    {
+        var (issue, _) = SimIssues.Ladder("AwayIssue", "R0", "R1", "R2", "R3", "R4");
+
+        var picks = Enumerable.Range(0, 50).Select(_ => ConvictionMath.AwayFromFaithRank(issue, 2f, 2f)).ToHashSet();
+
+        Assert.Equal([0f, 4f], picks.Order());
+    }
+
+    [Theory]
+    [InlineData(0f, 4f)]
+    [InlineData(4f, 0f)]
+    public void AwayFromFaithRank_OrthodoxPawnOnEndRung_AimsAtOtherEnd(float heldRank, float expectedRank)
+    {
+        var (issue, _) = SimIssues.Ladder("AwayIssue", "R0", "R1", "R2", "R3", "R4");
+
+        Assert.Equal(expectedRank, ConvictionMath.AwayFromFaithRank(issue, heldRank, heldRank));
+    }
 }
