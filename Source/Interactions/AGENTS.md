@@ -3,7 +3,7 @@
 Social interaction workers, ability workers, and play-log entries. The debate workers are the main callers of `IdeoTrackerData.PullStance` and `ConversionEvaluator.CheckConversion`.
 
 **Debate flow:**
-1. `InteractionWorker_IdeologicalDebatePrecept` selects a topic (`GetDebateTopic`), rolls (`GetDebateRoll`/`WinChance`), and on win calls `PullStance` → `ConvictionMath`; conviction flip triggers `CheckConversion`
+1. `InteractionWorker_IdeologicalDebatePrecept` selects a topic (`GetDebateTopic`; only Moral and Special issues qualify, via `PreceptPolicy.IsDebatable`, and the meme debate uses the same filter), rolls (`GetDebateRoll`/`WinChance`), and on win calls `PullStance` → `ConvictionMath`; conviction flip triggers `CheckConversion`
 2. `InteractionWorker_IdeologicalDebateMeme` runs at the meme level, shifts meme opinion, may also trigger conversion
 3. `InteractionWorker_AdvancedConversionAttempt` applies a certainty knock then calls `CheckConversion` directly
 

@@ -404,6 +404,11 @@ internal static partial class PreceptPolicy
     internal static void RegisterCategory(string issueDefName, PreceptCategory category) => Overrides[issueDefName] = category;
     internal static void ClearOverrides() => Overrides.Clear();
 
+    // Only Moral and Special issues feed structural opinion, so only they are worth a debate. A won debate on
+    // any other issue moves a stance that nothing reads.
+    internal static bool IsDebatable(IssueDef issue) =>
+        CategoryOf(issue) is PreceptCategory.Moral or PreceptCategory.Special;
+
     public static PreceptCategory CategoryOf(IssueDef issue)
     {
         if (Overrides.TryGetValue(issue.defName, out var overridden))

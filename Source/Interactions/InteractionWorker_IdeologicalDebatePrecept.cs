@@ -264,9 +264,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // The issues the two pawns' personal stances Disagree on, as the initiator's precept for each issue.
     // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
     // them. Each side argues from their personal stance (see AdjustOpinions).
-    // Issues without a seeded stance (PreceptCategory.NA: buildings, ritual seats, naming) aren't a belief
-    // axis and never get a personal stance recorded, so excluding them here is just staying in sync with
-    // IssueStanceTracker.EnsureSeeded rather than a bespoke category check.
+    // Only issues that feed structural opinion qualify (PreceptPolicy.IsDebatable).
     private static List<PreceptDef> DebatableIssues(
         Ideo initiatorIdeo,
         Dictionary<IssueDef, (float rank, float strength)> initiatorStances,
@@ -274,6 +272,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         [.. initiatorIdeo.precepts
             .Select(p => p.def)
             .Where(def => def.issue != null
+                && PreceptPolicy.IsDebatable(def.issue)
                 && initiatorStances.ContainsKey(def.issue)
                 && recipientStances.ContainsKey(def.issue)
                 && Disagree(initiatorStances[def.issue], recipientStances[def.issue]))

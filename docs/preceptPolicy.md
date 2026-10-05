@@ -106,8 +106,8 @@ Eclipse,
 
 ## PositiveOnly review (encoded)
 
-Context: debates currently pick any non-NA issue as a topic, and PositiveOnly topics move nothing structural.
-The plan is to limit debate topics to Moral + Special, so every PositiveOnly issue that carries a real value claim moved to Moral first.
+Context: debates used to pick any non-NA issue as a topic, and PositiveOnly topics moved nothing structural.
+Debate topics are now limited to Moral + Special (`PreceptPolicy.IsDebatable`), so every PositiveOnly issue that carries a real value claim moved to Moral first.
 Everything below is encoded in `PreceptPolicy` except where marked (p) or deferred.
 
 **Test for Moral:** the rung text makes a value claim, and either another rung opposes it or an ordinary outsider (the silent Don't-care side) would object to it.

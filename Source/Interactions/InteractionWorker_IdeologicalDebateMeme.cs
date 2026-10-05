@@ -167,11 +167,10 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         return result;
     }
 
-    // NA issues (rituals, buildings, relics) never get a seeded stance, so they are excluded to stay in sync
-    // with IssueStanceTracker.EnsureSeeded.
+    // Only issues that feed structural opinion are moved by a meme debate (PreceptPolicy.IsDebatable).
     private static IEnumerable<PreceptDef> MemePreceptsFor(Ideo ideo, MemeDef meme) =>
         ideo.precepts
-            .Where(p => p.def.issue != null && PreceptPolicy.CategoryOf(p.def.issue) != PreceptCategory.NA
+            .Where(p => p.def.issue != null && PreceptPolicy.IsDebatable(p.def.issue)
                 && (p.def.requiredMemes.Contains(meme) || p.def.associatedMemes.Contains(meme)))
             .Select(p => p.def);
 
