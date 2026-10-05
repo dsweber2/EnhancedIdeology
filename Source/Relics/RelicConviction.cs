@@ -49,7 +49,7 @@ internal static class RelicConviction
 
     // Per-TickLong conviction shift from one relic thought. The rate is the same as a precept moodlet of
     // equal mood, divided across the Moral issues so that the total effect on structural fit is also equal.
-    internal static void ApplyMoodletShift(Pawn pawn, IdeoTrackerData tracker, Thought_Memory thought)
+    internal static void ApplyMoodletShift(Pawn pawn, IdeoTrackerData tracker, Thought thought)
     {
         if (thought.sourcePrecept?.ideo is not { } ideo || ideo != pawn.Ideo)
         {
@@ -62,11 +62,7 @@ internal static class RelicConviction
             return;
         }
 
-        var delta = thought.MoodOffset()
-            * pawn.GetStatValue(StatDefOf.CertaintyLossFactor)
-            * EnhancedIdeologyMod.Settings.ConversionStancePull
-            * GameComponent_EnhancedIdeology.MoodletConvictionScalar
-            / issues.Count;
+        var delta = GameComponent_EnhancedIdeology.MoodletConvictionDelta(pawn, thought.MoodOffset()) / issues.Count;
         if (Mathf.Abs(delta) < 0.00001f)
         {
             return;
@@ -74,7 +70,7 @@ internal static class RelicConviction
 
         foreach (var issue in issues)
         {
-            tracker.ShiftIssueStance(issue, 0f, 0f, delta);
+            ConvictionMath.ApplyMoodPull(tracker, ideo, issue, delta);
         }
     }
 }

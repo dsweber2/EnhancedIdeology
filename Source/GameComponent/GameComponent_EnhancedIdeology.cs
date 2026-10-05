@@ -47,27 +47,50 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
         ApplyMoodletConvictionShifts();
     }
 
+    private readonly List<Thought> _tmpThoughts = [];
+
+    // Memories and situational thoughts both count. Vanilla precept thoughts are plain Thought_Memory or
+    // Thought_Situational, so the filter is the source precept, not the thought class.
     internal void ApplyMoodletConvictionShifts()
     {
         foreach (var (pawn, tracker) in PawnTracker)
         {
-            var memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
-            if (memories == null) continue;
-            foreach (var thought in memories)
+            _tmpThoughts.Clear();
+            pawn.needs?.mood?.thoughts?.GetAllMoodThoughts(_tmpThoughts);
+            foreach (var thought in _tmpThoughts)
             {
                 if (RelicConviction.IsRelicThought(thought.def))
                 {
                     RelicConviction.ApplyMoodletShift(pawn, tracker, thought);
                     continue;
                 }
-                if (thought is not Thought_MemeMemory memeThought) continue;
-                if (memeThought.sourcePrecept is not { } precept || precept.ideo != pawn.Ideo) continue;
-                var issue = precept.def.issue;
-                if (issue == null || Mathf.Abs(memeThought.ConvictionDeltaPerTickLong) < 0.0001f) continue;
-                tracker.ShiftIssueStance(issue, 0f, 0f, memeThought.ConvictionDeltaPerTickLong);
+                // Dissonance is the response to a foreign practice, not a practice of the pawn's own faith.
+                if (thought is Thought_CognitiveDissonance) continue;
+                if (thought.sourcePrecept is not { } precept || precept.ideo != pawn.Ideo) continue;
+                if (precept.def.issue is not { } issue) continue;
+                var delta = MoodletConvictionDelta(pawn, thought.MoodOffset());
+                if (Mathf.Abs(delta) < 0.00001f) continue;
+                // Only Moral issues have a ladder to move along. NA issues (rituals, buildings) have no stance.
+                switch (PreceptPolicy.CategoryOf(issue))
+                {
+                    case PreceptCategory.NA:
+                        break;
+                    case PreceptCategory.Moral:
+                        ConvictionMath.ApplyMoodPull(tracker, precept.ideo, issue, delta);
+                        break;
+                    default:
+                        tracker.ShiftIssueStance(issue, 0f, 0f, delta);
+                        break;
+                }
             }
         }
     }
+
+    internal static float MoodletConvictionDelta(Pawn pawn, float moodOffset) =>
+        moodOffset
+        * pawn.GetStatValue(StatDefOf.CertaintyLossFactor)
+        * EnhancedIdeologyMod.Settings.ConversionStancePull
+        * MoodletConvictionScalar;
 
     public void SetIdeo(Pawn pawn, Ideo ideo)
     {

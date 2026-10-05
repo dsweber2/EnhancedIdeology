@@ -4,10 +4,6 @@ public class Thought_MemeMemory : Thought_Memory
 {
     public string? SourceMemeLabel;
 
-    // Conviction delta applied each TickLong while this thought is active. Precomputed at gain time
-    // from MoodOffset × CertaintyLossFactor × ConversionStancePull × MoodletConvictionScalar.
-    public float ConvictionDeltaPerTickLong;
-
     public override string Description
     {
         get
@@ -22,6 +18,5 @@ public class Thought_MemeMemory : Thought_Memory
     {
         base.ExposeData();
         Scribe_Values.Look(ref SourceMemeLabel, "sourceMemeLabel");
-        Scribe_Values.Look(ref ConvictionDeltaPerTickLong, "convictionDeltaPerTickLong");
     }
 }

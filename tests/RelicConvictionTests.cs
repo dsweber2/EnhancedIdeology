@@ -2,20 +2,6 @@ namespace EnhancedIdeology.Tests;
 
 public class RelicConvictionTests : SeededTest
 {
-    private sealed class RelicMemory : Thought_Memory
-    {
-        private readonly float _moodOffset;
-
-        public RelicMemory(ThoughtDef thoughtDef, Precept source, float moodOffset)
-        {
-            def = thoughtDef;
-            sourcePrecept = source;
-            _moodOffset = moodOffset;
-        }
-
-        public override float MoodOffset() => _moodOffset;
-    }
-
     private static (SimWorld world, Ideo ideo, Precept_Relic relic, IssueDef[] issues, PreceptDef[] rungsA) Setup()
     {
         var world = new SimWorld();
@@ -104,7 +90,7 @@ public class RelicConvictionTests : SeededTest
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
         var before = issues.Select(issue => Strength(tracker, issue)).ToList();
 
-        pawn.needs.mood.thoughts.memories.Memories.Add(new RelicMemory(ThoughtDefOf.RelicsCollected, relic, moodOffset));
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(relic, moodOffset, ThoughtDefOf.RelicsCollected));
         world.Comp.ApplyMoodletConvictionShifts();
 
         var expectedTotal = moodOffset
@@ -127,7 +113,7 @@ public class RelicConvictionTests : SeededTest
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
         var before = Strength(tracker, issues[0]);
 
-        pawn.needs.mood.thoughts.memories.Memories.Add(new RelicMemory(ThoughtDefOf.RelicLost, relic, -5f));
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(relic, -5f, ThoughtDefOf.RelicLost));
         world.Comp.ApplyMoodletConvictionShifts();
 
         Assert.Equal(before, Strength(tracker, issues[0]));

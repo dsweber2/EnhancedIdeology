@@ -2,14 +2,8 @@ namespace EnhancedIdeology.Tests;
 
 public class MoodletConvictionTests : SeededTest
 {
-    private static Thought_MemeMemory MakeThought(Precept precept, float delta) => new()
-    {
-        sourcePrecept = precept,
-        ConvictionDeltaPerTickLong = delta,
-    };
-
-    [Fact]
-    public void SameIdeoThought_PositiveDelta_IncreasesIssueStrength()
+    private static (SimWorld world, SimPawn pawn, IdeoTrackerData tracker, IssueDef issue, Precept precept) Setup(
+        float certaintyLossFactor = 1f)
     {
         var world = new SimWorld();
         world.Initialize();
@@ -18,128 +12,203 @@ public class MoodletConvictionTests : SeededTest
         var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(rungs[0]).Build();
         world.AddIdeo(ideo);
 
-        var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithCertaintyLossFactor(certaintyLossFactor).Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var startStrength = tracker.IssueStances().First(s => s.issue == issue).strength;
+        return (world, pawn, tracker, issue, ideo.precepts.First(p => p.def == rungs[0]));
+    }
 
-        var precept = ideo.precepts.First(p => p.def == rungs[0]);
-        pawn.needs.mood.thoughts.memories.Memories.Add(MakeThought(precept, 0.5f));
+    private static float Strength(IdeoTrackerData tracker, IssueDef issue) =>
+        tracker.IssueStances().First(stance => stance.issue == issue).strength;
 
+    private static float ExpectedDelta(float moodOffset, float certaintyLossFactor = 1f) =>
+        moodOffset
+        * certaintyLossFactor
+        * EnhancedIdeologyMod.Settings.ConversionStancePull
+        * GameComponent_EnhancedIdeology.MoodletConvictionScalar;
+
+    [Theory]
+    [InlineData(8f)]
+    [InlineData(-8f)]
+    public void VanillaPreceptMemory_ShiftsIssueStrength(float moodOffset)
+    {
+        var (world, pawn, tracker, issue, precept) = Setup();
+        var before = Strength(tracker, issue);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, moodOffset));
         world.Comp.ApplyMoodletConvictionShifts();
 
-        var after = tracker.IssueStances().First(s => s.issue == issue);
-        Assert.Equal(startStrength + 0.5f, after.strength, precision: 4);
+        Assert.Equal(before + ExpectedDelta(moodOffset), Strength(tracker, issue), precision: 5);
+    }
+
+    [Theory]
+    [InlineData(8f)]
+    [InlineData(-8f)]
+    public void SituationalPreceptThought_ShiftsIssueStrength(float moodOffset)
+    {
+        var (world, pawn, tracker, issue, precept) = Setup();
+        var before = Strength(tracker, issue);
+
+        pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = moodOffset });
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.Equal(before + ExpectedDelta(moodOffset), Strength(tracker, issue), precision: 5);
     }
 
     [Fact]
-    public void SameIdeoThought_NegativeDelta_DecreasesIssueStrength()
+    public void CertaintyLossFactor_ScalesShift()
     {
-        var world = new SimWorld();
-        world.Initialize();
+        var (world, pawn, tracker, issue, precept) = Setup(certaintyLossFactor: 2f);
+        var before = Strength(tracker, issue);
 
-        var (issue, rungs) = SimIssues.Ladder("TestIssue", "Permissive", "Forbidding");
-        var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(rungs[0]).Build();
-        world.AddIdeo(ideo);
-
-        var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var startStrength = tracker.IssueStances().First(s => s.issue == issue).strength;
-
-        var precept = ideo.precepts.First(p => p.def == rungs[0]);
-        pawn.needs.mood.thoughts.memories.Memories.Add(MakeThought(precept, -0.5f));
-
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 8f));
         world.Comp.ApplyMoodletConvictionShifts();
 
-        var after = tracker.IssueStances().First(s => s.issue == issue);
-        Assert.Equal(startStrength - 0.5f, after.strength, precision: 4);
+        Assert.Equal(before + ExpectedDelta(8f, certaintyLossFactor: 2f), Strength(tracker, issue), precision: 5);
     }
 
     [Fact]
     public void CrossIdeoThought_DoesNotShiftConviction()
     {
-        var world = new SimWorld();
-        world.Initialize();
-
-        var (issue, rungs) = SimIssues.Ladder("TestIssue", "Permissive", "Forbidding");
-        var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(rungs[0]).Build();
-        var foreignIdeo = new IdeoBuilder().WithName("ForeignIdeo").AddPrecept(rungs[1]).Build();
-        world.AddIdeo(ideo);
+        var (world, pawn, tracker, issue, _) = Setup();
+        var (_, foreignRungs) = SimIssues.Ladder("ForeignIssue", "Permissive", "Forbidding");
+        var foreignIdeo = new IdeoBuilder().WithName("ForeignIdeo").AddPrecept(foreignRungs[1]).Build();
         world.AddIdeo(foreignIdeo);
+        var before = Strength(tracker, issue);
 
-        var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var startStrength = tracker.IssueStances().First(s => s.issue == issue).strength;
-
-        var foreignPrecept = foreignIdeo.precepts.First(p => p.def == rungs[1]);
-        pawn.needs.mood.thoughts.memories.Memories.Add(MakeThought(foreignPrecept, 0.5f));
-
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(foreignIdeo.precepts[0], 8f));
         world.Comp.ApplyMoodletConvictionShifts();
 
-        var after = tracker.IssueStances().First(s => s.issue == issue);
-        Assert.Equal(startStrength, after.strength, precision: 4);
+        Assert.Equal(before, Strength(tracker, issue));
     }
 
     [Fact]
-    public void ZeroDelta_DoesNotShiftConviction()
+    public void CognitiveDissonance_DoesNotShiftConviction()
+    {
+        var (world, pawn, tracker, issue, precept) = Setup();
+        var before = Strength(tracker, issue);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(
+            new Thought_CognitiveDissonance { sourcePrecept = precept, StoredMoodOffset = -8f });
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.Equal(before, Strength(tracker, issue));
+    }
+
+    [Fact]
+    public void ZeroMood_DoesNotShiftConviction()
+    {
+        var (world, pawn, tracker, issue, precept) = Setup();
+        var before = Strength(tracker, issue);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 0f));
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.Equal(before, Strength(tracker, issue));
+    }
+
+    [Fact]
+    public void MemoryAndSituationalOnSameIssue_Accumulate()
+    {
+        var (world, pawn, tracker, issue, precept) = Setup();
+        var before = Strength(tracker, issue);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 5f));
+        pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = 3f });
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.Equal(before + ExpectedDelta(8f), Strength(tracker, issue), precision: 5);
+    }
+
+    private static (SimWorld world, SimPawn pawn, IdeoTrackerData tracker, IssueDef issue, Precept precept) HeterodoxSetup(
+        float pawnRank)
     {
         var world = new SimWorld();
         world.Initialize();
 
-        var (issue, rungs) = SimIssues.Ladder("TestIssue", "Permissive", "Forbidding");
-        var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(rungs[0]).Build();
+        var (issue, rungs) = SimIssues.Ladder("HeterodoxIssue", "R0", "R1", "R2", "R3");
+        var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(rungs[2]).Build();
         world.AddIdeo(ideo);
 
         var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var startStrength = tracker.IssueStances().First(s => s.issue == issue).strength;
+        tracker.SetIssueStance(issue, pawnRank, 10f);
+        return (world, pawn, tracker, issue, ideo.precepts.First(p => p.def == rungs[2]));
+    }
 
-        var precept = ideo.precepts.First(p => p.def == rungs[0]);
-        pawn.needs.mood.thoughts.memories.Memories.Add(MakeThought(precept, 0f));
+    private static float Rank(IdeoTrackerData tracker, IssueDef issue) =>
+        tracker.IssueStances().First(stance => stance.issue == issue).rank;
 
+    [Fact]
+    public void HeterodoxPawn_GoodMood_PullsRankTowardFaith()
+    {
+        var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 0f);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 30f));
         world.Comp.ApplyMoodletConvictionShifts();
 
-        var after = tracker.IssueStances().First(s => s.issue == issue);
-        Assert.Equal(startStrength, after.strength, precision: 4);
+        Assert.True(Rank(tracker, issue) > 0f);
     }
 
     [Fact]
-    public void MultipleThoughtsOnSameIssue_DeltasAccumulate()
+    public void HeterodoxPawn_BadMood_HardensDissent()
+    {
+        var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 1f);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -30f));
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.True(Rank(tracker, issue) < 1f);
+        Assert.True(Strength(tracker, issue) > 10f);
+    }
+
+    [Fact]
+    public void HeterodoxPawn_BadMood_StaysOnOwnSideOfFaith()
+    {
+        var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 2.5f);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -30f));
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.True(Rank(tracker, issue) > 2.5f);
+    }
+
+    [Fact]
+    public void OrthodoxPawn_BadMood_WeakensWithoutLeavingRung()
+    {
+        var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 2f);
+
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -8f));
+        world.Comp.ApplyMoodletConvictionShifts();
+
+        Assert.True(Strength(tracker, issue) < 10f);
+        Assert.Equal(2f, Rank(tracker, issue), precision: 2);
+    }
+
+    [Fact]
+    public void NaIssueThought_IsSkipped()
     {
         var world = new SimWorld();
         world.Initialize();
 
-        var (issue, rungs) = SimIssues.Ladder("TestIssue", "Permissive", "Forbidding");
-        var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(rungs[0]).Build();
+        var (naIssue, naRungs) = SimIssues.Ladder("TestNaIssue", "Only");
+        PreceptPolicy.RegisterCategory(naIssue.defName, PreceptCategory.NA);
+        var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(naRungs[0]).Build();
         world.AddIdeo(ideo);
-
         var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var startStrength = tracker.IssueStances().First(s => s.issue == issue).strength;
 
-        var precept = ideo.precepts.First(p => p.def == rungs[0]);
-        pawn.needs.mood.thoughts.memories.Memories.Add(MakeThought(precept, 0.3f));
-        pawn.needs.mood.thoughts.memories.Memories.Add(MakeThought(precept, 0.2f));
-
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(ideo.precepts[0], 8f));
         world.Comp.ApplyMoodletConvictionShifts();
 
-        var after = tracker.IssueStances().First(s => s.issue == issue);
-        Assert.Equal(startStrength + 0.5f, after.strength, precision: 4);
+        Assert.DoesNotContain(world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn).IssueStances(), stance => stance.issue == naIssue);
     }
 
     [Fact]
     public void PreceptlessThought_OnPawnWithoutIdeo_IsSkipped()
     {
-        var world = new SimWorld();
-        world.Initialize();
-
-        var ideo = new IdeoBuilder().WithName("TestIdeo").Build();
-        world.AddIdeo(ideo);
-
-        var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
-        world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        var (world, pawn, _, _, _) = Setup();
         pawn.ideo.ideo = null;
-        pawn.needs.mood.thoughts.memories.Memories.Add(new Thought_MemeMemory { ConvictionDeltaPerTickLong = 0.5f });
 
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(null, 8f));
         world.Comp.ApplyMoodletConvictionShifts();
     }
 }

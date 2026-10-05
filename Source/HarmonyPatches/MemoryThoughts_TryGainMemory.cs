@@ -16,22 +16,9 @@ static class MemoryThoughts_TryGainMemory
         var pawn = newThought.pawn;
         if (pawn?.Ideo == null) return;
         if (newThought is Thought_CognitiveDissonance) return;
-        if (newThought.sourcePrecept?.ideo == null) return;
+        if (newThought.sourcePrecept?.ideo == null || newThought.sourcePrecept.ideo == pawn.Ideo) return;
 
         var offset = newThought.MoodOffset();
-
-        if (newThought.sourcePrecept.ideo == pawn.Ideo)
-        {
-            if (newThought is Thought_MemeMemory memeThought && Mathf.Abs(offset) > 0.01f)
-            {
-                memeThought.ConvictionDeltaPerTickLong = offset
-                    * pawn.GetStatValue(StatDefOf.CertaintyLossFactor)
-                    * EnhancedIdeologyMod.Settings.ConversionStancePull
-                    * GameComponent_EnhancedIdeology.MoodletConvictionScalar;
-            }
-            return;
-        }
-
         float counterMultiplier = 0f;
         MemeDef? triggeringMeme = null;
 

@@ -152,4 +152,34 @@ internal static class ConvictionMath
         var (newRank, newStrength) = ValleyStep(stance.rank, stance.strength, targetRank, farRank, targetStrength, stepLength);
         tracker.SetIssueStance(issue, newRank, newStrength);
     }
+
+    // A mood from a practice of the pawn's faith is a vote on the faith's rung, not on the pawn's own rung.
+    // A good mood pulls the stance toward the faith's rung at full conviction.
+    // A bad mood weakens an orthodox stance in place, and pushes a heterodox stance further out on its own side.
+    // The away target is on the pawn's side, so that a pawn is never pulled through the faith's rung.
+    // The arc length is |strengthDelta|, so for an orthodox pawn the strength changes by exactly that amount.
+    internal static void ApplyMoodPull(IdeoTrackerData tracker, Ideo ideo, IssueDef issue, float strengthDelta)
+    {
+        var stance = tracker.IssueStances().First(s => s.issue == issue);
+        var heldRank = IssueStanceTracker.HeldRank(ideo, issue);
+        float targetRank, targetStrength;
+        if (strengthDelta > 0f)
+        {
+            (targetRank, targetStrength) = (heldRank, ConvictionScale.AbsoluteMaxConvictionStrength);
+        }
+        else if (Mathf.Abs(stance.rank - heldRank) < ValleyMinGap)
+        {
+            (targetRank, targetStrength) = (heldRank, ConvictionScale.MinConvictionStrength);
+        }
+        else
+        {
+            var top = PreceptLadder.Rungs(issue).Count - 1;
+            (targetRank, targetStrength) = (stance.rank < heldRank ? 0f : top, ConvictionScale.AbsoluteMaxConvictionStrength);
+        }
+
+        var farRank = LadderExtremeAwayFrom(issue, targetRank);
+        var stepLength = Mathf.Abs(strengthDelta) * tracker.BrainwipeSusceptibilityMultiplier;
+        var (newRank, newStrength) = ValleyStep(stance.rank, stance.strength, targetRank, farRank, targetStrength, stepLength);
+        tracker.SetIssueStance(issue, newRank, newStrength);
+    }
 }

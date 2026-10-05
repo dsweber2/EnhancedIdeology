@@ -45,7 +45,7 @@ public class ClassicModeTests : SeededTest
         var (world, tracker, issue, precept) = Setup();
         var before = tracker.IssueStances().First(s => s.issue == issue);
         tracker.Pawn.needs.mood.thoughts.memories.Memories.Add(
-            new Thought_MemeMemory { sourcePrecept = precept, ConvictionDeltaPerTickLong = 0.5f });
+            new SimMemory(precept, 8f));
 
         world.Comp.ApplyMoodletConvictionShifts();
 

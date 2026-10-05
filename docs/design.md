@@ -144,6 +144,7 @@ The derivation and plots are in `analysis/conviction_valley.py`.
   Reading a book of one's own faith hardens conviction; reading a rival's pulls stances toward it.
 - **Contemplation** at a shrine, pew or reliquary reinforces the pawn's own stances.
 - **Precept moods** shift conviction on the issue they come from, a little every few hours.
+  A mood is a vote on the faith's rung, not on the pawn's own: a good mood pulls toward the faith's rung, a bad mood weakens an orthodox stance or pushes a heterodox one further out on its own side.
   Loyalty memes turn the good mood from another faith's practices into cognitive dissonance.
 - **Relics** strengthen every follower on all of the faith's moral issues when found; relic moods act like precept moods.
 

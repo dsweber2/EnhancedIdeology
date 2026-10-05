@@ -56,6 +56,8 @@ public class ThoughtHandler
 
     public void GetAllMoodThoughts(List<Thought> outThoughts)
     {
+        outThoughts.Clear();
+        outThoughts.AddRange(memories.Memories.Where(memory => memory.MoodOffset() != 0f));
         outThoughts.AddRange(SimulatedThoughts);
     }
 }
