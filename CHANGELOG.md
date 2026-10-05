@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- About 30 issues that make a real value claim now shape a pawn's opinion of other faiths and can be debated meaningfully.
+  This includes armour, barracks, pain, research, blindness, proselytizing, contemplation, and single-rung stances such as "madness exalted" or "recruiting forbidden".
+  Pure stat bonuses (crop yields, crafting speed, and so on) still do not.
+- The three armour specialties (blunt, sharp, heat) count as the same belief.
+- "Pain required" now implies welcoming rough living, as "pain idealized" already did.
+  Hunting sanguophages or raiding their camps now implies reviling bloodfeeders.
+
 ## [1.0.2]
 
 Initial release of Enhanced Ideology.

@@ -359,7 +359,7 @@ internal sealed class OpinionCard
                 continue;
             }
 
-            rows.Add((issue, RungLabel(issue, stance.rank), data.IssueOpinionToward(selected, issue),
+            rows.Add((issue, RungLabel(issue, stance.rank, pawn.Ideo), data.IssueOpinionToward(selected, issue),
                 SelectedRungLabel(selected, issue), stance.strength));
         }
 
@@ -383,7 +383,9 @@ internal sealed class OpinionCard
         return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
     }
 
-    private static string RungLabel(IssueDef issue, float rank)
+    // A tied rung (PreceptPolicy.TiedRungs) shares its anchor's rank, so when the pawn's own faith holds a rung
+    // at this rank, its label is used instead of the anchor's.
+    private static string RungLabel(IssueDef issue, float rank, Ideo ownIdeo)
     {
         var rungs = PreceptLadder.Rungs(issue);
         if (rank < 0f || rungs.Count == 0)
@@ -391,7 +393,9 @@ internal sealed class OpinionCard
             return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
         }
 
-        return rungs[Mathf.Clamp(Mathf.RoundToInt(rank), 0, rungs.Count - 1)].LabelCap;
+        var index = Mathf.Clamp(Mathf.RoundToInt(rank), 0, rungs.Count - 1);
+        var own = ownIdeo.precepts.FirstOrDefault(precept => precept.def.issue == issue && PreceptLadder.RankOf(precept.def) == index);
+        return own?.def.LabelCap ?? rungs[index].LabelCap;
     }
 
     // Only pawns with an ideology have a card. Classic mode has no certainty or stances to show.

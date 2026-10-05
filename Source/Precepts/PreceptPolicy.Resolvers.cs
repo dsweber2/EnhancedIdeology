@@ -157,6 +157,9 @@ internal static partial class PreceptPolicy
         ["Trees_Desired"] = InducedStance.Rung("TreeCutting", "TreeCutting_Disapproved"),
         ["AM_Trees_Despised"] = InducedStance.BeyondDontCare("TreeCutting", -1f),
         ["Pain_Idealized"] = InducedStance.Rung("RoughLiving", "RoughLiving_Welcomed"),
+        ["AM_Pain_Required"] = InducedStance.Rung("RoughLiving", "RoughLiving_Welcomed"),
+        ["AM_HuntFocus_Sanguophage"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
+        ["AM_SanguophageCamps_RaidingDesired"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
         ["VME_LeatherApparel_Disliked"] = InducedStance.Rung("AnimalSlaughter", "AnimalSlaughter_Disapproved"),
         ["VME_LeatherApparel_Abhorrent"] = InducedStance.Rung("AnimalSlaughter", "AnimalSlaughter_Horrible"),
     };

@@ -98,11 +98,109 @@ Keyed by rung defName so it's load-order robust. `— neutral —` marks where D
 
 ## PositiveOnly (contribute 0; positive only when held)
 
-✓ (David): AnimalsVenerated, ApparelDesire, BlindPsysense, Comfort, Indoors, MechanoidLabor, MiningYield,
+✓ (David): AnimalsVenerated, ApparelDesire, BlindPsysense, Indoors, MechanoidLabor, MiningYield,
 NeuralSupercharge, Nomadic, SlabBed, SlaveTrading, SleepAccelerator, SpaceHabitat.
 
-(a) also: AgeReversal, AnimalConnection, DarknessCombat, Lighting, Pain, Temperature, WorkDrive, MechanoidLabor, Mining, Tree Cutting
+(a) also: AnimalConnection, Temperature, WorkDrive, MechanoidLabor, Mining, Tree Cutting
 Eclipse,
+
+## PositiveOnly review (encoded)
+
+Context: debates currently pick any non-NA issue as a topic, and PositiveOnly topics move nothing structural.
+The plan is to limit debate topics to Moral + Special, so every PositiveOnly issue that carries a real value claim moved to Moral first.
+Everything below is encoded in `PreceptPolicy` except where marked (p) or deferred.
+
+**Test for Moral:** the rung text makes a value claim, and either another rung opposes it or an ordinary outsider (the silent Don't-care side) would object to it.
+Pure stat modifiers stay PositiveOnly.
+Caveat for one-sided issues: a silent pawn sits at Don't-care, one full span from the rung, so it reads as mild opposition to every faith that holds the rung.
+That is right for "madness is holy" and wrong for "tea is sacred", which is why the outsider-objects test matters.
+
+### Multi-rung
+
+Rungs listed pro → anti. `— neutral —` marks where Don't-care sits.
+
+| issue | mark | category | ladder | note |
+| --- | --- | --- | --- | --- |
+| AM_Armour | ✓ | Moral, tied ranks | `Forbidden` — neutral — `Blunt` = `Sharp` = `Heat` | the three specialties have identical text and differ only in stat; `PreceptPolicy.TiedRungs` maps Sharp and Heat onto Blunt |
+| AM_Barracks | ✓ | Moral, plain | `Preferred` (monastic) → `PreferredTrue` → `Acceptable` — neutral — | one-sided: silence is the vanilla dislike of barracks; monastic is Medium impact, preferred Low |
+| Pain | ✓ | Moral, plain | `AM_Pain_Required` → `Pain_Idealized` → `VME_Pain_DontCare` | `VME_Pain_DontCare` is the explicit neutral, but `At` degrades to −1 without VME, so use `After("Pain_Idealized")`; the `RoughLiving` induction should cover `AM_Pain_Required` too |
+| EB_Contemplation | ✓ | Moral, plain | `Required` → `Respected` → `Normal` → `Disapproved` → `Forbidden` | our own issue; `Normal` is the explicit neutral |
+| Research | ✓ | Moral, plain | `VeryFast` → `Fast` → `Normal` → `Slow` → `VerySlow` → `ExtremelySlow` → `None` | text is moral ("an immoral act" ↔ "among the most meaningful acts"); `Normal` is the explicit neutral |
+| Blindness | ✓ | Moral, plain | `Sublime` → `Elevated` → `Respected` — neutral — `Blinding_Horrible` | two-sided |
+| DarknessCombat | ✓ | Moral, plain | `Preferred` — neutral — `VME_DarknessCombat_Despised` | reverses the earlier (a); only two-sided with VME |
+| Lighting | ✓ | Moral, plain | `Darklight_Preferred` — neutral — `VME_Darklight_NormalPreferred` | reverses the earlier (a); only two-sided with VME |
+| Proselytizing | ✓ | Moral, plain | `VME_Forceful` → `Frequently` → `Sometimes` → `Occasionally` — neutral — `VME_Never` | vanilla rungs need the Proselytizer meme; `RelicHuntSuccess` was a scan artefact (it is a `HistoryEventDef`) |
+| VME_Power | ✓ | Moral, plain | `Exalted` → `Desired` → `Preferred` — neutral — | one-sided, same shape as Barracks |
+| VME_Junk | ✓ | Moral, plain | `Beautiful` → `Preferred` — neutral — | one-sided; weak claim |
+| VME_Death | ✓ | Moral, plain | `DontCare` → `Normal` → `Troubling` | axis is how much to mourn; `Normal` is the centre |
+| VME_AutomationEfficiency | ✓ | Moral, plain | `Increased` — neutral — `Decreased` | "working by hand is primitive" ↔ "automation is despicable" |
+| VME_CraftingQuality | ✓ | Moral, plain | `Increased` — neutral — `Decreased` | "take no shortcuts" ↔ "why create when you can steal" |
+| VME_PsychicSensitivity | ✓ | Moral, plain | `Heightened` — neutral — `Lowered` | "open mind" ↔ "mental fortress" |
+| AM_PsychicSensitivity | ✓ | Moral, plain | `Heightened` — neutral — `Affinity` | same axis as the VME issue, but a separate IssueDef; ✓ only one of the two may hold an opinion when both mods are loaded (see below) |
+| BS_AlienAppearanceTolerance | ✓ | Moral, plain | `FullTolerance` → `SomeTolerance` → `Default` | xenophobia axis; `Default` has `defaultSelectionWeight` 8, so every faith holds a rung and no Don't-care is needed |
+| Comfort | ✓ | Moral, plain | — neutral — `Comfort_Ignored` → `AM_Comfort_DiscomfortPreferred` | was ✓ PositiveOnly; one-sided anti-comfort, silence is the vanilla love of comfort |
+| VME_CraftingSpeed | ✓ | stay PositiveOnly | — | `FasterForManual` ↔ `SlowerForManual` is an axis, but `Slower` ("never rush") is off-axis |
+| AM_CombatProwess | ✓ | stay PositiveOnly | — | ranged / melee / reduced are trade-offs, not values |
+| MiningYield, VME_SkilledLabor, VME_PermitCooldown, VME_PermitHonorCost, ApparelDesire | ✓ | stay PositiveOnly | — | stat levels or payload; no opposing claim |
+
+**Display-order check** (active mod list, `ParentName` inheritance resolved):
+- Clean, no override: `EB_Contemplation`, `Research`, `Proselytizing`, `DarknessCombat`, `Lighting`, `VME_Death`, `VME_Power`, `VME_Junk`.
+  The last three run anti → pro, which is fine because `OpinionOnPrecept` is symmetric under reflection.
+- All rungs tied at order 0, fixed with an `OrderOverrides` entry: `AM_Barracks`, `Pain`, `Comfort`, `VME_AutomationEfficiency`, `VME_CraftingQuality`, `VME_PsychicSensitivity`, `AM_PsychicSensitivity`, `AM_Armour`.
+- Scrambled: `Blindness` sorts `Blinding_Horrible` (0) ahead of `Sublime` (10), `Elevated` (20), `Respected` (30), so the anti pole sits next to the strongest pro rung. Overridden.
+- Partly tied: `BS_AlienAppearanceTolerance` has `FullTolerance` and `SomeTolerance` both at 10. Overridden.
+
+**Don't-care where one pole comes from another mod:** the spec is keyed on the base rung only (`After`/`Before`), not `Between`, so it never collapses onto that rung when the other mod is absent.
+`Pain` uses `After("Pain_Idealized")`, `DarknessCombat` `After("DarknessCombat_Preferred")`, `Lighting` `Before("Darklight_Preferred")`, `Proselytizing` `After("Proselytizing_Occasionally")`.
+The older `Eclipse` entry (`Between("Eclipse_Beautiful", "VME_Eclipse_Despised")`) has this collapse without VME; not changed here.
+
+**Psychic sensitivity with both mods loaded** ✓: one axis must not count twice. Deferred; tracked in [todo.md](../todo.md).
+(p) `VME_PsychicSensitivity` holds the opinion, and `AM_PsychicSensitivity` drops to PositiveOnly.
+The AM rungs then induce the VME rungs (`AM_..._Heightened` → `VME_..._Heightened`, `AM_..._Affinity` → `VME_..._Lowered`), so a faith that holds only the AM precept still has a stance on the axis.
+An explicit VME precept wins over the induced one, as with every induced stance.
+With only Alpha Memes loaded, `AM_PsychicSensitivity` is Moral on its own.
+
+### Single-rung value claims
+
+Candidates for a two-point Moral issue with `DontCareSpec.Before`/`After` (the same shape as `Bonding`).
+Each passes the outsider-objects test.
+
+| issue | mark | rung | note |
+| --- | --- | --- | --- |
+| AM_Madness | (a) | `Exalted` | "a twisted mind is a sign of holiness" |
+| AM_Death | (a) | `Desired` | "death should be actively sought" |
+| VME_Corruption | (a) | `Essential` | "embrace the gifts of our dark god" |
+| AM_DeathrestCaskets | (a) | `Abhorrent` | |
+| AM_HarbingerTrees | (a) | `Disgusting` | |
+| AM_AnimaScreams | (a) | `Delightful` | delights in uprooting anima trees |
+| AM_Reliquaries | (a) | `Forbidden` | candidate coupling with `AM_RelicDestruction_Desired` |
+| AM_RelicDestruction | (a) | `Desired` | |
+| VFEA_Recruiting | (a) | `Forbidden` | debate-efficiency TODO under Interactions already touches this |
+| VFEA_BeingRecruited | (a) | `Forbidden` | |
+| VME_SocialInteractions | (a) | `Disallowed` | |
+| VME_LeaderDivinity | (a) | `Godlike` | regard for the leader, a separate axis from `VME_Leader` (how the leader is chosen) |
+| VME_Anonymity | (a) | `Required` | |
+| AgeReversal | (a) | `Demanded` | overrides the earlier (a) PositiveOnly |
+
+Not one-rung Moral after review:
+- `VME_SlaveTrading` (`OnlyBuying`) (a) — stay PositiveOnly. An induced `Slavery` stance never fires, because `Slavery` is mandatory and every faith holds an explicit rung. The faith's own Slavery rung already carries the axis.
+- `AM_HuntFocus_Sanguophage`, `AM_SanguophageCamps_RaidingDesired` (a) — stay PositiveOnly and induce `Bloodfeeders_Reviled` (`Bloodfeeders` is optional, so the induction applies).
+- `AnimalsVenerated`, `AM_AnimalsDespised` (a) — stay PositiveOnly for now. The right model is a Special payload compare like Weapons, which is not worth the work yet.
+
+**Couplings found along the way:**
+- `AM_HuntFocus_Sanguophage`, `AM_SanguophageCamps_RaidingDesired` → `Bloodfeeders_Reviled` (a), encoded
+- `AM_Pain_Required` → `RoughLiving_Welcomed` (same as `Pain_Idealized`) ✓, encoded
+- `AM_Armour_Forbidden`, `AM_NakedCombat_Preferred` → an approving `Nudity_*` rung (p)
+- `VME_Fishing_Adept` ("fishing is the right way; ranching and farming is not") → `Ranching` (p)
+
+**Stays PositiveOnly** (preferences, perks, production; no outsider objects): the ✓/(a) vanilla list above, plus
+`AM_Art`, `AM_ArtProductionSpeed`, `AM_ArtQuality`, `AM_AnimalAnalysis`, `AM_Baths`, `AM_Cattle`, `AM_CoffeeCultivation`,
+`AM_CoffeeDrinking`, `AM_CoffeeYield`, `AM_Dryads`, `AM_Horses`, `AM_Hydroagriculture`, `AM_KitchenProficiency`,
+`AM_MaternalMortality`, `AM_Meals`, `AM_Megaliths`, `AM_Mood`, `AM_PlantSowing`, `AM_PrefabAcquisition`, `AM_PrefabBuying`,
+`AM_PsyfocusGain`, `AM_Reputation`, `AM_RoomSize`, `AM_TableQuality`, `AM_TeaCultivation`, `AM_TeaDrinking`, `AM_TeaYield`,
+`AM_Water`, `VME_BookQuality`, `VME_Defeat`, `VME_FarmingYield`, `VME_FishingYield`, `VME_Hospital`, `VME_Immunity`,
+`VME_JunkDeconstructionYield`, `VME_LeaderAbilities`, `VME_Library`, `VME_Meditation`, `VME_PsyfocusGain`, `VME_TendQuality`,
+`VME_TitleInheritance`, `VME_Trading`, `VME_TradingPrice`, `VME_WoodcuttingYield`.
 
 ## UniversalPositive
 
@@ -166,9 +264,9 @@ are *reversed* (`VME_Recreation` anti→pro, `VME_Illness` indifferent→exalted
 etc.) are actually dead-centre, and `VME_Recreation`'s `fishing` sits at the pro extreme either way
 (numerically inert). No reorder overrides added.
 
-**PositiveOnly:** `VME_Death`, `VME_Power`, `VME_Junk`, `AM_Armour` (rungs are independent, not a ladder),
-`AM_CombatProwess`, `AM_Barracks`, `AM_HuntFocus`, and all mechanical perks (`*Speed`/`*Yield`/`*Quality`/
-`*Rate`/`*Efficiency`/`Cooldown`/`Sensitivity`).
+**PositiveOnly:** `AM_CombatProwess`, `AM_HuntFocus`, and the mechanical perks (`*Speed`/`*Yield`/`*Rate`/`Cooldown`).
+The value-claim issues that used to sit here (`VME_Death`, `VME_Power`, `VME_Junk`, `AM_Armour`, `AM_Barracks`,
+`VME_AutomationEfficiency`, `VME_CraftingQuality`, the psychic sensitivities) moved to Moral; see "PositiveOnly review".
 
 **Special (bespoke):** `VME_Leader` ✓ — categorical, any difference (incl. one side having no leader
 precept) = full −opinion, exact match = +opinion. `VME_Mood` ✓ — hybrid: high/normal/low grade by rung

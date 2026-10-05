@@ -53,7 +53,7 @@ public class PreceptPolicyTests : SeededTest
         var mandatoryIssues = new HashSet<string>
         {
             "Corpses", "InsectMeat", "MarriageName", "SpouseCount_Male", "SpouseCount_Female",
-            "OrganUse", "FungusEating",
+            "OrganUse", "FungusEating", "BS_AlienAppearanceTolerance",
         };
 
         var missingDontCare = PreceptPolicy.OrderOverrides.Keys

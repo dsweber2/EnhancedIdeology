@@ -18,13 +18,16 @@ internal static class PreceptLadder
     // lists the rare exception where the classic rung is NOT a duplicate (e.g. MarriageName_UsuallyMans has no
     // real Ideology-selectable equivalent) and must stay to keep spacing correct. For issues whose
     // displayOrderInIssue scrambles the axis once stacked, a PreceptPolicy order override pins the sequence.
+    // Rungs in PreceptPolicy.TiedRungs are left out: they share their anchor's rank, so the ladder holds one
+    // rung per rank.
     public static List<PreceptDef> Rungs(IssueDef issue)
     {
         if (_rungsCache.TryGetValue(issue, out var cached))
             return cached;
 
         var rungs = DefDatabase<PreceptDef>.AllDefs.Where(precept => precept.issue == issue
-            && (!precept.classic || PreceptPolicy.IncludeClassicInLadder.Contains(issue.defName)));
+            && (!precept.classic || PreceptPolicy.IncludeClassicInLadder.Contains(issue.defName))
+            && !PreceptPolicy.TiedRungs.ContainsKey(precept.defName));
         List<PreceptDef> result;
 
         if (PreceptPolicy.OrderOverrides.TryGetValue(issue.defName, out var order))
@@ -45,12 +48,18 @@ internal static class PreceptLadder
     }
 
     // Rank of a held stance within its issue ladder (index in the ordered rungs).
-    public static float RankOf(PreceptDef precept) => Rungs(precept.issue!).IndexOf(precept);
+    public static float RankOf(PreceptDef precept) =>
+        PreceptPolicy.TiedRungs.TryGetValue(precept.defName, out var anchor)
+            ? RankOfName(precept.issue!, anchor)
+            : Rungs(precept.issue!).IndexOf(precept);
 
     // Rank of a rung by defName within its issue's (reordered) ladder, or -1f if that rung is absent (mod
     // not loaded). Used by DontCareSpec to resolve neighbour-keyed placements against the live ladder.
-    public static float RankOfName(IssueDef issue, string defName) =>
-        Rungs(issue).FindIndex(precept => precept.defName == defName);
+    public static float RankOfName(IssueDef issue, string defName)
+    {
+        var target = PreceptPolicy.TiedRungs.GetValueOrDefault(defName, defName);
+        return Rungs(issue).FindIndex(precept => precept.defName == target);
+    }
 
     // Rank the virtual "Don't care" rung sits at for an issue whose ideo holds no explicit stance.
     // -1f is the permissive extreme, one step below the most permissive explicit rung.

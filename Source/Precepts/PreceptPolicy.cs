@@ -147,6 +147,14 @@ internal static partial class PreceptPolicy
         // classic-only (no real Ideology-selectable equivalent) but is kept in the ladder via
         // IncludeClassicInLadder purely to anchor the spacing; see OrderOverrides.
         "MarriageName",
+        // Former PositiveOnly issues whose rungs make a value claim (docs/preceptPolicy.md "PositiveOnly review").
+        "EB_Contemplation", "Research", "Pain", "Blindness", "DarknessCombat", "Lighting", "Proselytizing",
+        "Comfort", "AM_Armour", "AM_Barracks", "AM_PsychicSensitivity", "VME_Power", "VME_Junk", "VME_Death",
+        "VME_AutomationEfficiency", "VME_CraftingQuality", "VME_PsychicSensitivity", "BS_AlienAppearanceTolerance",
+        // Single-rung value claims: a silent outsider objects, so the silent Don't-care rung is the opposing pole.
+        "AgeReversal", "AM_Madness", "AM_Death", "AM_DeathrestCaskets", "AM_HarbingerTrees", "AM_AnimaScreams",
+        "AM_Reliquaries", "AM_RelicDestruction", "VME_Corruption", "VME_SocialInteractions", "VME_LeaderDivinity",
+        "VME_Anonymity", "VFEA_Recruiting", "VFEA_BeingRecruited",
     ];
     private static readonly HashSet<string> UniversalPositiveIssues = ["Charity", "VME_Recreation"];
     // Special issues route through the special resolvers instead of the rung-distance model. VME_Leader /
@@ -168,21 +176,13 @@ internal static partial class PreceptPolicy
     private static readonly HashSet<string> KnownPositiveOnlyIssues =
     [
         // Vanilla / DLC.
-        "ApparelDesire", "Lighting", "Pain", "Research", "Proselytizing", "Blindness", "DarknessCombat",
-        "IdeoRole",
-        // EnhancedBeliefs (our own).
-        "EB_Contemplation",
-        // Alpha Memes.
-        "AM_Armour", "AM_Barracks", "AM_CombatProwess",
-        // Comfort: base Ignored + AM_Comfort_DiscomfortPreferred are both anti-comfort rungs (no pro-comfort
-        // opposition). MiningYield: base High + AB_MiningYield_VeryHigh are yield bonuses at different levels.
-        "Comfort", "MiningYield",
-        // Better Ideology? (BS_).
-        "BS_AlienAppearanceTolerance",
-        // Vanilla Memes Expanded.
-        "VME_AutomationEfficiency", "VME_CraftingQuality", "VME_CraftingSpeed", "VME_Death",
-        "VME_Junk", "VME_PermitCooldown", "VME_PermitHonorCost", "VME_Power",
-        "VME_PsychicSensitivity", "VME_PsyfocusGain", "VME_SkilledLabor",
+        "ApparelDesire", "IdeoRole",
+        // Alpha Memes. CombatProwess rungs (ranged / melee / reduced) are trade-offs, not values.
+        "AM_CombatProwess",
+        // MiningYield: base High + AB_MiningYield_VeryHigh are yield bonuses at different levels.
+        "MiningYield",
+        // Vanilla Memes Expanded. CraftingSpeed's Slower rung ("never rush") is off the manual-labour axis.
+        "VME_CraftingSpeed", "VME_PermitCooldown", "VME_PermitHonorCost", "VME_PsyfocusGain", "VME_SkilledLabor",
         // Mort's Ideologies: Conservationist (MortStrudel.MortIdeologyEnv). Two restriction-only rungs,
         // no opposing pro-pollution rung.
         "MI_PowerGeneration",
@@ -275,6 +275,32 @@ internal static partial class PreceptPolicy
         // Indoors: VVE adds VVE_SmallSpaces_Horrible (no displayOrderInIssue) alongside the base-game
         // Indoors_Acceptable (also no displayOrderInIssue). Both default to 0, so order is undefined — fix it.
         ["Indoors"] = ["Indoors_Acceptable", "VVE_SmallSpaces_Horrible"],
+        // Former PositiveOnly issues whose rungs all tie at displayOrderInIssue=0 (or scramble, for Blindness
+        // and BS_AlienAppearanceTolerance) once stacked. Monastic (Medium impact) outranks preferred (Low).
+        ["AM_Armour"] = ["AM_Armour_Forbidden", "AM_Armour_Blunt"],
+        ["AM_Barracks"] = ["AM_Barracks_Preferred", "AM_Barracks_PreferredTrue", "AM_Barracks_Acceptable"],
+        ["Pain"] = ["AM_Pain_Required", "Pain_Idealized", "VME_Pain_DontCare"],
+        ["Comfort"] = ["Comfort_Ignored", "AM_Comfort_DiscomfortPreferred"],
+        ["Blindness"] = ["Blindness_Sublime", "Blindness_Elevated", "Blindness_Respected", "Blinding_Horrible"],
+        ["BS_AlienAppearanceTolerance"] =
+        [
+            "BS_AlienAppearanceTolerance_FullTolerance", "BS_AlienAppearanceTolerance_SomeTolerance",
+            "BS_AlienAppearanceTolerance_Default",
+        ],
+        ["VME_AutomationEfficiency"] = ["VME_AutomationEfficiency_Increased", "VME_AutomationEfficiency_Decreased"],
+        ["VME_CraftingQuality"] = ["VME_CraftingQuality_Increased", "VME_CraftingQuality_Decreased"],
+        ["VME_PsychicSensitivity"] = ["VME_PsychicSensitivity_Heightened", "VME_PsychicSensitivity_Lowered"],
+        ["AM_PsychicSensitivity"] = ["AM_PsychicSensitivity_Heightened", "AM_PsychicSensitivity_Affinity"],
+    };
+
+    // Rungs that share the rank of an anchor rung on the same issue, keyed tied rung -> anchor. They express
+    // the same belief and differ only in gameplay effect. Rungs() keeps only the anchor, so ranks stay
+    // contiguous; RankOf and RankOfName map a tied rung onto its anchor.
+    public static readonly Dictionary<string, string> TiedRungs = new()
+    {
+        // The three armour specialties have identical text ("Defense is paramount") and differ only in stat.
+        ["AM_Armour_Sharp"] = "AM_Armour_Blunt",
+        ["AM_Armour_Heat"] = "AM_Armour_Blunt",
     };
 
     // Where the virtual Don't-care rung sits for each OPTIONAL Moral issue (docs/preceptPolicy.md). Mandatory
@@ -354,6 +380,23 @@ internal static partial class PreceptPolicy
         ["RomanceOnTheRim_Issue_RomanceAttempt"] = DontCareSpec.Before("RomanceOnTheRim_RomanceAttempt_Encouraged"),
         // VME_BookWritingSpeed parallels VME_BookReadingSpeed.
         ["VME_BookWritingSpeed"] = DontCareSpec.Between("VME_BookWritingSpeed_Increased", "VME_BookWritingSpeed_Decreased"),
+        // Former PositiveOnly issues. Where one pole comes from another mod, the spec is keyed on the base rung
+        // only (After/Before), so it stays correct with or without that mod. Research, VME_Death and
+        // BS_AlienAppearanceTolerance have a defaultSelectionWeight rung and need no entry; VME_Power, VME_Junk
+        // and the single-rung issues use the -1 permissive default.
+        ["EB_Contemplation"] = DontCareSpec.At("Contemplation_Normal"),
+        ["Pain"] = DontCareSpec.After("Pain_Idealized"),
+        ["Blindness"] = DontCareSpec.Between("Blindness_Respected", "Blinding_Horrible"),
+        ["DarknessCombat"] = DontCareSpec.After("DarknessCombat_Preferred"),
+        ["Lighting"] = DontCareSpec.Before("Darklight_Preferred"),
+        ["Proselytizing"] = DontCareSpec.After("Proselytizing_Occasionally"),
+        ["Comfort"] = DontCareSpec.Before("Comfort_Ignored"),
+        ["AM_Armour"] = DontCareSpec.Between("AM_Armour_Forbidden", "AM_Armour_Blunt"),
+        ["AM_Barracks"] = DontCareSpec.After("AM_Barracks_Acceptable"),
+        ["VME_AutomationEfficiency"] = DontCareSpec.Between("VME_AutomationEfficiency_Increased", "VME_AutomationEfficiency_Decreased"),
+        ["VME_CraftingQuality"] = DontCareSpec.Between("VME_CraftingQuality_Increased", "VME_CraftingQuality_Decreased"),
+        ["VME_PsychicSensitivity"] = DontCareSpec.Between("VME_PsychicSensitivity_Heightened", "VME_PsychicSensitivity_Lowered"),
+        ["AM_PsychicSensitivity"] = DontCareSpec.Between("AM_PsychicSensitivity_Heightened", "AM_PsychicSensitivity_Affinity"),
     };
 
     // Sim/test hook: register a category for an issue absent from the hardcoded tables (test ladders are Moral).
