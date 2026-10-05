@@ -52,6 +52,8 @@ public static class ThoughtDefOf
     public static readonly Verse.ThoughtDef RelicDestroyed = new() { defName = "RelicDestroyed" };
     public static readonly Verse.ThoughtDef RelicsCollected = new() { defName = "RelicsCollected" };
     public static readonly Verse.ThoughtDef RelicAtRitual = new() { defName = "RelicAtRitual" };
+    public static readonly Verse.ThoughtDef HadAngeringFight = new() { defName = "HadAngeringFight" };
+    public static readonly Verse.ThoughtDef HadCatharticFight = new() { defName = "HadCatharticFight" };
 }
 
 public class HistoryEventDef : Def { }

@@ -22,6 +22,24 @@ internal sealed class PlayLogEntry_DebateInteraction : PlayLogEntry_Interaction
         winnerPreceptLabel = winnerLabel;
     }
 
+    // The entry for a debate the worker just resolved, or null when intDef is not a debate or no topic was found.
+    // Consumes the worker's logTopic so that the next interaction cannot log it again.
+    internal static PlayLogEntry_DebateInteraction? FromLastDebate(
+        InteractionDef intDef, Pawn initiator, Pawn recipient, List<RulePackDef> extraSentencePacks)
+    {
+        switch (intDef.Worker)
+        {
+            case InteractionWorker_IdeologicalDebatePrecept { logTopic: { } topic } worker:
+                worker.logTopic = null;
+                return new(intDef, initiator, recipient, extraSentencePacks, topic, worker.lastWinner, worker.lastWinnerPrecept?.label);
+            case InteractionWorker_IdeologicalDebateMeme { logTopic: { } topic } worker:
+                worker.logTopic = null;
+                return new(intDef, initiator, recipient, extraSentencePacks, topic, worker.lastWinner, topic.label);
+            default:
+                return null;
+        }
+    }
+
     protected override string ToGameStringFromPOV_Worker(Thing pov, bool forceLog)
     {
         if (initiator == null || recipient == null)

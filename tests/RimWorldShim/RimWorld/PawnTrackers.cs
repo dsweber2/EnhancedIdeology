@@ -69,6 +69,8 @@ public class Pawn_RelationTracker(Pawn pawn)
 
 public class Pawn_InteractionsTracker
 {
+    public Pawn_InteractionsTracker() { }
+    public Pawn_InteractionsTracker(Pawn pawn) { }
     public float SocialFightChance(InteractionDef interaction, Pawn other) => 0f;
     public bool SocialFightPossible(Pawn other) => false;
     public void StartSocialFight(Pawn other, string message) { }

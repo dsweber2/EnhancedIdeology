@@ -28,7 +28,8 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 - `NeedsCardUtility_DrawThoughtGroup.cs` — injects certainty bar into the needs card thought group
 - `ITab_Book_Size.cs` — adjusts book inspect tab size for EB's extended content
 - `BookUIUtility_DrawBenefits_Reroute.cs` — adjusts book benefit display for EB's custom reading outcome
-- `TryInteractWith_DebateLog.cs` — adds debate play-log entry after interaction resolves
+- `TryInteractWith_DebateLog.cs` — adds debate play-log entry after interaction resolves (`PlayLogEntry_DebateInteraction.FromLastDebate`)
+- `Caravan_TickInterval_Debates.cs` — caravan pawns get vanilla's random-interaction cadence and weights; only debates resolve, then it logs and sends the letter itself (`TryInteractWith` needs spawned pawns). Rules live in `Interactions/CaravanDebates.cs`
 - `InteractionDef_Symbol.cs` — patches grammar symbol resolution for debate log entries
 
 **ArrestedDebater needs blocking:**

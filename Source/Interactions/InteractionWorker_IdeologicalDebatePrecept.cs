@@ -102,7 +102,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             return 0f;
         }
         var pawnTracker = Current.Game.GetComponent<GameComponent_EnhancedIdeology>().PawnTracker;
-        if (ConflictingPrecepts(initiator.Ideo,
+        if (DebatableIssues(initiator.Ideo,
                 StanceMap(pawnTracker.EnsurePawnHasIdeoTracker(initiator)),
                 StanceMap(pawnTracker.EnsurePawnHasIdeoTracker(recipient))).Count == 0)
         {
@@ -229,11 +229,11 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     {
         var initiatorStances = StanceMap(initiatorTracker);
         var recipientStances = StanceMap(recipientTracker);
-        var conflictingIssues = ConflictingPrecepts(initiatorIdeo, initiatorStances, recipientStances);
+        var debatableIssues = DebatableIssues(initiatorIdeo, initiatorStances, recipientStances);
 
-        if (conflictingIssues.Count == 0)
+        if (debatableIssues.Count == 0)
         {
-            EnhancedIdeologyMod.Warning("GetDebateTopic: No conflicting topics found. Exiting.");
+            EnhancedIdeologyMod.Warning("GetDebateTopic: No debatable issues found. Exiting.");
             initiatorPrecept = null;
             return null;
         }
@@ -242,7 +242,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         // sampled proportionally to opposition magnitude via exponential racing (-log(U)/w).
         if (initiator.MentalState is MentalState_Iconoclast)
         {
-            initiatorPrecept = conflictingIssues.MinBy(def =>
+            initiatorPrecept = debatableIssues.MinBy(def =>
             {
                 var w = Mathf.Max(-initiatorTracker.IssueOpinionToward(recipientIdeo, def.issue), float.Epsilon);
                 return -Mathf.Log(Rand.Value) / w;
@@ -251,7 +251,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         }
 
         // Sample proportionally to how far apart the two pawns are on each issue, via exponential racing.
-        initiatorPrecept = conflictingIssues.MinBy(def =>
+        initiatorPrecept = debatableIssues.MinBy(def =>
             -Mathf.Log(Rand.Value) / TopicWeight(def.issue, initiatorStances[def.issue], recipientStances[def.issue]));
         return initiatorPrecept.issue;
     }
@@ -261,12 +261,13 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     private static Dictionary<IssueDef, (float rank, float strength)> StanceMap(IdeoTrackerData tracker) =>
         tracker.IssueStances().ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
 
+    // The issues the two pawns' personal stances Disagree on, as the initiator's precept for each issue.
     // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
     // them. Each side argues from their personal stance (see AdjustOpinions).
     // Issues without a seeded stance (PreceptCategory.NA: buildings, ritual seats, naming) aren't a belief
     // axis and never get a personal stance recorded, so excluding them here is just staying in sync with
     // IssueStanceTracker.EnsureSeeded rather than a bespoke category check.
-    private static List<PreceptDef> ConflictingPrecepts(
+    private static List<PreceptDef> DebatableIssues(
         Ideo initiatorIdeo,
         Dictionary<IssueDef, (float rank, float strength)> initiatorStances,
         Dictionary<IssueDef, (float rank, float strength)> recipientStances) =>
@@ -343,6 +344,12 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // in MentalState_Iconoclast so the job givers don't interrupt it.
     private static void StartDebateFight(Pawn initiator, Pawn recipient)
     {
+        if (initiator.GetCaravan() != null)
+        {
+            CaravanDebates.SettleFight(initiator, recipient);
+            return;
+        }
+
         var iconoclast = initiator.MentalState as MentalState_Iconoclast ?? recipient.MentalState as MentalState_Iconoclast;
         if (iconoclast != null)
         {
@@ -396,8 +403,10 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         {
             // Fetch social fight multiplier
             interaction.socialFightBaseChance = 1f;
-            var fightChanceModifier = (initiator.interactions?.SocialFightChance(interaction, recipient) ?? 0f)
-                + (recipient.interactions?.SocialFightChance(interaction, initiator) ?? 0f);
+            // A despawned pawn (in a caravan) has no interactions tracker. SocialFightChance reads only the pawn, so a
+            // temporary tracker gives the same result.
+            var fightChanceModifier = (initiator.interactions ?? new Pawn_InteractionsTracker(initiator)).SocialFightChance(interaction, recipient)
+                + (recipient.interactions ?? new Pawn_InteractionsTracker(recipient)).SocialFightChance(interaction, initiator);
             interaction.socialFightBaseChance = 0f;
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: fightChanceModifier={fightChanceModifier}");
 

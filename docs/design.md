@@ -125,6 +125,12 @@ The derivation and plots are in `analysis/conviction_valley.py`.
   Pawns whose faith approves of diversity can choose debating as recreation; while they do, most of their social interactions become debates.
   A draw can make either pawn dig in (more likely for intelligent pawns and those with shakier faith) or start a social fight.
   The diversity precept decides whether each pawn enjoys or resents the argument.
+  Caravans debate too, although vanilla runs no social interactions there.
+  Each pawn has the same chance of a random interaction as at home, with the same interaction weights, but only debates are resolved.
+  Prisoners take part like everyone else.
+  A caravan rests whenever it stops, so a pawn counts as awake when its rest need is at least 28% (vanilla "Tired" begins below that).
+  Every such pawn can debate, and every such pawn in the caravan is an onlooker.
+  A fight is not simulated off-map: both pawns get the memory of a social fight instead.
 - **Conversion attempts** (socializing and prisoner conversion) argue the single issue the target most opposes, at twice the normal pull.
   If the preacher wins, the target's certainty is knocked down temporarily and conversion is checked at once.
   If the preacher loses, the preacher's own stance moves toward the target's.

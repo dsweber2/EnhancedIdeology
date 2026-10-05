@@ -1,4 +1,5 @@
 using LudeonTK;
+using EnhancedIdeology.HarmonyPatches;
 using Verse.AI;
 
 namespace EnhancedIdeology;
@@ -117,6 +118,97 @@ internal static class DebugActions
         }
         Messages.Message($"{initiator.LabelShort} vs {recipient.LabelShort}: {outcome}",
             new LookTargets(initiator, recipient), MessageTypeDefOf.NeutralEvent, false);
+    }
+
+    // Force a debate in the selected caravan through the same path as Caravan_TickInterval_Debates, without the
+    // interaction roll. Picks a pair and a debate type by the debate weights, and reports who was eligible.
+    [DebugAction("Ideoligion", "Trigger caravan debate", actionType = DebugActionType.Action,
+        allowedGameStates = AllowedGameStates.PlayingOnWorld, requiresIdeology = true)]
+    private static void TriggerCaravanDebate()
+    {
+        if (Find.WorldSelector.SingleSelectedObject is not Caravan caravan)
+        {
+            Messages.Message("Select a single caravan first.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var pawns = caravan.PawnsListForReading;
+        var debates = new[] { EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept, EnhancedIdeologyDefOf.EB_IdeologicalDebateMeme };
+        var pairs = pawns.Where(Caravan_TickInterval_Debates.CanInitiate)
+            .SelectMany(initiator => pawns
+                .Where(recipient => recipient != initiator && Caravan_TickInterval_Debates.CanReceive(recipient))
+                .Select(recipient => (initiator, recipient,
+                    weight: debates.Sum(def => def.Worker.RandomSelectionWeight(initiator, recipient)))))
+            .Where(pair => pair.weight > 0f)
+            .ToList();
+
+        var humanlike = pawns.Count(pawn => pawn.RaceProps.Humanlike);
+        var alert = pawns.Count(pawn => pawn.RaceProps.Humanlike && CaravanDebates.IsAlert(pawn));
+        var eligibility = $"{alert}/{humanlike} humanlike pawns alert (rest >= {CaravanDebates.MinRestLevel:P0}), {pairs.Count} debatable pairs";
+        if (!pairs.TryRandomElementByWeight(pair => pair.weight, out var chosenPair))
+        {
+            Log.Message(CaravanDebateDiagnosis(pawns, debates));
+            Messages.Message($"No caravan debate possible: {eligibility}. Gate breakdown is in the log.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var (initiator, recipient, _) = chosenPair;
+        var chosen = debates.RandomElementByWeight(def => def.Worker.RandomSelectionWeight(initiator, recipient));
+        var letterDef = Caravan_TickInterval_Debates.Resolve(chosen, initiator, recipient);
+
+        var (topic, winner) = chosen.Worker switch
+        {
+            InteractionWorker_IdeologicalDebatePrecept worker => (worker.topic?.LabelCap.ToString(), worker.lastWinner),
+            InteractionWorker_IdeologicalDebateMeme worker => (worker.topic?.LabelCap.ToString(), worker.lastWinner),
+            _ => (null, null),
+        };
+        string outcome;
+        if (topic == null)
+        {
+            outcome = "no topic found";
+        }
+        else if (winner == null)
+        {
+            outcome = $"drew on {topic}";
+        }
+        else
+        {
+            var loser = winner == initiator ? recipient : initiator;
+            var conversion = letterDef != null ? " → converted!" : "";
+            outcome = $"{winner.LabelShort} out-argued {loser.LabelShort} on {topic}{conversion}, "
+                + $"{CaravanDebates.Onlookers(winner, loser).Count()} onlookers";
+        }
+        Messages.Message($"[{chosen.label}] {initiator.LabelShort} vs {recipient.LabelShort}: {outcome}. {eligibility}.",
+            caravan, MessageTypeDefOf.NeutralEvent, false);
+    }
+
+    // Each gate of CanInitiate/CanReceive per pawn, then the debate weights of every pair, to show which one fails.
+    private static string CaravanDebateDiagnosis(List<Pawn> pawns, InteractionDef[] debates)
+    {
+        var text = new System.Text.StringBuilder("[EnhancedIdeology] Caravan debate gates:\n");
+        var humanlike = pawns.Where(pawn => pawn.RaceProps.Humanlike).ToList();
+        foreach (var pawn in humanlike)
+        {
+            text.AppendLine($"  {pawn.LabelShort}: rest={pawn.needs.rest?.CurLevel.ToString("P0", CultureInfo.InvariantCulture) ?? "none"}"
+                + $" alert={CaravanDebates.IsAlert(pawn)}"
+                + $" initiate={Caravan_TickInterval_Debates.CanInitiate(pawn)}"
+                + $" receive={Caravan_TickInterval_Debates.CanReceive(pawn)}"
+                + $" socialDisabled={pawn.WorkTagIsDisabled(WorkTags.Social)}"
+                + $" talking={pawn.health.capacities.CapableOf(PawnCapacityDefOf.Talking)}"
+                + $" awake={pawn.Awake()} downed={pawn.Downed} faction={pawn.Faction?.Name ?? "none"}"
+                + $" mental={pawn.MentalStateDef?.defName ?? "none"} blocked={pawn.IsInteractionBlocked(null, isInitiator: true, isRandom: true)}"
+                + $" lifeStageCanInitiate={pawn.ageTracker.CurLifeStage.canInitiateSocialInteraction}"
+                + $" ideo={pawn.Ideo?.name ?? "none"}");
+        }
+        foreach (var initiator in humanlike)
+        {
+            foreach (var recipient in humanlike.Where(pawn => pawn != initiator))
+            {
+                var weights = string.Join(" ", debates.Select(def => $"{def.defName}={def.Worker.RandomSelectionWeight(initiator, recipient):F4}"));
+                text.AppendLine($"  {initiator.LabelShort} -> {recipient.LabelShort}: {weights}");
+            }
+        }
+        return text.ToString();
     }
 
     [DebugAction("Ideoligion", "Trigger contemplation", actionType = DebugActionType.ToolMapForPawns,

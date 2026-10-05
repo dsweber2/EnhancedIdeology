@@ -31,6 +31,12 @@ public class Pawn_HealthTracker
 public class Pawn_NeedsTracker
 {
     public readonly Need_Mood mood = new();
+    public Need_Rest? rest;
+}
+
+public class Need_Rest
+{
+    public float CurLevel = 1f;
 }
 
 public class Need_Mood
@@ -128,8 +134,10 @@ public class Pawn
     public bool IsPrisoner => false;
     public Map? Map => _simMap;
     public Map? MapHeld => _simMap;
-    public RimWorld.Caravan? GetCaravan() => null;
-    public bool IsCaravanMember() => false;
+    // Set by Caravan.AddPawn; vanilla resolves this through CaravanUtility.GetCaravan.
+    public RimWorld.Caravan? SimCaravan;
+    public RimWorld.Caravan? GetCaravan() => SimCaravan;
+    public bool IsCaravanMember() => SimCaravan != null;
     public bool Suspended => false;
     public Vector3 DrawPos => Vector3.zero;
     public DevelopmentalStage DevelopmentalStage => DevelopmentalStage.Adult;

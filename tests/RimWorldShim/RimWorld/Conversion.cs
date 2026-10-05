@@ -3,7 +3,16 @@ using UnityEngine;
 
 namespace RimWorld;
 
-public class Caravan { }
+public class Caravan
+{
+    public List<Pawn> PawnsListForReading { get; } = [];
+
+    public void AddPawn(Pawn pawn, bool addCarriedPawnToWorldPawnsIfAny)
+    {
+        PawnsListForReading.Add(pawn);
+        pawn.SimCaravan = this;
+    }
+}
 
 public class TraitRequirement
 {

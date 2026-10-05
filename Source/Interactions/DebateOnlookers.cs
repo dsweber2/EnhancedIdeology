@@ -34,6 +34,8 @@ internal static class DebateOnlookers
 
     private static List<Pawn> Witnesses(Pawn winner, Pawn loser)
     {
+        if (winner.GetCaravan() != null)
+            return [.. CaravanDebates.Onlookers(winner, loser)];
         if (!winner.Spawned || !loser.Spawned || winner.Map != loser.Map)
             return [];
 
