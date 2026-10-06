@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace EnhancedIdeology;
 
-internal static class DebugActions
+internal static partial class DebugActions
 {
     // Force a precept debate from the clicked pawn against the nearest visible humanlike with a debatable issue,
     // then report the topic and whether it flipped anyone. Drives the R2 stance write-path on demand instead

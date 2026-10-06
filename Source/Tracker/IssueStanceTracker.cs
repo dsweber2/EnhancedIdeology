@@ -131,6 +131,27 @@ internal sealed class IssueStanceTracker
         _strength[issue] = Mathf.Clamp(strength, ConvictionScale.MinConvictionStrength, ConvictionScale.AbsoluteMaxConvictionStrength);
     }
 
+    // Carry every stored rank from the ladder it was saved against to the live ladder. Returns true if a rank changed.
+    internal bool RemapToLiveLadders(Func<IssueDef, SavedLadder?> savedLadderFor)
+    {
+        var changed = false;
+        foreach (var issue in _preferredRank.Keys.ToList())
+        {
+            if (savedLadderFor(issue) is not { } saved) continue;
+            var rank = LadderMigration.Remap(issue, saved, _preferredRank[issue]);
+            changed |= rank != _preferredRank[issue];
+            _preferredRank[issue] = rank;
+        }
+        return changed;
+    }
+
+    // Move every stance onto the rung `ideo` holds. Strengths do not change.
+    internal void ResetRanksToHeld(Ideo ideo)
+    {
+        foreach (var issue in _preferredRank.Keys.ToList())
+            _preferredRank[issue] = HeldRank(ideo, issue);
+    }
+
     // Reset stances after a brainwipe. Does not zero certainty; caller handles that.
     internal void ApplyBrainwipe()
     {

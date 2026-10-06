@@ -37,6 +37,22 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
     public PawnIdeoTracker PawnTracker { get; } = new();
     public IdeoPawnTracker IdeoTracker { get; } = new();
 
+    // Ladders as they were when the loaded game was saved; null for a new game or a save made before ladders were
+    // saved. Components load before the world and maps, so this is set before any pawn stance is remapped.
+    private Dictionary<string, SavedLadder>? _savedLadders;
+
+    internal SavedLadder? SavedLadderFor(IssueDef issue) => _savedLadders?.GetValueOrDefault(issue.defName);
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+        if (Scribe.mode == LoadSaveMode.Saving)
+        {
+            _savedLadders = LadderMigration.CaptureAll();
+        }
+        Scribe_Collections.Look(ref _savedLadders, "savedLadders", LookMode.Value, LookMode.Deep);
+    }
+
     // Set so that an offset of 8 at default
     internal const float MoodletConvictionScalar = 0.0007f;
 

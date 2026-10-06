@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - "Pain required" now implies welcoming rough living, as "pain idealized" already did.
   Hunting sanguophages or raiding their camps now implies reviling bloodfeeders.
 
+### Fixed
+
+- Pawn stances now stay on the same belief when an issue's stances are reordered, or when a mod adds or removes one.
+  Before, a reorder could flip a pawn to the opposite view (for example, a faith that holds blinding horrible ended up with followers who found blindness sublime).
+  Saves from before this fix cannot be repaired automatically; use the new dev-mode action "Reset stances to orthodox" to move pawns back onto their faith's views without changing how strongly they hold them.
+
 ## [1.0.2]
 
 Initial release of Enhanced Ideology.

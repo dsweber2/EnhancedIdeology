@@ -37,6 +37,7 @@
     <Compile Include="../Source/Precepts/ConversionEvaluator.cs" />
     <Compile Include="../Source/Tracker/IdeoTrackerData.cs" />
     <Compile Include="../Source/Precepts/PreceptLadder.cs" />
+    <Compile Include="../Source/Precepts/LadderMigration.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.Resolvers.cs" />
     <Compile Include="../Source/Interactions/InteractionWorker_AdvancedConversionAttempt.cs" />

@@ -353,6 +353,14 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         Opinions.MarkDirty();
     }
 
+    // Move every stance onto the rung of the pawn's own ideo, keeping each strength.
+    public void ResetStancesToOrthodox()
+    {
+        EnsureIssueStancesSeeded();
+        Stances.ResetRanksToHeld(Pawn.Ideo!);
+        Opinions.MarkDirty();
+    }
+
     // Reset stances after a brainwipe. Strength floors at max(0, 3 + traitOffset/3).
     public void ApplyBrainwipe()
     {
@@ -472,6 +480,10 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (Scribe.mode == LoadSaveMode.PostLoadInit)
         {
             var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
+            if (Stances.RemapToLiveLadders(comp.SavedLadderFor))
+            {
+                Opinions.MarkDirty();
+            }
             if (Pawn == null) return;
             comp.SetIdeo(Pawn, Pawn.Ideo!);
         }

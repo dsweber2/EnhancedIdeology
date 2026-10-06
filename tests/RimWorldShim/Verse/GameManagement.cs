@@ -25,6 +25,8 @@ public static class Scribe_Values
 
 public static class Scribe_Collections
 {
+    public static void Look<T>(ref List<T> list, string label, LookMode lookMode = LookMode.Undefined) { }
+
     public static void Look<K, V>(
         ref Dictionary<K, V> dict, string label,
         LookMode keyLookMode, LookMode valueLookMode,
