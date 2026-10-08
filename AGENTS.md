@@ -5,6 +5,7 @@
 - only one DLL should be in `1.6/Assemblies/`: `EnhancedIdeology.dll` — if `EnhancedBeliefs.dll` appears there, delete it (stale build artifact from an old namespace migration attempt)
 - log snapshots: `make logs` → `cache/<timestamp>_logs.txt`
 - run the tests with `make test`
+- regenerate `docs/meme-precept-catalog.md` (all memes and precept issues per installed mod) with `uv run scripts/meme_precept_catalog.py`
 
 ## Translations
 

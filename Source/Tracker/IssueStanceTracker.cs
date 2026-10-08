@@ -44,6 +44,9 @@ internal sealed class IssueStanceTracker
         }
     }
 
+    // Test hook: tests swap the MemeDef database between cases.
+    internal static void ClearMemeCache() => _memeGrantableIssues = null;
+
     internal IssueStanceTracker(Pawn pawn) { _pawn = pawn; }
     internal void SetPawn(Pawn pawn) { _pawn = pawn; }
 
@@ -157,11 +160,10 @@ internal sealed class IssueStanceTracker
     {
         var traitFloor = Mathf.Max(0f, 3.0f + ConvictionStrengthOffset() / 3.0f);
         var memeOffsets = TraitMemeConvictionOffsets();
-        var memeOffsetsFromMemes = TraitMemeConvictionOffsetsFromMemes();
 
         foreach (var issue in _strength.Keys.ToList())
         {
-            var traitAligned = memeOffsets.ContainsKey(issue) || memeOffsetsFromMemes.ContainsKey(issue);
+            var traitAligned = memeOffsets.ContainsKey(issue);
             _strength[issue] = traitAligned ? Mathf.Max(traitFloor, 5f) : traitFloor;
 
             var keepStance = traitFloor > 1f || traitAligned;
@@ -270,27 +272,38 @@ internal sealed class IssueStanceTracker
         }
     }
 
+    // A meme links to an issue through a held precept (requiredMemes, or associatedMemes when the faith holds
+    // the meme), or through the meme's requireOne/selectOneOrNone when the faith takes a stance on the issue.
+    // Each meme-issue link counts once, so a link found by more than one route does not stack.
     private Dictionary<IssueDef, float> TraitMemeConvictionOffsets()
     {
-        var offsets = new Dictionary<IssueDef, float>();
-        foreach (var precept in _pawn.Ideo!.precepts)
+        var ideo = _pawn.Ideo!;
+        var links = new HashSet<(MemeDef meme, IssueDef issue)>();
+        foreach (var precept in ideo.precepts)
         {
             var issue = precept.def.issue;
-            if (issue == null || precept.def.requiredMemes.NullOrEmpty()) continue;
+            if (issue == null) continue;
 
+            // An associated meme counts only when the faith holds it. A required meme is always held.
             foreach (var meme in precept.def.requiredMemes)
-            {
-                float delta = 0f;
-                if (!meme.agreeableTraits.NullOrEmpty())
-                    foreach (var trait in meme.agreeableTraits)
-                        if (trait.HasTrait(_pawn)) delta += ConvictionScale.TraitMemeConvictionBonus;
-                if (!meme.disagreeableTraits.NullOrEmpty())
-                    foreach (var trait in meme.disagreeableTraits)
-                        if (trait.HasTrait(_pawn)) delta -= ConvictionScale.TraitMemeConvictionBonus;
+                links.Add((meme, issue));
+            foreach (var meme in precept.def.associatedMemes)
+                if (ideo.memes.Contains(meme)) links.Add((meme, issue));
+        }
+        foreach (var meme in ideo.memes)
+        {
+            if (!MemeGrantableIssues.TryGetValue(meme, out var grantable)) continue;
+            foreach (var issue in grantable)
+                if (HeldRank(ideo, issue) != PreceptLadder.DontCareRank(issue))
+                    links.Add((meme, issue));
+        }
 
-                if (delta != 0f)
-                    offsets[issue] = offsets.GetValueOrDefault(issue) + delta;
-            }
+        var offsets = new Dictionary<IssueDef, float>();
+        foreach (var (meme, issue) in links)
+        {
+            var delta = MemeTraitDelta(meme);
+            if (delta != 0f)
+                offsets[issue] = offsets.GetValueOrDefault(issue) + delta;
         }
 
         if (offsets.Count > 0)
@@ -313,22 +326,5 @@ internal sealed class IssueStanceTracker
             foreach (var trait in meme.disagreeableTraits)
                 if (trait.HasTrait(_pawn)) delta -= ConvictionScale.TraitMemeConvictionBonus;
         return delta;
-    }
-
-    private Dictionary<IssueDef, float> TraitMemeConvictionOffsetsFromMemes()
-    {
-        var offsets = new Dictionary<IssueDef, float>();
-        foreach (var meme in _pawn.Ideo!.memes)
-        {
-            if (!MemeGrantableIssues.TryGetValue(meme, out var grantable)) continue;
-            var delta = MemeTraitDelta(meme);
-            if (delta == 0f) continue;
-            foreach (var issue in grantable)
-            {
-                if (HeldRank(_pawn.Ideo!, issue) != PreceptLadder.DontCareRank(issue))
-                    offsets[issue] = offsets.GetValueOrDefault(issue) + delta;
-            }
-        }
-        return offsets;
     }
 }

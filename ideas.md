@@ -47,6 +47,7 @@ Committed work lives in [todo.md](todo.md); how the current system works is in [
 - **[Ideology: More Precepts](https://steamcommunity.com/sharedfiles/filedetails/?id=2559533848)**
 - **[Mort's Ideologies](https://steamcommunity.com/workshop/filedetails/?id=2935990253):** Conservationist/Polluter and Empiricism/Faith have structural terms; check the rest.
 - **[Gender Works](https://steamcommunity.com/sharedfiles/filedetails/?id=3573504386)**
+- rimtalk integration (or something like it) to generate book text descriptions and/or debates
 
 ## Implemented
 

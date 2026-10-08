@@ -6,11 +6,17 @@ public class TraitMemeConvictionTests : SeededTest
 {
     // Reseeds and resets global state before building so two calls within one test get the same base
     // conviction draw; only the trait configuration differs, isolating the meme offset.
-    private static float SeededStrengthFor(MemeDef meme, TraitDef? traitOnPawn, out IssueDef memeIssue)
+    [Flags]
+    private enum Link { Required = 1, Associated = 2, RequireOne = 4 }
+
+    private static float SeededStrengthFor(MemeDef meme, TraitDef? traitOnPawn, out IssueDef memeIssue,
+        Link link = Link.Required, bool ideoHoldsMeme = true)
     {
         Rand.SetSeed(1);
         DefDatabase<PreceptDef>.Clear();
         DefDatabase<IssueDef>.Clear();
+        DefDatabase<MemeDef>.Clear();
+        IssueStanceTracker.ClearMemeCache();
         PreceptPolicy.ClearOverrides();
 
         var world = new SimWorld();
@@ -18,9 +24,15 @@ public class TraitMemeConvictionTests : SeededTest
 
         var (issue, rungs) = SimIssues.Ladder("MemeIssue", "Permissive", "Forbidding");
         memeIssue = issue;
-        rungs[0].requiredMemes.Add(meme);
+        meme.requireOne.Clear();
+        if (link.HasFlag(Link.Required)) rungs[0].requiredMemes.Add(meme);
+        if (link.HasFlag(Link.Associated)) rungs[0].associatedMemes.Add(meme);
+        if (link.HasFlag(Link.RequireOne)) meme.requireOne.Add([rungs[0]]);
+        DefDatabase<MemeDef>.Add(meme);
 
-        var ideo = new IdeoBuilder().WithName("Faith").AddMeme(meme).AddPrecept(rungs[0]).Build();
+        var ideoBuilder = new IdeoBuilder().WithName("Faith").AddPrecept(rungs[0]);
+        if (ideoHoldsMeme) ideoBuilder = ideoBuilder.AddMeme(meme);
+        var ideo = ideoBuilder.Build();
         world.AddIdeo(ideo);
 
         var builder = new PawnBuilder().WithIdeo(ideo).WithLabel("P");
@@ -99,6 +111,55 @@ public class TraitMemeConvictionTests : SeededTest
         var withNone = SeededStrengthFor(meme, null, out _);
 
         Assert.Equal(withNone, withOther, precision: 4);
+    }
+
+    [Fact]
+    public void AssociatedMeme_HeldByFaith_BoostsConviction()
+    {
+        var traitDef = new TraitDef { defName = "DislikesMen" };
+        var meme = new MemeBuilder().WithName("FemaleSupremacy").WithAgreeableTrait(traitDef).Build();
+
+        var with = SeededStrengthFor(meme, traitDef, out _, Link.Associated);
+        var without = SeededStrengthFor(meme, null, out _, Link.Associated);
+
+        Assert.Equal(ConvictionScale.TraitMemeConvictionBonus, with - without, precision: 4);
+    }
+
+    [Fact]
+    public void RequireOneMeme_BoostsConvictionAtSpawn()
+    {
+        var traitDef = new TraitDef { defName = "Nudist" };
+        var meme = new MemeBuilder().WithName("Nudism").WithAgreeableTrait(traitDef).Build();
+
+        var with = SeededStrengthFor(meme, traitDef, out _, Link.RequireOne);
+        var without = SeededStrengthFor(meme, null, out _, Link.RequireOne);
+
+        Assert.Equal(ConvictionScale.TraitMemeConvictionBonus, with - without, precision: 4);
+    }
+
+    [Fact]
+    public void LinkFoundByEveryRoute_CountsOnce()
+    {
+        var traitDef = new TraitDef { defName = "Cannibal" };
+        var meme = new MemeBuilder().WithName("Cannibal").WithAgreeableTrait(traitDef).Build();
+        const Link everyRoute = Link.Required | Link.Associated | Link.RequireOne;
+
+        var with = SeededStrengthFor(meme, traitDef, out _, everyRoute);
+        var without = SeededStrengthFor(meme, null, out _, everyRoute);
+
+        Assert.Equal(ConvictionScale.TraitMemeConvictionBonus, with - without, precision: 4);
+    }
+
+    [Fact]
+    public void AssociatedMeme_NotHeldByFaith_HasNoEffect()
+    {
+        var traitDef = new TraitDef { defName = "DislikesMen" };
+        var meme = new MemeBuilder().WithName("FemaleSupremacy").WithAgreeableTrait(traitDef).Build();
+
+        var with = SeededStrengthFor(meme, traitDef, out _, Link.Associated, ideoHoldsMeme: false);
+        var without = SeededStrengthFor(meme, null, out _, Link.Associated, ideoHoldsMeme: false);
+
+        Assert.Equal(without, with, precision: 4);
     }
 
     [Fact]
