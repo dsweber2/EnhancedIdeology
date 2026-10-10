@@ -198,8 +198,22 @@ Issues for meme mods that are not installed locally were not computed.
 
 ## Traits with no meme affinity
 
-These traits appear in no meme's `agreeableTraits` or `disagreeableTraits`, so they have no effect on ideo opinion or conviction today.
-The list is meant for deciding which of them should get a link to precepts by some other route.
+No meme mod lists these traits in a meme's `agreeableTraits` or `disagreeableTraits`.
+The `meme/precepts` column holds the links this mod adds instead.
+It is the source of truth: `uv run scripts/trait_links_patch.py` turns it into `Common/Patches/TraitLinks.xml`.
+Each patch operation checks that the trait and the meme exist, so links to mods that are not loaded are skipped.
+
+- `Meme (+)` / `Meme (-)` adds the trait to the meme's `agreeableTraits` / `disagreeableTraits`.
+  Vanilla also reads these lists: ±20% conversion power per matching trait and meme, and the trait tooltip.
+- `degree: …` limits the link to those trait degrees, named by the labels in the Label column.
+- `[Issue → Rung]` links the trait straight to one rung of an issue (`TraitIssueLinks`), named by the suffix of the rung's defName (`[VME_DumbLabor → Disliked]` is `VME_DumbLabor_Disliked`).
+  It names a rung, not a pole, because "pro" is ambiguous on many ladders.
+  At spawn, after the rest of seeding: if the faith is silent on the issue, the pawn takes the rung at low strength (5–15); if the faith holds the rung, the pawn gains +10 conviction on it; if the faith holds any other rung, the pawn starts heterodox on the linked rung at the strength it rolled.
+  After a brainwipe, the pawn returns to the linked rung.
+  Prefer the mildest rung that fits.
+- `[Charity] (-)` is the one exception: Charity is a flat bonus for everyone, not a ladder, so the link turns that +5 into −5 for the pawn.
+- Rung links count as neither positive nor negative when balancing a row.
+- An empty cell means no meme fits well enough to be worth the link.
 
 How the list was built:
 
@@ -214,229 +228,229 @@ How the list was built:
 
 ### Vanilla
 
-| Trait              | meme/precepts | Label                                                                                                   | RimPsyche scopes                            | RimPsyche gates                                                      |
-|--------------------+---------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------+----------------------------------------------------------------------|
-| Psychopath         | cannibal (+), animal personhood (-), charity (-), loyalist (-), individualist (+), inhuman (+)              | psychopath                                                                                              | Compassion, Emotionality, Morality, Tension | Compassion, Humbleness, Insecurity, Integrity, Pessimism, Volatility |
-| Abrasive           |               | abrasive                                                                                               | Tact                                        | —                                                                    |
-| TooSmart           |               | too smart                                                                                               | Reflectiveness, Tension                     | Intellect                                                            |
-| NightOwl           |               | night owl                                                                                               | —                                           | —                                                                    |
-| Greedy             |               | greedy                                                                                                  | Expectation, SelfInterest                   | —                                                                    |
-| Jealous            | individualism               | jealous                                                                                                 | Competitiveness                             | Humbleness                                                           |
-| Gay                |               | gay                                                                                                     | —                                           | —                                                                    |
-| Bisexual           |               | bisexual                                                                                                | —                                           | —                                                                    |
-| AnnoyingVoice      |               | annoying voice                                                                                          | —                                           | —                                                                    |
-| CreepyBreathing    |               | creepy breathing                                                                                        | —                                           | —                                                                    |
-| Nimble             |               | nimble                                                                                                  | —                                           | —                                                                    |
-| FastLearner        |               | fast learner                                                                                            | —                                           | —                                                                    |
-| SlowLearner        |               | slow learner                                                                                            | —                                           | —                                                                    |
-| GreatMemory        |               | great memory                                                                                            | —                                           | —                                                                    |
-| Tough              |               | tough                                                                                                   | —                                           | —                                                                    |
-| QuickSleeper       |               | quick sleeper                                                                                           | —                                           | —                                                                    |
-| NaturalMood        |               | sanguine (2), optimist (1), pessimist (-1), depressive (-2)                                             | Optimism                                    | Pessimism                                                            |
-| Nerves             |               | iron-willed (2), steadfast (1), nervous (-1), volatile (-2)                                             | Tenacity, Tension                           | Volatility                                                           |
-| Neurotic           |               | neurotic (1), very neurotic (2)                                                                         | Organization, Tension                       | Orderliness                                                          |
-| PsychicSensitivity |               | psychically hypersensitive (2), psychically sensitive (1), psychically dull (-1), psychically deaf (-2) | —                                           | —                                                                    |
-| ShootingAccuracy   |               | careful shooter (1), trigger-happy (-1)                                                                 | Deliberation                                | —                                                                    |
-| Beauty             |               | beautiful (2), pretty (1), ugly (-1), staggeringly ugly (-2)                                            | —                                           | —                                                                    |
-| Immunity           |               | super-immune (1), sickly (-1)                                                                           | —                                           | —                                                                    |
-| Delicate           |               | delicate                                                                                                | —                                           | —                                                                    |
-| Recluse            |               | recluse                                                                                                 | Sociability                                 | Sociability                                                          |
+| Trait              | meme/precepts                                                                                                                                                                                                          | Label                                                                                                   | RimPsyche scopes                            | RimPsyche gates                                                      |
+|--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------+----------------------------------------------------------------------|
+| Psychopath         | Raider (+), AnimalPersonhood (-), [Charity] (-), Loyalist (-), Inhuman (+)                                                                                                                                             | psychopath                                                                                              | Compassion, Emotionality, Morality, Tension | Compassion, Humbleness, Insecurity, Integrity, Pessimism, Volatility |
+| Abrasive           |                                                                                                                                                                                                                        | abrasive                                                                                                | Tact                                        | —                                                                    |
+| TooSmart           | MI_Empiricist (+), VME_Cultured (+), [Research → Fast], [VME_DumbLabor → Disliked], MI_Faith (-), Loyalist (-)                                                                                                         | too smart                                                                                               | Reflectiveness, Tension                     | Intellect                                                            |
+| NightOwl           | Darkness (+), VME_Light (-)                                                                                                                                                                                            | night owl                                                                                               | —                                           | —                                                                    |
+| Greedy             | VME_Trader (+), VME_Aristocratic (+), MI_WealthStratification (+), MI_WealthEquality (-), AM_Monastic (-), [Charity] (-)                                                                                               | greedy                                                                                                  | Expectation, SelfInterest                   | —                                                                    |
+| Jealous            | Individualist (+)                                                                                                                                                                                                      | jealous                                                                                                 | Competitiveness                             | Humbleness                                                           |
+| Gay                |                                                                                                                                                                                                                        | gay                                                                                                     | —                                           | —                                                                    |
+| Bisexual           |                                                                                                                                                                                                                        | bisexual                                                                                                | —                                           | —                                                                    |
+| AnnoyingVoice      |                                                                                                                                                                                                                        | annoying voice                                                                                          | —                                           | —                                                                    |
+| CreepyBreathing    |                                                                                                                                                                                                                        | creepy breathing                                                                                        | —                                           | —                                                                    |
+| Nimble             |                                                                                                                                                                                                                        | nimble                                                                                                  | —                                           | —                                                                    |
+| FastLearner        |                                                                                                                                                                                                                        | fast learner                                                                                            | —                                           | —                                                                    |
+| SlowLearner        |                                                                                                                                                                                                                        | slow learner                                                                                            | —                                           | —                                                                    |
+| GreatMemory        |                                                                                                                                                                                                                        | great memory                                                                                            | —                                           | —                                                                    |
+| Tough              | PainIsVirtue (+), AM_Monastic (+)                                                                                                                                                                                      | tough                                                                                                   | —                                           | —                                                                    |
+| QuickSleeper       |                                                                                                                                                                                                                        | quick sleeper                                                                                           | —                                           | —                                                                    |
+| NaturalMood        | sanguine/optimist: Guilty (-), VME_PartyLife (+); pessimist/depressive: Guilty (+)                                                                                                                                     | sanguine (2), optimist (1), pessimist (-1), depressive (-2)                                             | Optimism                                    | Pessimism                                                            |
+| Nerves             | iron-willed/steadfast: PainIsVirtue (+), VME_Bushido (+); nervous/volatile: VME_Bushido (-)                                                                                                                            | iron-willed (2), steadfast (1), nervous (-1), volatile (-2)                                             | Tenacity, Tension                           | Volatility                                                           |
+| Neurotic           | VME_CraftCulture (+), VME_HardcoreIndustrialism (+), VME_PartyLife (-)                                                                                                                                                 | neurotic (1), very neurotic (2)                                                                         | Organization, Tension                       | Orderliness                                                          |
+| PsychicSensitivity | hypersensitive/sensitive: VME_PsychicFocus (+), Blindsight (+); dull/deaf: VME_PsychicFocus (-), AM_PsychicVampirism (-)                                                                                               | psychically hypersensitive (2), psychically sensitive (1), psychically dull (-1), psychically deaf (-2) | —                                           | —                                                                    |
+| ShootingAccuracy   | careful shooter: AM_Sharpshooter (+)                                                                                                                                                                                   | careful shooter (1), trigger-happy (-1)                                                                 | Deliberation                                | —                                                                    |
+| Beauty             | beautiful: AM_NakedTruth (+); beautiful/pretty: NikolaisIdeology_Aphroditic (+), [NikolaisIdeology_Beauty → Central]; ugly/staggeringly ugly: NikolaisIdeology_Aphroditic (-), [NikolaisIdeology_Beauty → Unimportant] | beautiful (2), pretty (1), ugly (-1), staggeringly ugly (-2)                                            | —                                           | —                                                                    |
+| Immunity           | sickly: VME_Healthcare (+)                                                                                                                                                                                             | super-immune (1), sickly (-1)                                                                           | —                                           | —                                                                    |
+| Delicate           | PainIsVirtue (-)                                                                                                                                                                                                       | delicate                                                                                                | —                                           | —                                                                    |
+| Recluse            | Individualist (+), Collectivist (-), VME_Anonymity (+), VFEA_Isolationist (+), VME_PartyLife (-), Proselytizer (-)                                                                                                     | recluse                                                                                                 | Sociability                                 | Sociability                                                          |
 
 ### Vanilla Traits Expanded
 
-| Trait               | Label          | RimPsyche scopes            | RimPsyche gates |
-|---------------------+----------------+-----------------------------+-----------------|
-| VTE_AbsentMinded    | absent-minded  | Focus, Imagination          | —               |
-| VTE_Eccentric       | eccentric      | Reflectiveness, Sociability | Intellect       |
-| VTE_Perfectionist   | perfectionist  | Deliberation, Tension       | —               |
-| VTE_Coward          | coward         | Bravery                     | —               |
-| VTE_Brave           | brave          | Bravery                     | —               |
-| VTE_Clumsy          | clumsy         | —                           | —               |
-| VTE_HeatInclined    | heat inclined  | —                           | —               |
-| VTE_ColdInclined    | cold inclined  | —                           | —               |
-| VTE_HeavySleeper    | heavy sleeper  | —                           | —               |
-| VTE_Neat            | neat           | Organization                | —               |
-| VTE_Slob            | slob           | Organization                | —               |
-| VTE_Workaholic      | workaholic     | Diligence, Focus            | —               |
-| VTE_IronStomach     | iron stomach   | —                           | —               |
-| VTE_AnimalLover     | animal lover   | —                           | —               |
-| VTE_AnimalHater     | animal hater   | —                           | —               |
-| VTE_BigBoned        | big-boned      | —                           | —               |
-| VTE_Rebel           | rebel          | Loyalty, Morality           | —               |
-| VTE_Submissive      | submissive     | —                           | Assertiveness   |
-| VTE_Vengeful        | vengeful       | Compassion                  | —               |
-| VTE_Technophobe     | technophobe    | —                           | —               |
-| VTE_FunLoving       | fun-loving     | Playfulness                 | —               |
-| VTE_Dunce           | dunce          | Reflectiveness              | Intellect       |
-| VTE_MartialArtist   | martial artist | —                           | —               |
-| VTE_Snob            | snob           | Expectation                 | Humbleness      |
-| VTE_Squeamish       | squeamish      | —                           | —               |
-| VTE_Anxious         | anxious        | Sociability, Tension        | Insecurity      |
-| VTE_Insatiable      | insatiable     | —                           | —               |
-| VTE_Prude           | prude          | Propriety                   | —               |
-| VTE_CouchPotato     | couch potato   | —                           | —               |
-| VTE_CatPerson       | cat person     | —                           | —               |
-| VTE_DogPerson       | dog person     | —                           | —               |
-| VTE_Prodigy         | prodigy        | Reflectiveness, Tension     | Intellect       |
-| VTE_Menagerist      | menagerist     | —                           | —               |
-| VTE_ChildOfSea      | Ocean lover    | —                           | —               |
-| VTE_ChildOfMountain | Mountain lover | —                           | —               |
-| VTE_MadSurgeon      | mad surgeon    | Compassion, Morality        | Compassion      |
-| VTE_DrunkenMaster   | drunken master | —                           | —               |
-| VTE_Kleptomaniac    | kleptomaniac   | Discipline, SelfInterest    | —               |
-| VTE_Stoner          | stoner         | —                           | —               |
-| VTE_Lush            | lush           | —                           | —               |
-| VTE_Wanderlust      | wanderlust     | —                           | —               |
-| VTE_Insomniac       | insomniac      | —                           | —               |
-| VTE_WorldWeary      | world weary    | Optimism, Sociability       | Pessimism       |
-| VTE_Desensitized    | desensitized   | Compassion, Emotionality    | —               |
-| VTE_RefinedPalate   | refined palate | —                           | —               |
-| VTE_Academian       | academian      | Reflectiveness              | Intellect       |
-| VTE_Groundbreaker   | groundbreaker  | —                           | —               |
-| VTE_Gastronomist    | gastronomist   | —                           | —               |
-| VTE_Ecologist       | ecologist      | —                           | —               |
-| VTE_Tycoon          | tycoon         | —                           | —               |
-| VTE_ThickSkinned    | thick skinned  | —                           | —               |
-| VTE_ThinSkinned     | thin skinned   | —                           | —               |
-| VTE_Schizoid        | schizoid       | —                           | —               |
+| Trait               | meme/precepts                                                                                                              | Label          | RimPsyche scopes            | RimPsyche gates |
+|---------------------+----------------------------------------------------------------------------------------------------------------------------+----------------+-----------------------------+-----------------|
+| VTE_AbsentMinded    |                                                                                                                            | absent-minded  | Focus, Imagination          | —               |
+| VTE_Eccentric       | AM_Madness (+), VME_Astrology (+), Individualist (+), Collectivist (-), VME_Gestalt (-)                                    | eccentric      | Reflectiveness, Sociability | Intellect       |
+| VTE_Perfectionist   | VME_CraftCulture (+), AM_Artist (+), AM_PrefabPreference (-)                                                               | perfectionist  | Deliberation, Tension       | —               |
+| VTE_Coward          | Raider (-), VME_Bushido (-), AM_Gladiator (-), VME_Pacifist (+), AM_NonViolence (+)                                        | coward         | Bravery                     | —               |
+| VTE_Brave           | Raider (+), VME_Bushido (+), AM_Gladiator (+), VME_Pacifist (-), AM_NonViolence (-)                                        | brave          | Bravery                     | —               |
+| VTE_Clumsy          |                                                                                                                            | clumsy         | —                           | —               |
+| VTE_HeatInclined    |                                                                                                                            | heat inclined  | —                           | —               |
+| VTE_ColdInclined    |                                                                                                                            | cold inclined  | —                           | —               |
+| VTE_HeavySleeper    |                                                                                                                            | heavy sleeper  | —                           | —               |
+| VTE_Neat            | VME_Scrapper (-)                                                                                                           | neat           | Organization                | —               |
+| VTE_Slob            | VME_Scrapper (+), VME_Aristocratic (-)                                                                                     | slob           | Organization                | —               |
+| VTE_Workaholic      | VME_HardcoreIndustrialism (+), Collectivist (+), VME_PartyLife (-)                                                         | workaholic     | Diligence, Focus            | —               |
+| VTE_IronStomach     |                                                                                                                            | iron stomach   | —                           | —               |
+| VTE_AnimalLover     | AnimalPersonhood (+), HumanPrimacy (-), VME_Vegan (+)                                                                      | animal lover   | —                           | —               |
+| VTE_AnimalHater     | AnimalPersonhood (-), HumanPrimacy (+)                                                                                     | animal hater   | —                           | —               |
+| VTE_BigBoned        |                                                                                                                            | big-boned      | —                           | —               |
+| VTE_Rebel           | Loyalist (-), VME_GodEmperor (-), MI_GovernmentAuthority (-), MI_GovernmentLiberty (+), Individualist (+)                  | rebel          | Loyalty, Morality           | —               |
+| VTE_Submissive      | Loyalist (+), VME_GodEmperor (+), VME_ExaltedPriesthood (+), Individualist (-), MI_GovernmentLiberty (-)                   | submissive     | —                           | Assertiveness   |
+| VTE_Vengeful        | VME_BloodCourt (+), VME_Pacifist (-), AM_NonViolence (-)                                                                   | vengeful       | Compassion                  | —               |
+| VTE_Technophobe     | Transhumanist (-), VME_Progressive (-), VME_MechanoidSupremacy (-), FleshPurity (+), NaturePrimacy (+), TreeConnection (+) | technophobe    | —                           | —               |
+| VTE_FunLoving       | VME_PartyLife (+), AM_Monastic (-), PainIsVirtue (-)                                                                       | fun-loving     | Playfulness                 | —               |
+| VTE_Dunce           | VME_Cultured (-)                                                                                                           | dunce          | Reflectiveness              | Intellect       |
+| VTE_MartialArtist   | VME_Bushido (+), AM_Gladiator (+), AM_Sharpshooter (-)                                                                     | martial artist | —                           | —               |
+| VTE_Snob            | VME_Aristocratic (+), Supremacist (+), VME_Egalitarian (-), AM_Monastic (-), VME_Scrapper (-)                              | snob           | Expectation                 | Humbleness      |
+| VTE_Squeamish       | Cannibal (-), VME_Fleshcrafters (-), AM_Sadist (-), AM_NonViolence (+), VME_Pacifist (+)                                   | squeamish      | —                           | —               |
+| VTE_Anxious         | VME_Anonymity (+), VME_PartyLife (-)                                                                                       | anxious        | Sociability, Tension        | Insecurity      |
+| VTE_Insatiable      | NikolaisIdeology_Aphroditic (+), NikolaisIdeology_Chastity (-), AM_Monastic (-)                                            | insatiable     | —                           | —               |
+| VTE_Prude           | Nudism (-), AM_NakedTruth (-), NikolaisIdeology_Aphroditic (-), NikolaisIdeology_Chastity (+), AM_Monastic (+)             | prude          | Propriety                   | —               |
+| VTE_CouchPotato     |                                                                                                                            | couch potato   | —                           | —               |
+| VTE_CatPerson       |                                                                                                                            | cat person     | —                           | —               |
+| VTE_DogPerson       |                                                                                                                            | dog person     | —                           | —               |
+| VTE_Prodigy         | VME_Cultured (+), MI_Empiricist (+), MI_Faith (-)                                                                          | prodigy        | Reflectiveness, Tension     | Intellect       |
+| VTE_Menagerist      | MI_Menagerist (+), AnimalPersonhood (+), HumanPrimacy (-)                                                                  | menagerist     | —                           | —               |
+| VTE_ChildOfSea      | VME_Angler (+), AM_WaterPrimacy (+), VVE_Nauticals (+), Tunneler (-), BMT_CavernDweller (-)                                | Ocean lover    | —                           | —               |
+| VTE_ChildOfMountain | Tunneler (+), BMT_CavernDweller (+), Shipborn (-)                                                                          | Mountain lover | —                           | —               |
+| VTE_MadSurgeon      | Transhumanist (+), VME_Fleshcrafters (+), GR_MadScientists (+), FleshPurity (-), GR_CarefulGeneticists (-)                 | mad surgeon    | Compassion, Morality        | Compassion      |
+| VTE_DrunkenMaster   | HighLife (+), VME_PartyLife (+), FleshPurity (-)                                                                           | drunken master | —                           | —               |
+| VTE_Kleptomaniac    | Raider (+)                                                                                                                 | kleptomaniac   | Discipline, SelfInterest    | —               |
+| VTE_Stoner          | HighLife (+), FleshPurity (-)                                                                                              | stoner         | —                           | —               |
+| VTE_Lush            | HighLife (+), VME_PartyLife (+), FleshPurity (-)                                                                           | lush           | —                           | —               |
+| VTE_Wanderlust      | VME_Nomad (+), VVE_Travelers (+), QuesterMeme_QuesterMeme (+), VME_CityBuilders (-), Tunneler (-)                          | wanderlust     | —                           | —               |
+| VTE_Insomniac       |                                                                                                                            | insomniac      | —                           | —               |
+| VTE_WorldWeary      | Guilty (+), VME_PartyLife (-)                                                                                              | world weary    | Optimism, Sociability       | Pessimism       |
+| VTE_Desensitized    | VME_Fleshcrafters (+)                                                                                                      | desensitized   | Compassion, Emotionality    | —               |
+| VTE_RefinedPalate   | AM_Epicurean (+), [NutrientPasteEating → Disgusting]                                                                       | refined palate | —                           | —               |
+| VTE_Academian       | VME_Cultured (+), MI_Empiricist (+), MI_Faith (-)                                                                          | academian      | Reflectiveness              | Intellect       |
+| VTE_Groundbreaker   | VME_Progressive (+)                                                                                                        | groundbreaker  | —                           | —               |
+| VTE_Gastronomist    | AM_Epicurean (+)                                                                                                           | gastronomist   | —                           | —               |
+| VTE_Ecologist       | NaturePrimacy (+), TreeConnection (+), MI_Environmentalist (+), MI_Industrialist (-), AM_Deforestation (-)                 | ecologist      | —                           | —               |
+| VTE_Tycoon          | VME_Trader (+), MI_WealthStratification (+), MI_WealthEquality (-)                                                         | tycoon         | —                           | —               |
+| VTE_ThickSkinned    |                                                                                                                            | thick skinned  | —                           | —               |
+| VTE_ThinSkinned     |                                                                                                                            | thin skinned   | —                           | —               |
+| VTE_Schizoid        | VME_Anonymity (+), VME_PartyLife (-)                                                                                       | schizoid       | —                           | —               |
 
 ### Hauts' Added Traits
 
-| Trait | Label | RimPsyche scopes | RimPsyche gates |
-|-------+-------+------------------+-----------------|
-| HVT_Drudge | drudge | Deliberation, Reflectiveness | Intellect |
-| HVT_Forgettable | forgettable | — | — |
-| HVT_Hale | hale | — | — |
-| HVT_Hotfoot | hotfoot | — | — |
-| HVT_Hysteric | hysteric | Tenacity | — |
-| HVT_Judgemental | judgemental | Openness, Trust | — |
-| HVT_Rambunctious | rambunctious | — | — |
-| HVT_RepressedRage | repressed rage | Aggressiveness | — |
-| HVT_Tranquil0 | tranquil | — | — |
-| HVT_Winsome | winsome | — | — |
-| HVT_ChronicNightmares | chronic nightmares | — | — |
-| HVT_VividDreams | vivid dreams | — | — |
-| HVT_Imperceptive | imperceptive | — | — |
-| HVT_Strong | mighty (1), herculean (2) | — | — |
-| HVT_Guru | guru | Tact | — |
-| HVT_RadicalThinker | radical thinker | Passion, Reflectiveness | Intellect |
-| HVT_Mentor | mentor | Competitiveness | — |
-| HVT_Catastrophist | catastrophist | Compassion | — |
-| HVT_Haunted | haunted | — | — |
-| HVT_CelestialCelerity | celestial celerity | — | — |
-| HVT_Navigator | navigator | — | — |
-| HVT_Test | game developer | — | — |
-| HVT_Everliving | everliving | — | — |
-| HVT_Vanquisher | vanquisher | — | — |
-| HVT_Compromised | compromised | — | — |
-| HVT_Pathogenic | pathogenic | — | — |
-| HVT_ChanshiGene | chanshi gene | — | — |
-| HVT_TTrait\* (122 traits) | psychic albatross … psychic ziz, plus locustspawn and doppelganger | — | — |
+| Trait                     | meme/precepts                                                       | Label                                                              | RimPsyche scopes             | RimPsyche gates |
+|---------------------------+---------------------------------------------------------------------+--------------------------------------------------------------------+------------------------------+-----------------|
+| HVT_Drudge                | VME_HardcoreIndustrialism (+), Collectivist (+), VME_Cultured (-)   | drudge                                                             | Deliberation, Reflectiveness | Intellect       |
+| HVT_Forgettable           |                                                                     | forgettable                                                        | —                            | —               |
+| HVT_Hale                  |                                                                     | hale                                                               | —                            | —               |
+| HVT_Hotfoot               |                                                                     | hotfoot                                                            | —                            | —               |
+| HVT_Hysteric              | PainIsVirtue (-)                                                    | hysteric                                                           | Tenacity                     | —               |
+| HVT_Judgemental           | Supremacist (+), VME_Egalitarian (-), [IdeoDiversity → Disapproved] | judgemental                                                        | Openness, Trust              | —               |
+| HVT_Rambunctious          |                                                                     | rambunctious                                                       | —                            | —               |
+| HVT_RepressedRage         | VME_Pacifist (-)                                                    | repressed rage                                                     | Aggressiveness               | —               |
+| HVT_Tranquil0             |                                                                     | tranquil                                                           | —                            | —               |
+| HVT_Winsome               |                                                                     | winsome                                                            | —                            | —               |
+| HVT_ChronicNightmares     |                                                                     | chronic nightmares                                                 | —                            | —               |
+| HVT_VividDreams           |                                                                     | vivid dreams                                                       | —                            | —               |
+| HVT_Imperceptive          |                                                                     | imperceptive                                                       | —                            | —               |
+| HVT_Strong                |                                                                     | mighty (1), herculean (2)                                          | —                            | —               |
+| HVT_Guru                  | Proselytizer (+), VME_ExaltedPriesthood (+), VME_Anonymity (-)      | guru                                                               | Tact                         | —               |
+| HVT_RadicalThinker        | Individualist (+), VME_Progressive (+), Loyalist (-)                | radical thinker                                                    | Passion, Reflectiveness      | Intellect       |
+| HVT_Mentor                | VME_Elders (+), VME_Cultured (+), VME_Anonymity (-)                 | mentor                                                             | Competitiveness              | —               |
+| HVT_Catastrophist         | Guilty (+)                                                          | catastrophist                                                      | Compassion                   | —               |
+| HVT_Haunted               |                                                                     | haunted                                                            | —                            | —               |
+| HVT_CelestialCelerity     |                                                                     | celestial celerity                                                 | —                            | —               |
+| HVT_Navigator             | VVE_Skyseekers (+), VVE_Travelers (+), VME_CityBuilders (-)         | navigator                                                          | —                            | —               |
+| HVT_Test                  |                                                                     | game developer                                                     | —                            | —               |
+| HVT_Everliving            |                                                                     | everliving                                                         | —                            | —               |
+| HVT_Vanquisher            |                                                                     | vanquisher                                                         | —                            | —               |
+| HVT_Compromised           |                                                                     | compromised                                                        | —                            | —               |
+| HVT_Pathogenic            |                                                                     | pathogenic                                                         | —                            | —               |
+| HVT_ChanshiGene           |                                                                     | chanshi gene                                                       | —                            | —               |
+| HVT_TTrait\* (122 traits) |                                                                     | psychic albatross … psychic ziz, plus locustspawn and doppelganger | —                            | —               |
 
 ### The Sims Traits
 
-| Trait             | Label           | RimPsyche scopes        | RimPsyche gates |
-|-------------------+-----------------+-------------------------+-----------------|
-| ST_Manipulative   | manipulative    | —                       | —               |
-| ST_Naive          | naive           | Trust                   | —               |
-| ST_Narcissist     | vain            | SelfInterest            | —               |
-| ST_Emotional      | emotional       | Emotionality            | —               |
-| ST_Paranoid       | paranoid        | Optimism                | —               |
-| ST_Goofball       | goofball        | Playfulness             | —               |
-| ST_Loyal          | loyal           | Loyalty                 | —               |
-| ST_Insane         | insane          | Stability               | —               |
-| ST_Grumpy         | grumpy          | Aggressiveness          | —               |
-| ST_Shy            | shy             | —                       | Assertiveness   |
-| ST_Procrastinator | procrastinator  | Diligence, Organization | —               |
-| ST_NonCommital    | non-committal   | Loyalty                 | —               |
-| ST_FamilyOriented | family oriented | Loyalty, Sociability    | —               |
-| ST_SteadyHands    | steady hands    | Deliberation            | —               |
-| ST_Daredevil      | daredevil       | Bravery                 | —               |
-| ST_Chatterbox     | chatterbox      | Talkativeness           | —               |
-| ST_Handy          | handy           | —                       | —               |
-| ST_Virtuoso       | virtuoso        | —                       | Imagination     |
-| ST_TechWhiz       | tech whiz       | —                       | —               |
-| ST_Gambler        | gambler         | Discipline              | —               |
-| ST_Childish       | childish        | Playfulness             | —               |
-| ST_Nosy           | nosy            | Inquisitiveness         | —               |
-| ST_HugePower      | huge power      | —                       | —               |
-| ST_Observant      | observant       | —                       | —               |
-| ST_Zen            | zen             | Aggressiveness          | Imagination     |
-| ST_Submissive     | submissive      | —                       | Assertiveness   |
-| ST_DrunkenMaster  | drunken master  | —                       | —               |
-| ST_Insomniac      | insomniac       | —                       | —               |
+| Trait             | meme/precepts                                                                            | Label           | RimPsyche scopes        | RimPsyche gates |
+|-------------------+------------------------------------------------------------------------------------------+-----------------+-------------------------+-----------------|
+| ST_Manipulative   | Proselytizer (+), VME_ViolentConversion (+), Guilty (-)                                  | manipulative    | —                       | —               |
+| ST_Naive          | Loyalist (+)                                                                             | naive           | Trust                   | —               |
+| ST_Narcissist     | Individualist (+), VME_Aristocratic (+), Collectivist (-), Guilty (-)                    | vain            | SelfInterest            | —               |
+| ST_Emotional      |                                                                                          | emotional       | Emotionality            | —               |
+| ST_Paranoid       | VFEA_Isolationist (+), VME_Anonymity (+), Proselytizer (-)                               | paranoid        | Optimism                | —               |
+| ST_Goofball       | VME_PartyLife (+), AM_Monastic (-)                                                       | goofball        | Playfulness             | —               |
+| ST_Loyal          | Loyalist (+), VME_Nationalist (+), Individualist (-)                                     | loyal           | Loyalty                 | —               |
+| ST_Insane         | AM_Madness (+)                                                                           | insane          | Stability               | —               |
+| ST_Grumpy         | VME_PartyLife (-)                                                                        | grumpy          | Aggressiveness          | —               |
+| ST_Shy            | VME_Anonymity (+), Proselytizer (-)                                                      | shy             | —                       | Assertiveness   |
+| ST_Procrastinator | VME_HardcoreIndustrialism (-)                                                            | procrastinator  | Diligence, Organization | —               |
+| ST_NonCommital    | Loyalist (-), Individualist (+)                                                          | non-committal   | Loyalty                 | —               |
+| ST_FamilyOriented | AM_Fertility (+), VME_Elders (+), AM_Monastic (-)                                        | family oriented | Loyalty, Sociability    | —               |
+| ST_SteadyHands    |                                                                                          | steady hands    | Deliberation            | —               |
+| ST_Daredevil      | Raider (+), AM_Gladiator (+), VME_Pacifist (-)                                           | daredevil       | Bravery                 | —               |
+| ST_Chatterbox     | Proselytizer (+), VME_PartyLife (+), VME_Anonymity (-)                                   | chatterbox      | Talkativeness           | —               |
+| ST_Handy          |                                                                                          | handy           | —                       | —               |
+| ST_Virtuoso       | AM_Artist (+), VME_Cultured (+), VME_HardcoreIndustrialism (-)                           | virtuoso        | —                       | Imagination     |
+| ST_TechWhiz       | VME_Progressive (+), VME_MechanoidSupremacy (+), FleshPurity (-)                         | tech whiz       | —                       | —               |
+| ST_Gambler        |                                                                                          | gambler         | Discipline              | —               |
+| ST_Childish       | AM_Youth (+), VME_PartyLife (+), AM_Monastic (-)                                         | childish        | Playfulness             | —               |
+| ST_Nosy           | VME_Anonymity (-)                                                                        | nosy            | Inquisitiveness         | —               |
+| ST_HugePower      |                                                                                          | huge power      | —                       | —               |
+| ST_Observant      |                                                                                          | observant       | —                       | —               |
+| ST_Zen            | AM_NonViolence (+), VME_Pacifist (+), TreeConnection (+), Raider (-), VME_BloodCourt (-) | zen             | Aggressiveness          | Imagination     |
+| ST_Submissive     | Loyalist (+), VME_GodEmperor (+), Individualist (-)                                      | submissive      | —                       | Assertiveness   |
+| ST_DrunkenMaster  | HighLife (+), VME_PartyLife (+), FleshPurity (-)                                         | drunken master  | —                       | —               |
+| ST_Insomniac      |                                                                                          | insomniac       | —                       | —               |
 
 ### SYR Individuality
 
-| Trait                   | Label                 | RimPsyche scopes      | RimPsyche gates |
-|-------------------------+-----------------------+-----------------------+-----------------|
-| SYR_Agile               | stealthy              | —                     | —               |
-| SYR_AnimalAffinity      | animal friend         | —                     | —               |
-| SYR_Architect           | architect             | —                     | —               |
-| SYR_CreativeThinker     | creative thinker      | Imagination           | —               |
-| SYR_GoodFortune         | fortunate             | —                     | —               |
-| SYR_GreenThumb          | green thumb           | —                     | —               |
-| SYR_GunNut              | gun nut               | —                     | —               |
-| SYR_HandEyeCoordination | hand-eye coordination | —                     | —               |
-| SYR_KeenEye             | keen eye              | —                     | —               |
-| SYR_MechanoidExpert     | mechanoid expert      | —                     | —               |
-| SYR_Perfectionist       | perfectionist         | Deliberation, Tension | —               |
-| SYR_Haggler             | silver tongue         | Tact                  | —               |
-| SYR_SteadyHands         | steady hands          | —                     | —               |
-| SYR_StrongBack          | strong back           | —                     | —               |
+| Trait                   | meme/precepts                                               | Label                 | RimPsyche scopes      | RimPsyche gates |
+|-------------------------+-------------------------------------------------------------+-----------------------+-----------------------+-----------------|
+| SYR_Agile               |                                                             | stealthy              | —                     | —               |
+| SYR_AnimalAffinity      | AnimalPersonhood (+), Rancher (+), HumanPrimacy (-)         | animal friend         | —                     | —               |
+| SYR_Architect           | VME_CityBuilders (+)                                        | architect             | —                     | —               |
+| SYR_CreativeThinker     | AM_Artist (+)                                               | creative thinker      | Imagination           | —               |
+| SYR_GoodFortune         |                                                             | fortunate             | —                     | —               |
+| SYR_GreenThumb          | NaturePrimacy (+), TreeConnection (+), AM_Deforestation (-) | green thumb           | —                     | —               |
+| SYR_GunNut              | AM_Sharpshooter (+)                                         | gun nut               | —                     | —               |
+| SYR_HandEyeCoordination |                                                             | hand-eye coordination | —                     | —               |
+| SYR_KeenEye             |                                                             | keen eye              | —                     | —               |
+| SYR_MechanoidExpert     | VME_MechanoidSupremacy (+)                                  | mechanoid expert      | —                     | —               |
+| SYR_Perfectionist       | VME_CraftCulture (+)                                        | perfectionist         | Deliberation, Tension | —               |
+| SYR_Haggler             | VME_Trader (+)                                              | silver tongue         | Tact                  | —               |
+| SYR_SteadyHands         |                                                             | steady hands          | —                     | —               |
+| SYR_StrongBack          |                                                             | strong back           | —                     | —               |
 
 ### Bad People
 
-| Trait               | Label     | RimPsyche scopes     | RimPsyche gates       |
-|---------------------+-----------+----------------------+-----------------------|
-| BadPeople_Evil      | Depraved  | Compassion, Morality | Compassion, Integrity |
-| BadPeople_Kinslayer | Kinslayer | Compassion, Morality | Compassion, Integrity |
+| Trait               | meme/precepts                                                                                                                   | Label     | RimPsyche scopes     | RimPsyche gates       |
+|---------------------+---------------------------------------------------------------------------------------------------------------------------------+-----------+----------------------+-----------------------|
+| BadPeople_Evil      | Raider (+), Supremacist (+), AM_Sadist (+), VME_BloodCourt (+), Guilty (-), VME_Pacifist (-), AM_NonViolence (-), [Charity] (-) | Depraved  | Compassion, Morality | Compassion, Integrity |
+| BadPeople_Kinslayer | VME_BloodCourt (+), AM_Fertility (-)                                                                                            | Kinslayer | Compassion, Morality | Compassion, Integrity |
 
 ### Big and Small
 
-| Trait                   | Label                 | RimPsyche scopes | RimPsyche gates |
-|-------------------------+-----------------------+------------------+-----------------|
-| Passioned_Learning      | diligent student      | —                | —               |
-| Very_Passioned_Learning | very diligent student | —                | —               |
-| BS_AnimalFriend         | Animal Friend         | —                | —               |
-| BS_AlcoholAddict        | alcohol lover         | Discipline       | —               |
-| BS_Gentle               | gentle                | Aggressiveness   | Compassion      |
-| BS_InsultProof          | uninsultable          | Stability        | —               |
-| BS_Unpretentious        | Unpretentious         | Expectation      | —               |
-| Gigantism               | gigantism             | —                | —               |
-| Large                   | large                 | —                | —               |
-| Small                   | small                 | —                | —               |
-| Dwarfism                | dwarfism              | —                | —               |
+| Trait                   | meme/precepts                                    | Label                 | RimPsyche scopes | RimPsyche gates |
+|-------------------------+--------------------------------------------------+-----------------------+------------------+-----------------|
+| Passioned_Learning      |                                                  | diligent student      | —                | —               |
+| Very_Passioned_Learning |                                                  | very diligent student | —                | —               |
+| BS_AnimalFriend         | AnimalPersonhood (+)                             | Animal Friend         | —                | —               |
+| BS_AlcoholAddict        | HighLife (+), VME_PartyLife (+), FleshPurity (-) | alcohol lover         | Discipline       | —               |
+| BS_Gentle               | AM_NonViolence (+), VME_Pacifist (+), Raider (-) | gentle                | Aggressiveness   | Compassion      |
+| BS_InsultProof          |                                                  | uninsultable          | Stability        | —               |
+| BS_Unpretentious        | AM_Monastic (+), VME_Aristocratic (-)            | Unpretentious         | Expectation      | —               |
+| Gigantism               |                                                  | gigantism             | —                | —               |
+| Large                   |                                                  | large                 | —                | —               |
+| Small                   |                                                  | small                 | —                | —               |
+| Dwarfism                |                                                  | dwarfism              | —                | —               |
 
 ### Consolidated Traits
 
-| Trait              | Label                                                 | RimPsyche scopes                       | RimPsyche gates |
-|--------------------+-------------------------------------------------------+----------------------------------------+-----------------|
-| RCT_Aesthete       | aesthete                                              | —                                      | Imagination     |
-| RCT_AnimalLover    | animal lover                                          | —                                      | —               |
-| RCT_AnimalHater    | animal hater                                          | —                                      | —               |
-| RCT_Builder        | builder                                               | —                                      | —               |
-| RCT_Butcher        | butcher                                               | —                                      | —               |
-| RCT_Claustrophobic | claustrophobic                                        | —                                      | —               |
-| RCT_ColdLover      | cold lover                                            | —                                      | —               |
-| RCT_DeepSleeper    | deep sleeper                                          | —                                      | —               |
-| RCT_Dunce          | dunce                                                 | Reflectiveness                         | Intellect       |
-| RCT_Gourmet        | gourmet                                               | —                                      | —               |
-| RCT_HeatLover      | heat lover                                            | —                                      | —               |
-| RCT_Aptitude       | inept (-1), coordinated (1)                           | —                                      | —               |
-| RCT_PainThreshold  | unstoppable (2), ironman (1), low pain tolerance (-1) | —                                      | —               |
-| RCT_Inventor       | inventor                                              | Focus, Imagination                     | —               |
-| RCT_Eyesight       | cranial nerve palsy (-1), eagle-eyed (1)              | —                                      | —               |
-| RCT_NeatFreak      | neat freak                                            | Organization                           | —               |
-| RCT_EatingSpeed    | nibbler (-1), glutton (1)                             | —                                      | —               |
-| RCT_Nyctophobe     | nyctophobe (-1), nyctophile (1)                       | —                                      | —               |
-| RCT_Perfectionist  | perfectionist                                         | Deliberation, Tension                  | —               |
-| RCT_Medic          | poor medic (-1), skilled medic (1), master medic (2)  | —                                      | —               |
-| RCT_Rockhound      | rockhound                                             | —                                      | —               |
-| RCT_Savant         | savant                                                | Diligence, Imagination, Reflectiveness | Intellect       |
-| RCT_decentlearner  | decent learner                                        | —                                      | —               |
-| RCT_Trader         | sucker (-1), haggler (1), master trader (2)           | —                                      | —               |
-| RCT_Diplomat       | uncouth (-1), diplomat (1), master diplomat (2)       | Tact                                   | —               |
-| RCT_Constitution   | weak constitution (-1), strong constitution (1)       | —                                      | —               |
-| RCT_BrownThumb     | brown thumb                                           | —                                      | —               |
-| RCT_GreenThumb     | Green thumb                                           | —                                      | —               |
+| Trait              | meme/precepts                                                                       | Label                                                 | RimPsyche scopes                       | RimPsyche gates |
+|--------------------+-------------------------------------------------------------------------------------+-------------------------------------------------------+----------------------------------------+-----------------|
+| RCT_Aesthete       | AM_Artist (+), VME_CraftCulture (+), VME_Scrapper (-)                               | aesthete                                              | —                                      | Imagination     |
+| RCT_AnimalLover    | AnimalPersonhood (+), HumanPrimacy (-)                                              | animal lover                                          | —                                      | —               |
+| RCT_AnimalHater    | AnimalPersonhood (-), HumanPrimacy (+)                                              | animal hater                                          | —                                      | —               |
+| RCT_Builder        | VME_CityBuilders (+)                                                                | builder                                               | —                                      | —               |
+| RCT_Butcher        | Rancher (+), AnimalPersonhood (-)                                                   | butcher                                               | —                                      | —               |
+| RCT_Claustrophobic | Tunneler (-), BMT_CavernDweller (-), Shipborn (-), NaturePrimacy (+), VME_Nomad (+) | claustrophobic                                        | —                                      | —               |
+| RCT_ColdLover      |                                                                                     | cold lover                                            | —                                      | —               |
+| RCT_DeepSleeper    |                                                                                     | deep sleeper                                          | —                                      | —               |
+| RCT_Dunce          |                                                                                     | dunce                                                 | Reflectiveness                         | Intellect       |
+| RCT_Gourmet        | AM_Epicurean (+), [NutrientPasteEating → Disgusting]                                | gourmet                                               | —                                      | —               |
+| RCT_HeatLover      |                                                                                     | heat lover                                            | —                                      | —               |
+| RCT_Aptitude       |                                                                                     | inept (-1), coordinated (1)                           | —                                      | —               |
+| RCT_PainThreshold  |                                                                                     | unstoppable (2), ironman (1), low pain tolerance (-1) | —                                      | —               |
+| RCT_Inventor       | VME_Progressive (+)                                                                 | inventor                                              | Focus, Imagination                     | —               |
+| RCT_Eyesight       |                                                                                     | cranial nerve palsy (-1), eagle-eyed (1)              | —                                      | —               |
+| RCT_NeatFreak      |                                                                                     | neat freak                                            | Organization                           | —               |
+| RCT_EatingSpeed    |                                                                                     | nibbler (-1), glutton (1)                             | —                                      | —               |
+| RCT_Nyctophobe     | nyctophobe: Darkness (-), VME_Light (+); nyctophile: Darkness (+), VME_Light (-)    | nyctophobe (-1), nyctophile (1)                       | —                                      | —               |
+| RCT_Perfectionist  |                                                                                     | perfectionist                                         | Deliberation, Tension                  | —               |
+| RCT_Medic          | skilled/master medic: VME_Healthcare (+)                                            | poor medic (-1), skilled medic (1), master medic (2)  | —                                      | —               |
+| RCT_Rockhound      | Tunneler (+)                                                                        | rockhound                                             | —                                      | —               |
+| RCT_Savant         | VME_Cultured (+)                                                                    | savant                                                | Diligence, Imagination, Reflectiveness | Intellect       |
+| RCT_decentlearner  |                                                                                     | decent learner                                        | —                                      | —               |
+| RCT_Trader         | haggler/master trader: VME_Trader (+)                                               | sucker (-1), haggler (1), master trader (2)           | —                                      | —               |
+| RCT_Diplomat       |                                                                                     | uncouth (-1), diplomat (1), master diplomat (2)       | Tact                                   | —               |
+| RCT_Constitution   |                                                                                     | weak constitution (-1), strong constitution (1)       | —                                      | —               |
+| RCT_BrownThumb     |                                                                                     | brown thumb                                           | —                                      | —               |
+| RCT_GreenThumb     | NaturePrimacy (+), TreeConnection (+), AM_Deforestation (-)                         | Green thumb                                           | —                                      | —               |

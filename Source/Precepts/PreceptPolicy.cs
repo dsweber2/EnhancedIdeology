@@ -143,6 +143,9 @@ internal static partial class PreceptPolicy
         "RomanceOnTheRim_Issue_Cheat",
         // VME_BookWritingSpeed parallels VME_BookReadingSpeed (Increased/Decreased axis).
         "VME_BookWritingSpeed",
+        // Nikolai's Ideology: Gender Works. Central (beauty is moral; pawns are judged by looks) vs Unimportant
+        // (focusing on beauty corrupts).
+        "NikolaisIdeology_Beauty",
         // Man's-name <-> woman's-name spectrum (mandatory -> no Don't-care, like SpouseCount). UsuallyMans is
         // classic-only (no real Ideology-selectable equivalent) but is kept in the ladder via
         // IncludeClassicInLadder purely to anchor the spacing; see OrderOverrides.
@@ -380,6 +383,7 @@ internal static partial class PreceptPolicy
         ["RomanceOnTheRim_Issue_RomanceAttempt"] = DontCareSpec.Before("RomanceOnTheRim_RomanceAttempt_Encouraged"),
         // VME_BookWritingSpeed parallels VME_BookReadingSpeed.
         ["VME_BookWritingSpeed"] = DontCareSpec.Between("VME_BookWritingSpeed_Increased", "VME_BookWritingSpeed_Decreased"),
+        ["NikolaisIdeology_Beauty"] = DontCareSpec.Between("NikolaisIdeology_Beauty_Central", "NikolaisIdeology_Beauty_Unimportant"),
         // Former PositiveOnly issues. Where one pole comes from another mod, the spec is keyed on the base rung
         // only (After/Before), so it stays correct with or without that mod. Research, VME_Death and
         // BS_AlienAppearanceTolerance have a defaultSelectionWeight rung and need no entry; VME_Power, VME_Junk

@@ -76,6 +76,7 @@ internal sealed class IssueStanceTracker
             if (!certaintyInitialized)
                 ApplyHeterodoxy();
             ApplyDietGeneStanceOverride();
+            ApplyTraitIssueLinks();
         }
 
         return freshSeed && certaintyInitialized;
@@ -159,12 +160,13 @@ internal sealed class IssueStanceTracker
     internal void ApplyBrainwipe()
     {
         var traitFloor = Mathf.Max(0f, 3.0f + ConvictionStrengthOffset() / 3.0f);
+        var alignedFloor = Mathf.Max(traitFloor, 5f);
         var memeOffsets = TraitMemeConvictionOffsets();
 
         foreach (var issue in _strength.Keys.ToList())
         {
             var traitAligned = memeOffsets.ContainsKey(issue);
-            _strength[issue] = traitAligned ? Mathf.Max(traitFloor, 5f) : traitFloor;
+            _strength[issue] = traitAligned ? alignedFloor : traitFloor;
 
             var keepStance = traitFloor > 1f || traitAligned;
             if (!keepStance)
@@ -174,6 +176,10 @@ internal sealed class IssueStanceTracker
                     _preferredRank[issue] = Rand.Range(0, rungCount);
             }
         }
+
+        // Traits survive a brainwipe, so issues they link to return to the linked rung.
+        foreach (var (issue, linkedRank) in TraitLinkedRanks())
+            SetStance(issue, linkedRank, alignedFloor);
     }
 
     // Apply conviction decay for the current game day. Returns true when decay was applied (i.e. caller
@@ -251,6 +257,37 @@ internal sealed class IssueStanceTracker
         return Enumerable.Range(0, rungCount)
             .Where(rank => rank != current)
             .RandomElementByWeight(rank => 1f / (1f + Mathf.Abs(rank - current)));
+    }
+
+    // Trait links to a rung (TraitIssueLinks), applied after the rest of generation. A faith silent on the issue
+    // gives the pawn a weak stance on the linked rung. A faith that holds the linked rung gains the trait-meme
+    // conviction bonus. A faith that holds any other rung makes the pawn heterodox on the linked rung.
+    private void ApplyTraitIssueLinks()
+    {
+        var ideo = _pawn.Ideo!;
+        foreach (var (issue, linkedRank) in TraitLinkedRanks())
+        {
+            var faithHolds = ideo.precepts.Any(precept => precept.def.issue == issue)
+                || PreceptPolicy.InducedRank(ideo, issue) != null;
+            if (!faithHolds)
+                SetStance(issue, linkedRank,
+                    Rand.Range(ConvictionScale.TraitStanceStrengthMin, ConvictionScale.TraitStanceStrengthMax));
+            else if (HeldRank(ideo, issue) == linkedRank)
+                SetStance(issue, linkedRank, _strength[issue] + ConvictionScale.TraitMemeConvictionBonus);
+            else
+                _preferredRank[issue] = linkedRank;
+        }
+    }
+
+    // Issue and rank of each rung the pawn's traits link to, for issues the pawn has a stance on.
+    private IEnumerable<(IssueDef issue, float rank)> TraitLinkedRanks()
+    {
+        foreach (var link in TraitIssueLinks.ActiveFor(_pawn))
+        {
+            if (link.Rung is not { issue: { } issue } rung || !_strength.ContainsKey(issue)) continue;
+            var rank = PreceptLadder.RankOf(rung);
+            if (rank >= 0f) yield return (issue, rank);
+        }
     }
 
     private void ApplyDietGeneStanceOverride()

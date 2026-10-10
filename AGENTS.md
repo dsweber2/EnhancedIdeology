@@ -6,6 +6,7 @@
 - log snapshots: `make logs` → `cache/<timestamp>_logs.txt`
 - run the tests with `make test`
 - regenerate `docs/meme-precept-catalog.md` (all memes and precept issues per installed mod) with `uv run scripts/meme_precept_catalog.py`
+- `Common/Patches/TraitLinks.xml` is generated from the `meme/precepts` column of `docs/trait-meme-affinity.md`: edit the doc, then `uv run scripts/trait_links_patch.py`
 
 ## Translations
 

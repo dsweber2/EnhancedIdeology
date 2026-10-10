@@ -248,7 +248,8 @@ Heuristic: **single-rung → PositiveOnly** (no disagreement axis; the default c
 **Moral, optional** (have a neighbour-keyed Don't-care in `DontCare`): `VME_Alcohol`, `VME_KillingWithFire`,
 `VME_LeatherApparel`, `VME_Scars`, `VME_Elders`, `VME_Royalty`, `VME_Mechanoids`, `VME_Insectoids`,
 `VME_Fire`, `VME_Firefighting`, `AM_Religion`, `AM_AnimalRelease`, `VME_Expectations`, `AM_Rain`,
-`VME_Aurora`, `VME_BookReading`, `VME_BookReadingSpeed`, `VME_BookWriting`, `VME_Travel`, `VME_PermanentBases`.
+`VME_Aurora`, `VME_BookReading`, `VME_BookReadingSpeed`, `VME_BookWriting`, `VME_Travel`, `VME_PermanentBases`,
+`NikolaisIdeology_Beauty` ✓ (`central` ↔ `unimportant`, Don't-care between them).
 
 **Moral, mandatory** (every ideo takes a stance → no Don't-care needed): `VME_Violence`, `VME_Recreation`,
 `VME_TaintedApparel`, `VME_TatteredApparel`, `AM_FertilityIssue`, `AM_LearningRate`, `AM_LovinFrequency`,

@@ -16,4 +16,8 @@ internal static class ConvictionScale
     internal const float AwayFromFaithStrength = 15f;
     internal const float ConvictionPerTraitDegree = 3f;
     internal const float TraitMemeConvictionBonus = 10f;
+    // Strength range of a stance a trait link gives on an issue the faith is silent on. Lower than a normal
+    // seed: the pawn holds it against their social circle.
+    internal const float TraitStanceStrengthMin = 5f;
+    internal const float TraitStanceStrengthMax = 15f;
 }

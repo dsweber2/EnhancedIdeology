@@ -40,6 +40,7 @@
     <Compile Include="../Source/Precepts/LadderMigration.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.Resolvers.cs" />
+    <Compile Include="../Source/Precepts/TraitIssueLinks.cs" />
     <Compile Include="../Source/Interactions/InteractionWorker_AdvancedConversionAttempt.cs" />
     <Compile Include="../Source/Interactions/AbilityConversion.cs" />
     <Compile Include="../Source/Precepts/ConvictionMath.cs" />
