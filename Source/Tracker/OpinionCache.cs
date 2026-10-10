@@ -84,7 +84,11 @@ internal sealed class OpinionCache
 
         foreach (var otherPawn in pawns)
         {
-            if (!SameLocalGroup(otherPawn)) continue;
+            if (otherPawn.Dead || !SameLocalGroup(otherPawn))
+            {
+                _ = _cachedRelationships.Remove(otherPawn);
+                continue;
+            }
             float pawnOpinion = _pawn.relations.OpinionOf(otherPawn);
             opinion += pawnOpinion * IdeoTrackerData.PawnOpinionFactor;
             _cachedRelationships[otherPawn] = pawnOpinion;
@@ -93,10 +97,16 @@ internal sealed class OpinionCache
         _cachedRelationshipIdeoOpinions[ideo] = opinion;
     }
 
+    // Rebuilds from scratch so pawns that left the ideo since the last refresh drop out.
     public void RecalculateRelationshipIdeoOpinions()
     {
+        _cachedRelationships.Clear();
+        _cachedRelationshipIdeoOpinions.Clear();
+        if (_pawn.Ideo != null)
+            CacheRelationshipIdeoOpinion(_pawn.Ideo);
         foreach (var ideo in _baseIdeoOpinions.Keys)
-            CacheRelationshipIdeoOpinion(ideo);
+            if (ideo != _pawn.Ideo)
+                CacheRelationshipIdeoOpinion(ideo);
     }
 
     public IEnumerable<(Pawn pawn, float opinion)> GetOwnIdeoRelationships()

@@ -71,6 +71,9 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
     {
         foreach (var (pawn, tracker) in PawnTracker)
         {
+            // Same scope as the certainty tick: world pawns do not drift, so their moods do not pull either.
+            if (pawn.Dead || pawn.Suspended || (pawn.MapHeld == null && !pawn.IsCaravanMember()))
+                continue;
             _tmpThoughts.Clear();
             pawn.needs?.mood?.thoughts?.GetAllMoodThoughts(_tmpThoughts);
             foreach (var thought in _tmpThoughts)
@@ -111,11 +114,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
     public void SetIdeo(Pawn pawn, Ideo ideo)
     {
         _ = PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-
-        foreach (var ideo2 in IdeoTracker.Select(kvp => kvp.Key).ToList())
-        {
-            _ = IdeoTracker.RemovePawnFromIdeoPawnTracker(ideo2, pawn);
-        }
+        RemoveFromIdeoLists(pawn);
 
         if (ideo == null)
         {
@@ -123,6 +122,20 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
         }
 
         IdeoTracker.EnsureIdeoPawnTrackerHasPawn(ideo, pawn);
+    }
+
+    // The ideo lists hold strong references, so a discarded pawn left in them is never collected, and its
+    // tracker stays in the weak table too. Every scan of the lists or trackers then grows over the game.
+    public void Notify_PawnDiscarded(Pawn pawn)
+    {
+        RemoveFromIdeoLists(pawn);
+        _ = PawnTracker.RemoveTracker(pawn);
+    }
+
+    private void RemoveFromIdeoLists(Pawn pawn)
+    {
+        foreach (var ideo in IdeoTracker.Select(kvp => kvp.Key).ToList())
+            _ = IdeoTracker.RemovePawnFromIdeoPawnTracker(ideo, pawn);
     }
 
     internal static int BeliefDifferences(Ideo ideo1, Ideo ideo2)
@@ -152,6 +165,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
         foreach (var ideoTracker in PawnTracker.Select(kvp => kvp.Value).ToList())
         {
             ideoTracker.SetIdeoBaseOpinion(ideo, ideoTracker.StructuralIdeoOpinion(ideo));
+            ideoTracker.InvalidateStructural();
         }
     }
 

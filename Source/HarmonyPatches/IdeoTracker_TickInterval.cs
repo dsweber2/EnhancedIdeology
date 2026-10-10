@@ -26,9 +26,9 @@ internal static class IdeoTracker_TickInterval
 
         var longTick = pawn.IsHashIntervalTick(GenTicks.TickLongInterval, delta);
 
-        // Refresh relationship opinions before recaching so the relational band uses fresh data.
+        // Refresh slow inputs before recaching so the structural and relational bands use fresh data.
         if (longTick)
-            data.RecalculateRelationshipIdeoOpinions();
+            data.RefreshSlowInputs();
 
         data.ApplyConvictionDecayIfNewDay();
         data.CertaintyChangeRecache(comp);

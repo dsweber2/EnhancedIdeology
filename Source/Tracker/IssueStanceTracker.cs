@@ -21,6 +21,9 @@ internal sealed class IssueStanceTracker
 
     private int _lastDecayDay = -1;
 
+    // IssueDefs do not change after load, so one full seeding pass per session is enough.
+    private bool _seeded;
+
     private static Dictionary<MemeDef, HashSet<IssueDef>>? _memeGrantableIssues;
     private static Dictionary<MemeDef, HashSet<IssueDef>> MemeGrantableIssues
     {
@@ -57,17 +60,21 @@ internal sealed class IssueStanceTracker
     // already has a played-in certainty, signalling the caller to schedule stance calibration.
     internal bool EnsureSeeded(bool certaintyInitialized)
     {
+        if (_seeded) return false;
+        _seeded = true;
+
         var freshSeed = _strength.Count == 0;
-        var traitOffset = ConvictionStrengthOffset();
+        float? traitOffset = null;
         Dictionary<IssueDef, float>? memeOffsets = null;
         foreach (var issue in DefDatabase<IssueDef>.AllDefs)
         {
             if (_strength.ContainsKey(issue)) continue;
             if (PreceptPolicy.CategoryOf(issue) == PreceptCategory.NA) continue;
+            traitOffset ??= ConvictionStrengthOffset();
             memeOffsets ??= TraitMemeConvictionOffsets();
             _preferredRank[issue] = HeldRank(_pawn.Ideo!, issue);
             _strength[issue] = Mathf.Clamp(
-                Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax) + traitOffset + memeOffsets.GetValueOrDefault(issue),
+                Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax) + traitOffset.Value + memeOffsets.GetValueOrDefault(issue),
                 ConvictionScale.MinConvictionStrength, ConvictionScale.AbsoluteMaxConvictionStrength);
         }
 
@@ -230,6 +237,7 @@ internal sealed class IssueStanceTracker
         {
             _preferredRank ??= [];
             _strength ??= [];
+            _seeded = false;
         }
     }
 

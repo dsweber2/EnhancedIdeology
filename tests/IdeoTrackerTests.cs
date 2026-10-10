@@ -38,6 +38,25 @@ public class IdeoTrackerTests : SeededTest
     }
 
     [Fact]
+    public void Notify_PawnDiscarded_DropsPawnFromIdeoListsAndTrackers()
+    {
+        // Regression: discarded pawns stayed in the ideo lists forever, so every scan grew over the game.
+        var world = new SimWorld();
+        world.Initialize();
+        var ideo = new IdeoBuilder().WithName("A").Build();
+        world.AddIdeo(ideo);
+
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithLabel("P").Build(world);
+        world.Comp.SetIdeo(pawn, ideo);
+        Assert.Contains(pawn, world.Comp.GetIdeoPawns(ideo));
+
+        world.Comp.Notify_PawnDiscarded(pawn);
+
+        Assert.DoesNotContain(pawn, world.Comp.GetIdeoPawns(ideo));
+        Assert.Null(world.Comp.PawnTracker.TryGetIdeoTracker(pawn));
+    }
+
+    [Fact]
     public void RecalculateRelationshipIdeoOpinions_MultiIdeoPawn_UpdatesAllTrackedIdeos()
     {
         // Regression: iterates baseIdeoOpinions.Keys, each of which calls GetIdeoPawns —

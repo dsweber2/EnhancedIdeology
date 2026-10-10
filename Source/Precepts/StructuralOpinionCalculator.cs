@@ -192,10 +192,13 @@ internal static class StructuralOpinionCalculator
 
         // Universally-valued issues (Charity): a flat boost when the target ideo holds a stance on them, or a
         // flat penalty for a pawn whose trait opposes the issue.
-        foreach (var issue in DefDatabase<IssueDef>.AllDefs)
+        HashSet<IssueDef>? seenUniversal = null;
+        foreach (var precept in ideo.precepts)
         {
-            if (PreceptPolicy.CategoryOf(issue) == PreceptCategory.UniversalPositive
-                && ideo.precepts.Any(precept => precept.def.issue == issue))
+            var issue = precept.def.issue;
+            if (issue != null
+                && PreceptPolicy.CategoryOf(issue) == PreceptCategory.UniversalPositive
+                && (seenUniversal ??= []).Add(issue))
             {
                 var bonus = TraitIssueLinks.Opposes(pawn, issue) ? -UniversalPositiveBonus : UniversalPositiveBonus;
                 opinion += bonus;

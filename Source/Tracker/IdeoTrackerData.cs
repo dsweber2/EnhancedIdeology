@@ -48,6 +48,9 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
     private readonly List<Thought> _tmpThoughts = [];
 
+    // Ideo the cached structural band was computed for; null when stale.
+    private Ideo? _structuralFor;
+
     // Certainty is a first-order relaxation toward a setpoint (target certainty): dc/dt = k * (target - c).
     // The setpoint is the sum of three bands - structural (innate fit), relational (co-religionists) and
     // practitional (current precept moods).
@@ -60,12 +63,11 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         var settings = EnhancedIdeologyMod.Settings;
 
-        Certainty.StructuralContributors.Clear();
         Certainty.RelationalContributors.Clear();
         Certainty.PractitionalContributors.Clear();
 
         // Structural band: innate fit of the pawn to their own ideo, from their per-issue precept stances.
-        var structural = StructuralOpinionOf(Pawn.Ideo!, Certainty.StructuralContributors) / 100f;
+        var structural = StructuralBand();
 
         // Relational band: mean opinion of co-religionists, scaled by the user's max range.
         var relational = RelationalBand(settings.RelationalMaxRange, Certainty.RelationalContributors, comp);
@@ -77,17 +79,46 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         if (Certainty.TryApplyCalibration(structural, Stances))
         {
-            Certainty.StructuralContributors.Clear();
-            structural = StructuralOpinionOf(Pawn.Ideo!, Certainty.StructuralContributors) / 100f;
+            InvalidateStances();
+            structural = StructuralBand();
             Certainty.SetBands(structural, relational, practitional);
         }
 
         Certainty.FinalizeRecache(structural, settings.CertaintyDriftRate);
     }
 
+    // The inputs change rarely, so the value and its contributors are kept until a stance write, trait change,
+    // ideo change, reform, or the long-tick refresh clears them.
+    private float StructuralBand()
+    {
+        if (_structuralFor == Pawn.Ideo)
+            return Certainty.CachedStructural;
+
+        Certainty.StructuralContributors.Clear();
+        _structuralFor = Pawn.Ideo;
+        return StructuralOpinionOf(Pawn.Ideo!, Certainty.StructuralContributors) / 100f;
+    }
+
+    internal void InvalidateStructural() => _structuralFor = null;
+
+    private void InvalidateStances()
+    {
+        Opinions.MarkDirty();
+        InvalidateStructural();
+    }
+
+    // Long-tick refresh for inputs that change without a notification: opinions of other pawns, age, genes, settings.
+    internal void RefreshSlowInputs()
+    {
+        Opinions.RecalculateRelationshipIdeoOpinions();
+        InvalidateStructural();
+    }
+
+    // Reads the relationships cached by the long-tick refresh; vanilla OpinionOf is too costly to poll each rare tick.
     private float RelationalBand(float maxRange, List<(string label, float pct)> contributors, GameComponent_EnhancedIdeology comp)
     {
-        Opinions.CacheRelationshipIdeoOpinion(Pawn.Ideo!, comp);
+        if (!Opinions.CachedRelationshipIdeoOpinions.ContainsKey(Pawn.Ideo!))
+            Opinions.CacheRelationshipIdeoOpinion(Pawn.Ideo!, comp);
 
         float sum = 0;
         int count = 0;
@@ -172,7 +203,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
         return Mathf.Max(
             Opinions.BaseIdeoOpinions[ideo] +
-            PersonalIdeoOpinion(ideo, out var _) +
+            PersonalIdeoOpinion(ideo, false, out var _) +
             IdeoOpinionFromRelationships(ideo, false, out var _), 0) / 100f;
     }
 
@@ -186,7 +217,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         }
 
         string? relationshipDevModeDetails = null;
-        var personalOpinion = PersonalIdeoOpinion(ideo, out var personalDevModeDetails) / 100f;
+        var personalOpinion = PersonalIdeoOpinion(ideo, true, out var personalDevModeDetails) / 100f;
         var relationshipOpinion = noRelationship ? 0 : IdeoOpinionFromRelationships(ideo, true, out relationshipDevModeDetails) / 100f;
         return new DetailedIdeoOpinion
         (
@@ -339,7 +370,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (Find.IdeoManager.classicMode) return;
         EnsureIssueStancesSeeded();
         Stances.ShiftStance(issue, targetRank, pull, strengthDelta, BrainwipeSusceptibilityMultiplier);
-        Opinions.MarkDirty();
+        InvalidateStances();
     }
 
     // Set the pawn's stance on `issue` to an absolute (rank, strength). The conviction-valley debate
@@ -350,7 +381,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         if (Find.IdeoManager.classicMode) return;
         EnsureIssueStancesSeeded();
         Stances.SetStance(issue, rank, strength);
-        Opinions.MarkDirty();
+        InvalidateStances();
     }
 
     // Move every stance onto the rung of the pawn's own ideo, keeping each strength.
@@ -358,7 +389,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         EnsureIssueStancesSeeded();
         Stances.ResetRanksToHeld(Pawn.Ideo!);
-        Opinions.MarkDirty();
+        InvalidateStances();
     }
 
     // Reset stances after a brainwipe. Strength floors at max(0, 3 + traitOffset/3).
@@ -367,7 +398,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         EnsureIssueStancesSeeded();
         Stances.ApplyBrainwipe();
         SetExtendedCertainty(0f);
-        Opinions.MarkDirty();
+        InvalidateStances();
     }
 
     // Recompute the cached structural opinions if a stance shift has invalidated them. Called at the top of
@@ -387,15 +418,27 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         return Stances.IssueStances();
     }
 
-    public float PersonalIdeoOpinion(Ideo ideo, out string? devDetails)
+    public float PersonalIdeoOpinion(Ideo ideo, bool includeDevDetails, out string? devDetails)
     {
         RefreshBaseOpinionsIfDirty();
-        if (Prefs.DevMode)
+
+        if (!Opinions.BaseIdeoOpinions.TryGetValue(ideo, out var baseIdeoOpinion))
+        {
+            baseIdeoOpinion = StructuralIdeoOpinion(ideo);
+            Opinions.BaseIdeoOpinions[ideo] = baseIdeoOpinion;
+        }
+        if (!Opinions.PersonalIdeoOpinions.TryGetValue(ideo, out var personalIdeoOpinion))
+        {
+            personalIdeoOpinion = 0;
+            Opinions.PersonalIdeoOpinions[ideo] = personalIdeoOpinion;
+        }
+
+        if (Prefs.DevMode && includeDevDetails)
         {
             var devDetailsBuilder = new StringBuilder();
             _ = devDetailsBuilder
-                .AppendLine($"Base opinion: {Opinions.BaseIdeoOpinions.GetValueOrDefault(ideo, StructuralIdeoOpinion(ideo))}")
-                .AppendLine($"Personal opinion: {Opinions.PersonalIdeoOpinions.GetValueOrDefault(ideo, 0)}");
+                .AppendLine($"Base opinion: {baseIdeoOpinion}")
+                .AppendLine($"Personal opinion: {personalIdeoOpinion}");
             var relevantMemeCount = ideo.memes.Intersect(Opinions.MemeOpinions.Keys).Count();
             _ = devDetailsBuilder
                 .AppendLine($"Meme opinions: {relevantMemeCount}");
@@ -409,17 +452,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         else
         {
             devDetails = null;
-        }
-
-        if (!Opinions.BaseIdeoOpinions.TryGetValue(ideo, out var baseIdeoOpinion))
-        {
-            baseIdeoOpinion = StructuralIdeoOpinion(ideo);
-            Opinions.BaseIdeoOpinions[ideo] = baseIdeoOpinion;
-        }
-        if (!Opinions.PersonalIdeoOpinions.TryGetValue(ideo, out var personalIdeoOpinion))
-        {
-            personalIdeoOpinion = 0;
-            Opinions.PersonalIdeoOpinions[ideo] = personalIdeoOpinion;
         }
 
         float opinion = 0;
@@ -467,7 +499,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     {
         EnsureIssueStancesSeeded();
         if (Stances.ApplyDecayIfNewDay())
-            Opinions.MarkDirty();
+            InvalidateStances();
     }
 
     public void ExposeData()
@@ -482,7 +514,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
             if (Stances.RemapToLiveLadders(comp.SavedLadderFor))
             {
-                Opinions.MarkDirty();
+                InvalidateStances();
             }
             if (Pawn == null) return;
             comp.SetIdeo(Pawn, Pawn.Ideo!);
@@ -507,6 +539,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
     public void RecacheAllBaseOpinions()
     {
+        InvalidateStructural();
         foreach (var ideo in Opinions.BaseIdeoOpinions.Keys.ToList())
             Opinions.BaseIdeoOpinions[ideo] = StructuralIdeoOpinion(ideo);
     }

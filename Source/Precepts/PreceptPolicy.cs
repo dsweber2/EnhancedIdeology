@@ -405,8 +405,20 @@ internal static partial class PreceptPolicy
 
     // Sim/test hook: register a category for an issue absent from the hardcoded tables (test ladders are Moral).
     private static readonly Dictionary<string, PreceptCategory> Overrides = [];
-    internal static void RegisterCategory(string issueDefName, PreceptCategory category) => Overrides[issueDefName] = category;
-    internal static void ClearOverrides() => Overrides.Clear();
+    internal static void RegisterCategory(string issueDefName, PreceptCategory category)
+    {
+        Overrides[issueDefName] = category;
+        CategoryCache.Clear();
+    }
+
+    internal static void ClearOverrides()
+    {
+        Overrides.Clear();
+        CategoryCache.Clear();
+    }
+
+    // CategoryOf is on the structural opinion hot path; the table lookups hash the defName each call.
+    private static readonly Dictionary<IssueDef, PreceptCategory> CategoryCache = [];
 
     // Only Moral and Special issues feed structural opinion, so only they are worth a debate. A won debate on
     // any other issue moves a stance that nothing reads.
@@ -415,15 +427,25 @@ internal static partial class PreceptPolicy
 
     public static PreceptCategory CategoryOf(IssueDef issue)
     {
-        if (Overrides.TryGetValue(issue.defName, out var overridden))
+        if (!CategoryCache.TryGetValue(issue, out var category))
+        {
+            category = ResolveCategory(issue.defName);
+            CategoryCache[issue] = category;
+        }
+        return category;
+    }
+
+    private static PreceptCategory ResolveCategory(string defName)
+    {
+        if (Overrides.TryGetValue(defName, out var overridden))
         {
             return overridden;
         }
 
-        if (MoralIssues.Contains(issue.defName)) return PreceptCategory.Moral;
-        if (UniversalPositiveIssues.Contains(issue.defName)) return PreceptCategory.UniversalPositive;
-        if (SpecialIssues.Contains(issue.defName)) return PreceptCategory.Special;
-        if (NAIssues.Contains(issue.defName)) return PreceptCategory.NA;
+        if (MoralIssues.Contains(defName)) return PreceptCategory.Moral;
+        if (UniversalPositiveIssues.Contains(defName)) return PreceptCategory.UniversalPositive;
+        if (SpecialIssues.Contains(defName)) return PreceptCategory.Special;
+        if (NAIssues.Contains(defName)) return PreceptCategory.NA;
         return PreceptCategory.PositiveOnly;
     }
 

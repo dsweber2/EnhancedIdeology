@@ -9,6 +9,7 @@ namespace EnhancedIdeology;
 internal static class PreceptLadder
 {
     private static readonly Dictionary<IssueDef, List<PreceptDef>> _rungsCache = [];
+    private static readonly Dictionary<IssueDef, float> _dontCareCache = [];
 
     // Stance rungs of an issue, permissive/pro -> forbidding/anti. This is the canonical filter vanilla's own
     // RandomizePrecepts uses (issue equality); reaction thoughts are ThoughtDefs, not PreceptDefs, so they
@@ -63,8 +64,15 @@ internal static class PreceptLadder
 
     // Rank the virtual "Don't care" rung sits at for an issue whose ideo holds no explicit stance.
     // -1f is the permissive extreme, one step below the most permissive explicit rung.
-    public static float DontCareRank(IssueDef issue) =>
-        PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : -1f;
+    public static float DontCareRank(IssueDef issue)
+    {
+        if (_dontCareCache.TryGetValue(issue, out var cached))
+            return cached;
+
+        var rank = PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : -1f;
+        _dontCareCache[issue] = rank;
+        return rank;
+    }
 
     // Classic precept for an issue that is NOT already a real ladder rung, or null if none exists.
     // Used by display code so a silent stance shows its effective-default label (e.g. "One Only" for
