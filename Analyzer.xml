@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Adds an "EnhancedIdeology" tab to Dubs Performance Analyzer.
+It profiles the per-pawn tick path, the opinion thoughts, and the patches on frequently called vanilla methods.
+-->
+<Analyzer>
+    <EnhancedIdeology>
+        <Types>
+            <!-- Per-pawn tick and belief state -->
+            <li>EnhancedIdeology.HarmonyPatches.IdeoTracker_TickInterval</li>
+            <li>EnhancedIdeology.HarmonyPatches.IdeoTracker_CertaintyChange</li>
+            <li>EnhancedIdeology.GameComponent_EnhancedIdeology</li>
+            <li>EnhancedIdeology.IdeoTrackerData</li>
+            <li>EnhancedIdeology.CertaintyTracker</li>
+            <li>EnhancedIdeology.IssueStanceTracker</li>
+            <li>EnhancedIdeology.OpinionCache</li>
+            <li>EnhancedIdeology.StructuralOpinionCalculator</li>
+            <li>EnhancedIdeology.ConversionEvaluator</li>
+
+            <!-- Thoughts and needs; the social workers run once per pawn pair -->
+            <li>EnhancedIdeology.ThoughtWorker_IdeologyOpinion</li>
+            <li>EnhancedIdeology.Thought_IdeologyOpinion</li>
+            <li>EnhancedIdeology.ThoughtWorker_LowCertaintyCoBeliever_Social</li>
+            <li>EnhancedIdeology.ThoughtWorker_ContemplationNeed</li>
+            <li>EnhancedIdeology.Need_Contemplation</li>
+
+            <!-- Think tree -->
+            <li>EnhancedIdeology.JobGiver_PrayFromNeed</li>
+            <li>EnhancedIdeology.JobGiver_CrisisOfFaith</li>
+            <li>EnhancedIdeology.JobGiver_Iconoclast</li>
+            <li>EnhancedIdeology.JobGiver_IconoclastFireGuard</li>
+            <li>EnhancedIdeology.ArrestedDebater_BlockNeeds</li>
+
+            <!-- Patches on frequently called vanilla methods -->
+            <li>EnhancedIdeology.ExpectationsUtility_Override</li>
+            <li>EnhancedIdeology.MemoryThoughts_TryGainMemory</li>
+            <li>EnhancedIdeology.HarmonyPatches.TryInteractWith_DebateLog</li>
+            <li>EnhancedIdeology.WorkGiver_DoBill_LeatherRestriction</li>
+            <li>EnhancedIdeology.Bill_PawnAllowedToStartAnew_CertaintyGate</li>
+
+            <!-- Caravans -->
+            <li>EnhancedIdeology.HarmonyPatches.Caravan_TickInterval_Debates</li>
+            <li>EnhancedIdeology.CaravanDebates</li>
+
+            <!-- UI -->
+            <li>EnhancedIdeology.HarmonyPatches.SocialCardUtility_DrawCertainty</li>
+            <li>EnhancedIdeology.HarmonyPatches.NeedsCardUtility_DrawThoughtGroup</li>
+        </Types>
+        <NestedTypes>
+            <!-- Holds the Designator_Build.Visible patch, which runs on each architect menu redraw -->
+            <li>EnhancedIdeology.HarmonyPatches.IdeoBook_ClassicModeBlock</li>
+        </NestedTypes>
+    </EnhancedIdeology>
+</Analyzer>

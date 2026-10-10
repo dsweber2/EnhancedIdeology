@@ -33,3 +33,4 @@ deploy:
 	rsync -a --delete 1.6/        $(RIMWORLD_MOD)/1.6/
 	rsync -a --delete Royalty/    $(RIMWORLD_MOD)/Royalty/
 	rsync -a --delete LICENSE     $(RIMWORLD_MOD)/LICENSE
+	rsync -a Analyzer.xml         $(RIMWORLD_MOD)/Analyzer.xml
