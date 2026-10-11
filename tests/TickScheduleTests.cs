@@ -75,4 +75,39 @@ public class TickScheduleTests : SeededTest
         IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
         Assert.NotEqual(before, tracker.CachedStructural);
     }
+
+    // Each refresh calls vanilla OpinionOf per local pawn, so relationship opinions refresh on every fourth long tick.
+    [Fact]
+    public void RelationshipOpinions_RefreshOnlyEverySlowInputsInterval()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var ideo = new IdeoBuilder().WithName("I").AddPrecept(new PreceptDef { defName = "P" }).Build();
+        world.AddIdeo(ideo);
+        var friend = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("Friend").Build(world);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("P")
+            .WithOpinionOf(friend, 80f)
+            .Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        const int interval = IdeoTracker_TickInterval.SlowInputsInterval;
+        var refreshTick = interval - (pawn.HashOffset() % interval);
+        Find.TickManager.TicksGame = refreshTick;
+        IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+        var before = tracker.CachedRelational;
+        Assert.True(before > 0f);
+
+        pawn.relations.SetOpinion(friend, -80f);
+        for (var tick = refreshTick + GenTicks.TickLongInterval; tick < refreshTick + interval; tick += GenTicks.TickLongInterval)
+        {
+            Find.TickManager.TicksGame = tick;
+            IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+            Assert.Equal(before, tracker.CachedRelational);
+        }
+
+        Find.TickManager.TicksGame = refreshTick + interval;
+        IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+        Assert.True(tracker.CachedRelational < 0f);
+    }
 }

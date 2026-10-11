@@ -22,6 +22,8 @@ Committed work lives in [todo.md](todo.md); how the current system works is in [
   A short, cheap ritual so belief can be reinforced more often (the "DIY rituals" mod is a reference).
 - **Conversion ritual outcome tiers.**
   Distinct results per quality: for example, a terrible outcome makes the target more certain of their top two stances and gives every attendee a bad thought about the preaching faith.
+- **Dead pawns influence certainty while their "died" moodlet is still active**
+  If they're dead you want to honor their memory (or curse them if you didn't like them to begin with).
 
 ### Memes and precepts
 

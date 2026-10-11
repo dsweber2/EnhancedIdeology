@@ -88,7 +88,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
     }
 
     // The inputs change rarely, so the value and its contributors are kept until a stance write, trait change,
-    // ideo change, reform, or the long-tick refresh clears them.
+    // ideo change, reform, or the slow-input refresh clears them.
     private float StructuralBand()
     {
         if (_structuralFor == Pawn.Ideo)
@@ -133,14 +133,15 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         InvalidateStructural();
     }
 
-    // Long-tick refresh for inputs that change without a notification: opinions of other pawns, age, genes, settings.
+    // Refresh for inputs that change without a notification: opinions of other pawns, age, genes, settings.
+    // The tick path calls it every IdeoTracker_TickInterval.SlowInputsInterval ticks.
     internal void RefreshSlowInputs()
     {
         Opinions.RecalculateRelationshipIdeoOpinions();
         InvalidateStructural();
     }
 
-    // Reads the relationships cached by the long-tick refresh; vanilla OpinionOf is too costly to poll each rare tick.
+    // Reads the relationships cached by the slow-input refresh; vanilla OpinionOf is too costly to poll each recache.
     private float RelationalBand(float maxRange, List<(string label, float pct)> contributors, GameComponent_EnhancedIdeology comp)
     {
         if (!Opinions.CachedRelationshipIdeoOpinions.ContainsKey(Pawn.Ideo!))

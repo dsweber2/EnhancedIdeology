@@ -98,8 +98,8 @@ The setpoint is recomputed at each long tick (2000 ticks), just before certainty
 The social and opinion tabs also recompute it for the pawn they show, when it is more than a rare tick (250 ticks) old or an input has changed.
 Two bands reuse cached inputs to keep that cheap.
 The structural band is kept until a stance write, trait change, faith change or reform invalidates it.
-Inputs that change without a notification (age, genes, settings) are picked up at the next long tick.
-The relational band reads opinions of co-religionists refreshed at the long tick, because vanilla's opinion calculation is costly.
+Inputs that change without a notification (age, genes, settings) are picked up within four long ticks (8000 ticks, about three game hours).
+The relational band reads opinions of co-religionists refreshed at that same interval, because vanilla's opinion calculation is costly.
 Co-religionists who died or left the pawn's map or caravan drop out at that refresh.
 Without a restoring term, the old model drained every pawn's certainty to zero over time; the setpoint gives certainty an equilibrium that events move.
 
