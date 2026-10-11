@@ -36,6 +36,11 @@ internal sealed class CertaintyTracker
     public float CachedRelational { get; private set; }
     public float CachedPractitional { get; private set; }
 
+    // Tick of the last setpoint recache; null before the first one and after an input changes.
+    private int? _recachedAt;
+    internal bool IsStale(int maxAgeTicks) => _recachedAt is not { } tick || Find.TickManager.TicksGame - tick >= maxAgeTicks;
+    internal void MarkStale() => _recachedAt = null;
+
     // Top contributors to each band for the social-card tooltip; (label, certainty-fraction contribution).
     public readonly List<(string label, float pct)> StructuralContributors = [];
     public readonly List<(string label, float pct)> RelationalContributors = [];
@@ -125,6 +130,7 @@ internal sealed class CertaintyTracker
         }
 
         CachedCertaintyChange = driftRate * (target - ExtendedCertainty);
+        _recachedAt = Find.TickManager.TicksGame;
     }
 
     // Called flat from IdeoTrackerData.ExposeData (no Scribe_Deep wrapper) to preserve XML structure.

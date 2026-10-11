@@ -3,7 +3,7 @@
 Harmony patches on vanilla entry points. Each file patches one or a small cluster of related methods.
 
 **Lifecycle / tick:**
-- `IdeoTracker_TickInterval.cs` — tick hook: advances certainty drift, fires `TryBackgroundConversion`, applies conviction decay; on the long tick calls `RefreshSlowInputs` before the recache; interval checks take vanilla's `delta` (1.6 ticks pawns every 1–15 ticks); also compiled into the tests (`TickScheduleTests`)
+- `IdeoTracker_TickInterval.cs` — tick hook, long tick only: `RefreshSlowInputs`, conviction decay, setpoint recache, certainty drift, `TryBackgroundConversion`; the interval check takes vanilla's `delta` (1.6 ticks pawns every 1–15 ticks); also compiled into the tests (`TickScheduleTests`)
 - `PawnComponentsUtility_Initialize.cs` — attaches `IdeoTrackerData` on pawn spawn
 - `Pawn_Discard.cs` — on a real discard, drops the pawn from the ideo lists and the tracker table (`Notify_PawnDiscarded`); without it they leak and every scan grows
 - `Pawn_ExposeData.cs` — syncs tracker on save/load; holds data for pawns loaded before the game component exists (other mods' components) until PostLoadInit
@@ -25,7 +25,7 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 - `CompAbilityEffect_Reassure_Reroute.cs` — replaces ability reassure with `AbilityReassure.Resolve`; also patches validity check and tooltip
 
 **UI injection:**
-- `SocialCardUtility_DrawCertainty.cs` — injects extended certainty bar and setpoint marker into the social card
+- `SocialCardUtility_DrawCertainty.cs` — injects extended certainty bar and setpoint marker into the social card; refreshes the shown pawn through `RecacheSetpointIfStale`; tooltip from `UI/CertaintyBar.Tooltip`
 - `NeedsCardUtility_DrawThoughtGroup.cs` — injects certainty bar into the needs card thought group
 - `ITab_Book_Size.cs` — adjusts book inspect tab size for EB's extended content
 - `BookUIUtility_DrawBenefits_Reroute.cs` — adjusts book benefit display for EB's custom reading outcome

@@ -1,8 +1,8 @@
 namespace EnhancedIdeology;
 
-// Shared rendering for a certainty bar's markers, drawn the way RimWorld's Need bars are: a crisis-of-faith
-// threshold tick and the target-certainty marker. Used by the social card certainty bar and the opinion tab's
-// own-ideo row, which both show the pawn's certainty drifting toward a setpoint.
+// Shared rendering for a certainty bar, drawn the way RimWorld's Need bars are: a crisis-of-faith threshold tick,
+// the target-certainty marker, and the setpoint tooltip. Used by the social card certainty bar and the opinion
+// tab's own-ideo row, which both show the pawn's certainty drifting toward a setpoint.
 [StaticConstructorOnStartup]
 internal static class CertaintyBar
 {
@@ -38,5 +38,35 @@ internal static class CertaintyBar
         var x = barRect.x + (barRect.width * pct);
         GUI.color = Color.white;
         GUI.DrawTexture(new Rect(x - (size / 2f), barRect.y + barRect.height, size, size), TargetMarkerTex);
+    }
+
+    // Certainty in the pawn's own faith, its setpoint and drift per day, then each band with its top contributors.
+    public static string Tooltip(Pawn pawn, IdeoTrackerData data)
+    {
+        string tip = "EnhancedIdeology.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO"), data.ExtendedCertainty.ToStringPercent()) + "\n\n";
+        tip += "EnhancedIdeology.CertaintyTarget".Translate(data.CachedTargetCertainty.ToStringPercent()) + "\n";
+        tip += "EnhancedIdeology.CertainChangePerDay".Translate(Signed(data.CachedCertaintyChange)) + "\n\n";
+        tip += Band("EnhancedIdeology.CertaintyBandStructural", data.CachedStructural, data.StructuralContributors);
+        tip += Band("EnhancedIdeology.CertaintyBandRelational", data.CachedRelational, data.RelationalContributors);
+        tip += Band("EnhancedIdeology.CertaintyBandPractice", data.CachedPractitional, data.PractitionalContributors);
+        return tip;
+    }
+
+    private static string Signed(float fraction) =>
+        (fraction >= 0f ? "+" : "") + fraction.ToStringPercent();
+
+    // A band header line ("Structural  +48%") followed by its top-3 contributors, each signed.
+    private static string Band(string labelKey, float total, List<(string label, float pct)> contributors)
+    {
+        var text = labelKey.Translate(Signed(total)) + "\n";
+        var ordered = contributors.OrderByDescending(c => Math.Abs(c.pct)).ToList();
+        foreach (var (label, pct) in ordered.Take(3))
+            text += $"    {label}: {Signed(pct)}\n";
+        if (ordered.Count > 3)
+        {
+            var remainder = ordered.Skip(3).Sum(c => c.pct);
+            text += $"    ({ordered.Count - 3} more: {Signed(remainder)})\n";
+        }
+        return text;
     }
 }

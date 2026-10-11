@@ -122,6 +122,76 @@ public class SetpointCachingTests : SeededTest
     }
 
     [Fact]
+    public void Display_FreshSetpoint_IsKept()
+    {
+        var (world, tracker, _, _) = BuildStructural();
+        var before = tracker.CachedCertaintyChange;
+
+        // Certainty moves without an invalidation, so only a recache picks it up.
+        tracker.SetExtendedCertainty(tracker.ExtendedCertainty + 0.2f);
+        Find.TickManager.TicksGame += IdeoTrackerData.DisplayRecacheTicks - 1;
+        tracker.RecacheSetpointIfStale(world.Comp);
+
+        Assert.Equal(before, tracker.CachedCertaintyChange);
+    }
+
+    [Fact]
+    public void Display_OldSetpoint_IsRecached()
+    {
+        var (world, tracker, _, _) = BuildStructural();
+        var before = tracker.CachedCertaintyChange;
+
+        tracker.SetExtendedCertainty(tracker.ExtendedCertainty + 0.2f);
+        Find.TickManager.TicksGame += IdeoTrackerData.DisplayRecacheTicks;
+        tracker.RecacheSetpointIfStale(world.Comp);
+
+        Assert.NotEqual(before, tracker.CachedCertaintyChange);
+    }
+
+    // A paused game does not advance ticks, so an invalidating write must make the setpoint stale by itself.
+    [Fact]
+    public void Display_StanceWrite_RecachesSetpointWithoutTicks()
+    {
+        var (world, tracker, _, issue) = BuildStructural();
+        var before = tracker.CachedStructural;
+
+        tracker.SetIssueStance(issue, 0f, tracker.Stances.GetStrength(issue));
+        tracker.RecacheSetpointIfStale(world.Comp);
+
+        Assert.True(tracker.CachedStructural < before);
+    }
+
+    [Fact]
+    public void Display_BaseOpinions_RecacheOnlyWhenOld()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (issue, rungs) = SimIssues.Ladder("Generosity", "Selfish", "Generous");
+        var own = new IdeoBuilder().WithName("I").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        var rival = new IdeoBuilder().WithName("J").AddPrecept(rungs[0], issue, displayOrderInIssue: 0).Build();
+        world.AddIdeo(own);
+        world.AddIdeo(rival);
+
+        var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0.5f).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        _ = tracker.IdeoOpinion(rival);
+        tracker.RecacheBaseOpinionsIfStale();
+        var before = tracker.Opinions.BaseIdeoOpinions[rival];
+
+        // A write that skips IdeoTrackerData sends no invalidation, so only the age check picks it up.
+        var otherRung = tracker.Stances.GetRank(issue) >= 0.5f ? 0f : 1f;
+        tracker.Stances.SetStance(issue, otherRung, tracker.Stances.GetStrength(issue));
+
+        tracker.RecacheBaseOpinionsIfStale();
+        Assert.Equal(before, tracker.Opinions.BaseIdeoOpinions[rival]);
+
+        Find.TickManager.TicksGame += IdeoTrackerData.DisplayRecacheTicks;
+        tracker.RecacheBaseOpinionsIfStale();
+        Assert.NotEqual(before, tracker.Opinions.BaseIdeoOpinions[rival]);
+    }
+
+    [Fact]
     public void CategoryOf_RegisterAfterLookup_TakesEffect()
     {
         var issue = new IssueDef { defName = "CacheProbe" };

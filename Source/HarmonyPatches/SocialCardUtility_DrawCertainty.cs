@@ -25,25 +25,15 @@ internal static class SocialCardUtility_DrawCertainty
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
+        data.RecacheSetpointIfStale(comp);
+
         var extended = data.ExtendedCertainty;
         var barMax = Mathf.Max(1f, extended, data.CachedTargetCertainty);
 
         if (Mouse.IsOver(containerRect))
         {
             Widgets.DrawHighlight(containerRect);
-
-            data.CertaintyChangeRecache(comp);
-            var certaintyChange = (data.CachedCertaintyChange >= 0f ? "+" : "") + data.CachedCertaintyChange.ToStringPercent();
-
-            var tip = "EnhancedIdeology.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), pawn.Ideo.Named("IDEO"), extended.ToStringPercent()) + "\n\n";
-            tip += "EnhancedIdeology.CertaintyTarget".Translate(data.CachedTargetCertainty.ToStringPercent()) + "\n";
-            tip += "EnhancedIdeology.CertainChangePerDay".Translate(certaintyChange) + "\n\n";
-
-            tip += Band("EnhancedIdeology.CertaintyBandStructural", data.CachedStructural, data.StructuralContributors);
-            tip += Band("EnhancedIdeology.CertaintyBandRelational", data.CachedRelational, data.RelationalContributors);
-            tip += Band("EnhancedIdeology.CertaintyBandPractice", data.CachedPractitional, data.PractitionalContributors);
-
-            TooltipHandler.TipRegion(containerRect, tip);
+            TooltipHandler.TipRegion(containerRect, CertaintyBar.Tooltip(pawn, data));
         }
         if (Widgets.ButtonInvisible(containerRect))
         {
@@ -60,30 +50,5 @@ internal static class SocialCardUtility_DrawCertainty
         CertaintyBar.DrawTargetMarker(filled, data.CachedTargetCertainty / barMax);
 
         return false;
-    }
-
-    private static string Signed(float fraction)
-    {
-        return (fraction >= 0f ? "+" : "") + fraction.ToStringPercent();
-    }
-
-    // A band header line ("Structural  +48%") followed by its top-3 contributors, each signed.
-    private static string Band(string labelKey, float total, List<(string label, float pct)> contributors)
-    {
-        var text = labelKey.Translate(Signed(total)) + "\n";
-
-        var ordered = contributors.OrderByDescending(c => Math.Abs(c.pct)).ToList();
-        foreach (var (label, pct) in ordered.Take(3))
-        {
-            text += $"    {label}: {Signed(pct)}\n";
-        }
-
-        if (ordered.Count > 3)
-        {
-            var remainder = ordered.Skip(3).Sum(c => c.pct);
-            text += $"    ({ordered.Count - 3} more: {Signed(remainder)})\n";
-        }
-
-        return text;
     }
 }

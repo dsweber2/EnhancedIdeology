@@ -45,4 +45,34 @@ public class TickScheduleTests : SeededTest
     {
         Assert.Equal(CertaintyAfterOneDay(1), CertaintyAfterOneDay(updateRate), precision: 5);
     }
+
+    // Certainty advances only on the long tick, so a recache between long ticks is wasted work.
+    [Fact]
+    public void BetweenLongTicks_SetpointIsNotRecached()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (issue, rungs) = SimIssues.Ladder("Generosity", "Selfish", "Generous");
+        var ideo = new IdeoBuilder().WithName("I").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        world.AddIdeo(ideo);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+
+        var longTick = GenTicks.TickLongInterval - (pawn.HashOffset() % GenTicks.TickLongInterval);
+        Find.TickManager.TicksGame = longTick;
+        IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+        var before = tracker.CachedStructural;
+
+        var otherRung = tracker.Stances.GetRank(issue) >= 0.5f ? 0f : 1f;
+        tracker.SetIssueStance(issue, otherRung, tracker.Stances.GetStrength(issue));
+
+        Find.TickManager.TicksGame = longTick + GenTicks.TickRareInterval;
+        IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+        Assert.Equal(before, tracker.CachedStructural);
+
+        Find.TickManager.TicksGame = longTick + GenTicks.TickLongInterval;
+        IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+        Assert.NotEqual(before, tracker.CachedStructural);
+    }
 }

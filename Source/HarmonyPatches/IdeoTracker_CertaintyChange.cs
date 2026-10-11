@@ -1,7 +1,7 @@
 namespace EnhancedIdeology.HarmonyPatches;
 
 // Intercepts vanilla's certainty integration: we return 0 so vanilla applies no change.
-// Recaching and actual integration are handled by IdeoTracker_TickInterval at TickRare/TickLong.
+// Recaching and actual integration are handled by IdeoTracker_TickInterval at TickLong.
 [HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.CertaintyChangePerDay), MethodType.Getter)]
 internal static class IdeoTracker_CertaintyChange
 {

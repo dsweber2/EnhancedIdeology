@@ -29,6 +29,12 @@ internal sealed class OpinionCache
     internal void MarkDirty() { _dirty = true; }
     internal void ClearDirty() { _dirty = false; }
 
+    // Tick of the last full base-opinion recache; null before the first one. Stance writes do not clear it,
+    // because reads refresh through the dirty flag.
+    private int? _recachedAt;
+    internal bool IsStale(int maxAgeTicks) => _recachedAt is not { } tick || Find.TickManager.TicksGame - tick >= maxAgeTicks;
+    internal void MarkRecached() => _recachedAt = Find.TickManager.TicksGame;
+
     // Scribe_Collections working lists.
     private List<Ideo>? _baseKeys;
     private List<Ideo>? _personalKeys;

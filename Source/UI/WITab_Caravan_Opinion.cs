@@ -42,7 +42,6 @@ internal sealed class WITab_Caravan_Opinion : WITab
     public override void OnOpen()
     {
         base.OnOpen();
-        OpinionCard.ForceRecache();
         EnsureSpecificTabPawnValid();
         specificOpinionTabForPawn ??= Pawns.FirstOrDefault();
     }

@@ -8,12 +8,6 @@ internal sealed class ITab_Opinion : ITab
         labelKey = "EnhancedIdeology.TabOpinion";
     }
 
-    public override void OnOpen()
-    {
-        base.OnOpen();
-        OpinionCard.ForceRecache();
-    }
-
     protected override void FillTab()
     {
         var card = new OpinionCard(SelPawn);

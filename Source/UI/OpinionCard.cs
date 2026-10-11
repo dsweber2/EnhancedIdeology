@@ -29,10 +29,6 @@ internal sealed class OpinionCard
     private enum StanceSort { ByStrength, ByContributionDesc, ByContributionAsc, ByIssueAsc, ByIssueDesc }
     private static StanceSort stanceSort = StanceSort.ByStrength;
 
-    // The pawn whose opinions were last recomputed for display, so we refresh once per pawn shown rather than
-    // every frame. Cleared on tab open so reopening the same pawn's tab also refreshes.
-    private static Pawn? recachedPawn;
-
     private readonly Pawn pawn;
     private readonly IdeoTrackerData data;
     private readonly List<Ideo> ideos;
@@ -48,22 +44,15 @@ internal sealed class OpinionCard
 
     public Vector2 Size { get; }
 
-    public static void ForceRecache() => recachedPawn = null;
-
     public OpinionCard(Pawn pawn)
     {
         this.pawn = pawn;
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        // The cached structural opinions and certainty setpoint are refreshed on a tick, so they can be stale
-        // when the tab is shown. Recompute once per pawn shown (cheap) so the numbers and target arrow are honest.
-        if (pawn != recachedPawn)
-        {
-            recachedPawn = pawn;
-            data.RecacheAllBaseOpinions();
-            data.CertaintyChangeRecache(comp);
-        }
+        // Base opinions first: a recache of them marks the setpoint stale.
+        data.RecacheBaseOpinionsIfStale();
+        data.RecacheSetpointIfStale(comp);
 
         ideos = Find.IdeoManager.IdeosListForReading;
         selected = selectedIdeo != null && ideos.Contains(selectedIdeo) ? selectedIdeo : pawn.Ideo;
@@ -273,13 +262,7 @@ internal sealed class OpinionCard
                 string tip;
                 if (ideo == pawn.Ideo)
                 {
-                    var certaintyChange = (data.CachedCertaintyChange >= 0f ? "+" : "") + data.CachedCertaintyChange.ToStringPercent();
-                    tip = "EnhancedIdeology.PawnCertaintyTooltip".Translate(pawn.Named("PAWN"), ideo.Named("IDEO"), data.ExtendedCertainty.ToStringPercent()) + "\n\n";
-                    tip += "EnhancedIdeology.CertaintyTarget".Translate(data.CachedTargetCertainty.ToStringPercent()) + "\n";
-                    tip += "EnhancedIdeology.CertainChangePerDay".Translate(certaintyChange) + "\n\n";
-                    tip += OpinionBand("EnhancedIdeology.CertaintyBandStructural", data.CachedStructural, data.StructuralContributors);
-                    tip += OpinionBand("EnhancedIdeology.CertaintyBandRelational", data.CachedRelational, data.RelationalContributors);
-                    tip += OpinionBand("EnhancedIdeology.CertaintyBandPractice", data.CachedPractitional, data.PractitionalContributors);
+                    tip = CertaintyBar.Tooltip(pawn, data);
                 }
                 else
                 {
@@ -316,23 +299,6 @@ internal sealed class OpinionCard
     {
         var frac = opinion / ConvictionScale.MaxConvictionStrength;
         return (frac >= 0f ? "+" : "") + frac.ToStringPercent();
-    }
-
-    private static string SignedFraction(float fraction) =>
-        (fraction >= 0f ? "+" : "") + fraction.ToStringPercent();
-
-    private static string OpinionBand(string labelKey, float total, List<(string label, float pct)> contributors)
-    {
-        var text = labelKey.Translate(SignedFraction(total)) + "\n";
-        var ordered = contributors.OrderByDescending(c => Math.Abs(c.pct)).ToList();
-        foreach (var (label, pct) in ordered.Take(3))
-            text += $"    {label}: {SignedFraction(pct)}\n";
-        if (ordered.Count > 3)
-        {
-            var remainder = ordered.Skip(3).Sum(c => c.pct);
-            text += $"    ({ordered.Count - 3} more: {SignedFraction(remainder)})\n";
-        }
-        return text;
     }
 
     // Every issue either the pawn's own faith or the selected ideoligion takes a stance on, strongest first: the

@@ -99,7 +99,27 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         return StructuralOpinionOf(Pawn.Ideo!, Certainty.StructuralContributors) / 100f;
     }
 
-    internal void InvalidateStructural() => _structuralFor = null;
+    internal void InvalidateStructural()
+    {
+        _structuralFor = null;
+        Certainty.MarkStale();
+    }
+
+    // The tick path recaches only on the long tick. The UI calls these for the pawn it shows, so that pawn's
+    // values are never older than DisplayRecacheTicks and no other pawn pays for it.
+    internal const int DisplayRecacheTicks = GenTicks.TickRareInterval;
+
+    public void RecacheSetpointIfStale(GameComponent_EnhancedIdeology comp)
+    {
+        if (Certainty.IsStale(DisplayRecacheTicks))
+            CertaintyChangeRecache(comp);
+    }
+
+    public void RecacheBaseOpinionsIfStale()
+    {
+        if (Opinions.IsStale(DisplayRecacheTicks))
+            RecacheAllBaseOpinions();
+    }
 
     private void InvalidateStances()
     {
@@ -542,6 +562,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         InvalidateStructural();
         foreach (var ideo in Opinions.BaseIdeoOpinions.Keys.ToList())
             Opinions.BaseIdeoOpinions[ideo] = StructuralIdeoOpinion(ideo);
+        Opinions.MarkRecached();
     }
 
     // Forwarding wrappers — logic lives in ConversionEvaluator.

@@ -6,13 +6,15 @@ internal static class IdeoTracker_TickInterval
     private const float CheckIntervalDays = GenTicks.TickLongInterval / 60000f;
 
     // Vanilla calls this every `delta` ticks (1 on screen, up to 15 off screen), not every tick.
-    // The interval checks use the delta overload, so each window fires once even when its exact tick is skipped.
+    // The interval check uses the delta overload, so each window fires once even when its exact tick is skipped.
+    // Certainty advances only on the long tick, from the setpoint recached just before it. A recache between
+    // long ticks would only move the social card's setpoint marker, so all work runs on the long tick.
     internal static void Postfix(Pawn_IdeoTracker __instance, int delta)
     {
         var pawn = __instance.pawn;
 
         // Fast exit: skip all lookups on the calls where nothing fires.
-        if (!pawn.IsHashIntervalTick(GenTicks.TickRareInterval, delta))
+        if (!pawn.IsHashIntervalTick(GenTicks.TickLongInterval, delta))
             return;
 
         // Caravan members have no map but must still drift. Suspended pawns (cryptosleep) are frozen, although
@@ -24,20 +26,13 @@ internal static class IdeoTracker_TickInterval
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        var longTick = pawn.IsHashIntervalTick(GenTicks.TickLongInterval, delta);
-
         // Refresh slow inputs before recaching so the structural and relational bands use fresh data.
-        if (longTick)
-            data.RefreshSlowInputs();
-
+        data.RefreshSlowInputs();
         data.ApplyConvictionDecayIfNewDay();
         data.CertaintyChangeRecache(comp);
+        data.AdvanceExtendedCertainty(CheckIntervalDays);
 
-        if (longTick)
-        {
-            data.AdvanceExtendedCertainty(CheckIntervalDays);
-            if (!pawn.InMentalState)
-                data.TryBackgroundConversion(CheckIntervalDays);
-        }
+        if (!pawn.InMentalState)
+            data.TryBackgroundConversion(CheckIntervalDays);
     }
 }
