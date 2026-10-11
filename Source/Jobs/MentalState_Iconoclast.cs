@@ -109,7 +109,7 @@ internal sealed class MentalState_Iconoclast : MentalState
                     {
                         // Incapable of engaging: still count as foiled toward the give-up timer.
                         if (pawn.WorkTagIsDisabled(WorkTags.Social) && pawn.WorkTagIsDisabled(WorkTags.Violent))
-                            foiledTicks += 30;
+                            foiledTicks += Math.Max(30, delta);
                         pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
                     }
                 }
