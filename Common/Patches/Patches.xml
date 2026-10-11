@@ -122,13 +122,22 @@
 		</value>
 	</Operation>
 
-	<!-- If VBE is active: also add our recipe to VBE's table -->
+	<!-- If VBE is active: also add our recipes to VBE's tables -->
 	<Operation Class="PatchOperationConditional">
 		<xpath>/Defs/ThingDef[defName="VBE_WritersTable"]</xpath>
 		<match Class="PatchOperationAdd">
-			<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook"]/recipeUsers</xpath>
+			<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook" or defName="EB_WriteIllustratedIdeobook"]/recipeUsers</xpath>
 			<value>
 				<li>VBE_WritersTable</li>
+			</value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="VBE_TypewritersTable"]</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook" or defName="EB_WriteIllustratedIdeobook"]/recipeUsers</xpath>
+			<value>
+				<li>VBE_TypewritersTable</li>
 			</value>
 		</match>
 	</Operation>
