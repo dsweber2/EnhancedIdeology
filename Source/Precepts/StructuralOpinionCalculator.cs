@@ -164,20 +164,23 @@ internal static class StructuralOpinionCalculator
         float preceptSum = 0;
         int issueCount = 0;
         var inducedTargets = InducedTargets(stances, ideo);
-        var relevantIssues = ideo.precepts.Select(precept => precept.def.issue)
-            .Where(issue => issue != null)
-            .Concat(stances.IssueStances().Select(stance => stance.issue).Where(issue => HoldsStance(stances, issue)))
-            .Concat(inducedTargets)
-            .Distinct();
+        RelevantIssues.Clear();
+        SeenIssues.Clear();
+        foreach (var precept in ideo.precepts)
+            AddRelevant(precept.def.issue);
+        foreach (var issue in stances.HeldIssues())
+            AddRelevant(issue);
+        foreach (var issue in inducedTargets)
+            AddRelevant(issue);
 
-        foreach (var issue in relevantIssues)
+        foreach (var issue in RelevantIssues)
         {
-            var perIssue = PerIssueOpinion(stances, pawnIdeo, ideo, issue!, inducedTargets, oppositionScale, out var graded);
+            var perIssue = PerIssueOpinion(stances, pawnIdeo, ideo, issue, inducedTargets, oppositionScale, out var graded);
             if (!graded) continue;
             preceptSum += perIssue;
             issueCount++;
             if (contributors != null && perIssue != 0f)
-                contributors.Add((issue!.LabelCap, perIssue));
+                contributors.Add((issue.LabelCap, perIssue));
         }
 
         if (issueCount > 0)
@@ -256,11 +259,18 @@ internal static class StructuralOpinionCalculator
     // Issues graded on the rung ladder even when not Moral: those the target ideo takes an induced stance on,
     // plus inducible issues the pawn holds a stance on. Depends on the pawn's stances, not their membership.
     internal static HashSet<IssueDef> InducedTargets(IssueStanceTracker stances, Ideo targetIdeo) =>
-        [.. PreceptPolicy.InducedIssues(targetIdeo), .. PreceptPolicy.InducibleIssues().Where(issue => HoldsStance(stances, issue))];
+        [.. PreceptPolicy.InducedIssues(targetIdeo), .. PreceptPolicy.InducibleIssues().Where(stances.HoldsStance)];
 
-    // True when the pawn's stance on `issue` is off the Don't-care rung, i.e. they hold a belief about it.
-    private static bool HoldsStance(IssueStanceTracker stances, IssueDef issue) =>
-        Mathf.Abs(stances.GetRank(issue) - PreceptLadder.DontCareRank(issue)) > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon;
+    // Scratch for Compute's issue set: first-seen order, so the precept sum adds in the same order every time.
+    // Compute does not re-enter itself, so one shared pair is enough.
+    private static readonly List<IssueDef> RelevantIssues = [];
+    private static readonly HashSet<IssueDef> SeenIssues = [];
+
+    private static void AddRelevant(IssueDef? issue)
+    {
+        if (issue != null && SeenIssues.Add(issue))
+            RelevantIssues.Add(issue);
+    }
 
     // Raw per-issue opinion (roughly +/-strength) the pawn holds toward `targetIdeo`'s stance on `issue`.
     // Moral issues and coupled targets grade by rung distance; Special issues carry bespoke categorical logic.

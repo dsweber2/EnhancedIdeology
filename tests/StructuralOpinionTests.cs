@@ -203,4 +203,53 @@ public class StructuralOpinionTests : SeededTest
 
         return tracker.StructuralIdeoOpinion(foreignIdeo);
     }
+
+    // Compute reads the held-issue list cached on the stance tracker, so every rank write must drop the cache.
+    [Fact]
+    public void HeldIssues_MatchFreshScan_AfterEveryRankWrite()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (held, heldRungs) = SimIssues.Ladder("HeldIssue", "Low", "High");
+        var (silent, _) = SimIssues.Ladder("SilentIssue", "Low", "High");
+        var ideo = new IdeoBuilder().WithName("I").AddPrecept(heldRungs[1], held, displayOrderInIssue: 10).Build();
+        world.AddIdeo(ideo);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        var stances = tracker.Stances;
+
+        void AssertMatchesFreshScan()
+        {
+            var fresh = tracker.IssueStances()
+                .Where(stance => Mathf.Abs(stance.rank - PreceptLadder.DontCareRank(stance.issue))
+                    > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon)
+                .Select(stance => stance.issue)
+                .ToList();
+            Assert.Equal(fresh, stances.HeldIssues());
+        }
+
+        AssertMatchesFreshScan();
+        Assert.Contains(held, stances.HeldIssues());
+        Assert.DoesNotContain(silent, stances.HeldIssues());
+
+        stances.SetStance(silent, 1f, 10f);
+        AssertMatchesFreshScan();
+        Assert.Contains(silent, stances.HeldIssues());
+
+        stances.ShiftStance(silent, PreceptLadder.DontCareRank(silent), 1f, 0f, 1f);
+        AssertMatchesFreshScan();
+        Assert.DoesNotContain(silent, stances.HeldIssues());
+
+        stances.SetStance(held, PreceptLadder.DontCareRank(held), 10f);
+        AssertMatchesFreshScan();
+        Assert.DoesNotContain(held, stances.HeldIssues());
+
+        stances.ResetRanksToHeld(ideo);
+        AssertMatchesFreshScan();
+        Assert.Contains(held, stances.HeldIssues());
+
+        stances.ApplyBrainwipe();
+        AssertMatchesFreshScan();
+    }
 }

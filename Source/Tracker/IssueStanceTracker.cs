@@ -56,6 +56,30 @@ internal sealed class IssueStanceTracker
     internal float GetRank(IssueDef issue) => _preferredRank[issue];
     internal float GetStrength(IssueDef issue) => _strength[issue];
 
+    // Issues the pawn holds a stance on, in stance order. Structural opinion reads this once per target ideo,
+    // so it is kept until a rank changes. Every rank write goes through SetRank.
+    private List<IssueDef>? _heldIssues;
+
+    private void SetRank(IssueDef issue, float rank)
+    {
+        _preferredRank[issue] = rank;
+        _heldIssues = null;
+    }
+
+    // True when the stance on `issue` is off the Don't-care rung, i.e. the pawn holds a belief about it.
+    internal bool HoldsStance(IssueDef issue) =>
+        Mathf.Abs(_preferredRank[issue] - PreceptLadder.DontCareRank(issue)) > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon;
+
+    internal IReadOnlyList<IssueDef> HeldIssues()
+    {
+        if (_heldIssues != null) return _heldIssues;
+        _heldIssues = [];
+        foreach (var issue in _strength.Keys)
+            if (HoldsStance(issue))
+                _heldIssues.Add(issue);
+        return _heldIssues;
+    }
+
     // Seed all issues for this pawn once. Returns true when a fresh seed occurred for a pawn that
     // already has a played-in certainty, signalling the caller to schedule stance calibration.
     internal bool EnsureSeeded(bool certaintyInitialized)
@@ -72,7 +96,7 @@ internal sealed class IssueStanceTracker
             if (PreceptPolicy.CategoryOf(issue) == PreceptCategory.NA) continue;
             traitOffset ??= ConvictionStrengthOffset();
             memeOffsets ??= TraitMemeConvictionOffsets();
-            _preferredRank[issue] = HeldRank(_pawn.Ideo!, issue);
+            SetRank(issue, HeldRank(_pawn.Ideo!, issue));
             _strength[issue] = Mathf.Clamp(
                 Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax) + traitOffset.Value + memeOffsets.GetValueOrDefault(issue),
                 ConvictionScale.MinConvictionStrength, ConvictionScale.AbsoluteMaxConvictionStrength);
@@ -129,7 +153,7 @@ internal sealed class IssueStanceTracker
     internal void ShiftStance(IssueDef issue, float targetRank, float pull, float strengthDelta, float brainwipeMultiplier)
     {
         var current = _preferredRank[issue];
-        _preferredRank[issue] = current + ((targetRank - current) * pull * brainwipeMultiplier);
+        SetRank(issue, current + ((targetRank - current) * pull * brainwipeMultiplier));
         _strength[issue] = Mathf.Clamp(
             _strength[issue] + strengthDelta * brainwipeMultiplier,
             ConvictionScale.MinConvictionStrength, ConvictionScale.AbsoluteMaxConvictionStrength);
@@ -138,7 +162,7 @@ internal sealed class IssueStanceTracker
     // Set stance to an absolute (rank, strength).
     internal void SetStance(IssueDef issue, float rank, float strength)
     {
-        _preferredRank[issue] = rank;
+        SetRank(issue, rank);
         _strength[issue] = Mathf.Clamp(strength, ConvictionScale.MinConvictionStrength, ConvictionScale.AbsoluteMaxConvictionStrength);
     }
 
@@ -151,7 +175,7 @@ internal sealed class IssueStanceTracker
             if (savedLadderFor(issue) is not { } saved) continue;
             var rank = LadderMigration.Remap(issue, saved, _preferredRank[issue]);
             changed |= rank != _preferredRank[issue];
-            _preferredRank[issue] = rank;
+            SetRank(issue, rank);
         }
         return changed;
     }
@@ -160,7 +184,7 @@ internal sealed class IssueStanceTracker
     internal void ResetRanksToHeld(Ideo ideo)
     {
         foreach (var issue in _preferredRank.Keys.ToList())
-            _preferredRank[issue] = HeldRank(ideo, issue);
+            SetRank(issue, HeldRank(ideo, issue));
     }
 
     // Reset stances after a brainwipe. Does not zero certainty; caller handles that.
@@ -180,7 +204,7 @@ internal sealed class IssueStanceTracker
             {
                 var rungCount = PreceptLadder.Rungs(issue).Count;
                 if (rungCount > 1)
-                    _preferredRank[issue] = Rand.Range(0, rungCount);
+                    SetRank(issue, Rand.Range(0, rungCount));
             }
         }
 
@@ -238,6 +262,7 @@ internal sealed class IssueStanceTracker
             _preferredRank ??= [];
             _strength ??= [];
             _seeded = false;
+            _heldIssues = null;
         }
     }
 
@@ -255,7 +280,7 @@ internal sealed class IssueStanceTracker
             .ToList();
 
         foreach (var issue in candidates)
-            _preferredRank[issue] = FlippedRank(issue, _preferredRank[issue]);
+            SetRank(issue, FlippedRank(issue, _preferredRank[issue]));
     }
 
     private static float FlippedRank(IssueDef issue, float orthodoxRank)
@@ -283,7 +308,7 @@ internal sealed class IssueStanceTracker
             else if (HeldRank(ideo, issue) == linkedRank)
                 SetStance(issue, linkedRank, _strength[issue] + ConvictionScale.TraitMemeConvictionBonus);
             else
-                _preferredRank[issue] = linkedRank;
+                SetRank(issue, linkedRank);
         }
     }
 

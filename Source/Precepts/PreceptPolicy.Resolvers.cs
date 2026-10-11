@@ -182,7 +182,7 @@ internal static partial class PreceptPolicy
     {
         foreach (var precept in ideo.precepts)
         {
-            if (InducedByPrecept.TryGetValue(precept.def.defName, out var induced))
+            if (InducedBy(precept.def) is { } induced)
             {
                 var issue = DefDatabase<IssueDef>.GetNamedSilentFail(induced.TargetIssue);
                 if (issue != null)
@@ -196,13 +196,24 @@ internal static partial class PreceptPolicy
     {
         foreach (var precept in ideo.precepts)
         {
-            if (InducedByPrecept.TryGetValue(precept.def.defName, out var induced)
-                && induced.TargetIssue == targetIssue.defName)
-            {
+            if (InducedBy(precept.def) is { } induced && induced.TargetIssue == targetIssue.defName)
                 return induced.Resolve(targetIssue);
-            }
         }
         return null;
+    }
+
+    // InducedByPrecept keyed by def. The precept scans above run for each issue a target ideo does not hold, and a
+    // defName key hashes the string on every lookup; a def caches its hash. The value depends only on the defName.
+    private static readonly Dictionary<PreceptDef, InducedStance?> InducedByDef = [];
+
+    private static InducedStance? InducedBy(PreceptDef def)
+    {
+        if (!InducedByDef.TryGetValue(def, out var induced))
+        {
+            induced = InducedByPrecept.TryGetValue(def.defName, out var stance) ? stance : null;
+            InducedByDef[def] = induced;
+        }
+        return induced;
     }
 
     // Every issue some coupling can induce a stance on. Issues whose mod is not loaded are skipped.

@@ -10,6 +10,7 @@ internal static class PreceptLadder
 {
     private static readonly Dictionary<IssueDef, List<PreceptDef>> _rungsCache = [];
     private static readonly Dictionary<IssueDef, float> _dontCareCache = [];
+    private static readonly Dictionary<PreceptDef, float> _rankCache = [];
 
     // Stance rungs of an issue, permissive/pro -> forbidding/anti. This is the canonical filter vanilla's own
     // RandomizePrecepts uses (issue equality); reaction thoughts are ThoughtDefs, not PreceptDefs, so they
@@ -48,11 +49,19 @@ internal static class PreceptLadder
         return result;
     }
 
-    // Rank of a held stance within its issue ladder (index in the ordered rungs).
-    public static float RankOf(PreceptDef precept) =>
-        PreceptPolicy.TiedRungs.TryGetValue(precept.defName, out var anchor)
+    // Rank of a held stance within its issue ladder (index in the ordered rungs). Memoized like Rungs, which it
+    // derives from: HeldRank calls it for every issue an ideo holds, on the structural opinion hot path.
+    public static float RankOf(PreceptDef precept)
+    {
+        if (_rankCache.TryGetValue(precept, out var cached))
+            return cached;
+
+        var rank = PreceptPolicy.TiedRungs.TryGetValue(precept.defName, out var anchor)
             ? RankOfName(precept.issue!, anchor)
             : Rungs(precept.issue!).IndexOf(precept);
+        _rankCache[precept] = rank;
+        return rank;
+    }
 
     // Rank of a rung by defName within its issue's (reordered) ladder, or -1f if that rung is absent (mod
     // not loaded). Used by DontCareSpec to resolve neighbour-keyed placements against the live ladder.
