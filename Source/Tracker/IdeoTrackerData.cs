@@ -121,9 +121,15 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             RecacheAllBaseOpinions();
     }
 
-    private void InvalidateStances()
+    // Base opinions lag mood pulls by at most this long. The own-ideo structural band does not lag.
+    internal const int MoodRecacheTicks = GenDate.TicksPerDay / 4;
+
+    private void InvalidateStances(bool fromMood = false)
     {
-        Opinions.MarkDirty();
+        if (fromMood)
+            Opinions.MarkMoodDirty();
+        else
+            Opinions.MarkDirty();
         InvalidateStructural();
     }
 
@@ -385,23 +391,24 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         pawn.health.hediffSet.GetFirstHediffOfDef(EnhancedIdeologyDefOf.EB_BrainwipeRecovery) != null;
 
     // Classic mode has no belief system: stances stay as seeded and nothing reads them.
-    public void ShiftIssueStance(IssueDef issue, float targetRank, float pull, float strengthDelta)
+    // Set fromMood for mood pulls: base opinions then wait up to MoodRecacheTicks before they recompute.
+    public void ShiftIssueStance(IssueDef issue, float targetRank, float pull, float strengthDelta, bool fromMood = false)
     {
         if (Find.IdeoManager.classicMode) return;
         EnsureIssueStancesSeeded();
         Stances.ShiftStance(issue, targetRank, pull, strengthDelta, BrainwipeSusceptibilityMultiplier);
-        InvalidateStances();
+        InvalidateStances(fromMood);
     }
 
     // Set the pawn's stance on `issue` to an absolute (rank, strength). The conviction-valley debate
     // write-path (PullStance) computes the whole new stance at once, since rank and strength are coupled
-    // along the curve — unlike ShiftIssueStance's independent deltas.
-    public void SetIssueStance(IssueDef issue, float rank, float strength)
+    // along the curve — unlike ShiftIssueStance's independent deltas. fromMood works as in ShiftIssueStance.
+    public void SetIssueStance(IssueDef issue, float rank, float strength, bool fromMood = false)
     {
         if (Find.IdeoManager.classicMode) return;
         EnsureIssueStancesSeeded();
         Stances.SetStance(issue, rank, strength);
-        InvalidateStances();
+        InvalidateStances(fromMood);
     }
 
     // Move every stance onto the rung of the pawn's own ideo, keeping each strength.
@@ -423,10 +430,10 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
     // Recompute the cached structural opinions if a stance shift has invalidated them. Called at the top of
     // every read that consumes base opinions, so a batch of ShiftIssueStance calls pays one recompute.
+    // After only mood pulls, the recompute waits until the oldest pull is MoodRecacheTicks old.
     private void RefreshBaseOpinionsIfDirty()
     {
-        if (!Opinions.IsDirty) return;
-        Opinions.ClearDirty();
+        if (!Opinions.NeedsRecache(MoodRecacheTicks)) return;
         RecacheAllBaseOpinions();
     }
 

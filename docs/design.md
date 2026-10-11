@@ -154,6 +154,8 @@ The derivation and plots are in `analysis/conviction_valley.py`.
 - **Precept moods** shift conviction on the issue they come from, a little every few hours.
   A mood is a vote on the faith's rung, not on the pawn's own: a good mood pulls toward the faith's rung, a bad mood pulls the stance away from the faith's rung toward a firm dissent (strength 15): an orthodox stance toward a random end of the ladder, a heterodox one further out on its own side.
   Loyalty memes turn the good mood from another faith's practices into cognitive dissonance.
+  These pulls are small and land on every pawn, so the pawn's opinion of other faiths catches up with them at most a quarter day late.
+  The certainty setpoint follows them at once, and every other stance change updates both at once.
 - **Relics** strengthen every follower on all of the faith's moral issues when found; relic moods act like precept moods.
 - **Reforming** a fluid ideoligion moves the faith's rungs, not the believers.
   A believer who was orthodox on a changed issue jumps straight to the new rung at half their conviction, rather than walking the conviction valley.

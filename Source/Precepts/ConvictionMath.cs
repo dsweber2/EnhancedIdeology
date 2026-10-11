@@ -195,6 +195,6 @@ internal static class ConvictionMath
         var farRank = LadderExtremeAwayFrom(issue, targetRank);
         var stepLength = Mathf.Abs(strengthDelta) * tracker.BrainwipeSusceptibilityMultiplier;
         var (newRank, newStrength) = ValleyStep(stance.rank, stance.strength, targetRank, farRank, targetStrength, stepLength);
-        tracker.SetIssueStance(issue, newRank, newStrength);
+        tracker.SetIssueStance(issue, newRank, newStrength, fromMood: true);
     }
 }

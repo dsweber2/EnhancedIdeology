@@ -25,15 +25,27 @@ internal sealed class OpinionCache
     // Set when a stance shift invalidates the cached structural (base) opinions. Read paths refresh
     // lazily so a batch of stance shifts pays only one recompute on the next read.
     private bool _dirty;
-    internal bool IsDirty => _dirty;
     internal void MarkDirty() { _dirty = true; }
-    internal void ClearDirty() { _dirty = false; }
+
+    // Set by mood pulls instead of _dirty. A mood pull lands on every pawn every long tick and moves a stance by
+    // about 0.01, so the base opinions wait up to a fixed age instead of recomputing for each pull.
+    private int? _moodDirtySince;
+    internal void MarkMoodDirty() => _moodDirtySince ??= Find.TickManager.TicksGame;
+
+    internal bool NeedsRecache(int moodMaxAgeTicks) =>
+        _dirty || (_moodDirtySince is { } since && Find.TickManager.TicksGame - since >= moodMaxAgeTicks);
 
     // Tick of the last full base-opinion recache; null before the first one. Stance writes do not clear it,
-    // because reads refresh through the dirty flag.
+    // because reads refresh through the dirty flags.
     private int? _recachedAt;
     internal bool IsStale(int maxAgeTicks) => _recachedAt is not { } tick || Find.TickManager.TicksGame - tick >= maxAgeTicks;
-    internal void MarkRecached() => _recachedAt = Find.TickManager.TicksGame;
+
+    internal void MarkRecached()
+    {
+        _recachedAt = Find.TickManager.TicksGame;
+        _dirty = false;
+        _moodDirtySince = null;
+    }
 
     // Scribe_Collections working lists.
     private List<Ideo>? _baseKeys;

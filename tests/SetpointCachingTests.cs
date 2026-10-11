@@ -1,7 +1,8 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers when the certainty setpoint reuses cached band inputs and when it recomputes them.
+// Covers when the certainty setpoint and the base opinions reuse cached inputs and when they recompute them.
 // The structural band is kept until its inputs change; the relational band reads opinions cached at the long tick.
+// Base opinions wait up to MoodRecacheTicks after a mood pull, and recompute at once after any other stance write.
 public class SetpointCachingTests : SeededTest
 {
     private static (SimWorld world, IdeoTrackerData tracker, SimPawn pawn, IssueDef issue) BuildStructural()
@@ -189,6 +190,74 @@ public class SetpointCachingTests : SeededTest
         Find.TickManager.TicksGame += IdeoTrackerData.DisplayRecacheTicks;
         tracker.RecacheBaseOpinionsIfStale();
         Assert.NotEqual(before, tracker.Opinions.BaseIdeoOpinions[rival]);
+    }
+
+    // Own faith and a rival both hold the pawn's rung, so the rival's base opinion moves with the pawn's strength.
+    private static (SimWorld world, IdeoTrackerData tracker, IssueDef issue, Ideo rival, Precept ownPrecept) BuildSharedRung()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+
+        var (issue, rungs) = SimIssues.Ladder("Generosity", "Selfish", "Generous");
+        var own = new IdeoBuilder().WithName("I").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        var rival = new IdeoBuilder().WithName("J").AddPrecept(rungs[1], issue, displayOrderInIssue: 10).Build();
+        world.AddIdeo(own);
+        world.AddIdeo(rival);
+
+        var pawn = new PawnBuilder().WithIdeo(own).WithCertainty(0.5f).WithLabel("P").Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.SetIssueStance(issue, 1f, 10f);
+        _ = tracker.IdeoOpinion(rival);
+        return (world, tracker, issue, rival, own.precepts[0]);
+    }
+
+    private static void ApplyGoodMood(SimWorld world, IdeoTrackerData tracker, Precept precept)
+    {
+        tracker.Pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 8f));
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
+    }
+
+    [Fact]
+    public void MoodPull_BaseOpinionsWaitForMoodRecacheTicks()
+    {
+        var (world, tracker, _, rival, ownPrecept) = BuildSharedRung();
+        var before = tracker.Opinions.BaseIdeoOpinions[rival];
+
+        ApplyGoodMood(world, tracker, ownPrecept);
+
+        Find.TickManager.TicksGame += IdeoTrackerData.MoodRecacheTicks - 1;
+        _ = tracker.IdeoOpinion(rival);
+        Assert.Equal(before, tracker.Opinions.BaseIdeoOpinions[rival]);
+
+        Find.TickManager.TicksGame += 1;
+        _ = tracker.IdeoOpinion(rival);
+        Assert.True(tracker.Opinions.BaseIdeoOpinions[rival] > before);
+    }
+
+    [Fact]
+    public void StanceWrite_WithMoodPullPending_RecachesAtOnce()
+    {
+        var (world, tracker, issue, rival, ownPrecept) = BuildSharedRung();
+        var before = tracker.Opinions.BaseIdeoOpinions[rival];
+
+        ApplyGoodMood(world, tracker, ownPrecept);
+        tracker.SetIssueStance(issue, 1f, 12f);
+        _ = tracker.IdeoOpinion(rival);
+
+        Assert.True(tracker.Opinions.BaseIdeoOpinions[rival] > before);
+    }
+
+    [Fact]
+    public void MoodPull_OwnStructuralBandDoesNotWait()
+    {
+        var (world, tracker, _, _, ownPrecept) = BuildSharedRung();
+        tracker.CertaintyChangeRecache(world.Comp);
+        var before = tracker.CachedStructural;
+
+        ApplyGoodMood(world, tracker, ownPrecept);
+        tracker.CertaintyChangeRecache(world.Comp);
+
+        Assert.True(tracker.CachedStructural > before);
     }
 
     [Fact]

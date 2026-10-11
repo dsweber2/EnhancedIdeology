@@ -89,7 +89,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
                     ConvictionMath.ApplyMoodPull(tracker, precept.ideo, issue, delta);
                     break;
                 default:
-                    tracker.ShiftIssueStance(issue, 0f, 0f, delta);
+                    tracker.ShiftIssueStance(issue, 0f, 0f, delta, fromMood: true);
                     break;
             }
         }
