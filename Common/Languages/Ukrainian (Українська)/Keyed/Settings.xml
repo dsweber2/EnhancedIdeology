@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Максимальний вплив настрою від правил (ритуали, вшанування, табу тощо) на цільову впевненість.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Поріг кризи віри: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Коли впевненість колоніста падає нижче цього значення, може статися криза віри. Вище = більше криз.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Поріг написання релігійних книг: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Мінімальна впевненість, потрібна колоністу, щоб написати релігійну книгу.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Темп навернення: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Наскільки швидко колоністи самостійно покидають погано відповідну їм віру відносно стандарту. Вище = спонтанні навернення частіші.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Втрата впевненості при спробі навернення: {0}</EnhancedIdeology.ConversionCertaintyKnock>

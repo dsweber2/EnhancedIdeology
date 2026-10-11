@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>El máximo en que los estados de ánimo de precepto (rituales, veneración, tabúes, etc.) pueden elevar o reducir la certeza objetivo.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Umbral de crisis de fe: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Cuando la certeza de un peón cae por debajo de este valor, puede sufrir un colapso por crisis de fe. Mayor valor = más crisis.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Umbral para escribir libros religiosos: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>La certeza mínima que necesita un peón para escribir un libro religioso.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Ritmo de conversión: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Qué tan rápido abandonan los peones por sí solos una fe que no encaja, en relación al valor por defecto. Mayor = conversiones espontáneas más probables.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Pérdida de certeza por intento de conversión: {0}</EnhancedIdeology.ConversionCertaintyKnock>

@@ -92,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. |  |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} |  |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. |  |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} |  |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. |  |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} |  |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. |  |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} |  |
@@ -154,7 +156,7 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. |  |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. |  |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. |  |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. |  |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. |  |
 
 ## DefInjected/RecipeDef
 
@@ -166,10 +168,10 @@
 | `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) |  |
 | `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials |  |
 | `EB_WriteIdeobook.label` | write religious book |  |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). |  |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. |  |
 | `EB_WriteIdeobook.jobString` | writing a religious book. |  |
 | `EB_WriteIllustratedIdeobook.label` | write illustrated religious book |  |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). |  |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. |  |
 | `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. |  |
 
 ## DefInjected/ThingDef

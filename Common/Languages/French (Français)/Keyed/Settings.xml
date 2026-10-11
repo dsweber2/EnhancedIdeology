@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>L'effet maximal que les humeurs liées aux préceptes (rituels, vénération, tabous, etc.) peuvent avoir sur la certitude cible.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Seuil de crise de foi : {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Quand la certitude d'un colon tombe en dessous de ce seuil, il peut vivre une crise de foi. Plus élevé = plus de crises.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Seuil d'écriture de livres religieux : {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>La certitude minimale dont un colon a besoin pour rédiger un livre religieux.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Rythme de conversion : {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Vitesse à laquelle les colons abandonnent d'eux-mêmes une foi mal adaptée, par rapport au défaut. Plus élevé = conversions spontanées plus fréquentes.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Perte de certitude lors d'une tentative de conversion : {0}</EnhancedIdeology.ConversionCertaintyKnock>

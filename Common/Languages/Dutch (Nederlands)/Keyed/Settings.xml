@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Het maximum waarmee leefregelstemming (van rituelen, verering, taboes, enz.) de doelzekerheid kan verhogen of verlagen.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Drempel geloofskrisis: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Wanneer de zekerheid van een pion hieronder daalt, kan een geloofskrisis optreden. Hoger = meer crises.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Drempel voor religieuze boeken schrijven: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>De minimale zekerheid die een pion nodig heeft om een religieus boek te schrijven.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Bekeringtempo: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Hoe snel pionnen vanzelf een slecht passend geloof verlaten, ten opzichte van de standaardwaarde. Hoger = spontane bekeringen zijn waarschijnlijker.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Zekerheidsverlies bij bekeringspoging: {0}</EnhancedIdeology.ConversionCertaintyKnock>

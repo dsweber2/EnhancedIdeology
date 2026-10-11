@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Das Maximum, um das die Gebotsstimmungen (aus Ritualen, Verehrung, Tabus usw.) die Zielglaube erhöhen oder senken können.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Glaubenskrisenschwelle: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Wenn der Glaube eines Kolonisten darunter fällt, kann er einen Glaubenskrisen-Zusammenbruch erleiden. Höher = mehr Krisen.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Schwelle zum Schreiben religiöser Bücher: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Der Mindestglaube, den ein Kolonist braucht, um ein religiöses Buch zu schreiben.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Bekehrungstempo: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Wie schnell Kolonisten von selbst einen schlecht passenden Glauben aufgeben, relativ zur Standardeinstellung. Höher = spontane Bekehrungen sind wahrscheinlicher.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Glaubensverlust bei Bekehrungsversuch: {0}</EnhancedIdeology.ConversionCertaintyKnock>

@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN} is niet de auteur van het boek.</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>Het boek is niet voor {PAWN_possessive} ideoligie.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>Geen beschikbare, toegankelijke lessenaar gevonden om aan te werken.</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>Zekerheid moet boven 90% zijn om religieuze teksten te schrijven.</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Zekerheid moet boven {0} zijn om religieuze teksten te schrijven.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

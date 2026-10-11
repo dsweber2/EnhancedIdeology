@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Legfeljebb ennyivel emelheti vagy csökkentheti az előírásokból eredő hangulat (szertartások, tisztelet, tabuk stb.) a célmeggyőződést.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Hiterősis-küszöb: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Ha egy karakter meggyőződése ez alá esik, hiterősis történhet. Magasabb = több krízis.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Vallásos könyv írásának küszöbe: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>A minimális meggyőződés, amely egy karakternek vallásos könyv írásához kell.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Áttérítési ütem: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Milyen gyorsan hagynak fel a karakterek önként egy nem illő hittel az alapértékhez képest. Magasabb = spontán áttérések valószínűbbek.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Áttérítési kísérlet meggyőződés-vesztesége: {0}</EnhancedIdeology.ConversionCertaintyKnock>

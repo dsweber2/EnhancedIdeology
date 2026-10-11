@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Максимальное влияние настроений от принципов (ритуалы, почитание, табу и т. д.) на целевую уверенность.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Порог кризиса веры: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Когда уверенность персонажа падает ниже этого значения, у него может случиться кризис веры. Выше = чаще кризисы.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Порог написания религиозных книг: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Минимальная уверенность, необходимая персонажу, чтобы написать религиозную книгу.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Темп обращения: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Насколько быстро персонажи самостоятельно отказываются от плохо подходящей веры относительно стандарта. Выше = спонтанные обращения более вероятны.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Потеря уверенности при попытке обращения: {0}</EnhancedIdeology.ConversionCertaintyKnock>

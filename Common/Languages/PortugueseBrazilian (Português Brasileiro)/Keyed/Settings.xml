@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>O máximo que os humores de preceito (de rituais, veneração, tabus, etc.) podem elevar ou reduzir a certeza alvo.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Limiar de crise de fé: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Quando a certeza de um colono cai abaixo disso, ele pode ter uma crise de fé. Maior = mais crises.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Limiar para escrever livros religiosos: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>A certeza mínima que um colono precisa para escrever um livro religioso.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Ritmo de conversão: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Quão rapidamente os colonos abandonam uma fé mal adequada por conta própria, em relação ao padrão. Maior = conversões espontâneas são mais prováveis.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Perda de certeza por tentativa de conversão: {0}</EnhancedIdeology.ConversionCertaintyKnock>

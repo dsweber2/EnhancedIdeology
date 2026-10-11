@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Cât de mult pot stările de precepte (din ritualuri, venerație, tabuuri etc.) crește sau scădea certitudinea-țintă.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Prag criză de credință: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Când certitudinea unui personaj scade sub acest prag, poate suferi o criză de credință. Mai mare = mai multe crize.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Prag pentru scrierea cărților religioase: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Certitudinea minimă de care are nevoie un personaj pentru a scrie o carte religioasă.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Ritm de conversie: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Cât de repede abandonează personajele de la sine o credință nepotrivită, față de implicit. Mai mare = conversii spontane mai probabile.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Pierdere certitudine la tentativă de conversie: {0}</EnhancedIdeology.ConversionCertaintyKnock>

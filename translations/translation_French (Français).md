@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] s'est montré plus convaincant. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Aucun des deux n'a changé d'avis. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Débat avec {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Retenu en débat par {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] a traversé une crise de foi. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | La crise de foi de [INITIATOR_nameDef] a aggravé [INITIATOR_possessive] détresse. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | L'effet maximal que les humeurs liées aux préceptes (rituels, vénération, tabous, etc.) peuvent avoir sur la certitude cible. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Seuil de crise de foi : {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Quand la certitude d'un colon tombe en dessous de ce seuil, il peut vivre une crise de foi. Plus élevé = plus de crises. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Seuil d'écriture de livres religieux : {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | La certitude minimale dont un colon a besoin pour rédiger un livre religieux. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Rythme de conversion : {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Vitesse à laquelle les colons abandonnent d'eux-mêmes une foi mal adaptée, par rapport au défaut. Plus élevé = conversions spontanées plus fréquentes. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Perte de certitude lors d'une tentative de conversion : {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} n'est pas l'auteur du livre. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Ce livre n'appartient pas à l'idéologie de {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Aucun lutrin disponible et accessible trouvé. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | La certitude doit dépasser 90% pour rédiger des textes religieux. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | La certitude doit dépasser {0} pour rédiger des textes religieux. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pages (Textile, Cuir ou Bois, pas de laine) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | couverture (Cuir ou Métal) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pages (Textile, Cuir ou Bois, pas de laine) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | couverture (Cuir ou Métal) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | matériaux précieux |
+| `EB_WriteIdeobook.label` | write religious book | rédiger un livre religieux |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Rédigez un livre religieux détaillant les croyances de votre idéologie. Requiert une certitude élevée en son idéoligion. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | rédige un livre religieux. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | rédiger un livre religieux illustré |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Rédigez un livre religieux enluminé orné de gemmes et d'encres. La qualité des matériaux accroît les aspects dévotionnels de sa lecture. Requiert une certitude élevée en son idéoligion. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | illustre un livre religieux. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | sermonne TargetA sur l'idéologie. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | sermonne TargetA sur l'idéologie. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | pose TargetA au sol pour le brûler. |
+| `EB_DebateRelax.reportString` | debating ideology. | débat d'idéologie. |
 | `EB_Pray.reportString` | contemplating. | en recueillement. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} a eu une crise mentale et agit en iconoclaste.\n\n[PAWN_pronoun] va tenter de brûler des livres religieux. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} n'est plus dans un état iconoclaste. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | État mental : Iconoclaste |
+| `EB_ArrestedDebater.label` | defiant rant | diatribe insoumise |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} a épuisé sa fureur idéologique. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | État mental : Diatribe insoumise |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | coreligionnaire hésitant |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | coreligionnaire sans foi |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | coreligionnaire au cœur apostat |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | rédiger un livre religieux |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Rédigez un livre religieux détaillant les croyances de votre idéologie. Requiert une certitude élevée en son idéoligion (au moins 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | rédige un livre religieux. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | rédiger un livre religieux illustré |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Rédigez un livre religieux enluminé orné de gemmes et d'encres. La qualité des matériaux accroît les aspects dévotionnels de sa lecture. Requiert une certitude élevée en son idéoligion (au moins 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | illustre un livre religieux. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

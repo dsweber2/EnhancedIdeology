@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN} no es el autor del libro.</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>El libro no pertenece a la ideoligión de {PAWN_possessive}.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>No se encontró ningún atril disponible y accesible para trabajar.</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>La certeza debe superar el 90% para escribir textos religiosos.</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>La certeza debe superar el {0} para escribir textos religiosos.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

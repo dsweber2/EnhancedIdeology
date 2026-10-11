@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Maksymalny wpływ nastrojów z zasad (rytuały, cześć, tabu itp.) na docelową pewność (w górę lub w dół).</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Próg kryzysu wiary: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Gdy pewność piona spadnie poniżej tej wartości, może dojść do załamania kryzysu wiary. Wyższe = więcej kryzysów.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Próg pisania ksiąg religijnych: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Minimalna pewność, jakiej pion potrzebuje, aby napisać księgę religijną.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Tempo nawrócenia: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Jak szybko piony same porzucają słabo pasującą wiarę, względem wartości domyślnej. Wyższe = spontaniczne nawrócenia są częstsze.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Utrata pewności przy próbie nawrócenia: {0}</EnhancedIdeology.ConversionCertaintyKnock>

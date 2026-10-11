@@ -3,7 +3,7 @@
   <RecipeDef>
     <defName>EB_WriteIdeobook</defName>
     <label>write religious book</label>
-    <description>Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%).</description>
+    <description>Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion.</description>
     <jobString>writing a religious book.</jobString>
     <workAmount>22500</workAmount>
     <workSkill>Intellectual</workSkill>
@@ -80,7 +80,7 @@
   <RecipeDef>
     <defName>EB_WriteIllustratedIdeobook</defName>
     <label>write illustrated religious book</label>
-    <description>Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%).</description>
+    <description>Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion.</description>
     <jobString>illustrating religious book.</jobString>
     <workAmount>30000</workAmount>
     <workSkill>Intellectual</workSkill>

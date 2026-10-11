@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN} ist nicht der Autor des Buches.</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>Das Buch ist nicht für {PAWN_possessive} Ideologie.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>Kein verfügbares, zugängliches Pult zum Arbeiten gefunden.</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>Der Glaube muss über 90% liegen, um religiöse Texte zu schreiben.</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Der Glaube muss über {0} liegen, um religiöse Texte zu schreiben.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

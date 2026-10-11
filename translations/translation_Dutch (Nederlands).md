@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] bleek overtuigender. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Geen van beiden veranderde van mening. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Debatteren met {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Vastgehouden in een debat door {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] ervoer een geloofskrisis. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]'s geloofskrisis vergrootte [INITIATOR_possessive] ellende. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Het maximum waarmee leefregelstemming (van rituelen, verering, taboes, enz.) de doelzekerheid kan verhogen of verlagen. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Drempel geloofskrisis: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Wanneer de zekerheid van een pion hieronder daalt, kan een geloofskrisis optreden. Hoger = meer crises. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Drempel voor religieuze boeken schrijven: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | De minimale zekerheid die een pion nodig heeft om een religieus boek te schrijven. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Bekeringtempo: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Hoe snel pionnen vanzelf een slecht passend geloof verlaten, ten opzichte van de standaardwaarde. Hoger = spontane bekeringen zijn waarschijnlijker. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Zekerheidsverlies bij bekeringspoging: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} is niet de auteur van het boek. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Het boek is niet voor {PAWN_possessive} ideoligie. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Geen beschikbare, toegankelijke lessenaar gevonden om aan te werken. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Zekerheid moet boven 90% zijn om religieuze teksten te schrijven. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Zekerheid moet boven {0} zijn om religieuze teksten te schrijven. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pagina's (Textiel, Leer of Hout, geen wol) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | omslag (Leer of Metaal) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pagina's (Textiel, Leer of Hout, geen wol) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | omslag (Leer of Metaal) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | kostbare materialen |
+| `EB_WriteIdeobook.label` | write religious book | religieus boek schrijven |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Schrijf een religieus boek dat de overtuigingen van jouw ideoligie beschrijft. Vereist een hoge zekerheid in de eigen ideoligie. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | een religieus boek schrijven. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | geïllustreerd religieus boek schrijven |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Schrijf een geïllumineerd religieus boek versierd met edelstenen en inkten. De kwaliteit van de materialen vergroot de devotionele aspecten van het lezen ervan. Vereist een hoge zekerheid in de eigen ideoligie. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | religieus boek illustreren. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | TargetA de les lezen over ideologie. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | TargetA de les lezen over ideologie. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetA op de grond plaatsen om te verbranden. |
+| `EB_DebateRelax.reportString` | debating ideology. | debatteren over ideologie. |
 | `EB_Pray.reportString` | contemplating. | mediterend. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} heeft een mentale breuk gehad en gedraagt zich als een beeldenstormer.\n\n[PAWN_pronoun] zal proberen religieuze boeken te verbranden. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} gedraagt zich niet langer als een beeldenstormer. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Geestestoestand: Beeldenstormer |
+| `EB_ArrestedDebater.label` | defiant rant | opstandige tirade |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} heeft de ideologische woede uitgeraasd. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Geestestoestand: Opstandige tirade |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | wankelende medegelovige |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | geloofloze medegelovige |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | afvallige medegelovige |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | religieus boek schrijven |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Schrijf een religieus boek dat de overtuigingen van jouw ideoligie beschrijft. Vereist een hoge zekerheid in de eigen ideoligie (minimaal 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | een religieus boek schrijven. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | geïllustreerd religieus boek schrijven |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Schrijf een geïllumineerd religieus boek versierd met edelstenen en inkten. De kwaliteit van de materialen vergroot de devotionele aspecten van het lezen ervan. Vereist een hoge zekerheid in de eigen ideoligie (minimaal 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | religieus boek illustreren. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

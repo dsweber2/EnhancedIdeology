@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN} není autorem knihy.</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>Tato kniha není pro ideobožství {PAWN_possessive}.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>Nenalezen žádný dostupný a přístupný pultík pro práci.</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>Jistota musí být nad 90 %, aby bylo možné psát náboženské texty.</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Jistota musí být nad {0}, aby bylo možné psát náboženské texty.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

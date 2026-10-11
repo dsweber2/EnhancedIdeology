@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] daha ikna edici olduğunu kanıtladı. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Hiçbiri görüşünü değiştirmedi. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | {0} ile tartışıyor |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | {0} tarafından tartışmada tutuluyor |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] bir iman krizi yaşadı. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]'in iman krizi [INITIATOR_possessive] ıstırabını daha da artırdı. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Öğreti ruh hallerinin (ritüeller, saygı, yasaklar vb.) hedef imanı ne kadar artırabileceği ya da düşürebileceğinin üst sınırı. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | İman krizi eşiği: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Bir karakterin imanı bunun altına düştüğünde iman krizi yaşayabilir. Yüksek değer = daha fazla kriz. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Dini kitap yazma eşiği: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | Bir karakterin dini kitap yazabilmesi için gereken en düşük iman. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | İhtidâ hızı: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Karakterlerin uymayan bir inancı kendi kendine ne kadar hızlı terk ettiği, varsayılana göre. Yüksek değer = kendiliğinden ihtidâlar daha olası. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | İhtidâ girişiminde iman kaybı: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}, kitabın yazarı değil. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Bu kitap {PAWN_possessive} ideolojisi için değil. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Çalışmak için kullanılabilir, erişilebilir bir kürsü bulunamadı. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Dini metin yazmak için iman %90'ın üzerinde olmalıdır. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Dini metin yazmak için iman {0} değerinin üzerinde olmalıdır. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | sayfalar (Tekstil, Deri veya Ahşap, yün yok) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | kapak (Deri veya Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | sayfalar (Tekstil, Deri veya Ahşap, yün yok) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | kapak (Deri veya Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | değerli malzemeler |
+| `EB_WriteIdeobook.label` | write religious book | dini kitap yaz |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | İdeolojinizin inançlarını anlatan bir dini kitap yazın. İdeodine yüksek iman gerektirir. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | dini kitap yazıyor. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | resimli dini kitap yaz |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Mücevherler ve mürekkeple süslenmiş aydınlatılmış bir dini kitap yazın. Malzeme kalitesi okuma deneyiminin ibadet boyutunu artırır. İdeodine yüksek iman gerektirir. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | dini kitabı resimlendiriyor. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | TargetA'ya ideoloji hakkında nutuk çekiyor. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | TargetA'ya ideoloji hakkında nutuk çekiyor. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetA'yı yakmak için yere bırakıyor. |
+| `EB_DebateRelax.reportString` | debating ideology. | ideoloji tartışıyor. |
 | `EB_Pray.reportString` | contemplating. | tefekkür ediyor. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} bir ruhsal çöküş yaşadı ve ikonoklast oluyor.\n\n[PAWN_pronoun] dini kitapları yakmaya çalışacak. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} artık ikonoklast değil. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Zihinsel durum: İkonoklast |
+| `EB_ArrestedDebater.label` | defiant rant | meydan okuyan nutuk |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} ideolojik öfkesini tüketti. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Zihinsel durum: Meydan okuyan nutuk |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | kararsız din kardeşi |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | imansız din kardeşi |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | mürted kalpli din kardeşi |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | dini kitap yaz |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | İdeolojinizin inançlarını anlatan bir dini kitap yazın. İdeodine yüksek iman gerektirir (en az %90). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | dini kitap yazıyor. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | resimli dini kitap yaz |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Mücevherler ve mürekkeple süslenmiş aydınlatılmış bir dini kitap yazın. Malzeme kalitesi okuma deneyiminin ibadet boyutunu artırır. İdeodine yüksek iman gerektirir (en az %90). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | dini kitabı resimlendiriyor. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

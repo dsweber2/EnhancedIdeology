@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Il massimo con cui gli stati d'animo da precetto (da rituali, venerazione, tabù, ecc.) possono aumentare o diminuire la certezza obiettivo.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Soglia di crisi di fede: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Quando la certezza di un pedone scende sotto questo valore, potrebbe avere un crollo per crisi di fede. Più alto = più crisi.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Soglia per scrivere libri religiosi: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>La certezza minima di cui un pedone ha bisogno per scrivere un libro religioso.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Ritmo di conversione: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Quanto velocemente i pedoni abbandonano da soli una fede poco adatta, rispetto all'impostazione predefinita. Più alto = le conversioni spontanee sono più probabili.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Perdita di certezza per tentativo di conversione: {0}</EnhancedIdeology.ConversionCertaintyKnock>

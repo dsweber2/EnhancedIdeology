@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef]更具说服力。 |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | 双方均未改变立场。 |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | 正在与{0}辩论 |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | 被{0}困在辩论中 |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef]经历了信仰危机。 |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]的信仰危机加剧了[INITIATOR_possessive]的痛苦。 |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | 戒律情绪（来自仪式、崇拜、禁忌等）能够提升或降低目标认可度的最大幅度。 |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | 信仰危机阈值：{0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | 当棋子的认可度低于此值时，可能发生信仰危机崩溃。越高则危机越频繁。 |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | 撰写宗教书籍阈值：{0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | 棋子撰写宗教书籍所需的最低认可度。 |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | 教化速度：{0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | 棋子自发放弃不适合信仰的速度（相对于默认值）。越高则自发转化越容易发生。 |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | 教化尝试认可度损失：{0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}不是该书的作者。 |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | 该书不属于{PAWN_possessive}的文化。 |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | 未找到可用且可进入的讲台来进行工作。 |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | 撰写宗教文本要求认可度高于90%。 |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | 撰写宗教文本要求认可度高于{0}。 |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | 书页（纺织品、皮革或木材，不含羊毛） |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | 封面（皮革或金属） |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | 书页（纺织品、皮革或木材，不含羊毛） |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | 封面（皮革或金属） |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | 贵重材料 |
+| `EB_WriteIdeobook.label` | write religious book | 撰写宗教书籍 |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | 撰写一本详述文化信仰的宗教书籍。要求对自身文化有高度认可度。 |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | 正在撰写宗教书籍。 |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | 撰写插图宗教书籍 |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | 撰写一本以宝石和彩墨装饰的彩绘宗教书籍。材料质量越高，阅读时的虔诚效果越强。要求对自身文化有高度认可度。 |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | 正在为宗教书籍绘制插图。 |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | 正就理念训斥TargetA。 |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | 正就理念训斥TargetA。 |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | 将TargetA放置于地面焚烧。 |
+| `EB_DebateRelax.reportString` | debating ideology. | 辩论理念中。 |
 | `EB_Pray.reportString` | contemplating. | 沉思中。 |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0}精神崩溃，正在充当偶像破坏者。\n\n[PAWN_pronoun]将尝试焚烧宗教书籍。 |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0}不再充当偶像破坏者。 |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | 精神状态：偶像破坏者 |
+| `EB_ArrestedDebater.label` | defiant rant | 抗命激辩 |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0}的理念怒火已经耗尽。 |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | 精神状态：抗命激辩 |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | 动摇的同信徒 |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | 无信的同信徒 |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | 心怀叛教的同信徒 |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | 撰写宗教书籍 |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | 撰写一本详述文化信仰的宗教书籍。要求对自身文化有高度认可度（至少90%）。 |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | 正在撰写宗教书籍。 |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | 撰写插图宗教书籍 |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | 撰写一本以宝石和彩墨装饰的彩绘宗教书籍。材料质量越高，阅读时的虔诚效果越强。要求对自身文化有高度认可度（至少90%）。 |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | 正在为宗教书籍绘制插图。 |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

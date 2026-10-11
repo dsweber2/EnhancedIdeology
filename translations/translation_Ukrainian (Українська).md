@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] виявився переконливішим. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Жоден не змінив своєї думки. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Дискутує з {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Втягнутий у суперечку з {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] пережив кризу віри. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Криза віри [INITIATOR_nameDef] посилила [INITIATOR_possessive] страждання. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Максимальний вплив настрою від правил (ритуали, вшанування, табу тощо) на цільову впевненість. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Поріг кризи віри: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Коли впевненість колоніста падає нижче цього значення, може статися криза віри. Вище = більше криз. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Поріг написання релігійних книг: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | Мінімальна впевненість, потрібна колоністу, щоб написати релігійну книгу. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Темп навернення: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Наскільки швидко колоністи самостійно покидають погано відповідну їм віру відносно стандарту. Вище = спонтанні навернення частіші. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Втрата впевненості при спробі навернення: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} не є автором книги. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Книга не призначена для ідеології {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Не знайдено вільної доступної кафедри для роботи. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Для написання релігійних текстів впевненість повинна бути вище 90%. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Для написання релігійних текстів впевненість повинна бути вище {0}. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | сторінки (Тканина, Шкіра або Дерево, без вовни) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | обкладинка (Шкіра або Метал) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | сторінки (Тканина, Шкіра або Дерево, без вовни) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | обкладинка (Шкіра або Метал) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | цінні матеріали |
+| `EB_WriteIdeobook.label` | write religious book | написати релігійну книгу |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Написати релігійну книгу, що детально описує переконання вашої ідеології. Потрібна висока впевненість в ідеології. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | пише релігійну книгу. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | написати ілюстровану релігійну книгу |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Написати ілюміновану релігійну книгу, прикрашену коштовним камінням та чорнилом. Якість матеріалів підвищує духовний ефект читання. Потрібна висока впевненість в ідеології. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ілюструє релігійну книгу. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | відчитує TargetA через ідеологію. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | відчитує TargetA через ідеологію. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | кладе ціль на землю для спалення. |
+| `EB_DebateRelax.reportString` | debating ideology. | сперечається про ідеологію. |
 | `EB_Pray.reportString` | contemplating. | споглядає. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} зазнав психічного зриву та стає іконоборцем.\n\n[PAWN_pronoun] спробує спалити релігійні книги. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} більше не іконоборець. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Психічний стан: Іконоборець |
+| `EB_ArrestedDebater.label` | defiant rant | зухвала тирада |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} вичерпує свою ідеологічну лють. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Психічний стан: Зухвала тирада |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | нестійкий одновірець |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | невірний одновірець |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | відступник серцем одновірець |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | написати релігійну книгу |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Написати релігійну книгу, що детально описує переконання вашої ідеології. Потрібна висока впевненість в ідеології (не менше 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | пише релігійну книгу. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | написати ілюстровану релігійну книгу |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Написати ілюміновану релігійну книгу, прикрашену коштовним камінням та чорнилом. Якість матеріалів підвищує духовний ефект читання. Потрібна висока впевненість в ідеології (не менше 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ілюструє релігійну книгу. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

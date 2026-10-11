@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] оказался убедительнее. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Никто не изменил своей позиции. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Спорит с {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Удерживается в споре с {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] пережил кризис веры. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Кризис веры [INITIATOR_nameDef] усугубил [INITIATOR_possessive] страдания. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Максимальное влияние настроений от принципов (ритуалы, почитание, табу и т. д.) на целевую уверенность. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Порог кризиса веры: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Когда уверенность персонажа падает ниже этого значения, у него может случиться кризис веры. Выше = чаще кризисы. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Порог написания религиозных книг: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | Минимальная уверенность, необходимая персонажу, чтобы написать религиозную книгу. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Темп обращения: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Насколько быстро персонажи самостоятельно отказываются от плохо подходящей веры относительно стандарта. Выше = спонтанные обращения более вероятны. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Потеря уверенности при попытке обращения: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} не является автором книги. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Книга не предназначена для идеолигии {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Не найдено доступной кафедры для работы. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Уверенность должна быть выше 90%, чтобы писать религиозные тексты. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Уверенность должна быть выше {0}, чтобы писать религиозные тексты. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | страницы (Ткань, Кожа или Дерево, без шерсти) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | обложка (Кожа или Металл) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | страницы (Ткань, Кожа или Дерево, без шерсти) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | обложка (Кожа или Металл) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | ценные материалы |
+| `EB_WriteIdeobook.label` | write religious book | написать религиозную книгу |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Написать религиозную книгу, подробно описывающую убеждения вашей идеолигии. Требует высокой уверенности в своей идеолигии. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | пишет религиозную книгу. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | написать иллюстрированную религиозную книгу |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Написать иллюминированную религиозную книгу, украшенную самоцветами и чернилами. Качество материалов усиливает духовный эффект от её чтения. Требует высокой уверенности в своей идеолигии. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | иллюстрирует религиозную книгу. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | отчитывает TargetA за идеологию. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | отчитывает TargetA за идеологию. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | кладёт TargetA на землю для сжигания. |
+| `EB_DebateRelax.reportString` | debating ideology. | спорит об идеологии. |
 | `EB_Pray.reportString` | contemplating. | медитирует. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} получил нервный срыв и стал иконоборцем.\n\n[PAWN_pronoun] попытается сжечь религиозные книги. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} больше не является иконоборцем. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Психическое состояние: иконоборец |
+| `EB_ArrestedDebater.label` | defiant rant | вызывающая тирада |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} исчерпывает свою идеологическую ярость. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Психическое состояние: вызывающая тирада |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | колеблющийся единоверец |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | безверный единоверец |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | вероотступнический единоверец |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | написать религиозную книгу |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Написать религиозную книгу, подробно описывающую убеждения вашей идеолигии. Требует высокой уверенности в своей идеолигии (не менее 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | пишет религиозную книгу. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | написать иллюстрированную религиозную книгу |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Написать иллюминированную религиозную книгу, украшенную самоцветами и чернилами. Качество материалов усиливает духовный эффект от её чтения. Требует высокой уверенности в своей идеолигии (не менее 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | иллюстрирует религиозную книгу. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

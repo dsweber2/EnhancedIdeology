@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN} nem a könyv szerzője.</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>A könyv nem {PAWN_possessive} ideológiájához tartozik.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>Nem található szabad, elérhető felolvasóállvány a munkához.</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>A vallásos szövegek írásához a meggyőződésnek 90% fölé kell emelkednie.</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>A vallásos szövegek írásához a meggyőződésnek {0} fölé kell emelkednie.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

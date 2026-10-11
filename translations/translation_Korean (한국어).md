@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef]이(가) 더 설득력 있음을 증명했습니다. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | 아무도 견해를 바꾸지 않았습니다. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | {0}와(과) 토론 중 |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | {0}에게 논쟁에 붙잡혀 있음 |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef]이(가) 신앙의 위기를 경험했습니다. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]의 신앙의 위기가 [INITIATOR_possessive] 고통을 가중시켰습니다. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | 규율 감정(행사, 숭배, 금기 등에서)이 목표 믿음을 높이거나 낮출 수 있는 최대 범위. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | 신앙의 위기 임계값: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | 폰의 믿음이 이 값 아래로 떨어지면 신앙의 위기가 발생할 수 있습니다. 높을수록 = 위기가 더 자주 발생합니다. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | 종교 서적 작성 임계값: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | 폰이 종교 서적을 작성하는 데 필요한 최소 믿음입니다. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | 교화 속도: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | 폰이 잘 맞지 않는 사상을 스스로 얼마나 빠르게 떠나는지, 기본값 대비. 높을수록 = 자발적 교화가 더 일어나기 쉽습니다. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | 교화 시도 믿음 손실: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}은(는) 이 책의 저자가 아닙니다. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | 이 책은 {PAWN_possessive} 사상을 위한 것이 아닙니다. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | 사용 가능한 강독대를 찾을 수 없습니다. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | 종교 서적을 작성하려면 믿음이 90% 이상이어야 합니다. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | 종교 서적을 작성하려면 믿음이 {0} 이상이어야 합니다. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | 페이지 (직물, 가죽 또는 나무, 양모 제외) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | 표지 (가죽 또는 금속) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | 페이지 (직물, 가죽 또는 나무, 양모 제외) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | 표지 (가죽 또는 금속) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | 귀중한 재료 |
+| `EB_WriteIdeobook.label` | write religious book | 종교 서적 작성 |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | 사상의 신념을 상세히 기술하는 종교 서적을 작성합니다. 자신의 사상에 대한 높은 믿음이 필요합니다. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | 종교 서적 작성 중. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | 삽화 종교 서적 작성 |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | 보석과 잉크로 장식된 채식 종교 서적을 작성합니다. 재료의 품질이 읽기의 헌신적 측면을 높입니다. 자신의 사상에 대한 높은 믿음이 필요합니다. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | 종교 서적 삽화 작업 중. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | TargetA에게 이념에 대해 열변을 토하는 중. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | TargetA에게 이념에 대해 열변을 토하는 중. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetA를 불태우기 위해 바닥에 놓는 중. |
+| `EB_DebateRelax.reportString` | debating ideology. | 이념 토론 중. |
 | `EB_Pray.reportString` | contemplating. | 명상 중. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0}이(가) 정신적 붕괴를 겪고 성상파괴 행동을 보이고 있습니다.\n\n[PAWN_pronoun]은(는) 종교 서적을 불태우려 할 것입니다. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0}은(는) 더 이상 성상파괴 행동을 하지 않습니다. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | 정신 상태: 성상파괴자 |
+| `EB_ArrestedDebater.label` | defiant rant | 반항적 열변 |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0}의 이념적 분노가 모두 사그라들었습니다. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | 정신 상태: 반항적 열변 |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | 흔들리는 동료 신도 |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | 믿음 없는 동료 신도 |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | 배교 심성의 동료 신도 |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | 종교 서적 작성 |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | 사상의 신념을 상세히 기술하는 종교 서적을 작성합니다. 자신의 사상에 대한 높은 믿음(최소 90%)이 필요합니다. |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | 종교 서적 작성 중. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | 삽화 종교 서적 작성 |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | 보석과 잉크로 장식된 채식 종교 서적을 작성합니다. 재료의 품질이 읽기의 헌신적 측면을 높입니다. 자신의 사상에 대한 높은 믿음(최소 90%)이 필요합니다. |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | 종교 서적 삽화 작업 중. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

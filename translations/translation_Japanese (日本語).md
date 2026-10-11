@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef]の方がより説得力があった。 |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | どちらも考えを変えなかった。 |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | {0}と議論中 |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | {0}に討論で引き留められている |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef]は信仰の危機を経験した。 |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef]の信仰の危機が[INITIATOR_possessive]苦悩をさらに深めた。 |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | 戒律のムード（儀式・崇拝・タブーなど）が目標信仰度を上下させる最大量。 |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | 信仰の危機の閾値: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | ポーンの信仰度がこれを下回ると、信仰の危機による精神崩壊が起きる可能性がある。高いほど危機が多くなる。 |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | 聖典執筆の閾値: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | ポーンが聖典を書くために必要な最低信仰度。 |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | 改宗ペース: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | ポーンが自発的に合わない信仰を捨てる速さ（デフォルト比）。高いほど自発的な改宗が起こりやすい。 |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | 改宗試みによる信仰度低下: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}はこの本の著者ではない。 |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | この本は{PAWN_possessive}の思想のものではない。 |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | 作業できる利用可能な演台が見つからない。 |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | 聖典を書くには信仰度が90%以上必要。 |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | 聖典を書くには信仰度が{0}以上必要。 |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | ページ（テキスタイル、革または木材、羊毛は不可） |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | 表紙（革または金属） |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | ページ（テキスタイル、革または木材、羊毛は不可） |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | 表紙（革または金属） |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | 貴重な素材 |
+| `EB_WriteIdeobook.label` | write religious book | 聖典を書く |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | 自身の思想の信条を詳述した聖典を書く。思想への高い信仰度が必要。 |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | 聖典を執筆中。 |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | 彩飾聖典を書く |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | 宝石とインクで飾られた彩飾聖典を書く。素材の品質が読書時の信仰的側面を高める。思想への高い信仰度が必要。 |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | 聖典を彩飾中。 |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | TargetAに思想について説教している。 |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | TargetAに思想について説教している。 |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetAを地面に置いて燃やしている。 |
+| `EB_DebateRelax.reportString` | debating ideology. | 思想について議論中。 |
 | `EB_Pray.reportString` | contemplating. | 瞑想中。 |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0}は精神崩壊を起こし、偶像破壊者と化している。\n\n[PAWN_pronoun]は聖典を燃やそうとするだろう。 |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0}はもはや偶像破壊者ではなくなった。 |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | 精神状態: 偶像破壊者 |
+| `EB_ArrestedDebater.label` | defiant rant | 反抗的な熱弁 |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0}は思想的な激情を出し尽くした。 |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | 精神状態: 反抗的な熱弁 |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | 揺らぐ同信者 |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | 信仰のない同信者 |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | 背教心を持つ同信者 |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | 聖典を書く |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | 自身の思想の信条を詳述した聖典を書く。思想への高い信仰度（90%以上）が必要。 |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | 聖典を執筆中。 |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | 彩飾聖典を書く |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | 宝石とインクで飾られた彩飾聖典を書く。素材の品質が読書時の信仰的側面を高める。思想への高い信仰度（90%以上）が必要。 |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | 聖典を彩飾中。 |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

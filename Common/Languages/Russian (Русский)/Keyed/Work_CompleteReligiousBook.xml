@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN} не является автором книги.</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>Книга не предназначена для идеолигии {PAWN_possessive}.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>Не найдено доступной кафедры для работы.</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>Уверенность должна быть выше 90%, чтобы писать религиозные тексты.</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Уверенность должна быть выше {0}, чтобы писать религиозные тексты.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

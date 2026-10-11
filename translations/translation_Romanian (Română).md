@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] s-a dovedit mai convingător. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Niciunul nu și-a schimbat opinia. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Dezbătând cu {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Reținut în dezbatere de {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] a trăit o criză de credință. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Criza de credință a lui [INITIATOR_nameDef] i-a agravat suferința [INITIATOR_possessive]. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Cât de mult pot stările de precepte (din ritualuri, venerație, tabuuri etc.) crește sau scădea certitudinea-țintă. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Prag criză de credință: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Când certitudinea unui personaj scade sub acest prag, poate suferi o criză de credință. Mai mare = mai multe crize. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Prag pentru scrierea cărților religioase: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | Certitudinea minimă de care are nevoie un personaj pentru a scrie o carte religioasă. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Ritm de conversie: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Cât de repede abandonează personajele de la sine o credință nepotrivită, față de implicit. Mai mare = conversii spontane mai probabile. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Pierdere certitudine la tentativă de conversie: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} nu este autorul cărții. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Cartea nu este pentru ideoligionul lui {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Nu s-a găsit niciun pupitru disponibil și accesibil pentru lucru. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Certitudinea trebuie să fie peste 90% pentru a scrie texte religioase. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Certitudinea trebuie să fie peste {0} pentru a scrie texte religioase. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pagini (Textile, Piele sau Lemn, fără lână) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | copertă (Piele sau Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pagini (Textile, Piele sau Lemn, fără lână) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | copertă (Piele sau Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | materiale prețioase |
+| `EB_WriteIdeobook.label` | write religious book | scrie carte religioasă |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Scrie o carte religioasă detaliind credințele ideoligionului tău. Necesită certitudine ridicată în ideoligionul propriu. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | scriind o carte religioasă. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | scrie carte religioasă ilustrată |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Scrie o carte religioasă iluminată, ornată cu pietre prețioase și cerneală. Calitatea materialelor sporește aspectele devoționale ale citirii ei. Necesită certitudine ridicată în ideoligionul propriu. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ilustrând cartea religioasă. |
 
 ## DefInjected/ThingDef
 
@@ -217,7 +236,9 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | hărțuind TargetA despre ideologie. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | hărțuind TargetA despre ideologie. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | plasând TargetA pe pământ pentru ardere. |
+| `EB_DebateRelax.reportString` | debating ideology. | dezbătând despre ideologie. |
 | `EB_Pray.reportString` | contemplating. | meditând. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} a suferit o prăbușire mentală și se comportă ca un iconoclast.\n\n[PAWN_pronoun] va încerca să ardă cărți religioase. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} nu mai este iconoclast. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Stare mentală: Iconoclast |
+| `EB_ArrestedDebater.label` | defiant rant | tiradă sfidătoare |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} și-a epuizat furia ideologică. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Stare mentală: Tiradă sfidătoare |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | coreligionar șovăielnic |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | coreligionar fără credință |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | coreligionar cu inimă apostat |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | scrie carte religioasă |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Scrie o carte religioasă detaliind credințele ideoligionului tău. Necesită certitudine ridicată în ideoligionul propriu (cel puțin 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | scriind o carte religioasă. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | scrie carte religioasă ilustrată |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Scrie o carte religioasă iluminată, ornată cu pietre prețioase și cerneală. Calitatea materialelor sporește aspectele devoționale ale citirii ei. Necesită certitudine ridicată în ideoligionul propriu (cel puțin 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ilustrând cartea religioasă. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

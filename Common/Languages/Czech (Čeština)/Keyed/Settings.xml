@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Maximální vliv, o který mohou nálady ze zásad (rituály, uctívání, tabu atd.) zvýšit nebo snížit cílovou jistotu.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Práh krize víry: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Pokud jistota pawna klesne pod tuto hodnotu, může dojít ke krizi víry. Vyšší = více krizí.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Práh pro psaní náboženských knih: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Minimální jistota, kterou pawn potřebuje k napsání náboženské knihy.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Tempo konverze: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Jak rychle pawni sami opouštějí nevyhovující víru, relativně k výchozí hodnotě. Vyšší = spontánní konverze jsou pravděpodobnější.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Ztráta jistoty při pokusu o konverzi: {0}</EnhancedIdeology.ConversionCertaintyKnock>

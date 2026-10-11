@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Öğreti ruh hallerinin (ritüeller, saygı, yasaklar vb.) hedef imanı ne kadar artırabileceği ya da düşürebileceğinin üst sınırı.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>İman krizi eşiği: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Bir karakterin imanı bunun altına düştüğünde iman krizi yaşayabilir. Yüksek değer = daha fazla kriz.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Dini kitap yazma eşiği: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Bir karakterin dini kitap yazabilmesi için gereken en düşük iman.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>İhtidâ hızı: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Karakterlerin uymayan bir inancı kendi kendine ne kadar hızlı terk ettiği, varsayılana göre. Yüksek değer = kendiliğinden ihtidâlar daha olası.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>İhtidâ girişiminde iman kaybı: {0}</EnhancedIdeology.ConversionCertaintyKnock>

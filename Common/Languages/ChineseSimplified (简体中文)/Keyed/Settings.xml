@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>戒律情绪（来自仪式、崇拜、禁忌等）能够提升或降低目标认可度的最大幅度。</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>信仰危机阈值：{0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>当棋子的认可度低于此值时，可能发生信仰危机崩溃。越高则危机越频繁。</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>撰写宗教书籍阈值：{0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>棋子撰写宗教书籍所需的最低认可度。</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>教化速度：{0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>棋子自发放弃不适合信仰的速度（相对于默认值）。越高则自发转化越容易发生。</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>教化尝试认可度损失：{0}</EnhancedIdeology.ConversionCertaintyKnock>

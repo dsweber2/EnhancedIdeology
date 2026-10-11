@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>Mức tối đa mà tâm trạng từ giới luật (từ nghi thức, tôn kính, điều cấm kỵ, v.v.) có thể tăng hoặc giảm độ chắc chắn mục tiêu.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Ngưỡng khủng hoảng đức tin: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Khi độ chắc chắn của nhân vật xuống dưới mức này, họ có thể bị khủng hoảng đức tin. Cao hơn = nhiều khủng hoảng hơn.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Ngưỡng viết sách tôn giáo: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>Độ chắc chắn tối thiểu mà nhân vật cần để viết sách tôn giáo.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Tốc độ cải đạo: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Tốc độ nhân vật tự bỏ tín ngưỡng không phù hợp, so với mặc định. Cao hơn = cải đạo tự phát có nhiều khả năng xảy ra hơn.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Mất độ chắc chắn khi cố cải đạo: {0}</EnhancedIdeology.ConversionCertaintyKnock>

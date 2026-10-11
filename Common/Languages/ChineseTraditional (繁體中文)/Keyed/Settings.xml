@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>戒律情緒（源自儀式、崇敬、禁忌等）能夠提升或降低目標感悟的最大幅度。</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>信仰危機閾值：{0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>當棋子感悟低於此值時，可能爆發信仰危機崩潰。數值越高，危機越頻繁。</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>撰寫宗教書籍閾值：{0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>棋子撰寫宗教書籍所需的最低感悟。</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>皈依速度：{0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>棋子自發放棄不合適信仰的速度，相對於預設值。數值越高，自發皈依越可能發生。</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>皈依嘗試感悟損失：{0}</EnhancedIdeology.ConversionCertaintyKnock>

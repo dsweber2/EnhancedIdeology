@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] meggyőzőbbnek bizonyult. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Egyikük sem változtatott véleményén. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Vitázik {0}-val |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | {0} vitában tartja |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] hiterősist élt át. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | [INITIATOR_nameDef] hiterősis súlyosbította [INITIATOR_possessive] nyomorát. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Legfeljebb ennyivel emelheti vagy csökkentheti az előírásokból eredő hangulat (szertartások, tisztelet, tabuk stb.) a célmeggyőződést. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Hiterősis-küszöb: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Ha egy karakter meggyőződése ez alá esik, hiterősis történhet. Magasabb = több krízis. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Vallásos könyv írásának küszöbe: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | A minimális meggyőződés, amely egy karakternek vallásos könyv írásához kell. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Áttérítési ütem: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Milyen gyorsan hagynak fel a karakterek önként egy nem illő hittel az alapértékhez képest. Magasabb = spontán áttérések valószínűbbek. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Áttérítési kísérlet meggyőződés-vesztesége: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} nem a könyv szerzője. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | A könyv nem {PAWN_possessive} ideológiájához tartozik. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Nem található szabad, elérhető felolvasóállvány a munkához. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | A vallásos szövegek írásához a meggyőződésnek 90% fölé kell emelkednie. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | A vallásos szövegek írásához a meggyőződésnek {0} fölé kell emelkednie. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | lapok (Textil, Bőr vagy Fa, gyapjú nélkül) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | borító (Bőr vagy Fém) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | lapok (Textil, Bőr vagy Fa, gyapjú nélkül) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | borító (Bőr vagy Fém) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | értékes anyagok |
+| `EB_WriteIdeobook.label` | write religious book | vallásos könyv írása |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Írj vallásos könyvet, amely részletezi ideológiád hittételeit. Magas meggyőződést igényel az ideológiában. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | vallásos könyvet ír. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | illusztrált vallásos könyv írása |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Írj illuminált vallásos könyvet, drágakövekkel és tintákkal díszítve. Az anyagok minősége növeli az olvasás áhítatos hatását. Magas meggyőződést igényel az ideológiában. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | vallásos könyvet illusztrál. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | kioktatja TargetA-t az ideológiáról. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | kioktatja TargetA-t az ideológiáról. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | TargetA-t a földre helyezi, hogy elégesse. |
+| `EB_DebateRelax.reportString` | debating ideology. | ideológiáról vitázik. |
 | `EB_Pray.reportString` | contemplating. | elmélkedik. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} mentálisan összeomlott és képrombolóként viselkedik.\n\n[PAWN_pronoun] megpróbálja elégetni a vallásos könyveket. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} már nem viselkedik képrombolóként. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Mentális állapot: Képromboló |
+| `EB_ArrestedDebater.label` | defiant rant | dacos kirohanás |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} kiadta magából az ideológiai dühét. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Mentális állapot: Dacos kirohanás |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | ingadozó hittestvér |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | hitetlen hittestvér |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | hitehagyott lelkű hittestvér |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | vallásos könyv írása |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Írj vallásos könyvet, amely részletezi ideológiád hittételeit. Magas meggyőződést igényel az ideológiában (legalább 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | vallásos könyvet ír. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | illusztrált vallásos könyv írása |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Írj illuminált vallásos könyvet, drágakövekkel és tintákkal díszítve. Az anyagok minősége növeli az olvasás áhítatos hatását. Magas meggyőződést igényel az ideológiában (legalább 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | vallásos könyvet illusztrál. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

@@ -17,6 +17,7 @@ public class Settings : ModSettings
     private const float DefaultPreceptOppositionScale = 1f;
     private const float DefaultConvictionDecayRate = 0.1f;
     private const float DefaultConversionOpinionMultiplier = 1f;
+    private const float DefaultBookWriteMinCertainty = 0.6f;
 
     private bool _debugInteractionWorkers;
     public bool DebugInteractionWorkers
@@ -89,6 +90,10 @@ public class Settings : ModSettings
     private float _conversionOpinionMultiplier = DefaultConversionOpinionMultiplier;
     public float ConversionOpinionMultiplier => _conversionOpinionMultiplier;
 
+    // Minimum certainty a pawn needs to work on a religious book bill.
+    private float _bookWriteMinCertainty = DefaultBookWriteMinCertainty;
+    public float BookWriteMinCertainty => _bookWriteMinCertainty;
+
     private Vector2 _scrollPosition;
     private float _contentHeight = 600f;
 
@@ -109,6 +114,7 @@ public class Settings : ModSettings
         Scribe_Values.Look(ref _preceptOppositionScale, "preceptOppositionScale", DefaultPreceptOppositionScale);
         Scribe_Values.Look(ref _convictionDecayRate, "convictionDecayRate", DefaultConvictionDecayRate);
         Scribe_Values.Look(ref _conversionOpinionMultiplier, "conversionOpinionMultiplier", DefaultConversionOpinionMultiplier);
+        Scribe_Values.Look(ref _bookWriteMinCertainty, "bookWriteMinCertainty", DefaultBookWriteMinCertainty);
     }
 
     public void DoSettingsWindowContents(Rect inRect)
@@ -129,6 +135,7 @@ public class Settings : ModSettings
         PercentSlider(listingStandard, "EnhancedIdeology.RelationalMaxRange", ref _relationalMaxRange, 0f, 0.5f, DefaultRelationalMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.PracticeMaxRange", ref _practiceMaxRange, 0f, 0.5f, DefaultPracticeMaxRange);
         PercentSlider(listingStandard, "EnhancedIdeology.CrisisThreshold", ref _crisisThreshold, 0f, 0.5f, DefaultCrisisThreshold);
+        PercentSlider(listingStandard, "EnhancedIdeology.BookWriteMinCertainty", ref _bookWriteMinCertainty, 0f, 2.5f, DefaultBookWriteMinCertainty);
         SubHeader(listingStandard, "EnhancedIdeology.SubSection.Conversion");
         MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionPace", ref _conversionPace, 0.25f, 4f, DefaultConversionPace);
         MultiplierSlider(listingStandard, "EnhancedIdeology.ConversionCertaintyKnock", ref _conversionCertaintyKnock, 0.5f, 1f, DefaultConversionCertaintyKnock);

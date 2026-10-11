@@ -7,9 +7,9 @@
   <EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>couverture (Cuir ou Métal)</EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary>
   <EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>matériaux précieux</EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary>
   <EB_WriteIdeobook.label>rédiger un livre religieux</EB_WriteIdeobook.label>
-  <EB_WriteIdeobook.description>Rédigez un livre religieux détaillant les croyances de votre idéologie. Requiert une certitude élevée en son idéoligion (au moins 90%).</EB_WriteIdeobook.description>
+  <EB_WriteIdeobook.description>Rédigez un livre religieux détaillant les croyances de votre idéologie. Requiert une certitude élevée en son idéoligion.</EB_WriteIdeobook.description>
   <EB_WriteIdeobook.jobString>rédige un livre religieux.</EB_WriteIdeobook.jobString>
   <EB_WriteIllustratedIdeobook.label>rédiger un livre religieux illustré</EB_WriteIllustratedIdeobook.label>
-  <EB_WriteIllustratedIdeobook.description>Rédigez un livre religieux enluminé orné de gemmes et d'encres. La qualité des matériaux accroît les aspects dévotionnels de sa lecture. Requiert une certitude élevée en son idéoligion (au moins 90%).</EB_WriteIllustratedIdeobook.description>
+  <EB_WriteIllustratedIdeobook.description>Rédigez un livre religieux enluminé orné de gemmes et d'encres. La qualité des matériaux accroît les aspects dévotionnels de sa lecture. Requiert une certitude élevée en son idéoligion.</EB_WriteIllustratedIdeobook.description>
   <EB_WriteIllustratedIdeobook.jobString>illustre un livre religieux.</EB_WriteIllustratedIdeobook.jobString>
 </LanguageData>

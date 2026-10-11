@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN}並非此書的作者。</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>此書並非為{PAWN_possessive}的理念所寫。</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>找不到可用且可進入的講台來進行工作。</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>撰寫宗教文本需要感悟高於90%。</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>撰寫宗教文本需要感悟高於{0}。</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

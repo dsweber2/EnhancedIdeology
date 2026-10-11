@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>El màxim que els estats d'ànim dels preceptes (de rituals, veneració, tabús, etc.) poden augmentar o disminuir la certesa objectiu.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Llindar de crisi de fe: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>Quan la certesa d'un peó cau per sota d'aquest valor, pot tenir una crisi de fe. Més alt = més crisis.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Llindar per escriure llibres religiosos: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>La certesa mínima que necessita un peó per escriure un llibre religiós.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>Ritme de conversió: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>Velocitat a la qual els peons abandonen espontàniament una fe poc adequada, en relació al valor predeterminat. Més alt = conversions espontànies més probables.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>Pèrdua de certesa per intent de conversió: {0}</EnhancedIdeology.ConversionCertaintyKnock>

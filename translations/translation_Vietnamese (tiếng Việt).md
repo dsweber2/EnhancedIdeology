@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] tỏ ra thuyết phục hơn. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Không ai thay đổi quan điểm. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Đang tranh luận với {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Bị {0} giữ lại tranh luận |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] đã trải qua một cuộc khủng hoảng đức tin. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Cuộc khủng hoảng đức tin của [INITIATOR_nameDef] làm trầm trọng thêm nỗi khốn khổ của [INITIATOR_possessive]. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Mức tối đa mà tâm trạng từ giới luật (từ nghi thức, tôn kính, điều cấm kỵ, v.v.) có thể tăng hoặc giảm độ chắc chắn mục tiêu. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Ngưỡng khủng hoảng đức tin: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Khi độ chắc chắn của nhân vật xuống dưới mức này, họ có thể bị khủng hoảng đức tin. Cao hơn = nhiều khủng hoảng hơn. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Ngưỡng viết sách tôn giáo: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | Độ chắc chắn tối thiểu mà nhân vật cần để viết sách tôn giáo. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Tốc độ cải đạo: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Tốc độ nhân vật tự bỏ tín ngưỡng không phù hợp, so với mặc định. Cao hơn = cải đạo tự phát có nhiều khả năng xảy ra hơn. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Mất độ chắc chắn khi cố cải đạo: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} không phải là tác giả của cuốn sách. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Cuốn sách không dành cho tín ngưỡng của {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Không tìm được bục giảng nào khả dụng và có thể tiếp cận. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Độ chắc chắn phải trên 90% để viết văn bản tôn giáo. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Độ chắc chắn phải trên {0} để viết văn bản tôn giáo. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | trang giấy (Vải, Da hoặc Gỗ, không có len) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | bìa sách (Da hoặc Kim loại) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | trang giấy (Vải, Da hoặc Gỗ, không có len) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | bìa sách (Da hoặc Kim loại) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | vật liệu quý hiếm |
+| `EB_WriteIdeobook.label` | write religious book | viết sách tôn giáo |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Viết một cuốn sách tôn giáo mô tả chi tiết niềm tin của tín ngưỡng bạn. Yêu cầu độ chắc chắn cao vào tín ngưỡng của mình. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | đang viết một cuốn sách tôn giáo. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | viết sách tôn giáo có minh họa |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Viết một cuốn sách tôn giáo được trang trí bằng đá quý và mực. Chất lượng vật liệu làm tăng tính sùng đạo khi đọc. Yêu cầu độ chắc chắn cao vào tín ngưỡng của mình. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | đang minh họa sách tôn giáo. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | đang lên lớp TargetA về hệ tư tưởng. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | đang lên lớp TargetA về hệ tư tưởng. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | đặt TargetA xuống đất để thiêu đốt. |
+| `EB_DebateRelax.reportString` | debating ideology. | đang tranh luận về hệ tư tưởng. |
 | `EB_Pray.reportString` | contemplating. | đang thiền định. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} bị rối loạn tâm lý và đang hành xử như kẻ phá tượng.\n\n[PAWN_pronoun] sẽ cố thiêu đốt sách tôn giáo. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} không còn hành xử như kẻ phá tượng nữa. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Trạng thái tâm lý: Kẻ phá tượng |
+| `EB_ArrestedDebater.label` | defiant rant | tràng đả kích thách thức |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} đã trút hết cơn phẫn nộ tư tưởng. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Trạng thái tâm lý: Tràng đả kích thách thức |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | đồng đạo đang dao động |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | đồng đạo thiếu đức tin |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | đồng đạo lòng bội đạo |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | viết sách tôn giáo |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Viết một cuốn sách tôn giáo mô tả chi tiết niềm tin của tín ngưỡng bạn. Yêu cầu độ chắc chắn cao vào tín ngưỡng của mình (ít nhất 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | đang viết một cuốn sách tôn giáo. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | viết sách tôn giáo có minh họa |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Viết một cuốn sách tôn giáo được trang trí bằng đá quý và mực. Chất lượng vật liệu làm tăng tính sùng đạo khi đọc. Yêu cầu độ chắc chắn cao vào tín ngưỡng của mình (ít nhất 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | đang minh họa sách tôn giáo. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

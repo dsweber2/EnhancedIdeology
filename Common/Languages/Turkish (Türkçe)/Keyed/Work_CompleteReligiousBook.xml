@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN}, kitabın yazarı değil.</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>Bu kitap {PAWN_possessive} ideolojisi için değil.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>Çalışmak için kullanılabilir, erişilebilir bir kürsü bulunamadı.</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>Dini metin yazmak için iman %90'ın üzerinde olmalıdır.</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>Dini metin yazmak için iman {0} değerinin üzerinde olmalıdır.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

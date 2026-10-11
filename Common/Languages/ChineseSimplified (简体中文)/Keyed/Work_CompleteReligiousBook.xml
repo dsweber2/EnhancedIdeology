@@ -6,5 +6,5 @@
   <EnhancedIdeology.PawnIsNotAuthor>{PAWN}不是该书的作者。</EnhancedIdeology.PawnIsNotAuthor>
   <EnhancedIdeology.BookIsNotForPawnIdeoligion>该书不属于{PAWN_possessive}的文化。</EnhancedIdeology.BookIsNotForPawnIdeoligion>
   <EnhancedIdeology.NoFreeValidLecternFound>未找到可用且可进入的讲台来进行工作。</EnhancedIdeology.NoFreeValidLecternFound>
-  <EnhancedIdeology.InsufficientCertaintyToWrite>撰写宗教文本要求认可度高于90%。</EnhancedIdeology.InsufficientCertaintyToWrite>
+  <EnhancedIdeology.InsufficientCertaintyToWrite>撰写宗教文本要求认可度高于{0}。</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

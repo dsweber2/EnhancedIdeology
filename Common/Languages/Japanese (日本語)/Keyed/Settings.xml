@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>戒律のムード（儀式・崇拝・タブーなど）が目標信仰度を上下させる最大量。</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>信仰の危機の閾値: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>ポーンの信仰度がこれを下回ると、信仰の危機による精神崩壊が起きる可能性がある。高いほど危機が多くなる。</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>聖典執筆の閾値: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>ポーンが聖典を書くために必要な最低信仰度。</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>改宗ペース: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>ポーンが自発的に合わない信仰を捨てる速さ（デフォルト比）。高いほど自発的な改宗が起こりやすい。</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>改宗試みによる信仰度低下: {0}</EnhancedIdeology.ConversionCertaintyKnock>

@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] ha resultat més persuasiu. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Cap dels dos ha canviat de parer. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Debatent amb {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Retingut en debat per {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] ha experimentat una crisi de fe. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | La crisi de fe de [INITIATOR_nameDef] ha agreujat la misèria de [INITIATOR_possessive]. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | El màxim que els estats d'ànim dels preceptes (de rituals, veneració, tabús, etc.) poden augmentar o disminuir la certesa objectiu. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Llindar de crisi de fe: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Quan la certesa d'un peó cau per sota d'aquest valor, pot tenir una crisi de fe. Més alt = més crisis. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Llindar per escriure llibres religiosos: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | La certesa mínima que necessita un peó per escriure un llibre religiós. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Ritme de conversió: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Velocitat a la qual els peons abandonen espontàniament una fe poc adequada, en relació al valor predeterminat. Més alt = conversions espontànies més probables. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Pèrdua de certesa per intent de conversió: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} no és l'autor del llibre. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | El llibre no és per a la ideoligió de {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | No s'ha trobat cap faristol disponible i accessible per treballar. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | La certesa ha de ser superior al 90% per escriure textos religiosos. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | La certesa ha de ser superior al {0} per escriure textos religiosos. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pàgines (Tèxtil, Cuir o Fusta, sense llana) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | coberta (Cuir o Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pàgines (Tèxtil, Cuir o Fusta, sense llana) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | coberta (Cuir o Metal) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | materials preciosos |
+| `EB_WriteIdeobook.label` | write religious book | escriure llibre religiós |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Escriu un llibre religiós que detalli les creences de la teva ideoligió. Requereix una alta certesa en la pròpia ideoligió. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | escrivint un llibre religiós. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | escriure llibre religiós il·lustrat |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Escriu un llibre religiós il·luminat adornat amb gemmes i tintes. La qualitat dels materials augmenta els aspectes devocionals de llegir-lo. Requereix una alta certesa en la pròpia ideoligió. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | il·lustrant un llibre religiós. |
 
 ## DefInjected/ThingDef
 
@@ -216,8 +235,10 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. |  |
+| `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | arengant TargetA sobre ideologia. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | arengant TargetA sobre ideologia. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | col·locant TargetA a terra per cremar. |
+| `EB_DebateRelax.reportString` | debating ideology. | debatent sobre ideologia. |
 | `EB_Pray.reportString` | contemplating. | contemplant. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} ha tingut una crisi mental i s'ha tornat iconoclasta.\n\n[PAWN_pronoun] intentarà cremar llibres religiosos. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} ja no és un iconoclasta. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Estat mental: Iconoclasta |
+| `EB_ArrestedDebater.label` | defiant rant | arenga desafiant |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} ha esgotat la seva fúria ideològica. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Estat mental: Arenga desafiant |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | correligionari vacil·lant |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | correligionari sense fe |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | correligionari d'esperit apòstata |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | escriure llibre religiós |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Escriu un llibre religiós que detalli les creences de la teva ideoligió. Requereix una alta certesa en la pròpia ideoligió (almenys el 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | escrivint un llibre religiós. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | escriure llibre religiós il·lustrat |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Escriu un llibre religiós il·luminat adornat amb gemmes i tintes. La qualitat dels materials augmenta els aspectes devocionals de llegir-lo. Requereix una alta certesa en la pròpia ideoligió (almenys el 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | il·lustrant un llibre religiós. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

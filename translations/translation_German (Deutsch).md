@@ -92,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Das Maximum, um das die Gebotsstimmungen (aus Ritualen, Verehrung, Tabus usw.) die Zielglaube erhöhen oder senken können. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Glaubenskrisenschwelle: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Wenn der Glaube eines Kolonisten darunter fällt, kann er einen Glaubenskrisen-Zusammenbruch erleiden. Höher = mehr Krisen. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Schwelle zum Schreiben religiöser Bücher: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | Der Mindestglaube, den ein Kolonist braucht, um ein religiöses Buch zu schreiben. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Bekehrungstempo: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Wie schnell Kolonisten von selbst einen schlecht passenden Glauben aufgeben, relativ zur Standardeinstellung. Höher = spontane Bekehrungen sind wahrscheinlicher. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Glaubensverlust bei Bekehrungsversuch: {0} |
@@ -154,7 +156,7 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} ist nicht der Autor des Buches. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Das Buch ist nicht für {PAWN_possessive} Ideologie. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Kein verfügbares, zugängliches Pult zum Arbeiten gefunden. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Der Glaube muss über 90% liegen, um religiöse Texte zu schreiben. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Der Glaube muss über {0} liegen, um religiöse Texte zu schreiben. |
 
 ## DefInjected/RecipeDef
 
@@ -166,10 +168,10 @@
 | `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | Einband (Leder oder Metall) |
 | `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | Wertvolle Materialien |
 | `EB_WriteIdeobook.label` | write religious book | religiöses Buch schreiben |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Ein religiöses Buch schreiben, das die Überzeugungen der eigenen Ideologie beschreibt. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%). |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Ein religiöses Buch schreiben, das die Überzeugungen der eigenen Ideologie beschreibt. Erfordert hohen Glauben an die eigene Ideoligion. |
 | `EB_WriteIdeobook.jobString` | writing a religious book. | schreibt ein religiöses Buch. |
 | `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | illuminiertes religiöses Buch schreiben |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Ein illuminiertes religiöses Buch schreiben, geschmückt mit Edelsteinen und Tinten. Die Qualität der Materialien steigert die andächtige Wirkung beim Lesen. Erfordert hohen Glauben an die eigene Ideoligion (mindestens 90%). |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Ein illuminiertes religiöses Buch schreiben, geschmückt mit Edelsteinen und Tinten. Die Qualität der Materialien steigert die andächtige Wirkung beim Lesen. Erfordert hohen Glauben an die eigene Ideoligion. |
 | `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | illustriert ein religiöses Buch. |
 
 ## DefInjected/ThingDef

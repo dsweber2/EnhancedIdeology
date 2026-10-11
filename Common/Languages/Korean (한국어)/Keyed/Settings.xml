@@ -16,6 +16,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>규율 감정(행사, 숭배, 금기 등에서)이 목표 믿음을 높이거나 낮출 수 있는 최대 범위.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>신앙의 위기 임계값: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>폰의 믿음이 이 값 아래로 떨어지면 신앙의 위기가 발생할 수 있습니다. 높을수록 = 위기가 더 자주 발생합니다.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>종교 서적 작성 임계값: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>폰이 종교 서적을 작성하는 데 필요한 최소 믿음입니다.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <EnhancedIdeology.ConversionPace>교화 속도: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>폰이 잘 맞지 않는 사상을 스스로 얼마나 빠르게 떠나는지, 기본값 대비. 높을수록 = 자발적 교화가 더 일어나기 쉽습니다.</EnhancedIdeology.ConversionPace.Tip>
   <EnhancedIdeology.ConversionCertaintyKnock>교화 시도 믿음 손실: {0}</EnhancedIdeology.ConversionCertaintyKnock>

@@ -17,6 +17,8 @@
   <EnhancedIdeology.PracticeMaxRange.Tip>The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty.</EnhancedIdeology.PracticeMaxRange.Tip>
   <EnhancedIdeology.CrisisThreshold>Crisis of faith threshold: {0}</EnhancedIdeology.CrisisThreshold>
   <EnhancedIdeology.CrisisThreshold.Tip>When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises.</EnhancedIdeology.CrisisThreshold.Tip>
+  <EnhancedIdeology.BookWriteMinCertainty>Religious book writing threshold: {0}</EnhancedIdeology.BookWriteMinCertainty>
+  <EnhancedIdeology.BookWriteMinCertainty.Tip>The minimum certainty a pawn needs to write a religious book.</EnhancedIdeology.BookWriteMinCertainty.Tip>
   <!-- Ideoligion — Conversion -->
   <EnhancedIdeology.ConversionPace>Conversion pace: {0}</EnhancedIdeology.ConversionPace>
   <EnhancedIdeology.ConversionPace.Tip>How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. </EnhancedIdeology.ConversionPace.Tip>

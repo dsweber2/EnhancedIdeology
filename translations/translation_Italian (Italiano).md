@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] si è dimostrato più persuasivo. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Nessuno dei due ha cambiato opinione. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Dibattendo con {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Trattenuto in un dibattito da {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] ha vissuto una crisi di fede. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | La crisi di fede di [INITIATOR_nameDef] ha aggravato la miseria di [INITIATOR_possessive]. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Il massimo con cui gli stati d'animo da precetto (da rituali, venerazione, tabù, ecc.) possono aumentare o diminuire la certezza obiettivo. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Soglia di crisi di fede: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Quando la certezza di un pedone scende sotto questo valore, potrebbe avere un crollo per crisi di fede. Più alto = più crisi. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Soglia per scrivere libri religiosi: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | La certezza minima di cui un pedone ha bisogno per scrivere un libro religioso. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Ritmo di conversione: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Quanto velocemente i pedoni abbandonano da soli una fede poco adatta, rispetto all'impostazione predefinita. Più alto = le conversioni spontanee sono più probabili. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Perdita di certezza per tentativo di conversione: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} non è l'autore del libro. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Il libro non è per l'ideoligione di {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Nessun leggio disponibile e accessibile trovato su cui lavorare. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | La certezza deve essere superiore al 90% per scrivere testi religiosi. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | La certezza deve essere superiore al {0} per scrivere testi religiosi. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pagine (Tessile, Cuoio o Legno, nessuna lana) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | copertina (Cuoio o Metallo) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | pagine (Tessile, Cuoio o Legno, nessuna lana) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | copertina (Cuoio o Metallo) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | materiali preziosi |
+| `EB_WriteIdeobook.label` | write religious book | scrivi libro religioso |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Scrivi un libro religioso che descriva le credenze della tua ideoligione. Richiede un'elevata certezza nella propria ideoligione. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | scrivendo un libro religioso. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | scrivi libro religioso illustrato |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Scrivi un libro religioso miniato adornato con gemme e inchiostri. La qualità dei materiali aumenta gli aspetti devozionali della lettura. Richiede un'elevata certezza nella propria ideoligione. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | illustrando il libro religioso. |
 
 ## DefInjected/ThingDef
 
@@ -217,7 +236,9 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | arringando TargetA riguardo all'ideologia. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | arringando TargetA riguardo all'ideologia. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | posizionando TargetA a terra per bruciarlo. |
+| `EB_DebateRelax.reportString` | debating ideology. | dibattendo di ideologia. |
 | `EB_Pray.reportString` | contemplating. | meditando. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} ha avuto un crollo mentale e sta diventando un iconoclasta.\n\n[PAWN_pronoun] cercherà di bruciare libri religiosi. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} non è più un iconoclasta. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Stato mentale: Iconoclasta |
+| `EB_ArrestedDebater.label` | defiant rant | invettiva ribelle |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} ha esaurito la propria furia ideologica. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Stato mentale: Invettiva ribelle |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | correligionario esitante |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | correligionario senza fede |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | correligionario dal cuore apostata |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | scrivi libro religioso |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Scrivi un libro religioso che descriva le credenze della tua ideoligione. Richiede un'elevata certezza nella propria ideoligione (almeno 90%). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | scrivendo un libro religioso. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | scrivi libro religioso illustrato |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Scrivi un libro religioso miniato adornato con gemme e inchiostri. La qualità dei materiali aumenta gli aspetti devozionali della lettura. Richiede un'elevata certezza nella propria ideoligione (almeno 90%). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | illustrando il libro religioso. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 

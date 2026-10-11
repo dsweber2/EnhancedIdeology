@@ -58,6 +58,7 @@
 | `EnhancedIdeology.DebateSent.WinnerPersuasive` | [WINNER_nameDef] proved more persuasive. | [WINNER_nameDef] se ukázal přesvědčivějším. |
 | `EnhancedIdeology.DebateSent.Draw` | Neither changed their view. | Nikdo svůj názor nezměnil. |
 | `EnhancedIdeology.JobReport_Debating` | Debating {0} | Debatuje s {0} |
+| `EnhancedIdeology.DraftDisabled_HeldInDebate` | Held in debate by {0} | Zadržen v debatě od {0} |
 | `EnhancedIdeology.CrisisLog.Wander` | [INITIATOR_nameDef] experienced a crisis of faith. | [INITIATOR_nameDef] prožil krizi víry. |
 | `EnhancedIdeology.CrisisLog.MoodBreak` | [INITIATOR_nameDef]'s crisis of faith compounded [INITIATOR_possessive] misery. | Krize víry [INITIATOR_nameDef] prohloubila [INITIATOR_possessive] trápení. |
 
@@ -91,6 +92,8 @@
 | `EnhancedIdeology.PracticeMaxRange.Tip` | The most that precept moods (from rituals, veneration, taboos, etc) can raise or lower target certainty. | Maximální vliv, o který mohou nálady ze zásad (rituály, uctívání, tabu atd.) zvýšit nebo snížit cílovou jistotu. |
 | `EnhancedIdeology.CrisisThreshold` | Crisis of faith threshold: {0} | Práh krize víry: {0} |
 | `EnhancedIdeology.CrisisThreshold.Tip` | When a pawn's certainty falls below this, they may have a crisis-of-faith breakdown. Higher = more crises. | Pokud jistota pawna klesne pod tuto hodnotu, může dojít ke krizi víry. Vyšší = více krizí. |
+| `EnhancedIdeology.BookWriteMinCertainty` | Religious book writing threshold: {0} | Práh pro psaní náboženských knih: {0} |
+| `EnhancedIdeology.BookWriteMinCertainty.Tip` | The minimum certainty a pawn needs to write a religious book. | Minimální jistota, kterou pawn potřebuje k napsání náboženské knihy. |
 | `EnhancedIdeology.ConversionPace` | Conversion pace: {0} | Tempo konverze: {0} |
 | `EnhancedIdeology.ConversionPace.Tip` | How quickly pawns abandon a poorly-fitting faith on their own, relative to default. Higher = spontaneous conversions are more likely. | Jak rychle pawni sami opouštějí nevyhovující víru, relativně k výchozí hodnotě. Vyšší = spontánní konverze jsou pravděpodobnější. |
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | Ztráta jistoty při pokusu o konverzi: {0} |
@@ -153,7 +156,23 @@
 | `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} není autorem knihy. |
 | `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Tato kniha není pro ideobožství {PAWN_possessive}. |
 | `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Nenalezen žádný dostupný a přístupný pultík pro práci. |
-| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above 90% to write religious texts. | Jistota musí být nad 90 %, aby bylo možné psát náboženské texty. |
+| `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Jistota musí být nad {0}, aby bylo možné psát náboženské texty. |
+
+## DefInjected/RecipeDef
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EB_WriteIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | stránky (Textil, Kůže nebo Dřevo, bez vlny) |
+| `EB_WriteIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | vazba (Kůže nebo Kov) |
+| `EB_WriteIllustratedIdeobook.ingredients.0.filter.customSummary` | pages (Textile, Leather, or wood, no wool) | stránky (Textil, Kůže nebo Dřevo, bez vlny) |
+| `EB_WriteIllustratedIdeobook.ingredients.1.filter.customSummary` | cover (Leather or Metal) | vazba (Kůže nebo Kov) |
+| `EB_WriteIllustratedIdeobook.ingredients.2.filter.customSummary` | precious materials | vzácné materiály |
+| `EB_WriteIdeobook.label` | write religious book | napsat náboženskou knihu |
+| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion. | Napište náboženskou knihu popisující přesvědčení vašeho ideobožství. Vyžaduje vysokou jistotu ve vlastní ideobožství. |
+| `EB_WriteIdeobook.jobString` | writing a religious book. | píše náboženskou knihu. |
+| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | napsat ilustrovanou náboženskou knihu |
+| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion. | Napište iluminovanou náboženskou knihu zdobenou drahokamy a inkousty. Kvalita materiálů zvyšuje pobožnostní aspekty jejího čtení. Vyžaduje vysokou jistotu ve vlastní ideobožství. |
+| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ilustruje náboženskou knihu. |
 
 ## DefInjected/ThingDef
 
@@ -217,7 +236,9 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EB_IconoclastDebate.reportString` | haranguing TargetA about ideology. | kárá TargetA ohledně ideologie. |
+| `EB_IconoclastAgitate.reportString` | haranguing TargetA about ideology. | kárá TargetA ohledně ideologie. |
 | `EB_PlaceAndBurnUntilDestroyed.reportString` | placing TargetA on the ground to burn. | pokládá TargetA na zem, aby ho spálil. |
+| `EB_DebateRelax.reportString` | debating ideology. | debatuje o ideologii. |
 | `EB_Pray.reportString` | contemplating. | kontempluje. |
 
 ## DefInjected/WorkGiverDef
@@ -241,6 +262,9 @@
 | `EB_Iconoclast.beginLetter` | {0} had a mental break and is being an iconoclast.\n\n[PAWN_pronoun] is going try and burn religious books. | {0} měl psychický kolaps a chová se jako ikonoklast.\n\n[PAWN_pronoun] se pokusí pálit náboženské knihy. |
 | `EB_Iconoclast.recoveryMessage` | {0} is no longer being an iconoclast. | {0} se již nechová jako ikonoklast. |
 | `EB_Iconoclast.baseInspectLine` | Mental state: Iconoclast | Duševní stav: Ikonoklast |
+| `EB_ArrestedDebater.label` | defiant rant | vzdorovitá tiráda |
+| `EB_ArrestedDebater.recoveryMessage` | {0} has exhausted their ideological fury. | {0} vyčerpal svou ideologickou zuřivost. |
+| `EB_ArrestedDebater.baseInspectLine` | Mental state: Defiant rant | Duševní stav: Vzdorovitá tiráda |
 
 ## DefInjected/IssueDef
 
@@ -308,17 +332,6 @@
 | `EB_LowCertaintyCoBeliever.stages.0.label` | wavering co-believer | váhavý spoluvěřící |
 | `EB_LowCertaintyCoBeliever.stages.1.label` | faithless co-believer | nevěrný spoluvěřící |
 | `EB_LowCertaintyCoBeliever.stages.2.label` | apostate-hearted co-believer | apostata v srdci spoluvěřící |
-
-## DefInjected/RecipeDef
-
-| key | source | translation |
-|-----|--------|-------------|
-| `EB_WriteIdeobook.label` | write religious book | napsat náboženskou knihu |
-| `EB_WriteIdeobook.description` | Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion (at least 90%). | Napište náboženskou knihu popisující přesvědčení vašeho ideobožství. Vyžaduje vysokou jistotu ve vlastní ideobožství (alespoň 90 %). |
-| `EB_WriteIdeobook.jobString` | writing a religious book. | píše náboženskou knihu. |
-| `EB_WriteIllustratedIdeobook.label` | write illustrated religious book | napsat ilustrovanou náboženskou knihu |
-| `EB_WriteIllustratedIdeobook.description` | Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion (at least 90%). | Napište iluminovanou náboženskou knihu zdobenou drahokamy a inkousty. Kvalita materiálů zvyšuje pobožnostní aspekty jejího čtení. Vyžaduje vysokou jistotu ve vlastní ideobožství (alespoň 90 %). |
-| `EB_WriteIllustratedIdeobook.jobString` | illustrating religious book. | ilustruje náboženskou knihu. |
 
 ## DefInjected/RitualAttachableOutcomeEffectDef
 
