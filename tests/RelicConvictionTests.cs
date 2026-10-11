@@ -89,7 +89,7 @@ public class RelicConvictionTests : SeededTest
         var before = issues.Select(issue => tracker.IssueStances().First(stance => stance.issue == issue)).ToList();
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(relic, -5f, ThoughtDefOf.RelicLost));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         foreach (var (issue, ii) in issues.Select((issue, ii) => (issue, ii)))
         {
@@ -108,7 +108,7 @@ public class RelicConvictionTests : SeededTest
         var before = issues.Select(issue => Strength(tracker, issue)).ToList();
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(relic, moodOffset, ThoughtDefOf.RelicsCollected));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         var expectedTotal = moodOffset
             * EnhancedIdeologyMod.Settings.ConversionStancePull
@@ -131,7 +131,7 @@ public class RelicConvictionTests : SeededTest
         var before = Strength(tracker, issues[0]);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(relic, -5f, ThoughtDefOf.RelicLost));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before, Strength(tracker, issues[0]));
         Assert.NotSame(ideo, pawn.Ideo);

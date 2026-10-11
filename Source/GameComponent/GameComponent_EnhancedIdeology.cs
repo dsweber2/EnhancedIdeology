@@ -56,51 +56,41 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
     // Set so that an offset of 8 at default
     internal const float MoodletConvictionScalar = 0.0007f;
 
-    public override void GameComponentTick()
-    {
-        base.GameComponentTick();
-        if (Find.TickManager.TicksGame % GenTicks.TickLongInterval != 0) return;
-        ApplyMoodletConvictionShifts();
-    }
-
     private readonly List<Thought> _tmpThoughts = [];
 
+    // One pawn's mood pulls, called from that pawn's long tick. The tick patch decides which pawns drift, and the
+    // hash offset spreads the pawns over the interval instead of doing all of them in one tick.
     // Memories and situational thoughts both count. Vanilla precept thoughts are plain Thought_Memory or
     // Thought_Situational, so the filter is the source precept, not the thought class.
-    internal void ApplyMoodletConvictionShifts()
+    internal void ApplyMoodletConvictionShifts(IdeoTrackerData tracker)
     {
-        foreach (var (pawn, tracker) in PawnTracker)
+        var pawn = tracker.Pawn;
+        _tmpThoughts.Clear();
+        pawn.needs?.mood?.thoughts?.GetAllMoodThoughts(_tmpThoughts);
+        foreach (var thought in _tmpThoughts)
         {
-            // Same scope as the certainty tick: world pawns do not drift, so their moods do not pull either.
-            if (pawn.Dead || pawn.Suspended || (pawn.MapHeld == null && !pawn.IsCaravanMember()))
-                continue;
-            _tmpThoughts.Clear();
-            pawn.needs?.mood?.thoughts?.GetAllMoodThoughts(_tmpThoughts);
-            foreach (var thought in _tmpThoughts)
+            if (RelicConviction.IsRelicThought(thought.def))
             {
-                if (RelicConviction.IsRelicThought(thought.def))
-                {
-                    RelicConviction.ApplyMoodletShift(pawn, tracker, thought);
-                    continue;
-                }
-                // Dissonance is the response to a foreign practice, not a practice of the pawn's own faith.
-                if (thought is Thought_CognitiveDissonance) continue;
-                if (thought.sourcePrecept is not { } precept || precept.ideo != pawn.Ideo) continue;
-                if (precept.def.issue is not { } issue) continue;
-                var delta = MoodletConvictionDelta(pawn, thought.MoodOffset());
-                if (Mathf.Abs(delta) < 0.00001f) continue;
-                // Only Moral issues have a ladder to move along. NA issues (rituals, buildings) have no stance.
-                switch (PreceptPolicy.CategoryOf(issue))
-                {
-                    case PreceptCategory.NA:
-                        break;
-                    case PreceptCategory.Moral:
-                        ConvictionMath.ApplyMoodPull(tracker, precept.ideo, issue, delta);
-                        break;
-                    default:
-                        tracker.ShiftIssueStance(issue, 0f, 0f, delta);
-                        break;
-                }
+                RelicConviction.ApplyMoodletShift(pawn, tracker, thought);
+                continue;
+            }
+            // Dissonance is the response to a foreign practice, not a practice of the pawn's own faith.
+            if (thought is Thought_CognitiveDissonance) continue;
+            if (thought.sourcePrecept is not { } precept || precept.ideo != pawn.Ideo) continue;
+            if (precept.def.issue is not { } issue) continue;
+            var delta = MoodletConvictionDelta(pawn, thought.MoodOffset());
+            if (Mathf.Abs(delta) < 0.00001f) continue;
+            // Only Moral issues have a ladder to move along. NA issues (rituals, buildings) have no stance.
+            switch (PreceptPolicy.CategoryOf(issue))
+            {
+                case PreceptCategory.NA:
+                    break;
+                case PreceptCategory.Moral:
+                    ConvictionMath.ApplyMoodPull(tracker, precept.ideo, issue, delta);
+                    break;
+                default:
+                    tracker.ShiftIssueStance(issue, 0f, 0f, delta);
+                    break;
             }
         }
     }

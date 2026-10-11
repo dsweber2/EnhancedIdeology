@@ -1,3 +1,5 @@
+using EnhancedIdeology.HarmonyPatches;
+
 namespace EnhancedIdeology.Tests;
 
 public class MoodletConvictionTests : SeededTest
@@ -33,7 +35,7 @@ public class MoodletConvictionTests : SeededTest
         var before = Strength(tracker, issue);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 8f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before + ExpectedDelta(8f), Strength(tracker, issue), precision: 5);
     }
@@ -45,7 +47,7 @@ public class MoodletConvictionTests : SeededTest
         var before = Strength(tracker, issue);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -8f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.True(Strength(tracker, issue) < before);
     }
@@ -57,7 +59,7 @@ public class MoodletConvictionTests : SeededTest
         var before = Strength(tracker, issue);
 
         pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = 8f });
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before + ExpectedDelta(8f), Strength(tracker, issue), precision: 5);
     }
@@ -69,7 +71,7 @@ public class MoodletConvictionTests : SeededTest
         var before = Strength(tracker, issue);
 
         pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = -8f });
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.True(Strength(tracker, issue) < before);
     }
@@ -81,7 +83,7 @@ public class MoodletConvictionTests : SeededTest
         var before = Strength(tracker, issue);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 8f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before + ExpectedDelta(8f, certaintyLossFactor: 2f), Strength(tracker, issue), precision: 5);
     }
@@ -96,7 +98,7 @@ public class MoodletConvictionTests : SeededTest
         var before = Strength(tracker, issue);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(foreignIdeo.precepts[0], 8f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before, Strength(tracker, issue));
     }
@@ -109,7 +111,7 @@ public class MoodletConvictionTests : SeededTest
 
         pawn.needs.mood.thoughts.memories.Memories.Add(
             new Thought_CognitiveDissonance { sourcePrecept = precept, StoredMoodOffset = -8f });
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before, Strength(tracker, issue));
     }
@@ -121,7 +123,7 @@ public class MoodletConvictionTests : SeededTest
         var before = Strength(tracker, issue);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 0f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before, Strength(tracker, issue));
     }
@@ -134,7 +136,7 @@ public class MoodletConvictionTests : SeededTest
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 5f));
         pawn.needs.mood.thoughts.SimulatedThoughts.Add(new SimThought { SourcePrecept = precept, MoodOffsetValue = 3f });
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before + ExpectedDelta(8f), Strength(tracker, issue), precision: 5);
     }
@@ -164,7 +166,7 @@ public class MoodletConvictionTests : SeededTest
         var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 0f);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 30f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.True(Rank(tracker, issue) > 0f);
     }
@@ -175,7 +177,7 @@ public class MoodletConvictionTests : SeededTest
         var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 1f);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -30f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.True(Rank(tracker, issue) < 1f);
         Assert.True(Strength(tracker, issue) > 10f);
@@ -187,7 +189,7 @@ public class MoodletConvictionTests : SeededTest
         var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 2.5f);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -30f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.True(Rank(tracker, issue) > 2.5f);
     }
@@ -201,7 +203,7 @@ public class MoodletConvictionTests : SeededTest
         var offsets = new List<float>();
         for (var ii = 0; ii < 20; ii++)
         {
-            world.Comp.ApplyMoodletConvictionShifts();
+            world.Comp.ApplyMoodletConvictionShifts(tracker);
             offsets.Add(Rank(tracker, issue) - 2f);
         }
 
@@ -215,7 +217,7 @@ public class MoodletConvictionTests : SeededTest
         var (world, pawn, tracker, issue, precept) = HeterodoxSetup(pawnRank: 2f);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, -30f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.NotEqual(2f, Rank(tracker, issue));
         Assert.True(Strength(tracker, issue) < 10f);
@@ -232,20 +234,39 @@ public class MoodletConvictionTests : SeededTest
         var ideo = new IdeoBuilder().WithName("TestIdeo").AddPrecept(naRungs[0]).Build();
         world.AddIdeo(ideo);
         var pawn = new PawnBuilder().WithIdeo(ideo).Build(world);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(ideo.precepts[0], 8f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
-        Assert.DoesNotContain(world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn).IssueStances(), stance => stance.issue == naIssue);
+        Assert.DoesNotContain(tracker.IssueStances(), stance => stance.issue == naIssue);
     }
 
     [Fact]
     public void PreceptlessThought_OnPawnWithoutIdeo_IsSkipped()
     {
-        var (world, pawn, _, _, _) = Setup();
+        var (world, pawn, tracker, _, _) = Setup();
         pawn.ideo.ideo = null;
 
         pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(null, 8f));
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
+    }
+
+    [Fact]
+    public void LongTick_AppliesMoodPullOnce()
+    {
+        var (_, pawn, tracker, issue, precept) = Setup();
+        pawn.needs.mood.thoughts.memories.Memories.Add(new SimMemory(precept, 8f));
+        var longTick = GenTicks.TickLongInterval - (pawn.HashOffset() % GenTicks.TickLongInterval);
+
+        // The first long tick also drains the day's conviction decay, so compare across the second one.
+        Find.TickManager.TicksGame = longTick;
+        IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+        var before = Strength(tracker, issue);
+
+        Find.TickManager.TicksGame = longTick + GenTicks.TickLongInterval;
+        IdeoTracker_TickInterval.Postfix(pawn.ideo, 1);
+
+        Assert.Equal(before + ExpectedDelta(8f), Strength(tracker, issue), precision: 5);
     }
 }

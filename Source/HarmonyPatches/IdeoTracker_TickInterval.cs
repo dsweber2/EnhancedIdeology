@@ -26,8 +26,9 @@ internal static class IdeoTracker_TickInterval
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var data = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
 
-        // Refresh slow inputs before recaching so the structural and relational bands use fresh data.
+        // Refresh slow inputs and apply mood pulls before recaching so the bands use fresh data and moved stances.
         data.RefreshSlowInputs();
+        comp.ApplyMoodletConvictionShifts(data);
         data.ApplyConvictionDecayIfNewDay();
         data.CertaintyChangeRecache(comp);
         data.AdvanceExtendedCertainty(CheckIntervalDays);

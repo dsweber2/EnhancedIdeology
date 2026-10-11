@@ -47,7 +47,7 @@ public class ClassicModeTests : SeededTest
         tracker.Pawn.needs.mood.thoughts.memories.Memories.Add(
             new SimMemory(precept, 8f));
 
-        world.Comp.ApplyMoodletConvictionShifts();
+        world.Comp.ApplyMoodletConvictionShifts(tracker);
 
         Assert.Equal(before, tracker.IssueStances().First(s => s.issue == issue));
     }
