@@ -83,20 +83,31 @@ internal sealed class JoyGiver_Contemplation : JoyGiver_InPrivateRoom
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         if (comp == null) return 0f;
         var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-        var moralIssues = pawn.Ideo.precepts
-            .Where(pp => pp.def.issue != null && PreceptPolicy.CategoryOf(pp.def.issue) == PreceptCategory.Moral)
-            .Select(pp => pp.def.issue)
-            .Distinct()
-            .ToList();
+        moralIssues.Clear();
+        foreach (var precept in pawn.Ideo.precepts)
+        {
+            var issue = precept.def.issue;
+            if (issue != null && PreceptPolicy.CategoryOf(issue) == PreceptCategory.Moral)
+                moralIssues.Add(issue);
+        }
         if (moralIssues.Count == 0) return 0f;
-        var stances = moralIssues
-            .Select(issue => tracker.IssueStances().FirstOrDefault(ss => ss.issue == issue))
-            .Where(ss => ss.issue != null)
-            .ToList();
-        return stances.Count > 0
-            ? stances.Average(ss => 1f - ss.strength / ConvictionScale.AbsoluteMaxConvictionStrength)
-            : 0f;
+        var total = 0f;
+        var count = 0;
+        foreach (var (issue, _, strength) in tracker.IssueStances())
+        {
+            if (!moralIssues.Contains(issue)) continue;
+            total += 1f - strength / ConvictionScale.AbsoluteMaxConvictionStrength;
+            count++;
+        }
+        return count > 0 ? total / count : 0f;
     }
+
+    private static readonly HashSet<IssueDef> moralIssues = [];
+
+    private static List<ThingDef>? siteDefs;
+
+    private static List<ThingDef> SiteDefs => siteDefs ??=
+        DefDatabase<ThingDef>.AllDefs.Where(def => def.HasComp<Comp_ContemplationSite>()).ToList();
 
     // Finds an altar in the room for the pawn to face.
     // Prefers the pawn's own ideo; falls back to any altar (guests, cross-ideo visitors).
@@ -120,14 +131,12 @@ internal sealed class JoyGiver_Contemplation : JoyGiver_InPrivateRoom
         if (pawn.Ideo == null || pawn.Map == null)
             return sites;
 
-        foreach (var room in pawn.Map.regionGrid.AllRooms.ToList())
+        foreach (var def in SiteDefs)
         {
-            if (room.PsychologicallyOutdoors) continue;
-            foreach (var thing in room.ContainedAndAdjacentThings.ToList())
+            foreach (var thing in pawn.Map.listerThings.ThingsOfDef(def))
             {
-                var comp = thing.TryGetComp<Comp_ContemplationSite>();
-                if (comp == null) continue;
-                var site = comp.TryGetSite(pawn);
+                if (thing.GetRoom()?.PsychologicallyOutdoors != false) continue;
+                var site = thing.TryGetComp<Comp_ContemplationSite>().TryGetSite(pawn);
                 if (site.HasValue) sites.Add(site.Value);
             }
         }
@@ -146,9 +155,9 @@ internal sealed class JoyGiver_Contemplation : JoyGiver_InPrivateRoom
         if (ownedRoom != null && !ownedRoom.PsychologicallyOutdoors && ownedRoom.Role != RoomRoleDefOf.WorshipRoom)
         {
             var cell = ownedRoom.Cells
-                .Where(c => c.Standable(pawn.Map) && !c.IsForbidden(pawn)
-                    && pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.None))
-                .RandomElementWithFallback(IntVec3.Invalid);
+                .InRandomOrder()
+                .FirstOrFallback(c => c.Standable(pawn.Map) && !c.IsForbidden(pawn)
+                    && pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.None), IntVec3.Invalid);
             if (cell.IsValid)
             {
                 var gain = 0.25f * ImpressivenessScore(ownedRoom) * AvgStrengthFactor(pawn) * JobDriver_Pray.ContemplationArc;
@@ -233,18 +242,19 @@ internal sealed class JoyGiver_Contemplation : JoyGiver_InPrivateRoom
         return sites[^1];
     }
 
-    // Non-altar ideo buildings (statues, monoliths): scanned across all rooms.
+    // Non-altar ideo buildings (statues, monoliths): looked up by the defs of the ideo's building precepts.
     internal static (Thing building, LocalTargetInfo cell)? FindStatueContemplationSite(Pawn pawn)
     {
-        foreach (var room in pawn.Map.regionGrid.AllRooms.ToList())
+        foreach (var precept in pawn.Ideo.PreceptsListForReading)
         {
-            if (room.PsychologicallyOutdoors)
+            if (precept is not Precept_Building { ThingDef: { isAltar: false } def })
                 continue;
-            foreach (var thing in room.ContainedAndAdjacentThings.ToList())
+            foreach (var thing in pawn.Map.listerThings.ThingsOfDef(def))
             {
-                if (thing.def.isAltar || thing is not ThingWithComps twc)
+                if (thing is not ThingWithComps twc || twc.compStyleable?.Ideo != pawn.Ideo)
                     continue;
-                if (twc.compStyleable?.Ideo != pawn.Ideo)
+                var room = thing.GetRoom();
+                if (room == null || room.PsychologicallyOutdoors)
                     continue;
                 if (twc.compStyleable.SourcePrecept is Precept_Building pb && pb.presenceDemand != null)
                 {
