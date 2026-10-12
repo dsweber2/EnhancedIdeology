@@ -109,7 +109,6 @@ public class ContemplationTests : SeededTest
     [InlineData(50f, 0f)]
     public void StrengthFactor_ScalesLinearlyToMax(float strength, float expected)
     {
-        var actual = 1f - (strength / ConvictionScale.AbsoluteMaxConvictionStrength);
-        Assert.Equal(expected, actual, precision: 4);
+        Assert.Equal(expected, ConvictionScale.StrengthFactor(strength), precision: 4);
     }
 }

@@ -12,4 +12,4 @@ Mental states and job givers for crisis-of-faith, iconoclast, and arrested-debat
 - `JobGiver_IconoclastFireGuard.cs` / `JobDriver_IconoclastDebate.cs` — fire guard: pins interlopers near the burn target, then debates every pinned pawn
 - `JobDriver_PlaceAndBurnUntilDestroyed.cs` — places an incendiary on target and waits for destruction; also contains `Toil_EnhancedIdeology` helper toil
 - `MentalState_ArrestedDebater.cs` — tick-based state: debates the nearest reachable pawn every 200 ticks; entered from `MentalState_Iconoclast` when the pawn becomes `IsPrisonerOfColony`
-- `MentalStateWorker_ArrestedDebater.cs` — gates `StateCanOccur`/`CanInitiateNow` to `IsPrisonerOfColony`; no natural break path
+- `MentalStateWorker_ArrestedDebater.cs` — gates `StateCanOccur` to `IsPrisonerOfColony`; no natural break path

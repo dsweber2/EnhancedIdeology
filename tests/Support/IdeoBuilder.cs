@@ -124,12 +124,6 @@ internal sealed class MemeBuilder
         return this;
     }
 
-    public MemeBuilder WithExclusionTag(string tag)
-    {
-        _meme.exclusionTags.Add(tag);
-        return this;
-    }
-
     public MemeBuilder WithAgreeableTrait(TraitDef trait, int? degree = null)
     {
         _meme.agreeableTraits.Add(new TraitRequirement { def = trait, degree = degree });

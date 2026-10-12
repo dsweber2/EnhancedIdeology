@@ -96,7 +96,7 @@ internal sealed class JoyGiver_Contemplation : JoyGiver_InPrivateRoom
         foreach (var (issue, _, strength) in tracker.IssueStances())
         {
             if (!moralIssues.Contains(issue)) continue;
-            total += 1f - strength / ConvictionScale.AbsoluteMaxConvictionStrength;
+            total += ConvictionScale.StrengthFactor(strength);
             count++;
         }
         return count > 0 ? total / count : 0f;

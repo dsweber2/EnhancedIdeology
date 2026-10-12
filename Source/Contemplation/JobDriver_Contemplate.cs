@@ -11,9 +11,6 @@ internal sealed class JobDriver_Pray : JobDriver
     private const int ReinforcementIntervalTicks = GenDate.TicksPerHour;
     private const int SymbolMoteIntervalTicks = 90;
     internal const float ContemplationArc = 0.5f;
-    // Exposed for tests: the diminishing-returns factor as conviction approaches its absolute ceiling.
-    internal static float StrengthFactor(float strength) =>
-        1f - (strength / ConvictionScale.AbsoluteMaxConvictionStrength);
 
     private LocalTargetInfo Pew => job.GetTarget(PewInd);
     private LocalTargetInfo Altar => job.GetTarget(AltarInd);
@@ -159,7 +156,7 @@ internal sealed class JobDriver_Pray : JobDriver
         if (stance.issue == null)
             return;
 
-        var strengthFactor = 1f - (stance.strength / ConvictionScale.AbsoluteMaxConvictionStrength);
+        var strengthFactor = ConvictionScale.StrengthFactor(stance.strength);
         var room = pawn.Position.GetRoom(pawn.Map);
         var impressivenessFactor = JoyGiver_Contemplation.ImpressivenessScore(room);
         if (IsLecternContemplation)

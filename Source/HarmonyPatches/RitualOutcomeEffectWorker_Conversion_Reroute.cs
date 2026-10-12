@@ -57,7 +57,7 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
             .SelectMany(c => c.labels)
             .ToList();
 
-        // Replacement: ldarg.3 (jobRitual), [ldloc outcome — reuse startIdx instruction], ldarg.2 (totalPresence), call handler.
+        // Replacement: ldarg.3 (jobRitual), [ldloc outcome — reuse startIdx instruction], call handler.
         var outcomeLoad = codes[startIdx].Clone();
         var callInstruction = new CodeInstruction(OpCodes.Call, HandlerMethod);
         callInstruction.labels.AddRange(orphanedLabels);
@@ -67,7 +67,6 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
         {
             new CodeInstruction(OpCodes.Ldarg_3),  // LordJob_Ritual jobRitual
             outcomeLoad,                            // RitualOutcomePossibility outcome
-            new CodeInstruction(OpCodes.Ldarg_2),  // Dictionary<Pawn, int> totalPresence
             callInstruction,
         });
 
@@ -78,8 +77,7 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
     // Positive outcome: pulls the convertee 4x toward the moralist's ideo orthodoxy on every Moral issue,
     // then fires a conversion attempt with the moralist's ideo as the priority candidate.
     // Negative outcome: standard 1x erosion on the convertee (moves away from orthodoxy, strength → 0).
-    private static void ApplyConversionRitual(
-        LordJob_Ritual jobRitual, RitualOutcomePossibility outcome, Dictionary<Pawn, int> totalPresence)
+    private static void ApplyConversionRitual(LordJob_Ritual jobRitual, RitualOutcomePossibility outcome)
     {
         if (outcome.positivityIndex == 0)
         {

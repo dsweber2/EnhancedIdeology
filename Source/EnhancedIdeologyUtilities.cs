@@ -37,15 +37,4 @@ internal static class EnhancedIdeologyUtilities
         if (maxRank <= dontCareRank) return 0f;
         return Mathf.Clamp01((rank - dontCareRank) / (maxRank - dontCareRank));
     }
-
-    internal static void ShowCertaintyChangeMote(Pawn recipient, float before, float after)
-    {
-        if (!recipient.Spawned)
-        {
-            return;
-        }
-
-        string text = "Certainty".Translate() + "\n" + before.ToStringPercent() + " -> " + after.ToStringPercent();
-        MoteMaker.ThrowText(recipient.DrawPos, recipient.Map, text, 8f);
-    }
 }

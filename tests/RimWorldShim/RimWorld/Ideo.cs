@@ -18,7 +18,6 @@ public class PreceptsWithNoneChance
 
 public class MemeDef : Def
 {
-    public List<string> exclusionTags = [];
     public List<TraitRequirement> agreeableTraits = [];
     public List<TraitRequirement> disagreeableTraits = [];
     public string? category;

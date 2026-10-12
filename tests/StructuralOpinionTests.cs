@@ -151,31 +151,6 @@ public class StructuralOpinionTests : SeededTest
             Mathf.Min(ConvictionScale.BaseConvictionMax * 5f, 100f));
     }
 
-    [Fact]
-    public void BeliefDifferences_SharedMeme_ReturnsNegativeOne()
-    {
-        var meme = new MemeDef { defName = "SharedMeme" };
-        var ideoA = new IdeoBuilder().WithName("A").AddMeme(meme).Build();
-        var ideoB = new IdeoBuilder().WithName("B").AddMeme(meme).Build();
-
-        var diff = GameComponent_EnhancedIdeology.BeliefDifferences(ideoA, ideoB);
-
-        Assert.Equal(-1, diff);
-    }
-
-    [Fact]
-    public void BeliefDifferences_ConflictingExclusionTags_ReturnsPositiveOne()
-    {
-        var memeA = new MemeBuilder().WithName("MemeA").WithExclusionTag("tag1").Build();
-        var memeB = new MemeBuilder().WithName("MemeB").WithExclusionTag("tag1").Build();
-        var ideoA = new IdeoBuilder().WithName("A").AddMeme(memeA).Build();
-        var ideoB = new IdeoBuilder().WithName("B").AddMeme(memeB).Build();
-
-        var diff = GameComponent_EnhancedIdeology.BeliefDifferences(ideoA, ideoB);
-
-        Assert.Equal(1, diff);
-    }
-
     // Builds a pawn whose own ideo optionally carries pawnMeme and returns their structural opinion of a
     // foreign ideo that holds the pawn's own preferred stance. The shared stance lifts the base structural
     // value clear of the 0 floor, so the meme term's sign (Supremacist -20, Guilty +10) is observable

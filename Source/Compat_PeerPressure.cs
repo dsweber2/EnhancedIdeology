@@ -13,8 +13,6 @@ internal static class Compat_PeerPressure
 
     private static Func<int, float>? _certaintyReductionOpinion;
 
-    internal static bool Active => _certaintyReductionOpinion != null;
-
     // Test-only injection point — lets unit tests exercise the math without a real PP assembly.
     internal static void SetForTest(Func<int, float>? fn) => _certaintyReductionOpinion = fn;
 

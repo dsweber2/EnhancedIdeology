@@ -29,11 +29,6 @@ public readonly struct HistoryEvent
     public HistoryEvent(RimWorld.HistoryEventDef? def, params NamedArgument[] args) { }
 }
 
-public static class MoteMaker
-{
-    public static void ThrowText(Vector3 pos, Map? map, string text, float duration = 3f) { }
-}
-
 public static class Extensions
 {
     public static bool NullOrEmpty<T>(this IEnumerable<T>? source)

@@ -128,28 +128,6 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
             _ = IdeoTracker.RemovePawnFromIdeoPawnTracker(ideo, pawn);
     }
 
-    internal static int BeliefDifferences(Ideo ideo1, Ideo ideo2)
-    {
-        var value = 0;
-
-        foreach (var meme1 in ideo1.memes)
-        {
-            foreach (var meme2 in ideo2.memes)
-            {
-                if (meme1 == meme2)
-                {
-                    value -= 1;
-                }
-                else if (meme1.exclusionTags.Intersect(meme2.exclusionTags).Any())
-                {
-                    value += 1;
-                }
-            }
-        }
-
-        return value;
-    }
-
     public void BaseOpinionRecache(Ideo ideo)
     {
         foreach (var ideoTracker in PawnTracker.Select(kvp => kvp.Value).ToList())

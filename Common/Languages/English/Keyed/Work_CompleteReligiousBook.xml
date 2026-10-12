@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
-    <EnhancedIdeology.IdeologyMissingRole>Ideoligion does not have the required '{ROLE}' role.</EnhancedIdeology.IdeologyMissingRole>
-    <EnhancedIdeology.PawnMissingRequiredRole>{PAWN} does not have the required '{ROLE}' role.</EnhancedIdeology.PawnMissingRequiredRole>
-    <EnhancedIdeology.PawnIsNotAuthor>{PAWN} is not the author of the book.</EnhancedIdeology.PawnIsNotAuthor>
-    <EnhancedIdeology.BookIsNotForPawnIdeoligion>The book is not for {PAWN_possessive} ideology.</EnhancedIdeology.BookIsNotForPawnIdeoligion>
-    <EnhancedIdeology.NoFreeValidLecternFound>No available, accessible lectern found to do work on.</EnhancedIdeology.NoFreeValidLecternFound>
     <EnhancedIdeology.InsufficientCertaintyToWrite>Certainty must be above {0} to write religious texts.</EnhancedIdeology.InsufficientCertaintyToWrite>
 </LanguageData>

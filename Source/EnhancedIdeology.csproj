@@ -54,11 +54,9 @@
 		<Publicize Include="Assembly-CSharp:RimWorld.IdeoDescriptionUtility" />
 		<Publicize Include="Assembly-CSharp:RimWorld.IdeoFoundation_Deity+SymbolSource" />
 		<Publicize Include="Assembly-CSharp:RimWorld.Pawn_IdeoTracker.Certainty" />
-		<Publicize Include="Assembly-CSharp:RimWorld.Pawn_IdeoTracker.ApplyCertaintyChangeFactor" />
 		<Publicize Include="Assembly-CSharp:RimWorld.IdeoFoundation_Deity.deities" />
 		<Publicize Include="Assembly-CSharp:RimWorld.CompReadable.doers" />
 		<Publicize Include="Assembly-CSharp:RimWorld.Ideo.precepts" />
-		<Publicize Include="Assembly-CSharp:RimWorld.SocialCardUtility.BarFullTexHor" />
 		<Publicize Include="Assembly-CSharp:RimWorld.Pawn_IdeoTracker.ideo" />
 		<Publicize Include="Assembly-CSharp:RimWorld.Pawn_IdeoTracker.pawn" />
 		<Publicize Include="Assembly-CSharp:RimWorld.TraitSet.pawn" />

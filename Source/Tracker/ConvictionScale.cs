@@ -20,4 +20,8 @@ internal static class ConvictionScale
     // seed: the pawn holds it against their social circle.
     internal const float TraitStanceStrengthMin = 5f;
     internal const float TraitStanceStrengthMax = 15f;
+
+    // Diminishing returns of a reinforcing pull as strength approaches the absolute ceiling.
+    internal static float StrengthFactor(float strength) =>
+        1f - (strength / AbsoluteMaxConvictionStrength);
 }

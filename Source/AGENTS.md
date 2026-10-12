@@ -16,7 +16,7 @@
 ## Subdirectories
 - `Tracker/` — per-pawn belief state: `IdeoTrackerData` orchestrator + `IssueStanceTracker`, `CertaintyTracker`, `OpinionCache`, `ConvictionScale`
 - `Precepts/` — precept classification, ladder resolution, structural opinion computation, conversion draw
-- `GameComponent/` — game-level pawn↔ideo tracker registry; entry point for patches needing `GetTracker(pawn)`
+- `GameComponent/` — game-level pawn↔ideo tracker registry; entry point for patches needing `PawnTracker.EnsurePawnHasIdeoTracker(pawn)`
 - `Interactions/` — debate, conversion, and reassure interaction workers; play-log entries
 - `HarmonyPatches/` — Harmony patches on vanilla entry points; grouped by system (tick, certainty, conversion, UI, misc)
 - `Books/` — religious book type (`BookIdeo`), reading outcomes, burning mechanics
