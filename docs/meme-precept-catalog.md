@@ -28,7 +28,7 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | FemaleSupremacy           | female supremacy  | meme      | ApparelDesire, **MarriageName**, **Nudity_Male**, **SpouseCount_Female**                                                                                                                                                                                       | DislikesMen                        |                | Women are the superior gender and should rule.                                         |
 | FleshPurity               | flesh purity      | meme      | Alcohol, **BodyModification**, DrugPossession, **DrugUse**, **GrowthVat**, IdeoRole, **OrganUse**                                                                                                                                                              | BodyPurist, Nudist                 | Transhumanist  | The human body should not be debased.                                                  |
 | Guilty                    | guilty            | meme      | Charity, Compassion, NikolaisIdeology_Neutors, **Pain**, **Slavery**                                                                                                                                                                                           |                                    |                | Our people carry guilt from ages past.                                                 |
-| HighLife                  | high life         | meme      | ApparelDesire, **DrugUse**, IdeoRole                                                                                                                                                                                                                           |                                    |                | Exotic states of mind are central to a good life.                                      |
+| HighLife                  | high life         | meme      | ApparelDesire, **DrugUse**, IdeoRole                                                                                                                                                                                                                           | DrugDesire (1), DrugDesire (2)     |                | Exotic states of mind are central to a good life.                                      |
 | HumanPrimacy              | human primacy     | meme      | **Bonding**, IdeoRole                                                                                                                                                                                                                                          |                                    |                | Humans are the moral center of the universe.                                           |
 | Individualist             | individualist     | meme      | **ChildLabor**, **DrugUse**, **Execution**, **IdeoDiversity**, **Lovin**, **Nudity_Female**, **Nudity_Male**, **Slavery**                                                                                                                                      |                                    |                | Each person is a free individual with the right to their own ideas and decisions.      |
 | Loyalist                  | loyalist          | meme      | **Apostasy**, **LanguageLearning**, WeaponProficiency                                                                                                                                                                                                          |                                    |                | We stand for our own before others.                                                    |
@@ -43,6 +43,15 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | Transhumanist             | transhumanist     | meme      | **AgeReversal**, ApparelDesire, **Biosculpting**, **BodyModification**, **GrowthVat**, IdeoRole, NeuralSupercharge, **NutrientPasteEating**, Ritual, SleepAccelerator                                                                                          | Transhumanist                      | BodyPurist     | Human progress means merging with technology.                                          |
 | TreeConnection            | tree connection   | meme      | **GauranlenConnection**, IdeoRole, Ritual, **RoughLiving**, Temperature, **Trees**                                                                                                                                                                             |                                    |                | Trees are the essence of life, and we must be near them.                               |
 | Tunneler                  | tunneler          | meme      | **FungusEating**, IdeoRole, **Indoors**, **InsectMeat**, MiningYield                                                                                                                                                                                           | Undergrounder                      |                | Humans ought to live underground, and enjoy the succulent fruit of the depths.         |
+| Structure_Animist         | animist           | structure |                                                                                                                                                                                                                                                                |                                    |                | Spirits live in everything around us.                                                  |
+| Structure_Archist         | archist           | structure |                                                                                                                                                                                                                                                                |                                    |                | Archotechs are the true gods.                                                          |
+| Structure_Ideological     | ideological       | structure |                                                                                                                                                                                                                                                                |                                    |                | There are no gods.                                                                     |
+| Structure_OriginBuddhist  | Buddhist origin   | structure | ApparelDesire                                                                                                                                                                                                                                                  |                                    |                | This ideoligion is a descendant of ancient Buddhism.                                   |
+| Structure_OriginChristian | Christian origin  | structure | ApparelDesire                                                                                                                                                                                                                                                  |                                    |                | This is a variant of the abstract theist structure.                                    |
+| Structure_OriginHindu     | Hindu origin      | structure | ApparelDesire                                                                                                                                                                                                                                                  |                                    |                | This is a variant of the embodied theist structure.                                    |
+| Structure_OriginIslamic   | Islamic origin    | structure | ApparelDesire                                                                                                                                                                                                                                                  |                                    |                | This is a variant of the abstract theist structure.                                    |
+| Structure_TheistAbstract  | abstract theist   | structure |                                                                                                                                                                                                                                                                |                                    |                | The god(s) do not have physical form, but are everywhere at once.                      |
+| Structure_TheistEmbodied  | embodied theist   | structure |                                                                                                                                                                                                                                                                |                                    |                | The god(s) walk the planets like us, yet they are powerful and immortal as we are not. |
 
 ### Biotech (DLC) (`ludeon.rimworld.biotech`)
 
@@ -87,46 +96,26 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | AM_VampireHunting             | vampire hunting           | meme      | **AM_DeathrestCaskets**, AM_HuntFocus, AM_SanguophageCamps, **Bloodfeeders**                                                                        |                                    |                | We refuse to tolerate the predations of the sanguophages.                                                                                    |
 | AM_WaterPrimacy               | water primacy             | meme      | AM_Baths, AM_Hydroagriculture, **AM_Rain**, AM_Water, Ritual                                                                                        |                                    | Pyromaniac     | Water is the essence of life, the purifier of souls, and the force that shapes the world.                                                    |
 | AM_Youth                      | youth                     | meme      | **VME_Elders**                                                                                                                                      |                                    |                | The future of the world belongs to the youth, and it is from the youth and not from the old that the fire of life will warm and enlighten t… |
+| AM_Structure_Alienism         | alienism                  | structure |                                                                                                                                                     |                                    |                | "True" alien life might not have been encountered by humanity, but we have warped life so much that the distinction is moot.                 |
+| AM_Structure_Atheist          | atheism                   | structure | **AM_Religion**                                                                                                                                     |                                    |                | There are no gods, no supernatural beings guiding our path or watching over us.                                                              |
+| AM_Structure_Corsair          | corsair                   | structure |                                                                                                                                                     |                                    |                | The misguided romanticization of ages long past has been a constant through all human history.                                               |
+| AM_Structure_Cubicism         | cubicism                  | structure |                                                                                                                                                     |                                    |                | Driven by an insatiable thirst for knowledge and spiritual enlightenment, the Cubicists dedicate their lives to unraveling the mysteries of… |
+| AM_Structure_FleshCult        | flesh cult                | structure |                                                                                                                                                     |                                    |                | We worship the pulsating flesh and the twisted abominations it births.                                                                       |
+| AM_Structure_Horaxian         | void-touched              | structure |                                                                                                                                                     |                                    |                | Space to you is a sterile grid, governed by logic.                                                                                           |
+| AM_Structure_Jainism          | jain origin               | structure |                                                                                                                                                     |                                    |                | This ideoligion is a descendant of ancient Jainism.                                                                                          |
+| AM_Structure_Jewish           | jewish origin             | structure |                                                                                                                                                     |                                    |                | This ideoligion is a descendant of ancient Judaism.                                                                                          |
+| AM_Structure_Kemetism         | Kemetic origin            | structure | IdeoRole, Ritual                                                                                                                                    |                                    |                | This ideoligion is a descendant of Egyptian Neopaganism, also known as Kemetism.                                                             |
+| AM_Structure_Mesoamerican     | mesoamerican origin       | structure |                                                                                                                                                     |                                    |                | This ideoligion is a descendant of the ancient religions of Mesoamerica.                                                                     |
+| AM_Structure_Neolithic        | neolithic                 | structure | AM_Megaliths                                                                                                                                        |                                    |                | The vast gulfs of space and time between the stars leave individual worlds vulnerable to regression.                                         |
+| AM_Structure_Scavenger        | scavenger                 | structure | Ritual                                                                                                                                              |                                    |                | The refuse and discarded ancient technology of past civilizations can be easily recycled and repurposed.                                     |
+| AM_Structure_Sikhism          | Sikh origin               | structure |                                                                                                                                                     |                                    |                | This ideoligion is a descendant of ancient Sikhism.                                                                                          |
+| AM_Structure_SteampunkRevival | steampunk revival         | structure |                                                                                                                                                     |                                    |                | With the advent of zero-emissions steam engines powered by flameless ceramic heat cells in the 22nd century, steam powered technology exper… |
 
-### Conservationist and Polluter - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyenv`)
+### Menagerist - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyspecwork`)
 
-| Meme                | Label           | Kind | Linked issues                                                                       | Agreeable | Disagreeable | Description                                                                                                                                  |
-|---------------------+-----------------+------+-------------------------------------------------------------------------------------+-----------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------|
-| MI_Environmentalist | conservationist | meme | IdeoRole, **MI_Pollution**, MI_PowerGeneration, **MI_ToxicWasteDumping**, **Trees** |           |              | A planet's biosphere is incredibly precious, both for its practical importance in maintaining human quality of life and for the inherent be… |
-| MI_Industrialist    | polluter        | meme | MechanoidLabor, **MI_Pollution**, **MI_ToxicWasteDumping**                          |           |              | With the right adaptations, we can not only survive in polluted environments, but thrive.                                                    |
-
-### Questing Meme (`sirmashedpotato.questingmeme`)
-
-| Meme                    | Label   | Kind | Linked issues                                            | Agreeable | Disagreeable | Description                                                            |
-|-------------------------+---------+------+----------------------------------------------------------+-----------+--------------+------------------------------------------------------------------------|
-| QuesterMeme_QuesterMeme | quester | meme | **QuesterMeme_QuestComplete**, **QuesterMeme_QuestFail** |           |              | Whether near or far, there are many wonders to discover in this world. |
-
-### Stoneborn - Dwarven Style Pack (`det.dwarvenstyle`)
-
-| Meme                 | Label   | Kind      | Linked issues | Agreeable | Disagreeable | Description                                                                     |
-|----------------------+---------+-----------+---------------+-----------+--------------+---------------------------------------------------------------------------------|
-| DV_Structure_Dwarven | dwarven | structure |               |           |              | Birthed in spite and forged through challenge, we hammer through to our future. |
-
-### Waymakers (Roads, Rails & Infrastructure Meme) (`mx.waymakers`)
-
-| Meme         | Label     | Kind | Linked issues                       | Agreeable | Disagreeable | Description                                           |
-|--------------+-----------+------+-------------------------------------+-----------+--------------+-------------------------------------------------------|
-| WM_Waymakers | waymakers | meme | IdeoRole, Ritual, WM_Infrastructure |           |              | The prosperity of civilization depends on connection. |
-
-### Biomes! Caverns (`biomesteam.biomescaverns`)
-
-| Meme              | Label          | Kind | Linked issues                 | Agreeable     | Disagreeable | Description                                                                    |
-|-------------------+----------------+------+-------------------------------+---------------+--------------+--------------------------------------------------------------------------------|
-| BMT_CavernDweller | cavern dweller | meme | **FungusEating**, **Indoors** | Undergrounder |              | Our distant ancestors lived in caves and we will only continue this tradition. |
-
-### Vanilla Vehicles Expanded (`oskarpotocki.vanillavehiclesexpanded`)
-
-| Meme           | Label      | Kind | Linked issues                                                                                                                              | Agreeable | Disagreeable | Description                                                                                        |
-|----------------+------------+------+--------------------------------------------------------------------------------------------------------------------------------------------+-----------+--------------+----------------------------------------------------------------------------------------------------|
-| VVE_Nauticals  | nauticals  | meme | Temperature, **VVE_Driving**, **VVE_Flying**, **VVE_Sailing**                                                                              |           |              | Embracing the vastness of the waters offers a deep connection to life's mysteries.                 |
-| VVE_Roadragers | roadragers | meme | VVE_Acceleration, **VVE_Driving**, **VVE_Flying**, VVE_FuelEfficiency, VVE_ImpactDamage, VVE_MaxSpeed, **VVE_Sailing**, VVE_VehicleRepairs |           |              | For us, the road is sacred, and vehicular dominance is both a belief and a testament to our power. |
-| VVE_Skyseekers | skyseekers | meme | **Indoors**, **Research**, **VVE_Flying**, VVE_FuelEfficiency                                                                              |           |              | Elevation, both physical and spiritual, is achieved by soaring through the skies.                  |
-| VVE_Travelers  | travelers  | meme | **RoughLiving**, **VVE_Driving**, **VVE_Flying**, **VVE_Sailing**                                                                          |           |              | The world is vast and meant to be explored in all its facets.                                      |
+| Meme          | Label      | Kind | Linked issues                                     | Agreeable | Disagreeable | Description                             |
+|---------------+------------+------+---------------------------------------------------+-----------+--------------+-----------------------------------------|
+| MI_Menagerist | menagerist | meme | AnimalConnection, MI_AnimalVariety, MI_Zookeeping |           |              | Caring for animals is deeply rewarding. |
 
 ### Vanilla Ideology Expanded - Memes and Structures (`vanillaexpanded.vmemese`)
 
@@ -183,6 +172,12 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | VME_Structure_Serketist           | serketism            | structure | **InsectMeat**, **VME_InsectJelly**                                                                                             |            |              | The true face of gods is found in the bite of a spider, the sting of the scorpion.                                                           |
 | VME_Structure_Shintaoism          | shintaoist origin    | structure |                                                                                                                                 |            |              | This ideoligion is a descendant of ancient Shinto and Taoism.                                                                                |
 
+### Waymakers (Roads, Rails & Infrastructure Meme) (`mx.waymakers`)
+
+| Meme         | Label     | Kind | Linked issues                       | Agreeable                                     | Disagreeable         | Description                                           |
+|--------------+-----------+------+-------------------------------------+-----------------------------------------------+----------------------+-------------------------------------------------------|
+| WM_Waymakers | waymakers | meme | IdeoRole, Ritual, WM_Infrastructure | Industriousness (2), SpeedOffset (2), Ascetic | Industriousness (-1) | The prosperity of civilization depends on connection. |
+
 ### Ideology: More Precepts (`llunak.moreprecepts`, inactive)
 
 | Meme     | Label    | Kind | Linked issues                                                              | Agreeable | Disagreeable                 | Description                                       |
@@ -197,6 +192,12 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | GR_CarefulGeneticists | careful geneticists | meme | **AutonomousWeapons**, GR_Failures, GR_HumanoidHybrids, GR_WorktableSpeeds         |           |              | Humanity has been practicing genetic engineering for centuries, and the correct way to use it as a tool is by carefully following a strict… |
 | GR_MadScientists      | mad scientists      | meme | **AutonomousWeapons**, GR_Failures, GR_HumanoidHybrids, GR_WorktableSpeeds, Ritual |           |              | There must be no limits to genetic engineering.                                                                                             |
 
+### Questing Meme (`sirmashedpotato.questingmeme`, inactive)
+
+| Meme                    | Label   | Kind | Linked issues                                            | Agreeable | Disagreeable | Description                                                            |
+|-------------------------+---------+------+----------------------------------------------------------+-----------+--------------+------------------------------------------------------------------------|
+| QuesterMeme_QuesterMeme | quester | meme | **QuesterMeme_QuestComplete**, **QuesterMeme_QuestFail** |           |              | Whether near or far, there are many wonders to discover in this world. |
+
 ### Political Compass - Mort's Ideologies (`mortstrudel.mortideology`, inactive)
 
 | Meme                    | Label                 | Kind | Linked issues                                                    | Agreeable | Disagreeable | Description                                                                                                                               |
@@ -206,6 +207,13 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | MI_WealthEquality       | wealth equality       | meme | Charity, MI_Homelessness, **miHousingDistribution**, **Slavery** |           |              | We must abolish all economic classes in order to achieve true equality.                                                                   |
 | MI_WealthStratification | wealth stratification | meme | IdeoRole, **MI_Leader**, **miHousingDistribution**, **Slavery**  |           |              | History is guided by the efforts of a few great people, whose enormous value to society must be reflected in their privileges and wealth. |
 
+### Conservationist and Polluter - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyenv`, inactive)
+
+| Meme                | Label           | Kind | Linked issues                                                                       | Agreeable | Disagreeable | Description                                                                                                                                  |
+|---------------------+-----------------+------+-------------------------------------------------------------------------------------+-----------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------|
+| MI_Environmentalist | conservationist | meme | IdeoRole, **MI_Pollution**, MI_PowerGeneration, **MI_ToxicWasteDumping**, **Trees** |           |              | A planet's biosphere is incredibly precious, both for its practical importance in maintaining human quality of life and for the inherent be… |
+| MI_Industrialist    | polluter        | meme | MechanoidLabor, **MI_Pollution**, **MI_ToxicWasteDumping**                          |           |              | With the right adaptations, we can not only survive in polluted environments, but thrive.                                                    |
+
 ### Empiricism and Faith - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyscifai`, inactive)
 
 | Meme          | Label      | Kind | Linked issues                                                                            | Agreeable | Disagreeable | Description                                                          |
@@ -213,11 +221,26 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | MI_Empiricist | empiricist | meme | MI_ConversionPower, MI_Laboratory, MI_MeditationFocusGain, MI_PruningSpeed, **Research** |           |              | Knowledge of the world is best gained through the scientific method. |
 | MI_Faith      | faith      | meme | MI_Certainty, MI_ConversionPower, MI_MeditationFocusGain, MI_PruningSpeed, **Research**  |           |              | The strength of our convictions comes from a sacred spirtuality.     |
 
-### Menagerist - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyspecwork`, inactive)
+### Biomes! Caverns (`biomesteam.biomescaverns`, inactive)
 
-| Meme          | Label      | Kind | Linked issues                                     | Agreeable | Disagreeable | Description                             |
-|---------------+------------+------+---------------------------------------------------+-----------+--------------+-----------------------------------------|
-| MI_Menagerist | menagerist | meme | AnimalConnection, MI_AnimalVariety, MI_Zookeeping |           |              | Caring for animals is deeply rewarding. |
+| Meme              | Label          | Kind | Linked issues                 | Agreeable     | Disagreeable | Description                                                                    |
+|-------------------+----------------+------+-------------------------------+---------------+--------------+--------------------------------------------------------------------------------|
+| BMT_CavernDweller | cavern dweller | meme | **FungusEating**, **Indoors** | Undergrounder |              | Our distant ancestors lived in caves and we will only continue this tradition. |
+
+### Vanilla Vehicles Expanded (`oskarpotocki.vanillavehiclesexpanded`, inactive)
+
+| Meme           | Label      | Kind | Linked issues                                                                                                                              | Agreeable | Disagreeable | Description                                                                                        |
+|----------------+------------+------+--------------------------------------------------------------------------------------------------------------------------------------------+-----------+--------------+----------------------------------------------------------------------------------------------------|
+| VVE_Nauticals  | nauticals  | meme | Temperature, **VVE_Driving**, **VVE_Flying**, **VVE_Sailing**                                                                              |           |              | Embracing the vastness of the waters offers a deep connection to life's mysteries.                 |
+| VVE_Roadragers | roadragers | meme | VVE_Acceleration, **VVE_Driving**, **VVE_Flying**, VVE_FuelEfficiency, VVE_ImpactDamage, VVE_MaxSpeed, **VVE_Sailing**, VVE_VehicleRepairs |           |              | For us, the road is sacred, and vehicular dominance is both a belief and a testament to our power. |
+| VVE_Skyseekers | skyseekers | meme | **Indoors**, **Research**, **VVE_Flying**, VVE_FuelEfficiency                                                                              |           |              | Elevation, both physical and spiritual, is achieved by soaring through the skies.                  |
+| VVE_Travelers  | travelers  | meme | **RoughLiving**, **VVE_Driving**, **VVE_Flying**, **VVE_Sailing**                                                                          |           |              | The world is vast and meant to be explored in all its facets.                                      |
+
+### Stoneborn - Dwarven Style Pack (`det.dwarvenstyle`, inactive)
+
+| Meme                 | Label   | Kind      | Linked issues | Agreeable | Disagreeable | Description                                                                     |
+|----------------------+---------+-----------+---------------+-----------+--------------+---------------------------------------------------------------------------------|
+| DV_Structure_Dwarven | dwarven | structure |               |           |              | Birthed in spite and forged through challenge, we hammer through to our future. |
 
 ### Nephilim Xenotype Reborn (`sov.nephilim`, inactive)
 
@@ -231,6 +254,12 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 |-----------------------------+------------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+------------------+--------------------------------------------------------------------------------------------|
 | NikolaisIdeology_Aphroditic | aphroditic | meme | **AM_FertilityIssue**, **AM_LovinFrequency**, IdeoRole, **Lovin**, NikolaisIdeology_Aphrodors, **NikolaisIdeology_Beauty**, NikolaisIdeology_GenderedApparel, NikolaisIdeology_Intimacy, Ritual, **VME_Recreation**                       | HVT_Aestheticist | Ascetic          | Love and beauty are the essence of life, and those who embody that essence must be adored. |
 | NikolaisIdeology_Chastity   | chastity   | meme | **AM_FertilityIssue**, **AM_LovinFrequency**, **DrugUse**, IdeoRole, **Lovin**, **NikolaisIdeology_Beauty**, NikolaisIdeology_Intimacy, NikolaisIdeology_Neutors, Ritual, **SpouseCount_Female**, **SpouseCount_Male**, **VME_DumbLabor** | Ascetic, Asexual | HVT_Aestheticist | To live virtuously, one must have a pure mind and body alike.                              |
+
+### Hotels and Recreation (`robtrg.hotelsandrecreation`, inactive)
+
+| Meme                 | Label          | Kind | Linked issues  | Agreeable | Disagreeable | Description                                                                          |
+|----------------------+----------------+------+----------------+-----------+--------------+--------------------------------------------------------------------------------------|
+| ROBTRG_PleasureHouse | pleasure house | meme | ROBTRG_SexWork |           |              | Pleasure is a gift to be shared, and those who share it with strangers do holy work. |
 
 ### Ocean Floor (`we1tall.depths`, inactive)
 
@@ -335,12 +364,6 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | Nomadic      | nomadic       | PositiveOnly (default) | desired                         |                  |
 | SpaceHabitat | space habitat | PositiveOnly (default) | preferred                       | Shipborn         |
 
-### [LTS]Tenants (`limetreesnake.tenants`)
-
-| Issue   | Label   | Category               | Rungs                     | Linked memes |
-|---------+---------+------------------------+---------------------------+--------------|
-| Tenancy | tenancy | PositiveOnly (default) | Tenant Hosting Encouraged |              |
-
 ### Alpha Memes (`sarg.alphamemes`)
 
 | Issue                 | Label                | Category               | Rungs                                           | Linked memes                                                         |
@@ -399,19 +422,11 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | AM_TeaYield           | tea yield            | PositiveOnly (default) | increased                                       | AM_TeaPrimacy                                                        |
 | AM_Water              | water                | PositiveOnly (default) | desired                                         | AM_WaterPrimacy                                                      |
 
-### Conservationist and Polluter - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyenv`)
+### Big and Small - Genes & More (`redmattis.bigsmall.core`)
 
-| Issue                | Label               | Category     | Rungs                                    | Linked memes                          |
-|----------------------+---------------------+--------------+------------------------------------------+---------------------------------------|
-| MI_Pollution         | pollution           | Moral        | despised, preferred                      | MI_Environmentalist, MI_Industrialist |
-| MI_PowerGeneration   | power generation    | PositiveOnly | clean power only, no toxifier generators | MI_Environmentalist                   |
-| MI_ToxicWasteDumping | toxic waste dumping | Moral        | abhorrent, respected                     | MI_Environmentalist, MI_Industrialist |
-
-### Cybranian - Rim Languages (`dimonsever000.factionlanguages`)
-
-| Issue            | Label             | Category | Rungs                                           | Linked memes                                                  |
-|------------------+-------------------+----------+-------------------------------------------------+---------------------------------------------------------------|
-| LanguageLearning | Language learning | Moral    | Hatred, Condemned, Neutral, Encouraged, Exalted | HAR_Xenophilia, HAR_Xenophobia, Loyalist, Raider, Supremacist |
+| Issue                       | Label            | Category | Rungs                                    | Linked memes |
+|-----------------------------+------------------+----------+------------------------------------------+--------------|
+| BS_AlienAppearanceTolerance | alien appearance | Moral    | extreme tolerance, high tolerance, weird |              |
 
 ### Enhanced Ideology (`dsweber2.enhancedideology`)
 
@@ -419,52 +434,12 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 |------------------+---------------+----------+---------------------------------------------------------+--------------|
 | EB_Contemplation | contemplation | Moral    | required, respected, acceptable, disapproved, forbidden |              |
 
-### Questing Meme (`sirmashedpotato.questingmeme`)
+### Menagerist - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyspecwork`)
 
-| Issue                     | Label             | Category | Rungs                                            | Linked memes            |
-|---------------------------+-------------------+----------+--------------------------------------------------+-------------------------|
-| QuesterMeme_QuestComplete | completing quests | Moral    | daring, honourable, respected                    | QuesterMeme_QuesterMeme |
-| QuesterMeme_QuestFail     | failing quests    | Moral    | disapproved, dishonourable, disliked, don't care | QuesterMeme_QuesterMeme |
-
-### Vanilla Races Expanded - Android (`vanillaracesexpanded.android`)
-
-| Issue             | Label    | Category     | Rungs                             | Linked memes |
-|-------------------+----------+--------------+-----------------------------------+--------------|
-| VRE_AndroidsIssue | androids | PositiveOnly | despised, equal, respected, tools |              |
-
-### Romance On The Rim (`telardo.romanceontherim`)
-
-| Issue                                  | Label             | Category     | Rungs                                              | Linked memes |
-|----------------------------------------+-------------------+--------------+----------------------------------------------------+--------------|
-| RomanceOnTheRim_Issue_Breakup          | Breakup           | Moral        | encouraged, discouraged, forbidden, arranged       |              |
-| RomanceOnTheRim_Issue_Cheat            | Cheat             | Moral        | encouraged, discouraged, forbidden                 |              |
-| RomanceOnTheRim_Issue_MarriageProposal | Marriage Proposal | PositiveOnly | late marriage, flash marriage, forbidden, arranged |              |
-| RomanceOnTheRim_Issue_RomanceAttempt   | Romance Attempt   | Moral        | encouraged, discouraged, forbidden, arranged       |              |
-
-### Waymakers (Roads, Rails & Infrastructure Meme) (`mx.waymakers`)
-
-| Issue             | Label          | Category               | Rungs    | Linked memes |
-|-------------------+----------------+------------------------+----------+--------------|
-| WM_Infrastructure | infrastructure | PositiveOnly (default) | required | WM_Waymakers |
-
-### Big and Small - Genes & More (`redmattis.bigsmall.core`)
-
-| Issue                       | Label            | Category | Rungs                                    | Linked memes |
-|-----------------------------+------------------+----------+------------------------------------------+--------------|
-| BS_AlienAppearanceTolerance | alien appearance | Moral    | extreme tolerance, high tolerance, weird |              |
-
-### Vanilla Vehicles Expanded (`oskarpotocki.vanillavehiclesexpanded`)
-
-| Issue              | Label           | Category               | Rungs                                   | Linked memes                                                 |
-|--------------------+-----------------+------------------------+-----------------------------------------+--------------------------------------------------------------|
-| VVE_Acceleration   | acceleration    | PositiveOnly           | high, sunday driver                     | VVE_Roadragers                                               |
-| VVE_Driving        | driving         | Moral                  | required, approved, horrible, forbidden | VVE_Nauticals, VVE_Roadragers, VVE_Travelers                 |
-| VVE_Flying         | flying          | Moral                  | required, approved, horrible, forbidden | VVE_Nauticals, VVE_Roadragers, VVE_Skyseekers, VVE_Travelers |
-| VVE_FuelEfficiency | fuel efficiency | PositiveOnly           | efficient, inefficient                  | VVE_Roadragers, VVE_Skyseekers                               |
-| VVE_ImpactDamage   | impact damage   | PositiveOnly (default) | high                                    | VVE_Roadragers                                               |
-| VVE_MaxSpeed       | max speed       | PositiveOnly (default) | increased                               | VVE_Roadragers                                               |
-| VVE_Sailing        | Sailing         | Moral                  | required, approved, horrible, forbidden | VVE_Nauticals, VVE_Roadragers, VVE_Travelers                 |
-| VVE_VehicleRepairs | vehicle repairs | PositiveOnly           | fast, slow                              | VVE_Roadragers                                               |
+| Issue            | Label          | Category               | Rungs    | Linked memes                 |
+|------------------+----------------+------------------------+----------+------------------------------|
+| MI_AnimalVariety | animal variety | PositiveOnly (default) | required | MI_Menagerist, NaturePrimacy |
+| MI_Zookeeping    | zookeeping     | PositiveOnly (default) | required | MI_Menagerist, NaturePrimacy |
 
 ### Vanilla Ideology Expanded - Memes and Structures (`vanillaexpanded.vmemese`)
 
@@ -532,11 +507,11 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | VME_Violence                | violence              | Moral                  | honorable, acceptable, disapproved, abhorrent, abhorrent (strict) [AM] | AM_NonViolence, VME_Pacifist                                                |
 | VME_WoodcuttingYield        | woodcutting yield     | PositiveOnly (default) | high                                                                   | VME_HardcoreIndustrialism                                                   |
 
-### Intimacy - Socio Butterfly (`lovelydovey.recreation.witheuterpe`)
+### Waymakers (Roads, Rails & Infrastructure Meme) (`mx.waymakers`)
 
-| Issue       | Label   | Category     | Rungs               | Linked memes |
-|-------------+---------+--------------+---------------------+--------------|
-| SEX_Divorce | divorce | PositiveOnly | accepted, forbidden |              |
+| Issue             | Label          | Category               | Rungs    | Linked memes |
+|-------------------+----------------+------------------------+----------+--------------|
+| WM_Infrastructure | infrastructure | PositiveOnly (default) | required | WM_Waymakers |
 
 ### Cybranian - Weapon Proficiency (`dimonsever000.weaponproficiency`, inactive)
 
@@ -560,6 +535,15 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | Traps               | traps              | PositiveOnly (default) | disapproved, horrible, prohibited                                                  |              |
 | Violence            | violence           | PositiveOnly (default) | avoided, pacifism, horrible, disapproved, defense, defense mild, wanted, essential | Pacifism     |
 
+### Romance On The Rim (`telardo.romanceontherim`, inactive)
+
+| Issue                                  | Label             | Category     | Rungs                                              | Linked memes |
+|----------------------------------------+-------------------+--------------+----------------------------------------------------+--------------|
+| RomanceOnTheRim_Issue_Breakup          | Breakup           | Moral        | encouraged, discouraged, forbidden, arranged       |              |
+| RomanceOnTheRim_Issue_Cheat            | Cheat             | Moral        | encouraged, discouraged, forbidden                 |              |
+| RomanceOnTheRim_Issue_MarriageProposal | Marriage Proposal | PositiveOnly | late marriage, flash marriage, forbidden, arranged |              |
+| RomanceOnTheRim_Issue_RomanceAttempt   | Romance Attempt   | Moral        | encouraged, discouraged, forbidden, arranged       |              |
+
 ### Vanilla Genetics Expanded (`vanillaexpanded.vgeneticse`, inactive)
 
 | Issue              | Label                   | Category               | Rungs                         | Linked memes                            |
@@ -568,6 +552,19 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | GR_HumanoidHybrids | humanoid hybrids        | PositiveOnly (default) | accepted, disliked, forbidden | GR_CarefulGeneticists, GR_MadScientists |
 | GR_WorktableSpeeds | genetic worktable speed | PositiveOnly (default) | genomorpher, implants         | GR_CarefulGeneticists, GR_MadScientists |
 
+### Questing Meme (`sirmashedpotato.questingmeme`, inactive)
+
+| Issue                     | Label             | Category | Rungs                                            | Linked memes            |
+|---------------------------+-------------------+----------+--------------------------------------------------+-------------------------|
+| QuesterMeme_QuestComplete | completing quests | Moral    | daring, honourable, respected                    | QuesterMeme_QuesterMeme |
+| QuesterMeme_QuestFail     | failing quests    | Moral    | disapproved, dishonourable, disliked, don't care | QuesterMeme_QuesterMeme |
+
+### [LTS]Tenants (`limetreesnake.tenants`, inactive)
+
+| Issue   | Label   | Category               | Rungs                     | Linked memes |
+|---------+---------+------------------------+---------------------------+--------------|
+| Tenancy | tenancy | PositiveOnly (default) | Tenant Hosting Encouraged |              |
+
 ### Political Compass - Mort's Ideologies (`mortstrudel.mortideology`, inactive)
 
 | Issue                 | Label                | Category               | Rungs                                                                               | Linked memes                                                          |
@@ -575,6 +572,14 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | MI_Homelessness       | homelessness         | PositiveOnly (default) | abhorrent                                                                           | MI_WealthEquality                                                     |
 | MI_Leader             | leader               | Moral                  | corporate, dictatorship, monarchy, Democracy, Anarchy                               | MI_GovernmentAuthority, MI_GovernmentLiberty, MI_WealthStratification |
 | miHousingDistribution | housing distribution | Moral                  | strict equality, mild equality, ignored, mild stratification, strict stratification | MI_WealthEquality, MI_WealthStratification                            |
+
+### Conservationist and Polluter - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyenv`, inactive)
+
+| Issue                | Label               | Category     | Rungs                                    | Linked memes                          |
+|----------------------+---------------------+--------------+------------------------------------------+---------------------------------------|
+| MI_Pollution         | pollution           | Moral        | despised, preferred                      | MI_Environmentalist, MI_Industrialist |
+| MI_PowerGeneration   | power generation    | PositiveOnly | clean power only, no toxifier generators | MI_Environmentalist                   |
+| MI_ToxicWasteDumping | toxic waste dumping | Moral        | abhorrent, respected                     | MI_Environmentalist, MI_Industrialist |
 
 ### Empiricism and Faith - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyscifai`, inactive)
 
@@ -586,12 +591,30 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | MI_MeditationFocusGain | meditation speed | PositiveOnly (default) | increased, reduced | MI_Empiricist, MI_Faith |
 | MI_PruningSpeed        | pruning speed    | PositiveOnly (default) | increased, reduced | MI_Empiricist, MI_Faith |
 
-### Menagerist - Mort's Ideologies: Memes and Precepts (`mortstrudel.mortideologyspecwork`, inactive)
+### Vanilla Races Expanded - Android (`vanillaracesexpanded.android`, inactive)
 
-| Issue            | Label          | Category               | Rungs    | Linked memes                 |
-|------------------+----------------+------------------------+----------+------------------------------|
-| MI_AnimalVariety | animal variety | PositiveOnly (default) | required | MI_Menagerist, NaturePrimacy |
-| MI_Zookeeping    | zookeeping     | PositiveOnly (default) | required | MI_Menagerist, NaturePrimacy |
+| Issue             | Label    | Category     | Rungs                             | Linked memes |
+|-------------------+----------+--------------+-----------------------------------+--------------|
+| VRE_AndroidsIssue | androids | PositiveOnly | despised, equal, respected, tools |              |
+
+### Vanilla Vehicles Expanded (`oskarpotocki.vanillavehiclesexpanded`, inactive)
+
+| Issue              | Label           | Category               | Rungs                                   | Linked memes                                                 |
+|--------------------+-----------------+------------------------+-----------------------------------------+--------------------------------------------------------------|
+| VVE_Acceleration   | acceleration    | PositiveOnly           | high, sunday driver                     | VVE_Roadragers                                               |
+| VVE_Driving        | driving         | Moral                  | required, approved, horrible, forbidden | VVE_Nauticals, VVE_Roadragers, VVE_Travelers                 |
+| VVE_Flying         | flying          | Moral                  | required, approved, horrible, forbidden | VVE_Nauticals, VVE_Roadragers, VVE_Skyseekers, VVE_Travelers |
+| VVE_FuelEfficiency | fuel efficiency | PositiveOnly           | efficient, inefficient                  | VVE_Roadragers, VVE_Skyseekers                               |
+| VVE_ImpactDamage   | impact damage   | PositiveOnly (default) | high                                    | VVE_Roadragers                                               |
+| VVE_MaxSpeed       | max speed       | PositiveOnly (default) | increased                               | VVE_Roadragers                                               |
+| VVE_Sailing        | Sailing         | Moral                  | required, approved, horrible, forbidden | VVE_Nauticals, VVE_Roadragers, VVE_Travelers                 |
+| VVE_VehicleRepairs | vehicle repairs | PositiveOnly           | fast, slow                              | VVE_Roadragers                                               |
+
+### Cybranian - Rim Languages (`dimonsever000.factionlanguages`, inactive)
+
+| Issue            | Label             | Category | Rungs                                           | Linked memes                                                  |
+|------------------+-------------------+----------+-------------------------------------------------+---------------------------------------------------------------|
+| LanguageLearning | Language learning | Moral    | Hatred, Condemned, Neutral, Encouraged, Exalted | HAR_Xenophilia, HAR_Xenophobia, Loyalist, Raider, Supremacist |
 
 ### Nephilim Xenotype Reborn (`sov.nephilim`, inactive)
 
@@ -608,6 +631,19 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | NikolaisIdeology_GenderedApparel | Gendered apparel | PositiveOnly (default) | don't care                | NikolaisIdeology_Aphroditic                                                                                       |
 | NikolaisIdeology_Intimacy        | intimacy         | PositiveOnly (default) | important, occasional     | AM_Fertility, AM_Monastic, NikolaisIdeology_Aphroditic, NikolaisIdeology_Chastity, PainIsVirtue, VME_Pacifist     |
 | NikolaisIdeology_Neutors         | neuters          | PositiveOnly (default) | reviled, elevated, sacred | AM_BiologicalDefilers, AM_BiologicalReconstructors, AM_Fertility, Guilty, NikolaisIdeology_Chastity, PainIsVirtue |
+
+### Intimacy - Socio Butterfly (`lovelydovey.recreation.witheuterpe`, inactive)
+
+| Issue       | Label   | Category     | Rungs               | Linked memes |
+|-------------+---------+--------------+---------------------+--------------|
+| SEX_Divorce | divorce | PositiveOnly | accepted, forbidden |              |
+
+### Hotels and Recreation (`robtrg.hotelsandrecreation`, inactive)
+
+| Issue              | Label       | Category               | Rungs                                     | Linked memes         |
+|--------------------+-------------+------------------------+-------------------------------------------+----------------------|
+| ROBTRG_Hospitality | hospitality | PositiveOnly (default) | valued, sacred duty                       |                      |
+| ROBTRG_SexWork     | sex work    | PositiveOnly (default) | abhorrent, disapproved, respected, sacred | ROBTRG_PleasureHouse |
 
 ### Ocean Floor (`we1tall.depths`, inactive)
 

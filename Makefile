@@ -1,4 +1,4 @@
-.PHONY: build deploy release test logs preview preview-all steam-page check-translations
+.PHONY: build deploy release test logs preview preview-all steam-page check-translations trait-links catalog
 
 build:
 	dotnet build Source/EnhancedIdeology.csproj
@@ -19,6 +19,12 @@ preview-all:
 
 check-translations:
 	uv run scripts/translate.py check
+
+catalog:
+	uv run scripts/meme_precept_catalog.py
+
+trait-links:
+	uv run scripts/trait_links_patch.py
 
 steam-page:
 	uv run scripts/md_to_bbcode.py

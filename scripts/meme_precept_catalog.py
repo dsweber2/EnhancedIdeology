@@ -330,9 +330,13 @@ def trait_names(meme: Def, key: str) -> list[str]:
     if elem is None:
         return []
     names = []
-    for li in elem.findall("li"):
-        trait = (li.findtext("def") or li.text or "").strip()
-        degree = (li.findtext("degree") or "").strip()
+    for child in elem:
+        if child.tag == "li":
+            trait = (child.findtext("def") or child.text or "").strip()
+            degree = (child.findtext("degree") or "").strip()
+        else:
+            trait = child.tag
+            degree = (child.findtext("degree") or child.text or "").strip()
         if trait:
             names.append(f"{trait} ({degree})" if degree else trait)
     return names

@@ -40,8 +40,6 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         Certainty.MarkAsLoadedWithoutData(existingCertainty);
 
     public void SetIdeoBaseOpinion(Ideo ideo, float opinion) => Opinions.SetIdeoBaseOpinion(ideo, opinion);
-    public void AdjustMemeOpinion(MemeDef meme, float power) => Opinions.AdjustMemeOpinion(meme, power);
-    public float TrueMemeOpinion(MemeDef meme) => Opinions.TrueMemeOpinion(meme);
     public void CacheRelationshipIdeoOpinion(Ideo ideo, GameComponent_EnhancedIdeology? comp = null) => Opinions.CacheRelationshipIdeoOpinion(ideo, comp);
     public void RecalculateRelationshipIdeoOpinions() => Opinions.RecalculateRelationshipIdeoOpinions();
     public IEnumerable<(Pawn pawn, float opinion)> GetOwnIdeoRelationships() => Opinions.GetOwnIdeoRelationships();
@@ -461,41 +459,16 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             Opinions.PersonalIdeoOpinions[ideo] = personalIdeoOpinion;
         }
 
-        if (Prefs.DevMode && includeDevDetails)
-        {
-            var devDetailsBuilder = new StringBuilder();
-            _ = devDetailsBuilder
-                .AppendLine($"Base opinion: {baseIdeoOpinion}")
-                .AppendLine($"Personal opinion: {personalIdeoOpinion}");
-            var relevantMemeCount = ideo.memes.Intersect(Opinions.MemeOpinions.Keys).Count();
-            _ = devDetailsBuilder
-                .AppendLine($"Meme opinions: {relevantMemeCount}");
-            foreach (var meme in ideo.memes)
-            {
-                if (Opinions.MemeOpinions.TryGetValue(meme, out var memeOpinion))
-                    _ = devDetailsBuilder.AppendLine($" - {meme.LabelCap}: {memeOpinion}");
-            }
-            devDetails = devDetailsBuilder.ToString();
-        }
-        else
-        {
-            devDetails = null;
-        }
-
-        float opinion = 0;
-
-        foreach (var meme in ideo.memes)
-        {
-            if (Opinions.MemeOpinions.TryGetValue(meme, out var memeOpinion))
-                opinion += memeOpinion;
-        }
+        devDetails = Prefs.DevMode && includeDevDetails
+            ? $"Base opinion: {baseIdeoOpinion}\nPersonal opinion: {personalIdeoOpinion}\n"
+            : null;
 
         // Makes sure personal opinions cannot drive total below zero
-        var curOpinion = Mathf.Max(baseIdeoOpinion + opinion, 0);
+        var curOpinion = Mathf.Max(baseIdeoOpinion, 0);
         if (Opinions.PersonalIdeoOpinions[ideo] < -curOpinion)
             Opinions.PersonalIdeoOpinions[ideo] = -curOpinion;
 
-        return opinion + Opinions.PersonalIdeoOpinions[ideo];
+        return Opinions.PersonalIdeoOpinions[ideo];
     }
 
     public float IdeoOpinionFromRelationships(Ideo ideo, bool includeDevDetails, out string? devDetails)

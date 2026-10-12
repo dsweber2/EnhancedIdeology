@@ -119,46 +119,6 @@ public class IdeoTrackerTests : SeededTest
     }
 
     [Fact]
-    public void TrueMemeOpinion_AgreeableTrait_IncreasesOpinion()
-    {
-        // Pawn has a trait matching meme.agreeableTraits → base 0 + 10 = 10
-        var world = new SimWorld();
-        world.Initialize();
-
-        var traitDef = new TraitDef { defName = "AgreeableForMeme" };
-        var meme = new MemeBuilder().WithName("TMO_Agreeable").WithAgreeableTrait(traitDef).Build();
-        var ideo = new IdeoBuilder().WithName("TM").AddMeme(meme).Build();
-        world.AddIdeo(ideo);
-
-        var pawn = new PawnBuilder().WithIdeo(ideo).WithTrait(traitDef).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-
-        var opinion = tracker.TrueMemeOpinion(meme);
-
-        Assert.True(opinion > 0f, $"Expected positive meme opinion for agreeable trait. Got: {opinion}");
-    }
-
-    [Fact]
-    public void TrueMemeOpinion_DisagreeableTrait_DecreasesOpinion()
-    {
-        // Pawn has a trait matching meme.disagreeableTraits → base 0 - 10 = -10
-        var world = new SimWorld();
-        world.Initialize();
-
-        var traitDef = new TraitDef { defName = "DisagreeableForMeme" };
-        var meme = new MemeBuilder().WithName("TMO_Disagreeable").WithDisagreeableTrait(traitDef).Build();
-        var ideo = new IdeoBuilder().WithName("TMD").AddMeme(meme).Build();
-        world.AddIdeo(ideo);
-
-        var pawn = new PawnBuilder().WithIdeo(ideo).WithTrait(traitDef).WithLabel("P").Build(world);
-        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
-
-        var opinion = tracker.TrueMemeOpinion(meme);
-
-        Assert.True(opinion < 0f, $"Expected negative meme opinion for disagreeable trait. Got: {opinion}");
-    }
-
-    [Fact]
     public void DetailedIdeoOpinion_OwnIdeo_ReturnsCurrentCertaintyAsBase()
     {
         // Own-ideo branch: BaseOpinion = Pawn.ideo.Certainty (not baseIdeoOpinions lookup)

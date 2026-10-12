@@ -10,6 +10,7 @@ docs/trait-meme-affinity.md ("Traits with no meme affinity" tables).
 
 Cell grammar (see the legend in the doc):
     Meme (+) / Meme (-)       trait goes in the meme's agreeableTraits / disagreeableTraits
+    Meme (++) / Meme (--)     same, but the trait goes in twice, so every effect counts double
     [Issue → Suffix]          trait links to the rung whose defName ends in _Suffix (TraitIssueLinks)
     [Issue] (-)               trait opposes a UniversalPositive issue (TraitIssueLinks)
     deg1/deg2: items; ...     items apply only to the trait degrees with those labels
@@ -32,8 +33,8 @@ import meme_precept_catalog as catalog_lib  # noqa: E402
 REPO = Path(__file__).resolve().parent.parent
 DOC = REPO / "docs" / "trait-meme-affinity.md"
 OUTPUT = REPO / "Common" / "Patches" / "TraitLinks.xml"
-SECTION = "## Traits with no meme affinity"
-MEME_ITEM = re.compile(r"^(\w+) \(([+-])\)$")
+SECTION = "## Additional meme affinity"
+MEME_ITEM = re.compile(r"^(\w+) \((\+\+?|--?)\)$")
 RUNG_ITEM = re.compile(r"^\[(\w+) → (\w+)\]$")
 OPPOSE_ITEM = re.compile(r"^\[(\w+)\] \(-\)$")
 DEGREE_LABEL = re.compile(r"(.+?) \((-?\d+)\)")
@@ -110,8 +111,8 @@ def parse(lines: list[str], catalog) -> tuple[dict[str, TraitLinks], list[str]]:
                     meme, sign = match.groups()
                     if meme not in catalog.memes:
                         problems.append(f"{trait}: meme {meme} not found locally")
-                    kind = "agreeableTraits" if sign == "+" else "disagreeableTraits"
-                    entry.memes[(meme, kind)].extend(degrees)
+                    kind = "agreeableTraits" if sign[0] == "+" else "disagreeableTraits"
+                    entry.memes[(meme, kind)].extend(degrees * len(sign))
                 elif match := RUNG_ITEM.match(item):
                     rung = resolve_rung(*match.groups(), catalog.precepts)
                     entry.rungs.extend((rung, degree) for degree in degrees)
@@ -123,9 +124,8 @@ def parse(lines: list[str], catalog) -> tuple[dict[str, TraitLinks], list[str]]:
 
 
 def trait_items(trait: str, degrees: list[int | None]) -> str:
-    if None in degrees:
-        return f"<li>{trait}</li>"
-    return "".join(f"<{trait}>{degree}</{trait}>" for degree in sorted(set(degrees)))
+    return "".join(f"<li>{trait}</li>" if degree is None else f"<{trait}>{degree}</{trait}>"
+                   for degree in sorted(degrees, key=lambda degree: (degree is not None, degree or 0)))
 
 
 def meme_operation(meme: str, kind: str, items: str) -> list[str]:

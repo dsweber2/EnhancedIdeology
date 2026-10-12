@@ -1,7 +1,7 @@
 namespace EnhancedIdeology;
 
 // Links from a trait straight to one rung of an issue, or against a universally-valued issue such as Charity
-// (docs/trait-meme-affinity.md "Traits with no meme affinity"). XML patches add it to TraitDefs.
+// (docs/trait-meme-affinity.md "Additional meme affinity"). XML patches add it to TraitDefs.
 public class TraitIssueLinks : DefModExtension
 {
     public List<TraitIssueLink> links = [];
