@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | 사상 |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | 사상 의견 |
-| `EnhancedIdeology.BeliefsHeader` | Issues | 쟁점 |
 | `EnhancedIdeology.ColIssue` | Issue | 쟁점 |
 | `EnhancedIdeology.ColStance` | Stance | 입장 |
 | `EnhancedIdeology.ColStrength` | Strength | 강도 |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | 구조적 (신념 및 본성): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | 교인 공동체: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | 실천 (최근 행사): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | 규율 쇠퇴: {0}/분기 |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | 상충하는 실천 |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | 의무적 초식 |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | 의무적 육식 |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | 사상에 필요한 '{ROLE}' 역할이 없습니다. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN}에게 필요한 '{ROLE}' 역할이 없습니다. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}은(는) 이 책의 저자가 아닙니다. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | 이 책은 {PAWN_possessive} 사상을 위한 것이 아닙니다. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | 사용 가능한 강독대를 찾을 수 없습니다. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | 종교 서적을 작성하려면 믿음이 {0} 이상이어야 합니다. |
 
 ## DefInjected/RecipeDef

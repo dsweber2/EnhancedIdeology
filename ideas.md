@@ -18,7 +18,8 @@ Committed work lives in [todo.md](todo.md); how the current system works is in [
 - **Moodlets move the rung too.**
   Precept moods currently shift only conviction strength.
   Ideally they also nudge the preferred rung, but the valley step (`PullStance`) is expensive to run that often.
-- **A lecture ritual.**
+- **Public API**
+- **A lecture ritual or moral guide ability.**
   A short, cheap ritual so belief can be reinforced more often (the "DIY rituals" mod is a reference).
 - **Conversion ritual outcome tiers.**
   Distinct results per quality: for example, a terrible outcome makes the target more certain of their top two stances and gives every attendee a bad thought about the preaching faith.

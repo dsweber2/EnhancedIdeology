@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ідеологія |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Думки про ідеологію |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Питання |
 | `EnhancedIdeology.ColIssue` | Issue | Питання |
 | `EnhancedIdeology.ColStance` | Stance | Позиція |
 | `EnhancedIdeology.ColStrength` | Strength | Сила |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Структурна (переконання та природа): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Громада: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Практика (недавні обряди): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Спад правил: {0}/квартал |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Протилежні практики |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Обов'язковий травоїдний |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Обов'язковий м'ясоїд |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | В ідеології немає необхідної ролі «{ROLE}». |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} не має необхідної ролі «{ROLE}». |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} не є автором книги. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Книга не призначена для ідеології {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Не знайдено вільної доступної кафедри для роботи. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Для написання релігійних текстів впевненість повинна бути вище {0}. |
 
 ## DefInjected/RecipeDef

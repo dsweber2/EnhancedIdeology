@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | 思想 |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | 思想への評価 |
-| `EnhancedIdeology.BeliefsHeader` | Issues | 問題 |
 | `EnhancedIdeology.ColIssue` | Issue | 問題 |
 | `EnhancedIdeology.ColStance` | Stance | 姿勢 |
 | `EnhancedIdeology.ColStrength` | Strength | 強度 |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | 構造的（信条と性質）: {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | 会衆: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | 実践（最近の儀式）: {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | 戒律の減衰: {0}/節 |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | 相反する慣行 |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | 絶対草食 |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | 絶対肉食 |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | 思想に必要な「{ROLE}」の役職がない。 |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN}は必要な「{ROLE}」の役職を持っていない。 |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}はこの本の著者ではない。 |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | この本は{PAWN_possessive}の思想のものではない。 |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | 作業できる利用可能な演台が見つからない。 |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | 聖典を書くには信仰度が{0}以上必要。 |
 
 ## DefInjected/RecipeDef

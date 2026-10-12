@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideobožství |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Názory na ideobožství |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Otázky |
 | `EnhancedIdeology.ColIssue` | Issue | Otázka |
 | `EnhancedIdeology.ColStance` | Stance | Postoj |
 | `EnhancedIdeology.ColStrength` | Strength | Síla |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Strukturální (přesvědčení a povaha): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Kongregace: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Praxe (nedávné obřady): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Rozpad zásad: {0}/quadrum |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Protichůdné praktiky |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Povinný bylinkář |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Povinný masožravec |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | Ideobožství nemá požadovanou roli „{ROLE}". |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} nemá požadovanou roli „{ROLE}". |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} není autorem knihy. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Tato kniha není pro ideobožství {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Nenalezen žádný dostupný a přístupný pultík pro práci. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Jistota musí být nad {0}, aby bylo možné psát náboženské texty. |
 
 ## DefInjected/RecipeDef

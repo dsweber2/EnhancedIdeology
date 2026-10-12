@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideologie |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Ideologiemeinungen |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Fragen |
 | `EnhancedIdeology.ColIssue` | Issue | Frage |
 | `EnhancedIdeology.ColStance` | Stance | Haltung |
 | `EnhancedIdeology.ColStrength` | Strength | Stärke |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Strukturell (Überzeugungen & Natur): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Gemeinde: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Praxis (kürzliche Riten): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Gebotszerfall: {0}/Quartal |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Widerstreitende Praktiken |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Obligater Herbivore |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Obligater Karnivore |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | Die Ideoligion hat keine erforderliche '{ROLE}'-Rolle. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} hat keine erforderliche '{ROLE}'-Rolle. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} ist nicht der Autor des Buches. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Das Buch ist nicht für {PAWN_possessive} Ideologie. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Kein verfügbares, zugängliches Pult zum Arbeiten gefunden. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Der Glaube muss über {0} liegen, um religiöse Texte zu schreiben. |
 
 ## DefInjected/RecipeDef

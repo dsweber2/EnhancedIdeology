@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Idéologie |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Opinions idéologiques |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Sujets |
 | `EnhancedIdeology.ColIssue` | Issue | Sujet |
 | `EnhancedIdeology.ColStance` | Stance | Position |
 | `EnhancedIdeology.ColStrength` | Strength | Force |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Structurel (croyances et nature) : {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Communauté : {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Pratique (rites récents) : {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Déclin du précepte : {0}/saison |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Pratiques opposées |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Herbivore obligatoire |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Carnivore obligatoire |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | L'idéoligion n'a pas le rôle « {ROLE} » requis. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} n'a pas le rôle « {ROLE} » requis. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} n'est pas l'auteur du livre. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Ce livre n'appartient pas à l'idéologie de {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Aucun lutrin disponible et accessible trouvé. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | La certitude doit dépasser {0} pour rédiger des textes religieux. |
 
 ## DefInjected/RecipeDef

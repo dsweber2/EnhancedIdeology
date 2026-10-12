@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | 理念 |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | 理念看法 |
-| `EnhancedIdeology.BeliefsHeader` | Issues | 議題 |
 | `EnhancedIdeology.ColIssue` | Issue | 議題 |
 | `EnhancedIdeology.ColStance` | Stance | 立場 |
 | `EnhancedIdeology.ColStrength` | Strength | 強度 |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | 結構性（信念與天性）：{0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | 會眾：{0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | 實踐（近期禮儀）：{0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | 戒律衰退：{0}/月 |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | 對立行為 |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | 強制草食者 |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | 強制肉食者 |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | 理念缺少所需的「{ROLE}」角色。 |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN}不具備所需的「{ROLE}」角色。 |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}並非此書的作者。 |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | 此書並非為{PAWN_possessive}的理念所寫。 |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | 找不到可用且可進入的講台來進行工作。 |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | 撰寫宗教文本需要感悟高於{0}。 |
 
 ## DefInjected/RecipeDef

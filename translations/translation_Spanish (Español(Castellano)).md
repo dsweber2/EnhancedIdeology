@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideoligión |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Opiniones sobre la ideoligión |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Temas |
 | `EnhancedIdeology.ColIssue` | Issue | Tema |
 | `EnhancedIdeology.ColStance` | Stance | Postura |
 | `EnhancedIdeology.ColStrength` | Strength | Fortaleza |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Estructural (creencias y naturaleza): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Congregación: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Práctica (ritos recientes): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Decaimiento de precepto: {0}/cuádrum |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Prácticas opuestas |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Herbívoro obligado |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Carnívoro obligado |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | La ideoligión no tiene el rol '{ROLE}' requerido. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} no tiene el rol '{ROLE}' requerido. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} no es el autor del libro. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | El libro no pertenece a la ideoligión de {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | No se encontró ningún atril disponible y accesible para trabajar. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | La certeza debe superar el {0} para escribir textos religiosos. |
 
 ## DefInjected/RecipeDef

@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Tín ngưỡng |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Quan điểm tín ngưỡng |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Vấn đề |
 | `EnhancedIdeology.ColIssue` | Issue | Vấn đề |
 | `EnhancedIdeology.ColStance` | Stance | Lập trường |
 | `EnhancedIdeology.ColStrength` | Strength | Sức mạnh |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Cấu trúc (niềm tin & bản chất): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Cộng đoàn: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Thực hành (nghi thức gần đây): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Phân rã giới luật: {0}/quý |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Thực hành đối lập |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Bắt buộc ăn chay |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Bắt buộc ăn thịt |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | Tín ngưỡng không có vai trò '{ROLE}' bắt buộc. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} không có vai trò '{ROLE}' bắt buộc. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} không phải là tác giả của cuốn sách. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Cuốn sách không dành cho tín ngưỡng của {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Không tìm được bục giảng nào khả dụng và có thể tiếp cận. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Độ chắc chắn phải trên {0} để viết văn bản tôn giáo. |
 
 ## DefInjected/RecipeDef

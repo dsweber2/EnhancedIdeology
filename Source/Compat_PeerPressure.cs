@@ -1,12 +1,15 @@
 namespace EnhancedIdeology;
 
-// Peer Pressure (joseasoler.peerpressure) multiplies certainty reduction and conversion-selection chance
-// by a factor derived from the recipient's opinion of the initiator. Our conversion flow never calls
-// InteractionWorker_ConvertIdeoAttempt.CertaintyReduction, so Peer Pressure's Postfix on that method
-// is silently skipped. We replicate the effect by adjusting our certainty knock directly.
+// Peer Pressure (joseasoler.peerpressure) multiplies certainty reduction and
+// conversion-selection chance by a factor derived from the recipient's opinion
+// of the initiator. Our conversion flow never calls
+// InteractionWorker_ConvertIdeoAttempt.CertaintyReduction, so Peer Pressure's
+// Postfix on that method is silently skipped. We replicate the effect by
+// adjusting our certainty knock directly.
 //
-// ConversionSelectionFactor is NOT overridden in InteractionWorker_AdvancedConversionAttempt, so
-// Peer Pressure's Postfix on the base class already fires correctly for that part.
+// ConversionSelectionFactor is NOT overridden in
+// InteractionWorker_AdvancedConversionAttempt, so Peer Pressure's Postfix on
+// the base class already fires correctly for that part.
 internal static class Compat_PeerPressure
 {
     public const string PackageId = "joseasoler.peerpressure";

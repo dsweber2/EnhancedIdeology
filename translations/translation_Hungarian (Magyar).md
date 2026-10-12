@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideológia |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Ideológiai vélemények |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Kérdések |
 | `EnhancedIdeology.ColIssue` | Issue | Kérdés |
 | `EnhancedIdeology.ColStance` | Stance | Álláspont |
 | `EnhancedIdeology.ColStrength` | Strength | Erősség |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Strukturális (hittételek és természet): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Gyülekezet: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Gyakorlat (közelmúlt szertartásai): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Előírás-kopás: {0}/negyed |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Ellentétes gyakorlatok |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Kötelező növényevő |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Kötelező húsevő |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | Az ideológiából hiányzik a szükséges '{ROLE}' szerep. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} nem rendelkezik a szükséges '{ROLE}' szereppel. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} nem a könyv szerzője. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | A könyv nem {PAWN_possessive} ideológiájához tartozik. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Nem található szabad, elérhető felolvasóállvány a munkához. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | A vallásos szövegek írásához a meggyőződésnek {0} fölé kell emelkednie. |
 
 ## DefInjected/RecipeDef

@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideoligió |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Opinions sobre la ideoligió |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Temes |
 | `EnhancedIdeology.ColIssue` | Issue | Tema |
 | `EnhancedIdeology.ColStance` | Stance | Postura |
 | `EnhancedIdeology.ColStrength` | Strength | Força |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Estructural (creences i naturalesa): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Congregació: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Pràctica (ritus recents): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Decaïment del precepte: {0}/quàdrum |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Pràctiques oposades |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Herbívor obligat |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Carnívor obligat |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | La ideoligió no té el rol '{ROLE}' requerit. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} no té el rol '{ROLE}' requerit. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} no és l'autor del llibre. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | El llibre no és per a la ideoligió de {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | No s'ha trobat cap faristol disponible i accessible per treballar. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | La certesa ha de ser superior al {0} per escriure textos religiosos. |
 
 ## DefInjected/RecipeDef

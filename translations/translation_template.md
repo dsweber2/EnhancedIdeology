@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology |  |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions |  |
-| `EnhancedIdeology.BeliefsHeader` | Issues |  |
 | `EnhancedIdeology.ColIssue` | Issue |  |
 | `EnhancedIdeology.ColStance` | Stance |  |
 | `EnhancedIdeology.ColStrength` | Strength |  |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} |  |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} |  |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} |  |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum |  |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices |  |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore |  |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore |  |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. |  |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. |  |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. |  |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. |  |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. |  |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. |  |
 
 ## DefInjected/RecipeDef

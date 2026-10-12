@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideoligie |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Ideoligiemeningen |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Kwesties |
 | `EnhancedIdeology.ColIssue` | Issue | Kwestie |
 | `EnhancedIdeology.ColStance` | Stance | Standpunt |
 | `EnhancedIdeology.ColStrength` | Strength | Kracht |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Structureel (overtuigingen & aard): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Gemeente: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Praktijk (recente riten): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Leefregelafname: {0}/quadrum |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Tegenstrijdige praktijken |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Verplicht herbivoor |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Verplicht carnivoor |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | Ideoligie heeft de vereiste '{ROLE}'-rol niet. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} heeft de vereiste '{ROLE}'-rol niet. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} is niet de auteur van het boek. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Het boek is niet voor {PAWN_possessive} ideoligie. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Geen beschikbare, toegankelijke lessenaar gevonden om aan te werken. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Zekerheid moet boven {0} zijn om religieuze teksten te schrijven. |
 
 ## DefInjected/RecipeDef

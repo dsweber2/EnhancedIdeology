@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideoligion |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Opinii ideoligion |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Probleme |
 | `EnhancedIdeology.ColIssue` | Issue | Problemă |
 | `EnhancedIdeology.ColStance` | Stance | Poziție |
 | `EnhancedIdeology.ColStrength` | Strength | Putere |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Structural (credințe și natură): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Congregație: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Practică (rituri recente): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Degradare precept: {0}/quadrum |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Practici opuse |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Ierbivore obligat |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Carnivor obligat |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | Ideoligionul nu are rolul '{ROLE}' necesar. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} nu are rolul '{ROLE}' necesar. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} nu este autorul cărții. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Cartea nu este pentru ideoligionul lui {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Nu s-a găsit niciun pupitru disponibil și accesibil pentru lucru. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Certitudinea trebuie să fie peste {0} pentru a scrie texte religioase. |
 
 ## DefInjected/RecipeDef

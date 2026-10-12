@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | İdeoloji |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | İdeoloji Görüşleri |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Konular |
 | `EnhancedIdeology.ColIssue` | Issue | Konu |
 | `EnhancedIdeology.ColStance` | Stance | Tutum |
 | `EnhancedIdeology.ColStrength` | Strength | Güç |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Yapısal (inançlar ve doğa): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Cemaat: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | İbadet (son ritüeller): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Öğreti bozunması: {0}/çeyrek |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Çelişkili ibadetler |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Zorunlu otçul |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Zorunlu etçil |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | İdeodinin gerekli '{ROLE}' rolü bulunmuyor. |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN}, gerekli '{ROLE}' rolüne sahip değil. |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN}, kitabın yazarı değil. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Bu kitap {PAWN_possessive} ideolojisi için değil. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Çalışmak için kullanılabilir, erişilebilir bir kürsü bulunamadı. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Dini metin yazmak için iman {0} değerinin üzerinde olmalıdır. |
 
 ## DefInjected/RecipeDef

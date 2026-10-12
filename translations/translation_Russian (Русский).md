@@ -119,7 +119,6 @@
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Идеолигия |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Мнения об идеолигии |
-| `EnhancedIdeology.BeliefsHeader` | Issues | Вопросы |
 | `EnhancedIdeology.ColIssue` | Issue | Вопрос |
 | `EnhancedIdeology.ColStance` | Stance | Позиция |
 | `EnhancedIdeology.ColStrength` | Strength | Сила |
@@ -140,7 +139,6 @@
 | `EnhancedIdeology.CertaintyBandStructural` | Structural (beliefs & nature): {0} | Структурная (убеждения и характер): {0} |
 | `EnhancedIdeology.CertaintyBandRelational` | Congregation: {0} | Община: {0} |
 | `EnhancedIdeology.CertaintyBandPractice` | Practice (recent rites): {0} | Практика (недавние обряды): {0} |
-| `EnhancedIdeology.CertaintyPreceptDecay` | Precept decay: {0}/quadrum | Угасание принципа: {0}/квартал |
 | `EnhancedIdeology.CouplingPenalty` | Opposed practices | Противоречащие практики |
 | `EnhancedIdeology.DietGeneAntiMeat` | Obligate herbivore | Облигатный травоядный |
 | `EnhancedIdeology.DietGeneProMeat` | Obligate carnivore | Облигатный плотоядный |
@@ -151,11 +149,6 @@
 
 | key | source | translation |
 |-----|--------|-------------|
-| `EnhancedIdeology.IdeologyMissingRole` | Ideoligion does not have the required '{ROLE}' role. | Идеолигия не имеет требуемой роли «{ROLE}». |
-| `EnhancedIdeology.PawnMissingRequiredRole` | {PAWN} does not have the required '{ROLE}' role. | {PAWN} не имеет требуемой роли «{ROLE}». |
-| `EnhancedIdeology.PawnIsNotAuthor` | {PAWN} is not the author of the book. | {PAWN} не является автором книги. |
-| `EnhancedIdeology.BookIsNotForPawnIdeoligion` | The book is not for {PAWN_possessive} ideology. | Книга не предназначена для идеолигии {PAWN_possessive}. |
-| `EnhancedIdeology.NoFreeValidLecternFound` | No available, accessible lectern found to do work on. | Не найдено доступной кафедры для работы. |
 | `EnhancedIdeology.InsufficientCertaintyToWrite` | Certainty must be above {0} to write religious texts. | Уверенность должна быть выше {0}, чтобы писать религиозные тексты. |
 
 ## DefInjected/RecipeDef
