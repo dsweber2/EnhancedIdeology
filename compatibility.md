@@ -78,7 +78,8 @@ These mods don't add ideology content but have explicit compatibility or are com
 
 ## [Vanilla Books Expanded](https://steamcommunity.com/sharedfiles/filedetails/?id=2193152410)
 
-The ideobook writing recipe is added to VBE's writers table when both mods are active.
+The ideobook writing recipes are added to VBE's writers and typewriters tables when both mods are active.
+Our writing desk is then removed from the architect menu; desks already built keep working.
 
 ## [Peer Pressure](https://steamcommunity.com/sharedfiles/filedetails/?id=3057626086) ([Continued](https://steamcommunity.com/sharedfiles/filedetails/?id=3605155621))
 

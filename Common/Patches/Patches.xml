@@ -141,6 +141,13 @@
 			</value>
 		</match>
 	</Operation>
+	<!-- VBE tables replace our writing desk. Keep the def so that desks in existing saves still work. -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="VBE_WritersTable"]</xpath>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ThingDef[defName="EB_WritingDesk"]/designationCategory</xpath>
+		</match>
+	</Operation>
 
 	<!-- Contemplation need: insert a need-driven contemplation job before main colonist behavior.
 	     The JobGiver gates on Need_Contemplation.CurCategory == Critical so only Required precept
