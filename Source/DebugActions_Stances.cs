@@ -19,6 +19,23 @@ internal static partial class DebugActions
         Messages.Message($"{pawn.LabelShort}: stances reset to {pawn.Ideo.name}.", MessageTypeDefOf.TaskCompletion, false);
     }
 
+    // Seeds the pawn if needed, then logs the trait stance targets and the vote behind each.
+    [DebugAction("Ideoligion", "Log trait stance targets", actionType = DebugActionType.ToolMapForPawns,
+        allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
+    private static void LogTraitStanceTargets(Pawn pawn)
+    {
+        if (pawn.Ideo == null)
+        {
+            Messages.Message($"{pawn.LabelShort} has no ideoligion.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        var tracker = Current.Game.GetComponent<GameComponent_EnhancedIdeology>().PawnTracker
+            .EnsurePawnHasIdeoTracker(pawn);
+        tracker.EnsureIssueStancesSeeded();
+        EnhancedIdeologyMod.Message(tracker.Stances.DescribeTraitTargets());
+    }
+
     [DebugAction("Ideoligion", "Reset stances to orthodox (all pawns)", actionType = DebugActionType.Action,
         allowedGameStates = AllowedGameStates.Playing, requiresIdeology = true)]
     private static void ResetAllStancesToOrthodox()

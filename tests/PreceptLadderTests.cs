@@ -62,6 +62,17 @@ public class PreceptLadderTests : SeededTest
     }
 
     [Fact]
+    public void DontCareRank_CharitySitsPastWeakestProRung()
+    {
+        var issue = new IssueDef { defName = "Charity" };
+        Rung(issue, "Charity_Essential", 0);
+        Rung(issue, "Charity_Important", 10);
+        Rung(issue, "Charity_Worthwhile", 20);
+
+        Assert.Equal(2.5f, PreceptLadder.DontCareRank(issue));
+    }
+
+    [Fact]
     public void DontCareRank_StubDefaultsToPermissiveExtreme()
     {
         Assert.Equal(-1f, PreceptLadder.DontCareRank(new IssueDef { defName = "AnimalSlaughter" }));

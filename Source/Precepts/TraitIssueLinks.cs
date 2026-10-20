@@ -7,7 +7,7 @@ public class TraitIssueLinks : DefModExtension
     public List<TraitIssueLink> links = [];
 
     // Links that apply to the pawn's traits at their current degrees.
-    internal static IEnumerable<TraitIssueLink> ActiveFor(Pawn pawn)
+    internal static IEnumerable<(Trait trait, TraitIssueLink link)> ActiveFor(Pawn pawn)
     {
         foreach (var trait in pawn.story.traits.allTraits)
         {
@@ -15,13 +15,13 @@ public class TraitIssueLinks : DefModExtension
             if (extension == null) continue;
             foreach (var link in extension.links)
                 if (link.degree == null || link.degree == trait.Degree)
-                    yield return link;
+                    yield return (trait, link);
         }
     }
 
     // True when one of the pawn's traits turns them against `issue`.
     internal static bool Opposes(Pawn pawn, IssueDef issue) =>
-        ActiveFor(pawn).Any(link => link.opposes == issue.defName);
+        ActiveFor(pawn).Any(active => active.link.opposes == issue.defName);
 }
 
 public class TraitIssueLink

@@ -369,7 +369,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             .ToList();
     }
 
-    private void EnsureIssueStancesSeeded()
+    internal void EnsureIssueStancesSeeded()
     {
         if (Stances.EnsureSeeded(Certainty.IsInitialized))
             Certainty.ScheduleCalibration(Pawn.ideo.Certainty);
@@ -495,7 +495,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
         return Opinions.CachedRelationshipIdeoOpinions[ideo];
     }
 
-    // Drain all issue conviction strengths uniformly by the global decay rate, once per game day.
+    // Once per game day, move trait-linked stances toward their linked rung and drain all other strengths.
     internal void ApplyConvictionDecayIfNewDay()
     {
         EnsureIssueStancesSeeded();

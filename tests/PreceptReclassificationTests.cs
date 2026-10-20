@@ -100,9 +100,9 @@ public class PreceptReclassificationTests : SeededTest
     }
 
     [Theory]
-    [InlineData(true, 1.5f)]
+    [InlineData(true, 2.5f)]
     [InlineData(false, 0.5f)]
-    public void Pain_DontCare_SitsPastIdealizedWithOrWithoutTheOtherMods(bool allMods, float expected)
+    public void Pain_DontCare_SitsPastTheMachismoRungWithOrWithoutTheOtherMods(bool allMods, float expected)
     {
         var issue = new IssueDef { defName = "Pain" };
         Register(issue, ("Pain_Idealized", 0));

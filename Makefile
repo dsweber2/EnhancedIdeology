@@ -1,7 +1,8 @@
 .PHONY: build deploy release test logs preview preview-all steam-page check-translations trait-links catalog
 
 build:
-	dotnet build Source/EnhancedIdeology.csproj
+	dotnet build Source/EnhancedIdeology.csproj -p:RimWorldVersion=1.6
+	dotnet build Source/EnhancedIdeology.csproj -p:RimWorldVersion=1.7
 
 test: build
 	dotnet test tests/EnhancedIdeology.Tests.csproj
@@ -37,6 +38,8 @@ deploy:
 	rsync -a --delete Common/     $(RIMWORLD_MOD)/Common/
 	rsync -a --delete Source/     $(RIMWORLD_MOD)/Source/
 	rsync -a --delete 1.6/        $(RIMWORLD_MOD)/1.6/
+	rsync -a --delete 1.7/        $(RIMWORLD_MOD)/1.7/
 	rsync -a --delete Royalty/    $(RIMWORLD_MOD)/Royalty/
 	rsync -a --delete LICENSE     $(RIMWORLD_MOD)/LICENSE
+	rsync -a LoadFolders.xml      $(RIMWORLD_MOD)/LoadFolders.xml
 	rsync -a Analyzer.xml         $(RIMWORLD_MOD)/Analyzer.xml

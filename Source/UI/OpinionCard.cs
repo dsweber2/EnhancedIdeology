@@ -186,6 +186,10 @@ internal sealed class OpinionCard
                     pawn.Named("PAWN"), issue.LabelCap, personalRung,
                     $"{strength:F1} ({(strength / ConvictionScale.MaxConvictionStrength).ToStringPercent()})",
                     selected.Named("IDEO"), selectedRung, Signed(contribution));
+                if (data.Stances.TraitTarget(issue) is { } target)
+                {
+                    tip += "\n\n" + TraitDriftText(issue, target, data.Stances.GetRank(issue));
+                }
                 if (Prefs.DevMode)
                 {
                     tip += $"\n[dev] vs {selected.name}: raw={opinion:F2}  " + data.IssueOpinionDebug(selected, issue);
@@ -301,7 +305,12 @@ internal sealed class OpinionCard
         return (frac >= 0f ? "+" : "") + frac.ToStringPercent();
     }
 
-    // Every issue either the pawn's own faith or the selected ideoligion takes a stance on, strongest first: the
+    // A personal stance on an issue that neither faith holds shows only above this strength.
+    private const float MinPersonalStanceStrength = 1f;
+
+    // Every issue either the pawn's own faith or the selected ideoligion takes a stance on, plus the pawn's own
+    // stances off Don't-care above MinPersonalStanceStrength (these also count in StructuralOpinionCalculator),
+    // strongest first: the
     // issue, the rung the pawn prefers (Don't-care where their faith is silent), their signed opinion of the
     // selected ideoligion's stance on it (for the % and colouring), the rung that ideoligion preaches (for the
     // tooltip), and conviction strength (for ordering). Including the selected ideo's own issues is what surfaces
@@ -314,6 +323,7 @@ internal sealed class OpinionCard
         var issues = pawn.Ideo.precepts.Concat(selected.precepts)
             .Where(precept => precept.def.issue != null)
             .Select(precept => precept.def.issue!)
+            .Concat(data.Stances.HeldIssues().Where(issue => stances[issue].strength > MinPersonalStanceStrength))
             .Distinct();
 
         foreach (var issue in issues)
@@ -349,12 +359,31 @@ internal sealed class OpinionCard
         return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
     }
 
+    // What the pawn's traits oppose on the issue, and the stance they drift toward. An opposition target names
+    // no drift while the stance is on an allowed spot, because the rank stays.
+    private string TraitDriftText(IssueDef issue, TraitStanceTarget target, float rank)
+    {
+        var lines = new List<string>();
+        if (target.Rung == null)
+        {
+            var opposed = target.Opposed.Keys.OrderBy(spot => spot).Select(spot => RungLabel(issue, spot, pawn.Ideo));
+            lines.Add("EnhancedIdeology.TraitDriftAgainst".Translate(pawn.Named("PAWN"), string.Join(", ", opposed)));
+        }
+        var pullRank = target.PullFrom(rank).rank;
+        if (target.Rung != null || pullRank != rank)
+        {
+            lines.Add("EnhancedIdeology.TraitDriftToward".Translate(pawn.Named("PAWN"), RungLabel(issue, pullRank, pawn.Ideo)));
+        }
+        return string.Join("\n", lines);
+    }
+
     // A tied rung (PreceptPolicy.TiedRungs) shares its anchor's rank, so when the pawn's own faith holds a rung
-    // at this rank, its label is used instead of the anchor's.
+    // at this rank, its label is used instead of the anchor's. Don't-care between or past the rungs has no rung.
     private static string RungLabel(IssueDef issue, float rank, Ideo ownIdeo)
     {
         var rungs = PreceptLadder.Rungs(issue);
-        if (rank < 0f || rungs.Count == 0)
+        var dontCare = PreceptLadder.DontCareRank(issue);
+        if (rank < 0f || rungs.Count == 0 || (rank == dontCare && dontCare != Mathf.Round(dontCare)))
         {
             return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
         }

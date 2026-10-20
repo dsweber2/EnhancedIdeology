@@ -1,7 +1,8 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers the trait-meme conviction offset: a pawn's trait compatibility with the memes behind their
-// precepts shifts the conviction strength seeded for those issues at spawn.
+// Covers the trait-meme conviction offset: a pawn's trait compatibility with the memes linked to their
+// faith's rungs shifts the conviction strength seeded for those issues at spawn, whether or not the faith
+// holds the meme.
 public class TraitMemeConvictionTests : SeededTest
 {
     // Reseeds and resets global state before building so two calls within one test get the same base
@@ -16,7 +17,7 @@ public class TraitMemeConvictionTests : SeededTest
         DefDatabase<PreceptDef>.Clear();
         DefDatabase<IssueDef>.Clear();
         DefDatabase<MemeDef>.Clear();
-        IssueStanceTracker.ClearMemeCache();
+        TraitStanceTargets.ClearMemeCache();
         PreceptPolicy.ClearOverrides();
 
         var world = new SimWorld();
@@ -114,7 +115,7 @@ public class TraitMemeConvictionTests : SeededTest
     }
 
     [Fact]
-    public void AssociatedMeme_HeldByFaith_BoostsConviction()
+    public void AssociatedMeme_BoostsConvictionAtHalfWeight()
     {
         var traitDef = new TraitDef { defName = "DislikesMen" };
         var meme = new MemeBuilder().WithName("FemaleSupremacy").WithAgreeableTrait(traitDef).Build();
@@ -122,7 +123,7 @@ public class TraitMemeConvictionTests : SeededTest
         var with = SeededStrengthFor(meme, traitDef, out _, Link.Associated);
         var without = SeededStrengthFor(meme, null, out _, Link.Associated);
 
-        Assert.Equal(ConvictionScale.TraitMemeConvictionBonus, with - without, precision: 4);
+        Assert.Equal(TraitStanceTargets.AssociatedMemeWeight * ConvictionScale.TraitMemeConvictionBonus, with - without, precision: 4);
     }
 
     [Fact]
@@ -151,15 +152,15 @@ public class TraitMemeConvictionTests : SeededTest
     }
 
     [Fact]
-    public void AssociatedMeme_NotHeldByFaith_HasNoEffect()
+    public void MemeNotHeldByFaith_StillCountsForHeldRung()
     {
         var traitDef = new TraitDef { defName = "DislikesMen" };
         var meme = new MemeBuilder().WithName("FemaleSupremacy").WithAgreeableTrait(traitDef).Build();
 
-        var with = SeededStrengthFor(meme, traitDef, out _, Link.Associated, ideoHoldsMeme: false);
-        var without = SeededStrengthFor(meme, null, out _, Link.Associated, ideoHoldsMeme: false);
+        var with = SeededStrengthFor(meme, traitDef, out _, Link.Required, ideoHoldsMeme: false);
+        var without = SeededStrengthFor(meme, null, out _, Link.Required, ideoHoldsMeme: false);
 
-        Assert.Equal(without, with, precision: 4);
+        Assert.Equal(ConvictionScale.TraitMemeConvictionBonus, with - without, precision: 4);
     }
 
     [Fact]

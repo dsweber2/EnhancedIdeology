@@ -20,6 +20,12 @@ internal static class ConvictionScale
     // seed: the pawn holds it against their social circle.
     internal const float TraitStanceStrengthMin = 5f;
     internal const float TraitStanceStrengthMax = 15f;
+    // Strength that daily decay pulls a trait-targeted issue toward, per trait vote (TraitStanceTargets), up to
+    // MaxConvictionStrength.
+    internal const float TraitDecayStrengthPerVote = 10f;
+    // Strength that daily decay pulls a stance toward when the traits only oppose rungs and the stance is on none
+    // of them. The rank does not move.
+    internal const float TraitAllowedStrength = 10f;
 
     // Diminishing returns of a reinforcing pull as strength approaches the absolute ceiling.
     internal static float StrengthFactor(float strength) =>

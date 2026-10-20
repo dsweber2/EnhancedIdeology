@@ -210,10 +210,10 @@ Each patch operation checks that the trait and the meme exist, so links to mods 
 - `degree: …` limits the link to those trait degrees, named by the labels in the Label column.
 - `[Issue → Rung]` links the trait straight to one rung of an issue (`TraitIssueLinks`), named by the suffix of the rung's defName (`[VME_DumbLabor → Disliked]` is `VME_DumbLabor_Disliked`).
   It names a rung, not a pole, because "pro" is ambiguous on many ladders.
-  At spawn, after the rest of seeding: if the faith is silent on the issue, the pawn takes the rung at low strength (5–15); if the faith holds the rung, the pawn gains +10 conviction on it; if the faith holds any other rung, the pawn starts heterodox on the linked rung at the strength it rolled.
-  After a brainwipe, the pawn returns to the linked rung.
   Prefer the mildest rung that fits.
-- `[Charity] (-)` is the one exception: Charity is a flat bonus for everyone, not a ladder, so the link turns that +5 into −5 for the pawn.
+- `[Charity] (-)` opposes a UniversalPositive issue: it turns the flat +5 opinion bonus into −5 for the pawn.
+- Every link above is also a vote toward or away from a stance; see [design.md](design.md) "Trait stance targets" for how votes shape spawn, brainwipe and decay.
+
 - Rung links count as neither positive nor negative when balancing a row.
 - An empty cell means no meme fits well enough to be worth the link.
 - Entries stack with those that the meme def or a trait-mod patch already has, so `(+)` on an existing link also doubles it.
@@ -398,7 +398,7 @@ How the list was built:
 | HVT_Textile                |                                                                          | textile                                                                                                                | Expectation, Propriety       | —                         |
 | HVT_Proclaimer             |                                                                          | proclaimer                                                                                                             | Morality, Passion            | Assertiveness             |
 | HVT_Sadist                 | Guilty (-)                                                               | sadistic                                                                                                               | Compassion, Morality         | Compassion, Integrity     |
-| HVT_Prideful               | Guilty (-)                                                               | entitled (1), prideful (2)                                                                                             | Ambition, Expectation        | Humbleness                |
+| HVT_Prideful               | Guilty (-), VME_Aristocratic (+),                                                               | entitled (1), prideful (2)                                                                                             | Ambition, Expectation        | Humbleness                |
 | HVT_Intolerant             | HAR_Xenophobia (+), Individualist (-)                                    | intolerant                                                                                                             | Openness                     | —                         |
 | HVT_Tolerant               | Individualist (+), HAR_Xenophilia (+), VME_ViolentConversion (-)         | tolerant                                                                                                               | Openness                     | —                         |
 | HVT_Anarchist              | Individualist (+), Loyalist (-)                                          | anarchist                                                                                                              | —                            | Cooperation               |

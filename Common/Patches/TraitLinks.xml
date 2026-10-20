@@ -8,16 +8,44 @@
 		<match Class="PatchOperationSequence">
 			<operations>
 				<li Class="PatchOperationConditional">
-					<xpath>/Defs/MemeDef[defName="VME_Egalitarian"]/disagreeableTraits</xpath>
+					<xpath>/Defs/MemeDef[defName="AM_Iconoclast"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
-						<xpath>/Defs/MemeDef[defName="VME_Egalitarian"]/disagreeableTraits</xpath>
+						<xpath>/Defs/MemeDef[defName="AM_Iconoclast"]/agreeableTraits</xpath>
 						<value><li>Abrasive</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
-						<xpath>/Defs/MemeDef[defName="VME_Egalitarian"]</xpath>
+						<xpath>/Defs/MemeDef[defName="AM_Iconoclast"]</xpath>
 						<match Class="PatchOperationAdd">
-							<xpath>/Defs/MemeDef[defName="VME_Egalitarian"]</xpath>
-							<value><disagreeableTraits><li>Abrasive</li></disagreeableTraits></value>
+							<xpath>/Defs/MemeDef[defName="AM_Iconoclast"]</xpath>
+							<value><agreeableTraits><li>Abrasive</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="Supremacist"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="Supremacist"]/agreeableTraits</xpath>
+						<value><li>Abrasive</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="Supremacist"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="Supremacist"]</xpath>
+							<value><agreeableTraits><li>Abrasive</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="VFEA_Isolationist"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="VFEA_Isolationist"]/agreeableTraits</xpath>
+						<value><li>Abrasive</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="VFEA_Isolationist"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="VFEA_Isolationist"]</xpath>
+							<value><agreeableTraits><li>Abrasive</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>

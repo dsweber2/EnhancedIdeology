@@ -4,9 +4,9 @@ namespace EnhancedIdeology.Tests;
 // a brainwipe, and a trait that opposes a UniversalPositive issue turns its flat bonus into a penalty.
 public class TraitIssueLinkTests : SeededTest
 {
-    private static TraitDef LinkedTrait(TraitIssueLink link)
+    private static TraitDef LinkedTrait(TraitIssueLink link, string defName = "LinkedTrait")
     {
-        var trait = new TraitDef { defName = "LinkedTrait" };
+        var trait = new TraitDef { defName = defName };
         trait.AddModExtension(new TraitIssueLinks { links = [link] });
         return trait;
     }
@@ -14,7 +14,7 @@ public class TraitIssueLinkTests : SeededTest
     // Seeds a pawn whose faith holds `faithRung` (null = silent) on a three-rung issue, with an optional trait.
     // Reseeds first so two calls draw the same base strengths and differ only in the trait.
     private static (IdeoTrackerData tracker, IssueDef issue, PreceptDef[] rungs) Seed(
-        int? faithRung, TraitDef? trait, int traitDegree = 0)
+        int? faithRung, TraitDef? trait, int traitDegree = 0, TraitDef? secondTrait = null)
     {
         Rand.SetSeed(1);
         DefDatabase<PreceptDef>.Clear();
@@ -33,6 +33,7 @@ public class TraitIssueLinkTests : SeededTest
 
         var pawnBuilder = new PawnBuilder().WithIdeo(ideo).WithLabel("P");
         if (trait != null) pawnBuilder = pawnBuilder.WithTrait(trait, traitDegree);
+        if (secondTrait != null) pawnBuilder = pawnBuilder.WithTrait(secondTrait);
         var pawn = pawnBuilder.Build(world);
         return (world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn), issue, rungs);
     }
@@ -113,6 +114,76 @@ public class TraitIssueLinkTests : SeededTest
         tracker.ApplyBrainwipe();
 
         Assert.Equal(2f, StanceOn(tracker, issue).rank);
+    }
+
+    private static void DecayDays(IdeoTrackerData tracker, int days)
+    {
+        for (var day = 0; day < days; day++)
+        {
+            GenTicks.TicksAbs = day * GenDate.TicksPerDay;
+            tracker.ApplyConvictionDecayIfNewDay();
+        }
+    }
+
+    [Theory]
+    [InlineData(30f)]
+    [InlineData(2f)]
+    public void Decay_PullsLinkedRungTowardSingleTraitStrength(float startStrength)
+    {
+        var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
+        var (tracker, issue, _) = Seed(faithRung: null, trait);
+        tracker.SetIssueStance(issue, 2f, startStrength);
+
+        DecayDays(tracker, 10);
+
+        var (rank, strength) = StanceOn(tracker, issue);
+        Assert.Equal(2f, rank);
+        Assert.True(Mathf.Abs(strength - ConvictionScale.TraitDecayStrengthPerVote) < Mathf.Abs(startStrength - ConvictionScale.TraitDecayStrengthPerVote),
+            $"Expected strength to move toward {ConvictionScale.TraitDecayStrengthPerVote}. start={startStrength}, after={strength}");
+    }
+
+    [Fact]
+    public void Decay_TwoTraitsOnOneRung_PullTowardDoubleStrength()
+    {
+        var link = new TraitIssueLink { rung = "LinkIssue_C" };
+        var startStrength = 1.5f * ConvictionScale.TraitDecayStrengthPerVote;
+
+        var (singleTracker, singleIssue, _) = Seed(faithRung: null, LinkedTrait(link));
+        singleTracker.SetIssueStance(singleIssue, 2f, startStrength);
+        DecayDays(singleTracker, 10);
+        var (doubleTracker, doubleIssue, _) = Seed(faithRung: null, LinkedTrait(link), secondTrait: LinkedTrait(link, "LinkedTrait2"));
+        doubleTracker.SetIssueStance(doubleIssue, 2f, startStrength);
+        DecayDays(doubleTracker, 10);
+
+        Assert.True(StanceOn(singleTracker, singleIssue).strength < startStrength);
+        Assert.True(StanceOn(doubleTracker, doubleIssue).strength > startStrength);
+    }
+
+    [Fact]
+    public void Decay_MovesOffRungStanceTowardLinkedRung()
+    {
+        var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
+        var (tracker, issue, _) = Seed(faithRung: 0, trait);
+        tracker.SetIssueStance(issue, 0f, 10f);
+
+        DecayDays(tracker, 10);
+
+        Assert.True(StanceOn(tracker, issue).rank > 0f);
+    }
+
+    [Fact]
+    public void Decay_UnlinkedIssueDrainsTowardZero()
+    {
+        var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
+        var (tracker, _, _) = Seed(faithRung: 0, trait);
+        var otherIssue = DefDatabase<IssueDef>.GetNamedSilentFail("OtherIssue")!;
+        var before = StanceOn(tracker, otherIssue);
+
+        DecayDays(tracker, 10);
+
+        var after = StanceOn(tracker, otherIssue);
+        Assert.Equal(before.rank, after.rank);
+        Assert.True(after.strength < before.strength);
     }
 
     // Structural opinion of a mirror faith that holds Charity, with or without a trait opposing Charity.

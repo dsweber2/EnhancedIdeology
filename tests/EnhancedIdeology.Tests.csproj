@@ -31,6 +31,7 @@
     <Compile Include="../Source/GameComponent/GameComponent_EnhancedIdeology_IdeoPawnTracker.cs" />
     <Compile Include="../Source/Tracker/ConvictionScale.cs" />
     <Compile Include="../Source/Tracker/IssueStanceTracker.cs" />
+    <Compile Include="../Source/Tracker/TraitStanceTargets.cs" />
     <Compile Include="../Source/Tracker/CertaintyTracker.cs" />
     <Compile Include="../Source/Tracker/OpinionCache.cs" />
     <Compile Include="../Source/Precepts/StructuralOpinionCalculator.cs" />
@@ -40,6 +41,7 @@
     <Compile Include="../Source/Precepts/LadderMigration.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.Resolvers.cs" />
+    <Compile Include="../Source/Precepts/PreceptPolicy.DontCare.cs" />
     <Compile Include="../Source/Precepts/TraitIssueLinks.cs" />
     <Compile Include="../Source/Interactions/InteractionWorker_AdvancedConversionAttempt.cs" />
     <Compile Include="../Source/Interactions/AbilityConversion.cs" />

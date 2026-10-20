@@ -7,6 +7,7 @@ Committed work lives in [todo.md](todo.md); how the current system works is in [
 
 ### Belief mechanics
 
+- **Radiochat moves stances**: you're talking to another faction, you should be moved by them somewhat. Debate would require generating a person, could choose a random idea. Given all the useful side effects, debate is probably the better mechanic
 - **Debate-obsessed break.**
   A mental break where the pawn goes around starting debates with everyone (the iconoclast agitation covers part of this).
 - **Hated faiths colour pawn opinions.**

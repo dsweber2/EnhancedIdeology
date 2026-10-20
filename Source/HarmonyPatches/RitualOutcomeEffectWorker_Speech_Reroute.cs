@@ -36,8 +36,12 @@ internal static class RitualOutcomeEffectWorker_Speech_Reroute
             return codes;
         }
 
-        // First stloc after SetIdeo is the text2 store at the end of the "converted listeners" concat.
-        var text2StlocIdx = codes.FindIndex(setIdeoIdx + 1, c => c.IsStloc());
+        // The ldloc after SetIdeo loads text2. Its matching stloc ends the "converted listeners" concat.
+        // Do not use the first stloc: the 1.7 compiler stores a TaggedString temp inside the concat.
+        var text2Ldloc = codes[setIdeoIdx + 1];
+        var text2StlocIdx = text2Ldloc.IsLdloc()
+            ? codes.FindIndex(setIdeoIdx + 1, c => c.IsStloc() && c.LocalIndex() == text2Ldloc.LocalIndex())
+            : -1;
         if (text2StlocIdx < 0 || text2StlocIdx + 1 >= codes.Count)
         {
             Log.Error("[EnhancedIdeology] RitualOutcomeEffectWorker_Speech transpiler: text2 stloc not found — game update?");

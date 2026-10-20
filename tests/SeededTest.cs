@@ -16,7 +16,7 @@ public abstract class SeededTest
         DefDatabase<PreceptDef>.Clear();
         DefDatabase<IssueDef>.Clear();
         DefDatabase<MemeDef>.Clear();
-        IssueStanceTracker.ClearMemeCache();
+        TraitStanceTargets.ClearMemeCache();
         PreceptPolicy.ClearOverrides();
         // Settings are a process-wide singleton in the sim; reset the knobs tests tweak so one test's mutation
         // never leaks into another's expectations.

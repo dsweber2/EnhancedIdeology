@@ -1,50 +1,5 @@
 namespace EnhancedIdeology;
 
-// Where the virtual "no opinion" rung sits for an optional Moral issue, expressed relative to named neighbour
-// rungs rather than a literal rank so it survives ladder reordering and load order. Resolved against the live
-// (reordered) ladder; a referenced rung absent from the ladder (mod not loaded) resolves to -1f and the spec
-// degrades gracefully (see Resolve). See docs/preceptPolicy.md's "Don't-care placement rule".
-internal readonly struct DontCareSpec
-{
-    private enum Kind { Between, Before, After, At }
-
-    private readonly Kind _kind;
-    private readonly string _a;
-    private readonly string? _b;
-
-    private DontCareSpec(Kind kind, string a, string? b)
-    {
-        _kind = kind;
-        _a = a;
-        _b = b;
-    }
-
-    public static DontCareSpec Between(string a, string b) => new(Kind.Between, a, b);
-    public static DontCareSpec Before(string a) => new(Kind.Before, a, null);
-    public static DontCareSpec After(string a) => new(Kind.After, a, null);
-    public static DontCareSpec At(string a) => new(Kind.At, a, null);
-
-    public float Resolve(IssueDef issue)
-    {
-        var a = PreceptLadder.RankOfName(issue, _a);
-        switch (_kind)
-        {
-            case Kind.Between:
-                var b = PreceptLadder.RankOfName(issue, _b!);
-                if (a < 0f && b < 0f) return -1f;
-                if (a < 0f) return b;
-                if (b < 0f) return a;
-                return (a + b) / 2f;
-            case Kind.Before:
-                return a < 0f ? -1f : a - 0.5f;
-            case Kind.After:
-                return a < 0f ? -1f : a + 0.5f;
-            default:
-                return a;
-        }
-    }
-}
-
 // A stance one issue's precept induces on another (docs/preceptPolicy.md "Interactions"): holding the source
 // precept makes an ideo behave, on the target issue, as if it took the given rung - unless it already takes an
 // explicit stance there. The induced rank is resolved against the live target ladder so it survives
@@ -113,11 +68,9 @@ internal static partial class PreceptPolicy
         // Lifestyle/aesthetic mod issues David gave an explicit Don't-care placement (docs/preceptPolicy.md).
         "VME_Expectations", "AM_Rain", "VME_Aurora", "VME_BookReading", "VME_BookReadingSpeed",
         "VME_BookWriting", "VME_Travel", "VME_PermanentBases",
-        // Mod Moral issues with a defaultSelectionWeight rung: every ideo resolves to a real rung (silent ->
-        // that default, usually the centred neutral), so the -1 Don't-care default is never consulted and no
-        // entry is needed. Verified each ladder is monotonic on its belief axis (a couple - VME_Recreation,
-        // VME_Illness - are reversed, but OpinionOnPrecept is symmetric under axis reflection), so no order
-        // override is needed either. See docs/preceptPolicy.md "Order-fix candidates (verified)".
+        // Mod Moral issues with a defaultSelectionWeight rung. That rung is the neutral (PreceptPolicy.DontCare).
+        // A couple - VME_Recreation, VME_Illness - run reversed, but OpinionOnPrecept is symmetric under axis
+        // reflection. See docs/preceptPolicy.md "Order-fix candidates (verified)".
         "AM_FertilityIssue", "AM_LearningRate", "AM_LovinFrequency", "AM_Creep", "AM_Disfigurement",
         "VME_Illness", "VME_InsectJelly", "VME_Sweets", "VME_DumbLabor", "AM_OcularTrees",
         // Anomaly DLC optional Moral issues (defNames assumed from vanilla naming conventions; verified against
@@ -159,7 +112,20 @@ internal static partial class PreceptPolicy
         "AM_Reliquaries", "AM_RelicDestruction", "VME_Corruption", "VME_SocialInteractions", "VME_LeaderDivinity",
         "VME_Anonymity", "VFEA_Recruiting", "VFEA_BeingRecruited",
     ];
-    private static readonly HashSet<string> UniversalPositiveIssues = ["Charity", "VME_Recreation"];
+    // UniversalPositive issue -> the rung that values it most. A trait that opposes the issue pulls away from it.
+    private static readonly Dictionary<string, string> UniversalPositiveValuedRung = new()
+    {
+        ["Charity"] = "Charity_Essential",
+        ["VME_Recreation"] = "VME_Recreation_Loved",
+    };
+
+    // Rank of the rung that values a UniversalPositive issue most, or null if the issue has none on the ladder.
+    internal static float? ValuedRank(IssueDef issue)
+    {
+        if (!UniversalPositiveValuedRung.TryGetValue(issue.defName, out var rung)) return null;
+        var rank = PreceptLadder.RankOfName(issue, rung);
+        return rank >= 0f ? rank : null;
+    }
     // Special issues route through the special resolvers instead of the rung-distance model. VME_Leader /
     // VME_Mood are rank-based (categorical / hybrid, via TrySpecialOpinion); Weapons / PreferredXenotypes
     // compare whole precept payloads (via TryPayloadSpecialOpinion).
@@ -251,16 +217,23 @@ internal static partial class PreceptPolicy
         ["Eclipse"] = ["Eclipse_Beautiful", "VME_Eclipse_Despised"],
         // AM_FungusEating_Required (AlphaMemes) and FungusEating_Preferred (Ideology) both default to order 0.
         ["FungusEating"] =
-            ["AM_FungusEating_Required", "FungusEating_Preferred", "VME_FungusEating_DontCare", "FungusEating_Despised"],
+        [
+            "AM_FungusEating_Required", "FungusEating_Preferred", "VME_FungusEating_DontCare",
+            "BMT_FungusEating_DontCare", "FungusEating_Despised",
+        ],
         // GauranlenConnection_Strong (Ideology) and AM_GauranlenConnection_Forbidden (AlphaMemes) both
         // default to order 0.
         ["GauranlenConnection"] = ["GauranlenConnection_Strong", "AM_GauranlenConnection_Forbidden"],
         // Ranching_Central/AM_Ranching_CattleCentered tie at default order 0; raw order otherwise interleaves
         // VME_Ranching_Disliked (anti, order 10) before VME_Ranching_Nomadic (pro, order 30).
         ["Ranching"] =
-            ["Ranching_Central", "AM_Ranching_CattleCentered", "VME_Ranching_Nomadic", "VME_Ranching_Disliked"],
-        // Trees_Desired (Ideology) and AM_Trees_Despised (AlphaMemes) both default to order 0.
-        ["Trees"] = ["Trees_Desired", "AM_Trees_Despised"],
+        [
+            "Ranching_Central", "AM_Ranching_CattleCentered", "VME_Ranching_Nomadic", "VME_Ranching_Discouraged",
+            "VME_Ranching_Disliked",
+        ],
+        // Trees_Desired (Ideology) and AM_Trees_Despised (AlphaMemes) both default to order 0, and
+        // MI_Trees_Mildly_Desired is a milder pro rung.
+        ["Trees"] = ["Trees_Desired", "MI_Trees_Mildly_Desired", "AM_Trees_Despised"],
         // Anomaly DLC: no displayOrderInIssue set on any rung, all default to 0.
         ["PsychicRituals"] = ["PsychicRituals_Exalted", "PsychicRituals_Disapproved", "PsychicRituals_Abhorrent"],
         ["VoidStudy"] = ["VoidStudy_VeryEfficient", "VoidStudy_Efficient", "VoidStudy_Inefficient", "VoidStudy_VeryInefficient"],
@@ -277,13 +250,22 @@ internal static partial class PreceptPolicy
             ["MI_LeaderAnarchy", "MI_Elections_Required", "MI_LeaderCorporate", "MI_LeaderMonarchy", "MI_LeaderDictatorship"],
         // Indoors: VVE adds VVE_SmallSpaces_Horrible (no displayOrderInIssue) alongside the base-game
         // Indoors_Acceptable (also no displayOrderInIssue). Both default to 0, so order is undefined — fix it.
-        ["Indoors"] = ["Indoors_Acceptable", "VVE_SmallSpaces_Horrible"],
+        // AM_Indoors_Required is the pro-indoors extreme, past Acceptable.
+        ["Indoors"] = ["AM_Indoors_Required", "Indoors_Acceptable", "VVE_SmallSpaces_Horrible"],
         // Former PositiveOnly issues whose rungs all tie at displayOrderInIssue=0 (or scramble, for Blindness
         // and BS_AlienAppearanceTolerance) once stacked. Monastic (Medium impact) outranks preferred (Low).
         ["AM_Armour"] = ["AM_Armour_Forbidden", "AM_Armour_Blunt"],
         ["AM_Barracks"] = ["AM_Barracks_Preferred", "AM_Barracks_PreferredTrue", "AM_Barracks_Acceptable"],
         ["Pain"] = ["AM_Pain_Required", "Pain_Idealized", "VME_Pain_DontCare"],
-        ["Comfort"] = ["Comfort_Ignored", "AM_Comfort_DiscomfortPreferred"],
+        // Anti-comfort to pro-comfort. Ideology: More Precepts adds Wanted/Important/Essential.
+        ["Comfort"] =
+        [
+            "AM_Comfort_DiscomfortPreferred", "Comfort_Ignored", "Comfort_Wanted", "Comfort_Important",
+            "Comfort_Essential",
+        ],
+        // Exuberant (lovin interval -0.6) is past Increased (-0.2).
+        ["AM_LovinFrequency"] =
+            ["AM_LovinFrequency_Decreased", "AM_LovinFrequency_Normal", "AM_LovinFrequency_Increased", "AM_LovinFrequency_Exuberant"],
         ["Blindness"] = ["Blindness_Sublime", "Blindness_Elevated", "Blindness_Respected", "Blinding_Horrible"],
         ["BS_AlienAppearanceTolerance"] =
         [
@@ -304,103 +286,6 @@ internal static partial class PreceptPolicy
         // The three armour specialties have identical text ("Defense is paramount") and differ only in stat.
         ["AM_Armour_Sharp"] = "AM_Armour_Blunt",
         ["AM_Armour_Heat"] = "AM_Armour_Blunt",
-    };
-
-    // Where the virtual Don't-care rung sits for each OPTIONAL Moral issue (docs/preceptPolicy.md). Mandatory
-    // issues never go silent, so they carry no entry; an unlisted issue defaults to -1f (permissive extreme).
-    // Keyed by IssueDef.defName; each spec is neighbour-keyed and resolved against the reordered ladder.
-    public static readonly Dictionary<string, DontCareSpec> DontCare = new()
-    {
-        // Vanilla / DLC optional Moral issues.
-        ["DrugUse"] = DontCareSpec.Between("DrugUse_MedicalOrSocial", "DrugUse_MedicalOnly"),
-        ["ChildLabor"] = DontCareSpec.Between("ChildLabor_Encouraged", "ChildLabor_Disapproved"),
-        ["Apostasy"] = DontCareSpec.Between("VME_Apostasy_Accepted", "Apostasy_Disapproved"),
-        ["Raiding"] = DontCareSpec.Between("VME_Raiding_Honorable", "VME_Raiding_Abhorrent"),
-        ["BodyModification"] = DontCareSpec.Between("BodyMod_Approved", "BodyMod_Disapproved"),
-        ["MeatEating"] = DontCareSpec.Between("MeatEating_NonMeat_Disapproved", "MeatEating_Disapproved"),
-        ["AnimalSlaughter"] = DontCareSpec.After("AM_AnimalSlaughter_Desired"),
-        ["Fishing"] = DontCareSpec.Between("Fishing_Disapproved", "Fishing_Sacred"),
-        ["GrowthVat"] = DontCareSpec.Between("GrowthVat_Essential", "GrowthVat_Prohibited"),
-        ["Bloodfeeders"] = DontCareSpec.Between("Bloodfeeders_Revered", "Bloodfeeders_Reviled"),
-        ["Biosculpting"] = DontCareSpec.Between("Biosculpting_Accelerated", "BioSculpter_Despised"),
-        ["AutonomousWeapons"] = DontCareSpec.Between("VME_AutonomousWeapons_Accepted", "AutonomousWeapons_Disapproved"),
-        ["Bonding"] = DontCareSpec.Before("Bonding_Disapproved"),
-        // Mod optional Moral issues (David's placements).
-        ["VME_Alcohol"] = DontCareSpec.Between("VME_Alcohol_Desired", "VME_Alcohol_MildAbstinence"),
-        ["VME_KillingWithFire"] = DontCareSpec.Between("VME_KillingWithFire_Abhorrent", "VME_KillingWithFire_Preferred"),
-        ["VME_LeatherApparel"] = DontCareSpec.Before("VME_LeatherApparel_Disliked"),
-        ["VME_Scars"] = DontCareSpec.Between("VME_Scars_Disgusting", "VME_Scars_Honorable"),
-        ["VME_Elders"] = DontCareSpec.Between("VME_Elders_Despised", "VME_Elders_Respected"),
-        ["VME_Royalty"] = DontCareSpec.Between("VME_Royalty_Disliked", "VME_Royalty_Respected"),
-        ["VME_Mechanoids"] = DontCareSpec.Between("VME_Mechanoids_Despised", "VME_Mechanoids_Exalted"),
-        ["VME_Insectoids"] = DontCareSpec.Between("VME_Insectoids_Despised", "VME_Insectoids_Exalted"),
-        ["VME_Fire"] = DontCareSpec.Between("VME_Fire_Despised", "VME_Fire_Desired"),
-        ["VME_Firefighting"] = DontCareSpec.Between("VME_Firefighting_Preferred", "VME_Firefighting_Abhorrent"),
-        ["AM_Religion"] = DontCareSpec.Between("AM_Religion_ProselytismDisliked", "AM_Religion_Disliked"),
-        ["AM_AnimalRelease"] = DontCareSpec.Between("AM_AnimalRelease_Discouraged", "AM_AnimalRelease_Encouraged"),
-        ["VME_Expectations"] = DontCareSpec.Between("VME_Expectations_High", "VME_Expectations_Low"),
-        ["AM_Rain"] = DontCareSpec.Between("AM_Rain_Disliked", "AM_Rain_Blessed"),
-        ["Eclipse"] = DontCareSpec.Between("Eclipse_Beautiful", "VME_Eclipse_Despised"),
-        ["GauranlenConnection"] = DontCareSpec.Between("GauranlenConnection_Strong", "AM_GauranlenConnection_Forbidden"),
-        ["Trees"] = DontCareSpec.Between("Trees_Desired", "AM_Trees_Despised"),
-        // Central/CattleCentered/Nomadic are all degrees of pro-ranching culture (Central even mandates not
-        // eating plants); only Disliked is anti. True indifference sits at the boundary between the mildest
-        // pro rung and the anti one, not "before Central" (which would read silence as itself mildly pro).
-        ["Ranching"] = DontCareSpec.Between("VME_Ranching_Nomadic", "VME_Ranching_Disliked"),
-        ["VME_Aurora"] = DontCareSpec.Between("VME_Aurora_Amazing", "VME_Aurora_Despised"),
-        ["VME_BookReading"] = DontCareSpec.Between("VME_BookReading_Desired", "VME_BookReading_Disliked"),
-        ["VME_BookReadingSpeed"] = DontCareSpec.Between("VME_BookReadingSpeed_Increased", "VME_BookReadingSpeed_Decreased"),
-        ["VME_BookWriting"] = DontCareSpec.Between("VME_BookWriting_Disliked", "VME_BookWriting_Exalted"),
-        ["VME_Travel"] = DontCareSpec.Between("VME_Travel_Desired", "VME_Travel_Despised"),
-        ["VME_PermanentBases"] = DontCareSpec.Between("VME_PermanentBases_Desired", "VME_PermanentBases_Despised"),
-        // Anomaly DLC optional Moral issues. Defnames are assumed; DontCareSpec degrades to -1f (issue skipped)
-        // if Anomaly is not loaded. Placements assumed from the user-supplied ladder descriptions.
-        ["PsychicRituals"] = DontCareSpec.Between("PsychicRituals_Disapproved", "PsychicRituals_Exalted"),
-        ["VoidStudy"] = DontCareSpec.Between("VoidStudy_Inefficient", "VoidStudy_Efficient"),
-        ["Inhumanizing"] = DontCareSpec.Before("Inhumanizing_Required"),
-        // Mort's Ideologies (MortStrudel.MortIdeologyEnv): two opposing rungs per issue.
-        ["MI_Pollution"] = DontCareSpec.Between("MI_Pollution_Preferred", "MI_Pollution_Despised"),
-        ["MI_ToxicWasteDumping"] = DontCareSpec.Between("MI_ToxicWasteDumping_Respected", "MI_ToxicWasteDumping_Abhorrent"),
-        // Mort's Ideologies: Political Compass (MortStrudel.MortIdeology).
-        // The Ignored rung (order=20) is the explicit neutral midpoint on the equality/stratification axis.
-        ["miHousingDistribution"] = DontCareSpec.At("miHousingDistribution_Ignored"),
-        // DontCare sits between Democracy and Corporate — the moderate centre of the authoritarian spectrum.
-        ["MI_Leader"] = DontCareSpec.Between("MI_Elections_Required", "MI_LeaderCorporate"),
-        // Questing Meme (SirMashedPotato.QuestingMeme): no-opinion sits before the mildest positive stance.
-        ["QuesterMeme_QuestComplete"] = DontCareSpec.Before("QuesterMeme_QuestComplete_Respected"),
-        ["QuesterMeme_QuestFail"] = DontCareSpec.Before("QuesterMeme_QuestFail_DontCare"),
-        // Vanilla Vehicles Expanded: Indoors is STACKED between pro-indoor and anti-indoor rungs.
-        // VVE_Driving/Flying/Sailing: the Allowed rung (defaultSelectionWeight=1) is the explicit neutral.
-        ["Indoors"] = DontCareSpec.Between("Indoors_Acceptable", "VVE_SmallSpaces_Horrible"),
-        ["VVE_Driving"] = DontCareSpec.At("VVE_Driving_Allowed"),
-        ["VVE_Flying"] = DontCareSpec.At("VVE_Flying_Allowed"),
-        ["VVE_Sailing"] = DontCareSpec.At("VVE_Sailing_Allowed"),
-        // Language Learning: Neutral rung (defaultSelectionWeight=1) is the explicit centre.
-        ["LanguageLearning"] = DontCareSpec.At("LanguageLearning_Neutral"),
-        // Romance on the Rim: no opinion on cheating/breakups sits before the most permissive rung.
-        ["RomanceOnTheRim_Issue_Cheat"] = DontCareSpec.Before("RomanceOnTheRim_Cheat_Encouraged"),
-        ["RomanceOnTheRim_Issue_Breakup"] = DontCareSpec.Before("RomanceOnTheRim_Breakup_Encouraged"),
-        ["RomanceOnTheRim_Issue_RomanceAttempt"] = DontCareSpec.Before("RomanceOnTheRim_RomanceAttempt_Encouraged"),
-        // VME_BookWritingSpeed parallels VME_BookReadingSpeed.
-        ["VME_BookWritingSpeed"] = DontCareSpec.Between("VME_BookWritingSpeed_Increased", "VME_BookWritingSpeed_Decreased"),
-        ["NikolaisIdeology_Beauty"] = DontCareSpec.Between("NikolaisIdeology_Beauty_Central", "NikolaisIdeology_Beauty_Unimportant"),
-        // Former PositiveOnly issues. Where one pole comes from another mod, the spec is keyed on the base rung
-        // only (After/Before), so it stays correct with or without that mod. Research, VME_Death and
-        // BS_AlienAppearanceTolerance have a defaultSelectionWeight rung and need no entry; VME_Power, VME_Junk
-        // and the single-rung issues use the -1 permissive default.
-        ["EB_Contemplation"] = DontCareSpec.At("Contemplation_Normal"),
-        ["Pain"] = DontCareSpec.After("Pain_Idealized"),
-        ["Blindness"] = DontCareSpec.Between("Blindness_Respected", "Blinding_Horrible"),
-        ["DarknessCombat"] = DontCareSpec.After("DarknessCombat_Preferred"),
-        ["Lighting"] = DontCareSpec.Before("Darklight_Preferred"),
-        ["Proselytizing"] = DontCareSpec.After("Proselytizing_Occasionally"),
-        ["Comfort"] = DontCareSpec.Before("Comfort_Ignored"),
-        ["AM_Armour"] = DontCareSpec.Between("AM_Armour_Forbidden", "AM_Armour_Blunt"),
-        ["AM_Barracks"] = DontCareSpec.After("AM_Barracks_Acceptable"),
-        ["VME_AutomationEfficiency"] = DontCareSpec.Between("VME_AutomationEfficiency_Increased", "VME_AutomationEfficiency_Decreased"),
-        ["VME_CraftingQuality"] = DontCareSpec.Between("VME_CraftingQuality_Increased", "VME_CraftingQuality_Decreased"),
-        ["VME_PsychicSensitivity"] = DontCareSpec.Between("VME_PsychicSensitivity_Heightened", "VME_PsychicSensitivity_Lowered"),
-        ["AM_PsychicSensitivity"] = DontCareSpec.Between("AM_PsychicSensitivity_Heightened", "AM_PsychicSensitivity_Affinity"),
     };
 
     // Sim/test hook: register a category for an issue absent from the hardcoded tables (test ladders are Moral).
@@ -443,7 +328,7 @@ internal static partial class PreceptPolicy
         }
 
         if (MoralIssues.Contains(defName)) return PreceptCategory.Moral;
-        if (UniversalPositiveIssues.Contains(defName)) return PreceptCategory.UniversalPositive;
+        if (UniversalPositiveValuedRung.ContainsKey(defName)) return PreceptCategory.UniversalPositive;
         if (SpecialIssues.Contains(defName)) return PreceptCategory.Special;
         if (NAIssues.Contains(defName)) return PreceptCategory.NA;
         return PreceptCategory.PositiveOnly;

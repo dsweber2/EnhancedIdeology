@@ -27,51 +27,51 @@ participates through the separate **acquired** channel (the existing personal pe
 
 ## Moral (need order + Don't-care rank)
 
-**Don't-care placement rule** — where the virtual "no opinion" rung sits depends on whether the ladder has
-a *pro* side:
-- **One-sided** (all rungs are degrees of restriction, no "encouraged/required" end, e.g. `KillingInnocentAnimals`
-  = disapproved→abhorrent): "don't care" = *no restriction* → **permissive extreme**, below rank 0.
-- **Two-sided** (pro ↔ anti, e.g. `Cannibalism` = required…abhorrent): "don't care" is **neutral — the
-  middle**, between the least-pro and least-anti rungs. NOT an extreme ("below required" would mean *more
-  pro-cannibal than required-ravenous", which is nonsense).
-- **Explicit neutral rung** (Execution `don't care`, Corpses `don't care`, NutrientPaste `indifferent`,
-  IdeoDiversity `neutral`): just use that rung's rank.
+**Don't-care placement rule** — neutral is the **vanilla baseline**: the stance of a pawn whose faith has no precept on the issue, which is what classic mode does.
+Find it by what the rungs do, not by their labels:
+- **A classic rung or a rung with no effects** (`Slavery_Acceptable`, `Corpses_Ugly`, `MI_DrugUse_Allowed`): neutral is that rung.
+- **A classic rung that is not in the ladder** (`Lovin_Free`, `VVE_*_Allowed`, `Execution_Classic`): neutral sits where that rung would be, next to the rung whose effects it matches.
+- **No baseline rung**: neutral sits between the mildest rungs on each side, or past the last rung of a one-sided ladder.
+- **A rung named "don't care" is a stance** if it changes anything from the baseline (`VME_Pain_DontCare` raises the pain shock threshold, `Corpses_DontCare` removes the vanilla corpse moodlets).
 
-| issue                                                                                                                                                                         | mark | Don't-care sits…                                                                          | note                                                                           |
-| ------------------------+------+------------------------------------------------------------+-------------------------------------------------------------------------------- |      |                                                                                           |                                                                                |
-| Cannibalism                                                                                                                                                                   | (a)  | neutral / mid (between `acceptable` and `disapproved`)                                    | two-sided; vanilla clean                                                       |
-| MeatEating                                                                                                                                                                    | (p)  | permissive extreme                                                                        | ⚑ scrambled by VIE (`vegetarian disliked` at high order) — needs order fix     |
-| AnimalSlaughter                                                                                                                                                               | (p)  | permissive extreme                                                                        | ⚑ scrambled by Alpha Memes (`desired` appended above `prohibited`) — order fix |
-| KillingInnocentAnimals                                                                                                                                                        | (a)  | permissive extreme                                                                        | vanilla clean                                                                  |
-| Slavery                                                                                                                                                                       | (a)  | After Slavery_acceptable                                                                  | vanilla clean                                                                  |
-| Execution                                                                                                                                                                     | (a)  | explicit `don't care` rung (mid)                                                          | has a real neutral rung                                                        |
-| OrganUse                                                                                                                                                                      | (p)  | ⚑ scrambled by Alpha Memes (`desired` appended above `prohibited`) — order fix            |                                                                                |
-| DrugUse                                                                                                                                                                       | (a)  | **mid-ladder** (~between medical-or-social & medical-only)                                | not −1; `essential` is pro-drug                                                |
-| ChildLabor                                                                                                                                                                    | (a)  | mid (between `encouraged` / `disapproved`)                                                | two-sided                                                                      |
-| Lovin                                                                                                                                                                         | (a)  | n/a, mandatory                                                                            | free↔prohibited spectrum                                                       |
-| Nudity (M/F)                                                                                                                                                                  | (a)  | n/a mid (`no rules`)                                                                      | has explicit `no rules`                                                        |
-| SpouseCount (M/F)                                                                                                                                                             | (a)  | order wrong (0,4,3,2,1), but manditory anyway                                             | monogamy↔polygamy — moral, or leave as preference?                             |
-| Scarification                                                                                                                                                                 | (a)  | n/a, mandatory                                                                            |                                                                                |
-| Apostasy                                                                                                                                                                      | (a)  | between accepted and disapproved                                                          |                                                                                |
-| IdeoDiversity                                                                                                                                                                 | (a)  | n/a, mandatory                                                                            | tolerance-of-other-beliefs — very on-topic; ties into PreferredXenotypes       |
-| Corpses                                                                                                                                                                       | (a)  | n/a, explicit `don't care` rung                                                           |                                                                                |
-| FungusEating                                                                                                                                                                  | (a)  | n/a mandatory, mid (`preferred`↔`despised`)                                               |                                                                                |
-| InsectMeat                                                                                                                                                                    | (a)  | n/a mandatory, mid                                                                        | has explicit `don't care` in some stacks                                       |
-| NutrientPasteEating                                                                                                                                                           | (a)  | explicit `indifferent`/`don't mind`                                                       | mods number it cleanly (negative orders)                                       |
-| BodyModification                                                                                                                                                              | (a)  | between approved and disapproved. `Only biological` should be between approved/disaproved |                                                                                |
-| Raiding                                                                                                                                                                       | (a)  | between honorable and abhorrent                                                           | required↔abhorrent (VIE)                                                       |
-| AutonomousWeapons                                                                                                                                                             | (a)  | between accepted and disapproved                                                          |                                                                                |
-| Fishing                                                                                                                                                                       | (a)  | betwene disapproved and sacred                                                            | prohibited↔sacred — two-sided but niche                                        |
-| GrowthVat                                                                                                                                                                     | (a)  | between essential and prohibited                                                          | essential↔prohibited                                                           |
-| Skullspike                                                                                                                                                                    | (a)  | mid                                                                                       | desired↔disapproved                                                            |
-| Bloodfeeders                                                                                                                                                                  | (a)  | mid                                                                                       | revered↔reviled                                                                |
-| Biosculpting                                                                                                                                                                  | (a)  | mid                                                                                       | Accelerated↔despised                                                           |
-| Bonding                                                                                                                                                                       | (a)  | permissive extreme                                                                        | single `disapproved` rung — thin                                               |
-| Trees                                                                                                                                                                         | (m)  | mid                                                                                       | Desired↔despised                                                               |
-| RoughLiving                                                                                                                                                                   | (m)  | mid                                                                                       | induced by AlphaMemes                                                          |
-| GauranlenConnection                                                                                                                                                           | (m)  | mid                                                                                       | induced by AlphaMemes                                                          |
-| Eclipse                                                                                                                                                                       | (m)  | mid                                                                                       | induced by VIE-M&S                                                             |
-| Ranching                                                                                                                                                                      | (m)  | between Nomadic and central                                                               | only if VIE-M&S is present                                                     |
+Mandatory issues need a neutral too: pawns read it for trait targets, held stances (`HoldsStance`), and opinion and debate spans.
+An unlisted issue defaults to −1, one step past rank 0; that is correct only for single-rung and restriction-only ladders (`KillingInnocentAnimals`, `Mining`, `TreeCutting`).
+A spec that names a mod rung needs a fallback for when that mod is absent (`DontCareSpec.Or`), and must not use `Between(vanillaRung, modRung)`, which collapses onto the vanilla rung.
+The table lives in `Source/Precepts/PreceptPolicy.DontCare.cs`.
+
+| issue | neutral | why |
+| --- | --- | --- |
+| Slavery | `Acceptable` | no effects; "a normal, unremarkable part of life" |
+| Execution | just before `HorribleIfInnocent` | `Execution_Classic` has only its "know" thoughts |
+| Cannibalism | `Abhorrent` | `Cannibalism_Classic` gives −20 for eating human meat, the same as `Abhorrent` |
+| OrganUse | just before `HorribleSellOK` | `OrganUse_Classic` objects only to harvests from colonists and guests |
+| Scarification | past `Minor` | vanilla has no scar thoughts |
+| Skullspike | between `Desired` and `Disapproved` | vanilla has no skullspike thoughts |
+| IdeoDiversity | `Standard` | default rung; "neither approved or disapproved" |
+| Lovin | past `FreeApproved` | `Lovin_Free` (classic, not in the ladder) has no thoughts |
+| Nudity (M/F) | the classic rung (groin, groin and chest) | classic |
+| SpouseCount (M/F) | `MaxOne` | classic |
+| MarriageName | `UsuallyMans` | classic |
+| Corpses | `Ugly` | classic; `DontCare` removes the vanilla moodlet, so it is a stance |
+| NutrientPasteEating | `Disgusting` | classic |
+| InsectMeat | `Despised_Classic` | classic |
+| FungusEating | `VME_FungusEating_DontCare`, else between `Preferred` and `Despised` | vanilla has no fungus thoughts |
+| Research | `Normal` | default rung, ×1 speed |
+| DrugUse | `MI_DrugUse_Allowed`, else just before `MedicalOrSocial` | no precept = no drug thoughts; `MedicalOrSocial` already forbids hard drugs |
+| ChildLabor | between `Encouraged` and `Disapproved` | |
+| Apostasy | just before `Disapproved` | `VME_Apostasy_Accepted` (certainty loss ×3) is a stance |
+| Raiding | past `VME_Raiding_Honorable`, else past `Respected` | |
+| BodyModification | `MI_BodyMod_Allowed`, else past `Approved` | `VME_BodyMod_OnlyBiological` is a stance |
+| AutonomousWeapons | just before `Disapproved` | `VME_AutonomousWeapons_Accepted` has a thought |
+| MeatEating, AnimalSlaughter, Fishing, GrowthVat, Bloodfeeders, Biosculpting | between the mildest pro and anti rungs | |
+| Bonding, KillingInnocentAnimals, Mining, TreeCutting | before rank 0 | restriction-only |
+| RoughLiving | just before `Welcomed` | |
+| Trees | past `MI_Trees_Mildly_Desired`, else past `Desired` | |
+| GauranlenConnection, Eclipse | past the vanilla pro rung | |
+| Indoors | past `Acceptable` | `AM_Indoors_Required` is the pro extreme |
+| Ranching | past the mildest pro rung present (`Nomadic`, `CattleCentered`, `Central`) | |
+| Comfort | past `Ignored` | `Ignored` drops the comfort need |
+| RomanceOnTheRim (Cheat, Breakup, RomanceAttempt) | past `Encouraged` | the precepts scale chances: `Encouraged` ×1.5, none ×1, `Discouraged` ×0.5 |
 
 ## Reorder (semantic order remap)
 
@@ -123,7 +123,7 @@ Rungs listed pro → anti. `— neutral —` marks where Don't-care sits.
 | --- | --- | --- | --- | --- |
 | AM_Armour | ✓ | Moral, tied ranks | `Forbidden` — neutral — `Blunt` = `Sharp` = `Heat` | the three specialties have identical text and differ only in stat; `PreceptPolicy.TiedRungs` maps Sharp and Heat onto Blunt |
 | AM_Barracks | ✓ | Moral, plain | `Preferred` (monastic) → `PreferredTrue` → `Acceptable` — neutral — | one-sided: silence is the vanilla dislike of barracks; monastic is Medium impact, preferred Low |
-| Pain | ✓ | Moral, plain | `AM_Pain_Required` → `Pain_Idealized` → `VME_Pain_DontCare` | `VME_Pain_DontCare` is the explicit neutral, but `At` degrades to −1 without VME, so use `After("Pain_Idealized")`; the `RoughLiving` induction should cover `AM_Pain_Required` too |
+| Pain | ✓ | Moral, plain | `AM_Pain_Required` → `Pain_Idealized` → `VME_Pain_DontCare` — neutral — | one-sided: `VME_Pain_DontCare` ("pain can be endured", +pain shock threshold) is a machismo rung, not the neutral; `After("VME_Pain_DontCare").Or(After("Pain_Idealized"))` falls back past `Idealized` without VME; the `RoughLiving` induction should cover `AM_Pain_Required` too |
 | EB_Contemplation | ✓ | Moral, plain | `Required` → `Respected` → `Normal` → `Disapproved` → `Forbidden` | our own issue; `Normal` is the explicit neutral |
 | Research | ✓ | Moral, plain | `VeryFast` → `Fast` → `Normal` → `Slow` → `VerySlow` → `ExtremelySlow` → `None` | text is moral ("an immoral act" ↔ "among the most meaningful acts"); `Normal` is the explicit neutral |
 | Blindness | ✓ | Moral, plain | `Sublime` → `Elevated` → `Respected` — neutral — `Blinding_Horrible` | two-sided |
@@ -137,8 +137,8 @@ Rungs listed pro → anti. `— neutral —` marks where Don't-care sits.
 | VME_CraftingQuality | ✓ | Moral, plain | `Increased` — neutral — `Decreased` | "take no shortcuts" ↔ "why create when you can steal" |
 | VME_PsychicSensitivity | ✓ | Moral, plain | `Heightened` — neutral — `Lowered` | "open mind" ↔ "mental fortress" |
 | AM_PsychicSensitivity | ✓ | Moral, plain | `Heightened` — neutral — `Affinity` | same axis as the VME issue, but a separate IssueDef; ✓ only one of the two may hold an opinion when both mods are loaded (see below) |
-| BS_AlienAppearanceTolerance | ✓ | Moral, plain | `FullTolerance` → `SomeTolerance` → `Default` | xenophobia axis; `Default` has `defaultSelectionWeight` 8, so every faith holds a rung and no Don't-care is needed |
-| Comfort | ✓ | Moral, plain | — neutral — `Comfort_Ignored` → `AM_Comfort_DiscomfortPreferred` | was ✓ PositiveOnly; one-sided anti-comfort, silence is the vanilla love of comfort |
+| BS_AlienAppearanceTolerance | ✓ | Moral, plain | `FullTolerance` → `SomeTolerance` → `Default` | xenophobia axis; `Default` (`defaultSelectionWeight` 8) is the neutral |
+| Comfort | ✓ | Moral, plain | `AM_Comfort_DiscomfortPreferred` → `Comfort_Ignored` — neutral — `Comfort_Wanted` → `Comfort_Important` → `Comfort_Essential` | `Ignored` drops the comfort need, so it is a stance; Ideology: More Precepts adds the pro-comfort rungs |
 | VME_CraftingSpeed | ✓ | stay PositiveOnly | — | `FasterForManual` ↔ `SlowerForManual` is an axis, but `Slower` ("never rush") is off-axis |
 | AM_CombatProwess | ✓ | stay PositiveOnly | — | ranged / melee / reduced are trade-offs, not values |
 | MiningYield, VME_SkilledLabor, VME_PermitCooldown, VME_PermitHonorCost, ApparelDesire | ✓ | stay PositiveOnly | — | stat levels or payload; no opposing claim |
@@ -151,7 +151,7 @@ Rungs listed pro → anti. `— neutral —` marks where Don't-care sits.
 - Partly tied: `BS_AlienAppearanceTolerance` has `FullTolerance` and `SomeTolerance` both at 10. Overridden.
 
 **Don't-care where one pole comes from another mod:** the spec is keyed on the base rung only (`After`/`Before`), not `Between`, so it never collapses onto that rung when the other mod is absent.
-`Pain` uses `After("Pain_Idealized")`, `DarknessCombat` `After("DarknessCombat_Preferred")`, `Lighting` `Before("Darklight_Preferred")`, `Proselytizing` `After("Proselytizing_Occasionally")`.
+`Pain` uses `After("VME_Pain_DontCare").Or(After("Pain_Idealized"))` (`Or` is the fallback when the first rung is absent), `DarknessCombat` `After("DarknessCombat_Preferred")`, `Lighting` `Before("Darklight_Preferred")`, `Proselytizing` `After("Proselytizing_Occasionally")`.
 The older `Eclipse` entry (`Between("Eclipse_Beautiful", "VME_Eclipse_Despised")`) has this collapse without VME; not changed here.
 
 **Psychic sensitivity with both mods loaded** ✓: one axis must not count twice. Deferred; tracked in [todo.md](../todo.md).
@@ -205,6 +205,8 @@ Not one-rung Moral after review:
 ## UniversalPositive
 
 - **Charity** ✓ — flat positive for everyone.
+  The ladder runs `Essential` (rank 0) → `Important` → `Worthwhile`, so Don't-care is `After("Charity_Worthwhile")`.
+  The `-1` default would put indifference next to `Essential`.
 
 ## Special
 

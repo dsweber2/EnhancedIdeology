@@ -24,32 +24,6 @@ internal sealed class IssueStanceTracker
     // IssueDefs do not change after load, so one full seeding pass per session is enough.
     private bool _seeded;
 
-    private static Dictionary<MemeDef, HashSet<IssueDef>>? _memeGrantableIssues;
-    private static Dictionary<MemeDef, HashSet<IssueDef>> MemeGrantableIssues
-    {
-        get
-        {
-            if (_memeGrantableIssues != null) return _memeGrantableIssues;
-            _memeGrantableIssues = [];
-            foreach (var meme in DefDatabase<MemeDef>.AllDefs)
-            {
-                var issues = new HashSet<IssueDef>();
-                if (!meme.requireOne.NullOrEmpty())
-                    foreach (var group in meme.requireOne)
-                        foreach (var precept in group)
-                            if (precept?.issue != null) issues.Add(precept.issue);
-                if (meme.selectOneOrNone?.preceptThingPairs != null)
-                    foreach (var pair in meme.selectOneOrNone.preceptThingPairs)
-                        if (pair?.precept?.issue != null) issues.Add(pair.precept.issue);
-                if (issues.Count > 0) _memeGrantableIssues[meme] = issues;
-            }
-            return _memeGrantableIssues;
-        }
-    }
-
-    // Test hook: tests swap the MemeDef database between cases.
-    internal static void ClearMemeCache() => _memeGrantableIssues = null;
-
     internal IssueStanceTracker(Pawn pawn) { _pawn = pawn; }
     internal void SetPawn(Pawn pawn) { _pawn = pawn; }
 
@@ -89,17 +63,17 @@ internal sealed class IssueStanceTracker
 
         var freshSeed = _strength.Count == 0;
         float? traitOffset = null;
-        Dictionary<IssueDef, float>? memeOffsets = null;
+        var seededNow = new List<IssueDef>();
         foreach (var issue in DefDatabase<IssueDef>.AllDefs)
         {
             if (_strength.ContainsKey(issue)) continue;
             if (PreceptPolicy.CategoryOf(issue) == PreceptCategory.NA) continue;
             traitOffset ??= ConvictionStrengthOffset();
-            memeOffsets ??= TraitMemeConvictionOffsets();
             SetRank(issue, HeldRank(_pawn.Ideo!, issue));
             _strength[issue] = Mathf.Clamp(
-                Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax) + traitOffset.Value + memeOffsets.GetValueOrDefault(issue),
+                Rand.Range(ConvictionScale.BaseConvictionMin, ConvictionScale.BaseConvictionMax) + traitOffset.Value,
                 ConvictionScale.MinConvictionStrength, ConvictionScale.AbsoluteMaxConvictionStrength);
+            seededNow.Add(issue);
         }
 
         if (freshSeed)
@@ -107,8 +81,9 @@ internal sealed class IssueStanceTracker
             if (!certaintyInitialized)
                 ApplyHeterodoxy();
             ApplyDietGeneStanceOverride();
-            ApplyTraitIssueLinks();
         }
+        if (seededNow.Count > 0)
+            ApplyTraitTargets(seededNow);
 
         return freshSeed && certaintyInitialized;
     }
@@ -192,11 +167,11 @@ internal sealed class IssueStanceTracker
     {
         var traitFloor = Mathf.Max(0f, 3.0f + ConvictionStrengthOffset() / 3.0f);
         var alignedFloor = Mathf.Max(traitFloor, 5f);
-        var memeOffsets = TraitMemeConvictionOffsets();
+        var targets = TraitStanceTargets.For(_pawn, _preferredRank);
 
         foreach (var issue in _strength.Keys.ToList())
         {
-            var traitAligned = memeOffsets.ContainsKey(issue);
+            var traitAligned = targets.ContainsKey(issue);
             _strength[issue] = traitAligned ? alignedFloor : traitFloor;
 
             var keepStance = traitFloor > 1f || traitAligned;
@@ -208,13 +183,14 @@ internal sealed class IssueStanceTracker
             }
         }
 
-        // Traits survive a brainwipe, so issues they link to return to the linked rung.
-        foreach (var (issue, linkedRank) in TraitLinkedRanks())
-            SetStance(issue, linkedRank, alignedFloor);
+        // Traits survive a brainwipe, so issues they target return to the target rank.
+        foreach (var (issue, target) in targets)
+            SetStance(issue, target.PullFrom(_preferredRank[issue]).rank, alignedFloor);
     }
 
     // Apply conviction decay for the current game day. Returns true when decay was applied (i.e. caller
-    // should mark structural opinion caches dirty).
+    // should mark structural opinion caches dirty). An issue with a trait target (TraitStanceTargets) moves along
+    // the conviction valley toward that target. All other issues drain toward zero strength.
     internal bool ApplyDecayIfNewDay()
     {
         var currentDay = GenTicks.TicksAbs / GenDate.TicksPerDay;
@@ -226,11 +202,26 @@ internal sealed class IssueStanceTracker
             / (GenDate.TicksPerSeason / (float)GenDate.TicksPerDay) / lossFactor;
         if (drainPerDay <= 0f) return false;
 
+        var traitTargets = TraitStanceTargets.For(_pawn, _preferredRank);
         foreach (var issue in _strength.Keys.ToList())
-            _strength[issue] = Mathf.Max(ConvictionScale.MinConvictionStrength, _strength[issue] - drainPerDay);
+        {
+            if (traitTargets.TryGetValue(issue, out var target))
+            {
+                var (targetRank, targetStrength) = target.PullFrom(_preferredRank[issue]);
+                var farRank = ConvictionMath.LadderExtremeAwayFrom(issue, targetRank);
+                var (rank, strength) = ConvictionMath.ValleyStep(
+                    _preferredRank[issue], _strength[issue], targetRank, farRank, targetStrength, drainPerDay);
+                SetStance(issue, rank, strength);
+            }
+            else
+            {
+                _strength[issue] = Mathf.Max(ConvictionScale.MinConvictionStrength, _strength[issue] - drainPerDay);
+            }
+        }
 
         return true;
     }
+
 
     // Scale all strengths by `scale`, clamped to conviction bounds. Used by certainty calibration.
     internal void ScaleStrengths(float scale)
@@ -292,35 +283,98 @@ internal sealed class IssueStanceTracker
             .RandomElementByWeight(rank => 1f / (1f + Mathf.Abs(rank - current)));
     }
 
-    // Trait links to a rung (TraitIssueLinks), applied after the rest of generation. A faith silent on the issue
-    // gives the pawn a weak stance on the linked rung. A faith that holds the linked rung gains the trait-meme
-    // conviction bonus. A faith that holds any other rung makes the pawn heterodox on the linked rung.
-    private void ApplyTraitIssueLinks()
+    // Trait targets (TraitStanceTargets), applied after the rest of generation to the issues seeded now.
+    // A faith silent on the issue gives the pawn a weak stance at the target.
+    // Toward a rung: a faith that holds it gains the conviction bonus per vote; a faith on another rung makes the
+    // pawn heterodox on the target rung. Against rungs: a stance on an opposed rung loses the bonus per opposing
+    // vote, or, when the faith is silent, takes the exit at low strength. A stance on an allowed spot does not change.
+    private void ApplyTraitTargets(List<IssueDef> issues)
     {
         var ideo = _pawn.Ideo!;
-        foreach (var (issue, linkedRank) in TraitLinkedRanks())
+        var sources = EnhancedIdeologyMod.Settings.DebugInteractionWorkers ? new Dictionary<IssueDef, List<string>>() : null;
+        var targets = TraitStanceTargets.For(_pawn, _preferredRank, sources);
+        var log = new List<string>();
+        foreach (var issue in issues)
         {
+            if (!targets.TryGetValue(issue, out var target)) continue;
             var faithHolds = ideo.precepts.Any(precept => precept.def.issue == issue)
                 || PreceptPolicy.InducedRank(ideo, issue) != null;
-            if (!faithHolds)
-                SetStance(issue, linkedRank,
-                    Rand.Range(ConvictionScale.TraitStanceStrengthMin, ConvictionScale.TraitStanceStrengthMax));
-            else if (HeldRank(ideo, issue) == linkedRank)
-                SetStance(issue, linkedRank, _strength[issue] + ConvictionScale.TraitMemeConvictionBonus);
+            var heldRank = HeldRank(ideo, issue);
+            var current = _preferredRank[issue];
+            var opposedWeight = target.OpposedWeight(current);
+            var weakStrength = Rand.Range(ConvictionScale.TraitStanceStrengthMin, ConvictionScale.TraitStanceStrengthMax);
+            string outcome;
+            if (target.Rung is { } rung && !faithHolds)
+            {
+                SetStance(issue, rung, weakStrength);
+                outcome = "faith silent, new stance";
+            }
+            else if (target.Rung is { } heldTarget && heldRank == heldTarget)
+            {
+                var bonus = target.Votes * ConvictionScale.TraitMemeConvictionBonus;
+                SetStance(issue, heldTarget, _strength[issue] + bonus);
+                outcome = $"faith holds target, strength {bonus:+0.#;-0.#}";
+            }
+            else if (target.Rung is { } otherRung)
+            {
+                SetRank(issue, otherRung);
+                outcome = $"heterodox, faith holds {TraitStanceTargets.RungName(issue, heldRank)}";
+            }
+            else if (opposedWeight == 0f)
+            {
+                outcome = "stance not opposed, unchanged";
+            }
+            else if (!faithHolds)
+            {
+                SetStance(issue, target.PullFrom(current).rank, weakStrength);
+                outcome = "faith silent on an opposed Don't-care, new stance";
+            }
             else
-                SetRank(issue, linkedRank);
+            {
+                var penalty = opposedWeight * ConvictionScale.TraitMemeConvictionBonus;
+                SetStance(issue, current, _strength[issue] - penalty);
+                outcome = $"stance on opposed rung, strength {-penalty:+0.#;-0.#}";
+            }
+
+            if (sources != null)
+                log.Add(DescribeTarget(issue, target, sources[issue], outcome));
         }
+
+        if (log.Count > 0)
+            EnhancedIdeologyMod.Debug($"{TraitTargetsHeader()}\n{string.Join("\n", log)}");
     }
 
-    // Issue and rank of each rung the pawn's traits link to, for issues the pawn has a stance on.
-    private IEnumerable<(IssueDef issue, float rank)> TraitLinkedRanks()
+    // The trait target on `issue`, or null when the pawn's traits do not vote on it. For the opinion card tooltip.
+    internal TraitStanceTarget? TraitTarget(IssueDef issue) =>
+        TraitStanceTargets.For(_pawn, new Dictionary<IssueDef, float> { [issue] = _preferredRank[issue] })
+            .GetValueOrDefault(issue);
+
+    // The pawn's trait targets on all seeded issues and the votes behind each, for the debug action.
+    internal string DescribeTraitTargets()
     {
-        foreach (var link in TraitIssueLinks.ActiveFor(_pawn))
-        {
-            if (link.Rung is not { issue: { } issue } rung || !_strength.ContainsKey(issue)) continue;
-            var rank = PreceptLadder.RankOf(rung);
-            if (rank >= 0f) yield return (issue, rank);
-        }
+        var sources = new Dictionary<IssueDef, List<string>>();
+        var targets = TraitStanceTargets.For(_pawn, _preferredRank, sources);
+        if (targets.Count == 0) return $"{TraitTargetsHeader()}\n  no trait votes";
+        return $"{TraitTargetsHeader()}\n"
+            + string.Join("\n", targets.Select(kv => DescribeTarget(kv.Key, kv.Value, sources[kv.Key], null)));
+    }
+
+    private string TraitTargetsHeader() =>
+        $"TraitStanceTargets: {_pawn.LabelShort} ({_pawn.Ideo?.name}), traits "
+        + string.Join(" ", _pawn.story.traits.allTraits.Select(trait => $"{trait.def.defName}({trait.Degree})"));
+
+    private string DescribeTarget(IssueDef issue, TraitStanceTarget target, List<string> sources, string? outcome)
+    {
+        var aim = target.Rung is { } rung
+            ? $"target {TraitStanceTargets.RungName(issue, rung)}"
+            : "avoids " + string.Join(" ", target.Opposed.Keys.OrderBy(rank => rank)
+                .Select(rank => TraitStanceTargets.RungName(issue, rank)));
+        var (pullRank, pullStrength) = target.PullFrom(_preferredRank[issue]);
+        return $"  {issue.defName}: votes {target.Votes:+0.##;-0.##}, {aim}"
+            + (outcome == null ? "" : $" -> {outcome}")
+            + $"; now {TraitStanceTargets.RungName(issue, _preferredRank[issue])} @ {_strength[issue]:0.#}"
+            + $", pull {TraitStanceTargets.RungName(issue, pullRank)} @ {pullStrength:0.#}"
+            + string.Concat(sources.Select(line => "\n    " + line));
     }
 
     private void ApplyDietGeneStanceOverride()
@@ -340,61 +394,5 @@ internal sealed class IssueStanceTracker
             if (rank >= 0)
                 SetStance(meatEatingIssue, rank, Rand.Range(8f, 30f));
         }
-    }
-
-    // A meme links to an issue through a held precept (requiredMemes, or associatedMemes when the faith holds
-    // the meme), or through the meme's requireOne/selectOneOrNone when the faith takes a stance on the issue.
-    // Each meme-issue link counts once, so a link found by more than one route does not stack.
-    private Dictionary<IssueDef, float> TraitMemeConvictionOffsets()
-    {
-        var ideo = _pawn.Ideo!;
-        var links = new HashSet<(MemeDef meme, IssueDef issue)>();
-        foreach (var precept in ideo.precepts)
-        {
-            var issue = precept.def.issue;
-            if (issue == null) continue;
-
-            // An associated meme counts only when the faith holds it. A required meme is always held.
-            foreach (var meme in precept.def.requiredMemes)
-                links.Add((meme, issue));
-            foreach (var meme in precept.def.associatedMemes)
-                if (ideo.memes.Contains(meme)) links.Add((meme, issue));
-        }
-        foreach (var meme in ideo.memes)
-        {
-            if (!MemeGrantableIssues.TryGetValue(meme, out var grantable)) continue;
-            foreach (var issue in grantable)
-                if (HeldRank(ideo, issue) != PreceptLadder.DontCareRank(issue))
-                    links.Add((meme, issue));
-        }
-
-        var offsets = new Dictionary<IssueDef, float>();
-        foreach (var (meme, issue) in links)
-        {
-            var delta = MemeTraitDelta(meme);
-            if (delta != 0f)
-                offsets[issue] = offsets.GetValueOrDefault(issue) + delta;
-        }
-
-        if (offsets.Count > 0)
-        {
-            var parts = offsets.Select(kv => $"{kv.Key.defName}={kv.Value:+0.#;-0.#}");
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
-                $"TraitMemeConvictionOffsets: {_pawn.LabelShort} [{string.Join(", ", parts)}]");
-        }
-
-        return offsets;
-    }
-
-    private float MemeTraitDelta(MemeDef meme)
-    {
-        var delta = 0f;
-        if (!meme.agreeableTraits.NullOrEmpty())
-            foreach (var trait in meme.agreeableTraits)
-                if (trait.HasTrait(_pawn)) delta += ConvictionScale.TraitMemeConvictionBonus;
-        if (!meme.disagreeableTraits.NullOrEmpty())
-            foreach (var trait in meme.disagreeableTraits)
-                if (trait.HasTrait(_pawn)) delta -= ConvictionScale.TraitMemeConvictionBonus;
-        return delta;
     }
 }

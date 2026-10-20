@@ -21,7 +21,7 @@ Certainty is a slow moving drift towards a target set by three bands:
 
 A pawn's opinion of an ideolgion, or Structural fit comes from three things:
 
-- **Issue stances**: each pawn holds a preferred position on each issue (e.g. "execution: Respected if guilty") with a conviction strength. They favour ideoligions whose precepts match and oppose those that don't, weighted by conviction. Traits and a pawn's starting ideoligion initialize issue stances, while interactions and moodlets shape them over time. Concretely, this contributes `mean(strength/20) * 100`.
+- **Issue stances**: each pawn holds a preferred position on each issue (e.g. "execution: Respected if guilty") with a conviction strength. They favour ideoligions whose precepts match and oppose those that don't, weighted by conviction. Traits and a pawn's starting ideoligion initialize issue stances, while interactions and moodlets shape them over time, though they decay back towards their traits slowly. Concretely, this contributes `mean(strength/20) * 100`.
 - **Personality fit**: some memes list traits they agree or disagree with. A Nudist pawn in a ideoligion that venerates Flesh Purity structurally fits better; the same pawn in a Transhumanist ideoligion fits worse.
 - **Inter-faith relations**: memes that are explicitly about other beliefs (e.g. supremacist, loyalist or guilty memes) apply flat opinion modifiers to all outside ideoligions.
 
@@ -57,7 +57,7 @@ Low certainty pawns who snap into the Iconoclast mental break hunt for ideoligio
 ## Settings
 **Ideoligion**: Settings related to certainty in one's ideoligion, such as drift rate, crisis threshold, or the influence of relationships on certainty.
 
-**Precept**: Settings for issue/precept level mechanics, such as debate and conversion settings or decay rate.
+**Precept**: Settings for issue/precept level mechanics, such as debate and conversion settings or decay towards traits rate.
 
 ---
 ## Compatibility

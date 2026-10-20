@@ -314,21 +314,25 @@ public class PreceptPolicyTests : SeededTest
         Assert.Equal(5f, PreceptLadder.RankOf(defs["MarriageName_AlwaysWomans"]));
     }
 
-    [Fact]
-    public void DontCareRank_DrugUse_IsMidLadder()
+    // No precept means no drug thoughts: the Political Compass "allowed" rung, else just past essential.
+    [Theory]
+    [InlineData(true, 1f)]
+    [InlineData(false, 0.5f)]
+    public void DontCareRank_DrugUse_IsAllowedOrBeforeMedicalOrSocial(bool withPoliticalCompass, float expected)
     {
         var issue = new IssueDef { defName = "DrugUse" };
-        foreach (var (name, order) in new[]
+        var rungs = new List<(string, int)>
         {
             ("DrugUse_Essential", 0), ("DrugUse_MedicalOrSocial", 10),
             ("DrugUse_MedicalOnly", 20), ("DrugUse_Prohibited", 30),
-        })
+        };
+        if (withPoliticalCompass) rungs.Add(("MI_DrugUse_Allowed", 40));
+        foreach (var (name, order) in rungs)
         {
             SimIssues.Register(new PreceptDef { defName = name, issue = issue, displayOrderInIssue = order });
         }
 
-        // Between medical-or-social (rank 1) and medical-only (rank 2) -> midpoint 1.5.
-        Assert.Equal(1.5f, PreceptLadder.DontCareRank(issue));
+        Assert.Equal(expected, PreceptLadder.DontCareRank(issue));
     }
 
     [Fact]

@@ -182,7 +182,7 @@ def read_policy() -> dict[str, str]:
     source = "\n".join(path.read_text() for path in POLICY_FILES)
     sets = {
         "MoralIssues": "Moral",
-        "UniversalPositiveIssues": "UniversalPositive",
+        "UniversalPositiveValuedRung": "UniversalPositive",
         "SpecialIssues": "Special",
         "NAIssues": "NA",
         "KnownPositiveOnlyIssues": "PositiveOnly",
@@ -190,8 +190,12 @@ def read_policy() -> dict[str, str]:
     policy: dict[str, str] = {}
     for set_name, category in sets.items():
         match = re.search(rf"HashSet<string> {set_name}\s*=\s*\[(.*?)\];", source, re.S)
-        body = re.sub(r"//[^\n]*", "", match.group(1))
-        for issue in re.findall(r'"([^"]+)"', body):
+        if match:
+            issues = re.findall(r'"([^"]+)"', re.sub(r"//[^\n]*", "", match.group(1)))
+        else:
+            match = re.search(rf"Dictionary<string, string> {set_name}\s*=\s*new\(\)\s*\{{(.*?)\}};", source, re.S)
+            issues = re.findall(r'\["([^"]+)"\]', re.sub(r"//[^\n]*", "", match.group(1)))
+        for issue in issues:
             policy.setdefault(issue, category)
     return policy
 
