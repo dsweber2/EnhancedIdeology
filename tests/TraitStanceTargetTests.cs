@@ -121,6 +121,7 @@ public class TraitStanceTargetTests : SeededTest
         var (cannibalism, rungs) = SimIssues.Ladder("Cannibalism",
             "Cannibalism_RequiredRavenous", "Cannibalism_RequiredStrong", "Cannibalism_Preferred",
             "Cannibalism_Acceptable", "Cannibalism_Disapproved", "Cannibalism_Horrible", "Cannibalism_Abhorrent");
+        rungs[6].defaultSelectionWeight = 1f;
         return (world, cannibalism, rungs);
     }
 
@@ -182,6 +183,7 @@ public class TraitStanceTargetTests : SeededTest
     {
         var (world, _, _) = Setup();
         var (corpses, rungs) = SimIssues.Ladder("Corpses", "Corpses_Ugly", "Corpses_DontCare");
+        rungs[0].defaultSelectionWeight = 1f;
         var meme = Meme("Con", agrees: false);
         rungs[0].requiredMemes.Add(meme);
         rungs[1].requiredMemes.Add(meme);

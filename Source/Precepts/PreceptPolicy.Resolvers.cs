@@ -145,7 +145,7 @@ internal static partial class PreceptPolicy
                 var rungCount = DefDatabase<PreceptDef>.AllDefs.Count(p => p.issue == issue);
                 if (rungCount >= 2 && CategoryOf(issue) == PreceptCategory.PositiveOnly
                     && !KnownPositiveOnlyIssues.Contains(issue.defName))
-                    Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) — please let the author know the issue name and ideally the mod of origin.");
+                    Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) from mod '{issue.modContentPack?.Name ?? "unknown"}' — please let the EnhancedBeliefs author know.");
             }
         }
     }

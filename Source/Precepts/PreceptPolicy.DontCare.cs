@@ -64,38 +64,13 @@ internal sealed class DontCareSpec
 
 internal static partial class PreceptPolicy
 {
-    // Neutral rank per issue: the vanilla baseline, the stance of a pawn with no precept on the issue (classic
-    // mode behaviour). A rung named "don't care" is a stance if it changes anything from that baseline.
-    // Mandatory issues need an entry too: pawns read neutral for trait targets, held stances and spans.
-    // An unlisted issue defaults to -1f, one step past rank 0. That is correct only for single-rung and
-    // restriction-only ladders. Specs that name a mod rung carry an Or() fallback for when the mod is absent.
+    // Neutral rank for issues with no default rung (PreceptLadder.DontCareRank derives the rest). Neutral is the
+    // stance of a pawn with no precept on the issue. A rung named "don't care" is a stance if it changes anything
+    // from that baseline. An unlisted issue defaults to -1f, one step past rank 0. That is correct only for
+    // single-rung and restriction-only ladders. Specs that name a mod rung carry an Or() fallback for when the
+    // mod is absent.
     public static readonly Dictionary<string, DontCareSpec> DontCare = new()
     {
-        // Vanilla / DLC mandatory issues: the classic rung, or the rung that matches the classic effects.
-        ["Slavery"] = DontCareSpec.At("Slavery_Acceptable"),
-        // Execution_Classic has only the "know" thoughts of HorribleIfInnocent.
-        ["Execution"] = DontCareSpec.Before("Execution_HorribleIfInnocent"),
-        // Cannibalism_Classic: ate human meat -20, the same as Abhorrent.
-        ["Cannibalism"] = DontCareSpec.At("Cannibalism_Abhorrent"),
-        // OrganUse_Classic: thoughts only for harvests from colonists and guests.
-        ["OrganUse"] = DontCareSpec.Before("OrganUse_HorribleSellOK"),
-        ["Scarification"] = DontCareSpec.After("Scarification_Minor"),
-        ["Skullspike"] = DontCareSpec.After("Skullspike_Desired"),
-        ["IdeoDiversity"] = DontCareSpec.At("IdeoDiversity_Standard"),
-        // Lovin_Free (classic) has no thoughts. It is not in the ladder.
-        ["Lovin"] = DontCareSpec.After("Lovin_FreeApproved"),
-        ["Nudity_Male"] = DontCareSpec.At("Nudity_Male_UncoveredGroinDisapproved"),
-        ["Nudity_Female"] = DontCareSpec.At("Nudity_Female_UncoveredGroinOrChestDisapproved"),
-        ["SpouseCount_Male"] = DontCareSpec.At("SpouseCount_Male_MaxOne"),
-        ["SpouseCount_Female"] = DontCareSpec.At("SpouseCount_Female_MaxOne"),
-        ["MarriageName"] = DontCareSpec.At("MarriageName_UsuallyMans"),
-        ["Corpses"] = DontCareSpec.At("Corpses_Ugly"),
-        ["NutrientPasteEating"] = DontCareSpec.At("NutrientPasteEating_Disgusting"),
-        ["InsectMeat"] = DontCareSpec.At("InsectMeatEating_Despised_Classic"),
-        ["FungusEating"] = DontCareSpec.At("VME_FungusEating_DontCare")
-            .Or(DontCareSpec.Between("FungusEating_Preferred", "FungusEating_Despised")),
-        ["Research"] = DontCareSpec.At("Research_Normal"),
-
         // Vanilla / DLC optional issues.
         // No precept means no drug thoughts, as MI_DrugUse_Allowed. MedicalOrSocial already forbids hard drugs.
         ["DrugUse"] = DontCareSpec.At("MI_DrugUse_Allowed").Or(DontCareSpec.Before("DrugUse_MedicalOrSocial")),
@@ -123,7 +98,6 @@ internal static partial class PreceptPolicy
         ["Charity"] = DontCareSpec.After("Charity_Worthwhile"),
         // VME_Pain_DontCare is a machismo rung ("pain can be endured"), so neutral sits past it.
         ["Pain"] = DontCareSpec.After("VME_Pain_DontCare").Or(DontCareSpec.After("Pain_Idealized")),
-        ["Blindness"] = DontCareSpec.Between("Blindness_Respected", "Blinding_Horrible"),
         ["DarknessCombat"] = DontCareSpec.After("DarknessCombat_Preferred"),
         ["Lighting"] = DontCareSpec.Before("Darklight_Preferred"),
         // No precept spreads the faith at x1: between Occasionally (x3) and Never (x0).
@@ -137,26 +111,6 @@ internal static partial class PreceptPolicy
 
         // Our own issue.
         ["EB_Contemplation"] = DontCareSpec.At("Contemplation_Normal"),
-
-        // Mod issues with a defaultSelectionWeight rung: that rung is the baseline.
-        ["AM_FertilityIssue"] = DontCareSpec.At("AM_FertilityIssue_Normal"),
-        ["AM_LearningRate"] = DontCareSpec.At("AM_LearningRate_Normal"),
-        ["AM_LovinFrequency"] = DontCareSpec.At("AM_LovinFrequency_Normal"),
-        ["BS_AlienAppearanceTolerance"] = DontCareSpec.At("BS_AlienAppearanceTolerance_Default"),
-        ["VME_Death"] = DontCareSpec.At("VME_Death_Normal"),
-        ["VME_DumbLabor"] = DontCareSpec.At("VME_DumbLabor_Indifferent"),
-        ["VME_Recreation"] = DontCareSpec.At("VME_Recreation_Normal"),
-        ["VME_Violence"] = DontCareSpec.At("VME_Violence_Acceptable"),
-        ["VME_Illness"] = DontCareSpec.At("VME_Illness_Indifferent"),
-        // Vanilla already gives a moodlet for tainted and tattered apparel, as Disapproved.
-        ["VME_TaintedApparel"] = DontCareSpec.At("VME_TaintedApparel_Disapproved"),
-        ["VME_TatteredApparel"] = DontCareSpec.At("VME_TatteredApparel_Disapproved"),
-        // VME_InsectJellyEaten_Neutral_Classic is classic-only and not in the ladder.
-        ["VME_InsectJelly"] = DontCareSpec.Between("VME_InsectJellyEaten_Despised", "VME_InsectJellyEaten_Loved_Classic"),
-        // VVE_*_Allowed is classic-only and not in the ladder. It sits between Approved and Horrible.
-        ["VVE_Driving"] = DontCareSpec.Between("VVE_Driving_Approved", "VVE_Driving_Horrible"),
-        ["VVE_Flying"] = DontCareSpec.Between("VVE_Flying_Approved", "VVE_Flying_Horrible"),
-        ["VVE_Sailing"] = DontCareSpec.Between("VVE_Sailing_Approved", "VVE_Sailing_Horrible"),
 
         // Mod optional issues.
         ["VME_Alcohol"] = DontCareSpec.Between("VME_Alcohol_Desired", "VME_Alcohol_MildAbstinence"),
@@ -202,5 +156,7 @@ internal static partial class PreceptPolicy
         ["RomanceOnTheRim_Issue_Breakup"] = DontCareSpec.After("RomanceOnTheRim_Breakup_Encouraged"),
         ["RomanceOnTheRim_Issue_RomanceAttempt"] = DontCareSpec.After("RomanceOnTheRim_RomanceAttempt_Encouraged"),
         ["NikolaisIdeology_Beauty"] = DontCareSpec.Between("NikolaisIdeology_Beauty_Central", "NikolaisIdeology_Beauty_Unimportant"),
+        // Humanoid Alien Races: Acceptable has no effects.
+        ["HAR_AlienDating"] = DontCareSpec.At("HAR_AlienDating_Acceptable"),
     };
 }

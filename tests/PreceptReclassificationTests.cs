@@ -74,12 +74,13 @@ public class PreceptReclassificationTests : SeededTest
     public void Blindness_OrderOverride_PutsHorribleAtTheAntiEnd()
     {
         var issue = new IssueDef { defName = "Blindness" };
-        Register(issue, ("Blinding_Horrible", 0), ("Blindness_Sublime", 10), ("Blindness_Elevated", 20), ("Blindness_Respected", 30));
+        var rungs = Register(issue, ("Blinding_Horrible", 0), ("Blindness_Sublime", 10), ("Blindness_Elevated", 20), ("Blindness_Respected", 30));
+        rungs["Blinding_Horrible"].defaultSelectionWeight = 1f;
 
         Assert.Equal(
             new[] { "Blindness_Sublime", "Blindness_Elevated", "Blindness_Respected", "Blinding_Horrible" },
             PreceptLadder.Rungs(issue).Select(p => p.defName));
-        Assert.Equal(2.5f, PreceptLadder.DontCareRank(issue));
+        Assert.Equal(3f, PreceptLadder.DontCareRank(issue));
     }
 
     [Fact]

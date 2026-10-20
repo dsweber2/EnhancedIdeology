@@ -44,16 +44,17 @@ public class PreceptPolicyTests : SeededTest
     }
 
     [Fact]
-    public void EveryOptionalOrderOverrideIssueHasADontCareEntry()
+    public void EveryOrderOverrideIssueWithoutDefaultsHasADontCareEntry()
     {
-        // OrderOverrides and DontCare are two separate tables keyed by the same issue defName, ~50 lines
-        // apart, with nothing forcing them to stay in sync. A mandatory issue (every ideo always holds a
-        // precept) intentionally has no DontCare entry; anything else needs one, or an ideo silent on it
-        // silently falls back to the hardcoded -1f default instead of a deliberate placement.
+        // OrderOverrides and DontCare are two separate tables keyed by the same issue defName, with nothing
+        // forcing them to stay in sync. An issue with default rungs takes its neutral from them
+        // (PreceptLadder.DontCareRank), so it has no DontCare entry; anything else needs one, or an ideo silent
+        // on it falls back to the hardcoded -1f default instead of a deliberate placement.
         var mandatoryIssues = new HashSet<string>
         {
-            "Corpses", "InsectMeat", "MarriageName", "SpouseCount_Male", "SpouseCount_Female",
-            "OrganUse", "FungusEating", "BS_AlienAppearanceTolerance",
+            "Corpses", "InsectMeat", "MarriageName", "SpouseCount_Male", "SpouseCount_Female", "OrganUse",
+            "FungusEating", "BS_AlienAppearanceTolerance", "AM_LovinFrequency", "Blindness", "Lovin", "VME_Sweets",
+            "WCE2_Torture", "GR_Failures", "GR_HumanoidHybrids",
         };
 
         var missingDontCare = PreceptPolicy.OrderOverrides.Keys
@@ -240,8 +241,7 @@ public class PreceptPolicyTests : SeededTest
             });
         }
 
-        // MaxOne is classic-only; the existing OrderOverride was dead code until IncludeClassicInLadder kept
-        // it in the ladder.
+        // MaxOne is a visible classic rung, so it is a ladder rung like the others.
         Assert.Equal(
             new[] { "MaxOne", "MaxTwo", "MaxThree", "MaxFour", "Unlimited" }.Select(s => $"SpouseCount_{gender}_{s}"),
             PreceptLadder.Rungs(issue).Select(p => p.defName));
@@ -296,8 +296,7 @@ public class PreceptPolicyTests : SeededTest
             defs[name] = def;
         }
 
-        // UsuallyMans is classic-only (no real Ideology-selectable equivalent) but must stay in the ladder
-        // (PreceptPolicy.IncludeClassicInLadder) to anchor the spacing correctly.
+        // UsuallyMans is a visible classic rung, so it stays in the ladder and anchors the spacing.
         Assert.Equal(
             new[]
             {

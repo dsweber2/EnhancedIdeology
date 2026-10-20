@@ -27,36 +27,40 @@ participates through the separate **acquired** channel (the existing personal pe
 
 ## Moral (need order + Don't-care rank)
 
-**Don't-care placement rule** — neutral is the **vanilla baseline**: the stance of a pawn whose faith has no precept on the issue, which is what classic mode does.
-Find it by what the rungs do, not by their labels:
-- **A classic rung or a rung with no effects** (`Slavery_Acceptable`, `Corpses_Ugly`, `MI_DrugUse_Allowed`): neutral is that rung.
-- **A classic rung that is not in the ladder** (`Lovin_Free`, `VVE_*_Allowed`, `Execution_Classic`): neutral sits where that rung would be, next to the rung whose effects it matches.
-- **No baseline rung**: neutral sits between the mildest rungs on each side, or past the last rung of a one-sided ladder.
-- **A rung named "don't care" is a stance** if it changes anything from the baseline (`VME_Pain_DontCare` raises the pain shock threshold, `Corpses_DontCare` removes the vanilla corpse moodlets).
+**Don't-care placement rule** — neutral is the stance an ideo falls back to on the issue.
+`PreceptLadder.DontCareRank` applies it in this order:
+1. **The issue has default rungs** (visible rungs with `defaultSelectionWeight > 0`): neutral is their mean rank, weighted by `defaultSelectionWeight`.
+   When an ideo loses its rung on such an issue, vanilla adds one of these back, picked at random by weight (`Ideo.RemovePrecept`), and the editor has no remove button for the issue.
+   So neutral is the expected stance of a fresh faith, not the effect-free rung (`GR_Failures_Accepted` is a stance; `GR_Failures_Disliked` is neutral).
+   This needs no table entry, and it covers mod issues that we have not classified.
+2. **No default rung** (a truly optional issue): neutral is the vanilla baseline, the stance of a pawn whose faith has no precept on the issue.
+   Find it by what the rungs do, not by their labels:
+   - **A rung with no effects** (`MI_DrugUse_Allowed`, `HAR_AlienDating_Acceptable`): neutral is that rung.
+   - **No baseline rung**: neutral sits between the mildest rungs on each side, or past the last rung of a one-sided ladder.
+   - **A rung named "don't care" is a stance** if it changes anything from the baseline (`VME_Pain_DontCare` raises the pain shock threshold).
+3. **Otherwise** −1, one step past rank 0; that is correct only for single-rung and restriction-only ladders (`KillingInnocentAnimals`, `Mining`, `TreeCutting`).
 
-Mandatory issues need a neutral too: pawns read it for trait targets, held stances (`HoldsStance`), and opinion and debate spans.
-An unlisted issue defaults to −1, one step past rank 0; that is correct only for single-rung and restriction-only ladders (`KillingInnocentAnimals`, `Mining`, `TreeCutting`).
+Visible classic rungs (`Lovin_Free`, `SpouseCount_*_MaxOne`, `VVE_*_Allowed`) are ordinary ladder rungs: `classic` only means the precept exists without the Ideology DLC.
+Invisible classic rungs (`Cannibalism_Classic`, `Execution_Classic`, `WCE2_Torture_Vanilla`) are the classic-mode fallback that no ideo can select, and stay out of the ladder.
+
+The case 2 specs live in `Source/Precepts/PreceptPolicy.DontCare.cs`.
 A spec that names a mod rung needs a fallback for when that mod is absent (`DontCareSpec.Or`), and must not use `Between(vanillaRung, modRung)`, which collapses onto the vanilla rung.
-The table lives in `Source/Precepts/PreceptPolicy.DontCare.cs`.
+
+Default-rung neutrals for the vanilla mandatory issues, for reference:
+
+| issue | default rungs | neutral |
+| --- | --- | --- |
+| Slavery | `Acceptable`, `Disapproved`, `Horrible`, `Abhorrent` | between `Disapproved` and `Horrible` |
+| Cannibalism | `Horrible`, `Abhorrent` | between them |
+| Lovin | `Free`, `SpouseOnly_Mild`, `SpouseOnly_Moderate`, `SpouseOnly_Strict` | between `Mild` and `Moderate` |
+| MarriageName | `UsuallyMans`, `Random`, `KeepNames` | `Random` |
+| Execution, OrganUse, Scarification, Skullspike, FungusEating, Blindness | `HorribleIfInnocent`, `HorribleSellOK`, `Horrible`, `Disapproved`, `Despised`, `Blinding_Horrible` | that rung |
+| IdeoDiversity, Nudity (M/F), SpouseCount (M/F), Corpses, NutrientPasteEating, InsectMeat, Research | the single default rung | that rung |
+
+Optional issues:
 
 | issue | neutral | why |
 | --- | --- | --- |
-| Slavery | `Acceptable` | no effects; "a normal, unremarkable part of life" |
-| Execution | just before `HorribleIfInnocent` | `Execution_Classic` has only its "know" thoughts |
-| Cannibalism | `Abhorrent` | `Cannibalism_Classic` gives −20 for eating human meat, the same as `Abhorrent` |
-| OrganUse | just before `HorribleSellOK` | `OrganUse_Classic` objects only to harvests from colonists and guests |
-| Scarification | past `Minor` | vanilla has no scar thoughts |
-| Skullspike | between `Desired` and `Disapproved` | vanilla has no skullspike thoughts |
-| IdeoDiversity | `Standard` | default rung; "neither approved or disapproved" |
-| Lovin | past `FreeApproved` | `Lovin_Free` (classic, not in the ladder) has no thoughts |
-| Nudity (M/F) | the classic rung (groin, groin and chest) | classic |
-| SpouseCount (M/F) | `MaxOne` | classic |
-| MarriageName | `UsuallyMans` | classic |
-| Corpses | `Ugly` | classic; `DontCare` removes the vanilla moodlet, so it is a stance |
-| NutrientPasteEating | `Disgusting` | classic |
-| InsectMeat | `Despised_Classic` | classic |
-| FungusEating | `VME_FungusEating_DontCare`, else between `Preferred` and `Despised` | vanilla has no fungus thoughts |
-| Research | `Normal` | default rung, ×1 speed |
 | DrugUse | `MI_DrugUse_Allowed`, else just before `MedicalOrSocial` | no precept = no drug thoughts; `MedicalOrSocial` already forbids hard drugs |
 | ChildLabor | between `Encouraged` and `Disapproved` | |
 | Apostasy | just before `Disapproved` | `VME_Apostasy_Accepted` (certainty loss ×3) is a stance |
@@ -266,6 +270,21 @@ are *reversed* (`VME_Recreation` anti→pro, `VME_Illness` indifferent→exalted
 `OpinionOnPrecept` is symmetric under axis reflection. The flagged neutrals (`AM_FertilityIssue`'s `normal`
 etc.) are actually dead-centre, and `VME_Recreation`'s `fishing` sits at the pro extreme either way
 (numerically inert). No reorder overrides added.
+
+**Moral, value axes from War Crimes Expanded 2, Humanoid Alien Races, and Genetic Rim.**
+Rungs listed pro → anti; neutral follows the Don't-care placement rule.
+
+| issue | ladder | neutral | why |
+| --- | --- | --- | --- |
+| WCE2_Torture | `AlwaysRespected` → `RespectedGuilty` → `DontCare` → `HorribleInnocent` → `Horrible` → `Abhorrent` | `HorribleInnocent` | default rung; `HorribleInnocent` and `Horrible` tie at order 40, so an order override fixes them |
+| HAR_EatingAliens | `RequiredStrong` → `Preferred` → `Acceptable` → `Disapproved` → `Abhorrent` | `Abhorrent` | default rung |
+| HAR_AlienDating | `Honorable` → `Preferred` → `Acceptable` → `Horrible` → `Prohibited` | `Acceptable` | optional (no default rung); no effects. `Acceptable` has order 0, before the pro rungs, so an order override fixes it |
+| HAR_AlienRaces | `Exalted` → `Respected` → `Standard` → `Horrible` → `Abhorrent` | `Standard` | default rung |
+| HAR_AlienSlavery | `Honorable` → `Acceptable` → `Disapproved` → `Horrible` → `Abhorrent` | between `Disapproved` and `Horrible` | four default rungs, as vanilla `Slavery` |
+| GR_Failures | `Accepted` → `Disliked` → `Shameful` | `Disliked` | default rung; `Accepted` has no effects but is a stance. No display orders, so an order override sets them |
+| GR_HumanoidHybrids | `Accepted` → `Disliked` → `Forbidden` | `Disliked` | as `GR_Failures` |
+
+`GR_WorktableSpeeds` (implant or genomorpher speed) is a stat perk and stays PositiveOnly.
 
 **PositiveOnly:** `AM_CombatProwess`, `AM_HuntFocus`, and the mechanical perks (`*Speed`/`*Yield`/`*Rate`/`Cooldown`).
 The value-claim issues that used to sit here (`VME_Death`, `VME_Power`, `VME_Junk`, `AM_Armour`, `AM_Barracks`,

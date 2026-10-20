@@ -1,7 +1,8 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers PreceptPolicy.DontCare: neutral is the vanilla baseline (the classic-mode stance), mandatory issues
-// included, and every spec that names a mod rung still lands correctly when that mod is absent.
+// Covers PreceptLadder.DontCareRank: an issue with default rungs takes their weighted mean rank, and every other
+// issue uses PreceptPolicy.DontCare, where each spec that names a mod rung still lands correctly when that mod is
+// absent.
 public class DontCarePlacementTests : SeededTest
 {
     private static float NeutralOf(string issueName, params string[] rungsInDisplayOrder)
@@ -12,47 +13,86 @@ public class DontCarePlacementTests : SeededTest
         return PreceptLadder.DontCareRank(issue);
     }
 
-    [Fact]
-    public void Slavery_NeutralIsAcceptable()
+    // Rungs in display order with their defaultSelectionWeight, as vanilla ships them.
+    private static float DefaultNeutralOf(string issueName, params (string name, float weight)[] rungsInDisplayOrder)
     {
-        Assert.Equal(1f, NeutralOf("Slavery",
-            "Slavery_Honorable", "Slavery_Acceptable", "Slavery_Disapproved", "Slavery_Horrible", "Slavery_Abhorrent"));
+        var issue = new IssueDef { defName = issueName };
+        for (var ii = 0; ii < rungsInDisplayOrder.Length; ii++)
+        {
+            var (name, weight) = rungsInDisplayOrder[ii];
+            SimIssues.Register(new PreceptDef
+            {
+                defName = name, issue = issue, displayOrderInIssue = ii * 10, defaultSelectionWeight = weight,
+            });
+        }
+        return PreceptLadder.DontCareRank(issue);
     }
 
     [Fact]
-    public void Cannibalism_NeutralIsAbhorrent_AsVanillaRevulsion()
+    public void SingleDefaultRung_IsTheNeutral()
     {
-        Assert.Equal(6f, NeutralOf("Cannibalism",
-            "Cannibalism_RequiredRavenous", "Cannibalism_RequiredStrong", "Cannibalism_Preferred",
-            "Cannibalism_Acceptable", "Cannibalism_Disapproved", "Cannibalism_Horrible", "Cannibalism_Abhorrent"));
+        Assert.Equal(3f, DefaultNeutralOf("Execution",
+            ("Execution_Required", 0f), ("Execution_RespectedIfGuilty", 0f), ("Execution_DontCare", 0f),
+            ("Execution_HorribleIfInnocent", 1f), ("Execution_Horrible", 0f), ("Execution_Abhorrent", 0f)));
     }
 
     [Fact]
-    public void Execution_NeutralSitsJustBeforeHorribleIfInnocent()
+    public void SeveralDefaultRungs_GiveTheirMeanRank()
     {
-        Assert.Equal(2.5f, NeutralOf("Execution",
-            "Execution_Required", "Execution_RespectedIfGuilty", "Execution_DontCare",
-            "Execution_HorribleIfInnocent", "Execution_Horrible", "Execution_Abhorrent"));
+        Assert.Equal(2.5f, DefaultNeutralOf("Slavery",
+            ("Slavery_Honorable", 0f), ("Slavery_Acceptable", 1f), ("Slavery_Disapproved", 1f),
+            ("Slavery_Horrible", 1f), ("Slavery_Abhorrent", 1f)));
     }
 
     [Fact]
-    public void Corpses_NeutralIsTheClassicUglyRung()
+    public void DefaultRungs_AreWeightedByDefaultSelectionWeight()
     {
-        Assert.Equal(0f, NeutralOf("Corpses", "Corpses_Ugly", "Corpses_DontCare", "AM_Corpses_Sublime"));
+        Assert.Equal(0.25f, DefaultNeutralOf("WeightedIssue",
+            ("WeightedIssue_A", 3f), ("WeightedIssue_B", 1f), ("WeightedIssue_C", 0f)));
     }
 
     [Fact]
-    public void Lovin_NeutralSitsPastFreeApproved()
+    public void InvisibleDefaultRung_IsIgnored()
     {
-        Assert.Equal(0.5f, NeutralOf("Lovin",
-            "Lovin_FreeApproved", "Lovin_SpouseOnly_Mild", "Lovin_SpouseOnly_Moderate", "Lovin_Prohibited"));
+        var issue = new IssueDef { defName = "HiddenDefaultIssue" };
+        SimIssues.Register(new PreceptDef { defName = "HiddenDefault_A", issue = issue, displayOrderInIssue = 0 });
+        SimIssues.Register(new PreceptDef { defName = "HiddenDefault_B", issue = issue, displayOrderInIssue = 10, defaultSelectionWeight = 1f });
+        SimIssues.Register(new PreceptDef
+        {
+            defName = "HiddenDefault_Classic", issue = issue, displayOrderInIssue = 20, defaultSelectionWeight = 1f, visible = false,
+        });
+
+        Assert.Equal(1f, PreceptLadder.DontCareRank(issue));
     }
 
     [Fact]
-    public void Research_NeutralIsTheDefaultRung()
+    public void DefaultRungs_OverrideATableEntry()
     {
-        Assert.Equal(2f, NeutralOf("Research",
-            "Research_VeryFast", "Research_Fast", "Research_Normal", "Research_Slow", "Research_None"));
+        // HAR_AlienDating has a table entry at Acceptable; a default rung elsewhere wins.
+        Assert.Equal(4f, DefaultNeutralOf("HAR_AlienDating",
+            ("HAR_AlienDating_Acceptable", 0f), ("HAR_AlienDating_Preferred", 0f), ("HAR_AlienDating_Honorable", 0f),
+            ("HAR_AlienDating_Horrible", 0f), ("HAR_AlienDating_Prohibited", 1f)));
+    }
+
+    [Fact]
+    public void Lovin_FreeIsALadderRung_AndNeutralIsTheMeanOfFourDefaults()
+    {
+        var issue = new IssueDef { defName = "Lovin" };
+        foreach (var (name, order, weight, classic) in new (string, int, float, bool)[]
+        {
+            ("Lovin_Free", 0, 1f, true), ("Lovin_FreeApproved", 0, 0f, false), ("Lovin_SpouseOnly_Mild", 10, 1f, false),
+            ("Lovin_SpouseOnly_Moderate", 20, 1f, false), ("Lovin_SpouseOnly_Strict", 30, 1f, false),
+            ("Lovin_Horrible", 40, 0f, false), ("Lovin_Prohibited", 50, 0f, false),
+        })
+        {
+            SimIssues.Register(new PreceptDef
+            {
+                defName = name, issue = issue, displayOrderInIssue = order, defaultSelectionWeight = weight, classic = classic,
+            });
+        }
+
+        Assert.Equal(1f, PreceptLadder.RankOfName(issue, "Lovin_Free"));
+        Assert.Equal(2.5f, PreceptLadder.DontCareRank(issue));
     }
 
     [Theory]
@@ -101,10 +141,11 @@ public class DontCarePlacementTests : SeededTest
     }
 
     [Fact]
-    public void VehicleDriving_NeutralIsWhereTheClassicAllowedRungSits()
+    public void VehicleDriving_NeutralIsTheClassicAllowedRung()
     {
-        Assert.Equal(1.5f, NeutralOf("VVE_Driving",
-            "VVE_Driving_Required", "VVE_Driving_Approved", "VVE_Driving_Horrible", "VVE_Driving_Forbidden"));
+        Assert.Equal(2f, DefaultNeutralOf("VVE_Driving",
+            ("VVE_Driving_Required", 0f), ("VVE_Driving_Approved", 0f), ("VVE_Driving_Allowed", 1f),
+            ("VVE_Driving_Horrible", 0f), ("VVE_Driving_Forbidden", 0f)));
     }
 
     [Fact]

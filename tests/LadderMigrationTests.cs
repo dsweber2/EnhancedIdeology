@@ -20,15 +20,16 @@ public class LadderMigrationTests : SeededTest
     [Fact]
     public void Remap_ReorderedBlindness_KeepsEachPawnOnTheirRung()
     {
-        var (issue, _) = SimIssues.Ladder("Blindness",
+        var (issue, rungs) = SimIssues.Ladder("Blindness",
             "Blinding_Horrible", "Blindness_Sublime", "Blindness_Elevated", "Blindness_Respected");
+        rungs[0].defaultSelectionWeight = 1f;
         var saved = Saved(-1f, "Blinding_Horrible", "Blindness_Sublime", "Blindness_Elevated", "Blindness_Respected");
 
         Assert.Equal(3f, PreceptLadder.RankOfName(issue, "Blinding_Horrible"));
         Assert.Equal(3f, LadderMigration.Remap(issue, saved, 0f));
         Assert.Equal(0f, LadderMigration.Remap(issue, saved, 1f));
         Assert.Equal(2f, LadderMigration.Remap(issue, saved, 3f));
-        Assert.Equal(2.5f, LadderMigration.Remap(issue, saved, -1f));
+        Assert.Equal(3f, LadderMigration.Remap(issue, saved, -1f));
     }
 
     [Fact]

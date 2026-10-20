@@ -264,7 +264,7 @@ correctly for whichever rungs are actually active - but don't take this table as
 | 5 | 100 | Ideology | Nudity_Female_CoveringAnythingButGroinDisapproved | pants at most | — |
 | 6 | 120 | Ideology | Nudity_Female_Mandatory | fully nude | — |
 UncoveredGroinOrChestDisapproved is classic-only; order is already monotonic once it's kept (no
-OrderOverride needed). Fixed via `PreceptPolicy.IncludeClassicInLadder`. Ranks 7-8 above are commented out
+OrderOverride needed). Fixed via the visible-rung filter in `PreceptLadder.Rungs`. Ranks 7-8 above are commented out
 in the actual vanilla XML (never loaded) - stale rows, removed.
 
 ### `Nudity_Male` — mandatory (Ideology)
@@ -279,7 +279,7 @@ in the actual vanilla XML (never loaded) - stale rows, removed.
 | 5 | 110 | Ideology | Nudity_Male_CoveringAnythingButGroinDisapproved | pants at most | — |
 | 6 | 130 | Ideology | Nudity_Male_Mandatory | fully nude | — |
 UncoveredGroinDisapproved is classic-only; order is already monotonic once it's kept (no OrderOverride
-needed). Fixed via `PreceptPolicy.IncludeClassicInLadder`. Ranks 7-8 above are commented out in the actual
+needed). Fixed via the visible-rung filter in `PreceptLadder.Rungs`. Ranks 7-8 above are commented out in the actual
 vanilla XML (never loaded) - stale rows, removed.
 
 ### `PreferredXenotypes` — optional (Biotech)
@@ -351,7 +351,7 @@ vanilla XML (never loaded) - stale rows, removed.
 | 4 | 60 | Ideology | SpouseCount_Female_MaxTwo | two or fewer | — |
 
 MaxOne is classic-only. The `PreceptPolicy.OrderOverrides` entry for this issue was already correct but
-was dead code (classic dropped before the override ran) until `IncludeClassicInLadder` fixed it.
+was dead code (classic dropped before the override ran) until the visible-rung filter in `PreceptLadder.Rungs` fixed it.
 
 ### `SpouseCount_Male` — mandatory (Core, Ideology)
 
@@ -363,7 +363,7 @@ was dead code (classic dropped before the override ran) until `IncludeClassicInL
 | 3 | 50 | Ideology | SpouseCount_Male_MaxThree | three or fewer | — |
 | 4 | 70 | Ideology | SpouseCount_Male_MaxTwo | two or fewer | — |
 
-Same as SpouseCount_Female: MaxOne is classic-only, override was dead code until IncludeClassicInLadder.
+Same as SpouseCount_Female: MaxOne is classic-only, override was dead code until the visible-rung filter in `PreceptLadder.Rungs`.
 
 ### `Temperature` — optional (Ideology)
 
@@ -819,7 +819,7 @@ sources: AlphaMemes, Core, Ideology
 | 2 | 20 | AlphaMemes | AM_Corpses_Sublime | sublime | — |
 
 Ugly is classic-only and ties with DontCare at order 10; both were a live bug (classic dropped, tie
-unresolved). Fixed via `PreceptPolicy.OrderOverrides` + `IncludeClassicInLadder`.
+unresolved). Fixed via `PreceptPolicy.OrderOverrides` + the visible-rung filter in `PreceptLadder.Rungs`.
 
 ### `DarknessCombat` — STACKED, optional
 sources: Ideology, VIE-M&S
@@ -875,7 +875,7 @@ sources: Core, Ideology, AlphaMemes, VIE-M&S
 
 Three-way tie at order 0 (Required/Loved/DontCare) plus the classic rung being excluded by default made this
 a live bug (`Source/Precepts/PreceptLadder.cs`'s classic filter): fixed via `PreceptPolicy.OrderOverrides` +
-`IncludeClassicInLadder`.
+the visible-rung filter in `PreceptLadder.Rungs`.
 
 ### `Lighting` — STACKED, optional
 sources: Ideology, VIE-M&S
@@ -910,7 +910,7 @@ sources: AlphaMemes, Core, Ideology
 | 4 | 30 | AlphaMemes | AM_NutrientPasteEating_Forbidden | forbidden | 0 |
 
 Disgusting is classic-only; order is already monotonic once it's kept in the ladder (no OrderOverride
-needed). Fixed via `PreceptPolicy.IncludeClassicInLadder`.
+needed). Fixed via the visible-rung filter in `PreceptLadder.Rungs`.
 
 ### `OrganUse` — STACKED, mandatory
 sources: AlphaMemes, Core, Ideology, VIE-M&S

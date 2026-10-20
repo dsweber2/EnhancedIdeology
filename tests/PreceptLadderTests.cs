@@ -25,16 +25,16 @@ public class PreceptLadderTests : SeededTest
     }
 
     [Fact]
-    public void Rungs_ExcludesClassicModeDefaults()
+    public void Rungs_ExcludesInvisibleClassicFallbacks()
     {
-        // Classic-mode default precepts (Lovin_Free, Cannibalism_Classic, ...) carry an issue but duplicate a
-        // real rung. Including them adds a phantom rung that shifts every rank and skews the falloff, so they
-        // must be filtered out of the ladder.
+        // Invisible classic precepts (Cannibalism_Classic, ...) carry an issue but no ideo can select them.
+        // Including them adds a phantom rung that shifts every rank and skews the falloff.
         var issue = new IssueDef { defName = "Cannibalism" };
         var acceptable = Rung(issue, "Acceptable", 0);
         var abhorrent = Rung(issue, "Abhorrent", 50);
         var classic = Rung(issue, "Cannibalism_Classic", 0);
         classic.classic = true;
+        classic.visible = false;
 
         Assert.Equal(new[] { acceptable, abhorrent }, PreceptLadder.Rungs(issue));
     }

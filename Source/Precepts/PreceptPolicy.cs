@@ -99,9 +99,7 @@ internal static partial class PreceptPolicy
         // Nikolai's Ideology: Gender Works. Central (beauty is moral; pawns are judged by looks) vs Unimportant
         // (focusing on beauty corrupts).
         "NikolaisIdeology_Beauty",
-        // Man's-name <-> woman's-name spectrum (mandatory -> no Don't-care, like SpouseCount). UsuallyMans is
-        // classic-only (no real Ideology-selectable equivalent) but is kept in the ladder via
-        // IncludeClassicInLadder purely to anchor the spacing; see OrderOverrides.
+        // Man's-name <-> woman's-name spectrum; see OrderOverrides.
         "MarriageName",
         // Former PositiveOnly issues whose rungs make a value claim (docs/preceptPolicy.md "PositiveOnly review").
         "EB_Contemplation", "Research", "Pain", "Blindness", "DarknessCombat", "Lighting", "Proselytizing",
@@ -111,6 +109,12 @@ internal static partial class PreceptPolicy
         "AgeReversal", "AM_Madness", "AM_Death", "AM_DeathrestCaskets", "AM_HarbingerTrees", "AM_AnimaScreams",
         "AM_Reliquaries", "AM_RelicDestruction", "VME_Corruption", "VME_SocialInteractions", "VME_LeaderDivinity",
         "VME_Anonymity", "VFEA_Recruiting", "VFEA_BeingRecruited",
+        // War Crimes Expanded 2.
+        "WCE2_Torture",
+        // Humanoid Alien Races: xenophilia axes on alien meat, romance, presence, and slavery.
+        "HAR_EatingAliens", "HAR_AlienDating", "HAR_AlienRaces", "HAR_AlienSlavery",
+        // Genetic Rim: acceptance of failed and humanoid genetic experiments.
+        "GR_Failures", "GR_HumanoidHybrids",
     ];
     // UniversalPositive issue -> the rung that values it most. A trait that opposes the issue pulls away from it.
     private static readonly Dictionary<string, string> UniversalPositiveValuedRung = new()
@@ -133,13 +137,6 @@ internal static partial class PreceptPolicy
         ["PreferredXenotypes", "Weapons", "VME_Leader", "VME_Mood"];
     private static readonly HashSet<string> NAIssues =
         ["IdeoBuilding", "IdeoRelic", "IdeoRitualSeat", "Ritual", "AM_Abilities"];
-    // Issues whose classic-only precept is not a duplicate of a real ladder rung (see PreceptLadder.Rungs) and
-    // must stay in the ladder to keep rank spacing correct, even though no real ideology can ever hold it.
-    internal static readonly HashSet<string> IncludeClassicInLadder =
-    [
-        "MarriageName", "InsectMeat", "Corpses", "NutrientPasteEating",
-        "SpouseCount_Male", "SpouseCount_Female", "Nudity_Male", "Nudity_Female",
-    ];
     // Multi-rung issues confirmed as PositiveOnly: no genuine belief axis, so rung-distance structural opinion
     // would be wrong. Listed here to suppress the startup warning for unclassified multi-rung issues.
     private static readonly HashSet<string> KnownPositiveOnlyIssues =
@@ -160,6 +157,8 @@ internal static partial class PreceptPolicy
         // (Forbidden/Arranged) — no clean moral axis.
         "VVE_Acceleration", "VVE_VehicleRepairs", "VVE_FuelEfficiency",
         "RomanceOnTheRim_Issue_MarriageProposal",
+        // Genetic Rim: two worktable speed perks, no belief axis.
+        "GR_WorktableSpeeds",
         // Not locally installed — safe PositiveOnly default pending ladder verification.
         "VRE_AndroidsIssue", "SEX_Divorce",
     ];
@@ -180,21 +179,15 @@ internal static partial class PreceptPolicy
         ["Corpses"] = ["Corpses_Ugly", "Corpses_DontCare", "AM_Corpses_Sublime"],
         // AM_InsectMeatEating_Required (AlphaMemes), InsectMeatEating_Loved (Ideology), and
         // VME_InsectMeatEating_DontCare (VIE-M&S) all sit at displayOrderInIssue=0 - fix the pro->neutral order.
-        // Despised_Classic is classic-only but is the only rung between neutral and Sacrilegious (docs/modCompat.md).
         ["InsectMeat"] =
         [
             "AM_InsectMeatEating_Required", "InsectMeatEating_Loved", "VME_InsectMeatEating_DontCare",
             "InsectMeatEating_Despised_Classic", "VME_InsectMeatEating_Sacrilegious",
         ],
-        // MaxOne is classic-only; kept alive via IncludeClassicInLadder (without it, this override was dead
-        // code - Rungs() filtered MaxOne out before the override ever ran).
         ["SpouseCount_Male"] =
             ["SpouseCount_Male_MaxOne", "SpouseCount_Male_MaxTwo", "SpouseCount_Male_MaxThree", "SpouseCount_Male_MaxFour", "SpouseCount_Male_Unlimited"],
         ["SpouseCount_Female"] =
             ["SpouseCount_Female_MaxOne", "SpouseCount_Female_MaxTwo", "SpouseCount_Female_MaxThree", "SpouseCount_Female_MaxFour", "SpouseCount_Female_Unlimited"],
-        // Man's-name <-> woman's-name spectrum. UsuallyMans is classic-only but genuinely occupies the "one
-        // step off the man's extreme" slot mirroring UsuallyWomans - dropping it would wrongly compress
-        // Random/KeepNames off the true center.
         ["MarriageName"] =
             ["MarriageName_AlwaysMans", "MarriageName_UsuallyMans", "MarriageName_Random", "MarriageName_KeepNames", "MarriageName_UsuallyWomans", "MarriageName_AlwaysWomans"],
         // MI_BodyMod_Allowed (Political Compass) sits at displayOrderInIssue=30, after Abhorrent — insert it
@@ -276,6 +269,29 @@ internal static partial class PreceptPolicy
         ["VME_CraftingQuality"] = ["VME_CraftingQuality_Increased", "VME_CraftingQuality_Decreased"],
         ["VME_PsychicSensitivity"] = ["VME_PsychicSensitivity_Heightened", "VME_PsychicSensitivity_Lowered"],
         ["AM_PsychicSensitivity"] = ["AM_PsychicSensitivity_Heightened", "AM_PsychicSensitivity_Affinity"],
+        // HorribleInnocent and Horrible tie at displayOrderInIssue=40.
+        ["WCE2_Torture"] =
+        [
+            "WCE2_Torture_AlwaysRespected", "WCE2_Torture_RespectedGuilty", "WCE2_Torture_DontCare",
+            "WCE2_Torture_HorribleInnocent", "WCE2_Torture_Horrible", "WCE2_Torture_Abhorrent",
+        ],
+        // Acceptable sits at displayOrderInIssue=0, before the two pro rungs.
+        ["HAR_AlienDating"] =
+        [
+            "HAR_AlienDating_Honorable", "HAR_AlienDating_Preferred", "HAR_AlienDating_Acceptable",
+            "HAR_AlienDating_Horrible", "HAR_AlienDating_Prohibited",
+        ],
+        // Lovin_Free and Lovin_FreeApproved tie at displayOrderInIssue=0.
+        ["Lovin"] =
+        [
+            "Lovin_FreeApproved", "Lovin_Free", "Lovin_SpouseOnly_Mild", "Lovin_SpouseOnly_Moderate",
+            "Lovin_SpouseOnly_Strict", "Lovin_Horrible", "Lovin_Prohibited",
+        ],
+        // VME_Sweets_Craved and VME_Sweets_Impartial tie at displayOrderInIssue=0.
+        ["VME_Sweets"] = ["VME_Sweets_Craved", "VME_Sweets_Impartial"],
+        // Genetic Rim sets no displayOrderInIssue.
+        ["GR_Failures"] = ["GR_Failures_Accepted", "GR_Failures_Disliked", "GR_Failures_Shameful"],
+        ["GR_HumanoidHybrids"] = ["GR_HumanoidHybrids_Accepted", "GR_HumanoidHybrids_Disliked", "GR_HumanoidHybrids_Forbidden"],
     };
 
     // Rungs that share the rank of an anchor rung on the same issue, keyed tied rung -> anchor. They express

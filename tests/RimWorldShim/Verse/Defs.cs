@@ -1,9 +1,15 @@
 namespace Verse;
 
+public class ModContentPack
+{
+    public string Name = string.Empty;
+}
+
 public abstract class Def
 {
     public string defName = string.Empty;
     public string? label;
+    public ModContentPack? modContentPack;
     public string LabelCap => string.IsNullOrEmpty(label)
         ? defName
         : char.ToUpperInvariant(label[0]) + label[1..];

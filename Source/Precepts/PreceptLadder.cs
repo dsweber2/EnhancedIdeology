@@ -14,11 +14,10 @@ internal static class PreceptLadder
 
     // Stance rungs of an issue, permissive/pro -> forbidding/anti. This is the canonical filter vanilla's own
     // RandomizePrecepts uses (issue equality); reaction thoughts are ThoughtDefs, not PreceptDefs, so they
-    // never pollute the ladder. Classic-mode default precepts (Lovin_Free, Cannibalism_Classic, ...) carry an
-    // issue but are the no-ideology fallback, duplicating a real rung; they are excluded so they do not add a
-    // phantom rung that shifts every real rank and skews the opinion falloff. PreceptPolicy.IncludeClassicInLadder
-    // lists the rare exception where the classic rung is NOT a duplicate (e.g. MarriageName_UsuallyMans has no
-    // real Ideology-selectable equivalent) and must stay to keep spacing correct. For issues whose
+    // never pollute the ladder. Invisible precepts (Cannibalism_Classic, Execution_Classic, ...) are the
+    // classic-mode fallback that no ideo can select; they are excluded so they do not add a phantom rung that
+    // shifts every real rank. Visible classic precepts (Lovin_Free, SpouseCount_Male_MaxOne, ...) are ordinary
+    // rungs: "classic" only means the precept exists without the Ideology DLC. For issues whose
     // displayOrderInIssue scrambles the axis once stacked, a PreceptPolicy order override pins the sequence.
     // Rungs in PreceptPolicy.TiedRungs are left out: they share their anchor's rank, so the ladder holds one
     // rung per rank.
@@ -28,7 +27,7 @@ internal static class PreceptLadder
             return cached;
 
         var rungs = DefDatabase<PreceptDef>.AllDefs.Where(precept => precept.issue == issue
-            && (!precept.classic || PreceptPolicy.IncludeClassicInLadder.Contains(issue.defName))
+            && precept.visible
             && !PreceptPolicy.TiedRungs.ContainsKey(precept.defName));
         List<PreceptDef> result;
 
@@ -71,27 +70,41 @@ internal static class PreceptLadder
         return Rungs(issue).FindIndex(precept => precept.defName == target);
     }
 
-    // Rank the virtual "Don't care" rung sits at for an issue whose ideo holds no explicit stance.
-    // -1f is the permissive extreme, one step below the most permissive explicit rung.
+    // Rank of the neutral stance on an issue (docs/preceptPolicy.md "Don't-care placement rule"). An issue with
+    // default rungs uses their weighted mean rank. Other issues use the PreceptPolicy.DontCare table, else -1f,
+    // one step below the most permissive explicit rung.
     public static float DontCareRank(IssueDef issue)
     {
         if (_dontCareCache.TryGetValue(issue, out var cached))
             return cached;
 
-        var rank = PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : -1f;
+        var rank = DefaultRank(issue)
+            ?? (PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : -1f);
         _dontCareCache[issue] = rank;
         return rank;
     }
 
-    // Classic precept for an issue that is NOT already a real ladder rung, or null if none exists.
-    // Used by display code so a silent stance shows its effective-default label (e.g. "One Only" for
-    // SpouseCount) rather than the generic "Don't care" string.
-    public static PreceptDef? ClassicFallback(IssueDef issue)
+    // When an ideo loses its rung on an issue with default rungs, vanilla adds one of them back, picked at random
+    // by defaultSelectionWeight (Ideo.RemovePrecept). The neutral stance is the expected rank of that pick.
+    private static float? DefaultRank(IssueDef issue)
     {
-        var rungs = Rungs(issue);
-        return DefDatabase<PreceptDef>.AllDefs
-            .FirstOrDefault(precept => precept.issue == issue && precept.classic && !rungs.Contains(precept));
+        var weightSum = 0f;
+        var rankSum = 0f;
+        foreach (var precept in DefDatabase<PreceptDef>.AllDefs)
+        {
+            if (precept.issue != issue || !precept.visible || precept.defaultSelectionWeight <= 0f)
+                continue;
+            weightSum += precept.defaultSelectionWeight;
+            rankSum += precept.defaultSelectionWeight * RankOf(precept);
+        }
+        return weightSum > 0f ? rankSum / weightSum : null;
     }
+
+    // Invisible classic precept for an issue, or null if none exists. Display code uses its label for an ideo with
+    // no rung on the issue (classic mode, or an issue added by a mod after the ideo was made).
+    public static PreceptDef? ClassicFallback(IssueDef issue) =>
+        DefDatabase<PreceptDef>.AllDefs.FirstOrDefault(precept =>
+            precept.issue == issue && precept.classic && !precept.visible && !precept.label.NullOrEmpty());
 
     // Opinion of targetRank given the pawn prefers preferredRank with the given strength, over a ladder
     // spanning [minRank, maxRank] (extent includes the virtual Don't-care rung when the issue is absent-able).

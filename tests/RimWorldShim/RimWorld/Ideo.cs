@@ -30,6 +30,8 @@ public class PreceptDef : Def
     public IssueDef? issue;
     public int displayOrderInIssue;
     public bool classic;
+    public bool visible = true;
+    public float defaultSelectionWeight;
     public List<PreceptComp> comps = [];
     public List<MemeDef> requiredMemes = [];
     public List<MemeDef> associatedMemes = [];
