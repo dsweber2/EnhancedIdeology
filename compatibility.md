@@ -19,6 +19,12 @@ Pawns with the **Carnivore** gene (`BS_Diet_Carnivore`) get the mirror treatment
 
 If Big and Small is not installed, all of the above is safely skipped.
 
+## [Humanoid Alien Races](https://steamcommunity.com/sharedfiles/filedetails/?id=839005762)
+
+**Eating aliens**, **alien dating**, **alien races**, and **alien slavery** are full moral axes.
+A xenophile ideo and a xenophobe ideo will structurally disagree on each of them, scaled by how far apart their stances are.
+The Xenophobia and Xenophilia memes are linked to personality traits, so colonist traits pull their beliefs toward or away from these memes.
+
 ## [Waymakers](https://steamcommunity.com/sharedfiles/filedetails/?id=3761384757)
 
 The `infrastructure` precept is treated as an ideo-specific obligation.
@@ -65,11 +71,25 @@ Homelessness precepts are treated as ideo-specific obligations and don't generat
 
 The `completing quests` and `failing quests` issues are treated as moral-axis beliefs.
 Ideos that treat quest completion as respectful vs. daring, or that hold different views on how to regard failure, will generate genuine structural disagreement with opposing positions.
+
+## [Vanilla Genetics Expanded](https://steamcommunity.com/sharedfiles/filedetails/?id=2801160906)
+
+How an ideo regards **genetic failures** and **humanoid hybrids** are full moral axes, running from accepted to shameful or forbidden.
+Colonists without a particular view sit at the mod's default, `disliked`.
+The Mad Scientist and Careful Geneticist memes are linked to personality traits.
+
+Worktable speed precepts are treated as ideo-specific stat modifiers and don't generate cross-ideo tension.
+
 ## [Vanilla Ideology Expanded — Memes and Structures](https://steamcommunity.com/sharedfiles/filedetails/?id=2636329500)
 
 Full support.
 All VIE issues are integrated.
 Where VIE rungs extend existing base-game issue ladders (e.g., `Apostasy`, `BodyModification`, `Slavery`), the combined ladder is ordered correctly so opinion distance is computed on the merged axis.
+
+## [War Crimes Expanded 2 Core (Updated)](https://steamcommunity.com/sharedfiles/filedetails/?id=3032870787)
+
+**Torture** is a full moral axis, from `always respected` through `horrible if innocent` to `always abhorrent`.
+Colonists without a particular view sit at the mod's default, `horrible if innocent`.
 
 
 # Other Mods

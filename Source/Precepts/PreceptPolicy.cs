@@ -113,7 +113,7 @@ internal static partial class PreceptPolicy
         "WCE2_Torture",
         // Humanoid Alien Races: xenophilia axes on alien meat, romance, presence, and slavery.
         "HAR_EatingAliens", "HAR_AlienDating", "HAR_AlienRaces", "HAR_AlienSlavery",
-        // Genetic Rim: acceptance of failed and humanoid genetic experiments.
+        // Vanilla Genetics Expanded: acceptance of failed and humanoid genetic experiments.
         "GR_Failures", "GR_HumanoidHybrids",
     ];
     // UniversalPositive issue -> the rung that values it most. A trait that opposes the issue pulls away from it.
@@ -157,7 +157,7 @@ internal static partial class PreceptPolicy
         // (Forbidden/Arranged) — no clean moral axis.
         "VVE_Acceleration", "VVE_VehicleRepairs", "VVE_FuelEfficiency",
         "RomanceOnTheRim_Issue_MarriageProposal",
-        // Genetic Rim: two worktable speed perks, no belief axis.
+        // Vanilla Genetics Expanded: two worktable speed perks, no belief axis.
         "GR_WorktableSpeeds",
         // Not locally installed — safe PositiveOnly default pending ladder verification.
         "VRE_AndroidsIssue", "SEX_Divorce",
@@ -289,7 +289,7 @@ internal static partial class PreceptPolicy
         ],
         // VME_Sweets_Craved and VME_Sweets_Impartial tie at displayOrderInIssue=0.
         ["VME_Sweets"] = ["VME_Sweets_Craved", "VME_Sweets_Impartial"],
-        // Genetic Rim sets no displayOrderInIssue.
+        // Vanilla Genetics Expanded sets no displayOrderInIssue.
         ["GR_Failures"] = ["GR_Failures_Accepted", "GR_Failures_Disliked", "GR_Failures_Shameful"],
         ["GR_HumanoidHybrids"] = ["GR_HumanoidHybrids_Accepted", "GR_HumanoidHybrids_Disliked", "GR_HumanoidHybrids_Forbidden"],
     };

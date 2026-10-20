@@ -1,7 +1,8 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers the War Crimes Expanded 2, Humanoid Alien Races, and Genetic Rim issues: category, rung order from the
-// display orders the mods ship, and the neutral rank their default rungs give (docs/preceptPolicy.md "Mod issues").
+// Covers the War Crimes Expanded 2, Humanoid Alien Races, and Vanilla Genetics Expanded issues: category, rung
+// order from the display orders the mods ship, and the neutral rank their default rungs give
+// (docs/preceptPolicy.md "Mod issues").
 public class ModIssueLadderTests : SeededTest
 {
     private static IssueDef Register(string issueName, params (string name, int order, float weight, bool visible)[] rungs)

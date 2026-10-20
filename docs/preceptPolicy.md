@@ -271,18 +271,18 @@ are *reversed* (`VME_Recreation` anti→pro, `VME_Illness` indifferent→exalted
 etc.) are actually dead-centre, and `VME_Recreation`'s `fishing` sits at the pro extreme either way
 (numerically inert). No reorder overrides added.
 
-**Moral, value axes from War Crimes Expanded 2, Humanoid Alien Races, and Genetic Rim.**
+**Moral, value axes from War Crimes Expanded 2, Humanoid Alien Races, and Vanilla Genetics Expanded (formerly Genetic Rim).**
 Rungs listed pro → anti; neutral follows the Don't-care placement rule.
 
-| issue | ladder | neutral | why |
-| --- | --- | --- | --- |
-| WCE2_Torture | `AlwaysRespected` → `RespectedGuilty` → `DontCare` → `HorribleInnocent` → `Horrible` → `Abhorrent` | `HorribleInnocent` | default rung; `HorribleInnocent` and `Horrible` tie at order 40, so an order override fixes them |
-| HAR_EatingAliens | `RequiredStrong` → `Preferred` → `Acceptable` → `Disapproved` → `Abhorrent` | `Abhorrent` | default rung |
-| HAR_AlienDating | `Honorable` → `Preferred` → `Acceptable` → `Horrible` → `Prohibited` | `Acceptable` | optional (no default rung); no effects. `Acceptable` has order 0, before the pro rungs, so an order override fixes it |
-| HAR_AlienRaces | `Exalted` → `Respected` → `Standard` → `Horrible` → `Abhorrent` | `Standard` | default rung |
-| HAR_AlienSlavery | `Honorable` → `Acceptable` → `Disapproved` → `Horrible` → `Abhorrent` | between `Disapproved` and `Horrible` | four default rungs, as vanilla `Slavery` |
-| GR_Failures | `Accepted` → `Disliked` → `Shameful` | `Disliked` | default rung; `Accepted` has no effects but is a stance. No display orders, so an order override sets them |
-| GR_HumanoidHybrids | `Accepted` → `Disliked` → `Forbidden` | `Disliked` | as `GR_Failures` |
+| issue              | ladder                                                                                             | neutral                              | why                                                                                                                   |
+| ---                | ---                                                                                                | ---                                  | ---                                                                                                                   |
+| WCE2_Torture       | `AlwaysRespected` → `RespectedGuilty` → `DontCare` → `HorribleInnocent` → `Horrible` → `Abhorrent` | `HorribleInnocent`                   | default rung; `HorribleInnocent` and `Horrible` tie at order 40, so an order override fixes them                      |
+| HAR_EatingAliens   | `RequiredStrong` → `Preferred` → `Acceptable` → `Disapproved` → `Abhorrent`                        | `Abhorrent`                          | default rung                                                                                                          |
+| HAR_AlienDating    | `Honorable` → `Preferred` → `Acceptable` → `Horrible` → `Prohibited`                               | `Acceptable`                         | optional (no default rung); no effects. `Acceptable` has order 0, before the pro rungs, so an order override fixes it |
+| HAR_AlienRaces     | `Exalted` → `Respected` → `Standard` → `Horrible` → `Abhorrent`                                    | `Standard`                           | default rung                                                                                                          |
+| HAR_AlienSlavery   | `Honorable` → `Acceptable` → `Disapproved` → `Horrible` → `Abhorrent`                              | between `Disapproved` and `Horrible` | four default rungs, as vanilla `Slavery`                                                                              |
+| GR_Failures        | `Accepted` → `Disliked` → `Shameful`                                                               | `Disliked`                           | default rung; `Accepted` has no effects but is a stance. No display orders, so an order override sets them            |
+| GR_HumanoidHybrids | `Accepted` → `Disliked` → `Forbidden`                                                              | `Disliked`                           | as `GR_Failures`                                                                                                      |
 
 `GR_WorktableSpeeds` (implant or genomorpher speed) is a stat perk and stays PositiveOnly.
 

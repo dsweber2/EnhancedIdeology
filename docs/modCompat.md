@@ -1553,7 +1553,7 @@ sources: VIE-M&S
 
 ## Issues from additional third-party mods
 
-These issues appear only when the listed mod is loaded. Source abbreviations: **MortEnv** = `MortStrudel.MortIdeologyEnv`, **MortPolitical** = `MortStrudel.MortIdeology`, **MortSciFai** = `MortStrudel.MortIdeologySciFai`, **Menagerist** = `MortStrudel.MortIdeologySpecWork`, **QuestingMeme** = `SirMashedPotato.QuestingMeme`, **Waymakers** = `Mx.Waymakers`.
+These issues appear only when the listed mod is loaded. Source abbreviations: **MortEnv** = `MortStrudel.MortIdeologyEnv`, **MortPolitical** = `MortStrudel.MortIdeology`, **MortSciFai** = `MortStrudel.MortIdeologySciFai`, **Menagerist** = `MortStrudel.MortIdeologySpecWork`, **QuestingMeme** = `SirMashedPotato.QuestingMeme`, **Waymakers** = `Mx.Waymakers`, **WCE2** = `Mersid.WCE2Updated.Core`, **HAR** = `erdelf.HumanoidAlienRaces`, **VGE** = `VanillaExpanded.VGeneticsE`.
 
 ### Mort's Ideologies: Conservationist & Polluter (`MortStrudel.MortIdeologyEnv`)
 
@@ -1739,3 +1739,126 @@ sources: MortSciFai
 |--:|--:|---|---|---|--:|
 | 0 | 0 | MortSciFai | MI_PruningSpeed_Increased | increased | — |
 | 1 | 0 | MortSciFai | MI_PruningSpeed_Reduced | reduced | — |
+
+### War Crimes Expanded 2 Core (Updated) (`Mersid.WCE2Updated.Core`)
+
+No 1.7 folder; the ladder below is from 1.6.
+
+#### `WCE2_Torture` — single-source, mandatory, **Moral**, OrderOverride applied
+sources: WCE2
+
+`Horrible` and `HorribleInnocent` tie at `displayOrderInIssue=40`.
+`WCE2_Torture_Vanilla` is invisible, so it is not a ladder rung; it has the same thoughts as `Horrible`.
+Neutral is the default rung, `HorribleInnocent`.
+
+Semantic axis: AlwaysRespected → RespectedGuilty → DontCare → HorribleInnocent (neutral) → Horrible → Abhorrent
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| — | — | WCE2 | WCE2_Torture_Vanilla | (invisible classic) | — |
+| 0 | 0 | WCE2 | WCE2_Torture_AlwaysRespected | always respected | — |
+| 1 | 10 | WCE2 | WCE2_Torture_RespectedGuilty | respected if guilty | — |
+| 2 | 20 | WCE2 | WCE2_Torture_DontCare | acceptable | — |
+| 3 | 40 | WCE2 | WCE2_Torture_Horrible | always horrible | — |
+| 4 | 40 | WCE2 | WCE2_Torture_HorribleInnocent | horrible if innocent | 1 |
+| 5 | 50 | WCE2 | WCE2_Torture_Abhorrent | always abhorrent | — |
+
+### Humanoid Alien Races (`erdelf.HumanoidAlienRaces`)
+
+Four xenophilia axes, all **Moral**.
+`HAR_Xenophobia` and `HAR_Xenophilia` memes carry trait links (`docs/trait-meme-affinity.md`).
+
+#### `HAR_EatingAliens` — single-source, mandatory, **Moral**
+sources: HAR
+
+Neutral is the default rung, `Abhorrent`.
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 0 | HAR | HAR_EatingAliens_RequiredStrong | required | — |
+| 1 | 10 | HAR | HAR_EatingAliens_Preferred | preferred | — |
+| 2 | 20 | HAR | HAR_EatingAliens_Acceptable | acceptable | — |
+| 3 | 30 | HAR | HAR_EatingAliens_Disapproved | disapproved | — |
+| 4 | 50 | HAR | HAR_EatingAliens_Abhorrent | abhorrent | 1 |
+
+#### `HAR_AlienDating` — single-source, optional, **Moral**, OrderOverride applied
+sources: HAR
+
+`Acceptable` sits at `displayOrderInIssue=0`, before the two pro rungs.
+`Preferred` has no comps; HAR presumably reads it in code, so it stays a separate rung.
+Neutral is `Acceptable`, the rung with no effects (`DontCare` table).
+
+Semantic axis: Honorable → Preferred → Acceptable (neutral) → Horrible → Prohibited
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 0 | HAR | HAR_AlienDating_Acceptable | acceptable | — |
+| 1 | 10 | HAR | HAR_AlienDating_Preferred | preferred | — |
+| 2 | 20 | HAR | HAR_AlienDating_Honorable | honorable | — |
+| 3 | 50 | HAR | HAR_AlienDating_Horrible | horrible | — |
+| 4 | 60 | HAR | HAR_AlienDating_Prohibited | forbidden | — |
+
+#### `HAR_AlienRaces` — single-source, mandatory, **Moral**
+sources: HAR
+
+Neutral is the default rung, `Standard`.
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 0 | HAR | HAR_AlienRaces_Exalted | exalted | — |
+| 1 | 10 | HAR | HAR_AlienRaces_Respected | respected | — |
+| 2 | 30 | HAR | HAR_AlienRaces_Standard | neutral | 1 |
+| 3 | 50 | HAR | HAR_AlienRaces_Horrible | disliked | — |
+| 4 | 60 | HAR | HAR_AlienRaces_Abhorrent | abhorrent | — |
+
+#### `HAR_AlienSlavery` — single-source, mandatory, **Moral**
+sources: HAR
+
+Four default rungs, as vanilla `Slavery`; neutral is their mean, between `Disapproved` and `Horrible`.
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 0 | HAR | HAR_AlienSlavery_Honorable | honorable | — |
+| 1 | 10 | HAR | HAR_AlienSlavery_Acceptable | acceptable | 1 |
+| 2 | 20 | HAR | HAR_AlienSlavery_Disapproved | disapproved | 1 |
+| 3 | 30 | HAR | HAR_AlienSlavery_Horrible | horrible | 1 |
+| 4 | 40 | HAR | HAR_AlienSlavery_Abhorrent | abhorrent | 1 |
+
+### Vanilla Genetics Expanded (`VanillaExpanded.VGeneticsE`)
+
+Formerly Genetic Rim, so its defNames keep the `GR_` prefix.
+No rung sets `displayOrderInIssue`, so every rank below is load order; OrderOverrides set the axis.
+`Accepted` has no comps and no code reference, but it is a stance: the default rung is `Disliked`.
+Careful Geneticist requires `GR_Failures_Accepted`; Mad Scientist requires `GR_Failures_Shameful` and `GR_HumanoidHybrids_Accepted`.
+
+#### `GR_Failures` — single-source, mandatory, **Moral**, OrderOverride applied
+sources: VGE
+
+Semantic axis: Accepted → Disliked (neutral) → Shameful
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | — | VGE | GR_Failures_Shameful | shameful | — |
+| 1 | — | VGE | GR_Failures_Disliked | disliked | 1 |
+| 2 | — | VGE | GR_Failures_Accepted | accepted | — |
+
+#### `GR_HumanoidHybrids` — single-source, mandatory, **Moral**, OrderOverride applied
+sources: VGE
+
+Semantic axis: Accepted → Disliked (neutral) → Forbidden
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | — | VGE | GR_HumanoidHybrids_Forbidden | forbidden | — |
+| 1 | — | VGE | GR_HumanoidHybrids_Disliked | disliked | 1 |
+| 2 | — | VGE | GR_HumanoidHybrids_Accepted | accepted | — |
+
+#### `GR_WorktableSpeeds` — single-source, optional (PositiveOnly)
+sources: VGE
+
+Worktable speed perks, no belief axis.
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | — | VGE | GR_WorktableSpeeds_Implants | implants | — |
+| 1 | — | VGE | GR_WorktableSpeeds_Genomorpher | genomorpher | — |
