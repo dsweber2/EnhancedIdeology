@@ -99,7 +99,7 @@
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | 改宗試みによる信仰度低下: {0} |
 | `EnhancedIdeology.ConversionCertaintyKnock.Tip` | When a moral guide wins a conversion debate but doesn't immediately flip the pawn, their certainty is multiplied by this. 1x = an 80%-certain pawn stays at 80%; 0.8x = an 80%-certain pawn drops to 64%. Lower = conversion attempts more impactful. | 道徳的指導者が改宗議論に勝ってもポーンがすぐに改宗しない場合、信仰度がこの値で乗算される。1x=80%信仰度のポーンが80%のまま。0.8x=80%が64%に低下。低いほど改宗試みの影響が大きい。 |
 | `EnhancedIdeology.ConvictionDecayRate` | Conviction decay: {0}/quadrum | 確信の減衰: {0}/節 |
-| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength all precepts lose per quadrum. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. | 全戒律が節ごとに失う確信強度。100%確信は戒律平均20、最大50。高いほど信条強化の必要性が高まる。 |
+| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength precepts lose per quadrum. Precepts linked to a trait drift toward the trait's stance instead. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. | 戒律が節ごとに失う確信強度。性格に結びついた戒律は、代わりにその性格の立場へと移っていく。100%確信は戒律平均20、最大50。高いほど信条強化の必要性が高まる。 |
 | `EnhancedIdeology.PreceptOppositionScale` | Opposite-stance opposition: {0} | 対立姿勢への反発: {0} |
 | `EnhancedIdeology.PreceptOppositionScale.Tip` | How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. At 100%, a pawn with Cannibalism: Disapproved 12 has opinion -12 of Cannibalism: Required (ravenous). 0% = indifferent to opposing stances; 100% = equal and opposite to their support for their own at the furthest extreme precept. | ポーンが問題の反対極端の姿勢にどれだけ強く反発するか（確信の割合）。100%では、食人：不承認12のポーンは食人：必須（貪欲）に対して-12の評価を持つ。0%=対立姿勢に無関心、100%=自分の最遠極端戒律への支持と等しく反対。 |
 | `EnhancedIdeology.ConversionStancePull` | Conversion strength: {0} | 改宗強度: {0} |
@@ -124,6 +124,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | 強度 |
 | `EnhancedIdeology.StanceDontCare` | Don't care | 無関心 |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | {1}の問題について、{PAWN_nameDef}は確信{3}で姿勢{2}をとっている。{IDEO_name}は{5}を説く。{PAWN_nameDef}のその姿勢への評価: {6}。 |
+| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | 外部の影響がなければ、{PAWN_nameDef}の性格は{1}へと傾く。 |
+| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef}の性格は{1}に反対している。 |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}の{IDEO_name}への評価: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | ミームと戒律から: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | 個人の信条から: {0} |

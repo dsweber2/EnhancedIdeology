@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Sức mạnh</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Không quan tâm</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>Về vấn đề {1}, {PAWN_nameDef} giữ lập trường {2} với niềm tin {3}. {IDEO_name} rao giảng {5}; quan điểm của {PAWN_nameDef} về lập trường đó: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.TraitDriftToward>Nếu không bị tác động, tính cách của {PAWN_nameDef} sẽ nghiêng về {1}.</EnhancedIdeology.TraitDriftToward>
+  <EnhancedIdeology.TraitDriftAgainst>Tính cách của {PAWN_nameDef} phản đối {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Quan điểm của {PAWN_nameDef} về {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Từ kỷ vật và giới luật: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Từ niềm tin cá nhân: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

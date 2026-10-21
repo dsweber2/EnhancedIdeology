@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Kracht</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Maakt niet uit</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>Over de kwestie van {1} heeft {PAWN_nameDef} het standpunt {2} met overtuiging {3}. {IDEO_name} predikt {5}; {PAWN_nameDef}'s mening over dat standpunt: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.TraitDriftToward>Zonder invloed van buitenaf trekt de persoonlijkheid van {PAWN_nameDef} naar {1}.</EnhancedIdeology.TraitDriftToward>
+  <EnhancedIdeology.TraitDriftAgainst>De persoonlijkheid van {PAWN_nameDef} is tegen {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}'s mening over {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Van geloofsprincipes en leefregels: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Van persoonlijke overtuigingen: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

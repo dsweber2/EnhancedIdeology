@@ -23,7 +23,7 @@
   <EnhancedIdeology.ConversionCertaintyKnock>改宗試みによる信仰度低下: {0}</EnhancedIdeology.ConversionCertaintyKnock>
   <EnhancedIdeology.ConversionCertaintyKnock.Tip>道徳的指導者が改宗議論に勝ってもポーンがすぐに改宗しない場合、信仰度がこの値で乗算される。1x=80%信仰度のポーンが80%のまま。0.8x=80%が64%に低下。低いほど改宗試みの影響が大きい。</EnhancedIdeology.ConversionCertaintyKnock.Tip>
   <EnhancedIdeology.ConvictionDecayRate>確信の減衰: {0}/節</EnhancedIdeology.ConvictionDecayRate>
-  <EnhancedIdeology.ConvictionDecayRate.Tip>全戒律が節ごとに失う確信強度。100%確信は戒律平均20、最大50。高いほど信条強化の必要性が高まる。</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>戒律が節ごとに失う確信強度。性格に結びついた戒律は、代わりにその性格の立場へと移っていく。100%確信は戒律平均20、最大50。高いほど信条強化の必要性が高まる。</EnhancedIdeology.ConvictionDecayRate.Tip>
   <EnhancedIdeology.PreceptOppositionScale>対立姿勢への反発: {0}</EnhancedIdeology.PreceptOppositionScale>
   <EnhancedIdeology.PreceptOppositionScale.Tip>ポーンが問題の反対極端の姿勢にどれだけ強く反発するか（確信の割合）。100%では、食人：不承認12のポーンは食人：必須（貪欲）に対して-12の評価を持つ。0%=対立姿勢に無関心、100%=自分の最遠極端戒律への支持と等しく反対。</EnhancedIdeology.PreceptOppositionScale.Tip>
   <EnhancedIdeology.ConversionStancePull>改宗強度: {0}</EnhancedIdeology.ConversionStancePull>

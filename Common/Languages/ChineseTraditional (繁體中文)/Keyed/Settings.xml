@@ -23,7 +23,7 @@
   <EnhancedIdeology.ConversionCertaintyKnock>皈依嘗試感悟損失：{0}</EnhancedIdeology.ConversionCertaintyKnock>
   <EnhancedIdeology.ConversionCertaintyKnock.Tip>當道德引導者贏得皈依辯論但棋子未立即轉變時，其感悟乘以此係數。1倍＝感悟80%的棋子維持80%；0.8倍＝感悟80%的棋子降至64%。數值越低，皈依嘗試影響越大。</EnhancedIdeology.ConversionCertaintyKnock.Tip>
   <EnhancedIdeology.ConvictionDecayRate>信念衰退：{0}/月</EnhancedIdeology.ConvictionDecayRate>
-  <EnhancedIdeology.ConvictionDecayRate.Tip>所有戒律每月損失的信念強度。注意：平均戒律值20對應100%信念，最大值為50。數值越高，強化信念的需求越迫切。</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>戒律每月損失的信念強度。與特性相關的戒律則會向該特性的立場漂移。注意：平均戒律值20對應100%信念，最大值為50。數值越高，強化信念的需求越迫切。</EnhancedIdeology.ConvictionDecayRate.Tip>
   <EnhancedIdeology.PreceptOppositionScale>對立立場反對度：{0}</EnhancedIdeology.PreceptOppositionScale>
   <EnhancedIdeology.PreceptOppositionScale.Tip>棋子反對某議題極端對立立場的強度，以其信念的分數表示。100%時，持「食人：不贊同12」的棋子對「食人：必須（飢渴）」的看法為-12。0%＝對對立立場漠然；100%＝與自身在最極端戒律的支持等量反對。</EnhancedIdeology.PreceptOppositionScale.Tip>
   <EnhancedIdeology.ConversionStancePull>皈依強度：{0}</EnhancedIdeology.ConversionStancePull>

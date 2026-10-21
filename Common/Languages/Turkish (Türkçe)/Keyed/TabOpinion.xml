@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Güç</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Umursamıyor</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>{1} konusunda {PAWN_nameDef}, {3} inançla {2} tutumunu benimsiyor. {IDEO_name}, {5}'i öğütlüyor; {PAWN_nameDef}'in bu tutuma dair görüşü: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.TraitDriftToward>Kendi haline bırakılırsa {PAWN_nameDef} kişiliği gereği şuna yönelir: {1}.</EnhancedIdeology.TraitDriftToward>
+  <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef} kişiliği gereği şuna karşıdır: {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}'in {IDEO_name} hakkındaki görüşü: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>İlkeler ve öğretilerden: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Kişisel inançlardan: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

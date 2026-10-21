@@ -99,7 +99,7 @@
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | 皈依嘗試感悟損失：{0} |
 | `EnhancedIdeology.ConversionCertaintyKnock.Tip` | When a moral guide wins a conversion debate but doesn't immediately flip the pawn, their certainty is multiplied by this. 1x = an 80%-certain pawn stays at 80%; 0.8x = an 80%-certain pawn drops to 64%. Lower = conversion attempts more impactful. | 當道德引導者贏得皈依辯論但棋子未立即轉變時，其感悟乘以此係數。1倍＝感悟80%的棋子維持80%；0.8倍＝感悟80%的棋子降至64%。數值越低，皈依嘗試影響越大。 |
 | `EnhancedIdeology.ConvictionDecayRate` | Conviction decay: {0}/quadrum | 信念衰退：{0}/月 |
-| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength all precepts lose per quadrum. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. | 所有戒律每月損失的信念強度。注意：平均戒律值20對應100%信念，最大值為50。數值越高，強化信念的需求越迫切。 |
+| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength precepts lose per quadrum. Precepts linked to a trait drift toward the trait's stance instead. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. | 戒律每月損失的信念強度。與特性相關的戒律則會向該特性的立場漂移。注意：平均戒律值20對應100%信念，最大值為50。數值越高，強化信念的需求越迫切。 |
 | `EnhancedIdeology.PreceptOppositionScale` | Opposite-stance opposition: {0} | 對立立場反對度：{0} |
 | `EnhancedIdeology.PreceptOppositionScale.Tip` | How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. At 100%, a pawn with Cannibalism: Disapproved 12 has opinion -12 of Cannibalism: Required (ravenous). 0% = indifferent to opposing stances; 100% = equal and opposite to their support for their own at the furthest extreme precept. | 棋子反對某議題極端對立立場的強度，以其信念的分數表示。100%時，持「食人：不贊同12」的棋子對「食人：必須（飢渴）」的看法為-12。0%＝對對立立場漠然；100%＝與自身在最極端戒律的支持等量反對。 |
 | `EnhancedIdeology.ConversionStancePull` | Conversion strength: {0} | 皈依強度：{0} |
@@ -124,6 +124,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | 強度 |
 | `EnhancedIdeology.StanceDontCare` | Don't care | 無所謂 |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | 在{1}的議題上，{PAWN_nameDef}持有立場{2}，信念強度為{3}。{IDEO_name}宣揚{5}；{PAWN_nameDef}對該立場的看法：{6}。 |
+| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | 若無外界影響，{PAWN_nameDef}的性格會使其傾向於{1}。 |
+| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef}的性格反對{1}。 |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}對{IDEO_name}的看法：{2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | 源自模因與戒律：{0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | 源自個人信念：{0} |

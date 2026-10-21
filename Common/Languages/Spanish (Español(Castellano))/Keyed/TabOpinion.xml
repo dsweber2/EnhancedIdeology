@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Fortaleza</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Indiferente</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>En el tema de {1}, {PAWN_nameDef} tiene la postura {2} con convicción {3}. {IDEO_name} predica {5}; opinión de {PAWN_nameDef} sobre esa postura: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.TraitDriftToward>Sin influencias externas, la personalidad de {PAWN_nameDef} tiende hacia {1}.</EnhancedIdeology.TraitDriftToward>
+  <EnhancedIdeology.TraitDriftAgainst>La personalidad de {PAWN_nameDef} está en contra de {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Opinión de {PAWN_nameDef} sobre {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>De memes y preceptos: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>De creencias personales: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

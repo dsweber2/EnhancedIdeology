@@ -23,7 +23,7 @@
   <EnhancedIdeology.ConversionCertaintyKnock>教化尝试认可度损失：{0}</EnhancedIdeology.ConversionCertaintyKnock>
   <EnhancedIdeology.ConversionCertaintyKnock.Tip>道德向导赢得教化辩论但未立即转化棋子时，对方认可度乘以此系数。1倍=认可度80%的棋子保持80%；0.8倍=认可度80%的棋子降至64%。越低则教化尝试影响越大。</EnhancedIdeology.ConversionCertaintyKnock.Tip>
   <EnhancedIdeology.ConvictionDecayRate>信念衰减：{0}/象</EnhancedIdeology.ConvictionDecayRate>
-  <EnhancedIdeology.ConvictionDecayRate.Tip>所有戒律每象损失的信念强度。注意：100%信念对应戒律平均值20，上限为50。越高则越需要强化信仰。</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>戒律每象损失的信念强度。与特性相关的戒律则会向该特性的立场漂移。注意：100%信念对应戒律平均值20，上限为50。越高则越需要强化信仰。</EnhancedIdeology.ConvictionDecayRate.Tip>
   <EnhancedIdeology.PreceptOppositionScale>对立立场反对度：{0}</EnhancedIdeology.PreceptOppositionScale>
   <EnhancedIdeology.PreceptOppositionScale.Tip>棋子对某议题极端对立立场的反对强度，以其信念的分数表示。100%时，持有"食人：不赞成 12"的棋子对"食人：必须（饥渴）"的看法为-12。0%=对对立立场漠不关心；100%=与其对最极端戒律的支持等量且相反。</EnhancedIdeology.PreceptOppositionScale.Tip>
   <EnhancedIdeology.ConversionStancePull>教化强度：{0}</EnhancedIdeology.ConversionStancePull>

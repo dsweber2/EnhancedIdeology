@@ -23,7 +23,7 @@
   <EnhancedIdeology.ConversionCertaintyKnock>Ztráta jistoty při pokusu o konverzi: {0}</EnhancedIdeology.ConversionCertaintyKnock>
   <EnhancedIdeology.ConversionCertaintyKnock.Tip>Když morální průvodce vyhraje konverzní debatu, ale pawn se okamžitě nepřevede, jeho jistota se vynásobí touto hodnotou. 1× = pawn s 80% jistotou zůstane na 80 %; 0,8× = pawn s 80% jistotou klesne na 64 %. Nižší = pokusy o konverzi jsou účinnější.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
   <EnhancedIdeology.ConvictionDecayRate>Rozpad přesvědčení: {0}/quadrum</EnhancedIdeology.ConvictionDecayRate>
-  <EnhancedIdeology.ConvictionDecayRate.Tip>O kolik sílá přesvědčení všech zásad klesá za quadrum. Pozn.: 100% přesvědčení odpovídá průměru zásad 20, maximum je 50. Vyšší = silnější potřeba posilovat přesvědčení.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>O kolik síla přesvědčení zásad klesá za quadrum. Zásady spojené s rysem se místo toho posouvají k postoji daného rysu. Pozn.: 100% přesvědčení odpovídá průměru zásad 20, maximum je 50. Vyšší = silnější potřeba posilovat přesvědčení.</EnhancedIdeology.ConvictionDecayRate.Tip>
   <EnhancedIdeology.PreceptOppositionScale>Odpor k opačnému postoji: {0}</EnhancedIdeology.PreceptOppositionScale>
   <EnhancedIdeology.PreceptOppositionScale.Tip>Jak silně pawn odporuje postoji na opačném konci škály problému, jako zlomek jeho přesvědčení. Při 100 % má pawn s Kanibalismus: Neschváleno 12 názor -12 na Kanibalismus: Povinné (hladový). 0 % = lhostejný k opačným postojům; 100 % = stejně silný, ale opačný k podpoře vlastní krajní zásady.</EnhancedIdeology.PreceptOppositionScale.Tip>
   <EnhancedIdeology.ConversionStancePull>Síla konverze: {0}</EnhancedIdeology.ConversionStancePull>

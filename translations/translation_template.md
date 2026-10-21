@@ -99,7 +99,7 @@
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} |  |
 | `EnhancedIdeology.ConversionCertaintyKnock.Tip` | When a moral guide wins a conversion debate but doesn't immediately flip the pawn, their certainty is multiplied by this. 1x = an 80%-certain pawn stays at 80%; 0.8x = an 80%-certain pawn drops to 64%. Lower = conversion attempts more impactful. |  |
 | `EnhancedIdeology.ConvictionDecayRate` | Conviction decay: {0}/quadrum |  |
-| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength all precepts lose per quadrum. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. |  |
+| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength precepts lose per quadrum. Precepts linked to a trait drift toward the trait's stance instead. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. |  |
 | `EnhancedIdeology.PreceptOppositionScale` | Opposite-stance opposition: {0} |  |
 | `EnhancedIdeology.PreceptOppositionScale.Tip` | How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. At 100%, a pawn with Cannibalism: Disapproved 12 has opinion -12 of Cannibalism: Required (ravenous). 0% = indifferent to opposing stances; 100% = equal and opposite to their support for their own at the furthest extreme precept. |  |
 | `EnhancedIdeology.ConversionStancePull` | Conversion strength: {0} |  |
@@ -124,6 +124,8 @@
 | `EnhancedIdeology.ColStrength` | Strength |  |
 | `EnhancedIdeology.StanceDontCare` | Don't care |  |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. |  |
+| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. |  |
+| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. |  |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} |  |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} |  |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} |  |

@@ -99,7 +99,7 @@
 | `EnhancedIdeology.ConversionCertaintyKnock` | Conversion attempt Certainty loss: {0} | 교화 시도 믿음 손실: {0} |
 | `EnhancedIdeology.ConversionCertaintyKnock.Tip` | When a moral guide wins a conversion debate but doesn't immediately flip the pawn, their certainty is multiplied by this. 1x = an 80%-certain pawn stays at 80%; 0.8x = an 80%-certain pawn drops to 64%. Lower = conversion attempts more impactful. | 도덕적 지도자가 교화 토론에서 이겼지만 폰이 즉시 전향하지 않을 때, 믿음에 이 값을 곱합니다. 1x = 80% 믿음의 폰은 80%를 유지; 0.8x = 80% 믿음의 폰은 64%로 하락. 낮을수록 = 교화 시도의 영향이 더 큽니다. |
 | `EnhancedIdeology.ConvictionDecayRate` | Conviction decay: {0}/quadrum | 확신 쇠퇴: {0}/분기 |
-| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength all precepts lose per quadrum. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. | 모든 규율이 분기당 잃는 확신 강도. 100% 확신은 규율 평균 20이며, 최대는 50입니다. 높을수록 = 신념을 강화해야 할 필요성이 더 강합니다. |
+| `EnhancedIdeology.ConvictionDecayRate.Tip` | How much conviction strength precepts lose per quadrum. Precepts linked to a trait drift toward the trait's stance instead. Note that 100% conviction is at a precept average of 20, max is 50. Higher = stronger need for reinforcing beliefs. | 규율이 분기당 잃는 확신 강도. 특성과 연결된 규율은 대신 그 특성의 입장 쪽으로 이동합니다. 100% 확신은 규율 평균 20이며, 최대는 50입니다. 높을수록 = 신념을 강화해야 할 필요성이 더 강합니다. |
 | `EnhancedIdeology.PreceptOppositionScale` | Opposite-stance opposition: {0} | 반대 입장 반감: {0} |
 | `EnhancedIdeology.PreceptOppositionScale.Tip` | How strongly a pawn opposes the stance at the opposite extreme of an issue, as a fraction of their conviction. At 100%, a pawn with Cannibalism: Disapproved 12 has opinion -12 of Cannibalism: Required (ravenous). 0% = indifferent to opposing stances; 100% = equal and opposite to their support for their own at the furthest extreme precept. | 폰이 어떤 문제의 정반대 극단 입장에 얼마나 강하게 반대하는지, 확신의 비율로. 100%에서, 식인: 불승인 12를 가진 폰은 식인: 필수(탐식)에 대해 -12 의견을 가집니다. 0% = 반대 입장에 무관심; 100% = 가장 극단적인 규율에서 자신의 지지와 동등하고 반대. |
 | `EnhancedIdeology.ConversionStancePull` | Conversion strength: {0} | 교화 강도: {0} |
@@ -124,6 +124,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | 강도 |
 | `EnhancedIdeology.StanceDontCare` | Don't care | 무관심 |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | {1} 쟁점에 대해, {PAWN_nameDef}은(는) 확신 {3}으로 {2} 입장을 가지고 있습니다. {IDEO_name}은(는) {5}을(를) 가르칩니다; 그 입장에 대한 {PAWN_nameDef}의 의견: {6}. |
+| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | 외부 영향이 없으면 {PAWN_nameDef}의 성격은 다음 쪽으로 기웁니다: {1}. |
+| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef}의 성격은 다음에 반대합니다: {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}의 {IDEO_name}에 대한 의견: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | 가르침과 규율에서: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | 개인 신념에서: {0} |

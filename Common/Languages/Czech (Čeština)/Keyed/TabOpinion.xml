@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Síla</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Nezáleží mi na tom</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>V otázce {1} má {PAWN_nameDef} postoj {2} s přesvědčením {3}. {IDEO_name} hlásá {5}; názor {PAWN_nameDef} na tento postoj: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.TraitDriftToward>Bez vnějšího vlivu táhne povaha {PAWN_nameDef} k: {1}.</EnhancedIdeology.TraitDriftToward>
+  <EnhancedIdeology.TraitDriftAgainst>Povaha {PAWN_nameDef} je proti: {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Názor {PAWN_nameDef} na {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Z přesvědčení a zásad: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Z osobních přesvědčení: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

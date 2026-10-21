@@ -23,7 +23,7 @@
   <EnhancedIdeology.ConversionCertaintyKnock>Втрата впевненості при спробі навернення: {0}</EnhancedIdeology.ConversionCertaintyKnock>
   <EnhancedIdeology.ConversionCertaintyKnock.Tip>Коли моральний провідник виграє дебати про навернення, але не переконує одразу, впевненість помножується на це значення. 1x = колоніст з 80% впевненості залишається на 80%; 0.8x = падає до 64%. Нижче = спроби навернення ефективніші.</EnhancedIdeology.ConversionCertaintyKnock.Tip>
   <EnhancedIdeology.ConvictionDecayRate>Спад переконань: {0}/квартал</EnhancedIdeology.ConvictionDecayRate>
-  <EnhancedIdeology.ConvictionDecayRate.Tip>Наскільки сила переконань усіх правил знижується за квартал. 100% переконаність відповідає середньому 20, максимум — 50. Вище = більша потреба в підкріпленні переконань.</EnhancedIdeology.ConvictionDecayRate.Tip>
+  <EnhancedIdeology.ConvictionDecayRate.Tip>Наскільки сила переконань правил знижується за квартал. Правила, пов'язані з рисою, натомість зміщуються до позиції цієї риси. 100% переконаність відповідає середньому 20, максимум — 50. Вище = більша потреба в підкріпленні переконань.</EnhancedIdeology.ConvictionDecayRate.Tip>
   <EnhancedIdeology.PreceptOppositionScale>Протилежна позиція — опозиція: {0}</EnhancedIdeology.PreceptOppositionScale>
   <EnhancedIdeology.PreceptOppositionScale.Tip>Наскільки сильно колоніст заперечує протилежну крайню позицію, як частку від переконань. При 100%, колоніст із «Канібалізм: Засуджено 12» матиме думку -12 щодо «Канібалізм: Обов'язково». 0% = байдужість до протилежних позицій; 100% = рівна й протилежна підтримці власної крайньої позиції.</EnhancedIdeology.PreceptOppositionScale.Tip>
   <EnhancedIdeology.ConversionStancePull>Сила навернення: {0}</EnhancedIdeology.ConversionStancePull>
