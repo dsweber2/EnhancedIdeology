@@ -17,9 +17,8 @@ internal static class ConvictionScale
     internal const float ConvictionPerTraitDegree = 3f;
     // Strength of one trait vote (TraitStanceTargets). See TraitVoteStrength.
     internal const float TraitStrengthPerVote = 8f;
-    // Strength that daily decay pulls a stance toward when the traits only oppose rungs and the stance is on none
-    // of them. The rank does not move.
-    internal const float TraitAllowedStrength = 10f;
+    // Spread of a new stance that seeding sets from trait votes, as a fraction of TraitVoteStrength.
+    internal const float TraitSeedSpread = 0.2f;
 
     // Diminishing returns of a reinforcing pull as strength approaches the absolute ceiling.
     internal static float StrengthFactor(float strength) =>

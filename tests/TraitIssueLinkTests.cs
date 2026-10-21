@@ -53,7 +53,9 @@ public class TraitIssueLinkTests : SeededTest
         var (rank, strength) = StanceOn(tracker, issue);
 
         Assert.Equal(2f, rank);
-        Assert.Equal(ConvictionScale.TraitVoteStrength(1f), strength, precision: 4);
+        Assert.InRange(strength,
+            ConvictionScale.TraitVoteStrength(1f) * (1f - ConvictionScale.TraitSeedSpread),
+            ConvictionScale.TraitVoteStrength(1f) * (1f + ConvictionScale.TraitSeedSpread));
     }
 
     [Fact]
@@ -79,7 +81,9 @@ public class TraitIssueLinkTests : SeededTest
         var (rank, strength) = StanceOn(tracker, issue);
 
         Assert.Equal(1f, rank);
-        Assert.Equal(ConvictionScale.TraitVoteStrength(1f), strength, precision: 4);
+        Assert.InRange(strength,
+            ConvictionScale.TraitVoteStrength(1f) * (1f - ConvictionScale.TraitSeedSpread),
+            ConvictionScale.TraitVoteStrength(1f) * (1f + ConvictionScale.TraitSeedSpread));
     }
 
     [Fact]

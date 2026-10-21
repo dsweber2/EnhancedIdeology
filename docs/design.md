@@ -87,7 +87,8 @@ The curve grows slower than the votes because several mods often add memes for o
 Otherwise the rungs that net below zero are a no-go region, an **opposition target**.
 Opposition says where the pawn is not, not where they are, so it never pulls a stance toward an opposed rung:
 
-- a stance on an allowed spot (a rung or an off-ladder Don't-care) keeps its rank, and its strength moves toward 10;
+- a stance on an allowed spot (a rung or an off-ladder Don't-care) keeps its rank, and its strength moves toward the strength of all the opposing votes on the issue, up to 20.
+  A weak dislike thus holds a weak conviction, and an issue with no trait votes drains toward 0;
 - a stance on an opposed spot exits to the nearest allowed spot on the side away from the opposed rungs' weighted centre, at the strength of the opposing votes on its spot, up to 20.
   On the centre it exits toward Don't-care, and it takes the other side when its own side has no allowed spot.
 
@@ -98,6 +99,7 @@ The target is used in three places:
 - **Spawn**, after the rest of seeding: if the faith is silent on the issue, the pawn takes a support target at the vote strength, or the exit from an opposed Don't-care.
   Toward a rung the faith holds, the pawn gains the vote strength as conviction; toward another rung, the pawn starts heterodox on the target at the vote strength.
   A stance on an opposed rung the faith holds loses the strength of the opposing votes; a stance on an allowed spot does not change.
+  Each new stance (silent faith, heterodox, or exit) takes its strength ±20% at random, so pawns with the same traits differ.
 - **Brainwipe**: the pawn returns to the target, or exits an opposed spot.
 - **Daily decay**: the stance moves along the conviction valley toward the pull, instead of draining toward zero. A support target pulls at the vote strength, up to 20.
 

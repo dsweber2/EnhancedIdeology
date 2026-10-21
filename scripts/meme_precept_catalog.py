@@ -31,7 +31,7 @@ GAME_VERSION = "1.6"
 DLC_ORDER = ["Core", "Royalty", "Ideology", "Biotech", "Anomaly", "Odyssey"]
 SKIPPED_DIRS = {"About", "Languages", "Patches", "Source", "Textures", "Sounds", ".git", ".vs"}
 VERSION_DIR = re.compile(r"^v?\d+\.\d+$")
-DEF_TAGS = {"MemeDef", "PreceptDef", "IssueDef"}
+DEF_TAGS = {"MemeDef", "PreceptDef", "IssueDef", "TraitDef"}
 LIST_ISSUES = {"Ritual", "IdeoRole", "IdeoBuilding", "IdeoRitualSeat", "IdeoRelic", "Weapons"}
 DESCRIPTION_LIMIT = 140
 
@@ -51,6 +51,7 @@ class Def:
     def_name: str
     mod: Mod
     fields: dict[str, ET.Element]
+    may_require: str = ""
 
     def text(self, key: str) -> str:
         elem = self.fields.get(key)
@@ -68,6 +69,7 @@ class Catalog:
     memes: dict[str, Def] = field(default_factory=dict)
     precepts: dict[str, Def] = field(default_factory=dict)
     issues: dict[str, Def] = field(default_factory=dict)
+    traits: dict[str, Def] = field(default_factory=dict)
 
 
 def read_active_ids() -> list[str]:
@@ -165,7 +167,8 @@ def resolve_fields(
 def build_catalog(mods: list[Mod]) -> Catalog:
     raw, named = parse_defs(mods)
     catalog = Catalog()
-    by_tag = {"MemeDef": catalog.memes, "PreceptDef": catalog.precepts, "IssueDef": catalog.issues}
+    by_tag = {"MemeDef": catalog.memes, "PreceptDef": catalog.precepts, "IssueDef": catalog.issues,
+              "TraitDef": catalog.traits}
     for elem, mod in raw:
         if elem.get("Abstract", "").lower() == "true":
             continue
@@ -174,7 +177,7 @@ def build_catalog(mods: list[Mod]) -> Catalog:
         if def_name_elem is None or not def_name_elem.text:
             continue
         def_name = def_name_elem.text.strip()
-        by_tag[elem.tag].setdefault(def_name, Def(elem.tag, def_name, mod, fields))
+        by_tag[elem.tag].setdefault(def_name, Def(elem.tag, def_name, mod, fields, elem.get("MayRequire", "")))
     return catalog
 
 

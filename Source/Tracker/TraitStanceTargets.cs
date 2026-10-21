@@ -15,7 +15,7 @@ internal sealed record TraitStanceTarget(
         var spot = NearestSpot(rank);
         return Opposed.TryGetValue(spot, out var weight)
             ? (Exit(spot, rank), StrengthOf(weight))
-            : (rank, ConvictionScale.TraitAllowedStrength);
+            : (rank, StrengthOf(-Votes));
     }
 
     // Opposed weight on the spot nearest to `rank`; 0 for an allowed spot or a support target.

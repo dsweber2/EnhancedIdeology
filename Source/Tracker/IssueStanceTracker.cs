@@ -284,10 +284,10 @@ internal sealed class IssueStanceTracker
     }
 
     // Trait targets (TraitStanceTargets), applied after the rest of generation to the issues seeded now.
-    // Strengths come from ConvictionScale.TraitVoteStrength of the votes.
-    // Toward a rung: a faith that is silent or holds another rung gives the pawn a stance on the target at the
-    // vote strength; a faith that holds it adds the vote strength. Against rungs: a stance on an opposed rung loses
-    // the vote strength, or, when the faith is silent, takes the exit. A stance on an allowed spot does not change.
+    // Strengths come from ConvictionScale.TraitVoteStrength of the votes; a new stance varies by ±TraitSeedSpread.
+    // Toward a rung: a faith that is silent or holds another rung gives the pawn a new stance on the target; a faith
+    // that holds it adds the vote strength. Against rungs: a stance on an opposed rung loses the vote strength, or,
+    // when the faith is silent, takes the exit as a new stance. A stance on an allowed spot does not change.
     private void ApplyTraitTargets(List<IssueDef> issues)
     {
         var ideo = _pawn.Ideo!;
@@ -305,7 +305,7 @@ internal sealed class IssueStanceTracker
             string outcome;
             if (target.Rung is { } rung && !faithHolds)
             {
-                SetStance(issue, rung, ConvictionScale.TraitVoteStrength(target.Votes));
+                SetStance(issue, rung, Spread(ConvictionScale.TraitVoteStrength(target.Votes)));
                 outcome = "faith silent, new stance";
             }
             else if (target.Rung is { } heldTarget && heldRank == heldTarget)
@@ -316,7 +316,7 @@ internal sealed class IssueStanceTracker
             }
             else if (target.Rung is { } otherRung)
             {
-                SetStance(issue, otherRung, ConvictionScale.TraitVoteStrength(target.Votes));
+                SetStance(issue, otherRung, Spread(ConvictionScale.TraitVoteStrength(target.Votes)));
                 outcome = $"heterodox, faith holds {TraitStanceTargets.RungName(issue, heldRank)}";
             }
             else if (opposedWeight == 0f)
@@ -326,7 +326,7 @@ internal sealed class IssueStanceTracker
             else if (!faithHolds)
             {
                 var (exitRank, exitStrength) = target.PullFrom(current);
-                SetStance(issue, exitRank, exitStrength);
+                SetStance(issue, exitRank, Spread(exitStrength));
                 outcome = "faith silent on an opposed Don't-care, new stance";
             }
             else
@@ -343,6 +343,9 @@ internal sealed class IssueStanceTracker
         if (log.Count > 0)
             EnhancedIdeologyMod.Debug($"{TraitTargetsHeader()}\n{string.Join("\n", log)}");
     }
+
+    private static float Spread(float strength) =>
+        strength * Rand.Range(1f - ConvictionScale.TraitSeedSpread, 1f + ConvictionScale.TraitSeedSpread);
 
     // The trait target on `issue`, or null when the pawn's traits do not vote on it. For the opinion card tooltip.
     internal TraitStanceTarget? TraitTarget(IssueDef issue) =>

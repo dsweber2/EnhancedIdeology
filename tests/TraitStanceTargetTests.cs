@@ -175,7 +175,7 @@ public class TraitStanceTargetTests : SeededTest
 
         Assert.Equal(expected, rank);
         if (stance == expected)
-            Assert.Equal(ConvictionScale.TraitAllowedStrength, strength);
+            Assert.Equal(ConvictionScale.TraitVoteStrength(TraitStanceTargets.DisagreeableMemeWeight), strength);
     }
 
     [Fact]
@@ -230,8 +230,8 @@ public class TraitStanceTargetTests : SeededTest
 
     [Theory]
     [InlineData(20f)]
-    [InlineData(2f)]
-    public void Decay_OnAnAllowedRung_KeepsRankAndMovesStrengthTowardTen(float startStrength)
+    [InlineData(1f)]
+    public void Decay_OnAnAllowedRung_KeepsRankAndMovesStrengthTowardOpposingVoteStrength(float startStrength)
     {
         var (world, cannibalism, rungs) = CannibalismSetup();
         rungs[2].requiredMemes.Add(Meme("Con", agrees: false));
@@ -246,10 +246,11 @@ public class TraitStanceTargetTests : SeededTest
         }
 
         var stance = tracker.IssueStances().First(ss => ss.issue == cannibalism);
+        var allowed = ConvictionScale.TraitVoteStrength(TraitStanceTargets.DisagreeableMemeWeight);
         Assert.Equal(6f, stance.rank);
         Assert.InRange(stance.strength,
-            Mathf.Min(startStrength, ConvictionScale.TraitAllowedStrength) + 0.01f,
-            Mathf.Max(startStrength, ConvictionScale.TraitAllowedStrength) - 0.01f);
+            Mathf.Min(startStrength, allowed) + 0.01f,
+            Mathf.Max(startStrength, allowed) - 0.01f);
     }
 
     [Fact]
@@ -306,7 +307,8 @@ public class TraitStanceTargetTests : SeededTest
         var neutral = PreceptLadder.DontCareRank(pain);
 
         Assert.Equal(2.5f, neutral);
-        Assert.Equal((neutral, ConvictionScale.TraitAllowedStrength), TargetsAt(pawn, pain, neutral)[pain].PullFrom(neutral));
+        var target = TargetsAt(pawn, pain, neutral)[pain];
+        Assert.Equal((neutral, ConvictionScale.TraitVoteStrength(-target.Votes)), target.PullFrom(neutral));
         Assert.Equal(neutral, TargetsAt(pawn, pain, 2f)[pain].PullFrom(2f).rank);
     }
 
