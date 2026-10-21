@@ -17,6 +17,8 @@ On spawn, these pawns are seeded with a strong stance at `MeatEating_Abhorrent` 
 
 Pawns with the **Carnivore** gene (`BS_Diet_Carnivore`) get the mirror treatment: +20 toward ideos that hold a `NonMeat_Disapproved`, `NonMeat_Horrible`, or `NonMeat_Abhorrent` stance, and are seeded at `MeatEating_NonMeat_Abhorrent`.
 
+Five Big and Small traits are also linked to memes and precepts (see [Trait Mods](#trait-mods)).
+
 If Big and Small is not installed, all of the above is safely skipped.
 
 ## [Humanoid Alien Races](https://steamcommunity.com/sharedfiles/filedetails/?id=839005762)
@@ -98,6 +100,46 @@ Where VIE rungs extend existing base-game issue ladders (e.g., `Apostasy`, `Body
 
 **Torture** is a full moral axis, from `always respected` through `horrible if innocent` to `always abhorrent`.
 Colonists without a particular view sit at the mod's default, `horrible if innocent`.
+
+# Trait Mods
+
+Traits from these mods are linked to memes and to individual precepts.
+A colonist's traits shape the beliefs they spawn with, the beliefs they drift back to over time, and how they regard other ideoligions.
+Traits also change conversion power against an ideoligion with a linked meme, as in vanilla.
+Each link is skipped when its trait or meme is not loaded, so no mod on this list is required.
+The full list of links, trait by trait, is in [docs/trait-meme-affinity.md](docs/trait-meme-affinity.md).
+
+## [Vanilla Traits Expanded](https://steamcommunity.com/sharedfiles/filedetails/?id=2296404655)
+
+45 of 53 traits are linked.
+
+## [Hauts' Added Traits](https://steamcommunity.com/sharedfiles/filedetails/?id=3422847391)
+
+54 of 93 traits are linked, in addition to the meme links Hauts' Added Traits adds itself.
+
+## [The Sims Traits](https://steamcommunity.com/sharedfiles/filedetails/?id=3604588393)
+
+31 of 36 traits are linked, in addition to the meme links The Sims Traits adds itself.
+
+## [[LC] Consolidated Traits](https://steamcommunity.com/sharedfiles/filedetails/?id=2879753009)
+
+22 of 28 traits are linked.
+
+## [[SYR] Individuality (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3253596705)
+
+9 of 14 traits are linked.
+
+## [Way Better Romance](https://steamcommunity.com/sharedfiles/filedetails/?id=2877731755)
+
+3 of 4 traits are linked.
+
+## [Bad People](https://steamcommunity.com/sharedfiles/filedetails/?id=1369675292)
+
+Both traits are linked.
+
+## [Intimacy - A Lovin' Expansion](https://steamcommunity.com/sharedfiles/filedetails/?id=3498422643)
+
+Both traits are linked.
 
 
 # Other Mods
