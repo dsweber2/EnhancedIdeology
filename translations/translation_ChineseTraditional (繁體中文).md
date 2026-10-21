@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | 強度 |
 | `EnhancedIdeology.StanceDontCare` | Don't care | 無所謂 |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | 在{1}的議題上，{PAWN_nameDef}持有立場{2}，信念強度為{3}。{IDEO_name}宣揚{5}；{PAWN_nameDef}對該立場的看法：{6}。 |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | 自昨天起，{PAWN_nameDef}的立場已從{1}轉為{2}。 |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | 自昨天起，{PAWN_nameDef}的信念強度已從{1}變為{2}。 |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | 若無外界影響，{PAWN_nameDef}的性格會使其傾向於{1}。 |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef}的性格反對{1}。 |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}對{IDEO_name}的看法：{2} |

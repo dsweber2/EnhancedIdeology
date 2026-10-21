@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | Sức mạnh |
 | `EnhancedIdeology.StanceDontCare` | Don't care | Không quan tâm |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | Về vấn đề {1}, {PAWN_nameDef} giữ lập trường {2} với niềm tin {3}. {IDEO_name} rao giảng {5}; quan điểm của {PAWN_nameDef} về lập trường đó: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Từ hôm qua, lập trường của {PAWN_nameDef} đã chuyển từ {1} sang {2}. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Từ hôm qua, niềm tin của {PAWN_nameDef} đã thay đổi từ {1} thành {2}. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Nếu không bị tác động, tính cách của {PAWN_nameDef} sẽ nghiêng về {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Tính cách của {PAWN_nameDef} phản đối {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Quan điểm của {PAWN_nameDef} về {IDEO_name}: {2} |

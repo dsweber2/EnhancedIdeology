@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | Erősség |
 | `EnhancedIdeology.StanceDontCare` | Don't care | Mindegy |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | A {1} kérdésben {PAWN_nameDef} álláspontja {2}, meggyőződése {3}. A {IDEO_name} {5}-t hirdet; {PAWN_nameDef} véleménye erről az álláspontról: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Tegnap óta {PAWN_nameDef} álláspontja {1} helyett {2} lett. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Tegnap óta {PAWN_nameDef} meggyőződése {1} helyett {2} lett. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Külső hatás nélkül {PAWN_nameDef} személyisége e felé húz: {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef} személyisége ellenzi: {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef} véleménye a {IDEO_name}-ről: {2} |

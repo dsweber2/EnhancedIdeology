@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | Síla |
 | `EnhancedIdeology.StanceDontCare` | Don't care | Nezáleží mi na tom |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | V otázce {1} má {PAWN_nameDef} postoj {2} s přesvědčením {3}. {IDEO_name} hlásá {5}; názor {PAWN_nameDef} na tento postoj: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Od včerejška se postoj {PAWN_nameDef} posunul z {1} na {2}. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Od včerejška se přesvědčení {PAWN_nameDef} změnilo z {1} na {2}. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Bez vnějšího vlivu táhne povaha {PAWN_nameDef} k: {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Povaha {PAWN_nameDef} je proti: {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Názor {PAWN_nameDef} na {IDEO_name}: {2} |

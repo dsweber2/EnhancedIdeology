@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Siła</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Obojętny</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>W kwestii {1}, {PAWN_nameDef} ma postawę {2} z przekonaniem {3}. {IDEO_name} głosi {5}; opinia {PAWN_nameDef} o tej postawie: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>Od wczoraj postawa {PAWN_nameDef} zmieniła się z {1} na {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>Od wczoraj przekonanie {PAWN_nameDef} zmieniło się z {1} na {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Bez wpływu z zewnątrz osobowość {PAWN_nameDef} ciąży ku: {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>Osobowość {PAWN_nameDef} sprzeciwia się: {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Opinia {PAWN_nameDef} o {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>

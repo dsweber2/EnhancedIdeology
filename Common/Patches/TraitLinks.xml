@@ -1610,13 +1610,13 @@
 					<xpath>/Defs/MemeDef[defName="Individualist"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Individualist"]/disagreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Conformist</li></value>
+						<value><li>HVT_Conformist</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
-							<value><disagreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Conformist</li></disagreeableTraits></value>
+							<value><disagreeableTraits><li>HVT_Conformist</li></disagreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -1624,13 +1624,13 @@
 					<xpath>/Defs/MemeDef[defName="Loyalist"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Loyalist"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Conformist</li></value>
+						<value><li>HVT_Conformist</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="Loyalist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="Loyalist"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Conformist</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Conformist</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -1707,13 +1707,13 @@
 					<xpath>/Defs/MemeDef[defName="MI_Empiricist"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="MI_Empiricist"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Doubtful</li></value>
+						<value><li>HVT_Doubtful</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="MI_Empiricist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="MI_Empiricist"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Doubtful</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Doubtful</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -1855,13 +1855,13 @@
 					<xpath>/Defs/MemeDef[defName="MI_Empiricist"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="MI_Empiricist"]/disagreeableTraits</xpath>
-						<value><HVT_Faithful MayRequire="Ludeon.RimWorld.Ideology">1</HVT_Faithful><HVT_Faithful MayRequire="Ludeon.RimWorld.Ideology">2</HVT_Faithful></value>
+						<value><HVT_Faithful>1</HVT_Faithful><HVT_Faithful>2</HVT_Faithful></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="MI_Empiricist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="MI_Empiricist"]</xpath>
-							<value><disagreeableTraits><HVT_Faithful MayRequire="Ludeon.RimWorld.Ideology">1</HVT_Faithful><HVT_Faithful MayRequire="Ludeon.RimWorld.Ideology">2</HVT_Faithful></disagreeableTraits></value>
+							<value><disagreeableTraits><HVT_Faithful>1</HVT_Faithful><HVT_Faithful>2</HVT_Faithful></disagreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -1924,13 +1924,13 @@
 					<xpath>/Defs/MemeDef[defName="Proselytizer"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Proselytizer"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Guru</li></value>
+						<value><li>HVT_Guru</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="Proselytizer"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="Proselytizer"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Guru</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Guru</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -1938,13 +1938,13 @@
 					<xpath>/Defs/MemeDef[defName="VME_Anonymity"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="VME_Anonymity"]/disagreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Guru</li></value>
+						<value><li>HVT_Guru</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="VME_Anonymity"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="VME_Anonymity"]</xpath>
-							<value><disagreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Guru</li></disagreeableTraits></value>
+							<value><disagreeableTraits><li>HVT_Guru</li></disagreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -1952,13 +1952,13 @@
 					<xpath>/Defs/MemeDef[defName="VME_ExaltedPriesthood"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="VME_ExaltedPriesthood"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Guru</li></value>
+						<value><li>HVT_Guru</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="VME_ExaltedPriesthood"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="VME_ExaltedPriesthood"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Guru</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Guru</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2114,13 +2114,13 @@
 					<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Intolerant</li></value>
+						<value><li>HVT_Intolerant</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Intolerant</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Intolerant</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2128,13 +2128,13 @@
 					<xpath>/Defs/MemeDef[defName="Individualist"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Individualist"]/disagreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Intolerant</li></value>
+						<value><li>HVT_Intolerant</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
-							<value><disagreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Intolerant</li></disagreeableTraits></value>
+							<value><disagreeableTraits><li>HVT_Intolerant</li></disagreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2619,13 +2619,13 @@
 					<xpath>/Defs/MemeDef[defName="Individualist"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Individualist"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_RadicalThinker</li></value>
+						<value><li>HVT_RadicalThinker</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_RadicalThinker</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_RadicalThinker</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2633,13 +2633,13 @@
 					<xpath>/Defs/MemeDef[defName="Loyalist"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Loyalist"]/disagreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_RadicalThinker</li></value>
+						<value><li>HVT_RadicalThinker</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="Loyalist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="Loyalist"]</xpath>
-							<value><disagreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_RadicalThinker</li></disagreeableTraits></value>
+							<value><disagreeableTraits><li>HVT_RadicalThinker</li></disagreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2647,13 +2647,13 @@
 					<xpath>/Defs/MemeDef[defName="VME_Progressive"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="VME_Progressive"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_RadicalThinker</li></value>
+						<value><li>HVT_RadicalThinker</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="VME_Progressive"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="VME_Progressive"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_RadicalThinker</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_RadicalThinker</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2934,13 +2934,13 @@
 					<xpath>/Defs/MemeDef[defName="MI_Empiricist"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="MI_Empiricist"]/disagreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Superstitious</li></value>
+						<value><li>HVT_Superstitious</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="MI_Empiricist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="MI_Empiricist"]</xpath>
-							<value><disagreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Superstitious</li></disagreeableTraits></value>
+							<value><disagreeableTraits><li>HVT_Superstitious</li></disagreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2948,13 +2948,13 @@
 					<xpath>/Defs/MemeDef[defName="VME_Astrology"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="VME_Astrology"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Superstitious</li></value>
+						<value><li>HVT_Superstitious</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="VME_Astrology"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="VME_Astrology"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Superstitious</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Superstitious</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -2994,13 +2994,13 @@
 					<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Tolerant</li></value>
+						<value><li>HVT_Tolerant</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Tolerant</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Tolerant</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -3008,13 +3008,13 @@
 					<xpath>/Defs/MemeDef[defName="Individualist"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Individualist"]/agreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Tolerant</li></value>
+						<value><li>HVT_Tolerant</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="Individualist"]</xpath>
-							<value><agreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Tolerant</li></agreeableTraits></value>
+							<value><agreeableTraits><li>HVT_Tolerant</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -3022,13 +3022,13 @@
 					<xpath>/Defs/MemeDef[defName="VME_ViolentConversion"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="VME_ViolentConversion"]/disagreeableTraits</xpath>
-						<value><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Tolerant</li></value>
+						<value><li>HVT_Tolerant</li></value>
 					</match>
 					<nomatch Class="PatchOperationConditional">
 						<xpath>/Defs/MemeDef[defName="VME_ViolentConversion"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="VME_ViolentConversion"]</xpath>
-							<value><disagreeableTraits><li MayRequire="Ludeon.RimWorld.Ideology">HVT_Tolerant</li></disagreeableTraits></value>
+							<value><disagreeableTraits><li>HVT_Tolerant</li></disagreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>

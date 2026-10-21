@@ -140,6 +140,34 @@ public class TraitStanceTargetTests : SeededTest
     }
 
     [Fact]
+    public void SupportCancelledOnOneRung_LeavesOppositionAtItsRungNet()
+    {
+        var (world, issue, rungs) = Setup();
+        var con = Meme("Con", agrees: false, listings: 2);
+        rungs[0].requiredMemes.Add(Meme("Pro", agrees: true));
+        rungs[0].requiredMemes.Add(con);
+        rungs[1].requiredMemes.Add(con);
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
+
+        var target = TargetsAt(pawn, issue, 2f)[issue];
+
+        Assert.Null(target.Rung);
+        Assert.Equal(-1f, target.Votes);
+        Assert.Equal((2f, ConvictionScale.TraitVoteStrength(1f)), target.PullFrom(2f));
+    }
+
+    [Fact]
+    public void OppositionOnSeparateRungs_TakesTheMostOpposedRung()
+    {
+        var (world, issue, rungs) = Setup();
+        rungs[0].requiredMemes.Add(Meme("ConA", agrees: false));
+        rungs[1].requiredMemes.Add(Meme("ConB", agrees: false));
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
+
+        Assert.Equal(-TraitStanceTargets.DisagreeableMemeWeight, TargetsAt(pawn, issue, 2f)[issue].Votes);
+    }
+
+    [Fact]
     public void OpposedCharity_ExitsEssentialOneRung()
     {
         var (world, _, _) = Setup();

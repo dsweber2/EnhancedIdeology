@@ -85,9 +85,11 @@ A count of votes gives strength `8 · votes^(2/3)` (`ConvictionScale.TraitVoteSt
 The curve grows slower than the votes because several mods often add memes for one idea (`AM_NonViolence`, `VME_Pacifist`), and each one is a vote.
 
 Otherwise the rungs that net below zero are a no-go region, an **opposition target**.
+Its votes are the net of the most opposed rung, the mirror of a support target.
+Support on other rungs thus cannot weaken it, and the votes are never zero.
 Opposition says where the pawn is not, not where they are, so it never pulls a stance toward an opposed rung:
 
-- a stance on an allowed spot (a rung or an off-ladder Don't-care) keeps its rank, and its strength moves toward the strength of all the opposing votes on the issue, up to 20.
+- a stance on an allowed spot (a rung or an off-ladder Don't-care) keeps its rank, and its strength moves toward the strength of the target's votes, up to 20.
   A weak dislike thus holds a weak conviction, and an issue with no trait votes drains toward 0;
 - a stance on an opposed spot exits to the nearest allowed spot on the side away from the opposed rungs' weighted centre, at the strength of the opposing votes on its spot, up to 20.
   On the centre it exits toward Don't-care, and it takes the other side when its own side has no allowed spot.

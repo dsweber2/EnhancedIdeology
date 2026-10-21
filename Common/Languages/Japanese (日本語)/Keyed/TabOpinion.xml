@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>強度</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>無関心</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>{1}の問題について、{PAWN_nameDef}は確信{3}で姿勢{2}をとっている。{IDEO_name}は{5}を説く。{PAWN_nameDef}のその姿勢への評価: {6}。</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>昨日から、{PAWN_nameDef}の姿勢は{1}から{2}へ移った。</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>昨日から、{PAWN_nameDef}の確信は{1}から{2}になった。</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>外部の影響がなければ、{PAWN_nameDef}の性格は{1}へと傾く。</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef}の性格は{1}に反対している。</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}の{IDEO_name}への評価: {2}</EnhancedIdeology.PawnOpinionTooltip>

@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | Siła |
 | `EnhancedIdeology.StanceDontCare` | Don't care | Obojętny |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | W kwestii {1}, {PAWN_nameDef} ma postawę {2} z przekonaniem {3}. {IDEO_name} głosi {5}; opinia {PAWN_nameDef} o tej postawie: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Od wczoraj postawa {PAWN_nameDef} zmieniła się z {1} na {2}. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Od wczoraj przekonanie {PAWN_nameDef} zmieniło się z {1} na {2}. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Bez wpływu z zewnątrz osobowość {PAWN_nameDef} ciąży ku: {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Osobowość {PAWN_nameDef} sprzeciwia się: {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Opinia {PAWN_nameDef} o {IDEO_name}: {2} |

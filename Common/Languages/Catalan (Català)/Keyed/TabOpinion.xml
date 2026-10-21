@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Força</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Indiferent</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>Sobre el tema de {1}, {PAWN_nameDef} té la postura {2} amb convicció {3}. {IDEO_name} predica {5}; opinió de {PAWN_nameDef} sobre aquesta postura: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>Des d'ahir, la postura de {PAWN_nameDef} ha passat de {1} a {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>Des d'ahir, la convicció de {PAWN_nameDef} ha passat de {1} a {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Sense influències externes, la personalitat de {PAWN_nameDef} tendeix cap a {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>La personalitat de {PAWN_nameDef} està en contra de {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Opinió de {PAWN_nameDef} sobre {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>

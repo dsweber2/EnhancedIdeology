@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Sức mạnh</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Không quan tâm</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>Về vấn đề {1}, {PAWN_nameDef} giữ lập trường {2} với niềm tin {3}. {IDEO_name} rao giảng {5}; quan điểm của {PAWN_nameDef} về lập trường đó: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>Từ hôm qua, lập trường của {PAWN_nameDef} đã chuyển từ {1} sang {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>Từ hôm qua, niềm tin của {PAWN_nameDef} đã thay đổi từ {1} thành {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Nếu không bị tác động, tính cách của {PAWN_nameDef} sẽ nghiêng về {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>Tính cách của {PAWN_nameDef} phản đối {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Quan điểm của {PAWN_nameDef} về {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>

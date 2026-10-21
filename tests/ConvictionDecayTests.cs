@@ -59,4 +59,69 @@ public class ConvictionDecayTests : SeededTest
         var afterDay1 = tracker.IssueStances().First(ss => ss.issue == issue).strength;
         Assert.True(afterDay1 < afterDay0, $"Expected further decay on next day. day0={afterDay0}, day1={afterDay1}");
     }
+
+    [Fact]
+    public void StanceBefore_ForANewPawn_IsTheSeededStance()
+    {
+        var (_, tracker, issue) = Setup();
+        var rank = tracker.Stances.GetRank(issue);
+        var strength = tracker.Stances.GetStrength(issue);
+        tracker.Stances.SetStance(issue, 1f, strength + 5f);
+
+        var before = tracker.Stances.StanceBefore(issue)!.Value;
+        Assert.Equal(rank, before.rank);
+        Assert.Equal(strength, before.strength);
+    }
+
+    [Fact]
+    public void StanceBefore_OnFirstDay_IsThatDayStart()
+    {
+        var (_, tracker, issue) = Setup();
+        var rank = tracker.Stances.GetRank(issue);
+        var strength = tracker.Stances.GetStrength(issue);
+        GenTicks.TicksAbs = 0;
+        tracker.ApplyConvictionDecayIfNewDay();
+        tracker.Stances.SetStance(issue, 1f, strength + 5f);
+
+        var before = tracker.Stances.StanceBefore(issue)!.Value;
+        Assert.Equal(rank, before.rank);
+        Assert.Equal(strength, before.strength, precision: 4);
+    }
+
+    [Fact]
+    public void StanceBefore_KeepsYesterdaysStanceAfterTheDayRollsOver()
+    {
+        var (_, tracker, issue) = Setup();
+        var dayZeroRank = tracker.Stances.GetRank(issue);
+        var dayZeroStrength = tracker.Stances.GetStrength(issue);
+        GenTicks.TicksAbs = 0;
+        tracker.ApplyConvictionDecayIfNewDay();
+        tracker.Stances.SetStance(issue, 1f, dayZeroStrength - 5f);
+
+        GenTicks.TicksAbs = GenDate.TicksPerDay;
+        tracker.ApplyConvictionDecayIfNewDay();
+
+        var before = tracker.Stances.StanceBefore(issue)!.Value;
+        Assert.Equal(dayZeroRank, before.rank);
+        Assert.Equal(dayZeroStrength, before.strength, precision: 4);
+    }
+
+    [Fact]
+    public void StanceBefore_ForgetsChangesOlderThanThePreviousDayStart()
+    {
+        var (_, tracker, issue) = Setup();
+        GenTicks.TicksAbs = 0;
+        tracker.ApplyConvictionDecayIfNewDay();
+        tracker.Stances.SetStance(issue, 1f, tracker.Stances.GetStrength(issue) - 5f);
+
+        var dayOneStrength = tracker.Stances.GetStrength(issue);
+        GenTicks.TicksAbs = GenDate.TicksPerDay;
+        tracker.ApplyConvictionDecayIfNewDay();
+        GenTicks.TicksAbs = 2 * GenDate.TicksPerDay;
+        tracker.ApplyConvictionDecayIfNewDay();
+
+        var before = tracker.Stances.StanceBefore(issue)!.Value;
+        Assert.Equal(1f, before.rank);
+        Assert.Equal(dayOneStrength, before.strength, precision: 4);
+    }
 }

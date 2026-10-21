@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | 강도 |
 | `EnhancedIdeology.StanceDontCare` | Don't care | 무관심 |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | {1} 쟁점에 대해, {PAWN_nameDef}은(는) 확신 {3}으로 {2} 입장을 가지고 있습니다. {IDEO_name}은(는) {5}을(를) 가르칩니다; 그 입장에 대한 {PAWN_nameDef}의 의견: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | 어제부터 {PAWN_nameDef}의 입장이 {1}에서 {2}(으)로 바뀌었습니다. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | 어제부터 {PAWN_nameDef}의 확신이 {1}에서 {2}(으)로 바뀌었습니다. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | 외부 영향이 없으면 {PAWN_nameDef}의 성격은 다음 쪽으로 기웁니다: {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef}의 성격은 다음에 반대합니다: {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}의 {IDEO_name}에 대한 의견: {2} |

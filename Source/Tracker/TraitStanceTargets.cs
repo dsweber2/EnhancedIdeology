@@ -59,7 +59,7 @@ internal sealed record TraitStanceTarget(
 //   each issue the meme links to, once per listing. A link through associatedMemes counts at AssociatedMemeWeight.
 // Each rung nets its support less its opposition. If a rung nets above zero, the target is the best-supported
 // rung, the closest one on a tie; its votes are that rung's net. Otherwise the rungs that net below zero are an
-// opposition target. No votes, or no allowed spot, give no target. UntargetedIssues never get a target.
+// opposition target; its votes are the most opposed rung's net. No votes, or no allowed spot, give no target. UntargetedIssues never get a target.
 // The faith does not matter: the targets come from the pawn's traits only.
 internal static class TraitStanceTargets
 {
@@ -118,14 +118,12 @@ internal static class TraitStanceTargets
     internal static Dictionary<IssueDef, TraitStanceTarget> For(
         Pawn pawn, IReadOnlyDictionary<IssueDef, float> ranks, Dictionary<IssueDef, List<string>>? sources = null)
     {
-        var totalWeight = new Dictionary<IssueDef, float>();
         var net = new Dictionary<IssueDef, Dictionary<float, float>>();
 
         // One vote of `weight` on `issue`, supporting (weight > 0) or opposing (weight < 0) each rung by its own weight.
         void Vote(IssueDef issue, float weight, IEnumerable<(float rank, float weight)> rungs, string? source)
         {
             if (!ranks.ContainsKey(issue) || UntargetedIssues.Contains(issue.defName)) return;
-            totalWeight[issue] = totalWeight.GetValueOrDefault(issue) + weight;
             if (!net.TryGetValue(issue, out var byRank)) net[issue] = byRank = [];
             foreach (var (rank, rungWeight) in rungs)
                 byRank[rank] = byRank.GetValueOrDefault(rank) + Mathf.Sign(weight) * rungWeight;
@@ -166,11 +164,11 @@ internal static class TraitStanceTargets
         }
 
         var targets = new Dictionary<IssueDef, TraitStanceTarget>();
-        foreach (var (issue, weight) in totalWeight)
+        foreach (var (issue, byRank) in net)
         {
             var current = ranks[issue];
             var dontCare = PreceptLadder.DontCareRank(issue);
-            var supported = net[issue].Where(kv => kv.Value > 0f).ToList();
+            var supported = byRank.Where(kv => kv.Value > 0f).ToList();
             if (supported.Count > 0)
             {
                 var (rung, rungNet) = supported
@@ -179,10 +177,10 @@ internal static class TraitStanceTargets
                 continue;
             }
 
-            var opposed = net[issue].Where(kv => kv.Value < 0f).ToDictionary(kv => kv.Key, kv => -kv.Value);
+            var opposed = byRank.Where(kv => kv.Value < 0f).ToDictionary(kv => kv.Key, kv => -kv.Value);
             var spots = Spots(issue, dontCare);
             if (opposed.Count == 0 || spots.All(opposed.ContainsKey)) continue;
-            targets[issue] = new TraitStanceTarget(null, weight, opposed, spots, dontCare);
+            targets[issue] = new TraitStanceTarget(null, -opposed.Values.Max(), opposed, spots, dontCare);
         }
         return targets;
     }

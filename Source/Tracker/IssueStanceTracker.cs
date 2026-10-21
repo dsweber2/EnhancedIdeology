@@ -19,6 +19,8 @@ internal sealed class IssueStanceTracker
     private List<float>? _preferredRankValues;
     private List<float>? _strengthValues;
 
+    private readonly StanceHistory _history = new();
+
     private int _lastDecayDay = -1;
 
     // IssueDefs do not change after load, so one full seeding pass per session is enough.
@@ -84,6 +86,8 @@ internal sealed class IssueStanceTracker
         }
         if (seededNow.Count > 0)
             ApplyTraitTargets(seededNow);
+        if (freshSeed)
+            FillMissingHistory();
 
         return freshSeed && certaintyInitialized;
     }
@@ -152,6 +156,8 @@ internal sealed class IssueStanceTracker
             changed |= rank != _preferredRank[issue];
             SetRank(issue, rank);
         }
+        _history.RemapRanks((issue, rank) =>
+            savedLadderFor(issue) is { } saved ? LadderMigration.Remap(issue, saved, rank) : null);
         return changed;
     }
 
@@ -196,6 +202,7 @@ internal sealed class IssueStanceTracker
         var currentDay = GenTicks.TicksAbs / GenDate.TicksPerDay;
         if (currentDay == _lastDecayDay) return false;
         _lastDecayDay = currentDay;
+        _history.RecordDayStart(_preferredRank, _strength);
 
         var lossFactor = _pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
         var drainPerDay = EnhancedIdeologyMod.Settings.ConvictionDecayRate
@@ -222,6 +229,11 @@ internal sealed class IssueStanceTracker
         return true;
     }
 
+    // Gives each issue with no history the current stance as its day start, so change arrows work at once.
+    internal void FillMissingHistory() => _history.FillMissing(_preferredRank, _strength);
+
+    // The stance about a day ago (StanceHistory.Before), or null when there is no record yet.
+    internal (float rank, float strength)? StanceBefore(IssueDef issue) => _history.Before(issue);
 
     // Scale all strengths by `scale`, clamped to conviction bounds. Used by certainty calibration.
     internal void ScaleStrengths(float scale)
@@ -247,6 +259,7 @@ internal sealed class IssueStanceTracker
         Scribe_Values.Look(ref _lastDecayDay, "lastDecayDay", defaultValue: -1);
         Scribe_Collections.Look(ref _preferredRank, "issuePreferredRank", LookMode.Def, LookMode.Value, ref _preferredRankKeys, ref _preferredRankValues);
         Scribe_Collections.Look(ref _strength, "issueStrength", LookMode.Def, LookMode.Value, ref _strengthKeys, ref _strengthValues);
+        _history.ExposeData();
 
         if (Scribe.mode == LoadSaveMode.PostLoadInit)
         {
@@ -347,10 +360,8 @@ internal sealed class IssueStanceTracker
     private static float Spread(float strength) =>
         strength * Rand.Range(1f - ConvictionScale.TraitSeedSpread, 1f + ConvictionScale.TraitSeedSpread);
 
-    // The trait target on `issue`, or null when the pawn's traits do not vote on it. For the opinion card tooltip.
-    internal TraitStanceTarget? TraitTarget(IssueDef issue) =>
-        TraitStanceTargets.For(_pawn, new Dictionary<IssueDef, float> { [issue] = _preferredRank[issue] })
-            .GetValueOrDefault(issue);
+    // The trait target on each issue the pawn's traits vote on. For the opinion card.
+    internal Dictionary<IssueDef, TraitStanceTarget> TraitTargets() => TraitStanceTargets.For(_pawn, _preferredRank);
 
     // The pawn's trait targets on all seeded issues and the votes behind each, for the debug action.
     internal string DescribeTraitTargets()

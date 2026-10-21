@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>강도</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>무관심</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>{1} 쟁점에 대해, {PAWN_nameDef}은(는) 확신 {3}으로 {2} 입장을 가지고 있습니다. {IDEO_name}은(는) {5}을(를) 가르칩니다; 그 입장에 대한 {PAWN_nameDef}의 의견: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>어제부터 {PAWN_nameDef}의 입장이 {1}에서 {2}(으)로 바뀌었습니다.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>어제부터 {PAWN_nameDef}의 확신이 {1}에서 {2}(으)로 바뀌었습니다.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>외부 영향이 없으면 {PAWN_nameDef}의 성격은 다음 쪽으로 기웁니다: {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef}의 성격은 다음에 반대합니다: {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}의 {IDEO_name}에 대한 의견: {2}</EnhancedIdeology.PawnOpinionTooltip>

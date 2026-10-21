@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Forza</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Indifferente</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>Sulla questione di {1}, {PAWN_nameDef} ha la posizione {2} con convinzione {3}. {IDEO_name} predica {5}; l'opinione di {PAWN_nameDef} su quella posizione: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>Da ieri, la posizione di {PAWN_nameDef} è passata da {1} a {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>Da ieri, la convinzione di {PAWN_nameDef} è passata da {1} a {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Lasciata a sé stessa, la personalità di {PAWN_nameDef} tende verso {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>La personalità di {PAWN_nameDef} è contraria a {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Opinione di {PAWN_nameDef} su {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>

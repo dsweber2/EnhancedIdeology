@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>強度</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>無所謂</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>在{1}的議題上，{PAWN_nameDef}持有立場{2}，信念強度為{3}。{IDEO_name}宣揚{5}；{PAWN_nameDef}對該立場的看法：{6}。</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>自昨天起，{PAWN_nameDef}的立場已從{1}轉為{2}。</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>自昨天起，{PAWN_nameDef}的信念強度已從{1}變為{2}。</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>若無外界影響，{PAWN_nameDef}的性格會使其傾向於{1}。</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef}的性格反對{1}。</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}對{IDEO_name}的看法：{2}</EnhancedIdeology.PawnOpinionTooltip>

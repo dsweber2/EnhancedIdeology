@@ -35,6 +35,8 @@ REPO = Path(__file__).resolve().parent.parent
 DOC = REPO / "docs" / "trait-meme-affinity.md"
 OUTPUT = REPO / "Common" / "Patches" / "TraitLinks.xml"
 SECTION = "## Additional meme affinity"
+# The mod depends on this DLC, so a MayRequire on it is always met.
+REQUIRED_DLC = "ludeon.rimworld.ideology"
 MEME_ITEM = re.compile(r"^(\w+) \((\+\+?|--?)\)$")
 RUNG_ITEM = re.compile(r"^\[(\w+) → (\w+)\]$")
 OPPOSE_ITEM = re.compile(r"^\[(\w+)\] \(-\)$")
@@ -136,7 +138,7 @@ def parse(lines: list[str], catalog) -> tuple[dict[str, TraitLinks], list[str]]:
 def trait_items(trait: str, degrees: list[int | None], may_require: str) -> str:
     """Meme trait-list entries. A trait def with MayRequire exists while patches run but is dropped at load when
     the DLC is absent, so the entry takes the same MayRequire to avoid a dangling cross-reference."""
-    attribute = f' MayRequire="{may_require}"' if may_require else ""
+    attribute = f' MayRequire="{may_require}"' if may_require and may_require.lower() != REQUIRED_DLC else ""
     return "".join(f"<li{attribute}>{trait}</li>" if degree is None else f"<{trait}{attribute}>{degree}</{trait}>"
                    for degree in sorted(degrees, key=lambda degree: (degree is not None, degree or 0)))
 

@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | Força |
 | `EnhancedIdeology.StanceDontCare` | Don't care | Indiferent |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | Sobre el tema de {1}, {PAWN_nameDef} té la postura {2} amb convicció {3}. {IDEO_name} predica {5}; opinió de {PAWN_nameDef} sobre aquesta postura: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Des d'ahir, la postura de {PAWN_nameDef} ha passat de {1} a {2}. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Des d'ahir, la convicció de {PAWN_nameDef} ha passat de {1} a {2}. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Sense influències externes, la personalitat de {PAWN_nameDef} tendeix cap a {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | La personalitat de {PAWN_nameDef} està en contra de {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Opinió de {PAWN_nameDef} sobre {IDEO_name}: {2} |

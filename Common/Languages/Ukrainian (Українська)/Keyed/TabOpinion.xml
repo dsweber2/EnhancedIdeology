@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Сила</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Байдуже</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>З питання {1}, {PAWN_nameDef} займає позицію {2} з переконанням {3}. {IDEO_name} проповідує {5}; думка {PAWN_nameDef} щодо цієї позиції: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>Від учора позиція {PAWN_nameDef} змістилася з {1} на {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>Від учора переконання {PAWN_nameDef} змінилося з {1} до {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Без зовнішнього впливу вдача {PAWN_nameDef} тягне до позиції: {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>Вдача {PAWN_nameDef} проти: {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Думка {PAWN_nameDef} про {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>

@@ -517,6 +517,7 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
             {
                 InvalidateStances();
             }
+            Stances.FillMissingHistory();
             if (Pawn == null) return;
             comp.SetIdeo(Pawn, Pawn.Ideo!);
         }

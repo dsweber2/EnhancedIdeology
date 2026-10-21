@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | Güç |
 | `EnhancedIdeology.StanceDontCare` | Don't care | Umursamıyor |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | {1} konusunda {PAWN_nameDef}, {3} inançla {2} tutumunu benimsiyor. {IDEO_name}, {5}'i öğütlüyor; {PAWN_nameDef}'in bu tutuma dair görüşü: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Dünden beri {PAWN_nameDef}'in tutumu {1} konumundan {2} konumuna geçti. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Dünden beri {PAWN_nameDef}'in inancı {1} değerinden {2} değerine değişti. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Kendi haline bırakılırsa {PAWN_nameDef} kişiliği gereği şuna yönelir: {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef} kişiliği gereği şuna karşıdır: {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}'in {IDEO_name} hakkındaki görüşü: {2} |

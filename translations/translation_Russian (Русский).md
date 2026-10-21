@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | Сила |
 | `EnhancedIdeology.StanceDontCare` | Don't care | Всё равно |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | По вопросу {1} {PAWN_nameDef} занимает позицию {2} с убеждённостью {3}. {IDEO_name} проповедует {5}; мнение {PAWN_nameDef} об этой позиции: {6}. |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Со вчерашнего дня позиция {PAWN_nameDef} сместилась с {1} на {2}. |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Со вчерашнего дня убеждённость {PAWN_nameDef} изменилась с {1} до {2}. |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Без внешнего влияния характер {PAWN_nameDef} тянет к позиции: {1}. |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Характер {PAWN_nameDef} против: {1}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Мнение {PAWN_nameDef} об {IDEO_name}: {2} |

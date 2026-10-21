@@ -125,6 +125,8 @@
 | `EnhancedIdeology.ColStrength` | Strength | 強度 |
 | `EnhancedIdeology.StanceDontCare` | Don't care | 無関心 |
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | {1}の問題について、{PAWN_nameDef}は確信{3}で姿勢{2}をとっている。{IDEO_name}は{5}を説く。{PAWN_nameDef}のその姿勢への評価: {6}。 |
+| `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | 昨日から、{PAWN_nameDef}の姿勢は{1}から{2}へ移った。 |
+| `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | 昨日から、{PAWN_nameDef}の確信は{1}から{2}になった。 |
 | `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | 外部の影響がなければ、{PAWN_nameDef}の性格は{1}へと傾く。 |
 | `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef}の性格は{1}に反対している。 |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}の{IDEO_name}への評価: {2} |

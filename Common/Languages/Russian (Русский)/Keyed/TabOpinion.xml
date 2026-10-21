@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Сила</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Всё равно</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>По вопросу {1} {PAWN_nameDef} занимает позицию {2} с убеждённостью {3}. {IDEO_name} проповедует {5}; мнение {PAWN_nameDef} об этой позиции: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>Со вчерашнего дня позиция {PAWN_nameDef} сместилась с {1} на {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>Со вчерашнего дня убеждённость {PAWN_nameDef} изменилась с {1} до {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Без внешнего влияния характер {PAWN_nameDef} тянет к позиции: {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>Характер {PAWN_nameDef} против: {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Мнение {PAWN_nameDef} об {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>

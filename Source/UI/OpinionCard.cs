@@ -15,9 +15,20 @@ internal sealed class OpinionCard
     private const float IconTextGap = 2 * Padding;
     private const float ColumnGap = 2 * Padding;
     private const float MaxRungWidth = 120f;
+    private const float GutterWidth = 3f;
+    // Strength changes below this are not marked with an arrow. The default daily drain (about 0.007 per day)
+    // stays below it over the two-day window.
+    private const float ArrowThreshold = 0.02f;
+    // A strength change of at least this (three won debates) or a rung change of at least LargeRungSwing
+    // gets a double arrow.
+    private const float LargeStrengthSwing = 3f;
+    private const float LargeRungSwing = 2f;
+    // Offset of the second glyph of a double arrow, as a fraction of the glyph width, so the two glyphs overlap.
+    private const float DoubleArrowOffset = 0.5f;
 
     // The left column grades each stance against a selected ideoligion: green where the pawn agrees with what
-    // it preaches on that issue, red where they clash. Default selection is the pawn's own faith.
+    // it preaches on that issue, red where they clash. Default selection is the pawn's own faith. The gutter
+    // stripe at the left edge of a stance row uses the same colours to grade the stance against the pawn's traits.
     private static readonly Color AgreeColor = new(0.35f, 0.7f, 0.35f);
     private static readonly Color DisagreeColor = new(0.85f, 0.35f, 0.35f);
 
@@ -34,6 +45,9 @@ internal sealed class OpinionCard
     private readonly List<Ideo> ideos;
     private readonly Ideo selected;
     private readonly List<(IssueDef issue, string personalRung, float opinion, string selectedRung, float strength)> stances;
+    private readonly Dictionary<IssueDef, TraitStanceTarget> traitTargets;
+    private readonly float glyphWidth;
+    private readonly float rungArrowWidth;
     private readonly float issueWidth;
     private readonly float rungWidth;
     private readonly List<float> rowHeights;
@@ -61,11 +75,14 @@ internal sealed class OpinionCard
         // Right column: overall opinion of every ideology (click a row to re-aim the left column at it). The two
         // share one vertical scroll, sized to whichever list is longer.
         stances = StanceRows(data, selected);
+        traitTargets = data.Stances.TraitTargets();
 
+        glyphWidth = new[] { "▲", "▼", "◀", "▶" }.Max(glyph => Text.CalcSize(glyph).x);
+        rungArrowWidth = glyphWidth * (1f + DoubleArrowOffset);
         issueWidth = stances.Select(row => Text.CalcSize(row.issue.LabelCap).x).DefaultIfEmpty(0f).Max();
         rungWidth = Mathf.Min(MaxRungWidth, stances.Select(row => Text.CalcSize(row.personalRung).x).DefaultIfEmpty(0f).Max());
         rowHeights = stances.Select(row => Mathf.Max(RowHeight, Text.CalcHeight(row.personalRung, rungWidth) + 2 * Padding)).ToList();
-        leftWidth = SmallPadding + IssueIconSize + SmallPadding + issueWidth + IconTextGap + rungWidth + IconTextGap + OpinionBarWidth + SmallPadding;
+        leftWidth = SmallPadding + IssueIconSize + SmallPadding + issueWidth + IconTextGap + rungArrowWidth + rungWidth + IconTextGap + glyphWidth + OpinionBarWidth + SmallPadding;
 
         nameWidth = ideos.Select(ideo => Text.CalcSize(ideo.name).x).DefaultIfEmpty(0f).Max();
         rightWidth = Padding + IconSize + IconTextGap + nameWidth + (2 * Padding) + BarWidth;
@@ -97,10 +114,10 @@ internal sealed class OpinionCard
         if (Widgets.ButtonInvisible(issueHeaderRect))
             stanceSort = stanceSort switch { StanceSort.ByIssueAsc => StanceSort.ByIssueDesc, StanceSort.ByIssueDesc => StanceSort.ByStrength, _ => StanceSort.ByIssueAsc };
 
-        var rungColX = issueColX + issueWidth + IconTextGap;
+        var rungColX = issueColX + issueWidth + IconTextGap + rungArrowWidth;
         Widgets.Label(new Rect(rungColX, 0f, rungWidth, headerH), "EnhancedIdeology.ColStance".Translate());
 
-        var strengthColX = rungColX + rungWidth + IconTextGap;
+        var strengthColX = rungColX + rungWidth + IconTextGap + glyphWidth;
         var strengthHeaderRect = new Rect(strengthColX, 0f, OpinionBarWidth, headerH);
         if (Mouse.IsOver(strengthHeaderRect))
             Widgets.DrawHighlight(strengthHeaderRect);
@@ -150,6 +167,14 @@ internal sealed class OpinionCard
             var (issue, personalRung, opinion, selectedRung, strength) = stances[ii];
             var rowH = rowHeights[ii];
             var contribution = opinion / count;
+            var rank = data.Stances.GetRank(issue);
+            var before = data.Stances.StanceBefore(issue);
+            traitTargets.TryGetValue(issue, out var traitTarget);
+
+            if (traitTarget != null && TraitFitColor(traitTarget, rank) is { } fitColor)
+            {
+                Widgets.DrawBoxSolid(new Rect(0f, pos + SmallPadding, GutterWidth, rowH - 2 * SmallPadding), fitColor);
+            }
 
             if (issue.Icon != null)
             {
@@ -161,24 +186,47 @@ internal sealed class OpinionCard
             Text.Anchor = TextAnchor.MiddleLeft;
             Widgets.Label(new Rect(labelX, pos, issueWidth, rowH), issue.LabelCap);
 
+            // A rung change over the past day, pointing along the ladder: left toward the permissive end, right
+            // toward the forbidding end.
+            var rungArrowX = labelX + issueWidth + IconTextGap;
+            Text.Anchor = TextAnchor.MiddleLeft;
+            var previousRung = before is { } previous ? RungLabel(issue, previous.rank, pawn.Ideo) : null;
+            var rungChanged = previousRung != null && previousRung != personalRung;
+            if (rungChanged)
+            {
+                var previousRank = before!.Value.rank;
+                var arrow = rank > previousRank ? "▶" : "◀";
+                var large = Mathf.Abs(rank - previousRank) >= LargeRungSwing;
+                DrawArrow(new Rect(rungArrowX, pos, rungArrowWidth, rowH), arrow, large, stacked: false);
+            }
+
             // The pawn's own rung, coloured by whether that stance agrees (green) or clashes (red) with the
             // selected ideoligion. Aimed at their own faith, red is exactly the drift a debate or book induced.
-            var rungX = labelX + issueWidth + IconTextGap;
+            var rungX = rungArrowX + rungArrowWidth;
             var rungTextH = Text.CalcHeight(personalRung, rungWidth);
             GUI.color = AgreementColor(opinion);
             Text.Anchor = TextAnchor.UpperLeft;
             Widgets.Label(new Rect(rungX, pos + (rowH - rungTextH) / 2f, rungWidth, rungTextH), personalRung);
             GUI.color = Color.white;
 
-            // This issue's contribution to the pawn's structural fit with the selected ideoligion, coloured.
-            var opinionRect = new Rect(rungX + rungWidth + IconTextGap, pos, OpinionBarWidth, rowH);
+            // Whether the strength rose or fell over the past day, then this issue's contribution to the pawn's
+            // structural fit with the selected ideoligion, coloured.
+            var opinionRect = new Rect(rungX + rungWidth + IconTextGap, pos, glyphWidth + OpinionBarWidth, rowH);
             Text.Anchor = TextAnchor.MiddleLeft;
+            var change = before is { } dayAgo ? strength - dayAgo.strength : 0f;
+            var strengthChanged = Mathf.Abs(change) >= ArrowThreshold;
+            if (strengthChanged)
+            {
+                var arrow = change > 0f ? "▲" : "▼";
+                var large = Mathf.Abs(change) >= LargeStrengthSwing;
+                DrawArrow(opinionRect.LeftPartPixels(glyphWidth), arrow, large, stacked: true);
+            }
             GUI.color = AgreementColor(opinion);
-            Widgets.Label(opinionRect, $"{strength:F1} ({Signed(contribution)})");
+            Widgets.Label(new Rect(opinionRect.x + glyphWidth, pos, OpinionBarWidth, rowH), $"{strength:F1} ({Signed(contribution)})");
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
-            var rowRect = new Rect(Padding, pos, rungX + rungWidth + IconTextGap + OpinionBarWidth, rowH);
+            var rowRect = new Rect(Padding, pos, opinionRect.xMax, rowH);
             if (Mouse.IsOver(rowRect))
             {
                 Widgets.DrawHighlight(rowRect);
@@ -186,9 +234,17 @@ internal sealed class OpinionCard
                     pawn.Named("PAWN"), issue.LabelCap, personalRung,
                     $"{strength:F1} ({(strength / ConvictionScale.MaxConvictionStrength).ToStringPercent()})",
                     selected.Named("IDEO"), selectedRung, Signed(contribution));
-                if (data.Stances.TraitTarget(issue) is { } target)
+                if (rungChanged || strengthChanged)
                 {
-                    tip += "\n\n" + TraitDriftText(issue, target, data.Stances.GetRank(issue));
+                    tip += "\n";
+                    if (rungChanged)
+                        tip += "\n" + "EnhancedIdeology.StanceChangedRung".Translate(pawn.Named("PAWN"), previousRung!, personalRung);
+                    if (strengthChanged)
+                        tip += "\n" + "EnhancedIdeology.StanceChangedStrength".Translate(pawn.Named("PAWN"), $"{strength - change:F1}", $"{strength:F1}");
+                }
+                if (traitTarget != null)
+                {
+                    tip += "\n\n" + TraitDriftText(issue, traitTarget, rank);
                 }
                 if (Prefs.DevMode)
                 {
@@ -295,8 +351,41 @@ internal sealed class OpinionCard
         }
     }
 
+    // Draws `glyph` at the left of the slot. A large swing draws two overlapping copies, offset along the
+    // direction the glyph points: stacked for a strength arrow, side by side for a rung arrow.
+    private void DrawArrow(Rect slot, string glyph, bool large, bool stacked)
+    {
+        var glyphRect = new Rect(slot.x, slot.y, glyphWidth, slot.height);
+        if (!large)
+        {
+            Widgets.Label(glyphRect, glyph);
+            return;
+        }
+        var offset = glyphWidth * DoubleArrowOffset;
+        if (stacked)
+        {
+            Widgets.Label(new Rect(slot.x, slot.y - offset / 2f, glyphWidth, slot.height), glyph);
+            Widgets.Label(new Rect(slot.x, slot.y + offset / 2f, glyphWidth, slot.height), glyph);
+        }
+        else
+        {
+            Widgets.Label(glyphRect, glyph);
+            Widgets.Label(new Rect(slot.x + offset, slot.y, glyphWidth, slot.height), glyph);
+        }
+    }
+
     private static Color AgreementColor(float opinion) =>
         opinion > 0.01f ? AgreeColor : opinion < -0.01f ? DisagreeColor : Color.white;
+
+    // Aligned on the rung a support target names, conflict off it or on a spot an opposition target opposes.
+    // An allowed spot under an opposition target has no colour: the traits only rule spots out.
+    private static Color? TraitFitColor(TraitStanceTarget target, float rank)
+    {
+        if (target.Rung is { } rung)
+            return Mathf.Abs(rank - rung) <= InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon
+                ? AgreeColor : DisagreeColor;
+        return target.OpposedWeight(rank) > 0f ? DisagreeColor : null;
+    }
 
     // The opinion as a signed percentage of the full-conviction mark, e.g. "+80%" / "-40%".
     private static string Signed(float opinion)

@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Force</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Indifférent</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>Sur le sujet de {1}, {PAWN_nameDef} a la position {2} avec une conviction de {3}. {IDEO_name} prêche {5} ; opinion de {PAWN_nameDef} sur cette position : {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>Depuis hier, la position de {PAWN_nameDef} est passée de {1} à {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>Depuis hier, la conviction de {PAWN_nameDef} est passée de {1} à {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Livré à lui-même, le caractère de {PAWN_nameDef} tend vers {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>Le caractère de {PAWN_nameDef} s'oppose à {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Opinion de {PAWN_nameDef} envers {IDEO_name} : {2}</EnhancedIdeology.PawnOpinionTooltip>

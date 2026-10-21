@@ -8,6 +8,8 @@
   <EnhancedIdeology.ColStrength>Putere</EnhancedIdeology.ColStrength>
   <EnhancedIdeology.StanceDontCare>Indiferent</EnhancedIdeology.StanceDontCare>
   <EnhancedIdeology.StanceTooltip>Referitor la problema {1}, {PAWN_nameDef} are poziția {2} cu convingerea {3}. {IDEO_name} propovăduiește {5}; opinia lui {PAWN_nameDef} față de acea poziție: {6}.</EnhancedIdeology.StanceTooltip>
+  <EnhancedIdeology.StanceChangedRung>De ieri, poziția lui {PAWN_nameDef} s-a mutat de la {1} la {2}.</EnhancedIdeology.StanceChangedRung>
+  <EnhancedIdeology.StanceChangedStrength>De ieri, convingerea lui {PAWN_nameDef} a trecut de la {1} la {2}.</EnhancedIdeology.StanceChangedStrength>
   <EnhancedIdeology.TraitDriftToward>Lăsată în voia ei, personalitatea lui {PAWN_nameDef} tinde spre {1}.</EnhancedIdeology.TraitDriftToward>
   <EnhancedIdeology.TraitDriftAgainst>Personalitatea lui {PAWN_nameDef} este împotriva {1}.</EnhancedIdeology.TraitDriftAgainst>
   <EnhancedIdeology.PawnOpinionTooltip>Opinia lui {PAWN_nameDef} față de {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
