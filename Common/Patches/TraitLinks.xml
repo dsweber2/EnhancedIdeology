@@ -7016,20 +7016,6 @@
 		<match Class="PatchOperationSequence">
 			<operations>
 				<li Class="PatchOperationConditional">
-					<xpath>/Defs/MemeDef[defName="AM_Monastic"]/agreeableTraits</xpath>
-					<match Class="PatchOperationAdd">
-						<xpath>/Defs/MemeDef[defName="AM_Monastic"]/agreeableTraits</xpath>
-						<value><li>Tough</li></value>
-					</match>
-					<nomatch Class="PatchOperationConditional">
-						<xpath>/Defs/MemeDef[defName="AM_Monastic"]</xpath>
-						<match Class="PatchOperationAdd">
-							<xpath>/Defs/MemeDef[defName="AM_Monastic"]</xpath>
-							<value><agreeableTraits><li>Tough</li></agreeableTraits></value>
-						</match>
-					</nomatch>
-				</li>
-				<li Class="PatchOperationConditional">
 					<xpath>/Defs/MemeDef[defName="AM_PainIsDivine"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="AM_PainIsDivine"]/agreeableTraits</xpath>

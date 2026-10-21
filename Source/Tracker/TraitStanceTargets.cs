@@ -22,8 +22,8 @@ internal sealed record TraitStanceTarget(
     internal float OpposedWeight(float rank) =>
         Rung == null && Opposed.TryGetValue(NearestSpot(rank), out var weight) ? weight : 0f;
 
-    private static float StrengthOf(float votes) => Mathf.Clamp(
-        votes * ConvictionScale.TraitDecayStrengthPerVote, 0f, ConvictionScale.MaxConvictionStrength);
+    private static float StrengthOf(float votes) =>
+        Mathf.Min(ConvictionScale.TraitVoteStrength(votes), ConvictionScale.MaxConvictionStrength);
 
     private float NearestSpot(float rank)
     {
@@ -55,15 +55,20 @@ internal sealed record TraitStanceTarget(
 // - a rung link (TraitIssueLinks.rung) votes +1 for its rung;
 // - an opposes link (TraitIssueLinks.opposes) votes -1 against the issue's valued rung;
 // - an indifferent link (TraitIssueLinks.indifferent) votes +1 for the issue's indifferent rank;
-// - a meme that lists the trait in agreeableTraits / disagreeableTraits votes +1 / -1 on each issue the meme
-//   links to, once per listing. A link through associatedMemes counts at AssociatedMemeWeight.
+// - a meme that lists the trait in agreeableTraits / disagreeableTraits votes +1 / -DisagreeableMemeWeight on
+//   each issue the meme links to, once per listing. A link through associatedMemes counts at AssociatedMemeWeight.
 // Each rung nets its support less its opposition. If a rung nets above zero, the target is the best-supported
-// rung, the closest one on a tie; its votes are the votes that agree with it. Otherwise the rungs that net below
-// zero are an opposition target. No votes, or no allowed spot, give no target.
+// rung, the closest one on a tie; its votes are that rung's net. Otherwise the rungs that net below zero are an
+// opposition target. No votes, or no allowed spot, give no target. UntargetedIssues never get a target.
 // The faith does not matter: the targets come from the pawn's traits only.
 internal static class TraitStanceTargets
 {
     internal const float AssociatedMemeWeight = 0.5f;
+    // Disliking a meme does not oppose every precept the meme requires as firmly as liking it supports them.
+    internal const float DisagreeableMemeWeight = 0.5f;
+
+    // An ideo holds many roles at once, so a rank on the role list has no meaning.
+    private static readonly HashSet<string> UntargetedIssues = ["IdeoRole"];
 
     // Meme -> issue -> rung rank -> weight of the strongest route from the meme to that rung.
     private static Dictionary<MemeDef, Dictionary<IssueDef, Dictionary<float, float>>>? _memeRungs;
@@ -113,15 +118,14 @@ internal static class TraitStanceTargets
     internal static Dictionary<IssueDef, TraitStanceTarget> For(
         Pawn pawn, IReadOnlyDictionary<IssueDef, float> ranks, Dictionary<IssueDef, List<string>>? sources = null)
     {
-        var votes = new Dictionary<IssueDef, List<(float weight, HashSet<float> rungs)>>();
+        var totalWeight = new Dictionary<IssueDef, float>();
         var net = new Dictionary<IssueDef, Dictionary<float, float>>();
 
         // One vote of `weight` on `issue`, supporting (weight > 0) or opposing (weight < 0) each rung by its own weight.
         void Vote(IssueDef issue, float weight, IEnumerable<(float rank, float weight)> rungs, string? source)
         {
-            if (!ranks.ContainsKey(issue)) return;
-            if (!votes.TryGetValue(issue, out var issueVotes)) votes[issue] = issueVotes = [];
-            issueVotes.Add((weight, rungs.Select(rung => rung.rank).ToHashSet()));
+            if (!ranks.ContainsKey(issue) || UntargetedIssues.Contains(issue.defName)) return;
+            totalWeight[issue] = totalWeight.GetValueOrDefault(issue) + weight;
             if (!net.TryGetValue(issue, out var byRank)) net[issue] = byRank = [];
             foreach (var (rank, rungWeight) in rungs)
                 byRank[rank] = byRank.GetValueOrDefault(rank) + Mathf.Sign(weight) * rungWeight;
@@ -154,7 +158,7 @@ internal static class TraitStanceTargets
         foreach (var (meme, byIssue) in MemeRungs)
         {
             var listings = MemeListings(meme, pawn);
-            if (listings == 0) continue;
+            if (listings == 0f) continue;
             var scale = Mathf.Abs(listings);
             var source = sources == null ? null : $"meme {meme.defName} via {MemeListingNames(meme, pawn)}";
             foreach (var (issue, byRank) in byIssue)
@@ -162,26 +166,23 @@ internal static class TraitStanceTargets
         }
 
         var targets = new Dictionary<IssueDef, TraitStanceTarget>();
-        foreach (var (issue, issueVotes) in votes)
+        foreach (var (issue, weight) in totalWeight)
         {
             var current = ranks[issue];
             var dontCare = PreceptLadder.DontCareRank(issue);
             var supported = net[issue].Where(kv => kv.Value > 0f).ToList();
             if (supported.Count > 0)
             {
-                var rung = supported
-                    .OrderByDescending(kv => kv.Value).ThenBy(kv => Mathf.Abs(kv.Key - current)).First().Key;
-                var agreeing = issueVotes.Sum(vote => vote.weight > 0f
-                    ? vote.rungs.Contains(rung) ? vote.weight : 0f
-                    : vote.rungs.Contains(rung) ? vote.weight : -vote.weight);
-                targets[issue] = new TraitStanceTarget(rung, agreeing, new Dictionary<float, float>(), [], dontCare);
+                var (rung, rungNet) = supported
+                    .OrderByDescending(kv => kv.Value).ThenBy(kv => Mathf.Abs(kv.Key - current)).First();
+                targets[issue] = new TraitStanceTarget(rung, rungNet, new Dictionary<float, float>(), [], dontCare);
                 continue;
             }
 
             var opposed = net[issue].Where(kv => kv.Value < 0f).ToDictionary(kv => kv.Key, kv => -kv.Value);
             var spots = Spots(issue, dontCare);
             if (opposed.Count == 0 || spots.All(opposed.ContainsKey)) continue;
-            targets[issue] = new TraitStanceTarget(null, issueVotes.Sum(vote => vote.weight), opposed, spots, dontCare);
+            targets[issue] = new TraitStanceTarget(null, weight, opposed, spots, dontCare);
         }
         return targets;
     }
@@ -198,16 +199,17 @@ internal static class TraitStanceTargets
         return spots;
     }
 
-    // Times the pawn's traits appear in the meme's agreeableTraits, less the times in its disagreeableTraits.
-    private static int MemeListings(MemeDef meme, Pawn pawn)
+    // Times the pawn's traits appear in the meme's agreeableTraits, less DisagreeableMemeWeight per time in its
+    // disagreeableTraits.
+    private static float MemeListings(MemeDef meme, Pawn pawn)
     {
-        var listings = 0;
+        var listings = 0f;
         if (!meme.agreeableTraits.NullOrEmpty())
             foreach (var trait in meme.agreeableTraits)
-                if (trait.HasTrait(pawn)) listings++;
+                if (trait.HasTrait(pawn)) listings += 1f;
         if (!meme.disagreeableTraits.NullOrEmpty())
             foreach (var trait in meme.disagreeableTraits)
-                if (trait.HasTrait(pawn)) listings--;
+                if (trait.HasTrait(pawn)) listings -= DisagreeableMemeWeight;
         return listings;
     }
 

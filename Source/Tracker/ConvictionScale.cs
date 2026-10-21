@@ -15,14 +15,8 @@ internal static class ConvictionScale
     // Target strength of a pull away from the faith's rung (bad moods, bad rituals): a firm, not a fanatical, dissent.
     internal const float AwayFromFaithStrength = 15f;
     internal const float ConvictionPerTraitDegree = 3f;
-    internal const float TraitMemeConvictionBonus = 10f;
-    // Strength range of a stance a trait link gives on an issue the faith is silent on. Lower than a normal
-    // seed: the pawn holds it against their social circle.
-    internal const float TraitStanceStrengthMin = 5f;
-    internal const float TraitStanceStrengthMax = 15f;
-    // Strength that daily decay pulls a trait-targeted issue toward, per trait vote (TraitStanceTargets), up to
-    // MaxConvictionStrength.
-    internal const float TraitDecayStrengthPerVote = 10f;
+    // Strength of one trait vote (TraitStanceTargets). See TraitVoteStrength.
+    internal const float TraitStrengthPerVote = 8f;
     // Strength that daily decay pulls a stance toward when the traits only oppose rungs and the stance is on none
     // of them. The rank does not move.
     internal const float TraitAllowedStrength = 10f;
@@ -30,4 +24,9 @@ internal static class ConvictionScale
     // Diminishing returns of a reinforcing pull as strength approaches the absolute ceiling.
     internal static float StrengthFactor(float strength) =>
         1f - (strength / AbsoluteMaxConvictionStrength);
+
+    // Strength that `votes` trait votes give: 0.5 → 5, 1 → 8, 2 → 12.7, 5 → 23.4. The 2/3 power stops memes from
+    // several mods that encode one idea from stacking linearly.
+    internal static float TraitVoteStrength(float votes) =>
+        TraitStrengthPerVote * Mathf.Pow(votes, 2f / 3f);
 }

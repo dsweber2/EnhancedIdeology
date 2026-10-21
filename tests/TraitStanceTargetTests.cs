@@ -45,14 +45,28 @@ public class TraitStanceTargetTests : SeededTest
     {
         var (world, issue, rungs) = Setup();
         rungs[0].requiredMemes.Add(Meme("Pro", agrees: true));
-        rungs[0].requiredMemes.Add(Meme("Con", agrees: false));
+        rungs[0].requiredMemes.Add(Meme("Con", agrees: false, listings: 2));
         var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
 
         Assert.Empty(TargetsAt(pawn, issue, 1f));
     }
 
     [Fact]
-    public void DoubleListing_DoublesVotesAndStrength()
+    public void DisagreeableListing_CountsHalfAnAgreeableOne()
+    {
+        var (world, issue, rungs) = Setup();
+        rungs[0].requiredMemes.Add(Meme("Pro", agrees: true));
+        rungs[0].requiredMemes.Add(Meme("Con", agrees: false));
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
+
+        var target = TargetsAt(pawn, issue, 1f)[issue];
+
+        Assert.Equal(0f, target.Rung);
+        Assert.Equal(1f - TraitStanceTargets.DisagreeableMemeWeight, target.Votes);
+    }
+
+    [Fact]
+    public void DoubleListing_DoublesVotes_StrengthGrowsSublinearly()
     {
         var (world, issue, rungs) = Setup();
         rungs[2].requiredMemes.Add(Meme("Pro", agrees: true, listings: 2));
@@ -62,7 +76,29 @@ public class TraitStanceTargetTests : SeededTest
 
         Assert.Equal(2f, target.Rung);
         Assert.Equal(2f, target.Votes);
-        Assert.Equal(2f * ConvictionScale.TraitDecayStrengthPerVote, target.PullFrom(0f).strength);
+        Assert.Equal(ConvictionScale.TraitVoteStrength(2f), target.PullFrom(0f).strength);
+        Assert.True(target.PullFrom(0f).strength < 2f * ConvictionScale.TraitVoteStrength(1f));
+    }
+
+    [Theory]
+    [InlineData(0.5f, 5.04f)]
+    [InlineData(1f, 8f)]
+    [InlineData(2f, 12.70f)]
+    [InlineData(5f, 23.39f)]
+    public void TraitVoteStrength_FollowsTwoThirdsPower(float votes, float expected)
+    {
+        Assert.Equal(expected, ConvictionScale.TraitVoteStrength(votes), precision: 2);
+    }
+
+    [Fact]
+    public void IdeoRole_GetsNoTarget()
+    {
+        var (world, _, _) = Setup();
+        var (roles, roleRungs) = SimIssues.Ladder("IdeoRole", "IdeoRole_Leader", "IdeoRole_ShootingSpecialist");
+        roleRungs[1].requiredMemes.Add(Meme("Pro", agrees: true));
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
+
+        Assert.Empty(TargetsAt(pawn, roles, 0f));
     }
 
     [Fact]
@@ -99,7 +135,7 @@ public class TraitStanceTargetTests : SeededTest
         var target = TargetsAt(pawn, issue, 0f)[issue];
 
         Assert.Null(target.Rung);
-        Assert.Equal(-1f, target.Votes);
+        Assert.Equal(-TraitStanceTargets.DisagreeableMemeWeight, target.Votes);
         Assert.Equal(PreceptLadder.DontCareRank(issue), target.PullFrom(0f).rank);
     }
 
@@ -156,11 +192,11 @@ public class TraitStanceTargetTests : SeededTest
         var target = TargetsAt(pawn, issue, 0f)[issue];
 
         Assert.Equal(2f, target.PullFrom(0f).rank);
-        Assert.Equal(2f, target.Votes);
+        Assert.Equal(1f, target.Votes);
     }
 
     [Fact]
-    public void SupportAndOppositionInOneDirection_AddUp()
+    public void OppositionToOtherRungs_DoesNotAddToSupport()
     {
         var (world, _, _) = Setup();
         var (slavery, rungs) = SimIssues.Ladder("Slavery",
@@ -175,7 +211,7 @@ public class TraitStanceTargetTests : SeededTest
         var target = TargetsAt(pawn, slavery, 1f)[slavery];
 
         Assert.Equal(4f, target.Rung);
-        Assert.Equal(2f, target.Votes);
+        Assert.Equal(1f, target.Votes);
     }
 
     [Fact]

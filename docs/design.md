@@ -70,30 +70,36 @@ So a neglected pawn drifts back toward what their personality implies, not towar
 Each link in [trait-meme-affinity.md](trait-meme-affinity.md) "Additional meme affinity", and each trait already listed in a meme def, is a vote on an issue (`Source/Tracker/TraitStanceTargets.cs`), whether or not the pawn's faith holds the meme:
 
 - a rung link votes +1 for its rung, an indifferent link votes +1 for the issue's indifferent rank (`PreceptLadder.IndifferentRank`, which can sit between rungs), and an opposes link votes −1 against the issue's most-valued rung (`Charity_Essential`);
-- a meme votes +1 per `agreeableTraits` listing and −1 per `disagreeableTraits` listing, on every rung it links to through `requiredMemes`, `requireOne` or `selectOneOrNone`; a link through `associatedMemes` counts half.
+- a meme votes +1 per `agreeableTraits` listing and −½ per `disagreeableTraits` listing, on every rung it links to through `requiredMemes`, `requireOne` or `selectOneOrNone`; a link through `associatedMemes` counts half.
+  Disliking a meme counts half because a meme bundles precepts: a trait that rejects pacifism does not, by that alone, reject abolition.
+
+`IdeoRole` gets no votes: an ideo holds many roles at once, so a rank on the role list means nothing.
 
 Each rung nets its support less its opposition.
 If any rung nets above zero, the issue has a **support target**: the best-supported rung, the one closest to the pawn's stance on a tie.
-Its strength counts the votes that agree with it: support for that rung, plus opposition to other rungs, less opposition to it.
-So +1 for `Slavery_Abhorrent` and −1 against `Slavery_Honorable` give a two-vote target, not a cancelled one.
+Its votes are that rung's net.
+Opposition to other rungs does not add to it: "not `Execution_Abhorrent`" is not "`Execution_Required`", and on a list like the roles it says nothing about which rung is left.
 A support target pulls straight to its rung, even past an opposed rung: explicit support beats avoidance.
+
+A count of votes gives strength `8 · votes^(2/3)` (`ConvictionScale.TraitVoteStrength`): ½ → 5, 1 → 8, 2 → 12.7, 5 → 23.4.
+The curve grows slower than the votes because several mods often add memes for one idea (`AM_NonViolence`, `VME_Pacifist`), and each one is a vote.
 
 Otherwise the rungs that net below zero are a no-go region, an **opposition target**.
 Opposition says where the pawn is not, not where they are, so it never pulls a stance toward an opposed rung:
 
 - a stance on an allowed spot (a rung or an off-ladder Don't-care) keeps its rank, and its strength moves toward 10;
-- a stance on an opposed spot exits to the nearest allowed spot on the side away from the opposed rungs' weighted centre, at strength 10 per opposing vote on its spot.
+- a stance on an opposed spot exits to the nearest allowed spot on the side away from the opposed rungs' weighted centre, at the strength of the opposing votes on its spot, up to 20.
   On the centre it exits toward Don't-care, and it takes the other side when its own side has no allowed spot.
 
 Mirroring the opposed range was rejected: it aims at the opposed rung when the range is centred, and it sends a pawn who rejects one extreme to the other.
 If every spot is opposed, the issue has no target.
 The target is used in three places:
 
-- **Spawn**, after the rest of seeding: if the faith is silent on the issue, the pawn takes a support target, or the exit from an opposed Don't-care, at low strength (5–15).
-  Toward a rung the faith holds, the pawn gains +10 conviction per vote; toward another rung, the pawn starts heterodox on the target at the strength it rolled.
-  A stance on an opposed rung the faith holds loses 10 conviction per opposing vote; a stance on an allowed spot does not change.
+- **Spawn**, after the rest of seeding: if the faith is silent on the issue, the pawn takes a support target at the vote strength, or the exit from an opposed Don't-care.
+  Toward a rung the faith holds, the pawn gains the vote strength as conviction; toward another rung, the pawn starts heterodox on the target at the vote strength.
+  A stance on an opposed rung the faith holds loses the strength of the opposing votes; a stance on an allowed spot does not change.
 - **Brainwipe**: the pawn returns to the target, or exits an opposed spot.
-- **Daily decay**: the stance moves along the conviction valley toward the pull, instead of draining toward zero. A support target pulls at strength 10 per vote, up to 20.
+- **Daily decay**: the stance moves along the conviction valley toward the pull, instead of draining toward zero. A support target pulls at the vote strength, up to 20.
 
 ## Opinion of an ideoligion
 

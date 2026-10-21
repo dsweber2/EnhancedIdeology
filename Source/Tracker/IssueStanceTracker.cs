@@ -284,10 +284,10 @@ internal sealed class IssueStanceTracker
     }
 
     // Trait targets (TraitStanceTargets), applied after the rest of generation to the issues seeded now.
-    // A faith silent on the issue gives the pawn a weak stance at the target.
-    // Toward a rung: a faith that holds it gains the conviction bonus per vote; a faith on another rung makes the
-    // pawn heterodox on the target rung. Against rungs: a stance on an opposed rung loses the bonus per opposing
-    // vote, or, when the faith is silent, takes the exit at low strength. A stance on an allowed spot does not change.
+    // Strengths come from ConvictionScale.TraitVoteStrength of the votes.
+    // Toward a rung: a faith that is silent or holds another rung gives the pawn a stance on the target at the
+    // vote strength; a faith that holds it adds the vote strength. Against rungs: a stance on an opposed rung loses
+    // the vote strength, or, when the faith is silent, takes the exit. A stance on an allowed spot does not change.
     private void ApplyTraitTargets(List<IssueDef> issues)
     {
         var ideo = _pawn.Ideo!;
@@ -302,22 +302,21 @@ internal sealed class IssueStanceTracker
             var heldRank = HeldRank(ideo, issue);
             var current = _preferredRank[issue];
             var opposedWeight = target.OpposedWeight(current);
-            var weakStrength = Rand.Range(ConvictionScale.TraitStanceStrengthMin, ConvictionScale.TraitStanceStrengthMax);
             string outcome;
             if (target.Rung is { } rung && !faithHolds)
             {
-                SetStance(issue, rung, weakStrength);
+                SetStance(issue, rung, ConvictionScale.TraitVoteStrength(target.Votes));
                 outcome = "faith silent, new stance";
             }
             else if (target.Rung is { } heldTarget && heldRank == heldTarget)
             {
-                var bonus = target.Votes * ConvictionScale.TraitMemeConvictionBonus;
+                var bonus = ConvictionScale.TraitVoteStrength(target.Votes);
                 SetStance(issue, heldTarget, _strength[issue] + bonus);
                 outcome = $"faith holds target, strength {bonus:+0.#;-0.#}";
             }
             else if (target.Rung is { } otherRung)
             {
-                SetRank(issue, otherRung);
+                SetStance(issue, otherRung, ConvictionScale.TraitVoteStrength(target.Votes));
                 outcome = $"heterodox, faith holds {TraitStanceTargets.RungName(issue, heldRank)}";
             }
             else if (opposedWeight == 0f)
@@ -326,12 +325,13 @@ internal sealed class IssueStanceTracker
             }
             else if (!faithHolds)
             {
-                SetStance(issue, target.PullFrom(current).rank, weakStrength);
+                var (exitRank, exitStrength) = target.PullFrom(current);
+                SetStance(issue, exitRank, exitStrength);
                 outcome = "faith silent on an opposed Don't-care, new stance";
             }
             else
             {
-                var penalty = opposedWeight * ConvictionScale.TraitMemeConvictionBonus;
+                var penalty = ConvictionScale.TraitVoteStrength(opposedWeight);
                 SetStance(issue, current, _strength[issue] - penalty);
                 outcome = $"stance on opposed rung, strength {-penalty:+0.#;-0.#}";
             }

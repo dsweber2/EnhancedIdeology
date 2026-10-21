@@ -49,7 +49,7 @@ Beyond these, a pawn who holds a higher opinion of another ideoligion than their
 
 ![Info_Books](https://images.steamusercontent.com/ugc/16283911562514376382/2DA48114CBC430029CA40933F554A655A4FD30C9/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 
-Books are tied to a specific ideoligion and carry per-issue conviction strengths, seeded from the author's own ideosyncratic stances. The more certain the author and the more impressive the materials, the stronger the effect.
+Books are tied to a specific ideoligion and carry per-issue conviction strengths, seeded from the author's own ideosyncratic stances. The more certain the author and the more impressive the materials, the stronger the effect. Even prisoners can read them, regardless of their faith.
 ### Iconoclasm 
 Low certainty pawns who snap into the Iconoclast mental break hunt for ideoligion books anywhere on the map, drag them somewhere clear, place them on the ground, and burn them, debating loudly against other pawns and trying to pick a fight. If there are no books, they'll try to destroy a relic or an altar.
 

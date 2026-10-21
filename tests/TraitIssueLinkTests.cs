@@ -45,7 +45,7 @@ public class TraitIssueLinkTests : SeededTest
     }
 
     [Fact]
-    public void SilentFaith_PawnTakesLinkedRungAtLowStrength()
+    public void SilentFaith_PawnTakesLinkedRungAtVoteStrength()
     {
         var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
 
@@ -53,7 +53,7 @@ public class TraitIssueLinkTests : SeededTest
         var (rank, strength) = StanceOn(tracker, issue);
 
         Assert.Equal(2f, rank);
-        Assert.InRange(strength, ConvictionScale.TraitStanceStrengthMin, ConvictionScale.TraitStanceStrengthMax);
+        Assert.Equal(ConvictionScale.TraitVoteStrength(1f), strength, precision: 4);
     }
 
     [Fact]
@@ -67,21 +67,19 @@ public class TraitIssueLinkTests : SeededTest
         var without = StanceOn(withoutTracker, baselineIssue);
 
         Assert.Equal(1f, with.rank);
-        Assert.Equal(without.strength + ConvictionScale.TraitMemeConvictionBonus, with.strength, precision: 4);
+        Assert.Equal(without.strength + ConvictionScale.TraitVoteStrength(1f), with.strength, precision: 4);
     }
 
     [Fact]
-    public void FaithHoldsOtherRung_PawnStartsHeterodoxAtRolledStrength()
+    public void FaithHoldsOtherRung_PawnStartsHeterodoxAtVoteStrength()
     {
         var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_B" });
 
-        var (withTracker, issue, _) = Seed(faithRung: 0, trait);
-        var with = StanceOn(withTracker, issue);
-        var (withoutTracker, baselineIssue, _) = Seed(faithRung: 0, null);
-        var without = StanceOn(withoutTracker, baselineIssue);
+        var (tracker, issue, _) = Seed(faithRung: 0, trait);
+        var (rank, strength) = StanceOn(tracker, issue);
 
-        Assert.Equal(1f, with.rank);
-        Assert.Equal(without.strength, with.strength, precision: 4);
+        Assert.Equal(1f, rank);
+        Assert.Equal(ConvictionScale.TraitVoteStrength(1f), strength, precision: 4);
     }
 
     [Fact]
@@ -138,15 +136,16 @@ public class TraitIssueLinkTests : SeededTest
 
         var (rank, strength) = StanceOn(tracker, issue);
         Assert.Equal(2f, rank);
-        Assert.True(Mathf.Abs(strength - ConvictionScale.TraitDecayStrengthPerVote) < Mathf.Abs(startStrength - ConvictionScale.TraitDecayStrengthPerVote),
-            $"Expected strength to move toward {ConvictionScale.TraitDecayStrengthPerVote}. start={startStrength}, after={strength}");
+        var single = ConvictionScale.TraitVoteStrength(1f);
+        Assert.True(Mathf.Abs(strength - single) < Mathf.Abs(startStrength - single),
+            $"Expected strength to move toward {single}. start={startStrength}, after={strength}");
     }
 
     [Fact]
     public void Decay_TwoTraitsOnOneRung_PullTowardDoubleStrength()
     {
         var link = new TraitIssueLink { rung = "LinkIssue_C" };
-        var startStrength = 1.5f * ConvictionScale.TraitDecayStrengthPerVote;
+        var startStrength = (ConvictionScale.TraitVoteStrength(1f) + ConvictionScale.TraitVoteStrength(2f)) / 2f;
 
         var (singleTracker, singleIssue, _) = Seed(faithRung: null, LinkedTrait(link));
         singleTracker.SetIssueStance(singleIssue, 2f, startStrength);
