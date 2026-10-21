@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} 信念偏移/象 |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT}（学习{IDEO}：{RATE}/小时） |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | 所倡导的信仰 |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/象 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | 宗教书籍被毁 |

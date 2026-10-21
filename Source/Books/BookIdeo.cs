@@ -182,7 +182,7 @@ internal sealed class BookIdeo : Book
         sb.AppendLine("EnhancedIdeology.BookBeliefsHeader".Translate());
         foreach (var (issue, stance, strength) in stances)
         {
-            var shiftPerQuadrum = (gainPerQuadrum * strength / ConvictionScale.MaxConvictionStrength).ToString("0.##", CultureInfo.InvariantCulture) + "/qd";
+            var shiftPerQuadrum = (gainPerQuadrum * strength).ToString("0.##", CultureInfo.InvariantCulture) + "/qd";
             sb.AppendLine($"  - {issue.LabelCap}: {stance.LabelCap} ({shiftPerQuadrum})");
         }
         return sb.ToString().TrimEndNewlines();

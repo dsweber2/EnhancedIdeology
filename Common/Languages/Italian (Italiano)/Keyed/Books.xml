@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} variazione convinzione/qd</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookReadingReport>{REPORT} (apprende {IDEO}: {RATE}/h)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Credenze difese</EnhancedIdeology.BookBeliefsHeader>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Libro religioso distrutto</EnhancedIdeology.LetterReligiousBookDestroyedLabel>

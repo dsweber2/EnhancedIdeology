@@ -28,6 +28,7 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 - `SocialCardUtility_DrawCertainty.cs` — injects extended certainty bar and setpoint marker into the social card; refreshes the shown pawn through `RecacheSetpointIfStale`; tooltip from `UI/CertaintyBar.Tooltip`
 - `NeedsCardUtility_DrawThoughtGroup.cs` — injects certainty bar into the needs card thought group
 - `ITab_Book_Size.cs` — adjusts book inspect tab size for EB's extended content
+- `JobDriver_Reading_Report.cs` — postfix on base `JobDriver.GetReport` (reading does not override it): while a pawn reads a religious book, appends "learning {IDEO}: X/hr" from `ReadingOutcomeDoer_CertaintyChange.PeakArcPerTick` × reading speed × room bonus
 - `BookUIUtility_DrawBenefits_Reroute.cs` — adjusts book benefit display for EB's custom reading outcome
 - `TryInteractWith_DebateLog.cs` — adds debate play-log entry after interaction resolves (`PlayLogEntry_DebateInteraction.FromLastDebate`)
 - `Caravan_TickInterval_Debates.cs` — caravan pawns get vanilla's random-interaction cadence and weights; only debates resolve, then it logs and sends the letter itself (`TryInteractWith` needs spawned pawns). Rules live in `Interactions/CaravanDebates.cs`

@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - 確信変化 {1}/節 |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT}（{IDEO}を学習: {RATE}/時） |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | 提唱する信条 |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/節 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | 聖典が破壊された |

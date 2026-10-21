@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - posun přesvědčení {1}/qd |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} (učí se {IDEO}: {RATE}/hod) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Zastávaná přesvědčení |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/qd |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Náboženská kniha zničena |

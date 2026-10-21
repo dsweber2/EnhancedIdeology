@@ -122,6 +122,20 @@
 		</value>
 	</Operation>
 
+	<!-- Prisoners without a recreation need read religious books in their cell, before they wander idle. -->
+	<Operation Class="PatchOperationInsert">
+		<xpath>Defs/ThinkTreeDef[defName="Humanlike"]//li[@Class="ThinkNode_ConditionalPrisoner"]/subNodes/li[@Class="ThinkNode_Tagger"][tagToGive="SatisfyingNeeds"]</xpath>
+		<order>Append</order>
+		<value>
+			<li Class="ThinkNode_Tagger">
+				<tagToGive>SatisfyingNeeds</tagToGive>
+				<subNodes>
+					<li Class="EnhancedIdeology.JobGiver_PrisonerReadReligiousText" />
+				</subNodes>
+			</li>
+		</value>
+	</Operation>
+
 	<!-- If VBE is active: also add our recipes to VBE's tables -->
 	<Operation Class="PatchOperationConditional">
 		<xpath>/Defs/ThingDef[defName="VBE_WritersTable"]</xpath>

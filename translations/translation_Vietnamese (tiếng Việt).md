@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} thay đổi niềm tin/quý |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} (học {IDEO}: {RATE}/giờ) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Niềm tin được đề cao |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/quý |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Sách tôn giáo bị hủy |

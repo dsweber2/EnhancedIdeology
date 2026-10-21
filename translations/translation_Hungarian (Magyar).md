@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} meggyőződés-változás/negyed |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} ({IDEO} tanulása: {RATE}/óra) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Hirdetett hittételek |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/negyed |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Vallásos könyv megsemmisült |

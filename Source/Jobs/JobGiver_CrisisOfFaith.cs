@@ -23,7 +23,7 @@ internal sealed class JobGiver_CrisisOfFaith : ThinkNode_JobGiver
     private static readonly List<Thing> bookSearchSet = [];
 
     // GenClosest does the reach check before the validator, so give it only books and bookcases.
-    private static BookIdeo? FindReadableReligiousBook(Pawn pawn)
+    internal static BookIdeo? FindReadableReligiousBook(Pawn pawn)
     {
         var listerThings = pawn.Map.listerThings;
         bookSearchSet.Clear();

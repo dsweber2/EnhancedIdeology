@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 확신 변화/분기</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookReadingReport>{REPORT} ({IDEO} 학습: {RATE}/시)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>지지하는 신념</EnhancedIdeology.BookBeliefsHeader>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/분기</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>종교 서적 파괴됨</EnhancedIdeology.LetterReligiousBookDestroyedLabel>

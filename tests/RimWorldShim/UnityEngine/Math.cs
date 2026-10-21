@@ -14,6 +14,7 @@ public static class Mathf
     public static float Log(float v) => MathF.Log(v);
     public static float Round(float v) => MathF.Round(v);
     public static int RoundToInt(float v) => (int)MathF.Round(v);
+    public static int CeilToInt(float v) => (int)MathF.Ceiling(v);
     public static float InverseLerp(float a, float b, float value)
         => a == b ? 0f : Math.Clamp((value - a) / (b - a), 0f, 1f);
     public static float MoveTowards(float current, float target, float maxDelta)

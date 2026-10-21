@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 信念偏移/象</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookReadingReport>{REPORT}（学习{IDEO}：{RATE}/小时）</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>所倡导的信仰</EnhancedIdeology.BookBeliefsHeader>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/象</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>宗教书籍被毁</EnhancedIdeology.LetterReligiousBookDestroyedLabel>

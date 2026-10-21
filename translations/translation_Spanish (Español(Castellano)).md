@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} cambio de convicción/cu |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} (aprendiendo {IDEO}: {RATE}/h) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Creencias defendidas |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/cu |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Libro religioso destruido |

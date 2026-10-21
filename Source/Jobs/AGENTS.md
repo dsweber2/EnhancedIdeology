@@ -4,6 +4,7 @@ Mental states and job givers for crisis-of-faith, iconoclast, and arrested-debat
 
 - `MentalState_CrisisOfFaith.cs` — mental state: pawn wanders aimlessly; clears on timer or certainty recovery
 - `JobGiver_CrisisOfFaith.cs` — AI job giver: during an active crisis, issues a contemplation job (`JoyGiver_Contemplation.TryBuildPrayJob`), else reading the closest readable `BookIdeo`; returns null otherwise so the wander state takes over
+- `JobGiver_PrisonerReadReligiousText.cs` — patched into the prisoner think tree after need satisfaction: colony prisoners without a recreation need read the closest reachable `BookIdeo` (`JobGiver_CrisisOfFaith.FindReadableReligiousBook`); the next allowed start tick is kept in `mindState.thinkData` under the node's save key, paced by `Books/PrisonerReading`
 - `MentalState_Iconoclast.cs` — mental state that tracks target structure and burn progress; `PostStart` records the break in the play log
 - `MentalStateWorker_Iconoclast.cs` — checks whether the iconoclast break can occur (pawn has ideo, burnable structures exist)
 - `MentalBreakWorker_Iconoclast.cs` — mental break worker that triggers `MentalState_Iconoclast` with a chosen target

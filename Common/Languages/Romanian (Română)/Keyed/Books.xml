@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - schimbare convingere {1}/qd</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookReadingReport>{REPORT} (învață {IDEO}: {RATE}/oră)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Credințe susținute</EnhancedIdeology.BookBeliefsHeader>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Carte religioasă distrusă</EnhancedIdeology.LetterReligiousBookDestroyedLabel>

@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - canvi de convicció {1}/qd</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookReadingReport>{REPORT} (aprenent {IDEO}: {RATE}/h)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Creences defensades</EnhancedIdeology.BookBeliefsHeader>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Llibre religiós destruït</EnhancedIdeology.LetterReligiousBookDestroyedLabel>

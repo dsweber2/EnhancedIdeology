@@ -77,6 +77,15 @@ public class BookReadingTests : SeededTest
     }
 
     [Fact]
+    public void ReaderGain_NonVegetarianReader_MatchesCertaintyGain()
+    {
+        var (_, pawn, doer) = Setup(QualityCategory.Good);
+        pawn.SetStatValue(StatDefOf.CertaintyLossFactor, 1.5f);
+
+        Assert.Equal(doer.CertaintyGain(pawn), doer.ReaderGain(pawn), precision: 9);
+    }
+
+    [Fact]
     public void OnReadingTick_OwnIdeo_HardensConviction()
     {
         // Reading your own faith's book raises conviction on the issues it takes a stance on, which lifts
@@ -134,6 +143,94 @@ public class BookReadingTests : SeededTest
             $"Expected reader's stance to slide toward the book ideo's rung 0. before={rankBefore}, after={rankAfter}");
         Assert.True(tracker.IdeoOpinion(bookIdeo) > opinionBefore,
             "Expected opinion of the book's ideo to rise as the reader's stance nears it.");
+    }
+
+    [Fact]
+    public void OnReadingTick_ForeignIdeo_FirmStanceResistsInRank()
+    {
+        // A rival book walks the conviction valley like a debate: a firmly held stance spends the arc losing
+        // conviction, so it moves less in rank than a shaky stance on the same rung.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (issue, rungs) = SimIssues.Ladder("BookIssue", "Permissive", "Forbidding");
+        var ownIdeo = new IdeoBuilder().WithName("OwnFaith").AddPrecept(rungs[1]).Build();
+        var bookIdeo = new IdeoBuilder().WithName("RivalFaith").AddPrecept(rungs[0]).Build();
+        world.AddIdeo(ownIdeo);
+        world.AddIdeo(bookIdeo);
+
+        var ownRank = PreceptLadder.RankOf(rungs[1]);
+        var shaky = new PawnBuilder().WithIdeo(ownIdeo).WithCertainty(0.5f).WithLabel("S").Build(world);
+        var firm = new PawnBuilder().WithIdeo(ownIdeo).WithCertainty(0.5f).WithLabel("F").Build(world);
+        var shakyTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(shaky);
+        var firmTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(firm);
+        shakyTracker.SetIssueStance(issue, ownRank, 2f);
+        firmTracker.SetIssueStance(issue, ownRank, 18f);
+
+        var doer = new ReadingOutcomeDoer_CertaintyChange { Quality = QualityCategory.Normal, ideo = bookIdeo };
+        for (var ii = 0; ii < 2000; ii++)
+        {
+            doer.OnReadingTick(shaky, 1f);
+            doer.OnReadingTick(firm, 1f);
+        }
+
+        var shakyStance = shakyTracker.IssueStances().First(stance => stance.issue == issue);
+        var firmStance = firmTracker.IssueStances().First(stance => stance.issue == issue);
+        var shakyMove = Mathf.Abs(shakyStance.rank - ownRank);
+        var firmMove = Mathf.Abs(firmStance.rank - ownRank);
+        Assert.True(firmMove > 0f, "Expected the firm reader to move at least a little.");
+        Assert.True(shakyMove > firmMove * 2f, $"Expected the shaky reader to move further in rank. shaky={shakyMove}, firm={firmMove}");
+        Assert.True(firmStance.strength < 18f, $"Expected the firm reader to lose conviction. strength={firmStance.strength}");
+    }
+
+    [Fact]
+    public void OnReadingTick_OwnIdeo_PullsHeterodoxStanceBackToOrthodoxy()
+    {
+        // A believer who drifted off the faith's rung reads their own scripture: the stance walks back toward the
+        // faith's rung instead of hardening where it drifted to.
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (issue, rungs) = SimIssues.Ladder("BookIssue", "Permissive", "Forbidding");
+        var ideo = new IdeoBuilder().WithName("Faith").AddPrecept(rungs[0]).Build();
+        world.AddIdeo(ideo);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithCertainty(0.5f).WithLabel("P").Build(world);
+
+        var heterodoxRank = PreceptLadder.RankOf(rungs[1]);
+        var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
+        tracker.SetIssueStance(issue, heterodoxRank, 4f);
+
+        var doer = new ReadingOutcomeDoer_CertaintyChange { Quality = QualityCategory.Normal, ideo = ideo };
+        for (var ii = 0; ii < 2000; ii++)
+        {
+            doer.OnReadingTick(pawn, 1f);
+        }
+
+        var rankAfter = tracker.IssueStances().First(stance => stance.issue == issue).rank;
+        var orthodoxRank = PreceptLadder.RankOf(rungs[0]);
+        Assert.True(Mathf.Abs(rankAfter - orthodoxRank) < Mathf.Abs(heterodoxRank - orthodoxRank),
+            $"Expected the stance to move toward the faith's rung. before={heterodoxRank}, after={rankAfter}");
+    }
+
+    [Fact]
+    public void PeakArcPerTick_IsGainTimesStrongestBookConviction()
+    {
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var (_, firstRungs) = SimIssues.Ladder("FirstIssue", "Permissive", "Forbidding");
+        var (_, secondRungs) = SimIssues.Ladder("SecondIssue", "Permissive", "Forbidding");
+        var ideo = new IdeoBuilder().WithName("Faith").AddPrecept(firstRungs[0]).AddPrecept(secondRungs[1]).Build();
+        world.AddIdeo(ideo);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithLabel("P").Build(world);
+
+        var doer = new ReadingOutcomeDoer_CertaintyChange { Quality = QualityCategory.Normal, ideo = ideo };
+        var peak = doer.IdeoStances().Max(entry => entry.strength);
+
+        Assert.Equal(doer.ReaderGain(pawn) * peak, doer.PeakArcPerTick(pawn), precision: 9);
     }
 
     [Fact]

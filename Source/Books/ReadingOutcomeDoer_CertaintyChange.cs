@@ -161,7 +161,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 
     public override string GetBenefitsString(Pawn? reader = null)
     {
-        return "EnhancedIdeology.BookReadingBenefit".Translate(ideo.Named("IDEO"), (CertaintyGain(reader) * TypicalReadingTicksPerQuadrum).ToString("0.##", CultureInfo.InvariantCulture));
+        return "EnhancedIdeology.BookReadingBenefit".Translate(ideo.Named("IDEO"), (PeakArcPerTick(reader) * TypicalReadingTicksPerQuadrum).ToString("0.##", CultureInfo.InvariantCulture));
     }
 
     public float CertaintyGain(Pawn? reader = null)
@@ -179,10 +179,11 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         return certaintyGain;
     }
 
-    // Per unit of certainty-fraction gain, how far a rival faith's book tugs the reader's stance toward each
-    // of its positions. Deliberately slow: belief migrates over a whole book (many ticks), not in one page,
-    // and certainty follows structurally via the setpoint rather than being poked here.
-    private const float SubversionPull = 1f;
+    // Gain per unit of vanilla reading factor (reading speed × room bonus × ticks) for this reader.
+    public float ReaderGain(Pawn reader) =>
+        CertaintyGain(reader) * (ReaderObjectsToLeather(reader) ? 0.5f : 1f);
+
+    private bool ReaderObjectsToLeather(Pawn reader) => VegetarianUtils.IsVegetarian(reader) && BookHasLeather();
 
     // Conviction a heterodox author argues the orthodox line with when their own stance has drifted off it -
     // they toe the party line in the book, but faintly, since they no longer believe it.
@@ -202,38 +203,46 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
             return;
         }
 
-        if (VegetarianUtils.IsVegetarian(reader) && BookHasLeather())
+        if (ReaderObjectsToLeather(reader))
         {
             var meatPrecept = reader.Ideo!.precepts.FirstOrDefault(p => p.def.defName.StartsWith("MeatEating_NonMeat", StringComparison.Ordinal));
             reader.needs?.mood?.thoughts.memories.TryGainMemory(EnhancedIdeologyDefOf.EB_ReadingLeatherboundBook, null, meatPrecept);
-            factor *= 0.5f;
         }
 
-        var gain = CertaintyGain(reader) * factor;
+        var gain = ReaderGain(reader) * factor;
         var comp = Current.Game.GetComponent<GameComponent_EnhancedIdeology>();
         var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(reader);
 
-        if (reader.Ideo == ideo)
-        {
-            // Reading your own faith's book hardens conviction on the issues it takes a stance on, by more where
-            // the book argues that issue with more conviction. A book arguing an issue at MaxConvictionStrength
-            // reproduces the old flat "certainty 1.0 == MaxConvictionStrength conviction" footing.
-            foreach (var precept in MoralPrecepts(ideo))
-            {
-                tracker.ShiftIssueStance(precept.issue!, 0f, 0f, gain * BookStrength(precept.issue!));
-            }
-
-            return;
-        }
-
-        // Reading a rival faith's book tugs your stances toward its positions, warming you to it and, as your
-        // fit with your own ideo erodes, letting the certainty setpoint pull your conviction down over time. A
-        // more fervently argued position tugs harder, normalized so MaxConvictionStrength matches the old pull.
+        // A book walks each issue along the conviction valley toward its rung, by an arc of gain x the book's
+        // conviction on that issue, as a debate or contemplation does. Your own faith's book pulls a drifted stance
+        // back to orthodoxy and then hardens it toward full conviction. A rival faith's book pulls toward its own
+        // position and conviction, so a firmly held stance gives up conviction before it moves in rank. This warms
+        // you to the rival faith and, as your fit with your own ideo erodes, lets the certainty setpoint pull your
+        // conviction down over time.
+        var ownFaith = reader.Ideo == ideo;
+        var stances = tracker.IssueStances().ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
+        var susceptibility = tracker.BrainwipeSusceptibilityMultiplier;
         foreach (var precept in MoralPrecepts(ideo))
         {
-            var pull = gain * SubversionPull * (BookStrength(precept.issue!) / ConvictionScale.MaxConvictionStrength);
-            tracker.ShiftIssueStance(precept.issue!, PreceptLadder.RankOf(precept), pull, 0f);
+            var issue = precept.issue!;
+            if (!stances.TryGetValue(issue, out var stance))
+                continue;
+
+            var bookRank = PreceptLadder.RankOf(precept);
+            var bookStrength = BookStrength(issue);
+            var targetStrength = ownFaith ? ConvictionScale.AbsoluteMaxConvictionStrength : bookStrength;
+            var (rank, strength) = ConvictionMath.ValleyStep(
+                stance.rank, stance.strength, bookRank, ConvictionMath.LadderExtremeAwayFrom(issue, bookRank),
+                targetStrength, gain * bookStrength * susceptibility);
+            tracker.SetIssueStance(issue, rank, strength);
         }
+    }
+
+    // Arc per tick, before reading speed and room bonus, on the issue the book argues most fervently.
+    public float PeakArcPerTick(Pawn? reader = null)
+    {
+        var peakStrength = IdeoStances().FirstOrDefault().strength;
+        return (reader == null ? CertaintyGain() : ReaderGain(reader)) * peakStrength;
     }
 
     private static IEnumerable<PreceptDef> MoralPrecepts(Ideo ideo) =>

@@ -2,6 +2,7 @@
 
 <LanguageData>
     <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} conviction shift/qd</EnhancedIdeology.BookReadingBenefit>
+    <EnhancedIdeology.BookReadingReport>{REPORT} (learning {IDEO}: {RATE}/hr)</EnhancedIdeology.BookReadingReport>
     <EnhancedIdeology.BookBeliefsHeader>Beliefs advocated</EnhancedIdeology.BookBeliefsHeader>
     <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
 

@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} 확신 변화/분기 |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} ({IDEO} 학습: {RATE}/시) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | 지지하는 신념 |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/분기 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | 종교 서적 파괴됨 |

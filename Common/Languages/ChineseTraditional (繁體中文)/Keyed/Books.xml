@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 信念變化/月</EnhancedIdeology.BookReadingBenefit>
+  <EnhancedIdeology.BookReadingReport>{REPORT}（學習{IDEO}：{RATE}/小時）</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>宣揚的信念</EnhancedIdeology.BookBeliefsHeader>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/月</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>宗教書籍已被摧毀</EnhancedIdeology.LetterReligiousBookDestroyedLabel>

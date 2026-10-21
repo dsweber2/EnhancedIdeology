@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} — {1} зміна переконань/кварт. |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} (вивчає {IDEO}: {RATE}/год) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Відстоювані переконання |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/кварт. |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Релігійну книгу знищено |

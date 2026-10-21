@@ -7,6 +7,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} inanç değişimi/çeyrek |
+| `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} ({IDEO} öğreniyor: {RATE}/sa) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Savunulan inançlar |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/çeyrek |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Dini kitap yok edildi |

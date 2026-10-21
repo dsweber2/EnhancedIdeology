@@ -181,7 +181,14 @@ The derivation and plots are in `analysis/conviction_valley.py`.
 - **Rituals** with the belief-reinforcement outcome move every participant toward orthodoxy and full conviction on a good result, and away on a bad one.
   The conversion ritual pulls the convertee's stances strongly toward the ritual's faith and checks conversion.
 - **Books** carry conviction like a pawn, taken from their author.
-  Reading a book of one's own faith hardens conviction; reading a rival's pulls stances toward it.
+  Reading walks each issue along the conviction valley toward the book's rung, by an arc per tick of the reading gain times the book's conviction on that issue.
+  A book of one's own faith pulls a drifted stance back to orthodoxy, then hardens it toward full conviction, as contemplation does.
+  A rival's book pulls toward its own position and conviction, like a debate, so a firmly held stance gives up conviction before it moves in rank.
+  The reading report and the book's tooltip show the arc on the issue the book argues most strongly.
+  Prisoners have no recreation need in vanilla, so they read the closest religious book they can reach in their cell, of any faith.
+  The less certain a prisoner is, the more they read: the share of the day is 1 − certainty, clamped to 25–90%.
+  Prisoners that have a recreation need from another mod read through that instead.
+  Slaves do not get this, since their books would be whatever is near their work.
 - **Contemplation** at a shrine, pew or reliquary reinforces the pawn's own stances.
 - **Precept moods** shift conviction on the issue they come from, a little every few hours.
   A mood is a vote on the faith's rung, not on the pawn's own: a good mood pulls toward the faith's rung, a bad mood pulls the stance away from the faith's rung toward a firm dissent (strength 15): an orthodox stance toward a random end of the ladder, a heterodox one further out on its own side.
