@@ -25,6 +25,14 @@ If Big and Small is not installed, all of the above is safely skipped.
 A xenophile ideo and a xenophobe ideo will structurally disagree on each of them, scaled by how far apart their stances are.
 The Xenophobia and Xenophilia memes are linked to personality traits, so colonist traits pull their beliefs toward or away from these memes.
 
+## [Ideology: More Precepts](https://steamcommunity.com/sharedfiles/filedetails/?id=2559533848)
+
+**Alcohol**, **barracks**, **compassion**, **drug possession**, **the elderly**, **newcomers**, **nomadism**, **superstition**, **taking from the downed**, **traps**, and **violence** are full moral axes.
+Ideos that take different stances on them will structurally disagree, scaled by how far apart the stances are.
+The extra **comfort** rungs join the base-game comfort ladder.
+
+Psychopaths are indifferent to violence and to leaving people to die, as their vanilla immunity to those thoughts implies.
+
 ## [Waymakers](https://steamcommunity.com/sharedfiles/filedetails/?id=3761384757)
 
 The `infrastructure` precept is treated as an ideo-specific obligation.

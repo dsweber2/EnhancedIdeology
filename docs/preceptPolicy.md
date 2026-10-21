@@ -44,6 +44,9 @@ Visible classic rungs (`Lovin_Free`, `SpouseCount_*_MaxOne`, `VVE_*_Allowed`) ar
 Invisible classic rungs (`Cannibalism_Classic`, `Execution_Classic`, `WCE2_Torture_Vanilla`) are the classic-mode fallback that no ideo can select, and stay out of the ladder.
 
 The case 2 specs live in `Source/Precepts/PreceptPolicy.DontCare.cs`.
+
+**Indifference** is the rank of a pawn with no objections on the issue, which indifferent trait links (`[Issue] (0)`) vote for.
+It is the neutral stance, except where `PreceptPolicy.Indifference` places it elsewhere: the default rungs object (`Scarification`, past `Minor`; `Blindness`, between `Respected` and `Horrible`), or the neutral placement counts vanilla thoughts outside the precepts (`Compassion`, past `Allies`).
 A spec that names a mod rung needs a fallback for when that mod is absent (`DontCareSpec.Or`), and must not use `Between(vanillaRung, modRung)`, which collapses onto the vanilla rung.
 
 Default-rung neutrals for the vanilla mandatory issues, for reference:
@@ -285,6 +288,26 @@ Rungs listed pro → anti; neutral follows the Don't-care placement rule.
 | GR_HumanoidHybrids | `Accepted` → `Disliked` → `Forbidden`                                                              | `Disliked`                           | as `GR_Failures`                                                                                                      |
 
 `GR_WorktableSpeeds` (implant or genomorpher speed) is a stat perk and stays PositiveOnly.
+
+**Moral, value axes from Ideology: More Precepts.**
+No rung has a default weight, so every neutral is a `DontCare` spec.
+Ladders are listed in rank order.
+
+| issue | ladder | neutral | why |
+| --- | --- | --- | --- |
+| Alcohol | `Essential` → `Wanted` → `Neutral` → `Disapproved` → `Prohibited` | `Neutral` | no effects; `Essential` and `Wanted` tie at order 0, so an order override fixes them |
+| Barracks | `Preferred` → `Despised` | between them | |
+| Compassion | `All` → `NonGuiltyEnemies` → `NonHostile` → `Allies` | between `NonHostile` and `Allies` | vanilla objects to banishing colonists (−6) and prisoners (−4) to die; indifference sits past `Allies` |
+| DrugPossession | `Prohibited` → `Alcohol` → `Social` | past `Social` | no restriction |
+| Elderly | `Abhorred` → `Disrespected` → `Respected` → `Revered` | between `Disrespected` and `Respected` | |
+| MP_NewcomerAttitude | `Fearful` → `Wary` → `Careful` → `Excited` | between `Careful` and `Excited` | every rung has a thought; the midpoint of the mildest pair |
+| Nomadism | `Essential` → `Important` → `Wanted` → `Disapproved` → `Horrible` | between `Wanted` and `Disapproved` | |
+| Superstition | `Contempt` → `Mild` → `Strong` | between `Contempt` and `Mild` | `Mild` already believes "there may be signs" |
+| TakingFromDowned | `Abhorrent` → `Horrible` → `Disapproved` | past `Disapproved` | restriction-only |
+| Traps | `Disapproved` → `Horrible` → `Prohibited` | before `Disapproved` | restriction-only |
+| Violence | `Pacifism` → `Avoided` → `Horrible` → `Disapproved` → `Defense` → `DefenseMild` → `Wanted` → `Essential` | between `DefenseMild` and `Wanted` | `Pacifism` and `Avoided` tie at order 30, so an order override puts the stricter first; the rest keep the author's order |
+
+The mod also extends `Comfort` with `Wanted` → `Important` → `Essential` (see "PositiveOnly review").
 
 **PositiveOnly:** `AM_CombatProwess`, `AM_HuntFocus`, and the mechanical perks (`*Speed`/`*Yield`/`*Rate`/`Cooldown`).
 The value-claim issues that used to sit here (`VME_Death`, `VME_Power`, `VME_Junk`, `AM_Armour`, `AM_Barracks`,

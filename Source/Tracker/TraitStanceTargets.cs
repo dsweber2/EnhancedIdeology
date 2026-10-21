@@ -54,6 +54,7 @@ internal sealed record TraitStanceTarget(
 // daily decay. Each trait link is a signed vote:
 // - a rung link (TraitIssueLinks.rung) votes +1 for its rung;
 // - an opposes link (TraitIssueLinks.opposes) votes -1 against the issue's valued rung;
+// - an indifferent link (TraitIssueLinks.indifferent) votes +1 for the issue's indifferent rank;
 // - a meme that lists the trait in agreeableTraits / disagreeableTraits votes +1 / -1 on each issue the meme
 //   links to, once per listing. A link through associatedMemes counts at AssociatedMemeWeight.
 // Each rung nets its support less its opposition. If a rung nets above zero, the target is the best-supported
@@ -142,6 +143,11 @@ internal static class TraitStanceTargets
                 && PreceptPolicy.ValuedRank(opposedIssue) is { } valuedRank)
             {
                 Vote(opposedIssue, -1f, [(valuedRank, 1f)], source + " opposes");
+            }
+            else if (link.indifferent != null
+                && DefDatabase<IssueDef>.GetNamedSilentFail(link.indifferent) is { } indifferentIssue)
+            {
+                Vote(indifferentIssue, 1f, [(PreceptLadder.IndifferentRank(indifferentIssue), 1f)], source + " indifferent");
             }
         }
 

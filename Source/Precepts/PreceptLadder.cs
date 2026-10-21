@@ -84,6 +84,11 @@ internal static class PreceptLadder
         return rank;
     }
 
+    // Rank of a pawn with no objections on the issue. It is the neutral stance unless PreceptPolicy.Indifference
+    // places it elsewhere. Indifferent trait links vote for it.
+    public static float IndifferentRank(IssueDef issue) =>
+        PreceptPolicy.Indifference.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : DontCareRank(issue);
+
     // When an ideo loses its rung on an issue with default rungs, vanilla adds one of them back, picked at random
     // by defaultSelectionWeight (Ideo.RemovePrecept). The neutral stance is the expected rank of that pick.
     private static float? DefaultRank(IssueDef issue)

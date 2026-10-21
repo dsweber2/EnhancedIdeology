@@ -115,6 +115,9 @@ internal static partial class PreceptPolicy
         "HAR_EatingAliens", "HAR_AlienDating", "HAR_AlienRaces", "HAR_AlienSlavery",
         // Vanilla Genetics Expanded: acceptance of failed and humanoid genetic experiments.
         "GR_Failures", "GR_HumanoidHybrids",
+        // Ideology: More Precepts.
+        "Alcohol", "Barracks", "Compassion", "DrugPossession", "Elderly", "MP_NewcomerAttitude", "Nomadism",
+        "Superstition", "TakingFromDowned", "Traps", "Violence",
     ];
     // UniversalPositive issue -> the rung that values it most. A trait that opposes the issue pulls away from it.
     private static readonly Dictionary<string, string> UniversalPositiveValuedRung = new()
@@ -289,6 +292,10 @@ internal static partial class PreceptPolicy
         ],
         // VME_Sweets_Craved and VME_Sweets_Impartial tie at displayOrderInIssue=0.
         ["VME_Sweets"] = ["VME_Sweets_Craved", "VME_Sweets_Impartial"],
+        // Ideology: More Precepts. Essential and Wanted tie at displayOrderInIssue=0; Pacifism and Avoided tie at
+        // 30. The rungs not listed keep their display order after these.
+        ["Alcohol"] = ["Alcohol_Essential", "Alcohol_Wanted"],
+        ["Violence"] = ["Violence_Pacifism", "Violence_Avoided"],
         // Vanilla Genetics Expanded sets no displayOrderInIssue.
         ["GR_Failures"] = ["GR_Failures_Accepted", "GR_Failures_Disliked", "GR_Failures_Shameful"],
         ["GR_HumanoidHybrids"] = ["GR_HumanoidHybrids_Accepted", "GR_HumanoidHybrids_Disliked", "GR_HumanoidHybrids_Forbidden"],

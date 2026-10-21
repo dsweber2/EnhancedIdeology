@@ -378,12 +378,14 @@ internal sealed class OpinionCard
     }
 
     // A tied rung (PreceptPolicy.TiedRungs) shares its anchor's rank, so when the pawn's own faith holds a rung
-    // at this rank, its label is used instead of the anchor's. Don't-care between or past the rungs has no rung.
+    // at this rank, its label is used instead of the anchor's. Don't-care and indifference between or past the
+    // rungs have no rung.
     private static string RungLabel(IssueDef issue, float rank, Ideo ownIdeo)
     {
         var rungs = PreceptLadder.Rungs(issue);
-        var dontCare = PreceptLadder.DontCareRank(issue);
-        if (rank < 0f || rungs.Count == 0 || (rank == dontCare && dontCare != Mathf.Round(dontCare)))
+        var offRung = rank != Mathf.Round(rank)
+            && (rank == PreceptLadder.DontCareRank(issue) || rank == PreceptLadder.IndifferentRank(issue));
+        if (rank < 0f || rungs.Count == 0 || offRung)
         {
             return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
         }

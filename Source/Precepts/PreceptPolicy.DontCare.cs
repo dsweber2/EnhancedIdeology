@@ -158,5 +158,31 @@ internal static partial class PreceptPolicy
         ["NikolaisIdeology_Beauty"] = DontCareSpec.Between("NikolaisIdeology_Beauty_Central", "NikolaisIdeology_Beauty_Unimportant"),
         // Humanoid Alien Races: Acceptable has no effects.
         ["HAR_AlienDating"] = DontCareSpec.At("HAR_AlienDating_Acceptable"),
+        // Ideology: More Precepts.
+        ["Alcohol"] = DontCareSpec.At("Alcohol_Neutral"),
+        ["Barracks"] = DontCareSpec.Between("Barracks_Preferred", "Barracks_Despised"),
+        // Vanilla objects to banishing colonists (-6) and prisoners (-4) to die, so neutral is not past Allies.
+        ["Compassion"] = DontCareSpec.Between("Compassion_NonHostile", "Compassion_Allies"),
+        ["DrugPossession"] = DontCareSpec.After("DrugPossession_Social"),
+        ["Elderly"] = DontCareSpec.Between("Elderly_Disrespected", "Elderly_Respected"),
+        ["MP_NewcomerAttitude"] = DontCareSpec.Between("MP_NewcomerAttitude_Careful", "MP_NewcomerAttitude_Excited"),
+        ["Nomadism"] = DontCareSpec.Between("Nomadism_Wanted", "Nomadism_Disapproved"),
+        ["Superstition"] = DontCareSpec.Between("Superstition_Contempt", "Superstition_Mild"),
+        ["TakingFromDowned"] = DontCareSpec.After("TakingFromDowned_Disapproved"),
+        ["Traps"] = DontCareSpec.Before("Traps_Disapproved"),
+        ["Violence"] = DontCareSpec.Between("Violence_DefenseMild", "Violence_Wanted"),
+    };
+
+    // Rank of indifference where it is not the neutral stance, read by PreceptLadder.IndifferentRank. Neutral
+    // objects when the default rungs object, or when the neutral placement counts vanilla thoughts that sit outside
+    // the precepts.
+    public static readonly Dictionary<string, DontCareSpec> Indifference = new()
+    {
+        // The default rung is Horrible. Vanilla has no scar thoughts.
+        ["Scarification"] = DontCareSpec.After("Scarification_Minor"),
+        // The default rung is Blinding_Horrible.
+        ["Blindness"] = DontCareSpec.Between("Blindness_Respected", "Blinding_Horrible"),
+        // Neutral sits before Allies because vanilla objects to banishing colonists and prisoners to die.
+        ["Compassion"] = DontCareSpec.After("Compassion_Allies"),
     };
 }

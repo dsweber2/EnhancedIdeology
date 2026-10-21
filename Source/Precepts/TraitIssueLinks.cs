@@ -1,7 +1,7 @@
 namespace EnhancedIdeology;
 
-// Links from a trait straight to one rung of an issue, or against a universally-valued issue such as Charity
-// (docs/trait-meme-affinity.md "Additional meme affinity"). XML patches add it to TraitDefs.
+// Links from a trait straight to one rung of an issue, to indifference on an issue, or against a universally-valued
+// issue such as Charity (docs/trait-meme-affinity.md "Additional meme affinity"). XML patches add it to TraitDefs.
 public class TraitIssueLinks : DefModExtension
 {
     public List<TraitIssueLink> links = [];
@@ -32,6 +32,8 @@ public class TraitIssueLink
     public string? rung;
     // defName of a UniversalPositive issue the trait opposes.
     public string? opposes;
+    // defName of an issue the trait is indifferent to (PreceptLadder.IndifferentRank).
+    public string? indifferent;
 
     internal PreceptDef? Rung => rung == null ? null : DefDatabase<PreceptDef>.GetNamedSilentFail(rung);
 }

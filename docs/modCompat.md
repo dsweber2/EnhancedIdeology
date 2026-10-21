@@ -1553,7 +1553,7 @@ sources: VIE-M&S
 
 ## Issues from additional third-party mods
 
-These issues appear only when the listed mod is loaded. Source abbreviations: **MortEnv** = `MortStrudel.MortIdeologyEnv`, **MortPolitical** = `MortStrudel.MortIdeology`, **MortSciFai** = `MortStrudel.MortIdeologySciFai`, **Menagerist** = `MortStrudel.MortIdeologySpecWork`, **QuestingMeme** = `SirMashedPotato.QuestingMeme`, **Waymakers** = `Mx.Waymakers`, **WCE2** = `Mersid.WCE2Updated.Core`, **HAR** = `erdelf.HumanoidAlienRaces`, **VGE** = `VanillaExpanded.VGeneticsE`.
+These issues appear only when the listed mod is loaded. Source abbreviations: **MortEnv** = `MortStrudel.MortIdeologyEnv`, **MortPolitical** = `MortStrudel.MortIdeology`, **MortSciFai** = `MortStrudel.MortIdeologySciFai`, **Menagerist** = `MortStrudel.MortIdeologySpecWork`, **QuestingMeme** = `SirMashedPotato.QuestingMeme`, **Waymakers** = `Mx.Waymakers`, **WCE2** = `Mersid.WCE2Updated.Core`, **HAR** = `erdelf.HumanoidAlienRaces`, **VGE** = `VanillaExpanded.VGeneticsE`, **MorePrecepts** = `llunak.MorePrecepts`.
 
 ### Mort's Ideologies: Conservationist & Polluter (`MortStrudel.MortIdeologyEnv`)
 
@@ -1862,3 +1862,147 @@ Worktable speed perks, no belief axis.
 |--:|--:|---|---|---|--:|
 | 0 | — | VGE | GR_WorktableSpeeds_Implants | implants | — |
 | 1 | — | VGE | GR_WorktableSpeeds_Genomorpher | genomorpher | — |
+
+### Ideology: More Precepts (`llunak.MorePrecepts`)
+
+No 1.6 or 1.7 folder; the ladders below are from 1.5.
+No rung has a default weight, so every issue is optional and its neutral is a `DontCare` spec.
+The mod also extends `Comfort`; see that entry in the stacked section above.
+
+#### `Alcohol` — single-source, optional, **Moral**, OrderOverride applied
+sources: MorePrecepts
+
+`Essential` and `Wanted` tie at `displayOrderInIssue=0`.
+
+Semantic axis: Essential → Wanted → Neutral (neutral) → Disapproved → Prohibited
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 0 | MorePrecepts | Alcohol_Wanted | wanted | — |
+| 1 | 0 | MorePrecepts | Alcohol_Essential | essential | — |
+| 2 | 10 | MorePrecepts | Alcohol_Neutral | neutral | — |
+| 3 | 20 | MorePrecepts | Alcohol_Disapproved | disapproved | — |
+| 4 | 30 | MorePrecepts | Alcohol_Prohibited | prohibited | — |
+
+#### `Barracks` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: Preferred → (neutral) → Despised
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 20 | MorePrecepts | Barracks_Preferred | preferred | — |
+| 1 | 30 | MorePrecepts | Barracks_Despised | despised | — |
+
+#### `Compassion` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Indifference (`[Compassion] (0)`) sits past `Allies`; vanilla's banishment thoughts put neutral before it.
+
+Semantic axis: All → NonGuiltyEnemies → NonHostile → (neutral) → Allies → (indifference)
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 20 | MorePrecepts | Compassion_All | all | — |
+| 1 | 30 | MorePrecepts | Compassion_NonGuiltyEnemies | except guilty enemies | — |
+| 2 | 40 | MorePrecepts | Compassion_NonHostile | not hostile | — |
+| 3 | 50 | MorePrecepts | Compassion_Allies | allies | — |
+
+#### `DrugPossession` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: Prohibited → Alcohol → Social → (neutral)
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 10 | MorePrecepts | DrugPossession_Prohibited | prohibited | — |
+| 1 | 20 | MorePrecepts | DrugPossession_Alcohol | alcohol | — |
+| 2 | 30 | MorePrecepts | DrugPossession_Social | social | — |
+
+#### `Elderly` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: Abhorred → Disrespected → (neutral) → Respected → Revered
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 10 | MorePrecepts | Elderly_Abhorred | abhorred | — |
+| 1 | 20 | MorePrecepts | Elderly_Disrespected | disrespected | — |
+| 2 | 50 | MorePrecepts | Elderly_Respected | respected | — |
+| 3 | 60 | MorePrecepts | Elderly_Revered | revered | — |
+
+#### `MP_NewcomerAttitude` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: Fearful → Wary → Careful → (neutral) → Excited
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 30 | MorePrecepts | MP_NewcomerAttitude_Fearful | fearful | — |
+| 1 | 40 | MorePrecepts | MP_NewcomerAttitude_Wary | wary | — |
+| 2 | 50 | MorePrecepts | MP_NewcomerAttitude_Careful | careful | — |
+| 3 | 60 | MorePrecepts | MP_NewcomerAttitude_Excited | excited | — |
+
+#### `Nomadism` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: Essential → Important → Wanted → (neutral) → Disapproved → Horrible
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 30 | MorePrecepts | Nomadism_Essential | essential | — |
+| 1 | 40 | MorePrecepts | Nomadism_Important | important | — |
+| 2 | 50 | MorePrecepts | Nomadism_Wanted | wanted | — |
+| 3 | 60 | MorePrecepts | Nomadism_Disapproved | disapproved | — |
+| 4 | 70 | MorePrecepts | Nomadism_Horrible | horrible | — |
+
+#### `Superstition` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: Contempt → (neutral) → Mild → Strong
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 10 | MorePrecepts | Superstition_Contempt | contempt | — |
+| 1 | 30 | MorePrecepts | Superstition_Mild | mild | — |
+| 2 | 50 | MorePrecepts | Superstition_Strong | strong | — |
+
+#### `TakingFromDowned` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: Abhorrent → Horrible → Disapproved → (neutral)
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 20 | MorePrecepts | TakingFromDowned_Abhorrent | abhorrent | — |
+| 1 | 30 | MorePrecepts | TakingFromDowned_Horrible | horrible | — |
+| 2 | 40 | MorePrecepts | TakingFromDowned_Disapproved | disapproved | — |
+
+#### `Traps` — single-source, optional, **Moral**
+sources: MorePrecepts
+
+Semantic axis: (neutral) → Disapproved → Horrible → Prohibited
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 0 | MorePrecepts | Traps_Disapproved | disapproved | — |
+| 1 | 10 | MorePrecepts | Traps_Horrible | horrible | — |
+| 2 | 20 | MorePrecepts | Traps_Prohibited | prohibited | — |
+
+#### `Violence` — single-source, optional, **Moral**, OrderOverride applied
+sources: MorePrecepts
+
+`Pacifism` and `Avoided` tie at `displayOrderInIssue=30`.
+
+Semantic axis: Pacifism → Avoided → Horrible → Disapproved → Defense → DefenseMild → (neutral) → Wanted → Essential
+
+| rank | order | source | defName | label | dsw |
+|--:|--:|---|---|---|--:|
+| 0 | 30 | MorePrecepts | Violence_Pacifism | pacifism | — |
+| 1 | 30 | MorePrecepts | Violence_Avoided | avoided | — |
+| 2 | 40 | MorePrecepts | Violence_Horrible | horrible | — |
+| 3 | 50 | MorePrecepts | Violence_Disapproved | disapproved | — |
+| 4 | 55 | MorePrecepts | Violence_Defense | defense | — |
+| 5 | 57 | MorePrecepts | Violence_DefenseMild | defense mild | — |
+| 6 | 60 | MorePrecepts | Violence_Wanted | wanted | — |
+| 7 | 70 | MorePrecepts | Violence_Essential | essential | — |

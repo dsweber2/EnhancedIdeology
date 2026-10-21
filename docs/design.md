@@ -69,7 +69,7 @@ So a neglected pawn drifts back toward what their personality implies, not towar
 
 Each link in [trait-meme-affinity.md](trait-meme-affinity.md) "Additional meme affinity", and each trait already listed in a meme def, is a vote on an issue (`Source/Tracker/TraitStanceTargets.cs`), whether or not the pawn's faith holds the meme:
 
-- a rung link votes +1 for its rung, and an opposes link votes −1 against the issue's most-valued rung (`Charity_Essential`);
+- a rung link votes +1 for its rung, an indifferent link votes +1 for the issue's indifferent rank (`PreceptLadder.IndifferentRank`, which can sit between rungs), and an opposes link votes −1 against the issue's most-valued rung (`Charity_Essential`);
 - a meme votes +1 per `agreeableTraits` listing and −1 per `disagreeableTraits` listing, on every rung it links to through `requiredMemes`, `requireOne` or `selectOneOrNone`; a link through `associatedMemes` counts half.
 
 Each rung nets its support less its opposition.

@@ -360,6 +360,19 @@
 						</match>
 					</nomatch>
 				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/TraitDef[defName="BS_Gentle"]</xpath>
+					<value>
+						<li Class="EnhancedIdeology.TraitIssueLinks">
+							<links>
+								<li><rung>WCE2_Torture_Horrible</rung></li>
+								<li><rung>Execution_Horrible</rung></li>
+								<li><rung>OrganUse_HorribleNoSell</rung></li>
+								<li><rung>VME_Raiding_Abhorrent</rung></li>
+							</links>
+						</li>
+					</value>
+				</li>
 			</operations>
 		</match>
 	</Operation>
@@ -898,6 +911,16 @@
 						</match>
 					</nomatch>
 				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/TraitDef[defName="Cannibal"]</xpath>
+					<value>
+						<li Class="EnhancedIdeology.TraitIssueLinks">
+							<links>
+								<li><rung>HAR_EatingAliens_Acceptable</rung></li>
+							</links>
+						</li>
+					</value>
+				</li>
 			</operations>
 		</match>
 	</Operation>
@@ -1271,6 +1294,82 @@
 						<li Class="EnhancedIdeology.TraitIssueLinks">
 							<links>
 								<li><opposes>Charity</opposes></li>
+							</links>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- HAR_Xenophobia -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="HAR_Xenophobia"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]/agreeableTraits</xpath>
+						<value><HAR_Xenophobia>-1</HAR_Xenophobia></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]</xpath>
+							<value><agreeableTraits><HAR_Xenophobia>-1</HAR_Xenophobia></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]/disagreeableTraits</xpath>
+						<value><HAR_Xenophobia>1</HAR_Xenophobia></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="HAR_Xenophilia"]</xpath>
+							<value><disagreeableTraits><HAR_Xenophobia>1</HAR_Xenophobia></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]/agreeableTraits</xpath>
+						<value><HAR_Xenophobia>1</HAR_Xenophobia></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]</xpath>
+							<value><agreeableTraits><HAR_Xenophobia>1</HAR_Xenophobia></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]/disagreeableTraits</xpath>
+						<value><HAR_Xenophobia>-1</HAR_Xenophobia></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="HAR_Xenophobia"]</xpath>
+							<value><disagreeableTraits><HAR_Xenophobia>-1</HAR_Xenophobia></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/TraitDef[defName="HAR_Xenophobia"]</xpath>
+					<value>
+						<li Class="EnhancedIdeology.TraitIssueLinks">
+							<links>
+								<li><degree>1</degree><rung>HAR_AlienRaces_Horrible</rung></li>
+								<li><degree>-1</degree><rung>HAR_AlienRaces_Respected</rung></li>
 							</links>
 						</li>
 					</value>
@@ -2470,6 +2569,20 @@
 						</match>
 					</nomatch>
 				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="VME_Aristocratic"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="VME_Aristocratic"]/agreeableTraits</xpath>
+						<value><li>HVT_Prideful</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="VME_Aristocratic"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="VME_Aristocratic"]</xpath>
+							<value><agreeableTraits><li>HVT_Prideful</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
 			</operations>
 		</match>
 	</Operation>
@@ -2654,6 +2767,30 @@
 							<value><disagreeableTraits><li>HVT_Sadist</li></disagreeableTraits></value>
 						</match>
 					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="Raider"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="Raider"]/agreeableTraits</xpath>
+						<value><li>HVT_Sadist</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="Raider"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="Raider"]</xpath>
+							<value><agreeableTraits><li>HVT_Sadist</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/TraitDef[defName="HVT_Sadist"]</xpath>
+					<value>
+						<li Class="EnhancedIdeology.TraitIssueLinks">
+							<links>
+								<li><rung>WCE2_Torture_AlwaysRespected</rung></li>
+							</links>
+						</li>
+					</value>
 				</li>
 			</operations>
 		</match>
@@ -3251,6 +3388,19 @@
 						</match>
 					</nomatch>
 				</li>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/TraitDef[defName="Kind"]</xpath>
+					<value>
+						<li Class="EnhancedIdeology.TraitIssueLinks">
+							<links>
+								<li><rung>WCE2_Torture_Horrible</rung></li>
+								<li><rung>Execution_Horrible</rung></li>
+								<li><rung>OrganUse_HorribleNoSell</rung></li>
+								<li><rung>VME_Raiding_Abhorrent</rung></li>
+							</links>
+						</li>
+					</value>
+				</li>
 			</operations>
 		</match>
 	</Operation>
@@ -3706,26 +3856,25 @@
 						</match>
 					</nomatch>
 				</li>
-				<li Class="PatchOperationConditional">
-					<xpath>/Defs/MemeDef[defName="Raider"]/agreeableTraits</xpath>
-					<match Class="PatchOperationAdd">
-						<xpath>/Defs/MemeDef[defName="Raider"]/agreeableTraits</xpath>
-						<value><li>Psychopath</li></value>
-					</match>
-					<nomatch Class="PatchOperationConditional">
-						<xpath>/Defs/MemeDef[defName="Raider"]</xpath>
-						<match Class="PatchOperationAdd">
-							<xpath>/Defs/MemeDef[defName="Raider"]</xpath>
-							<value><agreeableTraits><li>Psychopath</li></agreeableTraits></value>
-						</match>
-					</nomatch>
-				</li>
 				<li Class="PatchOperationAddModExtension">
 					<xpath>/Defs/TraitDef[defName="Psychopath"]</xpath>
 					<value>
 						<li Class="EnhancedIdeology.TraitIssueLinks">
 							<links>
+								<li><rung>WCE2_Torture_DontCare</rung></li>
+								<li><rung>Execution_DontCare</rung></li>
+								<li><rung>OrganUse_Acceptable</rung></li>
+								<li><rung>Cannibalism_Acceptable</rung></li>
+								<li><rung>Corpses_DontCare</rung></li>
+								<li><rung>HAR_EatingAliens_Acceptable</rung></li>
+								<li><rung>Slavery_Acceptable</rung></li>
 								<li><opposes>Charity</opposes></li>
+								<li><indifferent>KillingInnocentAnimals</indifferent></li>
+								<li><indifferent>GrowthVat</indifferent></li>
+								<li><indifferent>Scarification</indifferent></li>
+								<li><indifferent>Blindness</indifferent></li>
+								<li><indifferent>Violence</indifferent></li>
+								<li><indifferent>Compassion</indifferent></li>
 							</links>
 						</li>
 					</value>
