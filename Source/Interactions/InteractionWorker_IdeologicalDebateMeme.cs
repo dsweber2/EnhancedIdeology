@@ -10,9 +10,6 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
     // Per-precept pull is weaker than a focused precept debate since multiple precepts are affected at once.
     private const float MemeDebatePullMultiplier = 0.5f;
 
-    // Brainwiped pawns are nearly incapable of holding their own in a debate.
-    private const float BrainwipeDebateRollFactor = 0.15f;
-
     internal static readonly SimpleCurve CompatibilityFactorCurve =
     [
         new CurvePoint(-1.5f, 0.1f),
@@ -61,6 +58,19 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Initiator is incapable of social. Returning 0.");
             return 0f;
         }
+        if (recipient.Ideo == null)
+        {
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Recipient has no ideo. Returning 0.");
+            return 0f;
+        }
+        var pawnTracker = Current.Game.GetComponent<GameComponent_EnhancedIdeology>().PawnTracker;
+        if (DebatableMemes(initiator.Ideo, recipient.Ideo,
+                pawnTracker.EnsurePawnHasIdeoTracker(initiator),
+                pawnTracker.EnsurePawnHasIdeoTracker(recipient)).Count == 0)
+        {
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "No debatable meme. Returning 0.");
+            return 0f;
+        }
         var spreadFactor = initiator.GetStatValue(StatDefOf.SocialIdeoSpreadFrequencyFactor);
         var compatibility = initiator.relations.CompatibilityWith(recipient);
         var curveEval = CompatibilityFactorCurve.Evaluate(compatibility);
@@ -94,15 +104,18 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         if (initiatorIdeo == null || recipientIdeo == null) return;
 
         this.initiatorIdeo = initiatorIdeo;
-        topic = initiatorIdeo.memes.Union(recipientIdeo.memes).RandomElement();
+        var debatableMemes = DebatableMemes(initiatorIdeo, recipientIdeo, initiatorTracker, recipientTracker);
+        topic = debatableMemes.Count == 0 ? null : debatableMemes.RandomElement();
         logTopic = topic;
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate topic selected: {topic}");
+        if (topic == null)
+            return;
 
-        var initiatorRoll = GetDebateRoll(initiator);
-        var recipientRoll = GetDebateRoll(recipient);
+        var initiatorRoll = InteractionWorker_IdeologicalDebatePrecept.GetDebateRoll(initiator);
+        var recipientRoll = InteractionWorker_IdeologicalDebatePrecept.GetDebateRoll(recipient);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate rolls: initiator={initiatorRoll}, recipient={recipientRoll}");
 
-        if (Math.Abs(initiatorRoll - recipientRoll) <= 0.1f)
+        if (Math.Abs(initiatorRoll - recipientRoll) <= InteractionWorker_IdeologicalDebatePrecept.DrawThreshold(initiator, recipient))
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
             if (InteractionWorker_IdeologicalDebatePrecept.HandleDraw(
@@ -154,17 +167,18 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             initiatorConverted: lastWinner == initiator && letterDef == LetterDefOf.PositiveEvent);
     }
 
-    private static float GetDebateRoll(Pawn pawn)
+    // The memes either faith holds that touch at least one debatable issue the two pawns' personal stances
+    // disagree on. Co-believers with matching stances have none, so they never debate memes.
+    private static List<MemeDef> DebatableMemes(
+        Ideo initiatorIdeo, Ideo recipientIdeo, IdeoTrackerData initiatorTracker, IdeoTrackerData recipientTracker)
     {
-        var rand = Rand.Value;
-        var convPower = pawn.GetStatValue(StatDefOf.ConversionPower);
-        var certaintyLoss = pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
-        var socialImpact = pawn.GetStatValue(StatDefOf.SocialImpact);
-        var certainty = pawn.ideo.Certainty;
-        var result = rand * convPower / certaintyLoss * socialImpact * (1f + ((certainty - 0.6f) * 0.5f));
-        if (IdeoTrackerData.HasBrainwipeRecovery(pawn)) result *= BrainwipeDebateRollFactor;
-        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"GetDebateRoll: pawn={pawn}, rand={rand}, convPower={convPower}, certaintyLoss={certaintyLoss}, socialImpact={socialImpact}, certainty={certainty}, result={result}");
-        return result;
+        var initiatorStances = InteractionWorker_IdeologicalDebatePrecept.StanceMap(initiatorTracker);
+        var recipientStances = InteractionWorker_IdeologicalDebatePrecept.StanceMap(recipientTracker);
+        return [.. initiatorIdeo.memes.Union(recipientIdeo.memes)
+            .Where(meme => MemePreceptsFor(initiatorIdeo, meme).Concat(MemePreceptsFor(recipientIdeo, meme))
+                .Any(def => initiatorStances.TryGetValue(def.issue!, out var initiatorStance)
+                    && recipientStances.TryGetValue(def.issue!, out var recipientStance)
+                    && InteractionWorker_IdeologicalDebatePrecept.Disagree(initiatorStance, recipientStance)))];
     }
 
     // Only issues that feed structural opinion are moved by a meme debate (PreceptPolicy.IsDebatable).

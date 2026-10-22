@@ -38,8 +38,13 @@ public class ProselytizerAftermathTests : SeededTest
 
         var world = new SimWorld();
         world.Initialize();
-        var proselytizerIdeo = new IdeoBuilder().WithName("Preaching").AddMeme(proselytizer).Build();
-        var otherIdeo = new IdeoBuilder().WithName("Quiet").AddMeme(new MemeBuilder().WithName("Quietude").Build()).Build();
+        // A meme debate needs an issue the two faiths disagree on.
+        var (_, rungs) = SimIssues.Ladder("PreachedIssue", "P0", "P1");
+        rungs[0].associatedMemes.Add(proselytizer);
+        rungs[1].associatedMemes.Add(proselytizer);
+        var proselytizerIdeo = new IdeoBuilder().WithName("Preaching").AddMeme(proselytizer).AddPrecept(rungs[0]).Build();
+        var otherIdeo = new IdeoBuilder().WithName("Quiet").AddMeme(new MemeBuilder().WithName("Quietude").Build())
+            .AddPrecept(rungs[1]).Build();
         world.AddIdeo(proselytizerIdeo);
         world.AddIdeo(otherIdeo);
         return (world, proselytizerIdeo, otherIdeo);

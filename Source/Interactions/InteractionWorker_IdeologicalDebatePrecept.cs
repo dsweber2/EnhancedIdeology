@@ -161,10 +161,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var recipientRoll = GetDebateRoll(recipient);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate rolls: initiator={initiatorRoll}, recipient={recipientRoll}");
 
-        var drawThreshold = initiator.MentalState is MentalState_Iconoclast || recipient.MentalState is MentalState_Iconoclast
-            ? IconoclastDrawThreshold
-            : DebateDrawThreshold;
-        if (Math.Abs(initiatorRoll - recipientRoll) <= drawThreshold)
+        if (Math.Abs(initiatorRoll - recipientRoll) <= DrawThreshold(initiator, recipient))
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
             if (HandleDraw(interaction, initiator, recipient, initiatorTracker, recipientTracker, [topic], [topic]))
@@ -258,7 +255,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
     // Conviction is per pawn, not per precept, so each pawn's own stance on every issue is what gets compared.
     // Two same-faith pawns share every precept; what they can argue about is how firmly they each hold it.
-    private static Dictionary<IssueDef, (float rank, float strength)> StanceMap(IdeoTrackerData tracker) =>
+    internal static Dictionary<IssueDef, (float rank, float strength)> StanceMap(IdeoTrackerData tracker) =>
         tracker.IssueStances().ToDictionary(stance => stance.issue, stance => (stance.rank, stance.strength));
 
     // The issues the two pawns' personal stances Disagree on, as the initiator's precept for each issue.
@@ -290,7 +287,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
 
     // A topic is worth debating when the two pawns' personal stances differ: either a different rung (cross-faith,
     // or one has drifted) or the same rung held with meaningfully different conviction (same faith, different zeal).
-    private static bool Disagree((float rank, float strength) a, (float rank, float strength) b) =>
+    internal static bool Disagree((float rank, float strength) a, (float rank, float strength) b) =>
         Mathf.Abs(a.rank - b.rank) > DebateRankEpsilon
         || Mathf.Abs(a.strength - b.strength) > DebateStrengthGap;
 
@@ -314,6 +311,12 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"GetDebateRoll: pawn={pawn}, mean={DebateRollMean(pawn)}, iconoclastBonus={iconoclastBonus}, result={result}");
         return result;
     }
+
+    // Roll gap at or below which a debate is a draw. An iconoclast on either side widens the band.
+    internal static float DrawThreshold(Pawn initiator, Pawn recipient) =>
+        initiator.MentalState is MentalState_Iconoclast || recipient.MentalState is MentalState_Iconoclast
+            ? IconoclastDrawThreshold
+            : DebateDrawThreshold;
 
     // Probability the initiator wins the roll outright (draw excluded): P(initiatorRoll - recipientRoll > draw
     // threshold). The two rolls are independent Gaussians, so their difference is Gaussian with the summed

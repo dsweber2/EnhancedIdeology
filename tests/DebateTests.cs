@@ -463,6 +463,64 @@ public class DebateTests : SeededTest
         Assert.True(StanceRank(recipientTracker, issue) < before);
     }
 
+    [Fact]
+    public void DebateMeme_SameFaithMatchedConviction_IsNeverPickedAndMovesNothing()
+    {
+        var (_, initiator, recipient, issue, recipientTracker) = SameFaithMemePair(convictionGap: 0f);
+        var (_, rankBefore, strengthBefore) = recipientTracker.IssueStances().First(s => s.issue == issue);
+
+        var worker = new InteractionWorker_IdeologicalDebateMeme();
+        var weight = worker.RandomSelectionWeight(initiator, recipient);
+        worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        Assert.Equal(0f, weight);
+        Assert.Null(worker.logTopic);
+        var (_, rankAfter, strengthAfter) = recipientTracker.IssueStances().First(s => s.issue == issue);
+        Assert.Equal(rankBefore, rankAfter);
+        Assert.Equal(strengthBefore, strengthAfter);
+    }
+
+    [Fact]
+    public void DebateMeme_SameFaithConvictionGap_IsDebatable()
+    {
+        var (_, initiator, recipient, _, _) = SameFaithMemePair(convictionGap: 20f);
+
+        var worker = new InteractionWorker_IdeologicalDebateMeme();
+        var weight = worker.RandomSelectionWeight(initiator, recipient);
+        worker.Interacted(initiator, recipient, [], out _, out _, out _, out _);
+
+        Assert.True(weight > 0f);
+        Assert.NotNull(worker.logTopic);
+    }
+
+    // Two pawns of one faith holding the same rung on one meme-linked Moral issue. The recipient's conviction
+    // is set to the initiator's plus convictionGap.
+    private static (SimWorld world, Pawn initiator, Pawn recipient, IssueDef issue, IdeoTrackerData recipientTracker)
+        SameFaithMemePair(float convictionGap)
+    {
+        var world = new SimWorld();
+        world.Initialize();
+        Rand.SetSeed(1);
+
+        var meme = new MemeBuilder().WithName("SharedMeme").Build();
+        var (issue, rungs) = SimIssues.Ladder("SharedMemeIssue", "R0", "R1");
+        rungs[0].associatedMemes.Add(meme);
+        rungs[1].associatedMemes.Add(meme);
+        var ideo = new IdeoBuilder().WithName("SharedMemeIdeo").AddMeme(meme).AddPrecept(rungs[0]).Build();
+        world.AddIdeo(ideo);
+
+        var initiator = new PawnBuilder().WithIdeo(ideo).WithLabel("Init").Build(world);
+        var recipient = new PawnBuilder().WithIdeo(ideo).WithLabel("Recip").Build(world);
+
+        var initiatorStrength = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(initiator)
+            .IssueStances().First(s => s.issue == issue).strength;
+        var recipientTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(recipient);
+        var recipientStrength = recipientTracker.IssueStances().First(s => s.issue == issue).strength;
+        recipientTracker.ShiftIssueStance(issue, 0f, 0f, initiatorStrength + convictionGap - recipientStrength);
+
+        return (world, initiator, recipient, issue, recipientTracker);
+    }
+
     // --- Iconoclast topic-selection tests ---
 
     [Fact]

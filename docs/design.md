@@ -170,6 +170,8 @@ The derivation and plots are in `analysis/conviction_valley.py`.
 - **Debates** between pawns pick an issue they disagree on, from the issues the initiator's ideo takes a position on.
   Wider disagreements come up more often: each issue is weighted by its rung gap (as a fraction of the ladder, scaled to 20) plus its conviction gap.
   Both pawns argue from their personal stance, not their ideo's position, so a decisive win pulls the loser toward the winner's own belief.
+  A meme debate argues every debatable issue a meme touches at once, at half the pull.
+  It needs at least one of those issues in dispute, so co-believers with matching stances never debate memes, and it uses the same roll and draw band as an issue debate.
   Pawns that can see and hear a decisive debate are pulled toward the winner too, at a quarter of the normal pull.
   A winner from a Proselytizer faith doubles that onlooker pull, and onlookers with a high certainty loss factor move further.
   Pawns whose faith approves of diversity can choose debating as recreation; while they do, most of their social interactions become debates.
