@@ -64,8 +64,8 @@ internal sealed class DontCareSpec
 
 internal static partial class PreceptPolicy
 {
-    // Neutral rank for issues with no default rung (PreceptLadder.DontCareRank derives the rest). Neutral is the
-    // stance of a pawn with no precept on the issue. A rung named "don't care" is a stance if it changes anything
+    // Neutral rank for issues with no default rung, or where the default rungs misplace it; an entry overrides the
+    // defaults (PreceptLadder.DontCareRank derives the rest). Neutral is the stance of a pawn with no precept on the issue. A rung named "don't care" is a stance if it changes anything
     // from that baseline. An unlisted issue defaults to -1f, one step past rank 0. That is correct only for
     // single-rung and restriction-only ladders. Specs that name a mod rung carry an Or() fallback for when the
     // mod is absent.
@@ -171,6 +171,24 @@ internal static partial class PreceptPolicy
         ["TakingFromDowned"] = DontCareSpec.After("TakingFromDowned_Disapproved"),
         ["Traps"] = DontCareSpec.Before("Traps_Disapproved"),
         ["Violence"] = DontCareSpec.Between("Violence_DefenseMild", "Violence_Wanted"),
+        // Entries below override the default rungs' mean.
+        // The classic precept shares the Horrible tier's thoughts: a faith with no stated view disapproves. The
+        // DontCare default is only the rung the editor starts with.
+        ["SUF_Torture"] = DontCareSpec.At("SUF_Torture_Horrible"),
+        // The Acceptable and Horrible defaults average onto the tied gendered rung, which would make gendered
+        // divorce read as neutral.
+        ["RS_Issue_Divorce"] = DontCareSpec.Between("RS_Divorce_MaleOnly", "RS_Divorce_Horrible"),
+        // The 0.5 weight on Abhorrent only lets an occasional antinatalist faith spawn.
+        ["RS_Issue_Pregnancy"] = DontCareSpec.At("RS_Pregnancy_DontCare"),
+        ["VQE_ARCGenerators"] = DontCareSpec.Between("VQE_ARCGenerators_Exalted", "VQE_ARCGenerators_Abhorrent"),
+        ["BGM_FungalSymbiosis"] = DontCareSpec.Between("BGM_FungalSymbiosis_Revered", "BGM_FungalSymbiosis_Reviled"),
+        ["RS_Issue_Lovehexer"] = DontCareSpec.Between("RS_Lovehexer_Revered", "RS_Lovehexer_Reviled"),
+        // Altered Carbon: the DontCare rungs have no effects.
+        ["AC_Stacking"] = DontCareSpec.Between("AC_Stacking_Preferred", "AC_Stacking_Despised"),
+        ["AC_Sleeving"] = DontCareSpec.Between("AC_Sleeving_Preferred", "AC_Sleeving_Despised"),
+        ["AC_CrossSleeving"] = DontCareSpec.At("AC_CrossSleeving_DontCare"),
+        ["AC_StackDuplicating"] = DontCareSpec.At("AC_StackDuplicating_DontCare"),
+        ["AC_XenoSleeving"] = DontCareSpec.At("AC_XenoSleeving_DontCare"),
     };
 
     // Rank of indifference where it is not the neutral stance, read by PreceptLadder.IndifferentRank. Neutral

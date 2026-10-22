@@ -54,7 +54,7 @@ public class PreceptPolicyTests : SeededTest
         {
             "Corpses", "InsectMeat", "MarriageName", "SpouseCount_Male", "SpouseCount_Female", "OrganUse",
             "FungusEating", "BS_AlienAppearanceTolerance", "AM_LovinFrequency", "Blindness", "Lovin", "VME_Sweets",
-            "WCE2_Torture", "GR_Failures", "GR_HumanoidHybrids",
+            "WCE2_Torture", "GR_Failures", "GR_HumanoidHybrids", "RS_Issue_Marriage",
         };
 
         var missingDontCare = PreceptPolicy.OrderOverrides.Keys

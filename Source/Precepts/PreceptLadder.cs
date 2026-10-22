@@ -70,16 +70,17 @@ internal static class PreceptLadder
         return Rungs(issue).FindIndex(precept => precept.defName == target);
     }
 
-    // Rank of the neutral stance on an issue (docs/preceptPolicy.md "Don't-care placement rule"). An issue with
-    // default rungs uses their weighted mean rank. Other issues use the PreceptPolicy.DontCare table, else -1f,
-    // one step below the most permissive explicit rung.
+    // Rank of the neutral stance on an issue (docs/preceptPolicy.md "Don't-care placement rule"). A
+    // PreceptPolicy.DontCare entry comes first. Otherwise an issue with default rungs uses their weighted mean
+    // rank, else -1f, one step below the most permissive explicit rung.
     public static float DontCareRank(IssueDef issue)
     {
         if (_dontCareCache.TryGetValue(issue, out var cached))
             return cached;
 
-        var rank = DefaultRank(issue)
-            ?? (PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : -1f);
+        var rank = PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec)
+            ? spec.Resolve(issue)
+            : DefaultRank(issue) ?? -1f;
         _dontCareCache[issue] = rank;
         return rank;
     }

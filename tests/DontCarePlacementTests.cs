@@ -66,10 +66,10 @@ public class DontCarePlacementTests : SeededTest
     }
 
     [Fact]
-    public void DefaultRungs_OverrideATableEntry()
+    public void TableEntry_OverridesTheDefaultRungs()
     {
-        // HAR_AlienDating has a table entry at Acceptable; a default rung elsewhere wins.
-        Assert.Equal(4f, DefaultNeutralOf("HAR_AlienDating",
+        // HAR_AlienDating has a table entry at Acceptable; it wins over a default rung elsewhere.
+        Assert.Equal(2f, DefaultNeutralOf("HAR_AlienDating",
             ("HAR_AlienDating_Acceptable", 0f), ("HAR_AlienDating_Preferred", 0f), ("HAR_AlienDating_Honorable", 0f),
             ("HAR_AlienDating_Horrible", 0f), ("HAR_AlienDating_Prohibited", 1f)));
     }

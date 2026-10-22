@@ -6,6 +6,13 @@ Enhanced Ideology explicitly integrates with the following optional mods.
 
 Full support.
 All Alpha Memes issues are classified and their precept ladders are integrated into the structural opinion model.
+Every vampire hunt focus, whichever sanguophage xenotype it targets, makes the ideo regard bloodfeeders as reviled.
+
+## [Altered Carbon 2: ReSleeved](https://steamcommunity.com/sharedfiles/filedetails/?id=2196278117)
+
+**Neural stacks**, **sleeving**, **cross-sleeving**, **xeno-sleeving**, and **stack duplication** are full moral axes.
+A transhumanist ideo that demands sleeves and a flesh-purist ideo that despises them will structurally disagree on each issue.
+Colonists without a particular view sit at `don't care` where the mod offers one, and between `preferred` and `despised` otherwise.
 
 ## [Big and Small — Genes & More](https://steamcommunity.com/sharedfiles/filedetails/?id=2920751126)
 
@@ -21,6 +28,20 @@ Five Big and Small traits are also linked to memes and precepts (see [Trait Mods
 
 If Big and Small is not installed, all of the above is safely skipped.
 
+## [Genetics! Mushkin](https://steamcommunity.com/sharedfiles/filedetails/?id=3694372857)
+
+**Fungal symbiosis** is a full moral axis, as the base-game bloodfeeder issue is.
+An ideo that reveres the fungus-bonded and one that reviles them will structurally disagree.
+
+## [Hotels and Recreation](https://steamcommunity.com/sharedfiles/filedetails/?id=3814336747)
+
+**Hospitality** is a moral belief.
+An ideo that holds guests sacred is regarded a little warily by colonists who have no view on it.
+
+## [[AP] Hunting Meme](https://steamcommunity.com/sharedfiles/filedetails/?id=2887642697)
+
+The trophy and sustenance hunting precepts are treated as a hunting style, not a moral position, and don't generate cross-ideo tension.
+
 ## [Humanoid Alien Races](https://steamcommunity.com/sharedfiles/filedetails/?id=839005762)
 
 **Eating aliens**, **alien dating**, **alien races**, and **alien slavery** are full moral axes.
@@ -34,6 +55,11 @@ Ideos that take different stances on them will structurally disagree, scaled by 
 The extra **comfort** rungs join the base-game comfort ladder.
 
 Psychopaths are indifferent to violence and to leaving people to die, as their vanilla immunity to those thoughts implies.
+
+## [Medical Expansion - Vaccines](https://steamcommunity.com/sharedfiles/filedetails/?id=3705179186)
+
+**Vaccination** is a full moral axis, from `required` through `indifferent` to `prohibited`.
+Colonists without a particular view sit at the mod's default, `indifferent`.
 
 ## [Waymakers](https://steamcommunity.com/sharedfiles/filedetails/?id=3761384757)
 
@@ -77,10 +103,31 @@ The `DrugUse` and `BodyModification` ladders — which Political Compass extends
 
 Homelessness precepts are treated as ideo-specific obligations and don't generate cross-ideo tension.
 
+## [Progression: Ammunition](https://steamcommunity.com/sharedfiles/filedetails/?id=3798845290)
+
+Ammo handling precepts are treated as ideo-specific stat modifiers and don't generate cross-ideo tension.
+
 ## [Questing Meme](https://steamcommunity.com/sharedfiles/filedetails/?id=2826539854)
 
 The `completing quests` and `failing quests` issues are treated as moral-axis beliefs.
 Ideos that treat quest completion as respectful vs. daring, or that hold different views on how to regard failure, will generate genuine structural disagreement with opposing positions.
+
+## [ReSplice: Charmweavers](https://steamcommunity.com/sharedfiles/filedetails/?id=3131996691)
+
+**Divorce**, **marriage**, **pregnancy**, and **lovehexers** are full moral axes.
+The `only men` and `only women` rungs count as the same position, since they restrict on a separate axis (which sex may act) that a single ladder cannot hold.
+Colonists without a particular view on divorce sit between those gendered rungs and `horrible`, and on pregnancy at `don't care`.
+
+## [Suffering Expanded](https://steamcommunity.com/sharedfiles/filedetails/?id=3793056584)
+
+**Torture** is a full moral axis, from `sacrament` through `don't care` to `always abhorrent`.
+Colonists without a particular view sit at `always horrible`, which matches how the mod treats colonies without an ideology.
+`Penance` counts as `always horrible`: it objects to torturing outsiders as that rung does.
+
+## [Vanilla Factions Expanded - Pirates](https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948)
+
+**Camaraderie** is a moral belief.
+An ideo that exalts its crew is regarded a little warily by colonists who have no view on it.
 
 ## [Vanilla Genetics Expanded](https://steamcommunity.com/sharedfiles/filedetails/?id=2801160906)
 
@@ -95,6 +142,11 @@ Worktable speed precepts are treated as ideo-specific stat modifiers and don't g
 Full support.
 All VIE issues are integrated.
 Where VIE rungs extend existing base-game issue ladders (e.g., `Apostasy`, `BodyModification`, `Slavery`), the combined ladder is ordered correctly so opinion distance is computed on the merged axis.
+
+## [Vanilla Quests Expanded - The Generator](https://steamcommunity.com/sharedfiles/filedetails/?id=3411401573)
+
+**ARC generators** are a full moral axis.
+An ideo that exalts them and one that finds them abhorrent will structurally disagree.
 
 ## [War Crimes Expanded 2 Core (Updated)](https://steamcommunity.com/sharedfiles/filedetails/?id=3032870787)
 

@@ -118,6 +118,14 @@ internal static partial class PreceptPolicy
         // Ideology: More Precepts.
         "Alcohol", "Barracks", "Compassion", "DrugPossession", "Elderly", "MP_NewcomerAttitude", "Nomadism",
         "Superstition", "TakingFromDowned", "Traps", "Violence",
+        // Suffering Expanded, Medical Expansion - Vaccines, VQE - The Generator, Genetics! Mushkin.
+        "SUF_Torture", "VaccinePolicy", "VQE_ARCGenerators", "BGM_FungalSymbiosis",
+        // ReSplice: Charmweavers.
+        "RS_Issue_Divorce", "RS_Issue_Lovehexer", "RS_Issue_Marriage", "RS_Issue_Pregnancy",
+        // Altered Carbon 2: ReSleeved.
+        "AC_Stacking", "AC_Sleeving", "AC_CrossSleeving", "AC_StackDuplicating", "AC_XenoSleeving",
+        // One-sided pro ladders: a silent outsider sits at the default neutral, before rank 0.
+        "VFEP_Camaraderie", "ROBTRG_Hospitality",
     ];
     // UniversalPositive issue -> the rung that values it most. A trait that opposes the issue pulls away from it.
     private static readonly Dictionary<string, string> UniversalPositiveValuedRung = new()
@@ -148,6 +156,9 @@ internal static partial class PreceptPolicy
         "ApparelDesire", "IdeoRole",
         // Alpha Memes. CombatProwess rungs (ranged / melee / reduced) are trade-offs, not values.
         "AM_CombatProwess",
+        // HuntFocus rungs name which vampire to hunt. The belief reaches opinion through the induced
+        // Bloodfeeders_Reviled stance (PreceptPolicy.InducedByPrecept), so a Moral ladder would count it twice.
+        "AM_HuntFocus",
         // MiningYield: base High + AB_MiningYield_VeryHigh are yield bonuses at different levels.
         "MiningYield",
         // Vanilla Memes Expanded. CraftingSpeed's Slower rung ("never rush") is off the manual-labour axis.
@@ -162,6 +173,8 @@ internal static partial class PreceptPolicy
         "RomanceOnTheRim_Issue_MarriageProposal",
         // Vanilla Genetics Expanded: two worktable speed perks, no belief axis.
         "GR_WorktableSpeeds",
+        // Progression: Ammunition (reload stat modifiers) and [AP] Hunting Meme (hunting style, not a value).
+        "PA_AmmoHandling", "AP_TrophyHunterPreceptIssue",
         // Not locally installed — safe PositiveOnly default pending ladder verification.
         "VRE_AndroidsIssue", "SEX_Divorce",
     ];
@@ -299,6 +312,19 @@ internal static partial class PreceptPolicy
         // Vanilla Genetics Expanded sets no displayOrderInIssue.
         ["GR_Failures"] = ["GR_Failures_Accepted", "GR_Failures_Disliked", "GR_Failures_Shameful"],
         ["GR_HumanoidHybrids"] = ["GR_HumanoidHybrids_Accepted", "GR_HumanoidHybrids_Disliked", "GR_HumanoidHybrids_Forbidden"],
+        // Revered/Reviled and Exalted/Abhorrent pairs set no displayOrderInIssue.
+        ["VQE_ARCGenerators"] = ["VQE_ARCGenerators_Exalted", "VQE_ARCGenerators_Abhorrent"],
+        ["BGM_FungalSymbiosis"] = ["BGM_FungalSymbiosis_Revered", "BGM_FungalSymbiosis_Reviled"],
+        ["RS_Issue_Lovehexer"] = ["RS_Lovehexer_Revered", "RS_Lovehexer_Reviled"],
+        // Desired (order 50) sorts past Abhorrent (30).
+        ["RS_Issue_Pregnancy"] = ["RS_Pregnancy_Desired", "RS_Pregnancy_DontCare", "RS_Pregnancy_Abhorrent"],
+        // Abhorrent ("commitment is sinful") sits at order 30, before the gendered rungs.
+        ["RS_Issue_Marriage"] = ["RS_Marriage_Free", "RS_Marriage_MaleOnly", "RS_Marriage_Abhorrent"],
+        // Altered Carbon: the pro extremes set no order and tie with Preferred (0); the other ladders tie or set none.
+        ["AC_Stacking"] = ["AC_Stacking_Central", "AC_Stacking_Preferred", "AC_Stacking_Despised"],
+        ["AC_Sleeving"] = ["AC_Sleeving_Demanded", "AC_Sleeving_Preferred", "AC_Sleeving_Despised"],
+        ["AC_StackDuplicating"] = ["AC_StackDuplicating_Enlightened", "AC_StackDuplicating_DontCare", "AC_StackDuplicating_Horrible"],
+        ["AC_XenoSleeving"] = ["AC_XenoSleeving_DontCare", "AC_XenoSleeving_Despised"],
     };
 
     // Rungs that share the rank of an anchor rung on the same issue, keyed tied rung -> anchor. They express
@@ -309,6 +335,11 @@ internal static partial class PreceptPolicy
         // The three armour specialties have identical text ("Defense is paramount") and differ only in stat.
         ["AM_Armour_Sharp"] = "AM_Armour_Blunt",
         ["AM_Armour_Heat"] = "AM_Armour_Blunt",
+        // The gendered rungs restrict on a separate axis (which sex may act) that a single ladder cannot hold.
+        ["RS_Divorce_FemaleOnly"] = "RS_Divorce_MaleOnly",
+        ["RS_Marriage_FemaleOnly"] = "RS_Marriage_MaleOnly",
+        // Penance objects to torturing outsiders as Horrible does; its approval of self-torture is off this axis.
+        ["SUF_Torture_Penance"] = "SUF_Torture_Horrible",
     };
 
     // Sim/test hook: register a category for an issue absent from the hardcoded tables (test ladders are Moral).

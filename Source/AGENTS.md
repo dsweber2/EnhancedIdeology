@@ -35,5 +35,5 @@ Infrastructure and entry points that don't belong to a single subsystem:
 - `EnhancedIdeologyUtilities.cs` — shared helpers (apostasy strictness, etc.)
 - `HediffComp_BrainwipeRecovery.cs` — hediff comp for brainwipe susceptibility multiplier
 - `Compat_PeerPressure.cs` — peer-pressure mod compatibility shim
-- `DebugActions.cs` — dev-mode debug action menu entries; `DebugActions_Stances.cs` adds the reset-stances-to-orthodox actions (one pawn, or all) and "Log trait stance targets" (one pawn, seeds first); `DebugActions_Diagnostics.cs` logs the sizes of the collections the tick paths walk
+- `DebugActions.cs` — dev-mode debug action menu entries; `DebugActions_Stances.cs` adds the reset-stances-to-orthodox actions (one pawn, or all) and "Log trait stance targets" (one pawn, seeds first); `DebugActions_Diagnostics.cs` logs the sizes of the collections the tick paths walk, and "Log issue ladders" (every issue's live ladder with rung sources; also runs from the main menu)
 - `HotSwappableAttribute.cs`, `GlobalSuppressions.cs`, `globalusings.cs` — infrastructure

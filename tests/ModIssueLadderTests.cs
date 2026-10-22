@@ -1,6 +1,7 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers the War Crimes Expanded 2, Humanoid Alien Races, and Vanilla Genetics Expanded issues: category, rung
+// Covers the War Crimes Expanded 2, Humanoid Alien Races, Vanilla Genetics Expanded, Suffering Expanded,
+// ReSplice: Charmweavers, and Altered Carbon 2 issues: category, rung
 // order from the display orders the mods ship, and the neutral rank their default rungs give
 // (docs/preceptPolicy.md "Mod issues").
 public class ModIssueLadderTests : SeededTest
@@ -33,10 +34,131 @@ public class ModIssueLadderTests : SeededTest
         Assert.Equal(PreceptCategory.Moral, PreceptPolicy.CategoryOf(new IssueDef { defName = issueName }));
     }
 
-    [Fact]
-    public void CategoryOf_GeneticRimWorktableSpeeds_IsPositiveOnly()
+    [Theory]
+    [InlineData("SUF_Torture")]
+    [InlineData("VaccinePolicy")]
+    [InlineData("VQE_ARCGenerators")]
+    [InlineData("BGM_FungalSymbiosis")]
+    [InlineData("RS_Issue_Divorce")]
+    [InlineData("RS_Issue_Lovehexer")]
+    [InlineData("RS_Issue_Marriage")]
+    [InlineData("RS_Issue_Pregnancy")]
+    [InlineData("AC_Stacking")]
+    [InlineData("AC_Sleeving")]
+    [InlineData("AC_CrossSleeving")]
+    [InlineData("AC_StackDuplicating")]
+    [InlineData("AC_XenoSleeving")]
+    [InlineData("VFEP_Camaraderie")]
+    [InlineData("ROBTRG_Hospitality")]
+    public void CategoryOf_ReportedValueAxisModIssues_AreMoral(string issueName)
     {
-        Assert.Equal(PreceptCategory.PositiveOnly, PreceptPolicy.CategoryOf(new IssueDef { defName = "GR_WorktableSpeeds" }));
+        Assert.Equal(PreceptCategory.Moral, PreceptPolicy.CategoryOf(new IssueDef { defName = issueName }));
+    }
+
+    [Theory]
+    [InlineData("GR_WorktableSpeeds")]
+    [InlineData("PA_AmmoHandling")]
+    [InlineData("AP_TrophyHunterPreceptIssue")]
+    public void CategoryOf_StatAndStyleModIssues_ArePositiveOnly(string issueName)
+    {
+        Assert.Equal(PreceptCategory.PositiveOnly, PreceptPolicy.CategoryOf(new IssueDef { defName = issueName }));
+    }
+
+    [Fact]
+    public void SufferingTorture_PenanceTiesToHorrible_AndNeutralIsHorribleOverTheDefaultDontCare()
+    {
+        var issue = Register("SUF_Torture",
+            ("SUF_Torture_Classic", 0, 0f, false), ("SUF_Torture_Penance", 0, 0f, true),
+            ("SUF_Torture_Sacrament", 5, 0f, true), ("SUF_Torture_Required", 10, 0f, true),
+            ("SUF_Torture_Appreciated", 20, 0f, true), ("SUF_Torture_DontCare", 30, 1f, true),
+            ("SUF_Torture_HorribleIfInnocent", 40, 0f, true), ("SUF_Torture_Horrible", 50, 0f, true),
+            ("SUF_Torture_Abhorrent", 60, 0f, true));
+
+        Assert.Equal(
+            ["SUF_Torture_Sacrament", "SUF_Torture_Required", "SUF_Torture_Appreciated", "SUF_Torture_DontCare",
+             "SUF_Torture_HorribleIfInnocent", "SUF_Torture_Horrible", "SUF_Torture_Abhorrent"],
+            RungNames(issue));
+        Assert.Equal(5f, PreceptLadder.DontCareRank(issue));
+        Assert.Equal(PreceptLadder.RankOfName(issue, "SUF_Torture_Horrible"), PreceptLadder.RankOfName(issue, "SUF_Torture_Penance"));
+    }
+
+    [Fact]
+    public void DescribeRungs_ListsEveryPreceptInLadderOrder_WithItsSource()
+    {
+        var issue = new IssueDef { defName = "SUF_Torture" };
+        var suffering = new ModContentPack { Name = "Suffering Expanded" };
+        SimIssues.Register(new PreceptDef
+        {
+            defName = "SUF_Torture_Horrible", label = "always horrible", issue = issue, displayOrderInIssue = 50,
+            visible = true, modContentPack = suffering, fileName = "Precepts_Torture.xml",
+        });
+        SimIssues.Register(new PreceptDef { defName = "SUF_Torture_Extra", issue = issue, displayOrderInIssue = 70, visible = true });
+        SimIssues.Register(new PreceptDef
+        {
+            defName = "SUF_Torture_Penance", issue = issue, visible = true, modContentPack = suffering, fileName = "Precepts_Torture.xml",
+        });
+        SimIssues.Register(new PreceptDef { defName = "SUF_Torture_Classic", issue = issue, visible = false, modContentPack = suffering });
+
+        var lines = PreceptPolicy.DescribeRungs(issue).Split('\n');
+
+        Assert.Equal(4, lines.Length);
+        Assert.Equal("  - SUF_Torture_Horrible 'always horrible' (rank 0, order 50): Suffering Expanded, Precepts_Torture.xml", lines[0]);
+        Assert.Contains("SUF_Torture_Extra", lines[1]);
+        Assert.Contains("no mod: added by an XML patch", lines[1]);
+        Assert.Contains("tied to SUF_Torture_Horrible", lines[2]);
+        Assert.Contains("SUF_Torture_Classic", lines[3]);
+        Assert.Contains("(hidden,", lines[3]);
+    }
+
+    [Fact]
+    public void Pregnancy_DesiredLeads_AndNeutralIsDontCareOverTheWeightedDefaults()
+    {
+        var issue = Register("RS_Issue_Pregnancy",
+            ("RS_Pregnancy_DontCare", 0, 1f, true), ("RS_Pregnancy_Abhorrent", 30, 0.5f, true),
+            ("RS_Pregnancy_Desired", 50, 0f, true));
+
+        Assert.Equal(["RS_Pregnancy_Desired", "RS_Pregnancy_DontCare", "RS_Pregnancy_Abhorrent"], RungNames(issue));
+        Assert.Equal(1f, PreceptLadder.DontCareRank(issue));
+    }
+
+    [Fact]
+    public void Divorce_GenderedRungsTie_AndTheDontCareEntryOverridesTheDefaultsMean()
+    {
+        var issue = Register("RS_Issue_Divorce",
+            ("RS_Divorce_Acceptable", 0, 1f, true), ("RS_Divorce_MaleOnly", 30, 0f, true),
+            ("RS_Divorce_FemaleOnly", 30, 0f, true), ("RS_Divorce_Horrible", 35, 1f, true),
+            ("RS_Divorce_Abhorrent", 45, 0f, true), ("RS_Divorce_Forbidden", 55, 0f, true));
+
+        Assert.Equal(
+            ["RS_Divorce_Acceptable", "RS_Divorce_MaleOnly", "RS_Divorce_Horrible", "RS_Divorce_Abhorrent", "RS_Divorce_Forbidden"],
+            RungNames(issue));
+        Assert.Equal(1f, PreceptLadder.RankOfName(issue, "RS_Divorce_FemaleOnly"));
+        // The Acceptable and Horrible defaults alone average to 1.
+        Assert.Equal(1.5f, PreceptLadder.DontCareRank(issue));
+    }
+
+    [Fact]
+    public void AlteredCarbonStacking_CentralLeads_AndNeutralSitsBetweenPreferredAndDespised()
+    {
+        var issue = Register("AC_Stacking",
+            ("AC_Stacking_Central", 0, 0f, true), ("AC_Stacking_Preferred", 0, 0f, true),
+            ("AC_Stacking_Despised", 20, 0f, true));
+
+        Assert.Equal(["AC_Stacking_Central", "AC_Stacking_Preferred", "AC_Stacking_Despised"], RungNames(issue));
+        Assert.Equal(1.5f, PreceptLadder.DontCareRank(issue));
+    }
+
+    [Fact]
+    public void AlteredCarbonDuplicating_UnorderedRungsRunFromEnlightened_AndNeutralIsDontCare()
+    {
+        var issue = Register("AC_StackDuplicating",
+            ("AC_StackDuplicating_Horrible", 0, 0f, true), ("AC_StackDuplicating_DontCare", 0, 0f, true),
+            ("AC_StackDuplicating_Enlightened", 0, 0f, true));
+
+        Assert.Equal(
+            ["AC_StackDuplicating_Enlightened", "AC_StackDuplicating_DontCare", "AC_StackDuplicating_Horrible"],
+            RungNames(issue));
+        Assert.Equal(1f, PreceptLadder.DontCareRank(issue));
     }
 
     [Fact]

@@ -145,9 +145,30 @@ internal static partial class PreceptPolicy
                 var rungCount = DefDatabase<PreceptDef>.AllDefs.Count(p => p.issue == issue);
                 if (rungCount >= 2 && CategoryOf(issue) == PreceptCategory.PositiveOnly
                     && !KnownPositiveOnlyIssues.Contains(issue.defName))
-                    Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) from mod '{issue.modContentPack?.Name ?? "unknown"}' — please let the EnhancedBeliefs author know.");
+                    Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) from mod '{issue.modContentPack?.Name ?? "unknown"}' — please let the EnhancedBeliefs author know.\n{DescribeRungs(issue)}");
             }
         }
+    }
+
+    // One line per precept on the issue in ladder order, hidden and tied precepts last, each with the mod and file
+    // that define it. The game gives no mod to a precept that an XML patch adds or that code generates.
+    internal static string DescribeRungs(IssueDef issue) =>
+        string.Join("\n", DefDatabase<PreceptDef>.AllDefs
+            .Where(precept => precept.issue == issue)
+            .OrderBy(precept => !precept.visible || TiedRungs.ContainsKey(precept.defName))
+            .ThenBy(precept => precept.visible ? PreceptLadder.RankOf(precept) : 0f)
+            .ThenBy(precept => precept.displayOrderInIssue)
+            .Select(DescribeRung));
+
+    private static string DescribeRung(PreceptDef precept)
+    {
+        var rank = !precept.visible ? "hidden"
+            : TiedRungs.TryGetValue(precept.defName, out var anchor) ? $"rank {PreceptLadder.RankOf(precept)}, tied to {anchor}"
+            : $"rank {PreceptLadder.RankOf(precept)}";
+        var source = precept.modContentPack is { } mod
+            ? $"{mod.Name}, {precept.fileName}"
+            : "no mod: added by an XML patch or generated in code";
+        return $"  - {precept.defName} '{precept.label}' ({rank}, order {precept.displayOrderInIssue}): {source}";
     }
 
     // Cross-precept couplings: holding the keyed source precept makes an ideo behave, on another issue,
@@ -159,6 +180,10 @@ internal static partial class PreceptPolicy
         ["Pain_Idealized"] = InducedStance.Rung("RoughLiving", "RoughLiving_Welcomed"),
         ["AM_Pain_Required"] = InducedStance.Rung("RoughLiving", "RoughLiving_Welcomed"),
         ["AM_HuntFocus_Sanguophage"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
+        ["AM_HuntFocus_Strigoi"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
+        ["AM_HuntFocus_Malachai"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
+        ["AM_HuntFocus_Ekkimian"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
+        ["AM_HuntFocus_Bruxa"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
         ["AM_SanguophageCamps_RaidingDesired"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
         ["VME_LeatherApparel_Disliked"] = InducedStance.Rung("AnimalSlaughter", "AnimalSlaughter_Disapproved"),
         ["VME_LeatherApparel_Abhorrent"] = InducedStance.Rung("AnimalSlaughter", "AnimalSlaughter_Horrible"),

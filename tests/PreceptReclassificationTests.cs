@@ -150,6 +150,10 @@ public class PreceptReclassificationTests : SeededTest
 
     [Theory]
     [InlineData("AM_HuntFocus", "AM_HuntFocus_Sanguophage")]
+    [InlineData("AM_HuntFocus", "AM_HuntFocus_Strigoi")]
+    [InlineData("AM_HuntFocus", "AM_HuntFocus_Malachai")]
+    [InlineData("AM_HuntFocus", "AM_HuntFocus_Ekkimian")]
+    [InlineData("AM_HuntFocus", "AM_HuntFocus_Bruxa")]
     [InlineData("AM_SanguophageCamps", "AM_SanguophageCamps_RaidingDesired")]
     public void InducedRank_SanguophageHunting_ImpliesRevilingBloodfeeders(string issueName, string rungName)
     {

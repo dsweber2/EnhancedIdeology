@@ -29,6 +29,8 @@ participates through the separate **acquired** channel (the existing personal pe
 
 **Don't-care placement rule** — neutral is the stance an ideo falls back to on the issue.
 `PreceptLadder.DontCareRank` applies it in this order:
+0. **A `PreceptPolicy.DontCare` entry** wins over everything below.
+   Use one where the default rungs misplace neutral: `SUF_Torture` (the editor starts at `DontCare`, but the classic precept shares the `Horrible` thoughts), `RS_Issue_Divorce` (the defaults average onto the gendered rung), `RS_Issue_Pregnancy` (a 0.5 weight on `Abhorrent` pulls neutral off `DontCare`).
 1. **The issue has default rungs** (visible rungs with `defaultSelectionWeight > 0`): neutral is their mean rank, weighted by `defaultSelectionWeight`.
    When an ideo loses its rung on such an issue, vanilla adds one of these back, picked at random by weight (`Ideo.RemovePrecept`), and the editor has no remove button for the issue.
    So neutral is the expected stance of a fresh faith, not the effect-free rung (`GR_Failures_Accepted` is a stance; `GR_Failures_Disliked` is neutral).
@@ -43,7 +45,7 @@ participates through the separate **acquired** channel (the existing personal pe
 Visible classic rungs (`Lovin_Free`, `SpouseCount_*_MaxOne`, `VVE_*_Allowed`) are ordinary ladder rungs: `classic` only means the precept exists without the Ideology DLC.
 Invisible classic rungs (`Cannibalism_Classic`, `Execution_Classic`, `WCE2_Torture_Vanilla`) are the classic-mode fallback that no ideo can select, and stay out of the ladder.
 
-The case 2 specs live in `Source/Precepts/PreceptPolicy.DontCare.cs`.
+The case 0 and case 2 specs live in `Source/Precepts/PreceptPolicy.DontCare.cs`.
 
 **Indifference** is the rank of a pawn with no objections on the issue, which indifferent trait links (`[Issue] (0)`) vote for.
 It is the neutral stance, except where `PreceptPolicy.Indifference` places it elsewhere: the default rungs object (`Scarification`, past `Minor`; `Blindness`, between `Respected` and `Horrible`), or the neutral placement counts vanilla thoughts outside the precepts (`Compassion`, past `Allies`).
@@ -191,11 +193,12 @@ Each passes the outsider-objects test.
 
 Not one-rung Moral after review:
 - `VME_SlaveTrading` (`OnlyBuying`) (a) — stay PositiveOnly. An induced `Slavery` stance never fires, because `Slavery` is mandatory and every faith holds an explicit rung. The faith's own Slavery rung already carries the axis.
-- `AM_HuntFocus_Sanguophage`, `AM_SanguophageCamps_RaidingDesired` (a) — stay PositiveOnly and induce `Bloodfeeders_Reviled` (`Bloodfeeders` is optional, so the induction applies).
+- `AM_HuntFocus` (every rung), `AM_SanguophageCamps_RaidingDesired` (a) — stay PositiveOnly and induce `Bloodfeeders_Reviled` (`Bloodfeeders` is optional, so the induction applies).
+  A Moral `AM_HuntFocus` ladder would count the belief twice: once on the issue, and again on the induced stance.
 - `AnimalsVenerated`, `AM_AnimalsDespised` (a) — stay PositiveOnly for now. The right model is a Special payload compare like Weapons, which is not worth the work yet.
 
 **Couplings found along the way:**
-- `AM_HuntFocus_Sanguophage`, `AM_SanguophageCamps_RaidingDesired` → `Bloodfeeders_Reviled` (a), encoded
+- `AM_HuntFocus_*` (all five vampire targets), `AM_SanguophageCamps_RaidingDesired` → `Bloodfeeders_Reviled` (a), encoded
 - `AM_Pain_Required` → `RoughLiving_Welcomed` (same as `Pain_Idealized`) ✓, encoded
 - `AM_Armour_Forbidden`, `AM_NakedCombat_Preferred` → an approving `Nudity_*` rung (p)
 - `VME_Fishing_Adept` ("fishing is the right way; ranching and farming is not") → `Ranching` (p)
@@ -309,7 +312,32 @@ Ladders are listed in rank order.
 
 The mod also extends `Comfort` with `Wanted` → `Important` → `Essential` (see "PositiveOnly review").
 
-**PositiveOnly:** `AM_CombatProwess`, `AM_HuntFocus`, and the mechanical perks (`*Speed`/`*Yield`/`*Rate`/`Cooldown`).
+**Moral, value axes from Suffering Expanded, Medical Expansion - Vaccines, VQE - The Generator, Genetics! Mushkin, ReSplice: Charmweavers, Altered Carbon 2, VFE - Pirates, and Hotels and Recreation.** ✓
+Reported from another player's startup log (2026-10-21).
+Ladders are listed in rank order. A tied rung shares its anchor's rank.
+
+| issue               | ladder                                                                                                                | neutral                            | why                                                                                                                                                                                                                                          |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SUF_Torture         | `Sacrament` → `Required` → `Appreciated` → `DontCare` → `HorribleIfInnocent` → `Horrible` (= `Penance`) → `Abhorrent` | `Horrible`                         | table entry over the `DontCare` default: the classic precept shares the `Horrible` thoughts. `Penance` objects to torturing outsiders as `Horrible` does; its approval of self-torture is a separate axis that one ladder cannot hold        |
+| VaccinePolicy       | `Required` → `Accepted` → `Neutral` → `Disapproved` → `Prohibited`                                                    | `Neutral`                          | default rung; display order is already the axis                                                                                                                                                                                              |
+| VQE_ARCGenerators   | `Exalted` → `Abhorrent`                                                                                               | between them                       | no display orders, so an order override sets them                                                                                                                                                                                            |
+| BGM_FungalSymbiosis | `Revered` → `Reviled`                                                                                                 | between them                       | as `Bloodfeeders`                                                                                                                                                                                                                            |
+| RS_Issue_Lovehexer  | `Revered` → `Reviled`                                                                                                 | between them                       | as `Bloodfeeders`                                                                                                                                                                                                                            |
+| RS_Issue_Divorce    | `Acceptable` → `MaleOnly` (= `FemaleOnly`) → `Horrible` → `Abhorrent` → `Forbidden`                                   | between `OneOnly` and `Horrible`  | table entry; the mean of the `Acceptable` and `Horrible` defaults lands on `MaleOnly` and would make gendered divorce neutral. The gendered rungs really disagree on a separate axis (which sex may act); tied is the best one ladder can do |
+| RS_Issue_Marriage   | `Free` → `MaleOnly` (= `FemaleOnly`) → `Abhorrent`                                                                    | `Free`                             | default rung. `Abhorrent` ("commitment is sinful") has order 30, before the gendered rungs                                                                                                                                                   |
+| RS_Issue_Pregnancy  | `Desired` → `DontCare` → `Abhorrent`                                                                                  | `DontCare`                         | table entry; the 0.5 default weight on `Abhorrent` only lets an occasional antinatalist faith spawn. `Desired` has order 50, past `Abhorrent`                                                                                                |
+| AC_Stacking         | `Central` → `Preferred` → `Despised`                                                                                  | between `Preferred` and `Despised` | `Central` sets no order and ties with `Preferred`                                                                                                                                                                                            |
+| AC_Sleeving         | `Demanded` → `Preferred` → `Despised`                                                                                 | between `Preferred` and `Despised` | as `AC_Stacking`                                                                                                                                                                                                                             |
+| AC_StackDuplicating | `Enlightened` → `DontCare` → `Horrible`                                                                               | `DontCare`                         | no effects; no display orders                                                                                                                                                                                                                |
+| AC_XenoSleeving     | `DontCare` → `Despised`                                                                                               | `DontCare`                         | no effects; both rungs at order 10                                                                                                                                                                                                           |
+| AC_CrossSleeving    | `DontCare` → `Despised`                                                                                               | `DontCare`                         | no effects                                                                                                                                                                                                                                   |
+| VFEP_Camaraderie    | `Respected` → `Exalted`                                                                                               | before `Respected`                 | one-sided; the −1 default                                                                                                                                                                                                                    |
+| ROBTRG_Hospitality  | `Valued` → `SacredDuty`                                                                                               | before `Valued`                    | one-sided; the −1 default                                                                                                                                                                                                                    |
+
+The log counted 16 `SUF_Torture` rungs and 5 `RS_Issue_Pregnancy` rungs; the released mods ship 9 and 3.
+Some other mod adds rungs that we have not seen. They keep their display order after the listed rungs.
+
+**PositiveOnly:** `AM_CombatProwess`, `AM_HuntFocus`, `PA_AmmoHandling` (reload stat modifiers), `AP_TrophyHunterPreceptIssue` (hunting style), and the mechanical perks (`*Speed`/`*Yield`/`*Rate`/`Cooldown`).
 The value-claim issues that used to sit here (`VME_Death`, `VME_Power`, `VME_Junk`, `AM_Armour`, `AM_Barracks`,
 `VME_AutomationEfficiency`, `VME_CraftingQuality`, the psychic sensitivities) moved to Moral; see "PositiveOnly review".
 

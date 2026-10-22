@@ -31,6 +31,21 @@ internal static partial class DebugActions
             + $" max={localTrackers.Select(HeldStanceCount).DefaultIfEmpty().Max()}");
     }
 
+    // Every issue's live ladder after all patches, with the source of each rung. Runs from the main menu too, so a
+    // player can send it without loading a save.
+    [DebugAction("Ideoligion", "Log issue ladders", actionType = DebugActionType.Action,
+        allowedGameStates = AllowedGameStates.Entry | AllowedGameStates.Playing)]
+    private static void LogIssueLadders()
+    {
+        var issues = DefDatabase<IssueDef>.AllDefs
+            .Where(issue => PreceptPolicy.CategoryOf(issue) != PreceptCategory.NA)
+            .OrderBy(issue => issue.defName)
+            .Select(issue =>
+                $"{issue.defName} ({PreceptPolicy.CategoryOf(issue)}, from {issue.modContentPack?.Name ?? "no mod"}), "
+                + $"neutral rank {PreceptLadder.DontCareRank(issue):0.##}\n{PreceptPolicy.DescribeRungs(issue)}");
+        EnhancedIdeologyMod.Message("[issue ladders]\n" + string.Join("\n", issues));
+    }
+
     private static int HeldStanceCount(IdeoTrackerData data) =>
         data.IssueStances().Count(stance => Mathf.Abs(stance.rank - PreceptLadder.DontCareRank(stance.issue))
             > InteractionWorker_IdeologicalDebatePrecept.DebateRankEpsilon);
