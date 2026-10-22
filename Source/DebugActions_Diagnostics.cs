@@ -32,9 +32,10 @@ internal static partial class DebugActions
     }
 
     // Every issue's live ladder after all patches, with the source of each rung. Runs from the main menu too, so a
-    // player can send it without loading a save.
+    // player can send it without loading a save. Each AllowedGameStates flag is a requirement, so Invalid (no
+    // flags) is the only value that allows both the main menu and a game.
     [DebugAction("Ideoligion", "Log issue ladders", actionType = DebugActionType.Action,
-        allowedGameStates = AllowedGameStates.Entry | AllowedGameStates.Playing)]
+        allowedGameStates = AllowedGameStates.Invalid)]
     private static void LogIssueLadders()
     {
         var issues = DefDatabase<IssueDef>.AllDefs
