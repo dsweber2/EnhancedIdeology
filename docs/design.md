@@ -176,6 +176,11 @@ The derivation and plots are in `analysis/conviction_valley.py`.
   A winner from a Proselytizer faith doubles that onlooker pull, and onlookers with a high certainty loss factor move further.
   Pawns whose faith approves of diversity can choose debating as recreation; while they do, most of their social interactions become debates.
   A draw can make either pawn dig in (more likely for intelligent pawns and those with shakier faith) or start a social fight.
+  Between two 0-social pawns, a full-ladder disagreement fights about as often as a vanilla slight.
+  The chance is the mean of both pawns' vanilla social fight chances, so traits, drugs, genes and opinion all count.
+  The more socially skilled debater calms things down, and smaller disagreements (by the same weight that picks the topic) rarely come to blows.
+  Faiths that value diversity fight less, down to a fifth at Exalted; faiths that disapprove of it fight more, up to double at Abhorrent, but only with other faiths.
+  Strict apostasy also raises the chance across faiths.
   The diversity precept decides whether each pawn enjoys or resents the argument.
   Caravans debate too, although vanilla runs no social interactions there.
   Each pawn has the same chance of a random interaction as at home, with the same interaction weights, but only debates are resolved.

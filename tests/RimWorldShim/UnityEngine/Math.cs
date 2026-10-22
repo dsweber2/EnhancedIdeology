@@ -3,6 +3,7 @@ namespace UnityEngine;
 public static class Mathf
 {
     public static float Clamp01(float v) => Math.Clamp(v, 0f, 1f);
+    public static float Lerp(float a, float b, float t) => a + ((b - a) * Clamp01(t));
     public static float Clamp(float v, float min, float max) => Math.Clamp(v, min, max);
     public static float Abs(float v) => MathF.Abs(v);
     public static float Min(float a, float b) => MathF.Min(a, b);

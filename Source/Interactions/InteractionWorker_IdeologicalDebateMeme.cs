@@ -121,7 +121,8 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
             if (InteractionWorker_IdeologicalDebatePrecept.HandleDraw(
                 interaction, initiator, recipient, initiatorTracker, recipientTracker,
                 MemePreceptsFor(initiatorIdeo, topic).Select(precept => precept.issue!),
-                MemePreceptsFor(recipientIdeo, topic).Select(precept => precept.issue!)))
+                MemePreceptsFor(recipientIdeo, topic).Select(precept => precept.issue!),
+                MaxTopicWeight(initiatorIdeo, recipientIdeo, topic, initiatorTracker, recipientTracker)))
             {
                 EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight). Exiting.");
                 return;
@@ -175,11 +176,28 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         var initiatorStances = InteractionWorker_IdeologicalDebatePrecept.StanceMap(initiatorTracker);
         var recipientStances = InteractionWorker_IdeologicalDebatePrecept.StanceMap(recipientTracker);
         return [.. initiatorIdeo.memes.Union(recipientIdeo.memes)
-            .Where(meme => MemePreceptsFor(initiatorIdeo, meme).Concat(MemePreceptsFor(recipientIdeo, meme))
-                .Any(def => initiatorStances.TryGetValue(def.issue!, out var initiatorStance)
-                    && recipientStances.TryGetValue(def.issue!, out var recipientStance)
-                    && InteractionWorker_IdeologicalDebatePrecept.Disagree(initiatorStance, recipientStance)))];
+            .Where(meme => DisputedIssues(initiatorIdeo, recipientIdeo, meme, initiatorStances, recipientStances).Any())];
     }
+
+    // The widest disagreement among the meme's disputed issues, which sets the chance that a draw turns into a fight.
+    private static float MaxTopicWeight(
+        Ideo initiatorIdeo, Ideo recipientIdeo, MemeDef meme, IdeoTrackerData initiatorTracker, IdeoTrackerData recipientTracker)
+    {
+        var initiatorStances = InteractionWorker_IdeologicalDebatePrecept.StanceMap(initiatorTracker);
+        var recipientStances = InteractionWorker_IdeologicalDebatePrecept.StanceMap(recipientTracker);
+        return DisputedIssues(initiatorIdeo, recipientIdeo, meme, initiatorStances, recipientStances)
+            .Max(issue => InteractionWorker_IdeologicalDebatePrecept.TopicWeight(issue, initiatorStances[issue], recipientStances[issue]));
+    }
+
+    private static IEnumerable<IssueDef> DisputedIssues(
+        Ideo initiatorIdeo, Ideo recipientIdeo, MemeDef meme,
+        Dictionary<IssueDef, (float rank, float strength)> initiatorStances,
+        Dictionary<IssueDef, (float rank, float strength)> recipientStances) =>
+        MemePreceptsFor(initiatorIdeo, meme).Concat(MemePreceptsFor(recipientIdeo, meme))
+            .Select(def => def.issue!)
+            .Where(issue => initiatorStances.TryGetValue(issue, out var initiatorStance)
+                && recipientStances.TryGetValue(issue, out var recipientStance)
+                && InteractionWorker_IdeologicalDebatePrecept.Disagree(initiatorStance, recipientStance));
 
     // Only issues that feed structural opinion are moved by a meme debate (PreceptPolicy.IsDebatable).
     private static IEnumerable<PreceptDef> MemePreceptsFor(Ideo ideo, MemeDef meme) =>

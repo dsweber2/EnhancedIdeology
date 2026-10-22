@@ -43,7 +43,7 @@ internal sealed class JobGiver_IconoclastFireGuard : ThinkNode_JobGiver
 
         if (!canSocial)
         {
-            // Skip debate — initiate a social fight via the same path as StartDebateFight.
+            // Skip debate — initiate a social fight via the same path as DebateFights.Start.
             if (!SocialInteractionUtility.TryGetRandomVerbForSocialFight(pawn, out var verb)) return null;
             mentalState.fightTarget = nearest;
             nearest.mindState.mentalStateHandler.TryStartMentalState(

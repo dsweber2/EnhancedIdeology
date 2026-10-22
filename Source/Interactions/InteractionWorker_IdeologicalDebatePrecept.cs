@@ -164,7 +164,8 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         if (Math.Abs(initiatorRoll - recipientRoll) <= DrawThreshold(initiator, recipient))
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
-            if (HandleDraw(interaction, initiator, recipient, initiatorTracker, recipientTracker, [topic], [topic]))
+            var topicWeight = TopicWeight(topic, StanceMap(initiatorTracker)[topic], StanceMap(recipientTracker)[topic]);
+            if (HandleDraw(interaction, initiator, recipient, initiatorTracker, recipientTracker, [topic], [topic], topicWeight))
             {
                 EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "HandleDraw returned true (social fight). Exiting.");
                 return;
@@ -341,44 +342,6 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         return sign * y;
     }
 
-    // When an iconoclast is involved, StartSocialFight fails silently — TryStartMentalState(SocialFighting) can't
-    // replace an already-active mental state. Issue paired AttackMelee jobs directly instead and track the fight
-    // in MentalState_Iconoclast so the job givers don't interrupt it.
-    private static void StartDebateFight(Pawn initiator, Pawn recipient)
-    {
-        if (initiator.GetCaravan() != null)
-        {
-            CaravanDebates.SettleFight(initiator, recipient);
-            return;
-        }
-
-        var iconoclast = initiator.MentalState as MentalState_Iconoclast ?? recipient.MentalState as MentalState_Iconoclast;
-        if (iconoclast != null)
-        {
-            var other = iconoclast.pawn == initiator ? recipient : initiator;
-            iconoclast.fightTarget = other;
-            iconoclast.ClearDebateTargets();
-
-            // Give the other pawn SocialFighting. IsOtherPawnSocialFightingWithMe is patched to return
-            // true when the opponent is an iconoclast with matching fightTarget, so the state persists.
-            other.mindState.mentalStateHandler.TryStartMentalState(
-                MentalStateDefOf.SocialFighting, null, forced: false, forceWake: false,
-                causedByMood: false, iconoclast.pawn);
-
-            if (PawnUtility.ShouldSendNotificationAbout(iconoclast.pawn) || PawnUtility.ShouldSendNotificationAbout(other))
-                Messages.Message("MessageSocialFight".Translate(iconoclast.pawn.LabelShort, other.LabelShort, iconoclast.pawn.Named("PAWN1"), other.Named("PAWN2")), iconoclast.pawn, MessageTypeDefOf.ThreatSmall);
-            TaleRecorder.RecordTale(TaleDefOf.SocialFight, iconoclast.pawn, other);
-        }
-        else
-        {
-            recipient.interactions.StartSocialFight(initiator, "EnhancedIdeology.IdeologicalDebateOutcomeSocialFight");
-        }
-    }
-
-    // Iconoclast draw fight chance: bypasses SocialFightPossible (which gates on WorkTags.Violent) because
-    // a mental break overrides the pawn's normal pacifism. ~75% fight chance per draw.
-    internal const float IconoclastDrawFightChance = 0.75f;
-
     // An evenly-matched debate. Either it boils over into a social fight (returns true), or it entrenches both
     // sides (returns false). No rung moves and no one converts on a tie.
     internal static bool HandleDraw(
@@ -388,52 +351,16 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         IdeoTrackerData initiatorTracker,
         IdeoTrackerData recipientTracker,
         IEnumerable<IssueDef> initiatorIssues,
-        IEnumerable<IssueDef> recipientIssues)
+        IEnumerable<IssueDef> recipientIssues,
+        float topicWeight)
     {
-        float socialFightChance;
-        if (initiator.MentalState is MentalState_Iconoclast || recipient.MentalState is MentalState_Iconoclast)
-        {
-            // Mental break overrides normal violence restrictions — use a flat chance instead of SocialFightChance.
-            // If either pawn can't fight (pacifist ideology, trait, etc.) skip the fight entirely; repeated debates
-            // will naturally occur because the interloper is still present when the iconoclast's next job fires.
-            socialFightChance = (initiator.interactions?.SocialFightPossible(recipient) == true
-                && recipient.interactions?.SocialFightPossible(initiator) == true)
-                ? IconoclastDrawFightChance
-                : 0f;
-        }
-        else
-        {
-            // Fetch social fight multiplier
-            interaction.socialFightBaseChance = 1f;
-            // A despawned pawn (in a caravan) has no interactions tracker. SocialFightChance reads only the pawn, so a
-            // temporary tracker gives the same result.
-            var fightChanceModifier = (initiator.interactions ?? new Pawn_InteractionsTracker(initiator)).SocialFightChance(interaction, recipient)
-                + (recipient.interactions ?? new Pawn_InteractionsTracker(recipient)).SocialFightChance(interaction, initiator);
-            interaction.socialFightBaseChance = 0f;
-            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: fightChanceModifier={fightChanceModifier}");
-
-            // Socially adept pawns are much less likely to start a brawl over an ideological debate
-            socialFightChance = 0.05f * fightChanceModifier /
-                (0.5f + (initiator.skills.GetSkill(SkillDefOf.Social).Level * 0.1f)) /
-                (0.5f + (recipient.skills.GetSkill(SkillDefOf.Social).Level * 0.1f));
-
-            // Pawns from strict-apostacy faiths have less tolerance for being stalemated by a heretic.
-            // Only applies across different ideoligions — a draw against a fellow believer doesn't trigger apostacy rage.
-            if (initiator.Ideo != recipient.Ideo)
-            {
-                var apostacyFightMultiplier = 1f
-                    + (EnhancedIdeologyUtilities.ApostacyStrictness(initiator.Ideo) * 0.75f)
-                    + (EnhancedIdeologyUtilities.ApostacyStrictness(recipient.Ideo) * 0.75f);
-                socialFightChance *= apostacyFightMultiplier;
-                EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: apostacyFightMultiplier={apostacyFightMultiplier}");
-            }
-        }
+        var socialFightChance = DebateFights.Chance(interaction, initiator, recipient, topicWeight);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"HandleDraw: socialFightChance={socialFightChance}");
 
         if (Rand.Value < socialFightChance)
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Social fight triggered!");
-            StartDebateFight(initiator, recipient);
+            DebateFights.Start(initiator, recipient);
             return true;
         }
 
@@ -501,25 +428,15 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     private enum DiversityReaction { None, Bigoted, Neutral, Tolerant }
 
     // Classify a faith's IdeoDiversity stance relative to its Standard (neutral) rung: anything on the Approved
-    // side is tolerant, anything on the Disapproved side is bigoted. Direction-agnostic (the ladder's numeric
-    // orientation is derived from the Approved-vs-Standard sign), so it holds however the rungs are ordered.
+    // side is tolerant, anything on the Disapproved side is bigoted.
     private static DiversityReaction DiversityStance(Ideo ideo)
     {
-        var precept = ideo.precepts.FirstOrDefault(p => p.def.issue?.defName == "IdeoDiversity");
-        if (precept == null)
+        if (DiversityAxis.Of(ideo) is not { } axis)
         {
             return DiversityReaction.None;
         }
 
-        var issue = precept.def.issue!;
-        var standard = PreceptLadder.RankOfName(issue, "IdeoDiversity_Standard");
-        var approved = PreceptLadder.RankOfName(issue, "IdeoDiversity_Approved");
-        if (standard < 0f || approved < 0f)
-        {
-            return DiversityReaction.None;
-        }
-
-        var delta = (PreceptLadder.RankOf(precept.def) - standard) * Math.Sign(approved - standard);
+        var delta = axis.HeldDelta;
         if (delta > 0.5f)
         {
             return DiversityReaction.Tolerant;

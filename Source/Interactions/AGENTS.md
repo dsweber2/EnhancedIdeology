@@ -13,6 +13,7 @@ Social interaction workers, ability workers, and play-log entries. The debate wo
 **Files:**
 - `InteractionWorker_IdeologicalDebatePrecept.cs` — precept debate; key methods: `WinChance`, `GetDebateRoll`, `DrawThreshold`, `HandleDraw`, `TryEntrench`, `ApplyDiversityAftermath`, `ApplyApostacyAftermath`
 - `InteractionWorker_IdeologicalDebateMeme.cs` — meme debate; `CompatibilityFactorCurve` shapes persuasion by meme-overlap
+- `DebateFights.cs` — `Chance` (a draw's fight chance: mean vanilla `SocialFightChance` at `DrawFightBaseChance`, max-social falloff, topic weight, `DiversityFightFactor`, apostasy cross-faith; flat for iconoclasts) and `Start`; `DiversityAxis` reads a faith's IdeoDiversity rung, also used by the diversity aftermath. Called from `HandleDraw`
 - `InteractionWorker_AdvancedConversionAttempt.cs` — directed conversion attempt; resolves debate then calls `CheckConversion`
 - `AbilityConversion.cs` / `AbilityReassure.cs` — psycast ability logic; `RollTargetIssues`, `Resolve`
 - `JoyGiver_IdeologicalDebate.cs` — joy giver for `EB_DebateRelax` (vanilla social relax under its own JobDef); while a pawn runs it, the precept debate weight is multiplied by `DebateRelaxWeightFactor`

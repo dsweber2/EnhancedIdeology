@@ -71,7 +71,10 @@ public class Pawn_InteractionsTracker
 {
     public Pawn_InteractionsTracker() { }
     public Pawn_InteractionsTracker(Pawn pawn) { }
-    public float SocialFightChance(InteractionDef interaction, Pawn other) => 0f;
+    // Stands in for vanilla's health, opinion, trait and gene factors on the interaction's base chance.
+    public float fightChanceFactor;
+    public float SocialFightChance(InteractionDef interaction, Pawn other) =>
+        UnityEngine.Mathf.Clamp01(interaction.socialFightBaseChance * fightChanceFactor);
     public bool SocialFightPossible(Pawn other) => false;
     public void StartSocialFight(Pawn other, string message) { }
 }
