@@ -2,7 +2,7 @@ namespace EnhancedIdeology.Tests;
 
 public class ConvictionDecayTests : SeededTest
 {
-    private static (SimWorld world, IdeoTrackerData tracker, IssueDef issue) Setup()
+    private static (SimWorld world, IdeoTrackerData tracker, IssueDef issue) Setup(float certaintyLossFactor = 1f)
     {
         var world = new SimWorld();
         world.Initialize();
@@ -10,7 +10,7 @@ public class ConvictionDecayTests : SeededTest
         var (issue, rungs) = SimIssues.Ladder("Decay_Issue", "Rung0", "Rung1");
         var ideo = new IdeoBuilder().WithName("Decay").AddPrecept(rungs[0], issue, displayOrderInIssue: 0).Build();
         world.AddIdeo(ideo);
-        var pawn = new PawnBuilder().WithIdeo(ideo).WithLabel("P").Build(world);
+        var pawn = new PawnBuilder().WithIdeo(ideo).WithLabel("P").WithCertaintyLossFactor(certaintyLossFactor).Build(world);
         var tracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
         // Force seeding before the test touches TicksAbs so the Rand stream is consumed predictably.
         _ = tracker.IssueStances().ToList();
@@ -58,6 +58,23 @@ public class ConvictionDecayTests : SeededTest
 
         var afterDay1 = tracker.IssueStances().First(ss => ss.issue == issue).strength;
         Assert.True(afterDay1 < afterDay0, $"Expected further decay on next day. day0={afterDay0}, day1={afterDay1}");
+    }
+
+    [Fact]
+    public void ConvictionDecay_ScalesWithCertaintyLossFactor()
+    {
+        static float OneDayDrain(float certaintyLossFactor)
+        {
+            var (_, tracker, issue) = Setup(certaintyLossFactor);
+            tracker.Stances.SetStance(issue, 0f, 10f);
+            GenTicks.TicksAbs = 0;
+            tracker.ApplyConvictionDecayIfNewDay();
+            return 10f - tracker.Stances.GetStrength(issue);
+        }
+
+        var baseline = OneDayDrain(1f);
+        Assert.Equal(baseline * 0.25f, OneDayDrain(0.25f), precision: 5);
+        Assert.Equal(baseline * 2f, OneDayDrain(2f), precision: 5);
     }
 
     [Fact]

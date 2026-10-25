@@ -242,6 +242,88 @@ public class TraitStanceTargetTests : SeededTest
         Assert.Equal(1f, target.Votes);
     }
 
+    private static (TraitVote vote, float spot)? StrongestVoteAt(Pawn pawn, IssueDef issue, float rank)
+    {
+        var votes = new Dictionary<IssueDef, List<TraitVote>>();
+        var target = TraitStanceTargets.For(pawn, new Dictionary<IssueDef, float> { [issue] = rank }, votes)[issue];
+        return target.StrongestVote(rank, votes[issue]);
+    }
+
+    [Fact]
+    public void StrongestVote_SupportTarget_NamesTheMemeWithTheHeaviestRoute()
+    {
+        var (world, issue, rungs) = Setup();
+        rungs[2].associatedMemes.Add(Meme("Weak", agrees: true));
+        rungs[2].requiredMemes.Add(Meme("Strong", agrees: true));
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
+
+        var (vote, spot) = StrongestVoteAt(pawn, issue, 0f)!.Value;
+
+        Assert.Equal("Strong", vote.Meme!.defName);
+        Assert.Equal(Trait, vote.Trait.def);
+        Assert.Equal(2f, spot);
+    }
+
+    [Fact]
+    public void StrongestVote_SupportTarget_SkipsTheLosingOpposition()
+    {
+        var (world, issue, rungs) = Setup();
+        var linked = new TraitDef { defName = "Linked" };
+        linked.AddModExtension(new TraitIssueLinks { links = [new TraitIssueLink { rung = rungs[2].defName }] });
+        var meme = new MemeBuilder().WithName("Con").WithDisagreeableTrait(linked).Build();
+        DefDatabase<MemeDef>.Add(meme);
+        rungs[2].requiredMemes.Add(meme);
+        rungs[2].associatedMemes.Add(Meme("Pro", agrees: true));
+        var pawn = new PawnBuilder().WithIdeo(new IdeoBuilder().WithName("Faith").Build()).WithLabel("P")
+            .WithTrait(linked).WithTrait(Trait).Build(world);
+
+        var (vote, _) = StrongestVoteAt(pawn, issue, 0f)!.Value;
+
+        Assert.Null(vote.Meme);
+        Assert.Equal(linked, vote.Trait.def);
+    }
+
+    [Fact]
+    public void StrongestVote_OppositionOnTheCurrentSpot_NamesTheDisapprovedMemeAndThatSpot()
+    {
+        var (world, issue, rungs) = Setup();
+        rungs[0].requiredMemes.Add(Meme("ConA", agrees: false));
+        rungs[1].requiredMemes.Add(Meme("ConB", agrees: false));
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
+
+        var (vote, spot) = StrongestVoteAt(pawn, issue, 1f)!.Value;
+
+        Assert.Equal("ConB", vote.Meme!.defName);
+        Assert.True(vote.Weight < 0f);
+        Assert.Equal(1f, spot);
+    }
+
+    [Fact]
+    public void StrongestVote_OppositionWithTheStanceOnAnAllowedSpot_IsNull()
+    {
+        var (world, issue, rungs) = Setup();
+        rungs[0].requiredMemes.Add(Meme("Con", agrees: false));
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build());
+
+        Assert.Null(StrongestVoteAt(pawn, issue, 2f));
+    }
+
+    [Fact]
+    public void StrongestVote_OpposesLink_HasNoMeme()
+    {
+        var (world, _, _) = Setup();
+        var (charity, _) = SimIssues.Ladder("Charity", "Charity_Essential", "Charity_Important", "Charity_Worthwhile");
+        var greedy = new TraitDef { defName = "Greedy" };
+        greedy.AddModExtension(new TraitIssueLinks { links = [new TraitIssueLink { opposes = "Charity" }] });
+        var pawn = PawnWithTrait(world, new IdeoBuilder().WithName("Faith").Build(), greedy);
+
+        var (vote, spot) = StrongestVoteAt(pawn, charity, 0f)!.Value;
+
+        Assert.Null(vote.Meme);
+        Assert.Equal(greedy, vote.Trait.def);
+        Assert.Equal(0f, spot);
+    }
+
     [Fact]
     public void EverySpotOpposed_GivesNoTarget()
     {

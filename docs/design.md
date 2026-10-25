@@ -63,6 +63,8 @@ At pawn generation a stance starts at `U(5, 25)`, shifted by personality (iron-w
 A few of the weakest-held issues may start on a different rung from the faith's, so not every pawn is perfectly orthodox.
 Unreinforced conviction decays slowly toward zero.
 An issue the pawn's traits vote on instead decays toward the traits' target (see "Trait stance targets").
+The certainty loss factor multiplies the drain toward zero and divides the step toward a trait target.
+An iron-willed pawn (0.25×) thus holds stances 4× longer and asserts their innate preferences 4× faster.
 So a neglected pawn drifts back toward what their personality implies, not toward believing nothing.
 
 ### Trait stance targets

@@ -14,7 +14,7 @@ public class TraitIssueLinkTests : SeededTest
     // Seeds a pawn whose faith holds `faithRung` (null = silent) on a three-rung issue, with an optional trait.
     // Reseeds first so two calls draw the same base strengths and differ only in the trait.
     private static (IdeoTrackerData tracker, IssueDef issue, PreceptDef[] rungs) Seed(
-        int? faithRung, TraitDef? trait, int traitDegree = 0, TraitDef? secondTrait = null)
+        int? faithRung, TraitDef? trait, int traitDegree = 0, TraitDef? secondTrait = null, float certaintyLossFactor = 1f)
     {
         Rand.SetSeed(1);
         DefDatabase<PreceptDef>.Clear();
@@ -31,7 +31,7 @@ public class TraitIssueLinkTests : SeededTest
         var ideo = ideoBuilder.Build();
         world.AddIdeo(ideo);
 
-        var pawnBuilder = new PawnBuilder().WithIdeo(ideo).WithLabel("P");
+        var pawnBuilder = new PawnBuilder().WithIdeo(ideo).WithLabel("P").WithCertaintyLossFactor(certaintyLossFactor);
         if (trait != null) pawnBuilder = pawnBuilder.WithTrait(trait, traitDegree);
         if (secondTrait != null) pawnBuilder = pawnBuilder.WithTrait(secondTrait);
         var pawn = pawnBuilder.Build(world);
@@ -172,6 +172,21 @@ public class TraitIssueLinkTests : SeededTest
         DecayDays(tracker, 10);
 
         Assert.True(StanceOn(tracker, issue).rank > 0f);
+    }
+
+    [Fact]
+    public void Decay_ResistantPawnMovesTowardLinkedRungFaster()
+    {
+        float RankAfterDecay(float certaintyLossFactor)
+        {
+            var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
+            var (tracker, issue, _) = Seed(faithRung: 0, trait, certaintyLossFactor: certaintyLossFactor);
+            tracker.SetIssueStance(issue, 0f, 10f);
+            DecayDays(tracker, 10);
+            return StanceOn(tracker, issue).rank;
+        }
+
+        Assert.True(RankAfterDecay(0.25f) > RankAfterDecay(1f));
     }
 
     [Fact]

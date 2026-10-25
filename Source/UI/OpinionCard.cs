@@ -18,7 +18,7 @@ internal sealed class OpinionCard
     private const float GutterWidth = 3f;
     // Strength changes below this are not marked with an arrow. The default daily drain (about 0.007 per day)
     // stays below it over the two-day window.
-    private const float ArrowThreshold = 0.02f;
+    private const float ArrowThreshold = 0.1f;
     // A strength change of at least this (three won debates) or a rung change of at least LargeRungSwing
     // gets a double arrow.
     private const float LargeStrengthSwing = 3f;
@@ -242,9 +242,9 @@ internal sealed class OpinionCard
                     if (strengthChanged)
                         tip += "\n" + "EnhancedIdeology.StanceChangedStrength".Translate(pawn.Named("PAWN"), $"{strength - change:F1}", $"{strength:F1}");
                 }
-                if (traitTarget != null)
+                if (traitTarget != null && TraitDriftText(issue, traitTarget, rank) is { } drift)
                 {
-                    tip += "\n\n" + TraitDriftText(issue, traitTarget, rank);
+                    tip += "\n\n" + drift;
                 }
                 if (Prefs.DevMode)
                 {
@@ -448,22 +448,24 @@ internal sealed class OpinionCard
         return PreceptLadder.ClassicFallback(issue)?.LabelCap ?? "EnhancedIdeology.StanceDontCare".Translate();
     }
 
-    // What the pawn's traits oppose on the issue, and the stance they drift toward. An opposition target names
-    // no drift while the stance is on an allowed spot, because the rank stays.
-    private string TraitDriftText(IssueDef issue, TraitStanceTarget target, float rank)
+    // The strongest trait vote behind the target: the trait, the meme it (dis)approves of when the vote comes
+    // through one, and the rung it draws the pawn toward or the current stance it pushes the pawn away from.
+    // Empty while an opposition target leaves the stance on an allowed spot.
+    private string? TraitDriftText(IssueDef issue, TraitStanceTarget target, float rank)
     {
-        var lines = new List<string>();
-        if (target.Rung == null)
+        var votes = new Dictionary<IssueDef, List<TraitVote>>();
+        data.Stances.TraitTargets(votes);
+        if (target.StrongestVote(rank, votes[issue]) is not var (vote, spot)) return null;
+
+        var trait = vote.Trait.LabelCap;
+        var stance = RungLabel(issue, spot, pawn.Ideo);
+        return (vote.Meme, target.Rung != null) switch
         {
-            var opposed = target.Opposed.Keys.OrderBy(spot => spot).Select(spot => RungLabel(issue, spot, pawn.Ideo));
-            lines.Add("EnhancedIdeology.TraitDriftAgainst".Translate(pawn.Named("PAWN"), string.Join(", ", opposed)));
-        }
-        var pullRank = target.PullFrom(rank).rank;
-        if (target.Rung != null || pullRank != rank)
-        {
-            lines.Add("EnhancedIdeology.TraitDriftToward".Translate(pawn.Named("PAWN"), RungLabel(issue, pullRank, pawn.Ideo)));
-        }
-        return string.Join("\n", lines);
+            (null, true) => "EnhancedIdeology.TraitFavors".Translate(pawn.Named("PAWN"), trait, stance),
+            (null, false) => "EnhancedIdeology.TraitOpposes".Translate(pawn.Named("PAWN"), trait, stance),
+            ({ } meme, true) => "EnhancedIdeology.TraitMemeApproves".Translate(pawn.Named("PAWN"), trait, meme.LabelCap, stance),
+            ({ } meme, false) => "EnhancedIdeology.TraitMemeDisapproves".Translate(pawn.Named("PAWN"), trait, meme.LabelCap, stance),
+        };
     }
 
     // A tied rung (PreceptPolicy.TiedRungs) shares its anchor's rank, so when the pawn's own faith holds a rung

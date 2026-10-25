@@ -197,6 +197,8 @@ internal sealed class IssueStanceTracker
     // Apply conviction decay for the current game day. Returns true when decay was applied (i.e. caller
     // should mark structural opinion caches dirty). An issue with a trait target (TraitStanceTargets) moves along
     // the conviction valley toward that target. All other issues drain toward zero strength.
+    // CertaintyLossFactor scales the drain, and divides the valley step: a resistant pawn (factor < 1) keeps its
+    // stances longer and moves toward its trait targets faster.
     internal bool ApplyDecayIfNewDay()
     {
         var currentDay = GenTicks.TicksAbs / GenDate.TicksPerDay;
@@ -204,10 +206,12 @@ internal sealed class IssueStanceTracker
         _lastDecayDay = currentDay;
         _history.RecordDayStart(_preferredRank, _strength);
 
+        var basePerDay = EnhancedIdeologyMod.Settings.ConvictionDecayRate
+            / (GenDate.TicksPerSeason / (float)GenDate.TicksPerDay);
+        if (basePerDay <= 0f) return false;
         var lossFactor = _pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
-        var drainPerDay = EnhancedIdeologyMod.Settings.ConvictionDecayRate
-            / (GenDate.TicksPerSeason / (float)GenDate.TicksPerDay) / lossFactor;
-        if (drainPerDay <= 0f) return false;
+        var drainPerDay = basePerDay * lossFactor;
+        var valleyStepPerDay = basePerDay / lossFactor;
 
         var traitTargets = TraitStanceTargets.For(_pawn, _preferredRank);
         foreach (var issue in _strength.Keys.ToList())
@@ -217,7 +221,7 @@ internal sealed class IssueStanceTracker
                 var (targetRank, targetStrength) = target.PullFrom(_preferredRank[issue]);
                 var farRank = ConvictionMath.LadderExtremeAwayFrom(issue, targetRank);
                 var (rank, strength) = ConvictionMath.ValleyStep(
-                    _preferredRank[issue], _strength[issue], targetRank, farRank, targetStrength, drainPerDay);
+                    _preferredRank[issue], _strength[issue], targetRank, farRank, targetStrength, valleyStepPerDay);
                 SetStance(issue, rank, strength);
             }
             else
@@ -304,8 +308,8 @@ internal sealed class IssueStanceTracker
     private void ApplyTraitTargets(List<IssueDef> issues)
     {
         var ideo = _pawn.Ideo!;
-        var sources = EnhancedIdeologyMod.Settings.DebugInteractionWorkers ? new Dictionary<IssueDef, List<string>>() : null;
-        var targets = TraitStanceTargets.For(_pawn, _preferredRank, sources);
+        var votes = EnhancedIdeologyMod.Settings.DebugInteractionWorkers ? new Dictionary<IssueDef, List<TraitVote>>() : null;
+        var targets = TraitStanceTargets.For(_pawn, _preferredRank, votes);
         var log = new List<string>();
         foreach (var issue in issues)
         {
@@ -349,8 +353,8 @@ internal sealed class IssueStanceTracker
                 outcome = $"stance on opposed rung, strength {-penalty:+0.#;-0.#}";
             }
 
-            if (sources != null)
-                log.Add(DescribeTarget(issue, target, sources[issue], outcome));
+            if (votes != null)
+                log.Add(DescribeTarget(issue, target, votes[issue], outcome));
         }
 
         if (log.Count > 0)
@@ -360,24 +364,26 @@ internal sealed class IssueStanceTracker
     private static float Spread(float strength) =>
         strength * Rand.Range(1f - ConvictionScale.TraitSeedSpread, 1f + ConvictionScale.TraitSeedSpread);
 
-    // The trait target on each issue the pawn's traits vote on. For the opinion card.
-    internal Dictionary<IssueDef, TraitStanceTarget> TraitTargets() => TraitStanceTargets.For(_pawn, _preferredRank);
+    // The trait target on each issue the pawn's traits vote on, and the votes behind them when `votes` is given.
+    // For the opinion card.
+    internal Dictionary<IssueDef, TraitStanceTarget> TraitTargets(Dictionary<IssueDef, List<TraitVote>>? votes = null) =>
+        TraitStanceTargets.For(_pawn, _preferredRank, votes);
 
     // The pawn's trait targets on all seeded issues and the votes behind each, for the debug action.
     internal string DescribeTraitTargets()
     {
-        var sources = new Dictionary<IssueDef, List<string>>();
-        var targets = TraitStanceTargets.For(_pawn, _preferredRank, sources);
+        var votes = new Dictionary<IssueDef, List<TraitVote>>();
+        var targets = TraitStanceTargets.For(_pawn, _preferredRank, votes);
         if (targets.Count == 0) return $"{TraitTargetsHeader()}\n  no trait votes";
         return $"{TraitTargetsHeader()}\n"
-            + string.Join("\n", targets.Select(kv => DescribeTarget(kv.Key, kv.Value, sources[kv.Key], null)));
+            + string.Join("\n", targets.Select(kv => DescribeTarget(kv.Key, kv.Value, votes[kv.Key], null)));
     }
 
     private string TraitTargetsHeader() =>
         $"TraitStanceTargets: {_pawn.LabelShort} ({_pawn.Ideo?.name}), traits "
         + string.Join(" ", _pawn.story.traits.allTraits.Select(trait => $"{trait.def.defName}({trait.Degree})"));
 
-    private string DescribeTarget(IssueDef issue, TraitStanceTarget target, List<string> sources, string? outcome)
+    private string DescribeTarget(IssueDef issue, TraitStanceTarget target, List<TraitVote> votes, string? outcome)
     {
         var aim = target.Rung is { } rung
             ? $"target {TraitStanceTargets.RungName(issue, rung)}"
@@ -388,7 +394,7 @@ internal sealed class IssueStanceTracker
             + (outcome == null ? "" : $" -> {outcome}")
             + $"; now {TraitStanceTargets.RungName(issue, _preferredRank[issue])} @ {_strength[issue]:0.#}"
             + $", pull {TraitStanceTargets.RungName(issue, pullRank)} @ {pullStrength:0.#}"
-            + string.Concat(sources.Select(line => "\n    " + line));
+            + string.Concat(votes.Select(vote => "\n    " + vote.Describe(issue)));
     }
 
     private void ApplyDietGeneStanceOverride()

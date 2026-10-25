@@ -22,6 +22,23 @@ internal sealed record TraitStanceTarget(
     internal float OpposedWeight(float rank) =>
         Rung == null && Opposed.TryGetValue(NearestSpot(rank), out var weight) ? weight : 0f;
 
+    // The vote that adds the most weight to the target at `rank`, and the spot it acts on: for a support target,
+    // the strongest support for the target rung; for an opposition target, the strongest opposition to the spot
+    // nearest to `rank`. Null when the stance is on an allowed spot.
+    internal (TraitVote vote, float spot)? StrongestVote(float rank, IEnumerable<TraitVote> votes)
+    {
+        var spot = Rung ?? NearestSpot(rank);
+        if (Rung == null && !Opposed.ContainsKey(spot)) return null;
+        var supports = Rung != null;
+        var strongest = votes
+            .Where(vote => vote.Weight > 0f == supports)
+            .SelectMany(vote => vote.Rungs.Where(rung => rung.rank == spot).Select(rung => (vote, rung.weight)))
+            .OrderByDescending(entry => entry.weight)
+            .Select(entry => entry.vote)
+            .FirstOrDefault();
+        return strongest == null ? null : (strongest, spot);
+    }
+
     private static float StrengthOf(float votes) =>
         Mathf.Min(ConvictionScale.TraitVoteStrength(votes), ConvictionScale.MaxConvictionStrength);
 
@@ -48,6 +65,16 @@ internal sealed record TraitStanceTarget(
         var candidates = Spots.Where(other => !Opposed.ContainsKey(other) && (upward ? other > spot : other < spot));
         return upward ? candidates.Cast<float?>().FirstOrDefault() : candidates.Cast<float?>().LastOrDefault();
     }
+}
+
+// One trait vote on an issue. Meme is null for a direct trait link. A positive Weight supports each rung by its
+// own weight, a negative one opposes it. Source names the vote for the debug log.
+internal sealed record TraitVote(
+    Trait Trait, MemeDef? Meme, float Weight, IReadOnlyList<(float rank, float weight)> Rungs, string Source)
+{
+    internal string Describe(IssueDef issue) =>
+        $"{Weight:+0.##;-0.##} {Source} -> "
+        + string.Join(" ", Rungs.Select(rung => $"{TraitStanceTargets.RungName(issue, rung.rank)}x{rung.weight:0.##}"));
 }
 
 // Per-issue stance targets from a pawn's traits (docs/trait-meme-affinity.md). Read by seeding, brainwipe, and
@@ -114,42 +141,45 @@ internal static class TraitStanceTargets
     }
 
     // Targets for every issue in `ranks` (the pawn's current stance ranks) that the pawn's traits vote on.
-    // When `sources` is given, it receives one line per vote, for the debug log.
+    // When `votes` is given, it receives every vote on each targeted issue, for the debug log and the opinion card.
     internal static Dictionary<IssueDef, TraitStanceTarget> For(
-        Pawn pawn, IReadOnlyDictionary<IssueDef, float> ranks, Dictionary<IssueDef, List<string>>? sources = null)
+        Pawn pawn, IReadOnlyDictionary<IssueDef, float> ranks, Dictionary<IssueDef, List<TraitVote>>? votes = null)
     {
         var net = new Dictionary<IssueDef, Dictionary<float, float>>();
 
         // One vote of `weight` on `issue`, supporting (weight > 0) or opposing (weight < 0) each rung by its own weight.
-        void Vote(IssueDef issue, float weight, IEnumerable<(float rank, float weight)> rungs, string? source)
+        // A meme vote names the meme; a direct trait link names its trait and the kind of link.
+        void Vote(IssueDef issue, float weight, IReadOnlyList<(float rank, float weight)> rungs,
+            MemeDef? meme, Trait? trait = null, string linkKind = "")
         {
             if (!ranks.ContainsKey(issue) || UntargetedIssues.Contains(issue.defName)) return;
             if (!net.TryGetValue(issue, out var byRank)) net[issue] = byRank = [];
             foreach (var (rank, rungWeight) in rungs)
                 byRank[rank] = byRank.GetValueOrDefault(rank) + Mathf.Sign(weight) * rungWeight;
-            if (sources == null) return;
-            if (!sources.TryGetValue(issue, out var lines)) sources[issue] = lines = [];
-            var rungText = string.Join(" ", rungs.Select(rung => $"{RungName(issue, rung.rank)}x{rung.weight:0.##}"));
-            lines.Add($"{weight:+0.##;-0.##} {source} -> {rungText}");
+            if (votes == null) return;
+            if (!votes.TryGetValue(issue, out var issueVotes)) votes[issue] = issueVotes = [];
+            issueVotes.Add(meme == null
+                ? new TraitVote(trait!, null, weight, rungs, $"trait {TraitName(trait!.def, trait.Degree)}{linkKind}")
+                : new TraitVote(ListedTrait(meme, pawn, agreeable: weight > 0f), meme, weight, rungs,
+                    $"meme {meme.defName} via {MemeListingNames(meme, pawn)}"));
         }
 
         foreach (var (trait, link) in TraitIssueLinks.ActiveFor(pawn))
         {
-            var source = sources == null ? null : $"trait {TraitName(trait.def, trait.Degree)}";
             if (link.Rung is { issue: { } issue } rung && PreceptLadder.RankOf(rung) is var rank and >= 0f)
             {
-                Vote(issue, 1f, [(rank, 1f)], source);
+                Vote(issue, 1f, [(rank, 1f)], null, trait);
             }
             else if (link.opposes != null
                 && DefDatabase<IssueDef>.GetNamedSilentFail(link.opposes) is { } opposedIssue
                 && PreceptPolicy.ValuedRank(opposedIssue) is { } valuedRank)
             {
-                Vote(opposedIssue, -1f, [(valuedRank, 1f)], source + " opposes");
+                Vote(opposedIssue, -1f, [(valuedRank, 1f)], null, trait, " opposes");
             }
             else if (link.indifferent != null
                 && DefDatabase<IssueDef>.GetNamedSilentFail(link.indifferent) is { } indifferentIssue)
             {
-                Vote(indifferentIssue, 1f, [(PreceptLadder.IndifferentRank(indifferentIssue), 1f)], source + " indifferent");
+                Vote(indifferentIssue, 1f, [(PreceptLadder.IndifferentRank(indifferentIssue), 1f)], null, trait, " indifferent");
             }
         }
 
@@ -158,9 +188,8 @@ internal static class TraitStanceTargets
             var listings = MemeListings(meme, pawn);
             if (listings == 0f) continue;
             var scale = Mathf.Abs(listings);
-            var source = sources == null ? null : $"meme {meme.defName} via {MemeListingNames(meme, pawn)}";
             foreach (var (issue, byRank) in byIssue)
-                Vote(issue, listings * byRank.Values.Max(), byRank.Select(kv => (kv.Key, scale * kv.Value)), source);
+                Vote(issue, listings * byRank.Values.Max(), byRank.Select(kv => (kv.Key, scale * kv.Value)).ToList(), meme);
         }
 
         var targets = new Dictionary<IssueDef, TraitStanceTarget>();
@@ -209,6 +238,13 @@ internal static class TraitStanceTargets
             foreach (var trait in meme.disagreeableTraits)
                 if (trait.HasTrait(pawn)) listings -= DisagreeableMemeWeight;
         return listings;
+    }
+
+    // The first of the pawn's traits in the meme's agreeableTraits, or in its disagreeableTraits.
+    private static Trait ListedTrait(MemeDef meme, Pawn pawn, bool agreeable)
+    {
+        var listed = (agreeable ? meme.agreeableTraits : meme.disagreeableTraits)!.First(trait => trait.HasTrait(pawn));
+        return pawn.story.traits.GetTrait(listed.def!)!;
     }
 
     // The pawn's traits that the meme lists, "+" for agreeable and "-" for disagreeable.
