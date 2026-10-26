@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | Zur Frage {1} hat {PAWN_nameDef} die Haltung {2} mit Überzeugung {3}. {IDEO_name} predigt {5}; {PAWN_nameDef}s Meinung zu dieser Haltung: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Seit gestern hat sich die Haltung von {PAWN_nameDef} von {1} zu {2} verschoben. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Seit gestern ist die Überzeugung von {PAWN_nameDef} von {1} auf {2} gegangen. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Sich selbst überlassen, zieht die Persönlichkeit von {PAWN_nameDef} zu {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Die Persönlichkeit von {PAWN_nameDef} ist gegen {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. |  |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. |  |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. |  |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. |  |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}s Meinung über {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | Aus Glaubensgrundlagen und Geboten: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Aus persönlichen Überzeugungen: {0} |
