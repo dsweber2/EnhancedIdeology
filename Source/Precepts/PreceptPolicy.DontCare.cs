@@ -189,6 +189,11 @@ internal static partial class PreceptPolicy
         ["AC_CrossSleeving"] = DontCareSpec.At("AC_CrossSleeving_DontCare"),
         ["AC_StackDuplicating"] = DontCareSpec.At("AC_StackDuplicating_DontCare"),
         ["AC_XenoSleeving"] = DontCareSpec.At("AC_XenoSleeving_DontCare"),
+        // A Rim of Ice and Fire. Each rung has a default weight but needs a Westerosi meme, so no other faith takes it.
+        ["ARIOIAF_Lineage"] = DontCareSpec.After("ARIOIAF_Lineage_Pure"),
+        ["ARIOIAF_Death"] = DontCareSpec.After("ARIOIAF_Death_DontCare"),
+        ["ARIOIAF_Expectations"] = DontCareSpec.Before("ARIOIAF_Expectations_Low"),
+        ["ARIOIAF_Royalty"] = DontCareSpec.After("ARIOIAF_Royalty_Respected"),
     };
 
     // Rank of indifference where it is not the neutral stance, read by PreceptLadder.IndifferentRank. Neutral

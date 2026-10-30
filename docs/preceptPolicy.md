@@ -163,11 +163,18 @@ Rungs listed pro → anti. `— neutral —` marks where Don't-care sits.
 `Pain` uses `After("VME_Pain_DontCare").Or(After("Pain_Idealized"))` (`Or` is the fallback when the first rung is absent), `DarknessCombat` `After("DarknessCombat_Preferred")`, `Lighting` `Before("Darklight_Preferred")`, `Proselytizing` `After("Proselytizing_Occasionally")`.
 The older `Eclipse` entry (`Between("Eclipse_Beautiful", "VME_Eclipse_Despised")`) has this collapse without VME; not changed here.
 
-**Psychic sensitivity with both mods loaded** ✓: one axis must not count twice. Deferred; tracked in [todo.md](../todo.md).
-(p) `VME_PsychicSensitivity` holds the opinion, and `AM_PsychicSensitivity` drops to PositiveOnly.
-The AM rungs then induce the VME rungs (`AM_..._Heightened` → `VME_..._Heightened`, `AM_..._Affinity` → `VME_..._Lowered`), so a faith that holds only the AM precept still has a stance on the axis.
+**Copies of a VME issue** ✓ (`PreceptPolicy.DuplicateOf`): one axis must not count twice.
+When the VME issue is loaded, it holds the opinion, and the copy drops to PositiveOnly.
+The copy's rungs then induce the VME rungs, so a faith that holds only the copy still has a stance on the axis.
 An explicit VME precept wins over the induced one, as with every induced stance.
-With only Alpha Memes loaded, `AM_PsychicSensitivity` is Moral on its own.
+Without VME, the copy is Moral on its own.
+
+| copy | VME issue | induced rungs |
+| --- | --- | --- |
+| `AM_PsychicSensitivity` | `VME_PsychicSensitivity` | `Heightened` → `Heightened`, `Affinity` → `Lowered` |
+| `ARIOIAF_Death` | `VME_Death` | `DontCare` → `DontCare` |
+| `ARIOIAF_Expectations` | `VME_Expectations` | `Low` → `Low` |
+| `ARIOIAF_Royalty` | `VME_Royalty` | `Exalted` → `Exalted`, `Respected` → `Respected` |
 
 ### Single-rung value claims
 
@@ -336,6 +343,26 @@ Ladders are listed in rank order. A tied rung shares its anchor's rank.
 
 The log counted 16 `SUF_Torture` rungs and 5 `RS_Issue_Pregnancy` rungs; the released mods ship 9 and 3.
 Some other mod adds rungs that we have not seen. They keep their display order after the listed rungs.
+
+**A Rim of Ice and Fire** ✓ (`lordfelix.ARimOfIceAndFire`).
+Every rung it adds has `defaultSelectionWeight` 1 but needs a Westerosi meme, so each Moral issue below has a `DontCare` entry; otherwise the lone rung would be the neutral.
+
+| issue | category | ladder | neutral | why |
+| --- | --- | --- | --- | --- |
+| ARIOIAF_Lineage | Moral | `Pure` | after `Pure` | marrying within the bloodline; an ordinary outsider objects |
+| ARIOIAF_Death | Moral, copy of `VME_Death` | `DontCare` | after `DontCare` | see "Copies of a VME issue" |
+| ARIOIAF_Expectations | Moral, copy of `VME_Expectations` | `Low` | before `Low` | as above |
+| ARIOIAF_Royalty | Moral, copy of `VME_Royalty` | `Exalted` → `Respected` | after `Respected` | the text is VME's; `Respected` (order 40) sorts before `Exalted` (50), so an order override fixes it |
+| ARIOIAF_IronPrice | PositiveOnly | `Demanded` | — | "the strong take their due": induces `Raiding_Respected` instead of a separate axis |
+
+`IntrigueConduct`, `RightfulRule`, `Authority`, `LeaderSelection`, `KnightlyConduct`, `FeudalAllegiance`, `Oathkeeping`, `Sea`, `Snow`, `TitleInheritance`, `PermitCooldown` and `PermitHonorCost` stay PositiveOnly.
+The feudal ones make a claim that no ladder opposes, so a silent pawn would read as hostile to every Westerosi faith.
+
+Rungs on vanilla issues:
+- `ARIOIAF_FungusEating_DontCare` joins the `FungusEating` order override between the other "don't care" rungs and `Despised`.
+- `ARIOIAF_Proselytizing_Occasionally` copies `Proselytizing_Occasionally` (factor 3, order 20) for the Faith of the Seven, so it is a tied rung.
+- `ARIOIAF_Skullspike_DontCare` has a default weight, so it moves the `Skullspike` neutral to between itself and `Disapproved`.
+  No precept means no skullspike thoughts, so the move is accepted.
 
 **PositiveOnly:** `AM_CombatProwess`, `AM_HuntFocus`, `PA_AmmoHandling` (reload stat modifiers), `AP_TrophyHunterPreceptIssue` (hunting style), and the mechanical perks (`*Speed`/`*Yield`/`*Rate`/`Cooldown`).
 The value-claim issues that used to sit here (`VME_Death`, `VME_Power`, `VME_Junk`, `AM_Armour`, `AM_Barracks`,

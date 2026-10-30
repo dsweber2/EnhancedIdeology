@@ -126,7 +126,19 @@ internal static partial class PreceptPolicy
         "AC_Stacking", "AC_Sleeving", "AC_CrossSleeving", "AC_StackDuplicating", "AC_XenoSleeving",
         // One-sided pro ladders: a silent outsider sits at the default neutral, before rank 0.
         "VFEP_Camaraderie", "ROBTRG_Hospitality",
+        // A Rim of Ice and Fire. Death, Expectations and Royalty copy VME issues (see DuplicateOf).
+        "ARIOIAF_Lineage", "ARIOIAF_Death", "ARIOIAF_Expectations", "ARIOIAF_Royalty",
     ];
+    // Issues that copy the axis of an issue from another mod, keyed copy -> original. When the original is loaded,
+    // the copy is PositiveOnly and its rungs induce the original's rungs (InducedByPrecept), so the axis counts once.
+    // Without the original, the copy uses its own category.
+    private static readonly Dictionary<string, string> DuplicateOf = new()
+    {
+        ["AM_PsychicSensitivity"] = "VME_PsychicSensitivity",
+        ["ARIOIAF_Death"] = "VME_Death",
+        ["ARIOIAF_Expectations"] = "VME_Expectations",
+        ["ARIOIAF_Royalty"] = "VME_Royalty",
+    };
     // UniversalPositive issue -> the rung that values it most. A trait that opposes the issue pulls away from it.
     private static readonly Dictionary<string, string> UniversalPositiveValuedRung = new()
     {
@@ -228,7 +240,7 @@ internal static partial class PreceptPolicy
         ["FungusEating"] =
         [
             "AM_FungusEating_Required", "FungusEating_Preferred", "VME_FungusEating_DontCare",
-            "BMT_FungusEating_DontCare", "FungusEating_Despised",
+            "BMT_FungusEating_DontCare", "ARIOIAF_FungusEating_DontCare", "FungusEating_Despised",
         ],
         // GauranlenConnection_Strong (Ideology) and AM_GauranlenConnection_Forbidden (AlphaMemes) both
         // default to order 0.
@@ -325,6 +337,8 @@ internal static partial class PreceptPolicy
         ["AC_Sleeving"] = ["AC_Sleeving_Demanded", "AC_Sleeving_Preferred", "AC_Sleeving_Despised"],
         ["AC_StackDuplicating"] = ["AC_StackDuplicating_Enlightened", "AC_StackDuplicating_DontCare", "AC_StackDuplicating_Horrible"],
         ["AC_XenoSleeving"] = ["AC_XenoSleeving_DontCare", "AC_XenoSleeving_Despised"],
+        // Respected (order 40) sorts before Exalted (50); VME_Royalty runs Exalted first.
+        ["ARIOIAF_Royalty"] = ["ARIOIAF_Royalty_Exalted", "ARIOIAF_Royalty_Respected"],
     };
 
     // Rungs that share the rank of an anchor rung on the same issue, keyed tied rung -> anchor. They express
@@ -340,6 +354,8 @@ internal static partial class PreceptPolicy
         ["RS_Marriage_FemaleOnly"] = "RS_Marriage_MaleOnly",
         // Penance objects to torturing outsiders as Horrible does; its approval of self-torture is off this axis.
         ["SUF_Torture_Penance"] = "SUF_Torture_Horrible",
+        // A Rim of Ice and Fire: the same rung for the Faith of the Seven (factor 3, order 20).
+        ["ARIOIAF_Proselytizing_Occasionally"] = "Proselytizing_Occasionally",
     };
 
     // Sim/test hook: register a category for an issue absent from the hardcoded tables (test ladders are Moral).
@@ -381,6 +397,8 @@ internal static partial class PreceptPolicy
             return overridden;
         }
 
+        if (DuplicateOf.TryGetValue(defName, out var original) && DefDatabase<IssueDef>.GetNamedSilentFail(original) != null)
+            return PreceptCategory.PositiveOnly;
         if (MoralIssues.Contains(defName)) return PreceptCategory.Moral;
         if (UniversalPositiveValuedRung.ContainsKey(defName)) return PreceptCategory.UniversalPositive;
         if (SpecialIssues.Contains(defName)) return PreceptCategory.Special;

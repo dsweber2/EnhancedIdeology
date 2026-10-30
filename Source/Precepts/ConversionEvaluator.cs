@@ -255,6 +255,10 @@ internal static class ConversionEvaluator
         var oldBase = data.DetailedIdeoOpinion(oldIdeo!).BaseOpinion;
         data.AdjustPersonalOpinion(oldIdeo!, oldCertainty - oldBase);
 
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
+            $"ApplyConversion: {pawn} {oldIdeo} -> {newIdeo}, certainty {oldCertainty:F3} -> {newCertainty:F3} " +
+            $"(opinionOfNew {opinionOfNew:F3}), old ideo structural {oldBase:F3}, personal offset {oldCertainty - oldBase:+0.000;-0.000}");
+
         Find.PlayLog.Add(new PlayLogEntry_Conversion(pawn, newIdeo));
 
         if (!oldIdeoContains)

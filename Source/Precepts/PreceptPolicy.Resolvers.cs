@@ -144,7 +144,7 @@ internal static partial class PreceptPolicy
             {
                 var rungCount = DefDatabase<PreceptDef>.AllDefs.Count(p => p.issue == issue);
                 if (rungCount >= 2 && CategoryOf(issue) == PreceptCategory.PositiveOnly
-                    && !KnownPositiveOnlyIssues.Contains(issue.defName))
+                    && !KnownPositiveOnlyIssues.Contains(issue.defName) && !DuplicateOf.ContainsKey(issue.defName))
                     Log.Error($"[EnhancedBeliefs] Unclassified multi-rung issue '{issue.defName}' ({rungCount} rungs) from mod '{issue.modContentPack?.Name ?? "unknown"}' — please let the EnhancedBeliefs author know.\n{DescribeRungs(issue)}");
             }
         }
@@ -187,6 +187,15 @@ internal static partial class PreceptPolicy
         ["AM_SanguophageCamps_RaidingDesired"] = InducedStance.Rung("Bloodfeeders", "Bloodfeeders_Reviled"),
         ["VME_LeatherApparel_Disliked"] = InducedStance.Rung("AnimalSlaughter", "AnimalSlaughter_Disapproved"),
         ["VME_LeatherApparel_Abhorrent"] = InducedStance.Rung("AnimalSlaughter", "AnimalSlaughter_Horrible"),
+        // "The strong still take their due."
+        ["ARIOIAF_IronPrice_Demanded"] = InducedStance.Rung("Raiding", "Raiding_Respected"),
+        // Copies of another mod's issue (DuplicateOf) carry their axis onto the original's ladder.
+        ["AM_PsychicSensitivity_Heightened"] = InducedStance.Rung("VME_PsychicSensitivity", "VME_PsychicSensitivity_Heightened"),
+        ["AM_PsychicSensitivity_Affinity"] = InducedStance.Rung("VME_PsychicSensitivity", "VME_PsychicSensitivity_Lowered"),
+        ["ARIOIAF_Death_DontCare"] = InducedStance.Rung("VME_Death", "VME_Death_DontCare"),
+        ["ARIOIAF_Expectations_Low"] = InducedStance.Rung("VME_Expectations", "VME_Expectations_Low"),
+        ["ARIOIAF_Royalty_Exalted"] = InducedStance.Rung("VME_Royalty", "VME_Royalty_Exalted"),
+        ["ARIOIAF_Royalty_Respected"] = InducedStance.Rung("VME_Royalty", "VME_Royalty_Respected"),
     };
 
     // Directional penalties for couplings where the target issue is single-rung (no anti-stance to grade

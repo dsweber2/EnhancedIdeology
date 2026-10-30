@@ -118,7 +118,25 @@ def discover_mods() -> list[Mod]:
     return sorted(mods.values(), key=lambda mod: mod.order)
 
 
+def load_folders(mod: Mod) -> list[Path] | None:
+    """Folders that LoadFolders.xml lists for GAME_VERSION, with every IfModActive condition taken as met."""
+    config = mod.root / "LoadFolders.xml"
+    if not config.is_file():
+        return None
+    try:
+        version = ET.parse(config).getroot().find(f"v{GAME_VERSION}")
+    except ET.ParseError:
+        return None
+    if version is None:
+        return None
+    return [mod.root / (li.text or "").strip().strip("/") for li in version.iter("li")]
+
+
 def def_files(mod: Mod):
+    if (folders := load_folders(mod)) is not None:
+        for folder in folders:
+            yield from sorted((folder / "Defs").rglob("*.xml"))
+        return
     for path in mod.root.rglob("*.xml"):
         parts = path.relative_to(mod.root).parts[:-1]
         if not path.is_file() or "Defs" not in parts:
@@ -393,7 +411,8 @@ def render(catalog: Catalog, policy: dict[str, str]) -> str:
         "- **Linked memes / issues** come from `requiredMemes`, `associatedMemes` and the meme's `requireOne` and `selectOneOrNone`, the same links that trait–meme conviction seeding follows.",
         "  In the meme tables, debatable issues are in bold.",
         "- **Agreeable / Disagreeable** are the traits in the meme def itself; trait-mod patches are not applied (see trait-meme-affinity.md for those).",
-        "- Only defs under the root, `Common/`, or `1.6/` folders are read, so mods without 1.6 content do not appear.",
+        "- Defs are read from the folders that a mod's `LoadFolders.xml` lists for 1.6, with every mod condition taken as met.",
+        "  A mod with no `LoadFolders.xml` is read everywhere except folders for other game versions.",
         "",
     ]
     return "\n".join(align_tables(header + render_memes(catalog, policy, meme_issues)

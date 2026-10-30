@@ -25,6 +25,10 @@ internal static class CompAbilityEffect_Convert_Apply
 
         var certaintyBefore = recipient.ideo.Certainty;
         var issues = AbilityConversion.RollTargetIssues(recipientTracker, guide.Ideo, guideTracker);
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
+            $"Convert ability cast: {guide} -> {recipient}, preview winChance={InteractionWorker_IdeologicalDebatePrecept.WinChance(guide, recipient):F3} " +
+            $"conversionChance={recipientTracker.ConversionChanceAfterKnock(guide.Ideo, EnhancedIdeologyMod.Settings.ConversionCertaintyKnock):F3}, " +
+            $"issues=[{string.Join(", ", issues.Select(issue => $"{issue.defName} {recipientTracker.IssueOpinionToward(guide.Ideo, issue):+0.00;-0.00}"))}]");
 
         // A win runs CheckConversion inside Resolve, which already switches the recipient's ideo - so, unlike
         // vanilla, we do not force SetIdeo here.

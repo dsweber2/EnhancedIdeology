@@ -37,6 +37,8 @@ internal static class AbilityConversion
         var recipientRoll = InteractionWorker_IdeologicalDebatePrecept.GetDebateRoll(recipient);
         if (Math.Abs(guideRoll - recipientRoll) <= InteractionWorker_IdeologicalDebatePrecept.DebateDrawThreshold)
         {
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
+                $"AbilityConversion draw: {guide} -> {recipient}");
             return false;
         }
 
@@ -51,8 +53,14 @@ internal static class AbilityConversion
 
             var certaintyBefore = recipientTracker.ExtendedCertainty;
             recipientTracker.SetExtendedCertainty(certaintyBefore * EnhancedIdeologyMod.Settings.ConversionCertaintyKnock);
+            EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
+                $"AbilityConversion win: {guide} -> {recipient}, opinion of {guideIdeo} {opinionBefore:F3} -> {recipientTracker.IdeoOpinion(guideIdeo):F3} after pulls, " +
+                $"certainty {certaintyBefore:F3} -> {recipientTracker.ExtendedCertainty:F3} after knock");
             return recipientTracker.CheckConversion(guideIdeo, noBreakdown: true) == ConversionOutcome.Success;
         }
+
+        EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers,
+            $"AbilityConversion loss: {guide} -> {recipient}, guide pulled on {issues[0]}");
 
         var topIssue = issues[0];
         var recipientRank = recipientTracker.IssueStances().First(stance => stance.issue == topIssue).rank;
