@@ -265,7 +265,8 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
     // them. Each side argues from their personal stance (see AdjustOpinions).
     // Only issues that feed structural opinion qualify (PreceptPolicy.IsDebatable), and not an issue muted for
-    // the faith of either pawn (PreceptPolicy.IsMuted).
+    // the faith of either pawn (PreceptPolicy.IsMuted), and not an issue moot between the two faiths
+    // (PreceptPolicy.IsMootBetween).
     private static List<(PreceptDef precept, IssueDef issue)> DebatableIssues(
         Ideo initiatorIdeo, Ideo recipientIdeo,
         Dictionary<IssueDef, (float rank, float strength)> initiatorStances,
@@ -277,6 +278,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             .Where(topic => PreceptPolicy.IsDebatable(topic.issue)
                 && !PreceptPolicy.IsMuted(initiatorIdeo, topic.issue)
                 && !PreceptPolicy.IsMuted(recipientIdeo, topic.issue)
+                && !PreceptPolicy.IsMootBetween(initiatorIdeo, recipientIdeo, topic.issue)
                 && initiatorStances.ContainsKey(topic.issue)
                 && recipientStances.ContainsKey(topic.issue)
                 && Disagree(initiatorStances[topic.issue], recipientStances[topic.issue]))

@@ -287,7 +287,9 @@ internal static class StructuralOpinionCalculator
         float oppositionScale,
         out bool graded)
     {
-        graded = true;
+        graded = !PreceptPolicy.IsMootBetween(pawnIdeo, targetIdeo, issue);
+        if (!graded)
+            return 0f;
         var category = PreceptPolicy.CategoryOf(issue);
         if (category == PreceptCategory.Moral || inducedTargets.Contains(issue))
         {

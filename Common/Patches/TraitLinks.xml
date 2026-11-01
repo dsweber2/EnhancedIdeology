@@ -1111,6 +1111,34 @@
 					</nomatch>
 				</li>
 				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/agreeableTraits</xpath>
+						<value><li>BodyPurist</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+							<value><agreeableTraits><li>BodyPurist</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/disagreeableTraits</xpath>
+						<value><li>BodyPurist</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+							<value><disagreeableTraits><li>BodyPurist</li></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
 					<xpath>/Defs/MemeDef[defName="VME_Fleshcrafters"]/disagreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="VME_Fleshcrafters"]/disagreeableTraits</xpath>
@@ -3968,6 +3996,103 @@
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="VME_HolyDiseases"]</xpath>
 							<value><agreeableTraits><li>Masochist</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- NR_AlienInFlesh -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="NR_AlienInFlesh"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/disagreeableTraits</xpath>
+						<value><li>NR_AlienInFlesh</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+							<value><disagreeableTraits><li>NR_AlienInFlesh</li></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+						<value><li>NR_AlienInFlesh</li><li>NR_AlienInFlesh</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+							<value><agreeableTraits><li>NR_AlienInFlesh</li><li>NR_AlienInFlesh</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- NR_NaturalNetrunner -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="NR_NaturalNetrunner"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/disagreeableTraits</xpath>
+						<value><li>NR_NaturalNetrunner</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+							<value><disagreeableTraits><li>NR_NaturalNetrunner</li></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+						<value><li>NR_NaturalNetrunner</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+							<value><agreeableTraits><li>NR_NaturalNetrunner</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- NR_NetVeteran -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="NR_NetVeteran"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+						<value><li>NR_NetVeteran</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+							<value><agreeableTraits><li>NR_NetVeteran</li></agreeableTraits></value>
 						</match>
 					</nomatch>
 				</li>
@@ -6875,6 +7000,20 @@
 					</nomatch>
 				</li>
 				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]/agreeableTraits</xpath>
+						<value><li>ST_TechWhiz</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]</xpath>
+							<value><agreeableTraits><li>ST_TechWhiz</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
 					<xpath>/Defs/MemeDef[defName="Transhumanist"]/agreeableTraits</xpath>
 					<match Class="PatchOperationAdd">
 						<xpath>/Defs/MemeDef[defName="Transhumanist"]/agreeableTraits</xpath>
@@ -7660,6 +7799,34 @@
 						<xpath>/Defs/MemeDef[defName="GR_MadScientists"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="GR_MadScientists"]</xpath>
+							<value><agreeableTraits><li>Transhumanist</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/disagreeableTraits</xpath>
+						<value><li>Transhumanist</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+							<value><disagreeableTraits><li>Transhumanist</li></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/agreeableTraits</xpath>
+						<value><li>Transhumanist</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
 							<value><agreeableTraits><li>Transhumanist</li></agreeableTraits></value>
 						</match>
 					</nomatch>
@@ -10303,6 +10470,48 @@
 						<xpath>/Defs/MemeDef[defName="MI_Industrialist"]</xpath>
 						<match Class="PatchOperationAdd">
 							<xpath>/Defs/MemeDef[defName="MI_Industrialist"]</xpath>
+							<value><disagreeableTraits><li>VTE_Technophobe</li></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/agreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]/agreeableTraits</xpath>
+						<value><li>VTE_Technophobe</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_DigitalPurity"]</xpath>
+							<value><agreeableTraits><li>VTE_Technophobe</li></agreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]/disagreeableTraits</xpath>
+						<value><li>VTE_Technophobe</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_MachineRevelation"]</xpath>
+							<value><disagreeableTraits><li>VTE_Technophobe</li></disagreeableTraits></value>
+						</match>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/disagreeableTraits</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]/disagreeableTraits</xpath>
+						<value><li>VTE_Technophobe</li></value>
+					</match>
+					<nomatch Class="PatchOperationConditional">
+						<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
+						<match Class="PatchOperationAdd">
+							<xpath>/Defs/MemeDef[defName="NR_Meme_NetAscension"]</xpath>
 							<value><disagreeableTraits><li>VTE_Technophobe</li></disagreeableTraits></value>
 						</match>
 					</nomatch>

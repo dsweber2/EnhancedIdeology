@@ -104,6 +104,14 @@ internal static partial class PreceptPolicy
             .Distinct()
             .ToList()!;
 
+    // VXF_XenotypeStrictness sets how strictly a pawn must match a preferred xenotype. When neither faith prefers
+    // a xenotype, no rung has an effect, so the two faiths have nothing to disagree about on it.
+    internal static bool IsMootBetween(Ideo pawnIdeo, Ideo targetIdeo, IssueDef issue) =>
+        issue.defName == "VXF_XenotypeStrictness" && !HasPreferredXenotype(pawnIdeo) && !HasPreferredXenotype(targetIdeo);
+
+    private static bool HasPreferredXenotype(Ideo ideo) =>
+        ideo.precepts.OfType<Precept_Xenotype>().Any(precept => precept.xenotype != null || precept.customXenotype != null);
+
     // VME_Mood: linear high/normal/low ladder with two pariah rungs bolted on. Either pariah disagrees with
     // everything but its own kind; linear rungs grade by distance among themselves.
     private static float MoodOpinion(IssueDef issue, float pawnRank, float targetRank, float strength, float oppositionScale)

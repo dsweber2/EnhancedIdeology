@@ -205,6 +205,8 @@ internal static partial class PreceptPolicy
         ["ARIOIAF_IronPrice"] = DontCareSpec.After("ARIOIAF_IronPrice_Demanded"),
         ["ARIOIAF_Sea"] = DontCareSpec.After("ARIOIAF_Sea_Revered"),
         ["ARIOIAF_Snow"] = DontCareSpec.After("ARIOIAF_Snow_Beautiful"),
+        // No default rung. Wary already gives mood penalties for dives and trace, so no precept is past it.
+        ["NR_NetCulture"] = DontCareSpec.Between("NR_NetCulture_Wary", "NR_NetCulture_Sacred"),
     };
 
     // Rank of indifference where it is not the neutral stance, read by PreceptLadder.IndifferentRank. Neutral

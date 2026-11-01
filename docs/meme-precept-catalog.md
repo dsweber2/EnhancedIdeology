@@ -27,7 +27,7 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | Collectivist              | collectivist      | meme      | ApparelDesire, **Barracks**, **ChildLabor**, **DrugUse**, **Execution**, **Lovin**, **OrganUse**, **RS_Issue_Divorce**, **Slavery**, WorkDrive                                                                                                                                   |                                    |                | Each person is part of a greater whole.                                                |
 | Darkness                  | darkness          | meme      | **DarknessCombat**, **Eclipse**, **FungusEating**, IdeoRole, **Lighting**, **VME_Aurora**                                                                                                                                                                                        |                                    |                | Bright light burns and destroys!                                                       |
 | FemaleSupremacy           | female supremacy  | meme      | ApparelDesire, **MarriageName**, **Nudity_Male**, **RS_Issue_Divorce**, **RS_Issue_Marriage**, **SpouseCount_Female**                                                                                                                                                            | DislikesMen                        |                | Women are the superior gender and should rule.                                         |
-| FleshPurity               | flesh purity      | meme      | **Alcohol**, **BodyModification**, **DrugPossession**, **DrugUse**, **GrowthVat**, IdeoRole, **OrganUse**, **WCE2_Torture**                                                                                                                                                      | BodyPurist, Nudist                 | Transhumanist  | The human body should not be debased.                                                  |
+| FleshPurity               | flesh purity      | meme      | **Alcohol**, **BodyModification**, **DrugPossession**, **DrugUse**, **GrowthVat**, IdeoRole, **OrganUse**, VXF_XenotypeStrictness, **WCE2_Torture**                                                                                                                              | BodyPurist, Nudist                 | Transhumanist  | The human body should not be debased.                                                  |
 | Guilty                    | guilty            | meme      | Charity, **Compassion**, NikolaisIdeology_Neutors, **Pain**, **RS_Issue_Pregnancy**, **Slavery**, **WCE2_Torture**                                                                                                                                                               |                                    |                | Our people carry guilt from ages past.                                                 |
 | HighLife                  | high life         | meme      | ApparelDesire, **DrugUse**, IdeoRole                                                                                                                                                                                                                                             | DrugDesire (1), DrugDesire (2)     |                | Exotic states of mind are central to a good life.                                      |
 | HumanPrimacy              | human primacy     | meme      | **Bonding**, IdeoRole                                                                                                                                                                                                                                                            |                                    |                | Humans are the moral center of the universe.                                           |
@@ -41,7 +41,7 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | Raider                    | raider            | meme      | **Corpses**, **Execution**, IdeoRole, **LanguageLearning**, **OrganUse**, **Raiding**, Ritual, **Skullspike**, **WCE2_Torture**, WeaponProficiency                                                                                                                               |                                    |                | The strong should take from the weak.                                                  |
 | Rancher                   | rancher           | meme      | IdeoRole, **Ranching**                                                                                                                                                                                                                                                           |                                    |                | Raising animals is the right way; raising plants to eat is not.                        |
 | Supremacist               | supremacist       | meme      | **Corpses**, **Execution**, IdeoRole, **LanguageLearning**, Ritual, **Skullspike**, **Slavery**, **WCE2_Torture**, WeaponProficiency                                                                                                                                             |                                    |                | Our people should dominate all others.                                                 |
-| Transhumanist             | transhumanist     | meme      | **AgeReversal**, ApparelDesire, **Biosculpting**, **BodyModification**, **GrowthVat**, IdeoRole, NeuralSupercharge, **NutrientPasteEating**, Ritual, SleepAccelerator                                                                                                            | Transhumanist                      | BodyPurist     | Human progress means merging with technology.                                          |
+| Transhumanist             | transhumanist     | meme      | **AgeReversal**, ApparelDesire, **Biosculpting**, **BodyModification**, **GrowthVat**, IdeoRole, NeuralSupercharge, **NutrientPasteEating**, Ritual, SleepAccelerator, VXF_XenotypeStrictness                                                                                    | Transhumanist                      | BodyPurist     | Human progress means merging with technology.                                          |
 | TreeConnection            | tree connection   | meme      | **GauranlenConnection**, IdeoRole, Ritual, **RoughLiving**, Temperature, **Trees**                                                                                                                                                                                               |                                    |                | Trees are the essence of life, and we must be near them.                               |
 | Tunneler                  | tunneler          | meme      | **FungusEating**, IdeoRole, **Indoors**, **InsectMeat**, MiningYield                                                                                                                                                                                                             | Undergrounder                      |                | Humans ought to live underground, and enjoy the succulent fruit of the depths.         |
 | Structure_Animist         | animist           | structure |                                                                                                                                                                                                                                                                                  |                                    |                | Spirits live in everything around us.                                                  |
@@ -309,6 +309,14 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 |----------------+--------------+------+-----------------------------------+-----------+--------------+--------------------------------------------------------------------|
 | DP_DeepCalling | deep calling | meme | DP_Diving, DP_SeaFare, DP_Surface |           |              | People came out of the water once and have been uneasy ever since. |
 | DP_SeaKeeping  | sea keeping  | meme | DP_SeaLife                        |           |              | The sea was whole before us.                                       |
+
+### Hacking Expansion: Netrun (`gafarovmaxim.hackingexpansionnetrun`, inactive)
+
+| Meme                      | Label              | Kind | Linked issues                       | Agreeable | Disagreeable | Description                                    |
+|---------------------------+--------------------+------+-------------------------------------+-----------+--------------+------------------------------------------------|
+| NR_Meme_DigitalPurity     | digital purity     | meme | NR_AI, NR_Braindance, NR_NetCulture |           |              | The net rots the mind.                         |
+| NR_Meme_MachineRevelation | machine revelation | meme | IdeoRole, NR_AI, Ritual             |           |              | Awakened AIs are vessels of a higher mind.     |
+| NR_Meme_NetAscension      | net ascension      | meme | IdeoRole, NR_NetCulture, Ritual     |           |              | The body is a shell; the net is our true home. |
 
 ### Humanoid Alien Races (`erdelf.humanoidalienraces`, inactive)
 
@@ -688,6 +696,12 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 |----------------------+---------------+------------------------+------------------+-----------------|
 | GS_GraceTouchedIssue | Grace-touched | PositiveOnly (default) | revered, Reviled | GS_Gracetouched |
 
+### Birds of a Feather - A simple, consensual incest mod (`lovelydovey.birdsofafeather`, inactive)
+
+| Issue      | Label  | Category               | Rungs           | Linked memes |
+|------------+--------+------------------------+-----------------+--------------|
+| SEX_Incest | incest | PositiveOnly (default) | taboo, accepted |              |
+
 ### Nikolai's Ideology: Gender Works (`nikolaisideology.genderworks`, inactive)
 
 | Issue                            | Label            | Category               | Rungs                     | Linked memes                                                                                                                           |
@@ -697,6 +711,12 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | NikolaisIdeology_GenderedApparel | Gendered apparel | PositiveOnly (default) | don't care                | NikolaisIdeology_Aphroditic                                                                                                            |
 | NikolaisIdeology_Intimacy        | intimacy         | PositiveOnly (default) | important, occasional     | AM_Fertility, AM_Monastic, Inhuman, NikolaisIdeology_Aphroditic, NikolaisIdeology_Chastity, PainIsVirtue, RS_LoveLusting, VME_Pacifist |
 | NikolaisIdeology_Neutors         | neuters          | PositiveOnly (default) | reviled, elevated, sacred | AM_BiologicalDefilers, AM_BiologicalReconstructors, AM_Fertility, Guilty, NikolaisIdeology_Chastity, PainIsVirtue                      |
+
+### Venerated Xenotype Flexibility (Revisited) (`dcszar.veneratedxenotypeflexibility`, inactive)
+
+| Issue                  | Label                         | Category               | Rungs                                                     | Linked memes               |
+|------------------------+-------------------------------+------------------------+-----------------------------------------------------------+----------------------------|
+| VXF_XenotypeStrictness | preferred xenotype strictness | PositiveOnly (default) | exact match, full match, partial match, tolerant, vanilla | FleshPurity, Transhumanist |
 
 ### Intimacy - Socio Butterfly (`lovelydovey.recreation.witheuterpe`, inactive)
 
@@ -748,6 +768,14 @@ Use it with [trait-meme-affinity.md](trait-meme-affinity.md) to choose trait–m
 | DP_SeaFare | sea fare    | PositiveOnly (default) | cherished | DP_DeepCalling |
 | DP_SeaLife | sea life    | PositiveOnly (default) | sacred    | DP_SeaKeeping  |
 | DP_Surface | the surface | PositiveOnly (default) | shunned   | DP_DeepCalling |
+
+### Hacking Expansion: Netrun (`gafarovmaxim.hackingexpansionnetrun`, inactive)
+
+| Issue         | Label            | Category               | Rungs                                   | Linked memes                                     |
+|---------------+------------------+------------------------+-----------------------------------------+--------------------------------------------------|
+| NR_AI         | artificial minds | PositiveOnly (default) | abomination, tools, partners, venerated | NR_Meme_DigitalPurity, NR_Meme_MachineRevelation |
+| NR_Braindance | braindance       | PositiveOnly (default) | depraved, allowed, sacred experience    | NR_Meme_DigitalPurity                            |
+| NR_NetCulture | net culture      | PositiveOnly (default) | abhorrent, wary, sacred                 | NR_Meme_DigitalPurity, NR_Meme_NetAscension      |
 
 ### Humanoid Alien Races (`erdelf.humanoidalienraces`, inactive)
 

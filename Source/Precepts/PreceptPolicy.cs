@@ -134,6 +134,12 @@ internal static partial class PreceptPolicy
         "ARIOIAF_IronPrice", "ARIOIAF_Sea", "ARIOIAF_Snow",
         // RimDark 40k - Mankinds Finest. Respected -> Acceptable -> Horrible; Acceptable is the default rung.
         "BEWH_PsykerIssue",
+        // Birds of a Feather and Intimacy - Socio Butterfly. The default-weight rung is the vanilla baseline.
+        "SEX_Incest", "SEX_Divorce",
+        // Hacking Expansion: Netrun. Abomination -> Venerated, Depraved -> Sacred and Abhorrent -> Sacred.
+        "NR_AI", "NR_Braindance", "NR_NetCulture",
+        // Venerated Xenotype Flexibility: how strictly a pawn must match the preferred xenotype; see OrderOverrides.
+        "VXF_XenotypeStrictness",
     ];
     // Issues that copy the axis of an issue from another mod, keyed copy -> original. When the original is loaded,
     // the copy is PositiveOnly and its rungs induce the original's rungs (InducedByPrecept), so the axis counts once.
@@ -194,7 +200,7 @@ internal static partial class PreceptPolicy
         // Progression: Ammunition (reload stat modifiers) and [AP] Hunting Meme (hunting style, not a value).
         "PA_AmmoHandling", "AP_TrophyHunterPreceptIssue",
         // Not locally installed — safe PositiveOnly default pending ladder verification.
-        "VRE_AndroidsIssue", "SEX_Divorce",
+        "VRE_AndroidsIssue",
     ];
 
     // Rung defName order (permissive/pro -> forbidding/anti) for issues whose displayOrderInIssue scrambles
@@ -345,6 +351,13 @@ internal static partial class PreceptPolicy
         ["AC_XenoSleeving"] = ["AC_XenoSleeving_DontCare", "AC_XenoSleeving_Despised"],
         // Respected (order 40) sorts before Exalted (50); VME_Royalty runs Exalted first.
         ["ARIOIAF_Royalty"] = ["ARIOIAF_Royalty_Exalted", "ARIOIAF_Royalty_Respected"],
+        // All rungs at order 0. Loosest to strictest: Partial, Full and Exact only add matches to the vanilla
+        // check, and Vanilla turns the additions off.
+        ["VXF_XenotypeStrictness"] =
+        [
+            "VXF_XenotypeStrictness_Tolerant", "VXF_XenotypeStrictness_Partial", "VXF_XenotypeStrictness_Full",
+            "VXF_XenotypeStrictness_Exact", "VXF_XenotypeStrictness_Vanilla",
+        ],
     };
 
     // Rungs that share the rank of an anchor rung on the same issue, keyed tied rung -> anchor. They express

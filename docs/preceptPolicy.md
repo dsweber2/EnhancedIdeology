@@ -364,6 +364,18 @@ Each single-rung neutral sits half a rung past the rung (`After`).
 | ARIOIAF_Sea, ARIOIAF_Snow | Moral | one rung each | after the rung | Children of the Sea; Winter Is Coming |
 | ARIOIAF_PermitCooldown, ARIOIAF_PermitHonorCost | PositiveOnly | one rung each | — | gameplay perks, not beliefs |
 
+**Smaller mod ladders** ✓.
+The neutral is the default-weight rung unless the table says otherwise.
+
+| issue | mod | ladder | neutral | why |
+| --- | --- | --- | --- | --- |
+| SEX_Incest | Birds of a Feather | `Taboo` → `Accepted` | `Taboo` | no precept keeps the vanilla aversion to relatives |
+| SEX_Divorce | Intimacy - Socio Butterfly | `Accepted` → `Forbidden` | `Accepted` | "marriage is a lifelong commitment" is a value claim |
+| NR_AI | Hacking Expansion: Netrun | `Abomination` → `Tools` → `Partners` → `Venerated` | `Tools` | `Tools` has no thoughts; the ends mirror each other on erasing an AI |
+| NR_Braindance | Hacking Expansion: Netrun | `Depraved` → `Allowed` → `Sacred` | `Allowed` | `Allowed` has no thoughts |
+| NR_NetCulture | Hacking Expansion: Netrun | `Abhorrent` → `Wary` → `Sacred` | between `Wary` and `Sacred` | no rung has a default weight; `Wary` gives mood penalties for dives and trace, so no precept sits past it |
+| VXF_XenotypeStrictness | Venerated Xenotype Flexibility | `Tolerant` → `Partial` → `Full` → `Exact` → `Vanilla` | `Full` | all rungs at order 0, so an order override sets loosest to strictest; skipped in opinion and debates when neither faith prefers a xenotype (`PreceptPolicy.IsMootBetween`), because then no rung has an effect |
+
 
 Rungs on vanilla issues:
 - `ARIOIAF_FungusEating_DontCare` joins the `FungusEating` order override between the other "don't care" rungs and `Despised`.
