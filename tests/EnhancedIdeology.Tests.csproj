@@ -43,6 +43,7 @@
     <Compile Include="../Source/Precepts/PreceptPolicy.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.Resolvers.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.DontCare.cs" />
+    <Compile Include="../Source/Precepts/PreceptPolicy.Westeros.cs" />
     <Compile Include="../Source/Precepts/TraitIssueLinks.cs" />
     <Compile Include="../Source/Interactions/InteractionWorker_AdvancedConversionAttempt.cs" />
     <Compile Include="../Source/Interactions/AbilityConversion.cs" />

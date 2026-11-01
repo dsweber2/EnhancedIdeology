@@ -126,8 +126,12 @@ internal static partial class PreceptPolicy
         "AC_Stacking", "AC_Sleeving", "AC_CrossSleeving", "AC_StackDuplicating", "AC_XenoSleeving",
         // One-sided pro ladders: a silent outsider sits at the default neutral, before rank 0.
         "VFEP_Camaraderie", "ROBTRG_Hospitality",
-        // A Rim of Ice and Fire. Death, Expectations and Royalty copy VME issues (see DuplicateOf).
+        // A Rim of Ice and Fire. Each single-rung issue is a belief that a faith holds or does not hold.
+        // Death, Expectations and Royalty copy VME issues (see DuplicateOf). The permit perks stay PositiveOnly.
         "ARIOIAF_Lineage", "ARIOIAF_Death", "ARIOIAF_Expectations", "ARIOIAF_Royalty",
+        "ARIOIAF_Authority", "ARIOIAF_FeudalAllegiance", "ARIOIAF_LeaderSelection", "ARIOIAF_RightfulRule",
+        "ARIOIAF_TitleInheritance", "ARIOIAF_KnightlyConduct", "ARIOIAF_Oathkeeping", "ARIOIAF_IntrigueConduct",
+        "ARIOIAF_IronPrice", "ARIOIAF_Sea", "ARIOIAF_Snow",
     ];
     // Issues that copy the axis of an issue from another mod, keyed copy -> original. When the original is loaded,
     // the copy is PositiveOnly and its rungs induce the original's rungs (InducedByPrecept), so the axis counts once.

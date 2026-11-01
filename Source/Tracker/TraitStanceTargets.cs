@@ -87,7 +87,8 @@ internal sealed record TraitVote(
 // Each rung nets its support less its opposition. If a rung nets above zero, the target is the best-supported
 // rung, the closest one on a tie; its votes are that rung's net. Otherwise the rungs that net below zero are an
 // opposition target; its votes are the most opposed rung's net. No votes, or no allowed spot, give no target. UntargetedIssues never get a target.
-// The faith does not matter: the targets come from the pawn's traits only.
+// The targets come from the pawn's traits only. The faith matters only through PreceptPolicy.IsMuted: a muted issue
+// gets no target.
 internal static class TraitStanceTargets
 {
     internal const float AssociatedMemeWeight = 0.5f;
@@ -146,6 +147,7 @@ internal static class TraitStanceTargets
         Pawn pawn, IReadOnlyDictionary<IssueDef, float> ranks, Dictionary<IssueDef, List<TraitVote>>? votes = null)
     {
         var net = new Dictionary<IssueDef, Dictionary<float, float>>();
+        var westerosi = PreceptPolicy.IsWesterosi(pawn.Ideo);
 
         // One vote of `weight` on `issue`, supporting (weight > 0) or opposing (weight < 0) each rung by its own weight.
         // A meme vote names the meme; a direct trait link names its trait and the kind of link.
@@ -153,6 +155,7 @@ internal static class TraitStanceTargets
             MemeDef? meme, Trait? trait = null, string linkKind = "")
         {
             if (!ranks.ContainsKey(issue) || UntargetedIssues.Contains(issue.defName)) return;
+            if (westerosi && !PreceptPolicy.CountsInWesteros(issue)) return;
             if (!net.TryGetValue(issue, out var byRank)) net[issue] = byRank = [];
             foreach (var (rank, rungWeight) in rungs)
                 byRank[rank] = byRank.GetValueOrDefault(rank) + Mathf.Sign(weight) * rungWeight;

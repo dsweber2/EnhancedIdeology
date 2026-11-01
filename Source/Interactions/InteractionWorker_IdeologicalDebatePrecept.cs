@@ -102,7 +102,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             return 0f;
         }
         var pawnTracker = Current.Game.GetComponent<GameComponent_EnhancedIdeology>().PawnTracker;
-        if (DebatableIssues(initiator.Ideo,
+        if (DebatableIssues(initiator.Ideo, recipient.Ideo,
                 StanceMap(pawnTracker.EnsurePawnHasIdeoTracker(initiator)),
                 StanceMap(pawnTracker.EnsurePawnHasIdeoTracker(recipient))).Count == 0)
         {
@@ -227,7 +227,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     {
         var initiatorStances = StanceMap(initiatorTracker);
         var recipientStances = StanceMap(recipientTracker);
-        var debatableIssues = DebatableIssues(initiatorIdeo, initiatorStances, recipientStances);
+        var debatableIssues = DebatableIssues(initiatorIdeo, recipientIdeo, initiatorStances, recipientStances);
 
         if (debatableIssues.Count == 0)
         {
@@ -264,9 +264,10 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // The issues the two pawns' personal stances Disagree on, as the initiator's precept for each issue.
     // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
     // them. Each side argues from their personal stance (see AdjustOpinions).
-    // Only issues that feed structural opinion qualify (PreceptPolicy.IsDebatable).
+    // Only issues that feed structural opinion qualify (PreceptPolicy.IsDebatable), and not an issue muted for
+    // the faith of either pawn (PreceptPolicy.IsMuted).
     private static List<(PreceptDef precept, IssueDef issue)> DebatableIssues(
-        Ideo initiatorIdeo,
+        Ideo initiatorIdeo, Ideo recipientIdeo,
         Dictionary<IssueDef, (float rank, float strength)> initiatorStances,
         Dictionary<IssueDef, (float rank, float strength)> recipientStances) =>
         [.. initiatorIdeo.precepts
@@ -274,6 +275,8 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             .Where(def => def.issue != null)
             .Select(def => (precept: def, issue: def.issue!))
             .Where(topic => PreceptPolicy.IsDebatable(topic.issue)
+                && !PreceptPolicy.IsMuted(initiatorIdeo, topic.issue)
+                && !PreceptPolicy.IsMuted(recipientIdeo, topic.issue)
                 && initiatorStances.ContainsKey(topic.issue)
                 && recipientStances.ContainsKey(topic.issue)
                 && Disagree(initiatorStances[topic.issue], recipientStances[topic.issue]))

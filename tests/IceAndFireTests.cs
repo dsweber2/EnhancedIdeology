@@ -10,9 +10,45 @@ public class IceAndFireTests : SeededTest
     [InlineData("ARIOIAF_Death")]
     [InlineData("ARIOIAF_Expectations")]
     [InlineData("ARIOIAF_Royalty")]
+    [InlineData("ARIOIAF_RightfulRule")]
+    [InlineData("ARIOIAF_IronPrice")]
+    [InlineData("ARIOIAF_Snow")]
     public void CategoryOf_ValueAxes_AreMoral(string issueName)
     {
         Assert.Equal(PreceptCategory.Moral, PreceptPolicy.CategoryOf(new IssueDef { defName = issueName }));
+    }
+
+    [Theory]
+    [InlineData("ARIOIAF_PermitCooldown")]
+    [InlineData("ARIOIAF_PermitHonorCost")]
+    public void CategoryOf_PermitPerks_ArePositiveOnly(string issueName)
+    {
+        Assert.Equal(PreceptCategory.PositiveOnly, PreceptPolicy.CategoryOf(new IssueDef { defName = issueName }));
+    }
+
+    // Each Moral single-rung issue needs a DontCare entry; without one, the default weight makes the rung neutral.
+    [Theory]
+    [InlineData("ARIOIAF_Lineage", "ARIOIAF_Lineage_Pure")]
+    [InlineData("ARIOIAF_Authority", "ARIOIAF_Authority_Respected")]
+    [InlineData("ARIOIAF_FeudalAllegiance", "ARIOIAF_FeudalAllegiance_Honorable")]
+    [InlineData("ARIOIAF_LeaderSelection", "ARIOIAF_Leader_HighestTitle")]
+    [InlineData("ARIOIAF_RightfulRule", "ARIOIAF_RightfulRule_Essential")]
+    [InlineData("ARIOIAF_TitleInheritance", "ARIOIAF_TitleInheritance_Inherited")]
+    [InlineData("ARIOIAF_KnightlyConduct", "ARIOIAF_KnightlyConduct_Honorable")]
+    [InlineData("ARIOIAF_Oathkeeping", "ARIOIAF_Oathkeeping_Required")]
+    [InlineData("ARIOIAF_IntrigueConduct", "ARIOIAF_Intrigue_Dishonorable")]
+    [InlineData("ARIOIAF_IronPrice", "ARIOIAF_IronPrice_Demanded")]
+    [InlineData("ARIOIAF_Sea", "ARIOIAF_Sea_Revered")]
+    [InlineData("ARIOIAF_Snow", "ARIOIAF_Snow_Beautiful")]
+    public void SingleRungIssue_DefaultWeight_DoesNotMakeTheRungNeutral(string issueName, string rungName)
+    {
+        var issue = new IssueDef { defName = issueName };
+        SimIssues.Register(new PreceptDef
+        {
+            defName = rungName, issue = issue, displayOrderInIssue = 10, defaultSelectionWeight = 1f,
+        });
+
+        Assert.Equal(0.5f, PreceptLadder.DontCareRank(issue));
     }
 
     [Theory]
@@ -76,18 +112,6 @@ public class IceAndFireTests : SeededTest
         Assert.Equal(["ARIOIAF_Royalty_Exalted", "ARIOIAF_Royalty_Respected"],
             PreceptLadder.Rungs(issue).Select(rung => rung.defName));
         Assert.Equal(1.5f, PreceptLadder.DontCareRank(issue));
-    }
-
-    [Fact]
-    public void Lineage_DefaultWeight_DoesNotMakeTheRungNeutral()
-    {
-        var issue = new IssueDef { defName = "ARIOIAF_Lineage" };
-        SimIssues.Register(new PreceptDef
-        {
-            defName = "ARIOIAF_Lineage_Pure", issue = issue, displayOrderInIssue = 50, defaultSelectionWeight = 1f,
-        });
-
-        Assert.Equal(0.5f, PreceptLadder.DontCareRank(issue));
     }
 
     [Fact]

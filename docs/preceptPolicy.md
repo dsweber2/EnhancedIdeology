@@ -346,6 +346,9 @@ Some other mod adds rungs that we have not seen. They keep their display order a
 
 **A Rim of Ice and Fire** ✓ (`lordfelix.ARimOfIceAndFire`).
 Every rung it adds has `defaultSelectionWeight` 1 but needs a Westerosi meme, so each Moral issue below has a `DontCare` entry; otherwise the lone rung would be the neutral.
+Almost every ROIAF issue has a single rung, and a faith holds it or does not, so those issues are Moral.
+The Feudalism meme brings six of them, so a feudal and a non-feudal faith disagree on six axes; that is intended, because a change of faith in Westeros is meant to be hard.
+Each single-rung neutral sits half a rung past the rung (`After`).
 
 | issue | category | ladder | neutral | why |
 | --- | --- | --- | --- | --- |
@@ -353,16 +356,34 @@ Every rung it adds has `defaultSelectionWeight` 1 but needs a Westerosi meme, so
 | ARIOIAF_Death | Moral, copy of `VME_Death` | `DontCare` | after `DontCare` | see "Copies of a VME issue" |
 | ARIOIAF_Expectations | Moral, copy of `VME_Expectations` | `Low` | before `Low` | as above |
 | ARIOIAF_Royalty | Moral, copy of `VME_Royalty` | `Exalted` → `Respected` | after `Respected` | the text is VME's; `Respected` (order 40) sorts before `Exalted` (50), so an order override fixes it |
-| ARIOIAF_IronPrice | PositiveOnly | `Demanded` | — | "the strong take their due": induces `Raiding_Respected` instead of a separate axis |
+| ARIOIAF_IronPrice | Moral | `Demanded` | after `Demanded` | "the strong take their due"; also induces `Raiding_Respected` |
+| ARIOIAF_Authority, ARIOIAF_FeudalAllegiance, ARIOIAF_LeaderSelection, ARIOIAF_RightfulRule, ARIOIAF_TitleInheritance | Moral | one rung each | after the rung | the Feudalism set |
+| ARIOIAF_KnightlyConduct, ARIOIAF_Oathkeeping | Moral | one rung each | after the rung | Chivalric Honor |
+| ARIOIAF_IntrigueConduct | Moral | `Dishonorable` | after `Dishonorable` | Sacred Oaths |
+| ARIOIAF_Sea, ARIOIAF_Snow | Moral | one rung each | after the rung | Children of the Sea; Winter Is Coming |
+| ARIOIAF_PermitCooldown, ARIOIAF_PermitHonorCost | PositiveOnly | one rung each | — | gameplay perks, not beliefs |
 
-`IntrigueConduct`, `RightfulRule`, `Authority`, `LeaderSelection`, `KnightlyConduct`, `FeudalAllegiance`, `Oathkeeping`, `Sea`, `Snow`, `TitleInheritance`, `PermitCooldown` and `PermitHonorCost` stay PositiveOnly.
-The feudal ones make a claim that no ladder opposes, so a silent pawn would read as hostile to every Westerosi faith.
 
 Rungs on vanilla issues:
 - `ARIOIAF_FungusEating_DontCare` joins the `FungusEating` order override between the other "don't care" rungs and `Despised`.
 - `ARIOIAF_Proselytizing_Occasionally` copies `Proselytizing_Occasionally` (factor 3, order 20) for the Faith of the Seven, so it is a tied rung.
 - `ARIOIAF_Skullspike_DontCare` has a default weight, so it moves the `Skullspike` neutral to between itself and `Disapproved`.
   No precept means no skullspike thoughts, so the move is accepted.
+
+Muted issues (`PreceptPolicy.Westeros.cs`):
+A pawn whose faith has an `ARIOIAF_Structure_*` meme is judged only on the issues that the Westerosi faiths take a position on.
+For that pawn, every other issue is left out of the structural mean, gets no trait target, and cannot be a debate topic when either debater is Westerosi.
+The vanilla precepts on muted issues keep their mood effects.
+Without this, issues that no Westerosi faith holds (`AutonomousWeapons`, `DrugUse`) pull certainty through traits, and issues that every Westerosi faith holds the same way (`Nudity_*`, `Research`, `OrganUse`) dilute the mean.
+The counted issues are:
+- every `ARIOIAF_*` issue;
+- the vanilla issues that a ROIAF meme forces (`requireOne`) or that its `SevenistDoctrineMigration` forces: `Execution`, `Charity`, `Lovin`, `Apostasy`, `Slavery`, `IdeoDiversity`, `Proselytizing`, `Corpses`, `Raiding`, `Cannibalism`, `Skullspike`, `RoughLiving`, `Temperature`, `FungusEating`;
+- the vanilla issues that a ROIAF meme suggests (`MemeAssociations.xml`) or unlocks: `MarriageName`, `Comfort`, `NutrientPasteEating`, `Fishing`;
+- `BS_AlienAppearanceTolerance` and `AnimalsVenerated`, which ROIAF leaves to vanilla generation but which vary between its faiths;
+- `VME_Death`, `VME_Expectations` and `VME_Royalty`, which the ROIAF copies induce.
+
+A pawn of a non-Westerosi faith counts every issue, also when it compares itself with a Westerosi faith.
+The asymmetry is intended: an outsider reads a Westerosi faith's silence on drugs as indifference.
 
 **PositiveOnly:** `AM_CombatProwess`, `AM_HuntFocus`, `PA_AmmoHandling` (reload stat modifiers), `AP_TrophyHunterPreceptIssue` (hunting style), and the mechanical perks (`*Speed`/`*Yield`/`*Rate`/`Cooldown`).
 The value-claim issues that used to sit here (`VME_Death`, `VME_Power`, `VME_Junk`, `AM_Armour`, `AM_Barracks`,

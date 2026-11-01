@@ -158,7 +158,9 @@ internal static class StructuralOpinionCalculator
         // Structural precept fit: for each issue the target ideo takes a position on or the pawn holds a stance
         // on, how the target's stance compares to the pawn's preferred stance, weighted by conviction, averaged
         // and scaled to 0-100 (R2). Issues neither side holds are irrelevant. The pawn side comes from their
-        // stances, not their current faith, so an ideo scores the same whether it is theirs or not.
+        // stances, not their current faith, so an ideo scores the same whether it is theirs or not. A pawn of a
+        // Westerosi faith ignores the issues muted for it (PreceptPolicy.IsMuted).
+        var westerosi = PreceptPolicy.IsWesterosi(pawnIdeo);
         var oppositionScale = EnhancedIdeologyMod.Settings.PreceptOppositionScale;
         var preceptStart = contributors?.Count ?? 0;
         float preceptSum = 0;
@@ -175,6 +177,7 @@ internal static class StructuralOpinionCalculator
 
         foreach (var issue in RelevantIssues)
         {
+            if (westerosi && !PreceptPolicy.CountsInWesteros(issue)) continue;
             var perIssue = PerIssueOpinion(stances, pawnIdeo, ideo, issue, inducedTargets, oppositionScale, out var graded);
             if (!graded) continue;
             preceptSum += perIssue;

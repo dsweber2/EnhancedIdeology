@@ -194,6 +194,17 @@ internal static partial class PreceptPolicy
         ["ARIOIAF_Death"] = DontCareSpec.After("ARIOIAF_Death_DontCare"),
         ["ARIOIAF_Expectations"] = DontCareSpec.Before("ARIOIAF_Expectations_Low"),
         ["ARIOIAF_Royalty"] = DontCareSpec.After("ARIOIAF_Royalty_Respected"),
+        ["ARIOIAF_Authority"] = DontCareSpec.After("ARIOIAF_Authority_Respected"),
+        ["ARIOIAF_FeudalAllegiance"] = DontCareSpec.After("ARIOIAF_FeudalAllegiance_Honorable"),
+        ["ARIOIAF_LeaderSelection"] = DontCareSpec.After("ARIOIAF_Leader_HighestTitle"),
+        ["ARIOIAF_RightfulRule"] = DontCareSpec.After("ARIOIAF_RightfulRule_Essential"),
+        ["ARIOIAF_TitleInheritance"] = DontCareSpec.After("ARIOIAF_TitleInheritance_Inherited"),
+        ["ARIOIAF_KnightlyConduct"] = DontCareSpec.After("ARIOIAF_KnightlyConduct_Honorable"),
+        ["ARIOIAF_Oathkeeping"] = DontCareSpec.After("ARIOIAF_Oathkeeping_Required"),
+        ["ARIOIAF_IntrigueConduct"] = DontCareSpec.After("ARIOIAF_Intrigue_Dishonorable"),
+        ["ARIOIAF_IronPrice"] = DontCareSpec.After("ARIOIAF_IronPrice_Demanded"),
+        ["ARIOIAF_Sea"] = DontCareSpec.After("ARIOIAF_Sea_Revered"),
+        ["ARIOIAF_Snow"] = DontCareSpec.After("ARIOIAF_Snow_Beautiful"),
     };
 
     // Rank of indifference where it is not the neutral stance, read by PreceptLadder.IndifferentRank. Neutral

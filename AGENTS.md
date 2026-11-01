@@ -8,6 +8,12 @@
 - regenerate `docs/meme-precept-catalog.md` (all memes and precept issues per installed mod) with `make catalog`
 - `Common/Patches/TraitLinks.xml` is generated from the `meme/precepts` column of `docs/trait-meme-affinity.md`: edit the doc, then `make trait-links`
 
+## Mod compatibility support
+When surveying a new mod for compatibility, make 3 tables: 
+- new memes: each meme, the description, incompatible memes,  required precepts, associated precepts, disabled precepts, agreeing traits, conflicting traits, extra notes
+- new issues: each precept along with the rung, description of the precept mechanics, proposed category (positive/moral etc), neutral setting, extra notes
+- new traits: description, summary of mechanics, memes it agrees with, memes it disagrees with, extra notes
+
 ## Translations
 
 Language files live in `Common/Languages/{Lang}/`. English is the source of truth.
