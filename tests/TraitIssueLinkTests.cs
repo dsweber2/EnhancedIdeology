@@ -14,7 +14,8 @@ public class TraitIssueLinkTests : SeededTest
     // Seeds a pawn whose faith holds `faithRung` (null = silent) on a three-rung issue, with an optional trait.
     // Reseeds first so two calls draw the same base strengths and differ only in the trait.
     private static (IdeoTrackerData tracker, IssueDef issue, PreceptDef[] rungs) Seed(
-        int? faithRung, TraitDef? trait, int traitDegree = 0, TraitDef? secondTrait = null, float certaintyLossFactor = 1f)
+        int? faithRung, TraitDef? trait, int traitDegree = 0, TraitDef? secondTrait = null, float certaintyLossFactor = 1f,
+        float traitCertaintyLossMultiplier = 1f)
     {
         Rand.SetSeed(1);
         DefDatabase<PreceptDef>.Clear();
@@ -32,7 +33,7 @@ public class TraitIssueLinkTests : SeededTest
         world.AddIdeo(ideo);
 
         var pawnBuilder = new PawnBuilder().WithIdeo(ideo).WithLabel("P").WithCertaintyLossFactor(certaintyLossFactor);
-        if (trait != null) pawnBuilder = pawnBuilder.WithTrait(trait, traitDegree);
+        if (trait != null) pawnBuilder = pawnBuilder.WithTrait(trait, traitDegree, traitCertaintyLossMultiplier);
         if (secondTrait != null) pawnBuilder = pawnBuilder.WithTrait(secondTrait);
         var pawn = pawnBuilder.Build(world);
         return (world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn), issue, rungs);
@@ -175,18 +176,45 @@ public class TraitIssueLinkTests : SeededTest
     }
 
     [Fact]
-    public void Decay_ResistantPawnMovesTowardLinkedRungFaster()
+    public void Decay_InnatelyResistantPawnMovesTowardLinkedRungFaster()
     {
-        float RankAfterDecay(float certaintyLossFactor)
-        {
-            var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
-            var (tracker, issue, _) = Seed(faithRung: 0, trait, certaintyLossFactor: certaintyLossFactor);
-            tracker.SetIssueStance(issue, 0f, 10f);
-            DecayDays(tracker, 10);
-            return StanceOn(tracker, issue).rank;
-        }
+        Assert.True(RankAfterDecay(0.25f, innate: 0.25f) > RankAfterDecay(1f, innate: 1f));
+    }
 
-        Assert.True(RankAfterDecay(0.25f) > RankAfterDecay(1f));
+    [Fact]
+    public void Decay_ConditionedResistancePawnMovesTowardLinkedRungSlower()
+    {
+        var conditioned = RankAfterDecay(0.5f, innate: 1f);
+        Assert.True(conditioned < RankAfterDecay(1f, innate: 1f));
+        Assert.True(conditioned > 0f);
+    }
+
+    [Theory]
+    [InlineData(0f)]
+    [InlineData(-1.5f)]
+    public void Decay_UnmovablePawnKeepsItsStance(float certaintyLossFactor)
+    {
+        var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
+        var (tracker, issue, _) = Seed(faithRung: 0, trait, certaintyLossFactor: certaintyLossFactor);
+        var otherIssue = DefDatabase<IssueDef>.GetNamedSilentFail("OtherIssue")!;
+        tracker.SetIssueStance(issue, 0f, 10f);
+        var otherBefore = StanceOn(tracker, otherIssue);
+
+        DecayDays(tracker, 10);
+
+        Assert.Equal((0f, 10f), StanceOn(tracker, issue));
+        Assert.Equal(otherBefore, StanceOn(tracker, otherIssue));
+    }
+
+    // Rank on a trait-linked issue after ten days of decay, from rung 0 toward the linked rung 2.
+    private static float RankAfterDecay(float certaintyLossFactor, float innate)
+    {
+        var trait = LinkedTrait(new TraitIssueLink { rung = "LinkIssue_C" });
+        var (tracker, issue, _) = Seed(faithRung: 0, trait, certaintyLossFactor: certaintyLossFactor,
+            traitCertaintyLossMultiplier: innate);
+        tracker.SetIssueStance(issue, 0f, 10f);
+        DecayDays(tracker, 10);
+        return StanceOn(tracker, issue).rank;
     }
 
     [Fact]

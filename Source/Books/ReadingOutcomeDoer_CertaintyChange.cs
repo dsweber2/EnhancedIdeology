@@ -164,6 +164,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
         return "EnhancedIdeology.BookReadingBenefit".Translate(ideo.Named("IDEO"), (PeakArcPerTick(reader) * TypicalReadingTicksPerQuadrum).ToString("0.##", CultureInfo.InvariantCulture));
     }
 
+    // A resistant reader (CertaintyLossFactor < 1) is less influenced by any book, own faith or not.
     public float CertaintyGain(Pawn? reader = null)
     {
         var certaintyGain = certaintyGainFromQuality.Evaluate((int)Quality) / 100f;
@@ -171,9 +172,7 @@ internal sealed class ReadingOutcomeDoer_CertaintyChange : BookOutcomeDoer
 
         if (reader != null)
         {
-            certaintyGain = reader.Ideo == ideo
-                ? certaintyGain / reader.GetStatValue(StatDefOf.CertaintyLossFactor)
-                : certaintyGain * reader.GetStatValue(StatDefOf.CertaintyLossFactor) * 0.5f;
+            certaintyGain *= CertaintyLoss.Factor(reader) * (reader.Ideo == ideo ? 1f : 0.5f);
         }
 
         return certaintyGain;

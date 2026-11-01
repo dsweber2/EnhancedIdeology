@@ -101,7 +101,7 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
         var converteeTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(convertee);
         var baseStep = ConvictionMath.RitualBaseArc
             * Math.Abs(outcome.positivityIndex)
-            * convertee.GetStatValue(StatDefOf.CertaintyLossFactor);
+            * CertaintyLoss.Factor(convertee);
 
         var preceptSource = outcome.positivityIndex > 0 ? ritualIdeo.precepts : convertee.Ideo?.precepts;
         if (preceptSource == null)

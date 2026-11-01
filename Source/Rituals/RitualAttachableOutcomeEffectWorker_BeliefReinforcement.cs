@@ -35,7 +35,7 @@ internal sealed class RitualAttachableOutcomeEffectWorker_BeliefReinforcement : 
             var tracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn);
             var baseStep = ConvictionMath.RitualBaseArc
                 * Math.Abs(outcome.positivityIndex)
-                * pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
+                * CertaintyLoss.Factor(pawn);
 
             foreach (var precept in pawn.Ideo.precepts)
             {

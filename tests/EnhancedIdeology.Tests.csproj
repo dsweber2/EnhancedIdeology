@@ -30,6 +30,7 @@
     <Compile Include="../Source/GameComponent/GameComponent_EnhancedIdeology_PawnTracker.cs" />
     <Compile Include="../Source/GameComponent/GameComponent_EnhancedIdeology_IdeoPawnTracker.cs" />
     <Compile Include="../Source/Tracker/ConvictionScale.cs" />
+    <Compile Include="../Source/Tracker/CertaintyLoss.cs" />
     <Compile Include="../Source/Tracker/IssueStanceTracker.cs" />
     <Compile Include="../Source/Tracker/StanceHistory.cs" />
     <Compile Include="../Source/Tracker/TraitStanceTargets.cs" />

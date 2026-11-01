@@ -97,7 +97,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
 
     internal static float MoodletConvictionDelta(Pawn pawn, float moodOffset) =>
         moodOffset
-        * pawn.GetStatValue(StatDefOf.CertaintyLossFactor)
+        * CertaintyLoss.Factor(pawn)
         * EnhancedIdeologyMod.Settings.ConversionStancePull
         * MoodletConvictionScalar;
 

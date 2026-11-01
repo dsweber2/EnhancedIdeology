@@ -4,14 +4,14 @@ Social interaction workers, ability workers, and play-log entries. The debate wo
 
 **Debate flow:**
 1. `InteractionWorker_IdeologicalDebatePrecept` selects a topic (`GetDebateTopic`; only Moral and Special issues qualify, via `PreceptPolicy.IsDebatable`, and the meme debate uses the same filter), rolls (`GetDebateRoll`/`WinChance`), and on win calls `PullStance` → `ConvictionMath`; conviction flip triggers `CheckConversion`
-2. `InteractionWorker_IdeologicalDebateMeme` runs at the meme level: picks a meme with a disputed issue (`DebatableMemes`, reusing the precept worker's `StanceMap`/`Disagree`), rolls with the precept worker's `GetDebateRoll`/`DrawThreshold`, may also trigger conversion
+2. `InteractionWorker_IdeologicalDebateMeme` runs at the meme level: picks a meme with a disputed issue (`DebatableMemes`, reusing the precept worker's `StanceMap`/`Disagree`), rolls with the precept worker's `GetDebateRoll`/`IsDraw`, may also trigger conversion
 3. `InteractionWorker_AdvancedConversionAttempt` applies a certainty knock then calls `CheckConversion` directly
 
 **Ability flow:**
 - `AbilityConversion` / `AbilityReassure` — psycast wrappers; `RollTargetIssues` picks contested issues, `Resolve` applies the outcome; both rerouted from vanilla via `CompAbilityEffect_Convert/Reassure_Reroute` patches
 
 **Files:**
-- `InteractionWorker_IdeologicalDebatePrecept.cs` — precept debate; key methods: `WinChance`, `GetDebateRoll`, `DrawThreshold`, `HandleDraw`, `TryEntrench`, `ApplyDiversityAftermath`, `ApplyApostacyAftermath`
+- `InteractionWorker_IdeologicalDebatePrecept.cs` — precept debate; key methods: `WinChance`, `GetDebateRoll`, `DrawThreshold`, `IsDraw` (the draw band, plus `CertaintyLoss.UnmovedChance` for the loser), `HandleDraw`, `TryEntrench`, `ApplyDiversityAftermath`, `ApplyApostacyAftermath`
 - `InteractionWorker_IdeologicalDebateMeme.cs` — meme debate; `CompatibilityFactorCurve` shapes persuasion by meme-overlap
 - `DebateFights.cs` — `Chance` (a draw's fight chance: mean vanilla `SocialFightChance` at `DrawFightBaseChance`, max-social falloff, topic weight, `DiversityFightFactor`, apostasy cross-faith; flat for iconoclasts) and `Start`; `DiversityAxis` reads a faith's IdeoDiversity rung, also used by the diversity aftermath. Called from `HandleDraw`
 - `InteractionWorker_AdvancedConversionAttempt.cs` — directed conversion attempt; resolves debate then calls `CheckConversion`

@@ -30,9 +30,12 @@ internal sealed class PawnBuilder
         return this;
     }
 
-    public PawnBuilder WithTrait(TraitDef def, int degree = 0)
+    // certaintyLossMultiplier feeds CertaintyLoss.InnateFactor only; set the stat itself with WithCertaintyLossFactor.
+    public PawnBuilder WithTrait(TraitDef def, int degree = 0, float certaintyLossMultiplier = 1f)
     {
-        _traits.Add(new Trait { def = def, Degree = degree });
+        var trait = new Trait { def = def, Degree = degree };
+        if (certaintyLossMultiplier != 1f) trait.statFactors[StatDefOf.CertaintyLossFactor] = certaintyLossMultiplier;
+        _traits.Add(trait);
         return this;
     }
 

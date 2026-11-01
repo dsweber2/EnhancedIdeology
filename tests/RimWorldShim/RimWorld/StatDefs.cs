@@ -10,6 +10,22 @@ public class StatWorker
 public class StatDef : Def
 {
     public StatWorker Worker { get; } = new StatWorker();
+    public float defaultBaseValue = 1f;
+}
+
+public class StatModifier
+{
+    public StatDef stat = new();
+    public float value;
+}
+
+public static class StatUtility
+{
+    public static float GetStatOffsetFromList(this List<StatModifier>? modList, StatDef stat) =>
+        modList?.FirstOrDefault(mod => mod.stat == stat)?.value ?? 0f;
+
+    public static float GetStatFactorFromList(this List<StatModifier>? modList, StatDef stat) =>
+        modList?.FirstOrDefault(mod => mod.stat == stat)?.value ?? 1f;
 }
 
 public static class StatDefOf

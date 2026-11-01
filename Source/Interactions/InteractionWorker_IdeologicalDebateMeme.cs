@@ -115,7 +115,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         var recipientRoll = InteractionWorker_IdeologicalDebatePrecept.GetDebateRoll(recipient);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate rolls: initiator={initiatorRoll}, recipient={recipientRoll}");
 
-        if (Math.Abs(initiatorRoll - recipientRoll) <= InteractionWorker_IdeologicalDebatePrecept.DrawThreshold(initiator, recipient))
+        if (InteractionWorker_IdeologicalDebatePrecept.IsDraw(initiator, recipient, initiatorRoll, recipientRoll))
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
             if (InteractionWorker_IdeologicalDebatePrecept.HandleDraw(

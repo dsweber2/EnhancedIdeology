@@ -119,7 +119,7 @@ internal static class ConversionEvaluator
         var certaintyResistance = Mathf.Clamp01(1f - Mathf.Clamp01(data.ExtendedCertainty));
         var apostacyResistance = 1f - (EnhancedIdeologyUtilities.ApostacyStrictness(pawn.Ideo) * 0.75f);
         var index = SelectWeightedConversion(candidates,
-            pawn.GetStatValue(StatDefOf.CertaintyLossFactor) * certaintyResistance * apostacyResistance);
+            CertaintyLoss.Factor(pawn) * certaintyResistance * apostacyResistance);
         if (index < 0)
             return;
 
@@ -166,11 +166,8 @@ internal static class ConversionEvaluator
 
     // CrisisThreshold scaled by sqrt(CertaintyLossFactor). sqrt dampens the raw stat: at 3x volatile the
     // threshold rises to ~1.73x, not the full 3x a linear scale would produce.
-    internal static float EffectiveCrisisThreshold(IdeoTrackerData data)
-    {
-        var factor = data.Pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
-        return Mathf.Clamp01(EnhancedIdeologyMod.Settings.CrisisThreshold * Mathf.Sqrt(factor));
-    }
+    internal static float EffectiveCrisisThreshold(IdeoTrackerData data) =>
+        Mathf.Clamp01(EnhancedIdeologyMod.Settings.CrisisThreshold * Mathf.Sqrt(CertaintyLoss.Factor(data.Pawn)));
 
     // A per-window probability p, integrated over deltaDays as a hazard with the given interval.
     // Survival is multiplicative in time, so sampling the same span more finely yields the same total

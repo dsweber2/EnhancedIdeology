@@ -81,6 +81,8 @@ public class Pawn_GeneTracker
 
     public void AddGene(GeneDef gene) => _activeGenes.Add(gene);
 
+    public List<Gene> GenesListForReading => [.. _activeGenes.Select(def => new Gene { def = def })];
+
     public bool UniqueXenotype { get; set; } = false;
     public string xenotypeName { get; set; } = string.Empty;
     public RimWorld.XenotypeDef? Xenotype { get; set; }

@@ -161,7 +161,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         var recipientRoll = GetDebateRoll(recipient);
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Debate rolls: initiator={initiatorRoll}, recipient={recipientRoll}");
 
-        if (Math.Abs(initiatorRoll - recipientRoll) <= DrawThreshold(initiator, recipient))
+        if (IsDraw(initiator, recipient, initiatorRoll, recipientRoll))
         {
             EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, "Debate is a draw. Calling HandleDraw.");
             var topicWeight = TopicWeight(topic, StanceMap(initiatorTracker)[topic], StanceMap(recipientTracker)[topic]);
@@ -325,6 +325,16 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             ? IconoclastDrawThreshold
             : DebateDrawThreshold;
 
+    // Whether a debate is a draw. Rolls inside the draw band always are. Outside it, a loser below
+    // CertaintyLoss.ResistanceFloor can refuse to lose (CertaintyLoss.UnmovedChance); a factor of 0 always refuses.
+    internal static bool IsDraw(Pawn initiator, Pawn recipient, float initiatorRoll, float recipientRoll)
+    {
+        if (Math.Abs(initiatorRoll - recipientRoll) <= DrawThreshold(initiator, recipient)) return true;
+        var loser = initiatorRoll > recipientRoll ? recipient : initiator;
+        var unmovedChance = CertaintyLoss.UnmovedChance(CertaintyLoss.Factor(loser));
+        return unmovedChance > 0f && Rand.Value < unmovedChance;
+    }
+
     // Probability the initiator wins the roll outright (draw excluded): P(initiatorRoll - recipientRoll > draw
     // threshold). The two rolls are independent Gaussians, so their difference is Gaussian with the summed
     // variance; this is the tail of that difference past the draw band. Read-only, for the ability tooltip.
@@ -398,9 +408,10 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
             return;
         }
 
-        // A resistant pawn (CertaintyLossFactor < 1) also hardens less; fold it in so entrenchment mirrors the
-        // fragility scaling the rest of the debate uses.
-        var strengthGain = DebateEntrenchStrengthGain * pawn.GetStatValue(StatDefOf.CertaintyLossFactor) * (0.8f + (Rand.Value * 0.4f));
+        // A resistant pawn (CertaintyLossFactor < 1) hardens more: being hard to move is what digging in means.
+        var strengthGain = DebateEntrenchStrengthGain
+            * CertaintyLoss.Resistance(CertaintyLoss.Factor(pawn))
+            * (0.8f + (Rand.Value * 0.4f));
         tracker.ShiftIssueStance(issue, 0f, 0f, strengthGain);
         pawn.ideo.Certainty = Mathf.Clamp01(pawn.ideo.Certainty + (DebateEntrenchCertaintyGain * (0.8f + (Rand.Value * 0.4f))));
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"TryEntrench: {pawn} dug in (+{strengthGain} conviction on {issue}).");

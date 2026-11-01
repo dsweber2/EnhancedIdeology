@@ -63,9 +63,25 @@ At pawn generation a stance starts at `U(5, 25)`, shifted by personality (iron-w
 A few of the weakest-held issues may start on a different rung from the faith's, so not every pawn is perfectly orthodox.
 Unreinforced conviction decays slowly toward zero.
 An issue the pawn's traits vote on instead decays toward the traits' target (see "Trait stance targets").
-The certainty loss factor multiplies the drain toward zero and divides the step toward a trait target.
-An iron-willed pawn (0.25×) thus holds stances 4× longer and asserts their innate preferences 4× faster.
+The certainty loss factor multiplies the drain toward zero.
 So a neglected pawn drifts back toward what their personality implies, not toward believing nothing.
+
+### Certainty loss factor
+
+Vanilla does not clamp the stat, and mods that stack negative offsets (military ranks, gene-crafted soldiers) push it to zero or below.
+Every read clamps it at zero, and zero means the pawn cannot be persuaded.
+Every outside influence (debates, moods, rituals, relics, books of any faith, spontaneous conversion) scales with the clamped factor, so a resistant pawn is moved less.
+Digging in after a drawn debate is the one exception: it comes from the pawn itself, so it scales with the inverse, capped at 4× (factor 0.25).
+
+The step toward a trait target splits the factor by source.
+The innate part comes from traits and genes, the same way vanilla adds them up.
+Innate resistance asserts the pawn's personality: an iron-willed pawn (0.25×) holds stances 4× longer and moves toward its trait targets 4× faster.
+Resistance from anything else (ranks, hediffs, precepts, gear) is conditioning, which overrides personality, so it slows that step instead.
+The step scales with factor / innate²: a 0.5× rank on a vanilla pawn halves it, and a pawn at factor 0 does not move toward its trait targets at all.
+Mods that build genes from other data put that data on the innate side: Rimdark's chapter traits become a generated gene.
+
+A pawn with a factor below 0.25 can refuse to lose a debate.
+The chance rises from 0 at 0.25 to 1 at 0, and a refused loss counts as a draw, so it ends in a social fight or both sides digging in.
 
 ### Trait stance targets
 
@@ -178,6 +194,7 @@ The derivation and plots are in `analysis/conviction_valley.py`.
   A winner from a Proselytizer faith doubles that onlooker pull, and onlookers with a high certainty loss factor move further.
   Pawns whose faith approves of diversity can choose debating as recreation; while they do, most of their social interactions become debates.
   A draw can make either pawn dig in (more likely for intelligent pawns and those with shakier faith) or start a social fight.
+  A pawn that is hard to move digs in harder, and one that cannot be moved turns lost debates into draws (see "Certainty loss factor").
   Between two 0-social pawns, a full-ladder disagreement fights about as often as a vanilla slight.
   The chance is the mean of both pawns' vanilla social fight chances, so traits, drugs, genes and opinion all count.
   The more socially skilled debater calms things down, and smaller disagreements (by the same weight that picks the topic) rarely come to blows.

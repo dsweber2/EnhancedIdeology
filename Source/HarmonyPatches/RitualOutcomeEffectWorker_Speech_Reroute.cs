@@ -81,7 +81,7 @@ internal static class RitualOutcomeEffectWorker_Speech_Reroute
 
         var opinion = listener.relations.OpinionOf(speaker);
         var stepLength = ConvictionMath.RitualBaseArc
-            * listener.GetStatValue(StatDefOf.CertaintyLossFactor)
+            * CertaintyLoss.Factor(listener)
             * Compat_PeerPressure.AdjustStancePull(1f, opinion)
             * ConversionMultiplier;
 

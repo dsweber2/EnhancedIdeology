@@ -197,8 +197,9 @@ internal sealed class IssueStanceTracker
     // Apply conviction decay for the current game day. Returns true when decay was applied (i.e. caller
     // should mark structural opinion caches dirty). An issue with a trait target (TraitStanceTargets) moves along
     // the conviction valley toward that target. All other issues drain toward zero strength.
-    // CertaintyLossFactor scales the drain, and divides the valley step: a resistant pawn (factor < 1) keeps its
-    // stances longer and moves toward its trait targets faster.
+    // CertaintyLossFactor scales the drain: a resistant pawn (factor < 1) keeps its stances longer. The valley step
+    // uses CertaintyLoss.InnatePull: resistance from traits and genes moves the pawn toward its trait targets faster,
+    // resistance from other sources (ranks, hediffs) moves it slower.
     internal bool ApplyDecayIfNewDay()
     {
         var currentDay = GenTicks.TicksAbs / GenDate.TicksPerDay;
@@ -209,9 +210,9 @@ internal sealed class IssueStanceTracker
         var basePerDay = EnhancedIdeologyMod.Settings.ConvictionDecayRate
             / (GenDate.TicksPerSeason / (float)GenDate.TicksPerDay);
         if (basePerDay <= 0f) return false;
-        var lossFactor = _pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
+        var lossFactor = CertaintyLoss.Factor(_pawn);
         var drainPerDay = basePerDay * lossFactor;
-        var valleyStepPerDay = basePerDay / lossFactor;
+        var valleyStepPerDay = basePerDay * CertaintyLoss.InnatePull(lossFactor, CertaintyLoss.InnateFactor(_pawn));
 
         var traitTargets = TraitStanceTargets.For(_pawn, _preferredRank);
         foreach (var issue in _strength.Keys.ToList())

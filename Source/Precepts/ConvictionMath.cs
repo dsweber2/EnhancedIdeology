@@ -151,7 +151,7 @@ internal static class ConvictionMath
         var stepLength = DebateBaseArc
             * EnhancedIdeologyMod.Settings.DebateConvictionChange
             * conversionPower
-            * loser.GetStatValue(StatDefOf.CertaintyLossFactor)
+            * CertaintyLoss.Factor(loser)
             * pullMultiplier
             * apostacyResistance
             * loserTracker.BrainwipeSusceptibilityMultiplier;

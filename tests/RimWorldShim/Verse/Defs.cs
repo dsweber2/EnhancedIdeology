@@ -58,7 +58,17 @@ public static class DefDatabase<T> where T : Def
     }
 }
 
-public class GeneDef : Def { }
+public class GeneDef : Def
+{
+    public List<RimWorld.StatModifier>? statOffsets;
+    public List<RimWorld.StatModifier>? statFactors;
+}
+
+public class Gene
+{
+    public GeneDef def = new();
+    public bool Active = true;
+}
 
 public class IssueDef : Def { }
 

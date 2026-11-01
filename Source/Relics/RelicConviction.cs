@@ -38,7 +38,7 @@ internal static class RelicConviction
                 continue;
             }
 
-            var stepLength = RelicFoundArc * pawn.GetStatValue(StatDefOf.CertaintyLossFactor);
+            var stepLength = RelicFoundArc * CertaintyLoss.Factor(pawn);
             foreach (var issue in issues)
             {
                 ConvictionMath.ApplyRitualPull(comp, pawn, issue, IssueStanceTracker.HeldRank(ideo, issue),

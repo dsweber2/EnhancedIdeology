@@ -42,17 +42,57 @@ public class BookReadingTests : SeededTest
         Assert.Equal(0.000009f, gain, precision: 9);
     }
 
-    [Fact]
-    public void CertaintyGain_OwnIdeoReader_DividedByCertaintyLossFactor()
+    [Theory]
+    [InlineData(2f, 2f)]
+    [InlineData(0.5f, 0.5f)]
+    [InlineData(0f, 0f)]
+    [InlineData(-1f, 0f)]
+    public void CertaintyGain_OwnIdeoReader_ScaledByFactor(float certaintyLossFactor, float expectedScale)
     {
-        // Reader follows same ideo as book → gain ÷ CertaintyLossFactor
-        var (world, pawn, doer) = Setup(QualityCategory.Normal);
-        pawn.SetStatValue(StatDefOf.CertaintyLossFactor, 2f);
+        // Reader follows same ideo as book → gain × CertaintyLossFactor, clamped at 0
+        var (_, pawn, doer) = Setup(QualityCategory.Normal);
+        pawn.SetStatValue(StatDefOf.CertaintyLossFactor, certaintyLossFactor);
 
         var gainNoReader = doer.CertaintyGain(null);
         var gainWithReader = doer.CertaintyGain(pawn);
 
-        Assert.Equal(gainNoReader / 2f, gainWithReader, precision: 9);
+        Assert.Equal(gainNoReader * expectedScale, gainWithReader, precision: 9);
+    }
+
+    [Fact]
+    public void OnReadingTick_ResistantHeterodoxReader_ReturnsToOrthodoxySlower()
+    {
+        float RankAfterReading(float certaintyLossFactor)
+        {
+            var world = new SimWorld();
+            world.Initialize();
+            Rand.SetSeed(1);
+
+            var (issue, rungs) = SimIssues.Ladder("BookIssue", "Permissive", "Forbidding");
+            var ideo = new IdeoBuilder().WithName("Faith").AddPrecept(rungs[0]).Build();
+            world.AddIdeo(ideo);
+
+            var author = new PawnBuilder().WithIdeo(ideo).WithLabel("A").Build(world);
+            var doer = new ReadingOutcomeDoer_CertaintyChange { Quality = QualityCategory.Masterwork };
+            doer.OnBookGenerated(author);
+
+            var reader = new PawnBuilder().WithIdeo(ideo).WithCertaintyLossFactor(certaintyLossFactor)
+                .WithLabel("R").Build(world);
+            var readerTracker = world.Comp.PawnTracker.EnsurePawnHasIdeoTracker(reader);
+            readerTracker.SetIssueStance(issue, PreceptLadder.RankOf(rungs[1]), 10f);
+
+            for (var ii = 0; ii < 2000; ii++)
+            {
+                doer.OnReadingTick(reader, 1f);
+            }
+            return readerTracker.IssueStances().First(stance => stance.issue == issue).rank;
+        }
+
+        var ordinary = RankAfterReading(1f);
+        var resistant = RankAfterReading(0.5f);
+        Assert.True(ordinary < 1f, $"Expected the ordinary reader to move toward rung 0, got {ordinary}.");
+        Assert.True(resistant > ordinary, $"Expected the resistant reader to move less. resistant={resistant}, ordinary={ordinary}");
+        Assert.Equal(1f, RankAfterReading(0f));
     }
 
     [Fact]
