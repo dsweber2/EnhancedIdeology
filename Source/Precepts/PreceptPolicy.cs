@@ -132,6 +132,8 @@ internal static partial class PreceptPolicy
         "ARIOIAF_Authority", "ARIOIAF_FeudalAllegiance", "ARIOIAF_LeaderSelection", "ARIOIAF_RightfulRule",
         "ARIOIAF_TitleInheritance", "ARIOIAF_KnightlyConduct", "ARIOIAF_Oathkeeping", "ARIOIAF_IntrigueConduct",
         "ARIOIAF_IronPrice", "ARIOIAF_Sea", "ARIOIAF_Snow",
+        // RimDark 40k - Mankinds Finest. Respected -> Acceptable -> Horrible; Acceptable is the default rung.
+        "BEWH_PsykerIssue",
     ];
     // Issues that copy the axis of an issue from another mod, keyed copy -> original. When the original is loaded,
     // the copy is PositiveOnly and its rungs induce the original's rungs (InducedByPrecept), so the axis counts once.

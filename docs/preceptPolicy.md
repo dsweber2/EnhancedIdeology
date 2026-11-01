@@ -273,7 +273,8 @@ Heuristic: **single-rung → PositiveOnly** (no disagreement axis; the default c
 **Moral, mandatory** (every ideo takes a stance → no Don't-care needed): `VME_Violence`, `VME_Recreation`,
 `VME_TaintedApparel`, `VME_TatteredApparel`, `AM_FertilityIssue`, `AM_LearningRate`, `AM_LovinFrequency`,
 `AM_Creep`, `AM_Disfigurement`, `VME_Illness`, `VME_InsectJelly`, `VME_Sweets`, `VME_DumbLabor`,
-`AM_OcularTrees`.
+`AM_OcularTrees`, `BEWH_PsykerIssue` (RimDark 40k - Mankinds Finest: `respected` → `acceptable` → `horrible`;
+`acceptable` is the default rung and the neutral; psychic traits are deliberately not linked).
 
 **Order-fix candidates (verified — no fix needed).** Pulled every ladder above. Each carries a
 `defaultSelectionWeight` rung (silent ideos auto-resolve to it — mostly the centred neutral; `AM_Creep` /
