@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | Sobre el tema de {1}, {PAWN_nameDef} té la postura {2} amb convicció {3}. {IDEO_name} predica {5}; opinió de {PAWN_nameDef} sobre aquesta postura: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Des d'ahir, la postura de {PAWN_nameDef} ha passat de {1} a {2}. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Des d'ahir, la convicció de {PAWN_nameDef} ha passat de {1} a {2}. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Sense influències externes, la personalitat de {PAWN_nameDef} tendeix cap a {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | La personalitat de {PAWN_nameDef} està en contra de {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | El tret {1} de {PAWN_nameDef} afavoreix {2} i hi acosta la seva postura. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | El tret {1} de {PAWN_nameDef} s'oposa a {2} i n'allunya la seva postura. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | El tret {1} de {PAWN_nameDef} aprova el mem {2} i acosta la seva postura cap a {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | El tret {1} de {PAWN_nameDef} desaprova el mem {2} i allunya la seva postura de {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Opinió de {PAWN_nameDef} sobre {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | De mems i preceptes: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | De creences personals: {0} |

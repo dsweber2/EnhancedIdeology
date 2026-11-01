@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>W kwestii {1}, {PAWN_nameDef} ma postawę {2} z przekonaniem {3}. {IDEO_name} głosi {5}; opinia {PAWN_nameDef} o tej postawie: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Od wczoraj postawa {PAWN_nameDef} zmieniła się z {1} na {2}.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Od wczoraj przekonanie {PAWN_nameDef} zmieniło się z {1} na {2}.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Bez wpływu z zewnątrz osobowość {PAWN_nameDef} ciąży ku: {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>Osobowość {PAWN_nameDef} sprzeciwia się: {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>Cecha {1} postaci {PAWN_nameDef} sprzyja stanowisku {2} i przyciąga ją w tę stronę.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>Cecha {1} postaci {PAWN_nameDef} sprzeciwia się stanowisku {2} i odpycha ją od niego.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>Cecha {1} postaci {PAWN_nameDef} popiera pogląd {2} i przyciąga ją do stanowiska {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>Cecha {1} postaci {PAWN_nameDef} potępia pogląd {2} i odpycha ją od stanowiska {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>Opinia {PAWN_nameDef} o {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Z poglądów i zasad: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Z osobistych przekonań: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

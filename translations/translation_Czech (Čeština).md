@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | V otázce {1} má {PAWN_nameDef} postoj {2} s přesvědčením {3}. {IDEO_name} hlásá {5}; názor {PAWN_nameDef} na tento postoj: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Od včerejška se postoj {PAWN_nameDef} posunul z {1} na {2}. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Od včerejška se přesvědčení {PAWN_nameDef} změnilo z {1} na {2}. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Bez vnějšího vlivu táhne povaha {PAWN_nameDef} k: {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Povaha {PAWN_nameDef} je proti: {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | Rys {1} postavy {PAWN_nameDef} upřednostňuje postoj {2} a táhne ji tímto směrem. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | Rys {1} postavy {PAWN_nameDef} odmítá postoj {2} a odtlačuje ji od něj. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | Rys {1} postavy {PAWN_nameDef} schvaluje přesvědčení {2} a táhne ji k postoji {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | Rys {1} postavy {PAWN_nameDef} neschvaluje přesvědčení {2} a odtlačuje ji od postoje {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Názor {PAWN_nameDef} na {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | Z přesvědčení a zásad: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Z osobních přesvědčení: {0} |

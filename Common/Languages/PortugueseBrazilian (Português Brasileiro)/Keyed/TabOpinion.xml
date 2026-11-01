@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>Na questão de {1}, {PAWN_nameDef} tem a postura {2} com convicção {3}. {IDEO_name} prega {5}; opinião de {PAWN_nameDef} sobre essa postura: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Desde ontem, a postura de {PAWN_nameDef} passou de {1} para {2}.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Desde ontem, a convicção de {PAWN_nameDef} passou de {1} para {2}.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Sem influências externas, a personalidade de {PAWN_nameDef} tende a {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>A personalidade de {PAWN_nameDef} é contra {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>O traço {1} de {PAWN_nameDef} favorece {2} e puxa sua posição nessa direção.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>O traço {1} de {PAWN_nameDef} se opõe a {2} e afasta sua posição disso.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>O traço {1} de {PAWN_nameDef} aprova o meme {2} e puxa sua posição em direção a {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>O traço {1} de {PAWN_nameDef} desaprova o meme {2} e afasta sua posição de {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>Opinião de {PAWN_nameDef} sobre {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>De memes e preceitos: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>De crenças pessoais: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

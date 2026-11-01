@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>Zur Frage {1} hat {PAWN_nameDef} die Haltung {2} mit Überzeugung {3}. {IDEO_name} predigt {5}; {PAWN_nameDef}s Meinung zu dieser Haltung: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Seit gestern hat sich die Haltung von {PAWN_nameDef} von {1} zu {2} verschoben.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Seit gestern ist die Überzeugung von {PAWN_nameDef} von {1} auf {2} gegangen.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Sich selbst überlassen, zieht die Persönlichkeit von {PAWN_nameDef} zu {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>Die Persönlichkeit von {PAWN_nameDef} ist gegen {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>Das Merkmal {1} von {PAWN_nameDef} begünstigt {2} und zieht die Haltung in diese Richtung.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>Das Merkmal {1} von {PAWN_nameDef} lehnt {2} ab und drängt die Haltung davon weg.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>Das Merkmal {1} von {PAWN_nameDef} befürwortet die Glaubensgrundlage {2} und zieht die Haltung zu {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>Das Merkmal {1} von {PAWN_nameDef} missbilligt die Glaubensgrundlage {2} und drängt die Haltung weg von {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}s Meinung über {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Aus Glaubensgrundlagen und Geboten: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Aus persönlichen Überzeugungen: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

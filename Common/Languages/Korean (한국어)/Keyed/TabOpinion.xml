@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>{1} 쟁점에 대해, {PAWN_nameDef}은(는) 확신 {3}으로 {2} 입장을 가지고 있습니다. {IDEO_name}은(는) {5}을(를) 가르칩니다; 그 입장에 대한 {PAWN_nameDef}의 의견: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>어제부터 {PAWN_nameDef}의 입장이 {1}에서 {2}(으)로 바뀌었습니다.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>어제부터 {PAWN_nameDef}의 확신이 {1}에서 {2}(으)로 바뀌었습니다.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>외부 영향이 없으면 {PAWN_nameDef}의 성격은 다음 쪽으로 기웁니다: {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef}의 성격은 다음에 반대합니다: {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>{PAWN_nameDef}의 특성 {1}은(는) 다음 입장을 선호하여 그쪽으로 끌어당깁니다: {2}.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>{PAWN_nameDef}의 특성 {1}은(는) 다음 입장에 반대하여 그로부터 밀어냅니다: {2}.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>{PAWN_nameDef}의 특성 {1}은(는) 가르침 {2}을(를) 지지하여 다음 입장으로 끌어당깁니다: {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>{PAWN_nameDef}의 특성 {1}은(는) 가르침 {2}을(를) 못마땅해하여 다음 입장에서 밀어냅니다: {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}의 {IDEO_name}에 대한 의견: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>가르침과 규율에서: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>개인 신념에서: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

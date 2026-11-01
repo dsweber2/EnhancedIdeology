@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | {1} konusunda {PAWN_nameDef}, {3} inançla {2} tutumunu benimsiyor. {IDEO_name}, {5}'i öğütlüyor; {PAWN_nameDef}'in bu tutuma dair görüşü: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Dünden beri {PAWN_nameDef}'in tutumu {1} konumundan {2} konumuna geçti. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Dünden beri {PAWN_nameDef}'in inancı {1} değerinden {2} değerine değişti. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Kendi haline bırakılırsa {PAWN_nameDef} kişiliği gereği şuna yönelir: {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef} kişiliği gereği şuna karşıdır: {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | {PAWN_nameDef} kişisinin {1} özelliği şunu destekler ve onu bu yöne çeker: {2}. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | {PAWN_nameDef} kişisinin {1} özelliği şuna karşıdır ve onu bundan uzaklaştırır: {2}. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | {PAWN_nameDef} kişisinin {1} özelliği {2} ilkesini onaylar ve onu şu tutuma çeker: {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | {PAWN_nameDef} kişisinin {1} özelliği {2} ilkesini onaylamaz ve onu şu tutumdan uzaklaştırır: {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}'in {IDEO_name} hakkındaki görüşü: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | İlkeler ve öğretilerden: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Kişisel inançlardan: {0} |

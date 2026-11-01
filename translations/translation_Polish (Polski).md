@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | W kwestii {1}, {PAWN_nameDef} ma postawę {2} z przekonaniem {3}. {IDEO_name} głosi {5}; opinia {PAWN_nameDef} o tej postawie: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Od wczoraj postawa {PAWN_nameDef} zmieniła się z {1} na {2}. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Od wczoraj przekonanie {PAWN_nameDef} zmieniło się z {1} na {2}. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Bez wpływu z zewnątrz osobowość {PAWN_nameDef} ciąży ku: {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Osobowość {PAWN_nameDef} sprzeciwia się: {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | Cecha {1} postaci {PAWN_nameDef} sprzyja stanowisku {2} i przyciąga ją w tę stronę. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | Cecha {1} postaci {PAWN_nameDef} sprzeciwia się stanowisku {2} i odpycha ją od niego. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | Cecha {1} postaci {PAWN_nameDef} popiera pogląd {2} i przyciąga ją do stanowiska {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | Cecha {1} postaci {PAWN_nameDef} potępia pogląd {2} i odpycha ją od stanowiska {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Opinia {PAWN_nameDef} o {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | Z poglądów i zasad: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Z osobistych przekonań: {0} |

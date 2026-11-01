@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>Over de kwestie van {1} heeft {PAWN_nameDef} het standpunt {2} met overtuiging {3}. {IDEO_name} predikt {5}; {PAWN_nameDef}'s mening over dat standpunt: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Sinds gisteren is het standpunt van {PAWN_nameDef} verschoven van {1} naar {2}.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Sinds gisteren is de overtuiging van {PAWN_nameDef} gegaan van {1} naar {2}.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Zonder invloed van buitenaf trekt de persoonlijkheid van {PAWN_nameDef} naar {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>De persoonlijkheid van {PAWN_nameDef} is tegen {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>De eigenschap {1} van {PAWN_nameDef} begunstigt {2} en trekt de houding die kant op.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>De eigenschap {1} van {PAWN_nameDef} verzet zich tegen {2} en duwt de houding daarvan weg.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>De eigenschap {1} van {PAWN_nameDef} keurt het geloofsprincipe {2} goed en trekt de houding naar {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>De eigenschap {1} van {PAWN_nameDef} keurt het geloofsprincipe {2} af en duwt de houding weg van {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}'s mening over {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Van geloofsprincipes en leefregels: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Van persoonlijke overtuigingen: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

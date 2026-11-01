@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>{1}の問題について、{PAWN_nameDef}は確信{3}で姿勢{2}をとっている。{IDEO_name}は{5}を説く。{PAWN_nameDef}のその姿勢への評価: {6}。</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>昨日から、{PAWN_nameDef}の姿勢は{1}から{2}へ移った。</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>昨日から、{PAWN_nameDef}の確信は{1}から{2}になった。</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>外部の影響がなければ、{PAWN_nameDef}の性格は{1}へと傾く。</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef}の性格は{1}に反対している。</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>{PAWN_nameDef}の性格「{1}」は{2}を好み、そちらへと引き寄せる。</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>{PAWN_nameDef}の性格「{1}」は{2}に反発し、そこから遠ざける。</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>{PAWN_nameDef}の性格「{1}」はミーム「{2}」を支持し、{3}へと引き寄せる。</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>{PAWN_nameDef}の性格「{1}」はミーム「{2}」を嫌い、{3}から遠ざける。</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}の{IDEO_name}への評価: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>ミームと戒律から: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>個人の信条から: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

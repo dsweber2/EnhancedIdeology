@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | Referitor la problema {1}, {PAWN_nameDef} are poziția {2} cu convingerea {3}. {IDEO_name} propovăduiește {5}; opinia lui {PAWN_nameDef} față de acea poziție: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | De ieri, poziția lui {PAWN_nameDef} s-a mutat de la {1} la {2}. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | De ieri, convingerea lui {PAWN_nameDef} a trecut de la {1} la {2}. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Lăsată în voia ei, personalitatea lui {PAWN_nameDef} tinde spre {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Personalitatea lui {PAWN_nameDef} este împotriva {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | Trăsătura {1} a lui {PAWN_nameDef} favorizează {2} și îi atrage poziția într-acolo. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | Trăsătura {1} a lui {PAWN_nameDef} se opune la {2} și îi îndepărtează poziția de acolo. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | Trăsătura {1} a lui {PAWN_nameDef} aprobă meme-ul {2} și îi atrage poziția spre {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | Trăsătura {1} a lui {PAWN_nameDef} dezaprobă meme-ul {2} și îi îndepărtează poziția de {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Opinia lui {PAWN_nameDef} față de {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | Din meme și precepte: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Din credințe personale: {0} |

@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>Về vấn đề {1}, {PAWN_nameDef} giữ lập trường {2} với niềm tin {3}. {IDEO_name} rao giảng {5}; quan điểm của {PAWN_nameDef} về lập trường đó: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Từ hôm qua, lập trường của {PAWN_nameDef} đã chuyển từ {1} sang {2}.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Từ hôm qua, niềm tin của {PAWN_nameDef} đã thay đổi từ {1} thành {2}.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Nếu không bị tác động, tính cách của {PAWN_nameDef} sẽ nghiêng về {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>Tính cách của {PAWN_nameDef} phản đối {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>Đặc điểm {1} của {PAWN_nameDef} ủng hộ {2}, kéo lập trường về phía đó.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>Đặc điểm {1} của {PAWN_nameDef} phản đối {2}, đẩy lập trường ra xa khỏi đó.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>Đặc điểm {1} của {PAWN_nameDef} tán thành meme {2}, kéo lập trường về phía {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>Đặc điểm {1} của {PAWN_nameDef} không tán thành meme {2}, đẩy lập trường ra xa khỏi {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>Quan điểm của {PAWN_nameDef} về {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>Từ kỷ vật và giới luật: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Từ niềm tin cá nhân: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

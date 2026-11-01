@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | Về vấn đề {1}, {PAWN_nameDef} giữ lập trường {2} với niềm tin {3}. {IDEO_name} rao giảng {5}; quan điểm của {PAWN_nameDef} về lập trường đó: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Từ hôm qua, lập trường của {PAWN_nameDef} đã chuyển từ {1} sang {2}. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Từ hôm qua, niềm tin của {PAWN_nameDef} đã thay đổi từ {1} thành {2}. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Nếu không bị tác động, tính cách của {PAWN_nameDef} sẽ nghiêng về {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Tính cách của {PAWN_nameDef} phản đối {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | Đặc điểm {1} của {PAWN_nameDef} ủng hộ {2}, kéo lập trường về phía đó. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | Đặc điểm {1} của {PAWN_nameDef} phản đối {2}, đẩy lập trường ra xa khỏi đó. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | Đặc điểm {1} của {PAWN_nameDef} tán thành meme {2}, kéo lập trường về phía {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | Đặc điểm {1} của {PAWN_nameDef} không tán thành meme {2}, đẩy lập trường ra xa khỏi {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Quan điểm của {PAWN_nameDef} về {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | Từ kỷ vật và giới luật: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Từ niềm tin cá nhân: {0} |

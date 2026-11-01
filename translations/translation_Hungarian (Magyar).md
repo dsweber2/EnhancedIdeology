@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | A {1} kérdésben {PAWN_nameDef} álláspontja {2}, meggyőződése {3}. A {IDEO_name} {5}-t hirdet; {PAWN_nameDef} véleménye erről az álláspontról: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Tegnap óta {PAWN_nameDef} álláspontja {1} helyett {2} lett. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Tegnap óta {PAWN_nameDef} meggyőződése {1} helyett {2} lett. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Külső hatás nélkül {PAWN_nameDef} személyisége e felé húz: {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef} személyisége ellenzi: {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | {PAWN_nameDef} {1} jellemvonása ezt támogatja: {2}, és afelé húzza. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | {PAWN_nameDef} {1} jellemvonása ezt ellenzi: {2}, és eltaszítja tőle. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | {PAWN_nameDef} {1} jellemvonása helyesli ezt a mémet: {2}, és e felé húzza: {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | {PAWN_nameDef} {1} jellemvonása helyteleníti ezt a mémet: {2}, és eltaszítja ettől: {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef} véleménye a {IDEO_name}-ről: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | Mémekből és előírásokból: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Személyes meggyőződésből: {0} |

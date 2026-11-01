@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>{1} konusunda {PAWN_nameDef}, {3} inançla {2} tutumunu benimsiyor. {IDEO_name}, {5}'i öğütlüyor; {PAWN_nameDef}'in bu tutuma dair görüşü: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Dünden beri {PAWN_nameDef}'in tutumu {1} konumundan {2} konumuna geçti.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Dünden beri {PAWN_nameDef}'in inancı {1} değerinden {2} değerine değişti.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Kendi haline bırakılırsa {PAWN_nameDef} kişiliği gereği şuna yönelir: {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef} kişiliği gereği şuna karşıdır: {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>{PAWN_nameDef} kişisinin {1} özelliği şunu destekler ve onu bu yöne çeker: {2}.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>{PAWN_nameDef} kişisinin {1} özelliği şuna karşıdır ve onu bundan uzaklaştırır: {2}.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>{PAWN_nameDef} kişisinin {1} özelliği {2} ilkesini onaylar ve onu şu tutuma çeker: {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>{PAWN_nameDef} kişisinin {1} özelliği {2} ilkesini onaylamaz ve onu şu tutumdan uzaklaştırır: {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}'in {IDEO_name} hakkındaki görüşü: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>İlkeler ve öğretilerden: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>Kişisel inançlardan: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

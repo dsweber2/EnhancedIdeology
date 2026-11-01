@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>По вопросу {1} {PAWN_nameDef} занимает позицию {2} с убеждённостью {3}. {IDEO_name} проповедует {5}; мнение {PAWN_nameDef} об этой позиции: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Со вчерашнего дня позиция {PAWN_nameDef} сместилась с {1} на {2}.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Со вчерашнего дня убеждённость {PAWN_nameDef} изменилась с {1} до {2}.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Без внешнего влияния характер {PAWN_nameDef} тянет к позиции: {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>Характер {PAWN_nameDef} против: {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>Черта характера «{1}» у {PAWN_nameDef} располагает к позиции «{2}» и тянет к ней.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>Черта характера «{1}» у {PAWN_nameDef} противится позиции «{2}» и отталкивает от неё.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>Черта характера «{1}» у {PAWN_nameDef} одобряет черту «{2}» и тянет к позиции «{3}».</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>Черта характера «{1}» у {PAWN_nameDef} не одобряет черту «{2}» и отталкивает от позиции «{3}».</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>Мнение {PAWN_nameDef} об {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>От черт и принципов: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>От личных убеждений: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | Over de kwestie van {1} heeft {PAWN_nameDef} het standpunt {2} met overtuiging {3}. {IDEO_name} predikt {5}; {PAWN_nameDef}'s mening over dat standpunt: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Sinds gisteren is het standpunt van {PAWN_nameDef} verschoven van {1} naar {2}. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Sinds gisteren is de overtuiging van {PAWN_nameDef} gegaan van {1} naar {2}. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Zonder invloed van buitenaf trekt de persoonlijkheid van {PAWN_nameDef} naar {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | De persoonlijkheid van {PAWN_nameDef} is tegen {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | De eigenschap {1} van {PAWN_nameDef} begunstigt {2} en trekt de houding die kant op. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | De eigenschap {1} van {PAWN_nameDef} verzet zich tegen {2} en duwt de houding daarvan weg. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | De eigenschap {1} van {PAWN_nameDef} keurt het geloofsprincipe {2} goed en trekt de houding naar {3}. |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | De eigenschap {1} van {PAWN_nameDef} keurt het geloofsprincipe {2} af en duwt de houding weg van {3}. |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}'s mening over {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | Van geloofsprincipes en leefregels: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | Van persoonlijke overtuigingen: {0} |

@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>在{1}议题上，{PAWN_nameDef}持有立场{2}，信念强度为{3}。{IDEO_name}宣扬{5}；{PAWN_nameDef}对该立场的看法：{6}。</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>自昨天起，{PAWN_nameDef}的立场已从{1}转为{2}。</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>自昨天起，{PAWN_nameDef}的信念强度已从{1}变为{2}。</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>若无外界影响，{PAWN_nameDef}的性格会使其倾向于{1}。</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>{PAWN_nameDef}的性格反对{1}。</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>{PAWN_nameDef}的特性{1}偏向{2}，使其向此倾斜。</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>{PAWN_nameDef}的特性{1}反对{2}，使其远离此立场。</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>{PAWN_nameDef}的特性{1}认同模因{2}，使其倾向于{3}。</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>{PAWN_nameDef}的特性{1}不认同模因{2}，使其远离{3}。</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>{PAWN_nameDef}对{IDEO_name}的看法：{2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>来自模因与戒律：{0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>来自个人信仰：{0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

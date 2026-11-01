@@ -10,8 +10,10 @@
   <EnhancedIdeology.StanceTooltip>Sobre el tema de {1}, {PAWN_nameDef} té la postura {2} amb convicció {3}. {IDEO_name} predica {5}; opinió de {PAWN_nameDef} sobre aquesta postura: {6}.</EnhancedIdeology.StanceTooltip>
   <EnhancedIdeology.StanceChangedRung>Des d'ahir, la postura de {PAWN_nameDef} ha passat de {1} a {2}.</EnhancedIdeology.StanceChangedRung>
   <EnhancedIdeology.StanceChangedStrength>Des d'ahir, la convicció de {PAWN_nameDef} ha passat de {1} a {2}.</EnhancedIdeology.StanceChangedStrength>
-  <EnhancedIdeology.TraitDriftToward>Sense influències externes, la personalitat de {PAWN_nameDef} tendeix cap a {1}.</EnhancedIdeology.TraitDriftToward>
-  <EnhancedIdeology.TraitDriftAgainst>La personalitat de {PAWN_nameDef} està en contra de {1}.</EnhancedIdeology.TraitDriftAgainst>
+  <EnhancedIdeology.TraitFavors>El tret {1} de {PAWN_nameDef} afavoreix {2} i hi acosta la seva postura.</EnhancedIdeology.TraitFavors>
+  <EnhancedIdeology.TraitOpposes>El tret {1} de {PAWN_nameDef} s'oposa a {2} i n'allunya la seva postura.</EnhancedIdeology.TraitOpposes>
+  <EnhancedIdeology.TraitMemeApproves>El tret {1} de {PAWN_nameDef} aprova el mem {2} i acosta la seva postura cap a {3}.</EnhancedIdeology.TraitMemeApproves>
+  <EnhancedIdeology.TraitMemeDisapproves>El tret {1} de {PAWN_nameDef} desaprova el mem {2} i allunya la seva postura de {3}.</EnhancedIdeology.TraitMemeDisapproves>
   <EnhancedIdeology.PawnOpinionTooltip>Opinió de {PAWN_nameDef} sobre {IDEO_name}: {2}</EnhancedIdeology.PawnOpinionTooltip>
   <EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>De mems i preceptes: {0}</EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts>
   <EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>De creences personals: {0}</EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs>

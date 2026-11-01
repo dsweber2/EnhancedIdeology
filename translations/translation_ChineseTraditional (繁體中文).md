@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | 在{1}的議題上，{PAWN_nameDef}持有立場{2}，信念強度為{3}。{IDEO_name}宣揚{5}；{PAWN_nameDef}對該立場的看法：{6}。 |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | 自昨天起，{PAWN_nameDef}的立場已從{1}轉為{2}。 |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | 自昨天起，{PAWN_nameDef}的信念強度已從{1}變為{2}。 |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | 若無外界影響，{PAWN_nameDef}的性格會使其傾向於{1}。 |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | {PAWN_nameDef}的性格反對{1}。 |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | {PAWN_nameDef}的特性{1}偏向{2}，使其向此傾斜。 |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | {PAWN_nameDef}的特性{1}反對{2}，使其遠離此立場。 |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | {PAWN_nameDef}的特性{1}認同模因{2}，使其傾向於{3}。 |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | {PAWN_nameDef}的特性{1}不認同模因{2}，使其遠離{3}。 |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | {PAWN_nameDef}對{IDEO_name}的看法：{2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | 源自模因與戒律：{0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | 源自個人信念：{0} |

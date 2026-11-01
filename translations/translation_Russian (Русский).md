@@ -127,8 +127,10 @@
 | `EnhancedIdeology.StanceTooltip` | On the issue of {1}, {PAWN_nameDef} has the stance {2} with conviction {3}. {IDEO_name} preaches {5}; {PAWN_nameDef}'s opinion of that stance: {6}. | По вопросу {1} {PAWN_nameDef} занимает позицию {2} с убеждённостью {3}. {IDEO_name} проповедует {5}; мнение {PAWN_nameDef} об этой позиции: {6}. |
 | `EnhancedIdeology.StanceChangedRung` | Since yesterday, {PAWN_nameDef}'s stance has moved from {1} to {2}. | Со вчерашнего дня позиция {PAWN_nameDef} сместилась с {1} на {2}. |
 | `EnhancedIdeology.StanceChangedStrength` | Since yesterday, {PAWN_nameDef}'s conviction has gone from {1} to {2}. | Со вчерашнего дня убеждённость {PAWN_nameDef} изменилась с {1} до {2}. |
-| `EnhancedIdeology.TraitDriftToward` | Left alone, {PAWN_nameDef}'s personality draws {PAWN_objective} toward {1}. | Без внешнего влияния характер {PAWN_nameDef} тянет к позиции: {1}. |
-| `EnhancedIdeology.TraitDriftAgainst` | {PAWN_nameDef}'s personality is against {1}. | Характер {PAWN_nameDef} против: {1}. |
+| `EnhancedIdeology.TraitFavors` | {PAWN_nameDef}'s trait {1} favors {2}, drawing {PAWN_objective} toward it. | Черта характера «{1}» у {PAWN_nameDef} располагает к позиции «{2}» и тянет к ней. |
+| `EnhancedIdeology.TraitOpposes` | {PAWN_nameDef}'s trait {1} opposes {2}, pushing {PAWN_objective} away from it. | Черта характера «{1}» у {PAWN_nameDef} противится позиции «{2}» и отталкивает от неё. |
+| `EnhancedIdeology.TraitMemeApproves` | {PAWN_nameDef}'s trait {1} approves of the {2} meme, drawing {PAWN_objective} toward {3}. | Черта характера «{1}» у {PAWN_nameDef} одобряет черту «{2}» и тянет к позиции «{3}». |
+| `EnhancedIdeology.TraitMemeDisapproves` | {PAWN_nameDef}'s trait {1} disapproves of the {2} meme, pushing {PAWN_objective} away from {3}. | Черта характера «{1}» у {PAWN_nameDef} не одобряет черту «{2}» и отталкивает от позиции «{3}». |
 | `EnhancedIdeology.PawnOpinionTooltip` | {PAWN_nameDef}'s opinion of {IDEO_name}: {2} | Мнение {PAWN_nameDef} об {IDEO_name}: {2} |
 | `EnhancedIdeology.PawnOptionToolTip.FromMemesAndPrecepts` | From memes and precepts: {0} | От черт и принципов: {0} |
 | `EnhancedIdeology.PawnOptionToolTip.FromPersonalBeliefs` | From personal beliefs: {0} | От личных убеждений: {0} |
