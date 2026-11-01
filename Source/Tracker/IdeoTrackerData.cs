@@ -479,10 +479,10 @@ internal sealed class IdeoTrackerData(Pawn pawn) : IExposable
 
             var devDetailsBuilder = new StringBuilder();
             _ = devDetailsBuilder
-                .AppendLine($"Relationship opinion: {Opinions.CachedRelationshipIdeoOpinions.GetValueOrDefault(ideo, 0)}")
-                .AppendLine($"Relationships: {Opinions.CachedRelationships.Count(p => p.Key.Ideo == ideo)}");
+                .AppendLine(FormattableString.Invariant($"Relationship opinion: {Opinions.CachedRelationshipIdeoOpinions.GetValueOrDefault(ideo, 0)}"))
+                .AppendLine(FormattableString.Invariant($"Relationships: {Opinions.CachedRelationships.Count(p => p.Key.Ideo == ideo)}"));
             foreach (var kvp in Opinions.CachedRelationships.Where(p => p.Key.Ideo == ideo))
-                _ = devDetailsBuilder.AppendLine($" - {kvp.Key.Name}: {kvp.Value * PawnOpinionFactor} (scaled from {kvp.Value})");
+                _ = devDetailsBuilder.AppendLine(FormattableString.Invariant($" - {kvp.Key.Name}: {kvp.Value * PawnOpinionFactor} (scaled from {kvp.Value})"));
             devDetails = devDetailsBuilder.ToString();
         }
         else

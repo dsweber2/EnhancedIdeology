@@ -31,6 +31,7 @@ internal sealed class OpinionCard
     // stripe at the left edge of a stance row uses the same colours to grade the stance against the pawn's traits.
     private static readonly Color AgreeColor = new(0.35f, 0.7f, 0.35f);
     private static readonly Color DisagreeColor = new(0.85f, 0.35f, 0.35f);
+    private static readonly string[] ArrowGlyphs = ["▲", "▼", "◀", "▶"];
 
     private static Vector2 scroll;
 
@@ -77,7 +78,7 @@ internal sealed class OpinionCard
         stances = StanceRows(data, selected);
         traitTargets = data.Stances.TraitTargets();
 
-        glyphWidth = new[] { "▲", "▼", "◀", "▶" }.Max(glyph => Text.CalcSize(glyph).x);
+        glyphWidth = ArrowGlyphs.Max(glyph => Text.CalcSize(glyph).x);
         rungArrowWidth = glyphWidth * (1f + DoubleArrowOffset);
         issueWidth = stances.Select(row => Text.CalcSize(row.issue.LabelCap).x).DefaultIfEmpty(0f).Max();
         rungWidth = Mathf.Min(MaxRungWidth, stances.Select(row => Text.CalcSize(row.personalRung).x).DefaultIfEmpty(0f).Max());

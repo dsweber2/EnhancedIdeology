@@ -127,7 +127,7 @@ internal sealed class JobDriver_PlaceAndBurnUntilDestroyed : JobDriver
         var activeSpots = pawn.Map.gatherSpotLister.activeSpots;
         if (activeSpots.Count > 0)
         {
-            var nearest = activeSpots.MinBy(gs => gs.parent.Position.DistanceToSquared(pawn.Position));
+            var nearest = activeSpots.MinBy(gs => gs.parent.Position.DistanceToSquared(pawn.Position))!;
             return nearest.parent.Position;
         }
 

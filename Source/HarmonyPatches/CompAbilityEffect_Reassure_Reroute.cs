@@ -126,7 +126,7 @@ internal static class CompAbilityEffect_Reassure_Tooltip
                 var orthodoxIdx = Mathf.Clamp(Mathf.RoundToInt(orthodoxRank), 0, rungs.Count - 1);
 
                 if (rungs.Count > 0 && currentIdx != orthodoxIdx)
-                    sb.AppendLine($" -  {issue.LabelCap}: {rungs[currentIdx].LabelCap} → {rungs[orthodoxIdx].LabelCap}");
+                    sb.AppendLine(FormattableString.Invariant($" -  {issue.LabelCap}: {rungs[currentIdx].LabelCap} → {rungs[orthodoxIdx].LabelCap}"));
                 else
                     sb.AppendLine(" -  " + issue.LabelCap);
             }

@@ -286,7 +286,8 @@ internal sealed class MentalState_Iconoclast : MentalState
                 && g.Key.ProperRoom
                 && !g.Key.PsychologicallyOutdoors
                 && !AgitationPrivateRoles.Contains(g.Key.Role))
-            .MaxByWithFallback(g => g.Count());
+            .OrderByDescending(g => g.Count())
+            .FirstOrDefault();
 
         if (bestGroup != null)
         {

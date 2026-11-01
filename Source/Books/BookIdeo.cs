@@ -183,7 +183,7 @@ internal sealed class BookIdeo : Book
         foreach (var (issue, stance, strength) in stances)
         {
             var shiftPerQuadrum = (gainPerQuadrum * strength).ToString("0.##", CultureInfo.InvariantCulture) + "/qd";
-            sb.AppendLine($"  - {issue.LabelCap}: {stance.LabelCap} ({shiftPerQuadrum})");
+            sb.AppendLine(FormattableString.Invariant($"  - {issue.LabelCap}: {stance.LabelCap} ({shiftPerQuadrum})"));
         }
         return sb.ToString().TrimEndNewlines();
     }

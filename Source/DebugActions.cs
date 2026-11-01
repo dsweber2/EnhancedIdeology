@@ -1,6 +1,7 @@
 using LudeonTK;
 using EnhancedIdeology.HarmonyPatches;
 using Verse.AI;
+using static System.FormattableString;
 
 namespace EnhancedIdeology;
 
@@ -189,7 +190,7 @@ internal static partial class DebugActions
         var humanlike = pawns.Where(pawn => pawn.RaceProps.Humanlike).ToList();
         foreach (var pawn in humanlike)
         {
-            text.AppendLine($"  {pawn.LabelShort}: rest={pawn.needs.rest?.CurLevel.ToString("P0", CultureInfo.InvariantCulture) ?? "none"}"
+            var gates = $"  {pawn.LabelShort}: rest={pawn.needs.rest?.CurLevel.ToString("P0", CultureInfo.InvariantCulture) ?? "none"}"
                 + $" alert={CaravanDebates.IsAlert(pawn)}"
                 + $" initiate={Caravan_TickInterval_Debates.CanInitiate(pawn)}"
                 + $" receive={Caravan_TickInterval_Debates.CanReceive(pawn)}"
@@ -198,14 +199,15 @@ internal static partial class DebugActions
                 + $" awake={pawn.Awake()} downed={pawn.Downed} faction={pawn.Faction?.Name ?? "none"}"
                 + $" mental={pawn.MentalStateDef?.defName ?? "none"} blocked={pawn.IsInteractionBlocked(null, isInitiator: true, isRandom: true)}"
                 + $" lifeStageCanInitiate={pawn.ageTracker.CurLifeStage.canInitiateSocialInteraction}"
-                + $" ideo={pawn.Ideo?.name ?? "none"}");
+                + $" ideo={pawn.Ideo?.name ?? "none"}";
+            text.AppendLine(gates);
         }
         foreach (var initiator in humanlike)
         {
             foreach (var recipient in humanlike.Where(pawn => pawn != initiator))
             {
                 var weights = string.Join(" ", debates.Select(def => $"{def.defName}={def.Worker.RandomSelectionWeight(initiator, recipient):F4}"));
-                text.AppendLine($"  {initiator.LabelShort} -> {recipient.LabelShort}: {weights}");
+                text.AppendLine(Invariant($"  {initiator.LabelShort} -> {recipient.LabelShort}: {weights}"));
             }
         }
         return text.ToString();
@@ -240,14 +242,14 @@ internal static partial class DebugActions
     private static void LogContemplationSiteDiagnosis(Pawn pawn)
     {
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"=== Contemplation site diagnosis: {pawn.LabelShort} ({pawn.Ideo!.name}) ===");
+        sb.AppendLine(Invariant($"=== Contemplation site diagnosis: {pawn.LabelShort} ({pawn.Ideo!.name}) ==="));
         var sites = JoyGiver_Contemplation.FindSites(pawn);
-        sb.AppendLine($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  isMoralist={JoyGiver_Contemplation.IsMoralist(pawn)}  sites={sites.Count}  bestGain={sites.FirstOrDefault().EffectiveGain:F3}");
+        sb.AppendLine(Invariant($"CanMeditateNow={MeditationUtility.CanMeditateNow(pawn)}  isMoralist={JoyGiver_Contemplation.IsMoralist(pawn)}  sites={sites.Count}  bestGain={sites.FirstOrDefault().EffectiveGain:F3}"));
 
         sb.AppendLine("\n-- Lecterns (moralist contemplation site) --");
         foreach (var thing in pawn.Map!.listerThings.ThingsOfDef(ThingDefOf.Lectern))
         {
-            sb.AppendLine($"  {thing.LabelShort}  forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}");
+            sb.AppendLine(Invariant($"  {thing.LabelShort}  forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}"));
         }
 
         sb.AppendLine("\n-- Ideo buildings (non-altar) --");
@@ -259,27 +261,27 @@ internal static partial class DebugActions
                 if (thing is not ThingWithComps twc) continue;
                 var cs = twc.compStyleable;
                 if (cs == null || (cs.Ideo == null && cs.SourcePrecept == null)) continue;
-                sb.AppendLine($"  {thing.LabelShort} ({thing.def.defName})  isAltar={thing.def.isAltar}  csIdeo={cs.Ideo?.name ?? "null"}  match={cs.Ideo == pawn.Ideo}");
+                sb.AppendLine(Invariant($"  {thing.LabelShort} ({thing.def.defName})  isAltar={thing.def.isAltar}  csIdeo={cs.Ideo?.name ?? "null"}  match={cs.Ideo == pawn.Ideo}"));
                 if (!thing.def.isAltar && cs.Ideo == pawn.Ideo)
                 {
                     var cap = JoyGiver_Contemplation.StatueContemplationCap(thing);
-                    sb.AppendLine($"    statueCap={cap}  canReserveCap={pawn.CanReserve(thing, cap, -1)}");
+                    sb.AppendLine(Invariant($"    statueCap={cap}  canReserveCap={pawn.CanReserve(thing, cap, -1)}"));
                 }
                 if (cs.SourcePrecept is Precept_Building pb && pb.presenceDemand != null)
                 {
                     var demand = pb.presenceDemand;
-                    sb.Append($"    presenceDemand applies={demand.AppliesTo(pawn.Map)}");
+                    sb.Append(Invariant($"    presenceDemand applies={demand.AppliesTo(pawn.Map)}"));
                     if (demand.AppliesTo(pawn.Map))
                     {
                         var effRoom = demand.GetEffectiveRoom(thing);
-                        sb.Append($"  effectiveRoom={effRoom?.ID.ToString(CultureInfo.InvariantCulture) ?? "null"}");
+                        sb.Append(Invariant($"  effectiveRoom={effRoom?.ID.ToString(CultureInfo.InvariantCulture) ?? "null"}"));
                         if (effRoom != null)
                             foreach (var req in demand.roomRequirements ?? [])
-                                sb.Append($"  [{req.GetType().Name}={req.MetOrDisabled(effRoom, pawn)}]");
+                                sb.Append(Invariant($"  [{req.GetType().Name}={req.MetOrDisabled(effRoom, pawn)}]"));
                     }
                     sb.AppendLine();
                 }
-                sb.AppendLine($"    forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}");
+                sb.AppendLine(Invariant($"    forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}"));
             }
         }
 
@@ -290,7 +292,7 @@ internal static partial class DebugActions
             foreach (var thing in room.ContainedAndAdjacentThings.ToList())
             {
                 if (thing.def != ThingDefOf.Reliquary) continue;
-                sb.AppendLine($"  {thing.LabelShort}  impressiveness={room.GetStat(RoomStatDefOf.Impressiveness):F0}  forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}");
+                sb.AppendLine(Invariant($"  {thing.LabelShort}  impressiveness={room.GetStat(RoomStatDefOf.Impressiveness):F0}  forbidden={thing.IsForbidden(pawn)}  canReach={pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None)}"));
             }
         }
 

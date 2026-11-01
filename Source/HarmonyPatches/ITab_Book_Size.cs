@@ -12,7 +12,7 @@ internal static class ITab_Book_Size
 
     static void Postfix(ITab_Book __instance)
     {
-        var current = (Vector2)SizeField.GetValue(__instance);
+        var current = (Vector2)SizeField.GetValue(__instance)!;
         SizeField.SetValue(__instance, new Vector2(current.x, Height));
     }
 }

@@ -9,8 +9,8 @@ public class Thought_MemeMemory : Thought_Memory
         get
         {
             var desc = base.Description;
-            if (sourcePrecept != null || SourceMemeLabel.NullOrEmpty()) return desc;
-            return desc + "\n\n" + "CausedBy".Translate() + ": " + SourceMemeLabel;
+            if (sourcePrecept != null || SourceMemeLabel is not { Length: > 0 } memeLabel) return desc;
+            return desc + "\n\n" + "CausedBy".Translate() + ": " + memeLabel;
         }
     }
 

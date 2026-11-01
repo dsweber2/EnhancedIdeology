@@ -166,7 +166,7 @@ internal static class TraitStanceTargets
 
         foreach (var (trait, link) in TraitIssueLinks.ActiveFor(pawn))
         {
-            if (link.Rung is { issue: { } issue } rung && PreceptLadder.RankOf(rung) is var rank and >= 0f)
+            if (link.RungDef is { issue: { } issue } rung && PreceptLadder.RankOf(rung) is var rank and >= 0f)
             {
                 Vote(issue, 1f, [(rank, 1f)], null, trait);
             }
@@ -267,6 +267,6 @@ internal static class TraitStanceTargets
         var index = Mathf.RoundToInt(rank);
         return rank == index && index >= 0 && index < rungs.Count
             ? rungs[index].defName
-            : rank.ToString("0.##");
+            : rank.ToString("0.##", CultureInfo.InvariantCulture);
     }
 }

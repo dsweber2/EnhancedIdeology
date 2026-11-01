@@ -50,7 +50,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
         {
             _savedLadders = LadderMigration.CaptureAll();
         }
-        Scribe_Collections.Look(ref _savedLadders, "savedLadders", LookMode.Value, LookMode.Deep);
+        Scribe_Collections.Look(ref _savedLadders!, "savedLadders", LookMode.Value, LookMode.Deep);
     }
 
     // Set so that an offset of 8 at default
@@ -76,7 +76,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
             }
             // Dissonance is the response to a foreign practice, not a practice of the pawn's own faith.
             if (thought is Thought_CognitiveDissonance) continue;
-            if (thought.sourcePrecept is not { } precept || precept.ideo != pawn.Ideo) continue;
+            if (thought.sourcePrecept is not { ideo: { } ideo } precept || ideo != pawn.Ideo) continue;
             if (precept.def.issue is not { } issue) continue;
             var delta = MoodletConvictionDelta(pawn, thought.MoodOffset());
             if (Mathf.Abs(delta) < 0.00001f) continue;
@@ -86,7 +86,7 @@ internal sealed partial class GameComponent_EnhancedIdeology(Game game) : GameCo
                 case PreceptCategory.NA:
                     break;
                 case PreceptCategory.Moral:
-                    ConvictionMath.ApplyMoodPull(tracker, precept.ideo, issue, delta);
+                    ConvictionMath.ApplyMoodPull(tracker, ideo, issue, delta);
                     break;
                 default:
                     tracker.ShiftIssueStance(issue, 0f, 0f, delta, fromMood: true);

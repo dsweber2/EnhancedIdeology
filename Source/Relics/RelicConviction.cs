@@ -29,7 +29,7 @@ internal static class RelicConviction
     // Each living follower of the relic's ideo moves toward orthodoxy and higher conviction on all Moral issues.
     internal static void ApplyFindBoost(GameComponent_EnhancedIdeology comp, Precept_Relic relic)
     {
-        var ideo = relic.ideo;
+        var ideo = relic.ideo!;
         var issues = MoralIssues(ideo);
         foreach (var pawn in comp.GetIdeoPawns(ideo).ToList())
         {

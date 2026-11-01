@@ -240,18 +240,20 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         // sampled proportionally to opposition magnitude via exponential racing (-log(U)/w).
         if (initiator.MentalState is MentalState_Iconoclast)
         {
-            initiatorPrecept = debatableIssues.MinBy(def =>
+            var target = debatableIssues.MinBy(topic =>
             {
-                var w = Mathf.Max(-initiatorTracker.IssueOpinionToward(recipientIdeo, def.issue), float.Epsilon);
+                var w = Mathf.Max(-initiatorTracker.IssueOpinionToward(recipientIdeo, topic.issue), float.Epsilon);
                 return -Mathf.Log(Rand.Value) / w;
             });
-            return initiatorPrecept.issue;
+            initiatorPrecept = target.precept;
+            return target.issue;
         }
 
         // Sample proportionally to how far apart the two pawns are on each issue, via exponential racing.
-        initiatorPrecept = debatableIssues.MinBy(def =>
-            -Mathf.Log(Rand.Value) / TopicWeight(def.issue, initiatorStances[def.issue], recipientStances[def.issue]));
-        return initiatorPrecept.issue;
+        var chosen = debatableIssues.MinBy(topic =>
+            -Mathf.Log(Rand.Value) / TopicWeight(topic.issue, initiatorStances[topic.issue], recipientStances[topic.issue]));
+        initiatorPrecept = chosen.precept;
+        return chosen.issue;
     }
 
     // Conviction is per pawn, not per precept, so each pawn's own stance on every issue is what gets compared.
@@ -263,18 +265,19 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
     // The initiator raises issues their own ideo takes a position on; the recipient's ideo can be silent on
     // them. Each side argues from their personal stance (see AdjustOpinions).
     // Only issues that feed structural opinion qualify (PreceptPolicy.IsDebatable).
-    private static List<PreceptDef> DebatableIssues(
+    private static List<(PreceptDef precept, IssueDef issue)> DebatableIssues(
         Ideo initiatorIdeo,
         Dictionary<IssueDef, (float rank, float strength)> initiatorStances,
         Dictionary<IssueDef, (float rank, float strength)> recipientStances) =>
         [.. initiatorIdeo.precepts
             .Select(p => p.def)
-            .Where(def => def.issue != null
-                && PreceptPolicy.IsDebatable(def.issue)
-                && initiatorStances.ContainsKey(def.issue)
-                && recipientStances.ContainsKey(def.issue)
-                && Disagree(initiatorStances[def.issue], recipientStances[def.issue]))
-            .GroupBy(def => def.issue)
+            .Where(def => def.issue != null)
+            .Select(def => (precept: def, issue: def.issue!))
+            .Where(topic => PreceptPolicy.IsDebatable(topic.issue)
+                && initiatorStances.ContainsKey(topic.issue)
+                && recipientStances.ContainsKey(topic.issue)
+                && Disagree(initiatorStances[topic.issue], recipientStances[topic.issue]))
+            .GroupBy(topic => topic.issue)
             .Select(group => group.First())];
 
     // Rung gap as a fraction of the full ladder span, scaled to the 0-20 conviction range, plus the conviction gap.

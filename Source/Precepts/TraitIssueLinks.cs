@@ -35,5 +35,5 @@ public class TraitIssueLink
     // defName of an issue the trait is indifferent to (PreceptLadder.IndifferentRank).
     public string? indifferent;
 
-    internal PreceptDef? Rung => rung == null ? null : DefDatabase<PreceptDef>.GetNamedSilentFail(rung);
+    internal PreceptDef? RungDef => rung == null ? null : DefDatabase<PreceptDef>.GetNamedSilentFail(rung);
 }
