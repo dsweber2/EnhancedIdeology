@@ -140,6 +140,8 @@ internal static partial class PreceptPolicy
         "NR_AI", "NR_Braindance", "NR_NetCulture",
         // Venerated Xenotype Flexibility: how strictly a pawn must match the preferred xenotype; see OrderOverrides.
         "VXF_XenotypeStrictness",
+        // Mount Ownership: Important -> Essential, one-sided; a faith with no precept keeps no personal mounts.
+        "CompanionMounts_MountOwnership",
     ];
     // Issues that copy the axis of an issue from another mod, keyed copy -> original. When the original is loaded,
     // the copy is PositiveOnly and its rungs induce the original's rungs (InducedByPrecept), so the axis counts once.
@@ -358,6 +360,9 @@ internal static partial class PreceptPolicy
             "VXF_XenotypeStrictness_Tolerant", "VXF_XenotypeStrictness_Partial", "VXF_XenotypeStrictness_Full",
             "VXF_XenotypeStrictness_Exact", "VXF_XenotypeStrictness_Vanilla",
         ],
+        // Both rungs at order 0.
+        ["CompanionMounts_MountOwnership"] =
+            ["CompanionMounts_PersonalMountsDesired", "CompanionMounts_PersonalMountsEssential"],
     };
 
     // Rungs that share the rank of an anchor rung on the same issue, keyed tied rung -> anchor. They express

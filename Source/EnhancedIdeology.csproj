@@ -22,6 +22,9 @@
     <OutputPath>../$(RimWorldVersion)/Assemblies</OutputPath>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <!-- Keep the build machine path out of the shipped PDB and so out of player stack traces. -->
+    <DeterministicSourcePaths>true</DeterministicSourcePaths>
+    <GitRepositoryRemoteName>dsweber</GitRepositoryRemoteName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <Optimize>true</Optimize>

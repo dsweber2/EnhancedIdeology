@@ -375,6 +375,7 @@ The neutral is the default-weight rung unless the table says otherwise.
 | NR_Braindance | Hacking Expansion: Netrun | `Depraved` → `Allowed` → `Sacred` | `Allowed` | `Allowed` has no thoughts |
 | NR_NetCulture | Hacking Expansion: Netrun | `Abhorrent` → `Wary` → `Sacred` | between `Wary` and `Sacred` | no rung has a default weight; `Wary` gives mood penalties for dives and trace, so no precept sits past it |
 | VXF_XenotypeStrictness | Venerated Xenotype Flexibility | `Tolerant` → `Partial` → `Full` → `Exact` → `Vanilla` | `Full` | all rungs at order 0, so an order override sets loosest to strictest; skipped in opinion and debates when neither faith prefers a xenotype (`PreceptPolicy.IsMootBetween`), because then no rung has an effect |
+| CompanionMounts_MountOwnership | Mount Ownership | `Important` → `Essential` | before `Important` | one-sided; no precept means no personal mounts. Both rungs at order 0, so an order override sets them |
 
 
 Rungs on vanilla issues:
