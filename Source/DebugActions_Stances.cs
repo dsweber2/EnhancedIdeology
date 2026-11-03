@@ -19,6 +19,21 @@ internal static partial class DebugActions
         Messages.Message($"{pawn.LabelShort}: stances reset to {pawn.Ideo.name}.", MessageTypeDefOf.TaskCompletion, false);
     }
 
+    [DebugAction("Ideoligion", "Max out certainty (200%)", actionType = DebugActionType.ToolMapForPawns,
+        allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]
+    private static void MaxOutCertainty(Pawn pawn)
+    {
+        if (pawn.Ideo == null)
+        {
+            Messages.Message($"{pawn.LabelShort} has no ideoligion.", MessageTypeDefOf.RejectInput, false);
+            return;
+        }
+
+        Current.Game.GetComponent<GameComponent_EnhancedIdeology>().PawnTracker
+            .EnsurePawnHasIdeoTracker(pawn).SetExtendedCertainty(2f);
+        Messages.Message($"{pawn.LabelShort}: certainty set to 200%.", MessageTypeDefOf.TaskCompletion, false);
+    }
+
     // Seeds the pawn if needed, then logs the trait stance targets and the vote behind each.
     [DebugAction("Ideoligion", "Log trait stance targets", actionType = DebugActionType.ToolMapForPawns,
         allowedGameStates = AllowedGameStates.PlayingOnMap, requiresIdeology = true)]

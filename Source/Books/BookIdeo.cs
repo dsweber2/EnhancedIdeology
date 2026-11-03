@@ -48,6 +48,7 @@ internal sealed class BookIdeo : Book
     // Set during recipe completion to override quality with (Intellectual+Social)/2 average
     private Pawn? _recipeWorker;
     private bool _applyingCustomQuality;
+    private bool _authored;
 
     public float MaterialBonus => Doer.MaterialBonus;
 
@@ -77,10 +78,19 @@ internal sealed class BookIdeo : Book
     {
         if (_applyingCustomQuality) return;
 
+        // Vanilla regenerates a book without an author when quality changes.
+        // Keep the author's ideo and update only the quality in the description.
+        if (_authored)
+        {
+            description = GenerateFullDescription();
+            return;
+        }
+
         if (_recipeWorker != null)
         {
             var worker = _recipeWorker;
             _recipeWorker = null;
+            _authored = true;
 
             var intellectLevel = worker.skills?.GetSkill(SkillDefOf.Intellectual)?.Level ?? 0;
             var socialLevel = worker.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
@@ -143,6 +153,12 @@ internal sealed class BookIdeo : Book
 
         var totalValue = comp.ingredients.Sum(t => t.GetStatValueAbstract(StatDefOf.MarketValue));
         Doer.SetMaterialBonus(materialBonusFromIngredientValue.Evaluate(totalValue));
+    }
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+        Scribe_Values.Look(ref _authored, "authored");
     }
 
     public override string DescriptionDetailed => base.DescriptionDetailed + BuildStanceText();
