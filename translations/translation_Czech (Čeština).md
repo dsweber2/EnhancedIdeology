@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - posun přesvědčení {1}/qd |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} (učí se {IDEO}: {RATE}/hod) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Zastávaná přesvědčení |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | Autor: {AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/qd |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Náboženská kniha zničena |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {BOOK}, důležitá náboženská kniha ideobožství {IDEO}, byla zničena. Přívrženci {IDEO} z toho nebudou nadšeni. |

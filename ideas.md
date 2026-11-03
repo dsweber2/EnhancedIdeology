@@ -33,6 +33,18 @@ Committed work lives in [todo.md](todo.md); how the current system works is in [
 - **Illness (VME):** immunity-boosting genes favour ideoligions that exalt illness.
 - **Kind meme vs preferred xenotypes:** the xenotype/diversity friction exists as a precept coupling; the Kind-meme half needs the coupling framework to accept a meme as a source.
 - **Recruiting couplings:** precepts about recruiting should change how effective debates are, not opinion.
+- **Opposed rungs that share a rank.**
+  `TiedRungs` makes tied rungs agree fully, which is wrong where they really oppose each other: `RS_Divorce_MaleOnly`/`FemaleOnly`, `RS_Marriage_MaleOnly`/`FemaleOnly`, and `SUF_Torture_Penance`/`Horrible`.
+  Treat the shared rank as a fork in the ladder (`Acceptable — [MaleOnly | FemaleOnly] — Horrible`), so `TiedRungs` has two kinds: same belief (the armour specialties) and opposed branch.
+  The fork only matters near its rank: a pawn at `Acceptable` does not care which sex may divorce.
+  Fade the clash so that opinion does not jump when a debate pulls a pawn past a cutoff: `distance = |rankA − rankB| + branchPenalty × closeness(A) × closeness(B)` for pawns on different branches, with `closeness = max(0, 1 − |rank − tiedRank|)`.
+  Open: where a pawn's branch comes from, because a stance is one rank and cannot say which side it is on.
+  Taking it from the current faith's rung, as Weapons and Xenotypes do, needs no save changes, but a pawn only changes branch by converting.
+  Storing it per pawn is more faithful, but touches saves, `LadderMigration`, seeding, the debate pull, child assignment, `IdeoReform`, and the stance UI.
+  Leaning towards the faith's rung.
+  Open: the size of `branchPenalty`.
+  About one rung seems right; much more makes "men only" against "women only" a bigger fight than "anyone may divorce" against "divorce is horrible".
+  It rarely fires, since two faiths must hold opposite branches in the same game.
 
 ### UI
 

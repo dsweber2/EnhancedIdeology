@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - 確信変化 {1}/節</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT}（{IDEO}を学習: {RATE}/時）</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>提唱する信条</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>著者：{AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/節</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>聖典が破壊された</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{IDEO}にとって重要な聖典{BOOK}が破壊された。{IDEO}の信者はこれを喜ばないだろう。</EnhancedIdeology.LetterReligiousBookDestroyedText>

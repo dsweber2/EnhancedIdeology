@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} 확신 변화/분기 |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} ({IDEO} 학습: {RATE}/시) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | 지지하는 신념 |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | 저자: {AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/분기 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | 종교 서적 파괴됨 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {IDEO}의 중요한 종교 서적인 {BOOK}이(가) 파괴되었습니다. {IDEO}의 신도들은 이를 달가워하지 않을 것입니다. |

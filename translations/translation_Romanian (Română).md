@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - schimbare convingere {1}/qd |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} (învață {IDEO}: {RATE}/oră) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Credințe susținute |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | Autor: {AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/qd |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Carte religioasă distrusă |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {BOOK}, o carte religioasă importantă pentru {IDEO}, a fost distrusă. Adepții lui {IDEO} nu vor fi fericiți. |

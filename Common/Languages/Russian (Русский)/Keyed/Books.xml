@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} — {1} сдвиг убеждённости/кв</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT} (изучает {IDEO}: {RATE}/ч)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Отстаиваемые убеждения</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>Автор: {AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/кв</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Религиозная книга уничтожена</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, важная религиозная книга для {IDEO}, была уничтожена. Последователи {IDEO} будут недовольны.</EnhancedIdeology.LetterReligiousBookDestroyedText>

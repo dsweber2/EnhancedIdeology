@@ -5,7 +5,7 @@
     <label>write religious book</label>
     <description>Write a religious book detailing your ideology's beliefs. Requires high certainty in one's ideoligion.</description>
     <jobString>writing a religious book.</jobString>
-    <workAmount>22500</workAmount>
+    <workAmount>250000</workAmount>
     <workSkill>Intellectual</workSkill>
     <workSkillLearnFactor>0.5</workSkillLearnFactor>
     <workSpeedStat>ResearchSpeed</workSpeedStat>
@@ -82,7 +82,7 @@
     <label>write illustrated religious book</label>
     <description>Write an illuminated religious book adorned with jems and inks. The quality of materials increases the devotional aspects of reading it. Requires high certainty in one's ideoligion.</description>
     <jobString>illustrating religious book.</jobString>
-    <workAmount>30000</workAmount>
+    <workAmount>334000</workAmount>
     <workSkill>Intellectual</workSkill>
     <workSkillLearnFactor>0.5</workSkillLearnFactor>
     <workSpeedStat>ResearchSpeed</workSpeedStat>

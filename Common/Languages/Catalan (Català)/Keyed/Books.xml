@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - canvi de convicció {1}/qd</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT} (aprenent {IDEO}: {RATE}/h)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Creences defensades</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>Escrit per {AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Llibre religiós destruït</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, un important llibre religiós per a {IDEO}, ha estat destruït. Els seguidors de {IDEO} no estaran contents.</EnhancedIdeology.LetterReligiousBookDestroyedText>

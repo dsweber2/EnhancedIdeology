@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 信念偏移/象</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT}（学习{IDEO}：{RATE}/小时）</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>所倡导的信仰</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>作者：{AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/象</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>宗教书籍被毁</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}，{IDEO}的重要宗教书籍，已被摧毁。{IDEO}的信徒对此将大为不满。</EnhancedIdeology.LetterReligiousBookDestroyedText>

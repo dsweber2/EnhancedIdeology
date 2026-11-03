@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - schimbare convingere {1}/qd</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT} (învață {IDEO}: {RATE}/oră)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Credințe susținute</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>Autor: {AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Carte religioasă distrusă</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, o carte religioasă importantă pentru {IDEO}, a fost distrusă. Adepții lui {IDEO} nu vor fi fericiți.</EnhancedIdeology.LetterReligiousBookDestroyedText>

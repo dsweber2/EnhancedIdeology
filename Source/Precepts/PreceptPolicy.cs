@@ -396,6 +396,12 @@ internal static partial class PreceptPolicy
         CategoryCache.Clear();
     }
 
+    // True when a table lists the issue. The ladder heuristic reads only the issues that no table lists.
+    internal static bool IsCurated(string defName) =>
+        MoralIssues.Contains(defName) || UniversalPositiveValuedRung.ContainsKey(defName)
+        || SpecialIssues.Contains(defName) || NAIssues.Contains(defName)
+        || KnownPositiveOnlyIssues.Contains(defName) || DuplicateOf.ContainsKey(defName);
+
     // CategoryOf is on the structural opinion hot path; the table lookups hash the defName each call.
     private static readonly Dictionary<IssueDef, PreceptCategory> CategoryCache = [];
 

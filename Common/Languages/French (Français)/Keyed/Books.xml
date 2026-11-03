@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - dérive de conviction {1}/saison</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT} (apprend {IDEO} : {RATE}/h)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Croyances défendues</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>Écrit par {AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/saison</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Livre religieux détruit</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, un livre religieux important pour {IDEO}, a été détruit. Les fidèles de {IDEO} ne seront pas contents.</EnhancedIdeology.LetterReligiousBookDestroyedText>

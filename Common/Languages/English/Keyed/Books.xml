@@ -4,6 +4,7 @@
     <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} conviction shift/qd</EnhancedIdeology.BookReadingBenefit>
     <EnhancedIdeology.BookReadingReport>{REPORT} (learning {IDEO}: {RATE}/hr)</EnhancedIdeology.BookReadingReport>
     <EnhancedIdeology.BookBeliefsHeader>Beliefs advocated</EnhancedIdeology.BookBeliefsHeader>
+    <EnhancedIdeology.BookWrittenBy>Written by {AUTHOR}</EnhancedIdeology.BookWrittenBy>
     <EnhancedIdeology.ShiftRatePerQuadrum>{0}/qd</EnhancedIdeology.ShiftRatePerQuadrum>
 
     <!-- Book burning/destruction -->

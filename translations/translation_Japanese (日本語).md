@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - 確信変化 {1}/節 |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT}（{IDEO}を学習: {RATE}/時） |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | 提唱する信条 |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | 著者：{AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/節 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | 聖典が破壊された |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {IDEO}にとって重要な聖典{BOOK}が破壊された。{IDEO}の信者はこれを喜ばないだろう。 |

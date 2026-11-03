@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} mudança de convicção/trim</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT} (aprendendo {IDEO}: {RATE}/h)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>Crenças defendidas</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>Escrito por {AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/trim</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>Livro religioso destruído</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{BOOK}, um importante livro religioso de {IDEO}, foi destruído. Os seguidores de {IDEO} não ficarão nada felizes com isso.</EnhancedIdeology.LetterReligiousBookDestroyedText>

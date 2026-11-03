@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} inanç değişimi/çeyrek |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} ({IDEO} öğreniyor: {RATE}/sa) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Savunulan inançlar |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | Yazar: {AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/çeyrek |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Dini kitap yok edildi |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {IDEO} için önemli bir dini kitap olan {BOOK} yok edildi. {IDEO} mensupları bundan memnun olmayacak. |

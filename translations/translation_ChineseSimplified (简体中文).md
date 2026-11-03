@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} 信念偏移/象 |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT}（学习{IDEO}：{RATE}/小时） |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | 所倡导的信仰 |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | 作者：{AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/象 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | 宗教书籍被毁 |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {BOOK}，{IDEO}的重要宗教书籍，已被摧毁。{IDEO}的信徒对此将大为不满。 |

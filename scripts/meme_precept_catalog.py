@@ -13,6 +13,7 @@ defines them, with the PreceptPolicy category of each issue.
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -34,6 +35,10 @@ VERSION_DIR = re.compile(r"^v?\d+\.\d+$")
 DEF_TAGS = {"MemeDef", "PreceptDef", "IssueDef", "TraitDef"}
 LIST_ISSUES = {"Ritual", "IdeoRole", "IdeoBuilding", "IdeoRitualSeat", "IdeoRelic", "Weapons"}
 DESCRIPTION_LIMIT = 140
+LADDERS_FIXTURE = REPO / "tests" / "Fixtures" / "ladders.json"
+# PreceptDef fields that change gameplay. A rung with none of them is the vanilla baseline.
+EFFECT_FIELDS = ("comps", "abilityStatFactors", "statOffsets", "statFactors", "conditionalStatAffecters",
+                 "opposedWorkTypes", "enablesNeeds", "disablesNeeds")
 
 
 @dataclass
@@ -419,6 +424,32 @@ def render(catalog: Catalog, policy: dict[str, str]) -> str:
                                   + render_issues(catalog, policy, issue_memes)))
 
 
+def has_effects(rung: Def) -> bool:
+    return any(len(rung.fields[key]) > 0 for key in EFFECT_FIELDS if key in rung.fields)
+
+
+def ladders(catalog: Catalog) -> dict[str, list[dict]]:
+    """Every issue with two or more visible rungs, as the fixture for the ladder heuristic backtest."""
+    rungs_by_issue: dict[str, list[Def]] = defaultdict(list)
+    for precept in catalog.precepts.values():
+        if precept.text("visible").lower() != "false" and precept.text("issue"):
+            rungs_by_issue[precept.text("issue")].append(precept)
+    return {
+        issue: [
+            {
+                "defName": rung.def_name,
+                "displayOrderInIssue": int(rung_order(rung)),
+                "defaultSelectionWeight": float(rung.text("defaultSelectionWeight") or 0),
+                "hasEffects": has_effects(rung),
+                "mod": rung.mod.name,
+            }
+            for rung in sorted(rungs, key=lambda rung: rung.def_name)
+        ]
+        for issue, rungs in sorted(rungs_by_issue.items())
+        if issue in catalog.issues and issue not in LIST_ISSUES and len(rungs) >= 2
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--output", type=Path, default=REPO / "docs" / "meme-precept-catalog.md")
@@ -426,6 +457,8 @@ def main() -> None:
     mods = discover_mods()
     catalog = build_catalog(mods)
     args.output.write_text(render(catalog, read_policy()))
+    LADDERS_FIXTURE.parent.mkdir(exist_ok=True)
+    LADDERS_FIXTURE.write_text(json.dumps(ladders(catalog), indent=1) + "\n")
     print(f"{len(catalog.memes)} memes, {len(catalog.issues)} issues, "
           f"{len(catalog.precepts)} precepts -> {args.output}")
 

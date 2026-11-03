@@ -5,7 +5,7 @@
         <defName>EB_ReligiousEnlightenment</defName>
         <workerClass>EnhancedIdeology.InspirationWorker_ReligiousEnlightenment</workerClass>
         <label>religious enlightenment</label>
-        <baseDurationDays>4</baseDurationDays>
+        <baseDurationDays>15</baseDurationDays>
         <beginLetter>[PAWN_pronoun] feels a moment of divine clarity and is compelled to write a religious text.</beginLetter>
         <beginLetterDef>PositiveEvent</beginLetterDef>
         <baseInspectLine>Inspired: Religious enlightenment</baseInspectLine>

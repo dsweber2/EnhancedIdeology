@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} overtuigingsverschuiving/kw |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} ({IDEO} leren: {RATE}/uur) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Verdedigde overtuigingen |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | Geschreven door {AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/kw |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Religieus boek vernietigd |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {BOOK}, een belangrijk religieus boek voor {IDEO}, is vernietigd. Aanhangers van {IDEO} zullen hier niet blij mee zijn. |

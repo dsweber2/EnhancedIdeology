@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} meggyőződés-változás/negyed |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} ({IDEO} tanulása: {RATE}/óra) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Hirdetett hittételek |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | Szerző: {AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/negyed |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Vallásos könyv megsemmisült |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {BOOK}, a {IDEO} számára fontos vallásos könyv megsemmisült. A {IDEO} követői nem lesznek boldogok emiatt. |

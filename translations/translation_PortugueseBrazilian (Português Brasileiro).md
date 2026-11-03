@@ -9,6 +9,7 @@
 | `EnhancedIdeology.BookReadingBenefit` | {IDEO} - {1} conviction shift/qd | {IDEO} - {1} mudança de convicção/trim |
 | `EnhancedIdeology.BookReadingReport` | {REPORT} (learning {IDEO}: {RATE}/hr) | {REPORT} (aprendendo {IDEO}: {RATE}/h) |
 | `EnhancedIdeology.BookBeliefsHeader` | Beliefs advocated | Crenças defendidas |
+| `EnhancedIdeology.BookWrittenBy` | Written by {AUTHOR} | Escrito por {AUTHOR} |
 | `EnhancedIdeology.ShiftRatePerQuadrum` | {0}/qd | {0}/trim |
 | `EnhancedIdeology.LetterReligiousBookDestroyedLabel` | Religious book destroyed | Livro religioso destruído |
 | `EnhancedIdeology.LetterReligiousBookDestroyedText` | {BOOK}, an important religious book for {IDEO}, has been destroyed. Followers of {IDEO} won't be happy about it. | {BOOK}, um importante livro religioso de {IDEO}, foi destruído. Os seguidores de {IDEO} não ficarão nada felizes com isso. |

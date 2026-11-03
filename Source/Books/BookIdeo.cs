@@ -171,6 +171,13 @@ internal sealed class BookIdeo : Book
         {
             RegenerateName(Ideo);
         }
+
+        if (author != null)
+        {
+            var writtenBy = "EnhancedIdeology.BookWrittenBy".Translate((author.Name?.ToStringFull ?? author.LabelShort).Named("AUTHOR"));
+            descriptionFlavor = $"{descriptionFlavor}\n\n{writtenBy}";
+            description = GenerateFullDescription();
+        }
     }
 
     // Checks for null ideos in case something goes wrong

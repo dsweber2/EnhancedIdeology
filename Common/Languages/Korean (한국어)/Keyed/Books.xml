@@ -4,6 +4,7 @@
   <EnhancedIdeology.BookReadingBenefit>{IDEO} - {1} 확신 변화/분기</EnhancedIdeology.BookReadingBenefit>
   <EnhancedIdeology.BookReadingReport>{REPORT} ({IDEO} 학습: {RATE}/시)</EnhancedIdeology.BookReadingReport>
   <EnhancedIdeology.BookBeliefsHeader>지지하는 신념</EnhancedIdeology.BookBeliefsHeader>
+  <EnhancedIdeology.BookWrittenBy>저자: {AUTHOR}</EnhancedIdeology.BookWrittenBy>
   <EnhancedIdeology.ShiftRatePerQuadrum>{0}/분기</EnhancedIdeology.ShiftRatePerQuadrum>
   <EnhancedIdeology.LetterReligiousBookDestroyedLabel>종교 서적 파괴됨</EnhancedIdeology.LetterReligiousBookDestroyedLabel>
   <EnhancedIdeology.LetterReligiousBookDestroyedText>{IDEO}의 중요한 종교 서적인 {BOOK}이(가) 파괴되었습니다. {IDEO}의 신도들은 이를 달가워하지 않을 것입니다.</EnhancedIdeology.LetterReligiousBookDestroyedText>
