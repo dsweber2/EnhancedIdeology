@@ -1,0 +1,5050 @@
+{
+ "AM_Abilities": [
+  {
+   "defName": "AM_Abilities_AnalyzeCreature",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Abilities_DeathKnell",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_AnimalRelease": [
+  {
+   "defName": "AM_AnimalRelease_Discouraged",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_AnimalRelease_Encouraged",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_Armour": [
+  {
+   "defName": "AM_Armour_Blunt",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Armour_Forbidden",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Armour_Heat",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Armour_Sharp",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_Barracks": [
+  {
+   "defName": "AM_Barracks_Acceptable",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Barracks_Preferred",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Barracks_PreferredTrue",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_CombatProwess": [
+  {
+   "defName": "AM_CombatProwess_Increased",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_CombatProwess_Melee",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_CombatProwess_Reduced",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_Creep": [
+  {
+   "defName": "AM_Creep_Disliked",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Creep_DontCare",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Creep_Sublime",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_Disfigurement": [
+  {
+   "defName": "AM_Disfigurement_Disliked",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Disfigurement_DontCare",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Disfigurement_Preferred",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_FertilityIssue": [
+  {
+   "defName": "AM_FertilityIssue_Decreased",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_FertilityIssue_Increased",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_FertilityIssue_Normal",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_LearningRate": [
+  {
+   "defName": "AM_LearningRate_Decreased",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_LearningRate_Increased",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_LearningRate_Normal",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_LovinFrequency": [
+  {
+   "defName": "AM_LovinFrequency_Decreased",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_LovinFrequency_Exuberant",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_LovinFrequency_Increased",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_LovinFrequency_Normal",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_OcularTrees": [
+  {
+   "defName": "AM_OcularTrees_Desired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_OcularTrees_Indifferent",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_PsychicSensitivity": [
+  {
+   "defName": "AM_PsychicSensitivity_Affinity",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_PsychicSensitivity_Heightened",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_Rain": [
+  {
+   "defName": "AM_Rain_Blessed",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Rain_Disliked",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "AM_Religion": [
+  {
+   "defName": "AM_Religion_Despised",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Religion_Disliked",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Religion_Loved",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_Religion_ProselytismDisliked",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  }
+ ],
+ "ARIOIAF_Royalty": [
+  {
+   "defName": "ARIOIAF_Royalty_Exalted",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "A Rim of Ice and Fire"
+  },
+  {
+   "defName": "ARIOIAF_Royalty_Respected",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "A Rim of Ice and Fire"
+  }
+ ],
+ "Alcohol": [
+  {
+   "defName": "Alcohol_Disapproved",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Alcohol_Essential",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Alcohol_Neutral",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Alcohol_Prohibited",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Alcohol_Wanted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "AnimalSlaughter": [
+  {
+   "defName": "AM_AnimalSlaughter_Desired",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AnimalSlaughter_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "AnimalSlaughter_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "AnimalSlaughter_Prohibited",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Apostasy": [
+  {
+   "defName": "Apostasy_Abhorrent",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Apostasy_Despicable",
+   "displayOrderInIssue": 19,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "Apostasy_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Apostasy_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Apostasy_Accepted",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "ApparelDesire": [
+  {
+   "defName": "ApparelDesired_Soft_Subordinate",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "ApparelDesired_Strong_Subordinate",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "AutonomousWeapons": [
+  {
+   "defName": "AutonomousWeapons_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "AutonomousWeapons_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "AutonomousWeapons_Prohibited",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "GR_AutonomousWeapons_Scorned",
+   "displayOrderInIssue": 15,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Genetics Expanded"
+  },
+  {
+   "defName": "VME_AutonomousWeapons_Accepted",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_AutonomousWeapons_Exalted",
+   "displayOrderInIssue": -20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "BEWH_PsykerIssue": [
+  {
+   "defName": "BEWH_Psyker_Acceptable",
+   "displayOrderInIssue": 201,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "RimDark 40k - Mankinds Finest"
+  },
+  {
+   "defName": "BEWH_Psyker_Horrible",
+   "displayOrderInIssue": 202,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "RimDark 40k - Mankinds Finest"
+  },
+  {
+   "defName": "BEWH_Psyker_Respected",
+   "displayOrderInIssue": 200,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "RimDark 40k - Mankinds Finest"
+  }
+ ],
+ "BS_AlienAppearanceTolerance": [
+  {
+   "defName": "BS_AlienAppearanceTolerance_Default",
+   "displayOrderInIssue": 100,
+   "defaultSelectionWeight": 8.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Big and Small - Genes & More"
+  },
+  {
+   "defName": "BS_AlienAppearanceTolerance_FullTolerance",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.2,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Big and Small - Genes & More"
+  },
+  {
+   "defName": "BS_AlienAppearanceTolerance_SomeTolerance",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Big and Small - Genes & More"
+  }
+ ],
+ "Barracks": [
+  {
+   "defName": "Barracks_Despised",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Barracks_Preferred",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "Biosculpting": [
+  {
+   "defName": "BioSculpter_Despised",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Biosculpting_Accelerated",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Blindness": [
+  {
+   "defName": "Blinding_Horrible",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Blindness_Elevated",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Blindness_Respected",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Blindness_Sublime",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Bloodfeeders": [
+  {
+   "defName": "Bloodfeeders_Revered",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Biotech (DLC)"
+  },
+  {
+   "defName": "Bloodfeeders_Reviled",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Biotech (DLC)"
+  }
+ ],
+ "BodyModification": [
+  {
+   "defName": "BodyMod_Abhorrent",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "BodyMod_Approved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "BodyMod_Disapproved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_BodyMod_OnlyBiological",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "Bonding": [
+  {
+   "defName": "AM_Bonding_Abhorrent",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Bonding_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Cannibalism": [
+  {
+   "defName": "Cannibalism_Abhorrent",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Cannibalism_Acceptable",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Cannibalism_Disapproved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Cannibalism_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Cannibalism_Preferred",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Cannibalism_RequiredRavenous",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Cannibalism_RequiredStrong",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Charity": [
+  {
+   "defName": "Charity_Essential",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Charity_Important",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Charity_Worthwhile",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "ChildLabor": [
+  {
+   "defName": "ChildLabor_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Biotech (DLC)"
+  },
+  {
+   "defName": "ChildLabor_Encouraged",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Biotech (DLC)"
+  }
+ ],
+ "Comfort": [
+  {
+   "defName": "AM_Comfort_DiscomfortPreferred",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Comfort_Essential",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Comfort_Ignored",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Comfort_Important",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Comfort_Wanted",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "CompanionMounts_MountOwnership": [
+  {
+   "defName": "CompanionMounts_PersonalMountsDesired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Mount Ownership"
+  },
+  {
+   "defName": "CompanionMounts_PersonalMountsEssential",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Mount Ownership"
+  }
+ ],
+ "Compassion": [
+  {
+   "defName": "Compassion_All",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Compassion_Allies",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Compassion_NonGuiltyEnemies",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Compassion_NonHostile",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "Corpses": [
+  {
+   "defName": "AM_Corpses_Sublime",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Corpses_DontCare",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Corpses_Ugly",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Core"
+  }
+ ],
+ "DarknessCombat": [
+  {
+   "defName": "DarknessCombat_Preferred",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_DarknessCombat_Despised",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "DrugPossession": [
+  {
+   "defName": "DrugPossession_Alcohol",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "DrugPossession_Prohibited",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "DrugPossession_Social",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "DrugUse": [
+  {
+   "defName": "DrugUse_Essential",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "DrugUse_MedicalOnly",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "DrugUse_MedicalOrSocial",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "DrugUse_Prohibited",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MI_DrugUse_Allowed",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Political Compass - Mort's Ideologies"
+  }
+ ],
+ "EB_Contemplation": [
+  {
+   "defName": "Contemplation_Disapproved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Enhanced Ideology"
+  },
+  {
+   "defName": "Contemplation_Forbidden",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Enhanced Ideology"
+  },
+  {
+   "defName": "Contemplation_Normal",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Enhanced Ideology"
+  },
+  {
+   "defName": "Contemplation_Required",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Enhanced Ideology"
+  },
+  {
+   "defName": "Contemplation_Respected",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Enhanced Ideology"
+  }
+ ],
+ "Eclipse": [
+  {
+   "defName": "Eclipse_Beautiful",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Eclipse_Despised",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "Elderly": [
+  {
+   "defName": "Elderly_Abhorred",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Elderly_Disrespected",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Elderly_Respected",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Elderly_Revered",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "Execution": [
+  {
+   "defName": "Execution_Abhorrent",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Execution_DontCare",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Execution_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Execution_HorribleIfInnocent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Execution_Required",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Execution_RespectedIfGuilty",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Fishing": [
+  {
+   "defName": "Fishing_Disapproved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Odyssey (DLC)"
+  },
+  {
+   "defName": "Fishing_Prohibited",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Odyssey (DLC)"
+  },
+  {
+   "defName": "Fishing_Sacred",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Odyssey (DLC)"
+  }
+ ],
+ "FungusEating": [
+  {
+   "defName": "AM_FungusEating_Required",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "ARIOIAF_FungusEating_DontCare",
+   "displayOrderInIssue": 5,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "A Rim of Ice and Fire"
+  },
+  {
+   "defName": "BMT_FungusEating_DontCare",
+   "displayOrderInIssue": 5,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Biomes! Caverns"
+  },
+  {
+   "defName": "FungusEating_Despised",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "FungusEating_Preferred",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_FungusEating_DontCare",
+   "displayOrderInIssue": 5,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "GR_Failures": [
+  {
+   "defName": "GR_Failures_Accepted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Genetics Expanded"
+  },
+  {
+   "defName": "GR_Failures_Disliked",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Genetics Expanded"
+  },
+  {
+   "defName": "GR_Failures_Shameful",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Genetics Expanded"
+  }
+ ],
+ "GR_HumanoidHybrids": [
+  {
+   "defName": "GR_HumanoidHybrids_Accepted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Genetics Expanded"
+  },
+  {
+   "defName": "GR_HumanoidHybrids_Disliked",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Genetics Expanded"
+  },
+  {
+   "defName": "GR_HumanoidHybrids_Forbidden",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Genetics Expanded"
+  }
+ ],
+ "GR_WorktableSpeeds": [
+  {
+   "defName": "GR_WorktableSpeeds_Genomorpher",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Genetics Expanded"
+  },
+  {
+   "defName": "GR_WorktableSpeeds_Implants",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Genetics Expanded"
+  }
+ ],
+ "GS_GraceTouchedIssue": [
+  {
+   "defName": "GS_GraceTouchedRevered",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nephilim Xenotype Reborn"
+  },
+  {
+   "defName": "GS_GraceTouchedReviled",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nephilim Xenotype Reborn"
+  }
+ ],
+ "GauranlenConnection": [
+  {
+   "defName": "AM_GauranlenConnection_Forbidden",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "GauranlenConnection_Strong",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "GrowthVat": [
+  {
+   "defName": "GrowthVat_Essential",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Biotech (DLC)"
+  },
+  {
+   "defName": "GrowthVat_Prohibited",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Biotech (DLC)"
+  }
+ ],
+ "HAR_AlienDating": [
+  {
+   "defName": "HAR_AlienDating_Acceptable",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienDating_Honorable",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienDating_Horrible",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienDating_Preferred",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienDating_Prohibited",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  }
+ ],
+ "HAR_AlienRaces": [
+  {
+   "defName": "HAR_AlienRaces_Abhorrent",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienRaces_Exalted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienRaces_Horrible",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienRaces_Respected",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienRaces_Standard",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  }
+ ],
+ "HAR_AlienSlavery": [
+  {
+   "defName": "HAR_AlienSlavery_Abhorrent",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienSlavery_Acceptable",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienSlavery_Disapproved",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienSlavery_Honorable",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_AlienSlavery_Horrible",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  }
+ ],
+ "HAR_EatingAliens": [
+  {
+   "defName": "HAR_EatingAliens_Abhorrent",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_EatingAliens_Acceptable",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_EatingAliens_Disapproved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_EatingAliens_Preferred",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Humanoid Alien Races"
+  },
+  {
+   "defName": "HAR_EatingAliens_RequiredStrong",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Humanoid Alien Races"
+  }
+ ],
+ "IdeoDiversity": [
+  {
+   "defName": "IdeoDiversity_Abhorrent",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "IdeoDiversity_Approved",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "IdeoDiversity_Disapproved",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "IdeoDiversity_Exalted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "IdeoDiversity_Horrible",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "IdeoDiversity_Respected",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "IdeoDiversity_Standard",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Indoors": [
+  {
+   "defName": "AM_Indoors_Required",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Indoors_Acceptable",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VVE_SmallSpaces_Horrible",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  }
+ ],
+ "InsectMeat": [
+  {
+   "defName": "AM_InsectMeatEating_Required",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "InsectMeatEating_Despised_Classic",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Core"
+  },
+  {
+   "defName": "InsectMeatEating_Loved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_InsectMeatEating_DontCare",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_InsectMeatEating_Sacrilegious",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "KillingInnocentAnimals": [
+  {
+   "defName": "KillingInnocentAnimals_Abhorrent",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "KillingInnocentAnimals_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "KillingInnocentAnimals_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "LanguageLearning": [
+  {
+   "defName": "LanguageLearning_Condemned",
+   "displayOrderInIssue": 5,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Cybranian - Rim Languages"
+  },
+  {
+   "defName": "LanguageLearning_Encouraged",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Cybranian - Rim Languages"
+  },
+  {
+   "defName": "LanguageLearning_Exalted",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Cybranian - Rim Languages"
+  },
+  {
+   "defName": "LanguageLearning_Hatred",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Cybranian - Rim Languages"
+  },
+  {
+   "defName": "LanguageLearning_Neutral",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Cybranian - Rim Languages"
+  }
+ ],
+ "Lighting": [
+  {
+   "defName": "Darklight_Preferred",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Darklight_NormalPreferred",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "Lovin": [
+  {
+   "defName": "Lovin_Free",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Core"
+  },
+  {
+   "defName": "Lovin_FreeApproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Lovin_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Lovin_Prohibited",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Lovin_SpouseOnly_Mild",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Lovin_SpouseOnly_Moderate",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Lovin_SpouseOnly_Strict",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SEX_Lovin_HaremPlay",
+   "displayOrderInIssue": 19,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Intimacy - Friends n' Lovers"
+  },
+  {
+   "defName": "SEX_Lovin_HaremPlayIfCommited",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Intimacy - Friends n' Lovers"
+  }
+ ],
+ "MI_ConversionPower": [
+  {
+   "defName": "MI_ConversionPower_Increased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Empiricism and Faith - Mort's Ideologies: Memes and Precepts"
+  },
+  {
+   "defName": "MI_ConversionPower_Reduced",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Empiricism and Faith - Mort's Ideologies: Memes and Precepts"
+  }
+ ],
+ "MI_Leader": [
+  {
+   "defName": "MI_Elections_Required",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "MI_LeaderAnarchy",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "MI_LeaderCorporate",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "MI_LeaderDictatorship",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "MI_LeaderMonarchy",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Political Compass - Mort's Ideologies"
+  }
+ ],
+ "MI_MeditationFocusGain": [
+  {
+   "defName": "MI_MeditationFocusGain_Increased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Empiricism and Faith - Mort's Ideologies: Memes and Precepts"
+  },
+  {
+   "defName": "MI_MeditationFocusGain_Reduced",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Empiricism and Faith - Mort's Ideologies: Memes and Precepts"
+  }
+ ],
+ "MI_Pollution": [
+  {
+   "defName": "MI_Pollution_Despised",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Conservationist and Polluter - Mort's Ideologies: Memes and Precepts"
+  },
+  {
+   "defName": "MI_Pollution_Preferred",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Conservationist and Polluter - Mort's Ideologies: Memes and Precepts"
+  }
+ ],
+ "MI_PowerGeneration": [
+  {
+   "defName": "MI_PowerGeneration_CleanOnly",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Conservationist and Polluter - Mort's Ideologies: Memes and Precepts"
+  },
+  {
+   "defName": "MI_PowerGeneration_NoTox",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Conservationist and Polluter - Mort's Ideologies: Memes and Precepts"
+  }
+ ],
+ "MI_PruningSpeed": [
+  {
+   "defName": "MI_PruningSpeed_Increased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Empiricism and Faith - Mort's Ideologies: Memes and Precepts"
+  },
+  {
+   "defName": "MI_PruningSpeed_Reduced",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Empiricism and Faith - Mort's Ideologies: Memes and Precepts"
+  }
+ ],
+ "MI_ToxicWasteDumping": [
+  {
+   "defName": "MI_ToxicWasteDumping_Abhorrent",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Conservationist and Polluter - Mort's Ideologies: Memes and Precepts"
+  },
+  {
+   "defName": "MI_ToxicWasteDumping_Respected",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Conservationist and Polluter - Mort's Ideologies: Memes and Precepts"
+  }
+ ],
+ "MP_NewcomerAttitude": [
+  {
+   "defName": "MP_NewcomerAttitude_Careful",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "MP_NewcomerAttitude_Excited",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "MP_NewcomerAttitude_Fearful",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "MP_NewcomerAttitude_Wary",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "MarriageName": [
+  {
+   "defName": "MarriageName_AlwaysMans",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MarriageName_AlwaysWomans",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MarriageName_KeepNames",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MarriageName_Random",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MarriageName_UsuallyMans",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Core"
+  },
+  {
+   "defName": "MarriageName_UsuallyWomans",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "MeatEating": [
+  {
+   "defName": "MeatEating_Abhorrent",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MeatEating_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MeatEating_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MeatEating_NonMeat_Abhorrent",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MeatEating_NonMeat_Disapproved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "MeatEating_NonMeat_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_MeatEating_Abhorrent_Strict",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "Mining": [
+  {
+   "defName": "Mining_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Mining_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Mining_Prohibited",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "MiningYield": [
+  {
+   "defName": "AB_MiningYield_VeryHigh",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "MiningYield_High",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "NR_AI": [
+  {
+   "defName": "NR_AI_Abomination",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  },
+  {
+   "defName": "NR_AI_Partners",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  },
+  {
+   "defName": "NR_AI_Tools",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  },
+  {
+   "defName": "NR_AI_Venerated",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  }
+ ],
+ "NR_Braindance": [
+  {
+   "defName": "NR_Braindance_Allowed",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  },
+  {
+   "defName": "NR_Braindance_Depraved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  },
+  {
+   "defName": "NR_Braindance_Sacred",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  }
+ ],
+ "NR_NetCulture": [
+  {
+   "defName": "NR_NetCulture_Abhorrent",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  },
+  {
+   "defName": "NR_NetCulture_Sacred",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  },
+  {
+   "defName": "NR_NetCulture_Wary",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hacking Expansion: Netrun"
+  }
+ ],
+ "NikolaisIdeology_Aphrodors": [
+  {
+   "defName": "NikolaisIdeology_Aphrodors_Elevated",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  },
+  {
+   "defName": "NikolaisIdeology_Aphrodors_Reviled",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  },
+  {
+   "defName": "NikolaisIdeology_Aphrodors_Sacred",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  }
+ ],
+ "NikolaisIdeology_Beauty": [
+  {
+   "defName": "NikolaisIdeology_Beauty_Central",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Nikolai's Ideology: Gender Works"
+  },
+  {
+   "defName": "NikolaisIdeology_Beauty_Unimportant",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Nikolai's Ideology: Gender Works"
+  }
+ ],
+ "NikolaisIdeology_Intimacy": [
+  {
+   "defName": "NikolaisIdeology_Intimacy_High",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  },
+  {
+   "defName": "NikolaisIdeology_Intimacy_Low",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  }
+ ],
+ "NikolaisIdeology_Neutors": [
+  {
+   "defName": "NikolaisIdeology_Neutors_Elevated",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  },
+  {
+   "defName": "NikolaisIdeology_Neutors_Reviled",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  },
+  {
+   "defName": "NikolaisIdeology_Neutors_Sacred",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Nikolai's Ideology: Gender Works"
+  }
+ ],
+ "Nomadism": [
+  {
+   "defName": "Nomadism_Disapproved",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Nomadism_Essential",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Nomadism_Horrible",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Nomadism_Important",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Nomadism_Wanted",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "Nudity_Female": [
+  {
+   "defName": "AM_Nudity_Female_Strict",
+   "displayOrderInIssue": 140,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Nudity_Female_CoveringAnythingButGroinDisapproved",
+   "displayOrderInIssue": 100,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Female_Mandatory",
+   "displayOrderInIssue": 120,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Female_NoRules",
+   "displayOrderInIssue": 80,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Female_UncoveredGroinChestHairOrFaceDisapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Female_UncoveredGroinChestOrHairDisapproved",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Female_UncoveredGroinDisapproved",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Female_UncoveredGroinOrChestDisapproved",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Nudity_Male": [
+  {
+   "defName": "AM_Nudity_Male_Strict",
+   "displayOrderInIssue": 140,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Nudity_Male_CoveringAnythingButGroinDisapproved",
+   "displayOrderInIssue": 110,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Male_Mandatory",
+   "displayOrderInIssue": 130,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Male_NoRules",
+   "displayOrderInIssue": 90,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Male_UncoveredGroinChestHairOrFaceDisapproved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Male_UncoveredGroinChestOrHairDisapproved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Male_UncoveredGroinDisapproved",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Nudity_Male_UncoveredGroinOrChestDisapproved",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "NutrientPasteEating": [
+  {
+   "defName": "AM_NutrientPasteEating_Forbidden",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_NutrientPasteEating_Indifferent",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "AM_NutrientPasteEating_Preferred",
+   "displayOrderInIssue": -20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "NutrientPasteEating_Disgusting",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Core"
+  },
+  {
+   "defName": "NutrientPasteEating_DontMind",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "OrganUse": [
+  {
+   "defName": "AM_OrganUse_Torturous",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "OrganUse_Abhorrent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "OrganUse_Acceptable",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "OrganUse_HorribleNoSell",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "OrganUse_HorribleSellOK",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_OrganUse_PostMortem",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VRE_OrganUse_PigskinOnly",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Races Expanded - Pigskin"
+  }
+ ],
+ "Pain": [
+  {
+   "defName": "AM_Pain_Required",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Pain_Idealized",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Pain_DontCare",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "Proselytizing": [
+  {
+   "defName": "ARIOIAF_Proselytizing_Occasionally",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "A Rim of Ice and Fire"
+  },
+  {
+   "defName": "Proselytizing_Frequently",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Proselytizing_Occasionally",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Proselytizing_Sometimes",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Proselytizing_Forceful",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Proselytizing_Never",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "PsychicRituals": [
+  {
+   "defName": "PsychicRituals_Abhorrent",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Anomaly (DLC)"
+  },
+  {
+   "defName": "PsychicRituals_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Anomaly (DLC)"
+  },
+  {
+   "defName": "PsychicRituals_Exalted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Anomaly (DLC)"
+  }
+ ],
+ "QuesterMeme_QuestComplete": [
+  {
+   "defName": "QuesterMeme_QuestComplete_Daring",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Questing Meme"
+  },
+  {
+   "defName": "QuesterMeme_QuestComplete_Honourable",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Questing Meme"
+  },
+  {
+   "defName": "QuesterMeme_QuestComplete_Respected",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Questing Meme"
+  }
+ ],
+ "QuesterMeme_QuestFail": [
+  {
+   "defName": "QuesterMeme_QuestFail_Disapproved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Questing Meme"
+  },
+  {
+   "defName": "QuesterMeme_QuestFail_Dishonorable",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Questing Meme"
+  },
+  {
+   "defName": "QuesterMeme_QuestFail_Disliked",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Questing Meme"
+  },
+  {
+   "defName": "QuesterMeme_QuestFail_DontCare",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Questing Meme"
+  }
+ ],
+ "ROBTRG_Hospitality": [
+  {
+   "defName": "ROBTRG_Hospitality_SacredDuty",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  },
+  {
+   "defName": "ROBTRG_Hospitality_Valued",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  }
+ ],
+ "ROBTRG_Repopulation": [
+  {
+   "defName": "ROBTRG_Repopulation_Duty",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Hotels and Recreation"
+  },
+  {
+   "defName": "ROBTRG_Repopulation_Greed",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  },
+  {
+   "defName": "ROBTRG_Repopulation_Kindness",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  },
+  {
+   "defName": "ROBTRG_Repopulation_None",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 4.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  }
+ ],
+ "ROBTRG_SexWork": [
+  {
+   "defName": "ROBTRG_SexWork_Abhorrent",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  },
+  {
+   "defName": "ROBTRG_SexWork_Disapproved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  },
+  {
+   "defName": "ROBTRG_SexWork_Respected",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Hotels and Recreation"
+  },
+  {
+   "defName": "ROBTRG_SexWork_Sacred",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Hotels and Recreation"
+  }
+ ],
+ "RS_Issue_Divorce": [
+  {
+   "defName": "RS_Divorce_Abhorrent",
+   "displayOrderInIssue": 45,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Divorce_Acceptable",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Divorce_FemaleOnly",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Divorce_Forbidden",
+   "displayOrderInIssue": 55,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Divorce_Horrible",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Divorce_MaleOnly",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "ReSplice: Charmweavers"
+  }
+ ],
+ "RS_Issue_Lovehexer": [
+  {
+   "defName": "RS_Lovehexer_Revered",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Lovehexer_Reviled",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  }
+ ],
+ "RS_Issue_Marriage": [
+  {
+   "defName": "RS_Marriage_Abhorrent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Marriage_FemaleOnly",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Marriage_Free",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Marriage_MaleOnly",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "ReSplice: Charmweavers"
+  }
+ ],
+ "RS_Issue_Pregnancy": [
+  {
+   "defName": "RS_Pregnancy_Abhorrent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.5,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Pregnancy_Desired",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "ReSplice: Charmweavers"
+  },
+  {
+   "defName": "RS_Pregnancy_DontCare",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "ReSplice: Charmweavers"
+  }
+ ],
+ "Raiding": [
+  {
+   "defName": "Raiding_Required",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Raiding_Respected",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Raiding_Abhorrent",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Raiding_Honorable",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "Ranching": [
+  {
+   "defName": "AM_Ranching_CattleCentered",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Ranching_Central",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Ranching_Discouraged",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Ranching_Disliked",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Ranching_Nomadic",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "Research": [
+  {
+   "defName": "Research_ExtremelySlow",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Research_Fast",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Research_None",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Research_Normal",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Research_Slow",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Research_VeryFast",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Research_VerySlow",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "RomanceOnTheRim_Issue_Breakup": [
+  {
+   "defName": "RomanceOnTheRim_Breakup_Arranged",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_Breakup_Discouraged",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_Breakup_Encouraged",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_Breakup_Forbidden",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  }
+ ],
+ "RomanceOnTheRim_Issue_Cheat": [
+  {
+   "defName": "RomanceOnTheRim_Cheat_Discouraged",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_Cheat_Encouraged",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_Cheat_Forbidden",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  }
+ ],
+ "RomanceOnTheRim_Issue_MarriageProposal": [
+  {
+   "defName": "RomanceOnTheRim_MarriageProposal_Arranged",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_MarriageProposal_FlashMarriage",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_MarriageProposal_Forbidden",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_MarriageProposal_LateMarriage",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  }
+ ],
+ "RomanceOnTheRim_Issue_RomanceAttempt": [
+  {
+   "defName": "RomanceOnTheRim_RomanceAttempt_Arranged",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_RomanceAttempt_Discouraged",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_RomanceAttempt_Encouraged",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  },
+  {
+   "defName": "RomanceOnTheRim_RomanceAttempt_Forbidden",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Romance On The Rim"
+  }
+ ],
+ "RoughLiving": [
+  {
+   "defName": "AM_RoughLiving_Disliked",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "RoughLiving_Welcomed",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "SEX_Divorce": [
+  {
+   "defName": "SEX_Divorce_Accepted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Intimacy - Socio Butterfly"
+  },
+  {
+   "defName": "SEX_Divorce_Forbidden",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.1,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Intimacy - Socio Butterfly"
+  }
+ ],
+ "SEX_Incest": [
+  {
+   "defName": "SEX_Incest_Accepted",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.05,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Birds of a Feather - A simple, consensual incest mod"
+  },
+  {
+   "defName": "SEX_Incest_Taboo",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Birds of a Feather - A simple, consensual incest mod"
+  }
+ ],
+ "Scarification": [
+  {
+   "defName": "AM_Scarification_Insane",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "Scarification_Extreme",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Scarification_Heavy",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Scarification_Horrible",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Scarification_Minor",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Skullspike": [
+  {
+   "defName": "ARIOIAF_Skullspike_DontCare",
+   "displayOrderInIssue": 5,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "A Rim of Ice and Fire"
+  },
+  {
+   "defName": "Skullspike_Desired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Skullspike_Disapproved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Slavery": [
+  {
+   "defName": "Slavery_Abhorrent",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Slavery_Acceptable",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Slavery_Disapproved",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Slavery_Honorable",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "Slavery_Horrible",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "VME_Slavery_Forbidden",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "SpouseCount_Female": [
+  {
+   "defName": "SpouseCount_Female_MaxFour",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SpouseCount_Female_MaxOne",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Core"
+  },
+  {
+   "defName": "SpouseCount_Female_MaxThree",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SpouseCount_Female_MaxTwo",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SpouseCount_Female_Unlimited",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "SpouseCount_Male": [
+  {
+   "defName": "SpouseCount_Male_MaxFour",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SpouseCount_Male_MaxOne",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Core"
+  },
+  {
+   "defName": "SpouseCount_Male_MaxThree",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SpouseCount_Male_MaxTwo",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SpouseCount_Male_Unlimited",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Superstition": [
+  {
+   "defName": "Superstition_Contempt",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Superstition_Mild",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Superstition_Strong",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "TakingFromDowned": [
+  {
+   "defName": "TakingFromDowned_Abhorrent",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "TakingFromDowned_Disapproved",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "TakingFromDowned_Horrible",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "Traps": [
+  {
+   "defName": "Traps_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Traps_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Traps_Prohibited",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "TreeCutting": [
+  {
+   "defName": "TreeCutting_Disapproved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "TreeCutting_Horrible",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "TreeCutting_Prohibited",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "Trees": [
+  {
+   "defName": "AM_Trees_Despised",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "MI_Trees_Mildly_Desired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Conservationist and Polluter - Mort's Ideologies: Memes and Precepts"
+  },
+  {
+   "defName": "Trees_Desired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology (DLC)"
+  }
+ ],
+ "VME_Alcohol": [
+  {
+   "defName": "VME_Alcohol_Demanded",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Alcohol_Desired",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Alcohol_MildAbstinence",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Aurora": [
+  {
+   "defName": "VME_Aurora_Amazing",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Aurora_Despised",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_AutomationEfficiency": [
+  {
+   "defName": "VME_AutomationEfficiency_Decreased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_AutomationEfficiency_Increased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_BookReading": [
+  {
+   "defName": "VME_BookReading_Desired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_BookReading_Disliked",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_BookReadingSpeed": [
+  {
+   "defName": "VME_BookReadingSpeed_Decreased",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_BookReadingSpeed_Increased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_BookWriting": [
+  {
+   "defName": "VME_BookWriting_Disliked",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_BookWriting_Exalted",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_BookWritingSpeed": [
+  {
+   "defName": "VME_BookWritingSpeed_Decreased",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_BookWritingSpeed_Increased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_CraftingQuality": [
+  {
+   "defName": "VME_CraftingQuality_Decreased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_CraftingQuality_Increased",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_CraftingSpeed": [
+  {
+   "defName": "VME_CraftingSpeed_FasterForManual",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_CraftingSpeed_Slower",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_CraftingSpeed_SlowerForManual",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Death": [
+  {
+   "defName": "VME_Death_DontCare",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Death_Normal",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Death_Troubling",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_DumbLabor": [
+  {
+   "defName": "VME_DumbLabor_Disliked",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_DumbLabor_Exalted",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_DumbLabor_Horrible",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_DumbLabor_Indifferent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_DumbLabor_Liked",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Elders": [
+  {
+   "defName": "VME_Elders_Despised",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Elders_Holy",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Elders_Respected",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Expectations": [
+  {
+   "defName": "VME_Expectations_High",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Expectations_Low",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Fire": [
+  {
+   "defName": "VME_Fire_Desired",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Fire_Despised",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Firefighting": [
+  {
+   "defName": "VME_Firefighting_Abhorrent",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Firefighting_Preferred",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Illness": [
+  {
+   "defName": "VME_Illness_Exalted",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Illness_Indifferent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Illness_Preferred",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_InsectJelly": [
+  {
+   "defName": "VME_InsectJellyEaten_Despised",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_InsectJellyEaten_Loved_Classic",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_InsectJellyEaten_Neutral_Classic",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Insectoids": [
+  {
+   "defName": "VME_Insectoids_Despised",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Insectoids_Exalted",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Junk": [
+  {
+   "defName": "VME_Junk_Beautiful",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Junk_Preferred",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_KillingWithFire": [
+  {
+   "defName": "VME_KillingWithFire_Abhorrent",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_KillingWithFire_Preferred",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Leader": [
+  {
+   "defName": "VME_Leader_BestCrafter",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Leader_BestFighter",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Leader_BestPsycaster",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Leader_HighestTitle",
+   "displayOrderInIssue": 5,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Leader_Three",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_LeatherApparel": [
+  {
+   "defName": "VME_LeatherApparel_Abhorrent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_LeatherApparel_Disliked",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Mechanoids": [
+  {
+   "defName": "VME_Mechanoids_Despised",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Mechanoids_Exalted",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Mood": [
+  {
+   "defName": "VME_Mood_DictatedByStars",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Mood_HighExpectations",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Mood_LowExpectations",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Mood_Normal",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Mood_Shared",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_PermanentBases": [
+  {
+   "defName": "VME_PermanentBases_Desired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_PermanentBases_Despised",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_PermitCooldown": [
+  {
+   "defName": "VME_PermitCooldown_Increased",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_PermitCooldown_Lowered",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_PermitHonorCost": [
+  {
+   "defName": "VME_PermitHonorCost_Doubled",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_PermitHonorCost_Halved",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Power": [
+  {
+   "defName": "VME_Power_Desired",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Power_Exalted",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Power_Preferred",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_PsychicSensitivity": [
+  {
+   "defName": "VME_PsychicSensitivity_Heightened",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_PsychicSensitivity_Lowered",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Recreation": [
+  {
+   "defName": "AM_Recreation_Abhorrent",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "VME_Recreation_Disapproved",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Recreation_Fishing",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Recreation_Loved",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Recreation_Normal",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Royalty": [
+  {
+   "defName": "VME_Royalty_Disliked",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Royalty_Exalted",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Royalty_Hated",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Royalty_Respected",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Scars": [
+  {
+   "defName": "VME_Scars_Disgusting",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Scars_Honorable",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_SkilledLabor": [
+  {
+   "defName": "VME_SkilledLabor_Relaxed",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_SkilledLabor_Slow",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Sweets": [
+  {
+   "defName": "VME_Sweets_Craved",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Sweets_Impartial",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_TaintedApparel": [
+  {
+   "defName": "VME_TaintedApparel_Abhorrent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_TaintedApparel_Disapproved",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_TaintedApparel_DontCare",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_TatteredApparel": [
+  {
+   "defName": "VME_TatteredApparel_Abhorrent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_TatteredApparel_Disapproved",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_TatteredApparel_DontCare",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Travel": [
+  {
+   "defName": "VME_Travel_Desired",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Travel_Despised",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VME_Violence": [
+  {
+   "defName": "AM_Violence_Abhorrent_Strict",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "Alpha Memes"
+  },
+  {
+   "defName": "VME_Violence_Abhorrent",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Violence_Acceptable",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Violence_Disapproved",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  },
+  {
+   "defName": "VME_Violence_Honorable",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Ideology Expanded - Memes and Structures"
+  }
+ ],
+ "VRE_AndroidsIssue": [
+  {
+   "defName": "VRE_Androids_Despised",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Races Expanded - Android"
+  },
+  {
+   "defName": "VRE_Androids_Equal",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Races Expanded - Android"
+  },
+  {
+   "defName": "VRE_Androids_Respected",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Races Expanded - Android"
+  },
+  {
+   "defName": "VRE_Androids_Tools",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Races Expanded - Android"
+  }
+ ],
+ "VVE_Acceleration": [
+  {
+   "defName": "VVE_Acceleration_High",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Acceleration_Standard",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Acceleration_SundayDriver",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  }
+ ],
+ "VVE_Driving": [
+  {
+   "defName": "VVE_Driving_Allowed",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Driving_Approved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Driving_Forbidden",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Driving_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Driving_Required",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  }
+ ],
+ "VVE_Flying": [
+  {
+   "defName": "VVE_Flying_Allowed",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Flying_Approved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Flying_Forbidden",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Flying_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Flying_Required",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  }
+ ],
+ "VVE_FuelEfficiency": [
+  {
+   "defName": "VVE_FuelEfficiency_Efficient",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_FuelEfficiency_Inefficient",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_FuelEfficiency_Standard",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  }
+ ],
+ "VVE_Sailing": [
+  {
+   "defName": "VVE_Sailing_Allowed",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Sailing_Approved",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Sailing_Forbidden",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Sailing_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_Sailing_Required",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  }
+ ],
+ "VVE_VehicleRepairs": [
+  {
+   "defName": "VVE_VehicleRepairs_Fast",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_VehicleRepairs_Slow",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  },
+  {
+   "defName": "VVE_VehicleRepairs_Standard",
+   "displayOrderInIssue": 35,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Vanilla Vehicles Expanded"
+  }
+ ],
+ "VXF_XenotypeStrictness": [
+  {
+   "defName": "VXF_XenotypeStrictness_Exact",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Venerated Xenotype Flexibility (Revisited)"
+  },
+  {
+   "defName": "VXF_XenotypeStrictness_Full",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Venerated Xenotype Flexibility (Revisited)"
+  },
+  {
+   "defName": "VXF_XenotypeStrictness_Partial",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Venerated Xenotype Flexibility (Revisited)"
+  },
+  {
+   "defName": "VXF_XenotypeStrictness_Tolerant",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Venerated Xenotype Flexibility (Revisited)"
+  },
+  {
+   "defName": "VXF_XenotypeStrictness_Vanilla",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Venerated Xenotype Flexibility (Revisited)"
+  }
+ ],
+ "Violence": [
+  {
+   "defName": "Violence_Avoided",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Violence_Defense",
+   "displayOrderInIssue": 55,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Violence_DefenseMild",
+   "displayOrderInIssue": 57,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Violence_Disapproved",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Violence_Essential",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Violence_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Violence_Pacifism",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  },
+  {
+   "defName": "Violence_Wanted",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Ideology: More Precepts"
+  }
+ ],
+ "VoidStudy": [
+  {
+   "defName": "VoidStudy_Efficient",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Anomaly (DLC)"
+  },
+  {
+   "defName": "VoidStudy_Inefficient",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Anomaly (DLC)"
+  },
+  {
+   "defName": "VoidStudy_VeryEfficient",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Anomaly (DLC)"
+  },
+  {
+   "defName": "VoidStudy_VeryInefficient",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Anomaly (DLC)"
+  }
+ ],
+ "WCE2_Torture": [
+  {
+   "defName": "WCE2_Torture_Abhorrent",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "War Crimes Expanded 2 Core (Updated)"
+  },
+  {
+   "defName": "WCE2_Torture_AlwaysRespected",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": true,
+   "mod": "War Crimes Expanded 2 Core (Updated)"
+  },
+  {
+   "defName": "WCE2_Torture_DontCare",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "War Crimes Expanded 2 Core (Updated)"
+  },
+  {
+   "defName": "WCE2_Torture_Horrible",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "War Crimes Expanded 2 Core (Updated)"
+  },
+  {
+   "defName": "WCE2_Torture_HorribleInnocent",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "War Crimes Expanded 2 Core (Updated)"
+  },
+  {
+   "defName": "WCE2_Torture_RespectedGuilty",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "War Crimes Expanded 2 Core (Updated)"
+  }
+ ],
+ "WeaponProficiency": [
+  {
+   "defName": "WeaponProficiency_Approved",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Cybranian - Weapon Proficiency"
+  },
+  {
+   "defName": "WeaponProficiency_Encouraged",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Cybranian - Weapon Proficiency"
+  },
+  {
+   "defName": "WeaponProficiency_Exalted",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Cybranian - Weapon Proficiency"
+  }
+ ],
+ "miHousingDistribution": [
+  {
+   "defName": "miHousingDistribution_Ignored",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "miHousingDistribution_MildEquality",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "miHousingDistribution_MildStratification",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "miHousingDistribution_StrictEquality",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Political Compass - Mort's Ideologies"
+  },
+  {
+   "defName": "miHousingDistribution_StrictStratification",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Political Compass - Mort's Ideologies"
+  }
+ ]
+}

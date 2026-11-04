@@ -111,7 +111,36 @@ public class ModIssueLadderTests : SeededTest
     }
 
     [Fact]
-    public void Pregnancy_DesiredLeads_AndNeutralIsDontCareOverTheWeightedDefaults()
+    public void Intimacy_IsCuratedAsMoral()
+    {
+        // No rungs registered: SimIssues.Register would mark the issue as Moral, whatever the tables say.
+        Assert.True(PreceptPolicy.IsCurated("NikolaisIdeology_Intimacy"));
+        Assert.Equal(PreceptCategory.Moral, PreceptPolicy.CategoryOf(new IssueDef { defName = "NikolaisIdeology_Intimacy" }));
+    }
+
+    [Fact]
+    public void Intimacy_HighLeads_AndNeutralSitsBetweenItsRungs()
+    {
+        var issue = Register("NikolaisIdeology_Intimacy",
+            ("NikolaisIdeology_Intimacy_High", 30, 0f, true), ("NikolaisIdeology_Intimacy_Low", 40, 0f, true));
+
+        Assert.Equal(["NikolaisIdeology_Intimacy_High", "NikolaisIdeology_Intimacy_Low"], RungNames(issue));
+        Assert.Equal(0.5f, PreceptLadder.DontCareRank(issue));
+    }
+
+    [Theory]
+    [InlineData("MI_ConversionPower")]
+    [InlineData("MI_MeditationFocusGain")]
+    [InlineData("MI_PruningSpeed")]
+    [InlineData("WeaponProficiency")]
+    public void ReviewedPerkIssues_AreCuratedAsPositiveOnly(string issueName)
+    {
+        Assert.True(PreceptPolicy.IsCurated(issueName));
+        Assert.Equal(PreceptCategory.PositiveOnly, PreceptPolicy.CategoryOf(new IssueDef { defName = issueName }));
+    }
+
+    [Fact]
+    public void Pregnancy_DesiredLeads_AndNeutralIsTheRungWithTheHighestWeight()
     {
         var issue = Register("RS_Issue_Pregnancy",
             ("RS_Pregnancy_DontCare", 0, 1f, true), ("RS_Pregnancy_Abhorrent", 30, 0.5f, true),

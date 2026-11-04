@@ -50,7 +50,8 @@ internal enum PreceptCategory
 // stacking scrambles displayOrderInIssue. Keyed by defName so it survives load order. See docs/preceptPolicy.md.
 internal static partial class PreceptPolicy
 {
-    // Everything not listed defaults to PositiveOnly (0 structural). This is the curated Moral set.
+    // An issue that no table lists is Moral if LadderHeuristic is sure of it, else PositiveOnly (0 structural).
+    // This is the curated Moral set.
     private static readonly HashSet<string> MoralIssues =
     [
         "Cannibalism", "MeatEating", "AnimalSlaughter", "KillingInnocentAnimals", "Slavery", "Execution",
@@ -142,6 +143,8 @@ internal static partial class PreceptPolicy
         "VXF_XenotypeStrictness",
         // Mount Ownership: Important -> Essential, one-sided; a faith with no precept keeps no personal mounts.
         "CompanionMounts_MountOwnership",
+        // Nikolai's Ideology: Gender Works. Friendship is central (High) vs a distraction from nobler pursuits (Low).
+        "NikolaisIdeology_Intimacy",
     ];
     // Issues that copy the axis of an issue from another mod, keyed copy -> original. When the original is loaded,
     // the copy is PositiveOnly and its rungs induce the original's rungs (InducedByPrecept), so the axis counts once.
@@ -201,6 +204,11 @@ internal static partial class PreceptPolicy
         "GR_WorktableSpeeds",
         // Progression: Ammunition (reload stat modifiers) and [AP] Hunting Meme (hunting style, not a value).
         "PA_AmmoHandling", "AP_TrophyHunterPreceptIssue",
+        // Empiricism and Faith (Mort's Ideologies): each rung needs one meme, so the opposing rungs never meet in a faith.
+        "MI_ConversionPower", "MI_MeditationFocusGain", "MI_PruningSpeed",
+        // Cybranian - Weapon Proficiency: stronger versions of one stance. No rung opposes it, and an outsider does
+        // not object to it.
+        "WeaponProficiency",
         // Not locally installed — safe PositiveOnly default pending ladder verification.
         "VRE_AndroidsIssue",
     ];
@@ -388,19 +396,25 @@ internal static partial class PreceptPolicy
     {
         Overrides[issueDefName] = category;
         CategoryCache.Clear();
+        GuessCache.Clear();
     }
 
     internal static void ClearOverrides()
     {
         Overrides.Clear();
         CategoryCache.Clear();
+        GuessCache.Clear();
     }
 
     // True when a table lists the issue. The ladder heuristic reads only the issues that no table lists.
     internal static bool IsCurated(string defName) =>
         MoralIssues.Contains(defName) || UniversalPositiveValuedRung.ContainsKey(defName)
         || SpecialIssues.Contains(defName) || NAIssues.Contains(defName)
-        || KnownPositiveOnlyIssues.Contains(defName) || DuplicateOf.ContainsKey(defName);
+        || KnownPositiveOnlyIssues.Contains(defName) || DuplicateOf.ContainsKey(defName)
+        || OrderOverrides.ContainsKey(defName) || DontCare.ContainsKey(defName);
+
+    // True when the issue copies an issue from another mod. Its category then depends on whether that mod is loaded.
+    internal static bool IsDuplicate(string defName) => DuplicateOf.ContainsKey(defName);
 
     // CategoryOf is on the structural opinion hot path; the table lookups hash the defName each call.
     private static readonly Dictionary<IssueDef, PreceptCategory> CategoryCache = [];
@@ -414,14 +428,15 @@ internal static partial class PreceptPolicy
     {
         if (!CategoryCache.TryGetValue(issue, out var category))
         {
-            category = ResolveCategory(issue.defName);
+            category = ResolveCategory(issue);
             CategoryCache[issue] = category;
         }
         return category;
     }
 
-    private static PreceptCategory ResolveCategory(string defName)
+    private static PreceptCategory ResolveCategory(IssueDef issue)
     {
+        var defName = issue.defName;
         if (Overrides.TryGetValue(defName, out var overridden))
         {
             return overridden;
@@ -433,7 +448,7 @@ internal static partial class PreceptPolicy
         if (UniversalPositiveValuedRung.ContainsKey(defName)) return PreceptCategory.UniversalPositive;
         if (SpecialIssues.Contains(defName)) return PreceptCategory.Special;
         if (NAIssues.Contains(defName)) return PreceptCategory.NA;
-        return PreceptCategory.PositiveOnly;
+        return ConfidentGuess(issue) != null ? PreceptCategory.Moral : PreceptCategory.PositiveOnly;
     }
 
 }

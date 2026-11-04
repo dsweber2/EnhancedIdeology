@@ -28,12 +28,14 @@ participates through the separate **acquired** channel (the existing personal pe
 ## Moral (need order + Don't-care rank)
 
 **Don't-care placement rule** — neutral is the stance an ideo falls back to on the issue.
-`PreceptLadder.DontCareRank` applies it in this order:
+`PreceptLadder.DontCareRank` applies it in this order, and an issue that no table lists gets its placement from `LadderHeuristic` after case 0, when the heuristic sets one:
 0. **A `PreceptPolicy.DontCare` entry** wins over everything below.
-   Use one where the default rungs misplace neutral: `SUF_Torture` (the editor starts at `DontCare`, but the classic precept shares the `Horrible` thoughts), `RS_Issue_Divorce` (the defaults average onto the gendered rung), `RS_Issue_Pregnancy` (a 0.5 weight on `Abhorrent` pulls neutral off `DontCare`).
-1. **The issue has default rungs** (visible rungs with `defaultSelectionWeight > 0`): neutral is their mean rank, weighted by `defaultSelectionWeight`.
+   Use one where the default rungs misplace neutral: `SUF_Torture` (the editor starts at `DontCare`, but the classic precept shares the `Horrible` thoughts), `RS_Issue_Divorce` (the defaults average onto the gendered rung).
+1. **The issue has default rungs** (visible rungs with `defaultSelectionWeight > 0`): neutral is the rung with the highest weight.
+   A smaller weight only lets an occasional faith take that rung (`RS_Pregnancy_Abhorrent`, weight 0.5, against `RS_Pregnancy_DontCare`, weight 1).
+   If several rungs share the highest weight, neutral is the mean rank of all default rungs, weighted by `defaultSelectionWeight`.
    When an ideo loses its rung on such an issue, vanilla adds one of these back, picked at random by weight (`Ideo.RemovePrecept`), and the editor has no remove button for the issue.
-   So neutral is the expected stance of a fresh faith, not the effect-free rung (`GR_Failures_Accepted` is a stance; `GR_Failures_Disliked` is neutral).
+   So neutral is the stance a fresh faith is expected to hold, not the effect-free rung (`GR_Failures_Accepted` is a stance; `GR_Failures_Disliked` is neutral).
    This needs no table entry, and it covers mod issues that we have not classified.
 2. **No default rung** (a truly optional issue): neutral is the vanilla baseline, the stance of a pawn whose faith has no precept on the issue.
    Find it by what the rungs do, not by their labels:
@@ -219,6 +221,10 @@ Not one-rung Moral after review:
 `VME_JunkDeconstructionYield`, `VME_LeaderAbilities`, `VME_Library`, `VME_Meditation`, `VME_PsyfocusGain`, `VME_TendQuality`,
 `VME_TitleInheritance`, `VME_Trading`, `VME_TradingPrice`, `VME_WoodcuttingYield`.
 
+Also multi-rung (`KnownPositiveOnlyIssues`):
+- `MI_ConversionPower`, `MI_MeditationFocusGain`, `MI_PruningSpeed`: each rung needs one meme, so the opposing rungs never meet in a faith.
+- `WeaponProficiency` (`Approved` → `Encouraged` → `Exalted`): stronger versions of one stance, with no opposing rung, and an outsider does not object.
+
 ## UniversalPositive
 
 - **Charity** ✓ — flat positive for everyone.
@@ -262,6 +268,7 @@ toward, so it's a flat one-way hit scaled by the source's conviction, added afte
 ## Mod issues
 
 Heuristic: **single-rung → PositiveOnly** (no disagreement axis; the default covers them — no entry).
+A multi-rung issue with no entry goes to `LadderHeuristic`, which classifies it from its rung names or flags it; see [ladder-heuristic.md](ladder-heuristic.md).
 **Multi-rung → judge per issue.** Final classification (all encoded in `PreceptPolicy.cs`):
 
 **Moral, optional** (have a neighbour-keyed Don't-care in `DontCare`): `VME_Alcohol`, `VME_KillingWithFire`,
@@ -333,7 +340,7 @@ Ladders are listed in rank order. A tied rung shares its anchor's rank.
 | RS_Issue_Lovehexer  | `Revered` → `Reviled`                                                                                                 | between them                       | as `Bloodfeeders`                                                                                                                                                                                                                            |
 | RS_Issue_Divorce    | `Acceptable` → `MaleOnly` (= `FemaleOnly`) → `Horrible` → `Abhorrent` → `Forbidden`                                   | between `OneOnly` and `Horrible`  | table entry; the mean of the `Acceptable` and `Horrible` defaults lands on `MaleOnly` and would make gendered divorce neutral. The gendered rungs really disagree on a separate axis (which sex may act); tied is the best one ladder can do |
 | RS_Issue_Marriage   | `Free` → `MaleOnly` (= `FemaleOnly`) → `Abhorrent`                                                                    | `Free`                             | default rung. `Abhorrent` ("commitment is sinful") has order 30, before the gendered rungs                                                                                                                                                   |
-| RS_Issue_Pregnancy  | `Desired` → `DontCare` → `Abhorrent`                                                                                  | `DontCare`                         | table entry; the 0.5 default weight on `Abhorrent` only lets an occasional antinatalist faith spawn. `Desired` has order 50, past `Abhorrent`                                                                                                |
+| RS_Issue_Pregnancy  | `Desired` → `DontCare` → `Abhorrent`                                                                                  | `DontCare`                         | `DontCare` has the highest default weight; the 0.5 on `Abhorrent` only lets an occasional antinatalist faith spawn. `Desired` has order 50, past `Abhorrent`                                                                                                |
 | AC_Stacking         | `Central` → `Preferred` → `Despised`                                                                                  | between `Preferred` and `Despised` | `Central` sets no order and ties with `Preferred`                                                                                                                                                                                            |
 | AC_Sleeving         | `Demanded` → `Preferred` → `Despised`                                                                                 | between `Preferred` and `Despised` | as `AC_Stacking`                                                                                                                                                                                                                             |
 | AC_StackDuplicating | `Enlightened` → `DontCare` → `Horrible`                                                                               | `DontCare`                         | no effects; no display orders                                                                                                                                                                                                                |
@@ -376,6 +383,7 @@ The neutral is the default-weight rung unless the table says otherwise.
 | NR_NetCulture | Hacking Expansion: Netrun | `Abhorrent` → `Wary` → `Sacred` | between `Wary` and `Sacred` | no rung has a default weight; `Wary` gives mood penalties for dives and trace, so no precept sits past it |
 | VXF_XenotypeStrictness | Venerated Xenotype Flexibility | `Tolerant` → `Partial` → `Full` → `Exact` → `Vanilla` | `Full` | all rungs at order 0, so an order override sets loosest to strictest; skipped in opinion and debates when neither faith prefers a xenotype (`PreceptPolicy.IsMootBetween`), because then no rung has an effect |
 | CompanionMounts_MountOwnership | Mount Ownership | `Important` → `Essential` | before `Important` | one-sided; no precept means no personal mounts. Both rungs at order 0, so an order override sets them |
+| NikolaisIdeology_Intimacy | Nikolai's Ideology: Gender Works | `High` → `Low` | between `High` and `Low` | friendship is central vs a distraction from nobler pursuits |
 
 
 Rungs on vanilla issues:

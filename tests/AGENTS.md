@@ -13,5 +13,6 @@ Tests target net8, but the mod compiles against Unity's Mono BCL (shipped in `Kr
   - `VegetarianUtils.cs` — stub for the helper that lives in a non-compiled patch file
   - `SimWorld.cs` — sets up `Find`/`Current` statics and the game component; `AddIdeo` mirrors the `Ideo` constructor patch
   - `PawnBuilder.cs`, `IdeoBuilder.cs` (+ `SimIssues` ladders, `MemeBuilder`), `SimPawn.cs`, `SimThought.cs` — fixtures
+- `Fixtures/ladders.json` — every multi-rung issue installed locally, written by `make catalog`; read by `LadderHeuristicBacktest.cs`, which fails if the heuristic is sure and disagrees with the hand tables
 - `SeededTest.cs` — base class; reseeds `Rand` and resets global state before every test
 - `*Tests.cs` — one file per subsystem

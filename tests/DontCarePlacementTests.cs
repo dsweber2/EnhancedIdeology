@@ -1,6 +1,6 @@
 namespace EnhancedIdeology.Tests;
 
-// Covers PreceptLadder.DontCareRank: an issue with default rungs takes their weighted mean rank, and every other
+// Covers PreceptLadder.DontCareRank: an issue with default rungs takes PreceptLadder.NeutralOfDefaults, and every other
 // issue uses PreceptPolicy.DontCare, where each spec that names a mod rung still lands correctly when that mod is
 // absent.
 public class DontCarePlacementTests : SeededTest
@@ -45,10 +45,17 @@ public class DontCarePlacementTests : SeededTest
     }
 
     [Fact]
-    public void DefaultRungs_AreWeightedByDefaultSelectionWeight()
+    public void RungWithTheHighestWeight_IsTheNeutral()
     {
-        Assert.Equal(0.25f, DefaultNeutralOf("WeightedIssue",
-            ("WeightedIssue_A", 3f), ("WeightedIssue_B", 1f), ("WeightedIssue_C", 0f)));
+        Assert.Equal(1f, DefaultNeutralOf("WeightedIssue",
+            ("WeightedIssue_A", 0.5f), ("WeightedIssue_B", 3f), ("WeightedIssue_C", 0f)));
+    }
+
+    [Fact]
+    public void RungsThatShareTheHighestWeight_GiveTheWeightedMeanOfAllDefaults()
+    {
+        Assert.Equal(0.8f, DefaultNeutralOf("SharedTopIssue",
+            ("SharedTopIssue_A", 2f), ("SharedTopIssue_B", 2f), ("SharedTopIssue_C", 1f)), 0.001f);
     }
 
     [Fact]

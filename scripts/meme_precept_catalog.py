@@ -441,6 +441,7 @@ def ladders(catalog: Catalog) -> dict[str, list[dict]]:
                 "displayOrderInIssue": int(rung_order(rung)),
                 "defaultSelectionWeight": float(rung.text("defaultSelectionWeight") or 0),
                 "hasEffects": has_effects(rung),
+                "needsMeme": bool(rung.items("requiredMemes")),
                 "mod": rung.mod.name,
             }
             for rung in sorted(rungs, key=lambda rung: rung.def_name)

@@ -33,6 +33,13 @@ public class PreceptDef : Def
     public bool visible = true;
     public float defaultSelectionWeight;
     public List<PreceptComp> comps = [];
+    public List<AbilityStatModifiers>? abilityStatFactors;
+    public List<StatModifier>? statOffsets;
+    public List<StatModifier>? statFactors;
+    public List<ConditionalStatAffecter>? conditionalStatAffecters;
+    public List<WorkTypeDef> opposedWorkTypes = [];
+    public List<NeedDef>? enablesNeeds;
+    public List<NeedDef>? disablesNeeds;
     public List<MemeDef> requiredMemes = [];
     public List<MemeDef> associatedMemes = [];
 
@@ -40,6 +47,10 @@ public class PreceptDef : Def
 }
 
 public abstract class PreceptComp { }
+
+public class AbilityStatModifiers { }
+
+public class ConditionalStatAffecter { }
 
 public class Precept
 {

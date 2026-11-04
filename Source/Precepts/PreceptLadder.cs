@@ -19,6 +19,7 @@ internal static class PreceptLadder
     // shifts every real rank. Visible classic precepts (Lovin_Free, SpouseCount_Male_MaxOne, ...) are ordinary
     // rungs: "classic" only means the precept exists without the Ideology DLC. For issues whose
     // displayOrderInIssue scrambles the axis once stacked, a PreceptPolicy order override pins the sequence.
+    // LadderHeuristic gives the sequence of an issue that no table lists.
     // Rungs in PreceptPolicy.TiedRungs are left out: they share their anchor's rank, so the ladder holds one
     // rung per rank.
     public static List<PreceptDef> Rungs(IssueDef issue)
@@ -31,7 +32,10 @@ internal static class PreceptLadder
             && !PreceptPolicy.TiedRungs.ContainsKey(precept.defName));
         List<PreceptDef> result;
 
-        if (PreceptPolicy.OrderOverrides.TryGetValue(issue.defName, out var order))
+        var order = PreceptPolicy.OrderOverrides.TryGetValue(issue.defName, out var overridden)
+            ? overridden
+            : PreceptPolicy.ConfidentGuess(issue)?.Order.ToArray();
+        if (order != null)
         {
             result = [.. rungs.OrderBy(precept =>
             {
@@ -71,8 +75,9 @@ internal static class PreceptLadder
     }
 
     // Rank of the neutral stance on an issue (docs/preceptPolicy.md "Don't-care placement rule"). A
-    // PreceptPolicy.DontCare entry comes first. Otherwise an issue with default rungs uses their weighted mean
-    // rank, else -1f, one step below the most permissive explicit rung.
+    // PreceptPolicy.DontCare entry comes first, then the placement from LadderHeuristic. Otherwise an issue with
+    // default rungs uses NeutralOfDefaults,
+    // else -1f, one step below the most permissive explicit rung.
     public static float DontCareRank(IssueDef issue)
     {
         if (_dontCareCache.TryGetValue(issue, out var cached))
@@ -80,7 +85,7 @@ internal static class PreceptLadder
 
         var rank = PreceptPolicy.DontCare.TryGetValue(issue.defName, out var spec)
             ? spec.Resolve(issue)
-            : DefaultRank(issue) ?? -1f;
+            : PreceptPolicy.ConfidentGuess(issue)?.NeutralRank ?? DefaultRank(issue) ?? -1f;
         _dontCareCache[issue] = rank;
         return rank;
     }
@@ -91,19 +96,26 @@ internal static class PreceptLadder
         PreceptPolicy.Indifference.TryGetValue(issue.defName, out var spec) ? spec.Resolve(issue) : DontCareRank(issue);
 
     // When an ideo loses its rung on an issue with default rungs, vanilla adds one of them back, picked at random
-    // by defaultSelectionWeight (Ideo.RemovePrecept). The neutral stance is the expected rank of that pick.
-    private static float? DefaultRank(IssueDef issue)
+    // by defaultSelectionWeight (Ideo.RemovePrecept).
+    private static float? DefaultRank(IssueDef issue) =>
+        NeutralOfDefaults(DefDatabase<PreceptDef>.AllDefs
+            .Where(precept => precept.issue == issue && precept.visible && precept.defaultSelectionWeight > 0f)
+            .Select(precept => (RankOf(precept), precept.defaultSelectionWeight))
+            .ToList());
+
+    // The rung with the highest weight is the mod author's expected stance, so it is neutral. A smaller weight only
+    // lets an occasional faith take that rung. If several rungs share the highest weight, neutral is the weighted
+    // mean rank of all default rungs. Null when the issue has no default rungs.
+    internal static float? NeutralOfDefaults(List<(float rank, float weight)> defaults)
     {
-        var weightSum = 0f;
-        var rankSum = 0f;
-        foreach (var precept in DefDatabase<PreceptDef>.AllDefs)
-        {
-            if (precept.issue != issue || !precept.visible || precept.defaultSelectionWeight <= 0f)
-                continue;
-            weightSum += precept.defaultSelectionWeight;
-            rankSum += precept.defaultSelectionWeight * RankOf(precept);
-        }
-        return weightSum > 0f ? rankSum / weightSum : null;
+        if (defaults.Count == 0)
+            return null;
+
+        var highest = defaults.Max(entry => entry.weight);
+        var modes = defaults.Where(entry => entry.weight == highest).ToList();
+        return modes.Count == 1
+            ? modes[0].rank
+            : defaults.Sum(entry => entry.weight * entry.rank) / defaults.Sum(entry => entry.weight);
     }
 
     // Invisible classic precept for an issue, or null if none exists. Display code uses its label for an ideo with

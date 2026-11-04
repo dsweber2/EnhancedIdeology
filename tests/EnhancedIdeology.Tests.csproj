@@ -46,6 +46,7 @@
     <Compile Include="../Source/Precepts/LadderMigration.cs" />
     <Compile Include="../Source/Precepts/LadderHeuristic.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.cs" />
+    <Compile Include="../Source/Precepts/PreceptPolicy.Heuristic.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.Resolvers.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.DontCare.cs" />
     <Compile Include="../Source/Precepts/PreceptPolicy.Westeros.cs" />

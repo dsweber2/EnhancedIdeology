@@ -75,6 +75,8 @@ public class IssueDef : Def { }
 
 public class NeedDef : Def { }
 
+public class WorkTypeDef : Def { }
+
 public class ThingDef : Def { }
 
 public class JobDef : Def { }

@@ -171,15 +171,13 @@ internal static partial class PreceptPolicy
         ["TakingFromDowned"] = DontCareSpec.After("TakingFromDowned_Disapproved"),
         ["Traps"] = DontCareSpec.Before("Traps_Disapproved"),
         ["Violence"] = DontCareSpec.Between("Violence_DefenseMild", "Violence_Wanted"),
-        // Entries below override the default rungs' mean.
+        // Entries below override the default rungs.
         // The classic precept shares the Horrible tier's thoughts: a faith with no stated view disapproves. The
         // DontCare default is only the rung the editor starts with.
         ["SUF_Torture"] = DontCareSpec.At("SUF_Torture_Horrible"),
-        // The Acceptable and Horrible defaults average onto the tied gendered rung, which would make gendered
-        // divorce read as neutral.
+        // The Acceptable and Horrible defaults have the same weight, and their mean is the tied gendered rung. That
+        // would make gendered divorce read as neutral.
         ["RS_Issue_Divorce"] = DontCareSpec.Between("RS_Divorce_MaleOnly", "RS_Divorce_Horrible"),
-        // The 0.5 weight on Abhorrent only lets an occasional antinatalist faith spawn.
-        ["RS_Issue_Pregnancy"] = DontCareSpec.At("RS_Pregnancy_DontCare"),
         ["VQE_ARCGenerators"] = DontCareSpec.Between("VQE_ARCGenerators_Exalted", "VQE_ARCGenerators_Abhorrent"),
         ["BGM_FungalSymbiosis"] = DontCareSpec.Between("BGM_FungalSymbiosis_Revered", "BGM_FungalSymbiosis_Reviled"),
         ["RS_Issue_Lovehexer"] = DontCareSpec.Between("RS_Lovehexer_Revered", "RS_Lovehexer_Reviled"),
@@ -190,6 +188,7 @@ internal static partial class PreceptPolicy
         ["AC_StackDuplicating"] = DontCareSpec.At("AC_StackDuplicating_DontCare"),
         ["AC_XenoSleeving"] = DontCareSpec.At("AC_XenoSleeving_DontCare"),
         ["CompanionMounts_MountOwnership"] = DontCareSpec.Before("CompanionMounts_PersonalMountsDesired"),
+        ["NikolaisIdeology_Intimacy"] = DontCareSpec.Between("NikolaisIdeology_Intimacy_High", "NikolaisIdeology_Intimacy_Low"),
         // A Rim of Ice and Fire. Each rung has a default weight but needs a Westerosi meme, so no other faith takes it.
         ["ARIOIAF_Lineage"] = DontCareSpec.After("ARIOIAF_Lineage_Pure"),
         ["ARIOIAF_Death"] = DontCareSpec.After("ARIOIAF_Death_DontCare"),

@@ -43,7 +43,8 @@ internal static partial class DebugActions
             .OrderBy(issue => issue.defName)
             .Select(issue =>
                 $"{issue.defName} ({PreceptPolicy.CategoryOf(issue)}, from {issue.modContentPack?.Name ?? "no mod"}), "
-                + $"neutral rank {PreceptLadder.DontCareRank(issue):0.##}\n{PreceptPolicy.DescribeRungs(issue)}");
+                + $"neutral rank {PreceptLadder.DontCareRank(issue):0.##} {PreceptPolicy.DescribeGuess(issue)}\n"
+                + PreceptPolicy.DescribeRungs(issue));
         EnhancedIdeologyMod.Message("[issue ladders]\n" + string.Join("\n", issues));
     }
 
