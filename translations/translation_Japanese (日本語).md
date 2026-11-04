@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | 思想 |
 | `EnhancedIdeology.Section.Precept` | Precept | 戒律 |
 | `EnhancedIdeology.Section.Compat` | Compatibility | 互換性 |
+| `EnhancedIdeology.Section.Interface` | Interface | インターフェース |
 | `EnhancedIdeology.Section.Debug` | Debug | デバッグ |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | 個人の信仰度の動態 |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | 改宗の効果 |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | 戒律を変えようとしている相手への評価が効果をどれだけ増幅するか。1xかつ評価+100では、信仰度低下と信条引力の両方が2倍になる。0xでは評価は効果なし。「仲間の圧力」MODがインストールされている場合は使用されず、そのMODの倍率設定が代わりに適用される。 |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | セーブ読込時の最低信仰度: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | バニラまたはMOD導入前のセーブを読み込む際、信仰度がこれを下回るポーンの信条はゼロの代わりに最低限この目標値に設定される。信仰度0%のポーンが確信を一切持たない状態になるのを防ぐ。 |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | 思想タブを表示 |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | 入植者とキャラバン隊に思想タブを表示します。オフにすると、社交タブに思想ボタンが追加され、選択中の人物に追従するウィンドウで同じ画面を開きます。 |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | 開発: インタラクションワーカーのデバッグ |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | 開発モード有効時にインタラクションワーカーのデバッグログを有効にする。Enhanced Ideologyのデバッグ以外ではオフにすることを推奨する。 |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | 思想 |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | 思想... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | 思想への評価 |
 | `EnhancedIdeology.ColIssue` | Issue | 問題 |
 | `EnhancedIdeology.ColStance` | Stance | 姿勢 |

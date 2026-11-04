@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Ideoligion |
 | `EnhancedIdeology.Section.Precept` | Precept | Precept |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Compatibilitate |
+| `EnhancedIdeology.Section.Interface` | Interface | Interfață |
 | `EnhancedIdeology.Section.Debug` | Debug | Depanare |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Dinamica certitudinii personale |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Efecte de conversie |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Cât de mult amplifică opinia unui personaj față de cel care încearcă să îi schimbe preceptul efectul. La 1x și opinie +100, atât reducerea certitudinii cât și atracția de credință sunt dublate. La 0x, opinia nu are efect. Neutilizat când Peer Pressure este instalat — setarea multiplicatorului propriu al acelui mod preia controlul. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Certitudine minimă la încărcare salvare: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | La încărcarea unei salvări vanilla sau anterioare modului, personajele cu certitudinea sub acest prag au credințele inițializate la cel puțin această țintă în loc de zero. Previne ca un personaj cu 0% certitudine să rămână fără nicio convingere. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Afișează fila Ideoligion |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Afișează fila Ideoligion la personaje și caravane. Când este dezactivată, fila Social primește un buton Ideoligion care deschide aceeași vedere într-o fereastră ce urmărește personajul selectat. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | DEV: Depanare Interaction Workers |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Activează jurnalizarea de depanare pentru interaction workers când modul dev este activ. Recomand să lăsați dezactivat dacă nu depanați specific Enhanced Ideology. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideoligion |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Ideoligion... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Opinii ideoligion |
 | `EnhancedIdeology.ColIssue` | Issue | Problemă |
 | `EnhancedIdeology.ColStance` | Stance | Poziție |

@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Idéologie</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Précepte</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Compatibilité</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Interface</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Débogage</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Dynamique de certitude personnelle</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Effets de conversion</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Amplification de l'effet par l'opinion d'un colon envers celui qui tente de modifier son précepte. À 1x et opinion +100, le choc de certitude et l'attraction de croyance sont tous deux doublés. À 0x, l'opinion n'a aucun effet. Non utilisé si Peer Pressure est installé — le paramètre de ce mod prend alors le relais.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Certitude minimale à la reprise de sauvegarde : {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Au chargement d'une sauvegarde vanilla ou antérieure au mod, les colons dont la certitude est inférieure à cette valeur voient leurs croyances initialisées à ce seuil minimum plutôt qu'à zéro. Évite qu'un colon à 0% de certitude se retrouve sans aucune conviction.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Afficher l'onglet Idéologie</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Affiche l'onglet Idéologie sur les personnages et les caravanes. Si désactivé, l'onglet Social reçoit un bouton Idéologie qui ouvre la même vue dans une fenêtre qui suit le personnage sélectionné.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV : Débogage des travailleurs d'interaction</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Active la journalisation de débogage pour les travailleurs d'interaction en mode développeur. Laissez désactivé sauf si vous déboguez Enhanced Ideology spécifiquement.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

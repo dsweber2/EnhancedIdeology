@@ -29,7 +29,7 @@ internal sealed class WITab_Caravan_Opinion : WITab
         labelKey = "EnhancedIdeology.TabOpinion";
     }
 
-    public override bool IsVisible => SelCaravan != null && Pawns.Any();
+    public override bool IsVisible => EnhancedIdeologyMod.Settings.ShowOpinionTab && SelCaravan != null && Pawns.Any();
 
     protected override void UpdateSize()
     {

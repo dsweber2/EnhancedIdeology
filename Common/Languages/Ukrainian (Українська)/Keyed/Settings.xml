@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ідеологія</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Правило</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Сумісність</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Інтерфейс</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Налагодження</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Динаміка особистої впевненості</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Ефекти навернення</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Наскільки думка колоніста про того, хто намагається змінити його правило, підсилює ефект. При 1x і думці +100 і зниження впевненості, і притягування переконань подвоюються. При 0x думка не має ефекту. Не використовується, якщо встановлено Peer Pressure — замість цього застосовується власний множник того мода.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Мінімальна впевненість при завантаженні: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>При завантаженні ванільного або доісторичного збереження колоністи з впевненістю нижче цього значення отримують переконання мінімум на цій позначці замість нуля. Запобігає тому, щоб колоніст з 0% впевненості залишився без жодних переконань.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Показувати вкладку «Ідеологія»</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Показує вкладку «Ідеологія» у персонажів і караванів. Якщо вимкнено, у вкладці «Взаємини» з'являється кнопка «Ідеологія», яка відкриває той самий вигляд у вікні, що стежить за вибраним персонажем.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Налагодження обробників взаємодій</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Вмикає журнал налагодження для обробників взаємодій у режимі розробника. Рекомендується вимкнути, якщо ви не налагоджуєте Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

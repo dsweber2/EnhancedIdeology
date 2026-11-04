@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Ideoligie |
 | `EnhancedIdeology.Section.Precept` | Precept | Leefregel |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Compatibiliteit |
+| `EnhancedIdeology.Section.Interface` | Interface | Interface |
 | `EnhancedIdeology.Section.Debug` | Debug | Debug |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Persoonlijke zekerheidsprocessen |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Bekeringsinvloeden |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Hoeveel de mening van een pion over iemand die diens leefregel wil veranderen het effect versterkt. Bij 1x en mening +100 worden zowel de zekerheidsklap als de geloofsaantrekking verdubbeld. Bij 0x heeft mening geen effect. Niet gebruikt wanneer Peer Pressure is geïnstalleerd — de vermenigvuldigingsinstelling van die mod neemt het dan over. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Minimum zekerheid bij laden: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Bij het laden van een standaard- of pre-mod opgeslagen spel krijgen pionnen met zekerheid onder dit niveau hun overtuigingen ingesteld op minimaal dit doelniveau in plaats van nul. Voorkomt dat een pion met 0% zekerheid helemaal zonder overtuigingen achterblijft. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Tabblad Ideoligie tonen |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Toont het tabblad Ideoligie bij personages en karavanen. Indien uit, krijgt het tabblad Sociaal een knop Ideoligie die hetzelfde overzicht opent in een venster dat het geselecteerde personage volgt. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | DEV: Debug Interactiewerkers |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Schakelt debug-logboekregistratie in voor interactiewerkers wanneer de ontwikkelaarsmodus actief is. Laat dit uit tenzij je specifiek Enhanced Ideology debugt. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideoligie |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Ideoligie... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Ideoligiemeningen |
 | `EnhancedIdeology.ColIssue` | Issue | Kwestie |
 | `EnhancedIdeology.ColStance` | Stance | Standpunt |

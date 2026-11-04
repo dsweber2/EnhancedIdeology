@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideológia</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Előírás</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Kompatibilitás</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Felület</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Hibakeresés</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Személyes meggyőződés dinamikája</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Áttérítési hatások</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Mennyivel erősíti a hatást egy karakter véleménye arról, aki meg akarja változtatni az előírását. 1x értéknél és +100 véleménynél mind a meggyőződés-csökkenés, mind a hittétel-vonzás megduplázódik. 0x értéknél a véleménynek nincs hatása. Nem használható, ha a Peer Pressure mod telepítve van – helyette az a mod saját szorzó-beállítása lép életbe.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Mentés-betöltés minimális meggyőződése: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Vanilla vagy mod előtti mentés betöltésekor az ez alatti meggyőződésű karakterek hitét legalább erre a célértékre állítja nulla helyett. Megakadályozza, hogy egy 0%-os meggyőződésű karakter teljesen meggyőződés nélkül maradjon.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Ideológia fül megjelenítése</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Megjeleníti az Ideológia fület a karaktereknél és a karavánoknál. Kikapcsolva a Szociális fülön egy Ideológia gomb jelenik meg, amely ugyanezt a nézetet egy, a kijelölt karaktert követő ablakban nyitja meg.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>FEJ: Interakciós munkások hibakeresése</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Engedélyezi az interakciós munkások hibakeresési naplózását, ha a fejlesztői mód aktív. Javasolt kikapcsolt állapotban hagyni, kivéve ha kifejezetten az Enhanced Ideology-t hibakeresed.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology |  |
 | `EnhancedIdeology.Section.Precept` | Precept |  |
 | `EnhancedIdeology.Section.Compat` | Compatibility |  |
+| `EnhancedIdeology.Section.Interface` | Interface |  |
 | `EnhancedIdeology.Section.Debug` | Debug |  |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics |  |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects |  |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. |  |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} |  |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. |  |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab |  |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. |  |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers |  |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. |  |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology |  |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... |  |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions |  |
 | `EnhancedIdeology.ColIssue` | Issue |  |
 | `EnhancedIdeology.ColStance` | Stance |  |

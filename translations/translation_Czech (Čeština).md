@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Ideobožství |
 | `EnhancedIdeology.Section.Precept` | Precept | Zásada |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Kompatibilita |
+| `EnhancedIdeology.Section.Interface` | Interface | Rozhraní |
 | `EnhancedIdeology.Section.Debug` | Debug | Ladění |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Dynamika osobní jistoty |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Efekty konverze |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | O kolik násobí názor pawna na osobu snažící se změnit jeho zásadu daný efekt. Při 1× a názoru +100 se zdvojnásobí jak snížení jistoty, tak tah přesvědčení. Při 0× nemá názor žádný efekt. Nepoužívá se, pokud je nainstalován Peer Pressure – přebírá vlastní nastavení násobitele tohoto modu. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Minimální jistota při načtení uložené hry: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Při načtení základní nebo předmodové uložené hry mají pawni s jistotou pod touto hodnotou přesvědčení nastaveno alespoň na tuto cílovou hodnotu místo nuly. Zabraňuje tomu, aby pawn s 0% jistotou zůstal zcela bez přesvědčení. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Zobrazit záložku Ideobožství |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Zobrazí záložku Ideobožství u postav a karavan. Když je vypnuto, záložka Vztahy získá tlačítko Ideobožství, které otevře stejný přehled v okně sledujícím vybranou postavu. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | DEV: Ladění interakčních workerů |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Povolí ladící protokolování pro interakční workery při aktivním vývojářském režimu. Doporučujeme ponechat vypnuté, pokud neladíte přímo Enhanced Ideology. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideobožství |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Ideobožství... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Názory na ideobožství |
 | `EnhancedIdeology.ColIssue` | Issue | Otázka |
 | `EnhancedIdeology.ColStance` | Stance | Postoj |

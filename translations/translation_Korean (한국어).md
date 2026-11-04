@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | 사상 |
 | `EnhancedIdeology.Section.Precept` | Precept | 규율 |
 | `EnhancedIdeology.Section.Compat` | Compatibility | 호환성 |
+| `EnhancedIdeology.Section.Interface` | Interface | 인터페이스 |
 | `EnhancedIdeology.Section.Debug` | Debug | 디버그 |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | 개인 믿음 역학 |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | 교화 효과 |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | 규율을 바꾸려는 사람에 대한 폰의 의견이 효과를 얼마나 증폭시키는지. 1x이고 의견 +100일 때, 믿음 손실과 신념 당김 모두 두 배가 됩니다. 0x에서는 의견이 효과가 없습니다. Peer Pressure 모드가 설치되어 있을 때는 사용되지 않습니다 — 해당 모드의 고유 배수 설정이 대신 적용됩니다. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | 저장-불러오기 최소 믿음: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | 바닐라 또는 모드 이전 저장 파일을 불러올 때, 믿음이 이 값보다 낮은 폰의 신념이 0 대신 최소한 이 목표값으로 설정됩니다. 0% 믿음의 폰이 아무런 확신 없이 남겨지는 것을 방지합니다. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | 사상 탭 표시 |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | 정착민과 상단에 사상 탭을 표시합니다. 끄면 관계 탭에 사상 버튼이 추가되며, 선택한 인물을 따라가는 창에서 같은 화면을 엽니다. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | 개발: 상호작용 워커 디버그 |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | 개발자 모드가 활성화되어 있을 때 상호작용 워커의 디버그 로깅을 활성화합니다. Enhanced Ideology를 직접 디버그하지 않는 한 끄는 것을 권장합니다. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | 사상 |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | 사상... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | 사상 의견 |
 | `EnhancedIdeology.ColIssue` | Issue | 쟁점 |
 | `EnhancedIdeology.ColStance` | Stance | 입장 |

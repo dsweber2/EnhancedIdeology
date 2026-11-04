@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.TabOpinion>İdeoloji</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.OpenOpinionCard>İdeoloji...</EnhancedIdeology.OpenOpinionCard>
   <EnhancedIdeology.IdeologyOpinions>İdeoloji Görüşleri</EnhancedIdeology.IdeologyOpinions>
   <EnhancedIdeology.ColIssue>Konu</EnhancedIdeology.ColIssue>
   <EnhancedIdeology.ColStance>Tutum</EnhancedIdeology.ColStance>

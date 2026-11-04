@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | 文化 |
 | `EnhancedIdeology.Section.Precept` | Precept | 戒律 |
 | `EnhancedIdeology.Section.Compat` | Compatibility | 兼容性 |
+| `EnhancedIdeology.Section.Interface` | Interface | 界面 |
 | `EnhancedIdeology.Section.Debug` | Debug | 调试 |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | 个人认可度动态 |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | 教化效果 |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | 棋子对试图改变其戒律者的看法对效果的放大程度。1倍且好感度+100时，认可度降低和信仰牵引均翻倍。0倍时好感度无效果。安装"同伴压力"模组时不生效——改由该模组自身的倍率设置接管。 |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | 存档兼容最低认可度：{0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | 加载原版或模组前存档时，认可度低于此值的棋子将以此值为最低目标播种信念，而非归零。防止0%认可度的棋子完全失去一切信念。 |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | 显示文化标签页 |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | 在角色和远行队上显示文化标签页。关闭后，社交标签页中会出现一个文化按钮，在一个跟随所选角色的窗口中打开相同的内容。 |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | 开发：调试交互处理器 |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | 开发模式激活时启用交互处理器的调试日志。建议保持关闭，除非专门调试"增强意识形态"模组。 |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | 文化 |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | 文化... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | 文化看法 |
 | `EnhancedIdeology.ColIssue` | Issue | 议题 |
 | `EnhancedIdeology.ColStance` | Stance | 立场 |

@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>İdeoloji</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Öğreti</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Uyumluluk</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Arayüz</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Hata Ayıklama</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Kişisel iman dinamikleri</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>İhtidâ etkileri</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Bir karakterin öğretisini değiştirmeye çalışan birine olan görüşünün etkiyi ne kadar artırdığı. 1x ve +100 görüşte, hem iman kaybı hem de inanç çekimi ikiye katlanır. 0x'te görüşün hiçbir etkisi yoktur. Peer Pressure yüklü olduğunda kullanılmaz — bunun yerine o modun kendi çarpan ayarı devreye girer.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Kayıt-yükleme minimum imanı: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Vanilla veya mod öncesi bir kayıt yüklendiğinde, imanı bunun altındaki karakterlerin inançları sıfır yerine en az bu hedefe tohumlanır. %0 imanlı bir karakterin hiç inanç olmadan kalmasını önler.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>İdeoloji sekmesini göster</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Karakterlerde ve kervanlarda İdeoloji sekmesini gösterir. Kapalıyken Sosyal sekmesine, aynı görünümü seçili karakteri takip eden bir pencerede açan bir İdeoloji düğmesi eklenir.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>GEL: Etkileşim İşçilerini Hata Ayıkla</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Geliştirici modu etkinken etkileşim işçileri için hata ayıklama günlüğünü etkinleştirir. Özellikle Enhanced Ideology hata ayıklamıyorsanız kapalı bırakmanızı öneririm.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

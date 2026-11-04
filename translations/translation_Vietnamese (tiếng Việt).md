@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Tín ngưỡng |
 | `EnhancedIdeology.Section.Precept` | Precept | Giới luật |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Tương thích |
+| `EnhancedIdeology.Section.Interface` | Interface | Giao diện |
 | `EnhancedIdeology.Section.Debug` | Debug | Gỡ lỗi |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Động lực độ chắc chắn cá nhân |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Hiệu ứng cải đạo |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Mức độ quan điểm của nhân vật về người cố thay đổi giới luật của họ khuếch đại hiệu ứng. Ở 1x và quan điểm +100, cả giảm độ chắc chắn và kéo niềm tin đều tăng gấp đôi. Ở 0x, quan điểm không có tác dụng. Không được dùng khi có mod Peer Pressure — thiết lập nhân số của mod đó sẽ thay thế. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Độ chắc chắn tối thiểu khi tải lưu: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Khi tải bản lưu gốc hoặc bản lưu trước khi có mod, nhân vật có độ chắc chắn dưới mức này sẽ được thiết lập niềm tin ở mức tối thiểu này thay vì bằng không. Ngăn nhân vật 0% độ chắc chắn không có niềm tin gì cả. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Hiện thẻ Tín ngưỡng |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Hiện thẻ Tín ngưỡng ở nhân vật và đoàn lữ hành. Khi tắt, thẻ Quan hệ sẽ có nút Tín ngưỡng để mở cùng nội dung đó trong một cửa sổ đi theo nhân vật đang chọn. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | DEV: Gỡ lỗi Interaction Workers |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Bật ghi nhật ký gỡ lỗi cho interaction workers khi chế độ dev đang hoạt động. Nên tắt tùy chọn này trừ khi đang gỡ lỗi cụ thể cho Enhanced Ideology. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Tín ngưỡng |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Tín ngưỡng... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Quan điểm tín ngưỡng |
 | `EnhancedIdeology.ColIssue` | Issue | Vấn đề |
 | `EnhancedIdeology.ColStance` | Stance | Lập trường |

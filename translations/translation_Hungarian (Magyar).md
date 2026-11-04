@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Ideológia |
 | `EnhancedIdeology.Section.Precept` | Precept | Előírás |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Kompatibilitás |
+| `EnhancedIdeology.Section.Interface` | Interface | Felület |
 | `EnhancedIdeology.Section.Debug` | Debug | Hibakeresés |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Személyes meggyőződés dinamikája |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Áttérítési hatások |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Mennyivel erősíti a hatást egy karakter véleménye arról, aki meg akarja változtatni az előírását. 1x értéknél és +100 véleménynél mind a meggyőződés-csökkenés, mind a hittétel-vonzás megduplázódik. 0x értéknél a véleménynek nincs hatása. Nem használható, ha a Peer Pressure mod telepítve van – helyette az a mod saját szorzó-beállítása lép életbe. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Mentés-betöltés minimális meggyőződése: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Vanilla vagy mod előtti mentés betöltésekor az ez alatti meggyőződésű karakterek hitét legalább erre a célértékre állítja nulla helyett. Megakadályozza, hogy egy 0%-os meggyőződésű karakter teljesen meggyőződés nélkül maradjon. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Ideológia fül megjelenítése |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Megjeleníti az Ideológia fület a karaktereknél és a karavánoknál. Kikapcsolva a Szociális fülön egy Ideológia gomb jelenik meg, amely ugyanezt a nézetet egy, a kijelölt karaktert követő ablakban nyitja meg. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | FEJ: Interakciós munkások hibakeresése |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Engedélyezi az interakciós munkások hibakeresési naplózását, ha a fejlesztői mód aktív. Javasolt kikapcsolt állapotban hagyni, kivéve ha kifejezetten az Enhanced Ideology-t hibakeresed. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideológia |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Ideológia... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Ideológiai vélemények |
 | `EnhancedIdeology.ColIssue` | Issue | Kérdés |
 | `EnhancedIdeology.ColStance` | Stance | Álláspont |

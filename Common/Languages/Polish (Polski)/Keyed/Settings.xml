@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideologia</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Zasada</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Kompatybilność</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Interfejs</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Debugowanie</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Dynamika osobistej pewności</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Efekty nawrócenia</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>O ile opinia piona o osobie próbującej zmienić jego zasadę wzmacnia efekt. Przy 1x i opinii +100 zarówno obniżka pewności, jak i przyciąganie przekonań są podwojone. Przy 0x opinia nie ma żadnego efektu. Nie używane, gdy zainstalowany jest Peer Pressure — zamiast tego przejmuje własne ustawienie mnożnika tamtego moda.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Minimalna pewność przy wczytaniu: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Przy wczytywaniu zwykłego zapisu lub zapisu sprzed moda, piony o pewności poniżej tej wartości otrzymują ziarno przekonań co najmniej na tym poziomie zamiast zera. Zapobiega pozostawieniu piona bez żadnych przekonań przy pewności 0%.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Pokaż kartę Ideologia</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Pokazuje kartę Ideologia u postaci i karawan. Po wyłączeniu karta Relacje otrzymuje przycisk Ideologia, który otwiera ten sam widok w oknie podążającym za zaznaczoną postacią.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Debugowanie pracowników interakcji</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Włącza logowanie debugowania dla pracowników interakcji w trybie deweloperskim. Zalecam pozostawienie wyłączone, chyba że debugujesz konkretnie Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

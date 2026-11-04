@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideoligione</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Precetto</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Compatibilità</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Interfaccia</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Debug</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Dinamiche di certezza personale</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Effetti di conversione</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Quanto l'opinione di un pedone su chi cerca di cambiare il suo precetto amplifica l'effetto. A 1x e opinione +100, sia la riduzione di certezza che la spinta alla credenza sono raddoppiate. A 0x, l'opinione non ha effetto. Non usato quando Peer Pressure è installato — viene usata invece l'impostazione del moltiplicatore di quella mod.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Certezza minima al caricamento: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Al caricamento di un salvataggio vanilla o pre-mod, i pedoni con certezza inferiore a questo valore hanno le loro credenze inizializzate almeno a questo obiettivo invece di zero. Evita che un pedone con 0% di certezza rimanga senza alcuna convinzione.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Mostra la scheda Ideoligione</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Mostra la scheda Ideoligione su personaggi e carovane. Se disattivata, la scheda Relazioni riceve un pulsante Ideoligione che apre la stessa vista in una finestra che segue il personaggio selezionato.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Lavoratori Interazione</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Abilita il logging di debug per i lavoratori di interazione quando la modalità sviluppatore è attiva. Si consiglia di lasciarlo disattivato a meno che non si stia eseguendo il debug specificamente di Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

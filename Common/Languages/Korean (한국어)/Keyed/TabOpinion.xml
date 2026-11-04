@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.TabOpinion>사상</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.OpenOpinionCard>사상...</EnhancedIdeology.OpenOpinionCard>
   <EnhancedIdeology.IdeologyOpinions>사상 의견</EnhancedIdeology.IdeologyOpinions>
   <EnhancedIdeology.ColIssue>쟁점</EnhancedIdeology.ColIssue>
   <EnhancedIdeology.ColStance>입장</EnhancedIdeology.ColStance>

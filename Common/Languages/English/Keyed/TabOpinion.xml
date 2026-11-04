@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <EnhancedIdeology.TabOpinion>Ideology</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.OpenOpinionCard>Ideology...</EnhancedIdeology.OpenOpinionCard>
   <EnhancedIdeology.IdeologyOpinions>Ideology Opinions</EnhancedIdeology.IdeologyOpinions>
   <EnhancedIdeology.ColIssue>Issue</EnhancedIdeology.ColIssue>
   <EnhancedIdeology.ColStance>Stance</EnhancedIdeology.ColStance>

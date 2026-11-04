@@ -26,6 +26,10 @@ public class Settings : ModSettings
         set => _debugInteractionWorkers = value;
     }
 
+    // When off, the Ideology inspect tab is hidden and the social card gets a button that opens the same card in a window.
+    private bool _showOpinionTab = true;
+    public bool ShowOpinionTab => _showOpinionTab;
+
     // How fast certainty relaxes toward its setpoint each day (dc/dt = k * (target - c)).
     private float _certaintyDriftRate = DefaultCertaintyDriftRate;
     public float CertaintyDriftRate => _certaintyDriftRate;
@@ -102,6 +106,7 @@ public class Settings : ModSettings
         base.ExposeData();
 
         Scribe_Values.Look(ref _debugInteractionWorkers, "debugInteractionWorkers", false);
+        Scribe_Values.Look(ref _showOpinionTab, "showOpinionTab", true);
         Scribe_Values.Look(ref _certaintyDriftRate, "certaintyDriftRate", DefaultCertaintyDriftRate);
         Scribe_Values.Look(ref _relationalMaxRange, "relationalMaxRange", DefaultRelationalMaxRange);
         Scribe_Values.Look(ref _practiceMaxRange, "practiceMaxRange", DefaultPracticeMaxRange);
@@ -151,6 +156,12 @@ public class Settings : ModSettings
 
         Header(listingStandard, "EnhancedIdeology.Section.Compat");
         PercentSlider(listingStandard, "EnhancedIdeology.SaveCompatMinCertainty", ref _saveCompatMinCertainty, 0f, 0.5f, DefaultSaveCompatMinCertainty);
+
+        Header(listingStandard, "EnhancedIdeology.Section.Interface");
+        listingStandard.CheckboxLabeled(
+            "EnhancedIdeology.ShowOpinionTab".Translate(),
+            ref _showOpinionTab,
+            "EnhancedIdeology.ShowOpinionTab.Tip".Translate());
 
         Header(listingStandard, "EnhancedIdeology.Section.Debug");
         listingStandard.CheckboxLabeled(

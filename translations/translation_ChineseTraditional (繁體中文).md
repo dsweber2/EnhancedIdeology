@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | 理念 |
 | `EnhancedIdeology.Section.Precept` | Precept | 戒律 |
 | `EnhancedIdeology.Section.Compat` | Compatibility | 相容性 |
+| `EnhancedIdeology.Section.Interface` | Interface | 介面 |
 | `EnhancedIdeology.Section.Debug` | Debug | 除錯 |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | 個人感悟動態 |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | 皈依效果 |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | 棋子對試圖改變其戒律者的看法放大效果的程度。1倍且看法+100時，感悟衝擊與信念牽引均翻倍。0倍時，看法無任何效果。安裝「同伴壓力」模組時此設定無效——改由該模組自身的倍率設定接管。 |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | 存檔載入最低感悟：{0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | 載入原版或模組前的存檔時，感悟低於此值的棋子，其信念目標至少設為此值而非零。防止感悟0%的棋子完全失去所有信念。 |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | 顯示理念分頁 |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | 在角色與旅隊上顯示理念分頁。關閉後，社交分頁會出現一個理念按鈕，在一個跟隨所選角色的視窗中開啟相同的內容。 |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | 開發：除錯互動工作器 |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | 在開發者模式啟用時，為互動工作器啟用除錯紀錄。建議除非專門除錯「Enhanced Ideology」，否則保持關閉。 |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | 理念 |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | 理念... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | 理念看法 |
 | `EnhancedIdeology.ColIssue` | Issue | 議題 |
 | `EnhancedIdeology.ColStance` | Stance | 立場 |

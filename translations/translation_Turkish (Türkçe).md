@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | İdeoloji |
 | `EnhancedIdeology.Section.Precept` | Precept | Öğreti |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Uyumluluk |
+| `EnhancedIdeology.Section.Interface` | Interface | Arayüz |
 | `EnhancedIdeology.Section.Debug` | Debug | Hata Ayıklama |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Kişisel iman dinamikleri |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | İhtidâ etkileri |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Bir karakterin öğretisini değiştirmeye çalışan birine olan görüşünün etkiyi ne kadar artırdığı. 1x ve +100 görüşte, hem iman kaybı hem de inanç çekimi ikiye katlanır. 0x'te görüşün hiçbir etkisi yoktur. Peer Pressure yüklü olduğunda kullanılmaz — bunun yerine o modun kendi çarpan ayarı devreye girer. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Kayıt-yükleme minimum imanı: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Vanilla veya mod öncesi bir kayıt yüklendiğinde, imanı bunun altındaki karakterlerin inançları sıfır yerine en az bu hedefe tohumlanır. %0 imanlı bir karakterin hiç inanç olmadan kalmasını önler. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | İdeoloji sekmesini göster |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Karakterlerde ve kervanlarda İdeoloji sekmesini gösterir. Kapalıyken Sosyal sekmesine, aynı görünümü seçili karakteri takip eden bir pencerede açan bir İdeoloji düğmesi eklenir. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | GEL: Etkileşim İşçilerini Hata Ayıkla |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Geliştirici modu etkinken etkileşim işçileri için hata ayıklama günlüğünü etkinleştirir. Özellikle Enhanced Ideology hata ayıklamıyorsanız kapalı bırakmanızı öneririm. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | İdeoloji |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | İdeoloji... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | İdeoloji Görüşleri |
 | `EnhancedIdeology.ColIssue` | Issue | Konu |
 | `EnhancedIdeology.ColStance` | Stance | Tutum |

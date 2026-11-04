@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>理念</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>戒律</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>相容性</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>介面</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>除錯</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>個人感悟動態</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>皈依效果</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>棋子對試圖改變其戒律者的看法放大效果的程度。1倍且看法+100時，感悟衝擊與信念牽引均翻倍。0倍時，看法無任何效果。安裝「同伴壓力」模組時此設定無效——改由該模組自身的倍率設定接管。</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>存檔載入最低感悟：{0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>載入原版或模組前的存檔時，感悟低於此值的棋子，其信念目標至少設為此值而非零。防止感悟0%的棋子完全失去所有信念。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>顯示理念分頁</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>在角色與旅隊上顯示理念分頁。關閉後，社交分頁會出現一個理念按鈕，在一個跟隨所選角色的視窗中開啟相同的內容。</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>開發：除錯互動工作器</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>在開發者模式啟用時，為互動工作器啟用除錯紀錄。建議除非專門除錯「Enhanced Ideology」，否則保持關閉。</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

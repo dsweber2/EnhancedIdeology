@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Идеолигия |
 | `EnhancedIdeology.Section.Precept` | Precept | Принцип |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Совместимость |
+| `EnhancedIdeology.Section.Interface` | Interface | Интерфейс |
 | `EnhancedIdeology.Section.Debug` | Debug | Отладка |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Динамика личной уверенности |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Эффекты обращения |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Насколько мнение персонажа о том, кто пытается изменить его принцип, усиливает эффект. При 1x и мнении +100 и снижение уверенности, и притяжение убеждения удваиваются. При 0x мнение не влияет. Не используется при установленном моде Peer Pressure — вместо него действует настройка множителя из того мода. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Минимальная уверенность при загрузке: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | При загрузке стандартного сохранения или сохранения без мода, персонажи с уверенностью ниже этого значения получают убеждения минимум до этого целевого значения вместо нуля. Предотвращает ситуацию, когда персонаж с 0% уверенности остаётся совсем без убеждений. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Показывать вкладку «Идеолигия» |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Показывает вкладку «Идеолигия» у персонажей и караванов. Если выключено, во вкладке «Социум» появляется кнопка «Идеолигия», которая открывает то же самое в окне, следующем за выбранным персонажем. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | РАЗР.: Отладка обработчиков взаимодействий |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Включает отладочное протоколирование для обработчиков взаимодействий в режиме разработчика. Рекомендуется оставить выключенным, если вы специально не отлаживаете Enhanced Ideology. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Идеолигия |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Идеолигия... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Мнения об идеолигии |
 | `EnhancedIdeology.ColIssue` | Issue | Вопрос |
 | `EnhancedIdeology.ColStance` | Stance | Позиция |

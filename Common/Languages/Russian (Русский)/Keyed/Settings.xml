@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Идеолигия</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Принцип</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Совместимость</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Интерфейс</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Отладка</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Динамика личной уверенности</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Эффекты обращения</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Насколько мнение персонажа о том, кто пытается изменить его принцип, усиливает эффект. При 1x и мнении +100 и снижение уверенности, и притяжение убеждения удваиваются. При 0x мнение не влияет. Не используется при установленном моде Peer Pressure — вместо него действует настройка множителя из того мода.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Минимальная уверенность при загрузке: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>При загрузке стандартного сохранения или сохранения без мода, персонажи с уверенностью ниже этого значения получают убеждения минимум до этого целевого значения вместо нуля. Предотвращает ситуацию, когда персонаж с 0% уверенности остаётся совсем без убеждений.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Показывать вкладку «Идеолигия»</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Показывает вкладку «Идеолигия» у персонажей и караванов. Если выключено, во вкладке «Социум» появляется кнопка «Идеолигия», которая открывает то же самое в окне, следующем за выбранным персонажем.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>РАЗР.: Отладка обработчиков взаимодействий</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Включает отладочное протоколирование для обработчиков взаимодействий в режиме разработчика. Рекомендуется оставить выключенным, если вы специально не отлаживаете Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

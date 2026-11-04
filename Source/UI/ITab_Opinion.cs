@@ -16,5 +16,5 @@ internal sealed class ITab_Opinion : ITab
     }
 
     public override bool Hidden => !IsVisible;
-    public override bool IsVisible => OpinionCard.CanShow(SelPawn);
+    public override bool IsVisible => EnhancedIdeologyMod.Settings.ShowOpinionTab && OpinionCard.CanShow(SelPawn);
 }

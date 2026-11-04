@@ -2,6 +2,7 @@
 <!-- Author: claude -->
 <LanguageData>
   <EnhancedIdeology.TabOpinion>Ideologie</EnhancedIdeology.TabOpinion>
+  <EnhancedIdeology.OpenOpinionCard>Ideologie...</EnhancedIdeology.OpenOpinionCard>
   <EnhancedIdeology.IdeologyOpinions>Ideologiemeinungen</EnhancedIdeology.IdeologyOpinions>
   <EnhancedIdeology.ColIssue>Frage</EnhancedIdeology.ColIssue>
   <EnhancedIdeology.ColStance>Haltung</EnhancedIdeology.ColStance>

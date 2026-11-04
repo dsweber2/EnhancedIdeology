@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideoligie</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Leefregel</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Compatibiliteit</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Interface</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Debug</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Persoonlijke zekerheidsprocessen</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Bekeringsinvloeden</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Hoeveel de mening van een pion over iemand die diens leefregel wil veranderen het effect versterkt. Bij 1x en mening +100 worden zowel de zekerheidsklap als de geloofsaantrekking verdubbeld. Bij 0x heeft mening geen effect. Niet gebruikt wanneer Peer Pressure is geïnstalleerd — de vermenigvuldigingsinstelling van die mod neemt het dan over.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Minimum zekerheid bij laden: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Bij het laden van een standaard- of pre-mod opgeslagen spel krijgen pionnen met zekerheid onder dit niveau hun overtuigingen ingesteld op minimaal dit doelniveau in plaats van nul. Voorkomt dat een pion met 0% zekerheid helemaal zonder overtuigingen achterblijft.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Tabblad Ideoligie tonen</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Toont het tabblad Ideoligie bij personages en karavanen. Indien uit, krijgt het tabblad Sociaal een knop Ideoligie die hetzelfde overzicht opent in een venster dat het geselecteerde personage volgt.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Interactiewerkers</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Schakelt debug-logboekregistratie in voor interactiewerkers wanneer de ontwikkelaarsmodus actief is. Laat dit uit tenzij je specifiek Enhanced Ideology debugt.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

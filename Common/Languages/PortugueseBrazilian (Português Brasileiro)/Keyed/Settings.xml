@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideologia</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Preceito</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Compatibilidade</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Interface</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Depuração</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Dinâmica de certeza pessoal</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Efeitos de conversão</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Quanto a opinião de um colono sobre alguém tentando mudar seu preceito amplifica o efeito. Em 1x e opinião +100, tanto o golpe de certeza quanto a atração de crença são dobrados. Em 0x, a opinião não tem efeito. Não usado quando Pressão de Grupo está instalado — a configuração de multiplicador do próprio mod assume o controle.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Certeza mínima ao carregar save: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Ao carregar um save vanilla ou anterior ao mod, colonos com certeza abaixo desse valor têm suas crenças iniciadas com pelo menos esse alvo em vez de zero. Evita que um colono com 0% de certeza fique sem nenhuma convicção.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Mostrar a aba Ideologia</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Mostra a aba Ideologia em personagens e caravanas. Se desativada, a aba Social ganha um botão Ideologia que abre a mesma visualização em uma janela que acompanha o personagem selecionado.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Depurar Trabalhadores de Interação</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Habilita log de depuração para trabalhadores de interação quando o modo dev está ativo. Sugiro deixar desligado a menos que esteja depurando o Enhanced Ideology especificamente.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

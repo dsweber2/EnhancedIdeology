@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>思想</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>戒律</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>互換性</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>インターフェース</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>デバッグ</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>個人の信仰度の動態</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>改宗の効果</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>戒律を変えようとしている相手への評価が効果をどれだけ増幅するか。1xかつ評価+100では、信仰度低下と信条引力の両方が2倍になる。0xでは評価は効果なし。「仲間の圧力」MODがインストールされている場合は使用されず、そのMODの倍率設定が代わりに適用される。</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>セーブ読込時の最低信仰度: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>バニラまたはMOD導入前のセーブを読み込む際、信仰度がこれを下回るポーンの信条はゼロの代わりに最低限この目標値に設定される。信仰度0%のポーンが確信を一切持たない状態になるのを防ぐ。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>思想タブを表示</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>入植者とキャラバン隊に思想タブを表示します。オフにすると、社交タブに思想ボタンが追加され、選択中の人物に追従するウィンドウで同じ画面を開きます。</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>開発: インタラクションワーカーのデバッグ</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>開発モード有効時にインタラクションワーカーのデバッグログを有効にする。Enhanced Ideologyのデバッグ以外ではオフにすることを推奨する。</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

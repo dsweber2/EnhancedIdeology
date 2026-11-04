@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Tín ngưỡng</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Giới luật</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Tương thích</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Giao diện</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Gỡ lỗi</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Động lực độ chắc chắn cá nhân</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Hiệu ứng cải đạo</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Mức độ quan điểm của nhân vật về người cố thay đổi giới luật của họ khuếch đại hiệu ứng. Ở 1x và quan điểm +100, cả giảm độ chắc chắn và kéo niềm tin đều tăng gấp đôi. Ở 0x, quan điểm không có tác dụng. Không được dùng khi có mod Peer Pressure — thiết lập nhân số của mod đó sẽ thay thế.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Độ chắc chắn tối thiểu khi tải lưu: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Khi tải bản lưu gốc hoặc bản lưu trước khi có mod, nhân vật có độ chắc chắn dưới mức này sẽ được thiết lập niềm tin ở mức tối thiểu này thay vì bằng không. Ngăn nhân vật 0% độ chắc chắn không có niềm tin gì cả.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Hiện thẻ Tín ngưỡng</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Hiện thẻ Tín ngưỡng ở nhân vật và đoàn lữ hành. Khi tắt, thẻ Quan hệ sẽ có nút Tín ngưỡng để mở cùng nội dung đó trong một cửa sổ đi theo nhân vật đang chọn.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Gỡ lỗi Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Bật ghi nhật ký gỡ lỗi cho interaction workers khi chế độ dev đang hoạt động. Nên tắt tùy chọn này trừ khi đang gỡ lỗi cụ thể cho Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

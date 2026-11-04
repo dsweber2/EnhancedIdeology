@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideology</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Precept</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Compatibility</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Interface</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Debug</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Personal Certainty dynamics</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Conversion effects</EnhancedIdeology.SubSection.Conversion>
@@ -39,6 +40,9 @@
   <!-- Compatibility -->
   <EnhancedIdeology.SaveCompatMinCertainty>Save-load minimum certainty: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <!-- Interface -->
+  <EnhancedIdeology.ShowOpinionTab>Show Ideology tab</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn.</EnhancedIdeology.ShowOpinionTab.Tip>
   <!-- Debug -->
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically.</EnhancedIdeology.DebugInteractionWorkers.Tip>

@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideoligión</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Precepto</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Compatibilidad</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Interfaz</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Depuración</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Dinámica de certeza personal</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Efectos de conversión</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>Cuánto amplifica el efecto la opinión de un peón sobre quien intenta cambiar su precepto. A 1x y opinión +100, tanto el golpe de certeza como el jalón de creencia se duplican. A 0x, la opinión no tiene efecto. No se usa cuando está instalado Peer Pressure — ese mod usa su propio multiplicador.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Certeza mínima al cargar partida: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Al cargar una partida vanilla o anterior al mod, los peones con certeza por debajo de esto tienen sus creencias inicializadas al menos a este objetivo en lugar de cero. Evita que un peón con 0% de certeza quede sin convicción alguna.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Mostrar la pestaña Ideoligión</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Muestra la pestaña Ideoligión en los personajes y las caravanas. Si está desactivada, la pestaña Social recibe un botón Ideoligión que abre la misma vista en una ventana que sigue al personaje seleccionado.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Depurar trabajadores de interacción</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Activa el registro de depuración para los trabajadores de interacción cuando el modo dev está activo. Se recomienda dejarlo desactivado a menos que estés depurando Enhanced Ideology específicamente.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

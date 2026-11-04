@@ -26,6 +26,7 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 
 **UI injection:**
 - `SocialCardUtility_DrawCertainty.cs` — injects extended certainty bar and setpoint marker into the social card; refreshes the shown pawn through `RecacheSetpointIfStale`; tooltip from `UI/CertaintyBar.Tooltip`
+- `SocialCardUtility_OpinionButton.cs` — when `Settings.ShowOpinionTab` is off, adds an "Ideology..." button left of vanilla "Choose role..." that toggles `UI/Window_OpinionCard`; a prefix/postfix on `DrawPawnRole` narrows the role row so vanilla's role tooltip ends before the button, and redraws the divider line at full width (only when `drawLine` is true, which only the social card passes)
 - `NeedsCardUtility_DrawThoughtGroup.cs` — injects certainty bar into the needs card thought group
 - `ITab_Book_Size.cs` — adjusts book inspect tab size for EB's extended content
 - `JobDriver_Reading_Report.cs` — postfix on base `JobDriver.GetReport` (reading does not override it): while a pawn reads a religious book, appends "learning {IDEO}: X/hr" from `ReadingOutcomeDoer_CertaintyChange.PeakArcPerTick` × reading speed × room bonus

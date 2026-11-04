@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Ideoligión |
 | `EnhancedIdeology.Section.Precept` | Precept | Precepto |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Compatibilidad |
+| `EnhancedIdeology.Section.Interface` | Interface | Interfaz |
 | `EnhancedIdeology.Section.Debug` | Debug | Depuración |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Dinámica de certeza personal |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Efectos de conversión |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Cuánto amplifica el efecto la opinión de un peón sobre quien intenta cambiar su precepto. A 1x y opinión +100, tanto el golpe de certeza como el jalón de creencia se duplican. A 0x, la opinión no tiene efecto. No se usa cuando está instalado Peer Pressure — ese mod usa su propio multiplicador. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Certeza mínima al cargar partida: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Al cargar una partida vanilla o anterior al mod, los peones con certeza por debajo de esto tienen sus creencias inicializadas al menos a este objetivo en lugar de cero. Evita que un peón con 0% de certeza quede sin convicción alguna. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Mostrar la pestaña Ideoligión |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Muestra la pestaña Ideoligión en los personajes y las caravanas. Si está desactivada, la pestaña Social recibe un botón Ideoligión que abre la misma vista en una ventana que sigue al personaje seleccionado. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | DEV: Depurar trabajadores de interacción |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Activa el registro de depuración para los trabajadores de interacción cuando el modo dev está activo. Se recomienda dejarlo desactivado a menos que estés depurando Enhanced Ideology específicamente. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideoligión |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Ideoligión... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Opiniones sobre ideoligión |
 | `EnhancedIdeology.ColIssue` | Issue | Tema |
 | `EnhancedIdeology.ColStance` | Stance | Postura |

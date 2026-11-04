@@ -83,6 +83,7 @@
 | `EnhancedIdeology.Section.Ideoligion` | Ideology | Ideologie |
 | `EnhancedIdeology.Section.Precept` | Precept | Gebot |
 | `EnhancedIdeology.Section.Compat` | Compatibility | Kompatibilität |
+| `EnhancedIdeology.Section.Interface` | Interface | Oberfläche |
 | `EnhancedIdeology.Section.Debug` | Debug | Debug |
 | `EnhancedIdeology.SubSection.Belief` | Personal Certainty dynamics | Persönliche Glaubensdynamik |
 | `EnhancedIdeology.SubSection.Conversion` | Conversion effects | Bekehrungseffekte |
@@ -112,6 +113,8 @@
 | `EnhancedIdeology.ConversionOpinionMultiplier.Tip` | How much a pawn's opinion of someone trying to change their precept amplifies the effect. At 1x and opinion +100, both the certainty knock and the belief pull are doubled. At 0x, opinion has no effect. Not used when Peer Pressure is installed — that mod's own multiplier setting takes over instead. | Wie sehr die Meinung eines Kolonisten über jemanden, der versucht, sein Gebot zu ändern, die Wirkung verstärkt. Bei 1x und Meinung +100 werden sowohl der Glaubensverlust als auch die Überzeugungsverschiebung verdoppelt. Bei 0x hat die Meinung keinen Effekt. Wird nicht verwendet, wenn Peer Pressure installiert ist — dort übernimmt die eigene Multiplikatoreinstellung dieses Mods. |
 | `EnhancedIdeology.SaveCompatMinCertainty` | Save-load minimum certainty: {0} | Speicher-Kompatibilität: Mindestglaube: {0} |
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Beim Laden eines Vanilla- oder Vor-Mod-Spielstands erhalten Kolonisten, deren Glaube darunter liegt, mindestens diesen Zielwert anstatt Null. Verhindert, dass ein Kolonist mit 0% Glaube ohne jegliche Überzeugungen zurückbleibt. |
+| `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Ideologie-Reiter anzeigen |
+| `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Zeigt den Ideologie-Reiter bei Figuren und Karawanen an. Wenn deaktiviert, erhält der Reiter Sozial stattdessen eine Ideologie-Schaltfläche, die dieselbe Ansicht in einem Fenster öffnet, das der ausgewählten Figur folgt. |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | ENTW: Interaction Workers debuggen |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Aktiviert Debug-Protokollierung für Interaction Workers, wenn der Entwicklermodus aktiv ist. Empfohlen: deaktiviert lassen, außer beim Debuggen von Enhanced Ideology. |
 
@@ -120,6 +123,7 @@
 | key | source | translation |
 |-----|--------|-------------|
 | `EnhancedIdeology.TabOpinion` | Ideology | Ideologie |
+| `EnhancedIdeology.OpenOpinionCard` | Ideology... | Ideologie... |
 | `EnhancedIdeology.IdeologyOpinions` | Ideology Opinions | Ideologiemeinungen |
 | `EnhancedIdeology.ColIssue` | Issue | Frage |
 | `EnhancedIdeology.ColStance` | Stance | Haltung |

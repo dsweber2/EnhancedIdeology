@@ -5,6 +5,7 @@
   <EnhancedIdeology.Section.Ideoligion>Ideobožství</EnhancedIdeology.Section.Ideoligion>
   <EnhancedIdeology.Section.Precept>Zásada</EnhancedIdeology.Section.Precept>
   <EnhancedIdeology.Section.Compat>Kompatibilita</EnhancedIdeology.Section.Compat>
+  <EnhancedIdeology.Section.Interface>Rozhraní</EnhancedIdeology.Section.Interface>
   <EnhancedIdeology.Section.Debug>Ladění</EnhancedIdeology.Section.Debug>
   <EnhancedIdeology.SubSection.Belief>Dynamika osobní jistoty</EnhancedIdeology.SubSection.Belief>
   <EnhancedIdeology.SubSection.Conversion>Efekty konverze</EnhancedIdeology.SubSection.Conversion>
@@ -34,6 +35,8 @@
   <EnhancedIdeology.ConversionOpinionMultiplier.Tip>O kolik násobí názor pawna na osobu snažící se změnit jeho zásadu daný efekt. Při 1× a názoru +100 se zdvojnásobí jak snížení jistoty, tak tah přesvědčení. Při 0× nemá názor žádný efekt. Nepoužívá se, pokud je nainstalován Peer Pressure – přebírá vlastní nastavení násobitele tohoto modu.</EnhancedIdeology.ConversionOpinionMultiplier.Tip>
   <EnhancedIdeology.SaveCompatMinCertainty>Minimální jistota při načtení uložené hry: {0}</EnhancedIdeology.SaveCompatMinCertainty>
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Při načtení základní nebo předmodové uložené hry mají pawni s jistotou pod touto hodnotou přesvědčení nastaveno alespoň na tuto cílovou hodnotu místo nuly. Zabraňuje tomu, aby pawn s 0% jistotou zůstal zcela bez přesvědčení.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
+  <EnhancedIdeology.ShowOpinionTab>Zobrazit záložku Ideobožství</EnhancedIdeology.ShowOpinionTab>
+  <EnhancedIdeology.ShowOpinionTab.Tip>Zobrazí záložku Ideobožství u postav a karavan. Když je vypnuto, záložka Vztahy získá tlačítko Ideobožství, které otevře stejný přehled v okně sledujícím vybranou postavu.</EnhancedIdeology.ShowOpinionTab.Tip>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Ladění interakčních workerů</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Povolí ladící protokolování pro interakční workery při aktivním vývojářském režimu. Doporučujeme ponechat vypnuté, pokud neladíte přímo Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>
