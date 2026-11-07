@@ -43,6 +43,11 @@
   <!-- Interface -->
   <EnhancedIdeology.ShowOpinionTab>Show Ideology tab</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Ideoligion change notifications:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>How you are told when a colonist, prisoner or slave changes ideoligion. Rituals, speeches, the convert ability and mental breaks still mention conversions in their own letters and messages.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Letter</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Message</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Off</EnhancedIdeology.IdeoChangeNotification.Off>
   <!-- Debug -->
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically.</EnhancedIdeology.DebugInteractionWorkers.Tip>

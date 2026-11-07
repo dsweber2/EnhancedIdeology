@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Ao carregar um save vanilla ou anterior ao mod, colonos com certeza abaixo desse valor têm suas crenças iniciadas com pelo menos esse alvo em vez de zero. Evita que um colono com 0% de certeza fique sem nenhuma convicção.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Mostrar a aba Ideologia</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Mostra a aba Ideologia em personagens e caravanas. Se desativada, a aba Social ganha um botão Ideologia que abre a mesma visualização em uma janela que acompanha o personagem selecionado.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Notificações de mudança de ideologia:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Forma de aviso quando um colono, prisioneiro ou escravo muda de ideologia. Rituais, discursos, a habilidade de conversão e colapsos mentais continuam mencionando conversões em suas próprias cartas e mensagens.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Carta</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Mensagem</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Desligado</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Depurar Trabalhadores de Interação</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Habilita log de depuração para trabalhadores de interação quando o modo dev está ativo. Sugiro deixar desligado a menos que esteja depurando o Enhanced Ideology especificamente.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

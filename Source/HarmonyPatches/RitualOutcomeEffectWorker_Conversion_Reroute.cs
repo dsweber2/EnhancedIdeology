@@ -135,7 +135,10 @@ internal static class RitualOutcomeEffectWorker_Conversion_Reroute
 
         if (outcome.positivityIndex > 0)
         {
-            converteeTracker.CheckConversion(ritualIdeo, noBreakdown: true);
+            var oldIdeo = convertee.Ideo!;
+            var oldRole = oldIdeo.GetRole(convertee);
+            if (converteeTracker.CheckConversion(ritualIdeo, noBreakdown: true) == ConversionOutcome.Success)
+                IdeoChangeNotifier.NotifyConversion(convertee, oldIdeo, oldRole, "EnhancedIdeology.IdeoChange.Ritual");
         }
     }
 

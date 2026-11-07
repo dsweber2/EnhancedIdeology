@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Změna ideobožství</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort} už příliš pochybuje o {OLDIDEO_name} a nyní následuje {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} se odvrací od {OLDIDEO_name} a nyní následuje {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>Rituál konverze uspěl: {PAWN_labelShort} se odvrací od {OLDIDEO_name} a nyní následuje {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>Po zničení {BOOK_label} se {PAWN_labelShort} odvrací od {OLDIDEO_name} a nyní následuje {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>바닐라 또는 모드 이전 저장 파일을 불러올 때, 믿음이 이 값보다 낮은 폰의 신념이 0 대신 최소한 이 목표값으로 설정됩니다. 0% 믿음의 폰이 아무런 확신 없이 남겨지는 것을 방지합니다.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>사상 탭 표시</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>정착민과 상단에 사상 탭을 표시합니다. 끄면 관계 탭에 사상 버튼이 추가되며, 선택한 인물을 따라가는 창에서 같은 화면을 엽니다.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>사상 변화 알림:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>정착민, 죄수 또는 노예가 사상을 바꿀 때 알리는 방식입니다. 행사, 연설, 교화 능력, 정신 붕괴는 여전히 각자의 편지와 메시지에서 교화를 언급합니다.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>편지</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>메시지</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>끄기</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>개발: 상호작용 워커 디버그</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>개발자 모드가 활성화되어 있을 때 상호작용 워커의 디버그 로깅을 활성화합니다. Enhanced Ideology를 직접 디버그하지 않는 한 끄는 것을 권장합니다.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

@@ -53,4 +53,4 @@ Harmony patches on vanilla entry points. Each file patches one or a small cluste
 - `PsychicRitualToil_Brainwipe_Start.cs` — hooks brainwipe start to reset stances
 - `WorkGiver_DoBill_LeatherRestriction.cs` — enforces vegetarian/carnivore leather crafting restrictions
 - `GenRecipe_MakeRecipeProducts_QualityBoost.cs` — quality bonus for crafting religious books
-- `IdeoBook_ClassicModeBlock.cs` — in classic mode, removes religious books from trader stock, random book sets, reward thing sets, and hides the writing desk from the architect menu
+- `IdeoBook_ClassicModeBlock.cs` — in classic mode, removes religious books from trader stock, random book sets, reward thing sets, and hides the religious book recipes on every table (VBE, Medieval Overhaul) and the writing desk from the architect menu

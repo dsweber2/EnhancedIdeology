@@ -58,24 +58,15 @@ internal static class Caravan_TickInterval_Debates
         Resolve(chosen, initiator, recipient);
     }
 
-    // The parts of Pawn_InteractionsTracker.TryInteractWith that apply off-map: resolve, log, and send the letter.
-    // Returns the letter def, which is set when the debate converted someone.
-    internal static LetterDef? Resolve(InteractionDef chosen, Pawn initiator, Pawn recipient)
+    // The parts of Pawn_InteractionsTracker.TryInteractWith that apply off-map: resolve and log. The debate
+    // workers send their own conversion notification.
+    internal static void Resolve(InteractionDef chosen, Pawn initiator, Pawn recipient)
     {
         var sentencePacks = new List<RulePackDef>();
-        chosen.Worker.Interacted(initiator, recipient, sentencePacks, out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
+        chosen.Worker.Interacted(initiator, recipient, sentencePacks, out _, out _, out _, out _);
         var entry = (PlayLogEntry_Interaction?)PlayLogEntry_DebateInteraction.FromLastDebate(chosen, initiator, recipient, sentencePacks)
             ?? new PlayLogEntry_Interaction(chosen, initiator, recipient, sentencePacks);
         Find.PlayLog.Add(entry);
-
-        if (letterDef != null)
-        {
-            var text = entry.ToGameStringFromPOV(initiator);
-            if (!letterText.NullOrEmpty())
-                text += "\n\n" + letterText;
-            Find.LetterStack.ReceiveLetter(letterLabel, text, letterDef, lookTargets ?? initiator);
-        }
-        return letterDef;
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Third-party interaction workers")]

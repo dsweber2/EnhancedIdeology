@@ -34,8 +34,7 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
         var preacherPersuaded = ResolveDirectedDebate(initiator, recipient, comp, initiatorIdeo, recipientTracker);
 
         // 2) Only a won debate can flip the recipient's faith.
-        if (preacherPersuaded && TryHandleSuccessfulConversion(initiator, recipient, recipientTracker, initiatorIdeo, recipientIdeo, extraSentencePacks,
-            ref letterText, ref letterLabel, ref letterDef, ref lookTargets))
+        if (preacherPersuaded && TryHandleSuccessfulConversion(initiator, recipient, recipientTracker, initiatorIdeo, recipientIdeo, extraSentencePacks))
         {
             if (initiator.Ideo?.memes.Contains(EnhancedIdeologyDefOf.Proselytizer) == true)
                 InteractionWorker_IdeologicalDebatePrecept.GainProselytizerMemory(initiator, EnhancedIdeologyDefOf.EB_ProselytizerConverted);
@@ -100,27 +99,17 @@ internal sealed class InteractionWorker_AdvancedConversionAttempt : InteractionW
         IdeoTrackerData recipientTracker,
         Ideo initiatorIdeo,
         Ideo recipientIdeo,
-        List<RulePackDef> extraSentencePacks,
-        ref string? letterText,
-        ref string? letterLabel,
-        ref LetterDef? letterDef,
-        ref LookTargets? lookTargets)
+        List<RulePackDef> extraSentencePacks)
     {
+        var role = recipientIdeo.GetRole(recipient);
         if (recipientTracker.CheckConversion(initiatorIdeo, noBreakdown: true) == ConversionOutcome.Success)
         {
-            if (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient))
-            {
-                letterLabel = "LetterLabelConvertIdeoAttempt_Success".Translate();
-                letterText = "LetterConvertIdeoAttempt_Success".Translate(initiator.Named("INITIATOR"), recipient.Named("RECIPIENT"), initiator.Ideo.Named("IDEO"), recipientIdeo.Named("OLDIDEO")).Resolve();
-                letterDef = LetterDefOf.PositiveEvent;
-                lookTargets = new LookTargets(initiator, recipient);
-                var role = recipientIdeo.GetRole(recipient);
-
-                if (role != null)
-                {
-                    letterText = letterText + "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(recipient.Named("PAWN"), role.Named("ROLE"), recipientIdeo.Named("OLDIDEO")).Resolve();
-                }
-            }
+            IdeoChangeNotifier.Notify(
+                "LetterLabelConvertIdeoAttempt_Success".Translate(),
+                "LetterConvertIdeoAttempt_Success".Translate(initiator.Named("INITIATOR"), recipient.Named("RECIPIENT"), initiator.Ideo.Named("IDEO"), recipientIdeo.Named("OLDIDEO")).Resolve()
+                    + IdeoChangeNotifier.RoleLostPostfix(recipient, recipientIdeo, role),
+                new LookTargets(initiator, recipient),
+                initiator, recipient);
 
             extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
             return true;

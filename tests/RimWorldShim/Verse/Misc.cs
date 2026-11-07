@@ -12,6 +12,7 @@ public enum WorkTags
 public struct LookTargets
 {
     public LookTargets(params Pawn[] pawns) { }
+    public static implicit operator LookTargets(Pawn pawn) => new(pawn);
 }
 
 public class RulePackDef : Def { }

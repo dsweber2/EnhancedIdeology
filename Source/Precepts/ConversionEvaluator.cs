@@ -130,7 +130,10 @@ internal static class ConversionEvaluator
             return;
         }
 
+        var oldIdeo = pawn.Ideo!;
+        var oldRole = oldIdeo.GetRole(pawn);
         ApplyConversion(data, chosen);
+        IdeoChangeNotifier.NotifyConversion(pawn, oldIdeo, oldRole, "EnhancedIdeology.IdeoChange.Drift");
     }
 
     // When the crisis-of-faith candidate wins: if the pawn's mood is already below their minor break
@@ -155,13 +158,22 @@ internal static class ConversionEvaluator
             .Where(ii => ii != pawn.Ideo)
             .MaxByWithFallback(ii => data.IdeoOpinion(ii!));
 
+        // The conversion is told in the crisis letter, so it gets no notification of its own.
+        string? conversionText = null;
         if (bestIdeo != null && data.IdeoOpinion(bestIdeo) > currentOpinion)
+        {
+            var oldIdeo = pawn.Ideo!;
+            var oldRole = oldIdeo.GetRole(pawn);
             ApplyConversion(data, bestIdeo);
+            conversionText = "EnhancedIdeology.IdeoChange.Crisis".Translate(
+                pawn.Named("PAWN"), oldIdeo.Named("OLDIDEO"), bestIdeo.Named("NEWIDEO")).Resolve()
+                + IdeoChangeNotifier.RoleLostPostfix(pawn, oldIdeo, oldRole);
+        }
 
         data.SetExtendedCertainty(1.5f * crisisThreshold);
 
         Find.PlayLog.Add(new PlayLogEntry_CrisisOfFaith(pawn, CrisisOutcome.Wander));
-        _ = pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.EB_CrisisOfFaith);
+        _ = pawn.mindState.mentalStateHandler.TryStartMentalState(EnhancedIdeologyDefOf.EB_CrisisOfFaith, conversionText);
     }
 
     // CrisisThreshold scaled by sqrt(CertaintyLossFactor). sqrt dampens the raw stat: at 3x volatile the

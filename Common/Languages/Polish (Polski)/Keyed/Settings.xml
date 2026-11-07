@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Przy wczytywaniu zwykłego zapisu lub zapisu sprzed moda, piony o pewności poniżej tej wartości otrzymują ziarno przekonań co najmniej na tym poziomie zamiast zera. Zapobiega pozostawieniu piona bez żadnych przekonań przy pewności 0%.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Pokaż kartę Ideologia</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Pokazuje kartę Ideologia u postaci i karawan. Po wyłączeniu karta Relacje otrzymuje przycisk Ideologia, który otwiera ten sam widok w oknie podążającym za zaznaczoną postacią.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Powiadomienia o zmianie ideologii:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Sposób powiadamiania, gdy kolonista, więzień lub niewolnik zmienia ideologię. Rytuały, przemowy, zdolność nawracania i załamania psychiczne nadal wspominają o nawróceniach we własnych listach i wiadomościach.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>List</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Wiadomość</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Wyłączone</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Debugowanie pracowników interakcji</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Włącza logowanie debugowania dla pracowników interakcji w trybie deweloperskim. Zalecam pozostawienie wyłączone, chyba że debugujesz konkretnie Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

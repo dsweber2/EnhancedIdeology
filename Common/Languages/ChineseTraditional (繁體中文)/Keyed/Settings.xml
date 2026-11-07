@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>載入原版或模組前的存檔時，感悟低於此值的棋子，其信念目標至少設為此值而非零。防止感悟0%的棋子完全失去所有信念。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>顯示理念分頁</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>在角色與旅隊上顯示理念分頁。關閉後，社交分頁會出現一個理念按鈕，在一個跟隨所選角色的視窗中開啟相同的內容。</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>理念轉變通知：</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>殖民者、囚犯或奴隸改變理念時的通知方式。儀式、演講、皈依能力與精神崩潰仍會在各自的信件與訊息中提及皈依。</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>信件</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>訊息</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>關閉</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>開發：除錯互動工作器</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>在開發者模式啟用時，為互動工作器啟用除錯紀錄。建議除非專門除錯「Enhanced Ideology」，否則保持關閉。</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

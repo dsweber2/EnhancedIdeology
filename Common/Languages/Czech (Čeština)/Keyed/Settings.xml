@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Při načtení základní nebo předmodové uložené hry mají pawni s jistotou pod touto hodnotou přesvědčení nastaveno alespoň na tuto cílovou hodnotu místo nuly. Zabraňuje tomu, aby pawn s 0% jistotou zůstal zcela bez přesvědčení.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Zobrazit záložku Ideobožství</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Zobrazí záložku Ideobožství u postav a karavan. Když je vypnuto, záložka Vztahy získá tlačítko Ideobožství, které otevře stejný přehled v okně sledujícím vybranou postavu.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Oznámení o změně ideobožství:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Způsob oznámení, když kolonista, vězeň nebo otrok změní ideobožství. Rituály, projevy, schopnost konverze a psychická zhroucení i nadále zmiňují konverze ve vlastních dopisech a zprávách.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Dopis</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Zpráva</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Vypnuto</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Ladění interakčních workerů</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Povolí ladící protokolování pro interakční workery při aktivním vývojářském režimu. Doporučujeme ponechat vypnuté, pokud neladíte přímo Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

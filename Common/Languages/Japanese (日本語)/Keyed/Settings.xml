@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>バニラまたはMOD導入前のセーブを読み込む際、信仰度がこれを下回るポーンの信条はゼロの代わりに最低限この目標値に設定される。信仰度0%のポーンが確信を一切持たない状態になるのを防ぐ。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>思想タブを表示</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>入植者とキャラバン隊に思想タブを表示します。オフにすると、社交タブに思想ボタンが追加され、選択中の人物に追従するウィンドウで同じ画面を開きます。</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>思想の変化の通知：</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>入植者・囚人・奴隷が思想を変えたときの通知方法です。儀式・演説・改宗アビリティ・精神崩壊は、引き続きそれぞれのレターやメッセージで改宗に言及します。</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>レター</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>メッセージ</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>オフ</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>開発: インタラクションワーカーのデバッグ</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>開発モード有効時にインタラクションワーカーのデバッグログを有効にする。Enhanced Ideologyのデバッグ以外ではオフにすることを推奨する。</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

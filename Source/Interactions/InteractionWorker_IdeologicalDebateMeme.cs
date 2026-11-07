@@ -93,6 +93,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         letterDef = null;
         lookTargets = null;
         lastWinner = null;
+        var loserConverted = false;
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Interacted called: initiator={initiator}, recipient={recipient}");
 
@@ -138,26 +139,13 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
                 ? EnhancedIdeologyDefOf.EB_Sentence_InitiatorWon
                 : EnhancedIdeologyDefOf.EB_Sentence_RecipientWon);
 
-            var loserOldIdeo = loser.Ideo;
+            var loserOldIdeo = loser.Ideo!;
+            var loserRole = loserOldIdeo.GetRole(loser);
             var loserTracker = comp.PawnTracker.EnsurePawnHasIdeoTracker(loser);
-            if (loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
-                && (PawnUtility.ShouldSendNotificationAbout(winner) || PawnUtility.ShouldSendNotificationAbout(loser)))
+            if (loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success)
             {
-                var loserRole = loserOldIdeo!.GetRole(loser);
-                letterLabel = "EnhancedIdeology.LetterLabelIdeologicalDebateConversion".Translate();
-                letterText = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(
-                    winner.Named("CONVINCER"),
-                    loser.Named("CONVINCED"),
-                    loserOldIdeo.Named("OLDIDEO"),
-                    loser.Ideo.Named("NEWIDEO"),
-                    topic.Named("ISSUE")).Resolve();
-                if (loserRole != null)
-                {
-                    letterText += "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(
-                        loser.Named("PAWN"), loserRole.Named("ROLE"), loserOldIdeo.Named("OLDIDEO")).Resolve();
-                }
-                letterDef = LetterDefOf.PositiveEvent;
-                lookTargets = new LookTargets(winner, loser);
+                loserConverted = true;
+                InteractionWorker_IdeologicalDebatePrecept.NotifyDebateConversion(winner, loser, loserOldIdeo, loserRole, topic);
                 extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
             }
         }
@@ -165,7 +153,7 @@ internal sealed class InteractionWorker_IdeologicalDebateMeme : InteractionWorke
         InteractionWorker_IdeologicalDebatePrecept.ApplyDiversityAftermath(initiator, recipient);
         InteractionWorker_IdeologicalDebatePrecept.ApplyApostacyAftermath(initiator, recipient);
         InteractionWorker_IdeologicalDebatePrecept.ApplyProselytizerAftermath(initiator, crossIdeo: initiatorIdeo != recipientIdeo,
-            initiatorConverted: lastWinner == initiator && letterDef == LetterDefOf.PositiveEvent);
+            initiatorConverted: lastWinner == initiator && loserConverted);
     }
 
     // The memes either faith holds that touch at least one debatable issue the two pawns' personal stances

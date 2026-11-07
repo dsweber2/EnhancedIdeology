@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Khi tải bản lưu gốc hoặc bản lưu trước khi có mod, nhân vật có độ chắc chắn dưới mức này sẽ được thiết lập niềm tin ở mức tối thiểu này thay vì bằng không. Ngăn nhân vật 0% độ chắc chắn không có niềm tin gì cả.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Hiện thẻ Tín ngưỡng</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Hiện thẻ Tín ngưỡng ở nhân vật và đoàn lữ hành. Khi tắt, thẻ Quan hệ sẽ có nút Tín ngưỡng để mở cùng nội dung đó trong một cửa sổ đi theo nhân vật đang chọn.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Thông báo thay đổi tín ngưỡng:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Cách thông báo khi một cư dân, tù nhân hoặc nô lệ thay đổi tín ngưỡng. Các nghi thức, bài diễn văn, kỹ năng cải đạo và suy sụp tinh thần vẫn nhắc đến việc cải đạo trong thư và tin nhắn riêng của chúng.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Thư</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Tin nhắn</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Tắt</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Gỡ lỗi Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Bật ghi nhật ký gỡ lỗi cho interaction workers khi chế độ dev đang hoạt động. Nên tắt tùy chọn này trừ khi đang gỡ lỗi cụ thể cho Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

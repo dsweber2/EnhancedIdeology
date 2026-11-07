@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>При загрузке стандартного сохранения или сохранения без мода, персонажи с уверенностью ниже этого значения получают убеждения минимум до этого целевого значения вместо нуля. Предотвращает ситуацию, когда персонаж с 0% уверенности остаётся совсем без убеждений.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Показывать вкладку «Идеолигия»</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Показывает вкладку «Идеолигия» у персонажей и караванов. Если выключено, во вкладке «Социум» появляется кнопка «Идеолигия», которая открывает то же самое в окне, следующем за выбранным персонажем.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Уведомления о смене идеолигии:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Способ уведомления, когда поселенец, заключённый или раб меняет идеолигию. Ритуалы, речи, способность обращения и нервные срывы по-прежнему упоминают обращения в своих письмах и сообщениях.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Письмо</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Сообщение</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Выкл.</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>РАЗР.: Отладка обработчиков взаимодействий</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Включает отладочное протоколирование для обработчиков взаимодействий в режиме разработчика. Рекомендуется оставить выключенным, если вы специально не отлаживаете Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

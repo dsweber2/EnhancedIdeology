@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>При завантаженні ванільного або доісторичного збереження колоністи з впевненістю нижче цього значення отримують переконання мінімум на цій позначці замість нуля. Запобігає тому, щоб колоніст з 0% впевненості залишився без жодних переконань.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Показувати вкладку «Ідеологія»</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Показує вкладку «Ідеологія» у персонажів і караванів. Якщо вимкнено, у вкладці «Взаємини» з'являється кнопка «Ідеологія», яка відкриває той самий вигляд у вікні, що стежить за вибраним персонажем.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Сповіщення про зміну ідеології:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Спосіб сповіщення, коли колоніст, в'язень або раб змінює ідеологію. Ритуали, промови, здатність навернення та психічні зриви й надалі згадують навернення у власних листах і повідомленнях.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Лист</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Повідомлення</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Вимк.</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Налагодження обробників взаємодій</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Вмикає журнал налагодження для обробників взаємодій у режимі розробника. Рекомендується вимкнути, якщо ви не налагоджуєте Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

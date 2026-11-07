@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Al cargar una partida sin mods o anterior al mod, los peones con certeza inferior a este valor reciben creencias sembradas hasta al menos este objetivo en lugar de cero. Evita que un peón con 0% de certeza quede sin ninguna convicción.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Mostrar la pestaña Ideoligión</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Muestra la pestaña Ideoligión en los personajes y las caravanas. Si está desactivada, la pestaña Social recibe un botón Ideoligión que abre la misma vista en una ventana que sigue al personaje seleccionado.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Notificaciones de cambio de ideoligión:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Forma de aviso cuando un colono, prisionero o esclavo cambia de ideoligión. Los rituales, los discursos, la habilidad de conversión y las crisis mentales siguen mencionando las conversiones en sus propias cartas y mensajes.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Carta</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Mensaje</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Desactivado</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Depurar trabajadores de interacción</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Activa el registro de depuración para los trabajadores de interacción cuando el modo de desarrollo está activo. Se recomienda dejarlo desactivado a menos que estés depurando Enhanced Ideology específicamente.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

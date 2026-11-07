@@ -134,6 +134,9 @@ public class Pawn
     public JobDef? CurJobDef { get; set; }
     public bool Destroyed => false;
     public bool IsPrisoner => false;
+    public bool IsColonist => false;
+    public bool IsPrisonerOfColony => false;
+    public bool IsSlaveOfColony => false;
     public Map? Map => _simMap;
     public Map? MapHeld => _simMap;
     // Set by Caravan.AddPawn; vanilla resolves this through CaravanUtility.GetCaravan.

@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>En carregar una partida estàndard o anterior al mod, els peons amb certesa per sota d'aquest valor reben com a mínim aquest objectiu en lloc de zero. Evita que un peó amb 0% de certesa quedi sense cap convicció.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Mostra la pestanya Ideoligió</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Mostra la pestanya Ideoligió als personatges i a les caravanes. Si està desactivada, la pestanya Social mostra un botó Ideoligió que obre la mateixa vista en una finestra que segueix el personatge seleccionat.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Notificacions de canvi d'ideoligió:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Forma d'avís quan un colon, presoner o esclau canvia d'ideoligió. Els rituals, els discursos, l'habilitat de conversió i els trencaments mentals continuen esmentant les conversions a les seves pròpies cartes i missatges.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Carta</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Missatge</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Desactivat</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Depura Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Activa el registre de depuració per als interaction workers quan el mode de desenvolupament és actiu. Es recomana deixar-ho desactivat tret que s'estigui depurant Enhanced Ideology específicament.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

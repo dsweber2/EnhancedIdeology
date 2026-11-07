@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Ideoligieverandering</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>De twijfels van {PAWN_labelShort} over {OLDIDEO_name} zijn te sterk geworden. {PAWN_labelShort} volgt nu {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} heeft {OLDIDEO_name} verlaten en volgt nu {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>Het bekeringsritueel is gelukt: {PAWN_labelShort} heeft {OLDIDEO_name} verlaten en volgt nu {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>Geschokt door de vernietiging van {BOOK_label} heeft {PAWN_labelShort} {OLDIDEO_name} verlaten en volgt nu {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

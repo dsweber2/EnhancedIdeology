@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Зміна ідеології</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort} надто сильно сумнівається в {OLDIDEO_name} і тепер сповідує {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} зрікається {OLDIDEO_name} і тепер сповідує {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>Ритуал навернення вдався: {PAWN_labelShort} зрікається {OLDIDEO_name} і тепер сповідує {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>Після знищення {BOOK_label} {PAWN_labelShort} зрікається {OLDIDEO_name} і тепер сповідує {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

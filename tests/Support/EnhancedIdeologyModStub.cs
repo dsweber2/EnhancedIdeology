@@ -37,4 +37,5 @@ internal sealed class SimSettings
     public float PreceptOppositionScale { get; set; } = 1f;
     public float SaveCompatMinCertainty { get; set; } = 0.125f;
     public float ConversionOpinionMultiplier { get; set; } = 1f;
+    public IdeoChangeNotificationMode IdeoChangeNotification { get; set; } = IdeoChangeNotificationMode.Letter;
 }

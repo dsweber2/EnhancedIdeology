@@ -36,16 +36,12 @@ internal static partial class DebugActions
 
         var worker = (InteractionWorker_IdeologicalDebatePrecept)EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept.Worker;
         var extraSentencePacks = new List<RulePackDef>();
-        worker.Interacted(initiator, recipient, extraSentencePacks, out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
+        var initiatorOldIdeo = initiator.Ideo;
+        var recipientOldIdeo = recipient.Ideo;
+        worker.Interacted(initiator, recipient, extraSentencePacks, out _, out _, out _, out _);
 
         var logEntry = new PlayLogEntry_DebateInteraction(EnhancedIdeologyDefOf.EB_IdeologicalDebatePrecept, initiator, recipient, extraSentencePacks, worker.topic, worker.lastWinner, worker.lastWinnerPrecept?.label);
         Find.PlayLog.Add(logEntry);
-        if (letterDef != null)
-        {
-            var logText = logEntry.ToGameStringFromPOV(initiator);
-            var text = letterText.NullOrEmpty() ? logText : logText + "\n\n" + letterText;
-            Find.LetterStack.ReceiveLetter(letterLabel, text, letterDef, lookTargets ?? new LookTargets(initiator, recipient));
-        }
 
         string outcome;
         if (worker.topic == null)
@@ -58,7 +54,7 @@ internal static partial class DebugActions
         }
         else
         {
-            var conviction = letterDef != null ? " → converted!" : "";
+            var conviction = initiator.Ideo != initiatorOldIdeo || recipient.Ideo != recipientOldIdeo ? " → converted!" : "";
             outcome = $"{worker.lastWinner.LabelShort} out-argued {worker.lastLoser!.LabelShort} on {worker.topic.LabelCap}{conviction}";
         }
         Messages.Message($"{initiator.LabelShort} vs {recipient.LabelShort}: {outcome}",
@@ -92,16 +88,12 @@ internal static partial class DebugActions
 
         var worker = (InteractionWorker_IdeologicalDebateMeme)EnhancedIdeologyDefOf.EB_IdeologicalDebateMeme.Worker;
         var extraSentencePacks = new List<RulePackDef>();
-        worker.Interacted(initiator, recipient, extraSentencePacks, out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
+        var initiatorOldIdeo = initiator.Ideo;
+        var recipientOldIdeo = recipient.Ideo;
+        worker.Interacted(initiator, recipient, extraSentencePacks, out _, out _, out _, out _);
 
         var logEntry = new PlayLogEntry_DebateInteraction(EnhancedIdeologyDefOf.EB_IdeologicalDebateMeme, initiator, recipient, extraSentencePacks, worker.logTopic, worker.lastWinner, worker.logTopic?.label);
         Find.PlayLog.Add(logEntry);
-        if (letterDef != null)
-        {
-            var logText = logEntry.ToGameStringFromPOV(initiator);
-            var text = letterText.NullOrEmpty() ? logText : logText + "\n\n" + letterText;
-            Find.LetterStack.ReceiveLetter(letterLabel, text, letterDef, lookTargets ?? new LookTargets(initiator, recipient));
-        }
 
         string outcome;
         if (worker.logTopic == null)
@@ -114,7 +106,7 @@ internal static partial class DebugActions
         }
         else
         {
-            var conviction = letterDef != null ? " → converted!" : "";
+            var conviction = initiator.Ideo != initiatorOldIdeo || recipient.Ideo != recipientOldIdeo ? " → converted!" : "";
             outcome = $"{worker.lastWinner.LabelShort} out-argued on {worker.logTopic.LabelCap}{conviction}";
         }
         Messages.Message($"{initiator.LabelShort} vs {recipient.LabelShort}: {outcome}",
@@ -155,7 +147,9 @@ internal static partial class DebugActions
 
         var (initiator, recipient, _) = chosenPair;
         var chosen = debates.RandomElementByWeight(def => def.Worker.RandomSelectionWeight(initiator, recipient));
-        var letterDef = Caravan_TickInterval_Debates.Resolve(chosen, initiator, recipient);
+        var initiatorOldIdeo = initiator.Ideo;
+        var recipientOldIdeo = recipient.Ideo;
+        Caravan_TickInterval_Debates.Resolve(chosen, initiator, recipient);
 
         var (topic, winner) = chosen.Worker switch
         {
@@ -175,7 +169,7 @@ internal static partial class DebugActions
         else
         {
             var loser = winner == initiator ? recipient : initiator;
-            var conversion = letterDef != null ? " → converted!" : "";
+            var conversion = initiator.Ideo != initiatorOldIdeo || recipient.Ideo != recipientOldIdeo ? " → converted!" : "";
             outcome = $"{winner.LabelShort} out-argued {loser.LabelShort} on {topic}{conversion}, "
                 + $"{CaravanDebates.Onlookers(winner, loser).Count()} onlookers";
         }
@@ -329,12 +323,7 @@ internal static partial class DebugActions
         var extraSentencePacks = new List<RulePackDef>();
         var oldIdeo = recipient.Ideo;
 
-        worker.Interacted(initiator, recipient, extraSentencePacks, out var letterText, out var letterLabel, out var letterDef, out var lookTargets);
-
-        if (letterDef != null)
-        {
-            Find.LetterStack.ReceiveLetter(letterLabel, letterText, letterDef, lookTargets ?? new LookTargets(initiator, recipient));
-        }
+        worker.Interacted(initiator, recipient, extraSentencePacks, out _, out _, out _, out _);
 
         var outcome = recipient.Ideo != oldIdeo
             ? $"converted {oldIdeo!.name} → {recipient.Ideo!.name}"

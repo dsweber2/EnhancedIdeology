@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>思想の変化</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort}は{OLDIDEO_name}への疑念を抑えきれなくなり、{NEWIDEO_name}を信奉するようになりました。</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort}は{OLDIDEO_name}を捨て、{NEWIDEO_name}を信奉するようになりました。</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>改宗の儀式は成功しました。{PAWN_labelShort}は{OLDIDEO_name}を捨て、{NEWIDEO_name}を信奉するようになりました。</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>{BOOK_label}が破壊されたことで{PAWN_labelShort}は動揺し、{OLDIDEO_name}を捨てて{NEWIDEO_name}を信奉するようになりました。</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

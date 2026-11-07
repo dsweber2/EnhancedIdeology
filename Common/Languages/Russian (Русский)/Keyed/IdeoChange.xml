@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Смена идеолигии</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort} слишком сильно сомневается в {OLDIDEO_name} и теперь следует {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} отрекается от {OLDIDEO_name} и теперь следует {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>Ритуал обращения удался: {PAWN_labelShort} отрекается от {OLDIDEO_name} и теперь следует {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>После уничтожения {BOOK_label} {PAWN_labelShort} отрекается от {OLDIDEO_name} и теперь следует {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

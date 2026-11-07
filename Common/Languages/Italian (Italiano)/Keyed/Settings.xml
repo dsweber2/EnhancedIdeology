@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Al caricamento di un salvataggio vanilla o pre-mod, i pedoni con certezza inferiore a questo valore hanno le loro credenze inizializzate almeno a questo obiettivo invece di zero. Evita che un pedone con 0% di certezza rimanga senza alcuna convinzione.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Mostra la scheda Ideoligione</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Mostra la scheda Ideoligione su personaggi e carovane. Se disattivata, la scheda Relazioni riceve un pulsante Ideoligione che apre la stessa vista in una finestra che segue il personaggio selezionato.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Notifiche di cambio di ideoligione:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Modalità di notifica quando un colono, un prigioniero o uno schiavo cambia ideoligione. Rituali, discorsi, l'abilità di conversione e i crolli mentali menzionano ancora le conversioni nelle proprie lettere e nei propri messaggi.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Lettera</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Messaggio</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Disattivato</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Debug Lavoratori Interazione</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Abilita il logging di debug per i lavoratori di interazione quando la modalità sviluppatore è attiva. Si consiglia di lasciarlo disattivato a meno che non si stia eseguendo il debug specificamente di Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

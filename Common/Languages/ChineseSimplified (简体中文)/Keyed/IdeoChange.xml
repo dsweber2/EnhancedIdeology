@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>文化转变</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort}对{OLDIDEO_name}的怀疑已无法压抑，如今转而信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort}放弃了{OLDIDEO_name}，如今信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>教化仪式成功了：{PAWN_labelShort}放弃了{OLDIDEO_name}，如今信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>{BOOK_label}被毁使{PAWN_labelShort}深受动摇，放弃了{OLDIDEO_name}，如今信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

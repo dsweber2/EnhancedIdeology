@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Au chargement d'une sauvegarde vanilla ou antérieure au mod, les colons dont la certitude est inférieure à cette valeur voient leurs croyances initialisées à ce seuil minimum plutôt qu'à zéro. Évite qu'un colon à 0% de certitude se retrouve sans aucune conviction.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Afficher l'onglet Idéologie</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Affiche l'onglet Idéologie sur les personnages et les caravanes. Si désactivé, l'onglet Social reçoit un bouton Idéologie qui ouvre la même vue dans une fenêtre qui suit le personnage sélectionné.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Notifications de changement d'idéoligion :</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Mode de notification lorsqu'un colon, un prisonnier ou un esclave change d'idéoligion. Les rituels, les discours, la capacité de conversion et les crises mentales mentionnent toujours les conversions dans leurs propres lettres et messages.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Lettre</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Message</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Désactivé</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV : Débogage des travailleurs d'interaction</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Active la journalisation de débogage pour les travailleurs d'interaction en mode développeur. Laissez désactivé sauf si vous déboguez Enhanced Ideology spécifiquement.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

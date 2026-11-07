@@ -1,7 +1,8 @@
 namespace EnhancedIdeology.HarmonyPatches;
 
 // Religious books only change certainty and stances. Classic mode has neither, so the books must not
-// appear: not in trader stock, not in random book or reward sets, and the writing desk is not buildable.
+// appear: not in trader stock, not in random book or reward sets, not as a recipe on any table, and the
+// writing desk is not buildable.
 internal static class IdeoBook_ClassicModeBlock
 {
     // Some callers run at startup or in the main menu, when there is no world.
@@ -36,6 +37,16 @@ internal static class IdeoBook_ClassicModeBlock
         private static void Postfix(ThingDef thingDef, ref bool __result)
         {
             if (__result && Blocked(thingDef)) __result = false;
+        }
+    }
+
+    // Other mods' writing tables also get the religious book recipes.
+    [HarmonyPatch(typeof(RecipeDef), nameof(RecipeDef.AvailableNow), MethodType.Getter)]
+    private static class Recipes
+    {
+        private static void Postfix(RecipeDef __instance, ref bool __result)
+        {
+            if (__result && Blocked(__instance.ProducedThingDef)) __result = false;
         }
     }
 

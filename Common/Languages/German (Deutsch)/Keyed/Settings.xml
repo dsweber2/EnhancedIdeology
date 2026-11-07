@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Beim Laden eines Vanilla- oder Vor-Mod-Spielstands erhalten Kolonisten, deren Glaube darunter liegt, mindestens diesen Zielwert anstatt Null. Verhindert, dass ein Kolonist mit 0% Glaube ohne jegliche Überzeugungen zurückbleibt.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Ideologie-Reiter anzeigen</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Zeigt den Ideologie-Reiter bei Figuren und Karawanen an. Wenn deaktiviert, erhält der Reiter Sozial stattdessen eine Ideologie-Schaltfläche, die dieselbe Ansicht in einem Fenster öffnet, das der ausgewählten Figur folgt.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Benachrichtigung bei Ideologiewechsel:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Art der Benachrichtigung, wenn ein Kolonist, Gefangener oder Sklave die Ideologie wechselt. Rituale, Reden, die Bekehrungsfähigkeit und mentale Zusammenbrüche erwähnen Bekehrungen weiterhin in ihren eigenen Briefen und Nachrichten.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Brief</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Nachricht</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Aus</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>ENTW: Interaction Workers debuggen</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Aktiviert Debug-Protokollierung für Interaction Workers, wenn der Entwicklermodus aktiv ist. Empfohlen: deaktiviert lassen, außer beim Debuggen von Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

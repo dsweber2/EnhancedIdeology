@@ -38,6 +38,7 @@ public static class Messages
 {
     public static void Message(TaggedString text, Pawn? target, MessageTypeDef? type, bool historical = true) { }
     public static void Message(string text, Pawn? target, MessageTypeDef? type, bool historical = true) { }
+    public static void Message(string text, LookTargets lookTargets, MessageTypeDef? type, bool historical = true) { }
 }
 
 public static class PawnUtility
@@ -95,6 +96,11 @@ public class ShimTickManager
     public int TicksGame;
 }
 
+public class ShimLetterStack
+{
+    public void ReceiveLetter(TaggedString label, TaggedString text, LetterDef? def, LookTargets lookTargets) { }
+}
+
 public class ShimPlayLog
 {
     public void Add(object entry) { }
@@ -107,6 +113,7 @@ public static class Find
     public static ShimStoryteller Storyteller { get; set; } = new();
     public static HistoryEventsManager HistoryEventsManager { get; set; } = new();
     public static ShimPlayLog PlayLog { get; set; } = new();
+    public static ShimLetterStack LetterStack { get; set; } = new();
 }
 
 public static class Current

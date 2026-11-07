@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>加载原版或模组前存档时，认可度低于此值的棋子将以此值为最低目标播种信念，而非归零。防止0%认可度的棋子完全失去一切信念。</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>显示文化标签页</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>在角色和远行队上显示文化标签页。关闭后，社交标签页中会出现一个文化按钮，在一个跟随所选角色的窗口中打开相同的内容。</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>文化转变通知：</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>殖民者、囚犯或奴隶改变文化时的通知方式。仪式、演讲、教化能力和精神崩溃仍会在各自的信件和消息中提及教化。</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>信件</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>消息</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>关闭</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>开发：调试交互处理器</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>开发模式激活时启用交互处理器的调试日志。建议保持关闭，除非专门调试"增强意识形态"模组。</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

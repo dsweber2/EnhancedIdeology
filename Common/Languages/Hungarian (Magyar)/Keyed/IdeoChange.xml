@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Ideológiaváltás</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort} kételyei a(z) {OLDIDEO_name} ideológiával szemben túl erősek lettek. Mostantól a(z) {NEWIDEO_name} követője.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} elhagyta a(z) {OLDIDEO_name} ideológiát, és mostantól a(z) {NEWIDEO_name} követője.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>Az áttérítési szertartás sikerült: {PAWN_labelShort} elhagyta a(z) {OLDIDEO_name} ideológiát, és mostantól a(z) {NEWIDEO_name} követője.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>{PAWN_labelShort} megrendült a(z) {BOOK_label} elpusztításától: elhagyta a(z) {OLDIDEO_name} ideológiát, és mostantól a(z) {NEWIDEO_name} követője.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

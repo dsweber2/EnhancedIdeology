@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Canvi d'ideoligió</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>Els dubtes de {PAWN_labelShort} sobre {OLDIDEO_name} s'han fet massa forts, i ara segueix {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} ha abandonat {OLDIDEO_name} i ara segueix {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>El ritual de conversió ha funcionat: {PAWN_labelShort} ha abandonat {OLDIDEO_name} i ara segueix {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>La destrucció de {BOOK_label} ha sacsejat {PAWN_labelShort}, que ha abandonat {OLDIDEO_name} i ara segueix {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

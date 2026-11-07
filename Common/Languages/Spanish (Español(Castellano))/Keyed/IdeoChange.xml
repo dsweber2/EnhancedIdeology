@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Cambio de ideoligión</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>Las dudas de {PAWN_labelShort} sobre {OLDIDEO_name} se han vuelto demasiado fuertes. Ahora sigue {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} ha abandonado {OLDIDEO_name} y ahora sigue {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>El ritual de conversión ha funcionado: {PAWN_labelShort} ha abandonado {OLDIDEO_name} y ahora sigue {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>La destrucción de {BOOK_label} ha sacudido a {PAWN_labelShort}, que ha abandonado {OLDIDEO_name} y ahora sigue {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

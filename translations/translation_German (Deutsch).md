@@ -45,6 +45,16 @@
 | `EnhancedIdeology.Convert.Factor.Intellectual` | Intellectual debate: {0} vs {1} | Intellektuelle Debatte: {0} gegen {1} |
 | `EnhancedIdeology.Convert.Factor.Social` | Social impact: {0} vs {1} | Sozialer Einfluss: {0} gegen {1} |
 
+## Keyed/IdeoChange.xml
+
+| key | source | translation |
+|-----|--------|-------------|
+| `EnhancedIdeology.LetterLabelIdeoChange` | Ideoligion change | Ideologiewechsel |
+| `EnhancedIdeology.IdeoChange.Drift` | {PAWN_labelShort}'s doubts about {OLDIDEO_name} have grown too strong. {PAWN_pronoun} now follows {NEWIDEO_name}. | Die Zweifel von {PAWN_labelShort} an {OLDIDEO_name} sind zu stark geworden. {PAWN_labelShort} folgt nun {NEWIDEO_name}. |
+| `EnhancedIdeology.IdeoChange.Crisis` | {PAWN_labelShort} has abandoned {OLDIDEO_name} and now follows {NEWIDEO_name}. | {PAWN_labelShort} hat {OLDIDEO_name} aufgegeben und folgt nun {NEWIDEO_name}. |
+| `EnhancedIdeology.IdeoChange.Ritual` | The conversion ritual worked: {PAWN_labelShort} has abandoned {OLDIDEO_name} and now follows {NEWIDEO_name}. | Das Bekehrungsritual war erfolgreich: {PAWN_labelShort} hat {OLDIDEO_name} aufgegeben und folgt nun {NEWIDEO_name}. |
+| `EnhancedIdeology.IdeoChange.BookDestroyed` | Shaken by the destruction of {BOOK_label}, {PAWN_labelShort} has abandoned {OLDIDEO_name} and now follows {NEWIDEO_name}. | Die Zerstörung von {BOOK_label} hat {PAWN_labelShort} erschüttert. {PAWN_labelShort} hat {OLDIDEO_name} aufgegeben und folgt nun {NEWIDEO_name}. |
+
 ## Keyed/Interaction_IdeologicalDebate.xml
 
 | key | source | translation |
@@ -115,6 +125,11 @@
 | `EnhancedIdeology.SaveCompatMinCertainty.Tip` | When loading a vanilla or pre-mod save, pawns whose certainty is below this have their beliefs seeded to at least this target instead of zero. Prevents a pawn with 0% certainty from being left with no convictions whatsoever. | Beim Laden eines Vanilla- oder Vor-Mod-Spielstands erhalten Kolonisten, deren Glaube darunter liegt, mindestens diesen Zielwert anstatt Null. Verhindert, dass ein Kolonist mit 0% Glaube ohne jegliche Überzeugungen zurückbleibt. |
 | `EnhancedIdeology.ShowOpinionTab` | Show Ideology tab | Ideologie-Reiter anzeigen |
 | `EnhancedIdeology.ShowOpinionTab.Tip` | Show the Ideology tab on pawns and caravans. When off, the Social tab gets an Ideology button instead, which opens the same view in a window that follows the selected pawn. | Zeigt den Ideologie-Reiter bei Figuren und Karawanen an. Wenn deaktiviert, erhält der Reiter Sozial stattdessen eine Ideologie-Schaltfläche, die dieselbe Ansicht in einem Fenster öffnet, das der ausgewählten Figur folgt. |
+| `EnhancedIdeology.IdeoChangeNotification` | Ideoligion change notifications: | Benachrichtigung bei Ideologiewechsel: |
+| `EnhancedIdeology.IdeoChangeNotification.Tip` | How you are told when a colonist, prisoner or slave changes ideoligion. Rituals, speeches, the convert ability and mental breaks still mention conversions in their own letters and messages. | Art der Benachrichtigung, wenn ein Kolonist, Gefangener oder Sklave die Ideologie wechselt. Rituale, Reden, die Bekehrungsfähigkeit und mentale Zusammenbrüche erwähnen Bekehrungen weiterhin in ihren eigenen Briefen und Nachrichten. |
+| `EnhancedIdeology.IdeoChangeNotification.Letter` | Letter | Brief |
+| `EnhancedIdeology.IdeoChangeNotification.Message` | Message | Nachricht |
+| `EnhancedIdeology.IdeoChangeNotification.Off` | Off | Aus |
 | `EnhancedIdeology.DebugInteractionWorkers` | DEV: Debug Interaction Workers | ENTW: Interaction Workers debuggen |
 | `EnhancedIdeology.DebugInteractionWorkers.Tip` | Enables debug logging for interaction workers when dev mode is active. I suggest you leave this off unless debugging Enhanced Ideology specifically. | Aktiviert Debug-Protokollierung für Interaction Workers, wenn der Entwicklermodus aktiv ist. Empfohlen: deaktiviert lassen, außer beim Debuggen von Enhanced Ideology. |
 

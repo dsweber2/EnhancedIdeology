@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Schimbare de ideoligion</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>Îndoielile lui {PAWN_labelShort} față de {OLDIDEO_name} au devenit prea puternice. Acum urmează {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} a abandonat {OLDIDEO_name} și acum urmează {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>Ritualul de convertire a reușit: {PAWN_labelShort} a abandonat {OLDIDEO_name} și acum urmează {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>După distrugerea cărții {BOOK_label}, {PAWN_labelShort} a abandonat {OLDIDEO_name} și acum urmează {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

@@ -203,6 +203,12 @@ These mods don't add ideology content but have explicit compatibility or are com
 The ideobook writing recipes are added to VBE's writers and typewriters tables when both mods are active.
 Our writing desk is then removed from the architect menu; desks already built keep working.
 
+## [Medieval Overhaul](https://steamcommunity.com/sharedfiles/filedetails/?id=3219596926)
+
+The ideobook writing recipes are added to Medieval Overhaul's book scribe table when both mods are active.
+As with VBE, our writing desk is then removed from the architect menu; desks already built keep working.
+The pages of religious books are then made of Medieval Overhaul paper only.
+
 ## [Peer Pressure](https://steamcommunity.com/sharedfiles/filedetails/?id=3057626086) ([Continued](https://steamcommunity.com/sharedfiles/filedetails/?id=3605155621))
 
 Integrated, but prefers the settings from Peer Pressure if both mods are active.

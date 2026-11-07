@@ -30,6 +30,10 @@ public class Settings : ModSettings
     private bool _showOpinionTab = true;
     public bool ShowOpinionTab => _showOpinionTab;
 
+    // How the player hears that a colonist, prisoner or slave changed ideoligion.
+    private IdeoChangeNotificationMode _ideoChangeNotification = IdeoChangeNotificationMode.Letter;
+    public IdeoChangeNotificationMode IdeoChangeNotification => _ideoChangeNotification;
+
     // How fast certainty relaxes toward its setpoint each day (dc/dt = k * (target - c)).
     private float _certaintyDriftRate = DefaultCertaintyDriftRate;
     public float CertaintyDriftRate => _certaintyDriftRate;
@@ -107,6 +111,7 @@ public class Settings : ModSettings
 
         Scribe_Values.Look(ref _debugInteractionWorkers, "debugInteractionWorkers", false);
         Scribe_Values.Look(ref _showOpinionTab, "showOpinionTab", true);
+        Scribe_Values.Look(ref _ideoChangeNotification, "ideoChangeNotification", IdeoChangeNotificationMode.Letter);
         Scribe_Values.Look(ref _certaintyDriftRate, "certaintyDriftRate", DefaultCertaintyDriftRate);
         Scribe_Values.Look(ref _relationalMaxRange, "relationalMaxRange", DefaultRelationalMaxRange);
         Scribe_Values.Look(ref _practiceMaxRange, "practiceMaxRange", DefaultPracticeMaxRange);
@@ -162,6 +167,16 @@ public class Settings : ModSettings
             "EnhancedIdeology.ShowOpinionTab".Translate(),
             ref _showOpinionTab,
             "EnhancedIdeology.ShowOpinionTab.Tip".Translate());
+        listingStandard.Label("EnhancedIdeology.IdeoChangeNotification".Translate(),
+            tooltip: "EnhancedIdeology.IdeoChangeNotification.Tip".Translate());
+        foreach (IdeoChangeNotificationMode mode in Enum.GetValues(typeof(IdeoChangeNotificationMode)))
+        {
+            if (listingStandard.RadioButton(("EnhancedIdeology.IdeoChangeNotification." + mode).Translate(),
+                    _ideoChangeNotification == mode, tabIn: 12f))
+            {
+                _ideoChangeNotification = mode;
+            }
+        }
 
         Header(listingStandard, "EnhancedIdeology.Section.Debug");
         listingStandard.CheckboxLabeled(

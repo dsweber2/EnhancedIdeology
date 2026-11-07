@@ -155,9 +155,50 @@
 			</value>
 		</match>
 	</Operation>
-	<!-- VBE tables replace our writing desk. Keep the def so that desks in existing saves still work. -->
+	<!-- If Medieval Overhaul is active: also add our recipes to its book scribe table -->
 	<Operation Class="PatchOperationConditional">
-		<xpath>/Defs/ThingDef[defName="VBE_WritersTable"]</xpath>
+		<xpath>/Defs/ThingDef[defName="DankPyon_Book_ScribeTable"]</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook" or defName="EB_WriteIllustratedIdeobook"]/recipeUsers</xpath>
+			<value>
+				<li>DankPyon_Book_ScribeTable</li>
+			</value>
+		</match>
+	</Operation>
+	<!-- If Medieval Overhaul is active: pages are made of its paper only.
+	     Compat_MedievalOverhaul clears the translated page summary, so the paper label shows instead. -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="DankPyon_Paper"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook" or defName="EB_WriteIllustratedIdeobook"]/ingredients/li[1]/filter</xpath>
+					<value>
+						<filter>
+							<thingDefs>
+								<li>DankPyon_Paper</li>
+							</thingDefs>
+						</filter>
+					</value>
+				</li>
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook" or defName="EB_WriteIllustratedIdeobook"]/fixedIngredientFilter/categories/li[.="Textiles"]</xpath>
+				</li>
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook" or defName="EB_WriteIllustratedIdeobook"]/fixedIngredientFilter/disallowedCategories</xpath>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/RecipeDef[defName="EB_WriteIdeobook" or defName="EB_WriteIllustratedIdeobook"]/fixedIngredientFilter/thingDefs/li[.="WoodLog"]</xpath>
+					<value>
+						<li>DankPyon_Paper</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+	<!-- VBE and Medieval Overhaul tables replace our writing desk. Keep the def so that desks in existing saves still work. -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="VBE_WritersTable" or defName="DankPyon_Book_ScribeTable"]</xpath>
 		<match Class="PatchOperationRemove">
 			<xpath>/Defs/ThingDef[defName="EB_WritingDesk"]/designationCategory</xpath>
 		</match>

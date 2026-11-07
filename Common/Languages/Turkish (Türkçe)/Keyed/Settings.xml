@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Vanilla veya mod öncesi bir kayıt yüklendiğinde, imanı bunun altındaki karakterlerin inançları sıfır yerine en az bu hedefe tohumlanır. %0 imanlı bir karakterin hiç inanç olmadan kalmasını önler.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>İdeoloji sekmesini göster</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Karakterlerde ve kervanlarda İdeoloji sekmesini gösterir. Kapalıyken Sosyal sekmesine, aynı görünümü seçili karakteri takip eden bir pencerede açan bir İdeoloji düğmesi eklenir.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>İdeodin değişikliği bildirimleri:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Bir kolonici, mahkûm veya köle ideodin değiştirdiğinde bildirim şekli. Ritüeller, konuşmalar, ihtidâ yeteneği ve zihinsel çöküşler ihtidâlardan kendi mektup ve mesajlarında bahsetmeye devam eder.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Mektup</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Mesaj</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Kapalı</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>GEL: Etkileşim İşçilerini Hata Ayıkla</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Geliştirici modu etkinken etkileşim işçileri için hata ayıklama günlüğünü etkinleştirir. Özellikle Enhanced Ideology hata ayıklamıyorsanız kapalı bırakmanızı öneririm.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

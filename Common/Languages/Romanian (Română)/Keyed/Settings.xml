@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>La încărcarea unei salvări vanilla sau anterioare modului, personajele cu certitudinea sub acest prag au credințele inițializate la cel puțin această țintă în loc de zero. Previne ca un personaj cu 0% certitudine să rămână fără nicio convingere.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Afișează fila Ideoligion</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Afișează fila Ideoligion la personaje și caravane. Când este dezactivată, fila Social primește un buton Ideoligion care deschide aceeași vedere într-o fereastră ce urmărește personajul selectat.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Notificări la schimbarea ideoligionului:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Modul de notificare când un colonist, prizonier sau sclav își schimbă ideoligionul. Ritualurile, discursurile, abilitatea de convertire și crizele mentale menționează în continuare convertirile în propriile scrisori și mesaje.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Scrisoare</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Mesaj</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Oprit</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>DEV: Depanare Interaction Workers</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Activează jurnalizarea de depanare pentru interaction workers când modul dev este activ. Recomand să lăsați dezactivat dacă nu depanați specific Enhanced Ideology.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

@@ -41,6 +41,7 @@
     <Compile Include="../Source/Tracker/OpinionCache.cs" />
     <Compile Include="../Source/Precepts/StructuralOpinionCalculator.cs" />
     <Compile Include="../Source/Precepts/ConversionEvaluator.cs" />
+    <Compile Include="../Source/Precepts/IdeoChangeNotifier.cs" />
     <Compile Include="../Source/Tracker/IdeoTrackerData.cs" />
     <Compile Include="../Source/Precepts/PreceptLadder.cs" />
     <Compile Include="../Source/Precepts/LadderMigration.cs" />

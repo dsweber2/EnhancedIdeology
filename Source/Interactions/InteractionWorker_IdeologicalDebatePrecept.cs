@@ -135,6 +135,7 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         lastLoser = null;
 
         lastWinnerPrecept = null;
+        var loserConverted = false;
 
         EnhancedIdeologyMod.DebugIf(EnhancedIdeologyMod.Settings.DebugInteractionWorkers, $"Interacted called: initiator={initiator}, recipient={recipient}");
 
@@ -187,27 +188,14 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
                 ? EnhancedIdeologyDefOf.EB_Sentence_InitiatorWon
                 : EnhancedIdeologyDefOf.EB_Sentence_RecipientWon);
 
-            var loserOldIdeo = loser.Ideo;
+            var loserOldIdeo = loser.Ideo!;
+            var loserRole = loserOldIdeo.GetRole(loser);
             var loserTracker = loser == recipient ? recipientTracker : initiatorTracker;
             // Same-faith debates adjust conviction only; no cross-faith conversion can result.
-            if (winner.Ideo != loser.Ideo && loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success
-                && (PawnUtility.ShouldSendNotificationAbout(winner) || PawnUtility.ShouldSendNotificationAbout(loser)))
+            if (winner.Ideo != loser.Ideo && loserTracker.CheckConversion(winner.Ideo) == ConversionOutcome.Success)
             {
-                var loserRole = loserOldIdeo!.GetRole(loser);
-                letterLabel = "EnhancedIdeology.LetterLabelIdeologicalDebateConversion".Translate();
-                letterText = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(
-                    winner.Named("CONVINCER"),
-                    loser.Named("CONVINCED"),
-                    loserOldIdeo.Named("OLDIDEO"),
-                    loser.Ideo.Named("NEWIDEO"),
-                    issue.Named("ISSUE")).Resolve();
-                if (loserRole != null)
-                {
-                    letterText += "\n\n" + "LetterRoleLostLetterIdeoChangedPostfix".Translate(
-                        loser.Named("PAWN"), loserRole.Named("ROLE"), loserOldIdeo.Named("OLDIDEO")).Resolve();
-                }
-                letterDef = LetterDefOf.PositiveEvent;
-                lookTargets = new LookTargets(winner, loser);
+                loserConverted = true;
+                NotifyDebateConversion(winner, loser, loserOldIdeo, loserRole, issue);
                 extraSentencePacks.Add(RulePackDefOf.Sentence_ConvertIdeoAttemptSuccess);
             }
         }
@@ -216,7 +204,23 @@ internal sealed class InteractionWorker_IdeologicalDebatePrecept : InteractionWo
         ApplyDiversityAftermath(initiator, recipient);
         ApplyApostacyAftermath(initiator, recipient);
         ApplyProselytizerAftermath(initiator, crossIdeo: initiatorIdeo != recipientIdeo,
-            initiatorConverted: lastWinner == initiator && letterDef == LetterDefOf.PositiveEvent);
+            initiatorConverted: lastWinner == initiator && loserConverted);
+    }
+
+    // Shared with the meme debate. issueOrMeme is the debate topic, shown as {ISSUE_label}.
+    internal static void NotifyDebateConversion(Pawn winner, Pawn loser, Ideo loserOldIdeo, Precept_Role? loserRole, Def issueOrMeme)
+    {
+        var text = "EnhancedIdeology.LetterIdeologicalDebateConversionText".Translate(
+            winner.Named("CONVINCER"),
+            loser.Named("CONVINCED"),
+            loserOldIdeo.Named("OLDIDEO"),
+            loser.Ideo!.Named("NEWIDEO"),
+            issueOrMeme.Named("ISSUE")).Resolve();
+        IdeoChangeNotifier.Notify(
+            "EnhancedIdeology.LetterLabelIdeologicalDebateConversion".Translate(),
+            text + IdeoChangeNotifier.RoleLostPostfix(loser, loserOldIdeo, loserRole),
+            new LookTargets(winner, loser),
+            winner, loser);
     }
 
     private static IssueDef? GetDebateTopic(

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>İdeodin değişikliği</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort} adlı kişinin {OLDIDEO_name} hakkındaki şüpheleri fazla güçlendi. Artık {NEWIDEO_name} ideodinini izliyor.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort}, {OLDIDEO_name} ideodinini bıraktı ve artık {NEWIDEO_name} ideodinini izliyor.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>İhtidâ ritüeli işe yaradı: {PAWN_labelShort}, {OLDIDEO_name} ideodinini bıraktı ve artık {NEWIDEO_name} ideodinini izliyor.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>{BOOK_label} yok edilince sarsılan {PAWN_labelShort}, {OLDIDEO_name} ideodinini bıraktı ve artık {NEWIDEO_name} ideodinini izliyor.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

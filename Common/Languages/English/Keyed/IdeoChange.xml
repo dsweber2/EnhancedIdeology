@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+    <EnhancedIdeology.LetterLabelIdeoChange>Ideoligion change</EnhancedIdeology.LetterLabelIdeoChange>
+    <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort}'s doubts about {OLDIDEO_name} have grown too strong. {PAWN_pronoun} now follows {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+    <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} has abandoned {OLDIDEO_name} and now follows {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+    <EnhancedIdeology.IdeoChange.Ritual>The conversion ritual worked: {PAWN_labelShort} has abandoned {OLDIDEO_name} and now follows {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+    <EnhancedIdeology.IdeoChange.BookDestroyed>Shaken by the destruction of {BOOK_label}, {PAWN_labelShort} has abandoned {OLDIDEO_name} and now follows {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

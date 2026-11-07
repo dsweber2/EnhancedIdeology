@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>理念轉變</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>{PAWN_labelShort}對{OLDIDEO_name}的懷疑已無法壓抑，如今改為信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort}放棄了{OLDIDEO_name}，如今信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>皈依儀式成功了：{PAWN_labelShort}放棄了{OLDIDEO_name}，如今信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>{BOOK_label}遭到摧毀，使{PAWN_labelShort}深受動搖，放棄了{OLDIDEO_name}，如今信奉{NEWIDEO_name}。</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

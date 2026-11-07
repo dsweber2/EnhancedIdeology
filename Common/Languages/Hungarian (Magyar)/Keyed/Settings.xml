@@ -37,6 +37,11 @@
   <EnhancedIdeology.SaveCompatMinCertainty.Tip>Vanilla vagy mod előtti mentés betöltésekor az ez alatti meggyőződésű karakterek hitét legalább erre a célértékre állítja nulla helyett. Megakadályozza, hogy egy 0%-os meggyőződésű karakter teljesen meggyőződés nélkül maradjon.</EnhancedIdeology.SaveCompatMinCertainty.Tip>
   <EnhancedIdeology.ShowOpinionTab>Ideológia fül megjelenítése</EnhancedIdeology.ShowOpinionTab>
   <EnhancedIdeology.ShowOpinionTab.Tip>Megjeleníti az Ideológia fület a karaktereknél és a karavánoknál. Kikapcsolva a Szociális fülön egy Ideológia gomb jelenik meg, amely ugyanezt a nézetet egy, a kijelölt karaktert követő ablakban nyitja meg.</EnhancedIdeology.ShowOpinionTab.Tip>
+  <EnhancedIdeology.IdeoChangeNotification>Ideológiaváltási értesítések:</EnhancedIdeology.IdeoChangeNotification>
+  <EnhancedIdeology.IdeoChangeNotification.Tip>Az értesítés módja, amikor egy gyarmatos, fogoly vagy rabszolga ideológiát vált. A szertartások, beszédek, az áttérítő képesség és a mentális összeomlások továbbra is megemlítik az áttéréseket a saját leveleikben és üzeneteikben.</EnhancedIdeology.IdeoChangeNotification.Tip>
+  <EnhancedIdeology.IdeoChangeNotification.Letter>Levél</EnhancedIdeology.IdeoChangeNotification.Letter>
+  <EnhancedIdeology.IdeoChangeNotification.Message>Üzenet</EnhancedIdeology.IdeoChangeNotification.Message>
+  <EnhancedIdeology.IdeoChangeNotification.Off>Ki</EnhancedIdeology.IdeoChangeNotification.Off>
   <EnhancedIdeology.DebugInteractionWorkers>FEJ: Interakciós munkások hibakeresése</EnhancedIdeology.DebugInteractionWorkers>
   <EnhancedIdeology.DebugInteractionWorkers.Tip>Engedélyezi az interakciós munkások hibakeresési naplózását, ha a fejlesztői mód aktív. Javasolt kikapcsolt állapotban hagyni, kivéve ha kifejezetten az Enhanced Ideology-t hibakeresed.</EnhancedIdeology.DebugInteractionWorkers.Tip>
 </LanguageData>

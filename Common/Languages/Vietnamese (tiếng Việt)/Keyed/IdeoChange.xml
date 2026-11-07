@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: claude -->
+<LanguageData>
+  <EnhancedIdeology.LetterLabelIdeoChange>Thay đổi tín ngưỡng</EnhancedIdeology.LetterLabelIdeoChange>
+  <EnhancedIdeology.IdeoChange.Drift>Những nghi ngờ của {PAWN_labelShort} về {OLDIDEO_name} đã trở nên quá lớn. Giờ đây {PAWN_labelShort} theo {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Drift>
+  <EnhancedIdeology.IdeoChange.Crisis>{PAWN_labelShort} đã từ bỏ {OLDIDEO_name} và giờ theo {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Crisis>
+  <EnhancedIdeology.IdeoChange.Ritual>Nghi thức cải đạo đã thành công: {PAWN_labelShort} đã từ bỏ {OLDIDEO_name} và giờ theo {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.Ritual>
+  <EnhancedIdeology.IdeoChange.BookDestroyed>Bị lung lay bởi việc {BOOK_label} bị phá hủy, {PAWN_labelShort} đã từ bỏ {OLDIDEO_name} và giờ theo {NEWIDEO_name}.</EnhancedIdeology.IdeoChange.BookDestroyed>
+</LanguageData>

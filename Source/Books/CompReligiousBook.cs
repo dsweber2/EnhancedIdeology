@@ -148,7 +148,12 @@ internal sealed class CompReligiousBook : ThingComp
             var thought = (Thought_ReligiousBookDestroyed)ThoughtMaker.MakeThought(EnhancedIdeologyDefOf.EB_ReligiousBookDestroyed);
             thought.DestroyedBookIdeo = Ideo;
             pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(thought);
-            _ = comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn).CheckConversion(excludeIdeos: [Ideo]);
+            var oldRole = Ideo.GetRole(pawn);
+            if (comp.PawnTracker.EnsurePawnHasIdeoTracker(pawn).CheckConversion(excludeIdeos: [Ideo]) == ConversionOutcome.Success)
+            {
+                IdeoChangeNotifier.NotifyConversion(pawn, Ideo, oldRole, "EnhancedIdeology.IdeoChange.BookDestroyed",
+                    parent.Named("BOOK"));
+            }
         }
     }
 

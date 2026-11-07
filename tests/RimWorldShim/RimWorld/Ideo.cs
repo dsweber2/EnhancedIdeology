@@ -64,7 +64,7 @@ public class IdeoRoleDef : Def
     public float certaintyLossFactor = 1f;
 }
 
-public class IdeoRole
+public class Precept_Role
 {
     public IdeoRoleDef def = new();
 }
@@ -106,7 +106,7 @@ public class Ideo
 
     public bool HasMeme(MemeDef? meme) => meme != null && memes.Contains(meme);
 
-    public IdeoRole? GetRole(Pawn pawn) => null;
+    public Precept_Role? GetRole(Pawn pawn) => null;
 
     public void Notify_MemberGainedByConversion() { }
 
