@@ -1775,6 +1775,106 @@
    "mod": "Vanilla Ideology Expanded - Memes and Structures"
   }
  ],
+ "LoverCount_Female": [
+  {
+   "defName": "LoverCount_Female_MaxFour",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Female_MaxOne",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Female_MaxThree",
+   "displayOrderInIssue": 40,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Female_MaxTwo",
+   "displayOrderInIssue": 60,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Female_None",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Female_Unlimited",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  }
+ ],
+ "LoverCount_Male": [
+  {
+   "defName": "LoverCount_Male_MaxFour",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Male_MaxOne",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Male_MaxThree",
+   "displayOrderInIssue": 50,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Male_MaxTwo",
+   "displayOrderInIssue": 70,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Male_None",
+   "displayOrderInIssue": 0,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
+   "defName": "LoverCount_Male_Unlimited",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  }
+ ],
  "Lovin": [
   {
    "defName": "Lovin_Free",
@@ -3477,6 +3577,14 @@
    "mod": "Ideology (DLC)"
   },
   {
+   "defName": "SpouseCount_Female_None",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
+  },
+  {
    "defName": "SpouseCount_Female_Unlimited",
    "displayOrderInIssue": 0,
    "defaultSelectionWeight": 0.0,
@@ -3517,6 +3625,14 @@
    "hasEffects": true,
    "needsMeme": false,
    "mod": "Ideology (DLC)"
+  },
+  {
+   "defName": "SpouseCount_Male_None",
+   "displayOrderInIssue": -10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": true,
+   "needsMeme": false,
+   "mod": "Way Better Romance"
   },
   {
    "defName": "SpouseCount_Male_Unlimited",

@@ -16,6 +16,7 @@ internal sealed record LadderGuess(IReadOnlyList<string> Order, float? NeutralRa
 // Classifies a multi-rung issue from the stance word that ends each rung's defName. Each word has a signed
 // intensity: positive approves, negative objects, 0 is the plain baseline. A ladder where every rung has a
 // distinct intensity is Moral, ordered by intensity, with neutral placed by the Don't-care placement rule.
+// A ladder where every rung is a count limit (None, MaxOne.., Unlimited) is Moral, ordered by the limit.
 internal static class LadderHeuristic
 {
     private static readonly Dictionary<string, int> Intensity = new()
@@ -43,11 +44,17 @@ internal static class LadderHeuristic
     // A word before the stance word that reverses it ("NotDesired").
     private static readonly string[] Negations = ["Not", "Non", "No", "Anti"];
 
+    // Count words for limit ladders (SpouseCount_Male_MaxTwo). The whole last segment must match.
+    private static readonly string[] Numbers = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+
     public static LadderGuess Classify(IReadOnlyList<HeuristicRung> rungs)
     {
         var flags = new List<string>();
         if (rungs.Count < 2)
             flags.Add("single rung");
+
+        if (rungs.Count > 0 && rungs.All(rung => CountOf(rung.DefName) != null))
+            return ClassifyCounts(rungs, flags);
 
         var scored = new List<(HeuristicRung rung, int intensity)>();
         foreach (var rung in rungs)
@@ -69,6 +76,32 @@ internal static class LadderHeuristic
 
         var neutral = NeutralRank(order, flags);
         return new LadderGuess(order.Select(entry => entry.rung.DefName).ToList(), neutral, flags);
+    }
+
+    // A limit ladder runs from the lowest limit to Unlimited. A count is not a value claim, so there is no
+    // baseline rung: neutral comes from a default rung open to any faith, and without one the issue is flagged.
+    private static LadderGuess ClassifyCounts(IReadOnlyList<HeuristicRung> rungs, List<string> flags)
+    {
+        var order = rungs.OrderBy(rung => CountOf(rung.DefName)).ToList();
+        foreach (var group in order.GroupBy(rung => CountOf(rung.DefName)).Where(group => group.Count() > 1))
+            flags.Add($"same count: {string.Join(", ", group.Select(rung => rung.DefName))}");
+        if (!rungs.Any(rung => rung.DefaultWeight > 0f && !rung.NeedsMeme))
+            flags.Add("count ladder with no default rung open to any faith");
+        return new LadderGuess(order.Select(rung => rung.DefName).ToList(), null, flags);
+    }
+
+    // None = 0, MaxOne..MaxTen = 1..10, Unlimited = int.MaxValue; anything else is null.
+    private static int? CountOf(string defName)
+    {
+        var segment = defName.Substring(defName.LastIndexOf('_') + 1);
+        if (segment == "None")
+            return 0;
+        if (segment == "Unlimited")
+            return int.MaxValue;
+        if (!segment.StartsWith("Max", StringComparison.Ordinal))
+            return null;
+        var number = Array.IndexOf(Numbers, segment.Substring(3));
+        return number >= 0 ? number + 1 : null;
     }
 
     // The word that ends the last defName segment, matched on a capital letter boundary, or null.

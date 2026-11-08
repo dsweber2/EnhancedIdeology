@@ -234,10 +234,11 @@ internal static partial class PreceptPolicy
             "AM_InsectMeatEating_Required", "InsectMeatEating_Loved", "VME_InsectMeatEating_DontCare",
             "InsectMeatEating_Despised_Classic", "VME_InsectMeatEating_Sacrilegious",
         ],
+        // SpouseCount_*_None comes from Way Better Romance.
         ["SpouseCount_Male"] =
-            ["SpouseCount_Male_MaxOne", "SpouseCount_Male_MaxTwo", "SpouseCount_Male_MaxThree", "SpouseCount_Male_MaxFour", "SpouseCount_Male_Unlimited"],
+            ["SpouseCount_Male_None", "SpouseCount_Male_MaxOne", "SpouseCount_Male_MaxTwo", "SpouseCount_Male_MaxThree", "SpouseCount_Male_MaxFour", "SpouseCount_Male_Unlimited"],
         ["SpouseCount_Female"] =
-            ["SpouseCount_Female_MaxOne", "SpouseCount_Female_MaxTwo", "SpouseCount_Female_MaxThree", "SpouseCount_Female_MaxFour", "SpouseCount_Female_Unlimited"],
+            ["SpouseCount_Female_None", "SpouseCount_Female_MaxOne", "SpouseCount_Female_MaxTwo", "SpouseCount_Female_MaxThree", "SpouseCount_Female_MaxFour", "SpouseCount_Female_Unlimited"],
         ["MarriageName"] =
             ["MarriageName_AlwaysMans", "MarriageName_UsuallyMans", "MarriageName_Random", "MarriageName_KeepNames", "MarriageName_UsuallyWomans", "MarriageName_AlwaysWomans"],
         // MI_BodyMod_Allowed (Political Compass) sits at displayOrderInIssue=30, after Abhorrent — insert it

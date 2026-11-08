@@ -153,6 +153,14 @@ An ideo that exalts them and one that finds them abhorrent will structurally dis
 **Torture** is a full moral axis, from `always respected` through `horrible if innocent` to `always abhorrent`.
 Colonists without a particular view sit at the mod's default, `horrible if innocent`.
 
+## [Way Better Romance](https://steamcommunity.com/sharedfiles/filedetails/?id=2877731755)
+
+**Men's lovers** and **women's lovers** are full moral axes, from `none` to `unlimited`, like the spouse count issues.
+An ideo that forbids lovers outside marriage and one that allows any number will structurally disagree.
+Colonists without a particular view sit at the mod's default, `none`.
+The mod's `none` spouse precepts join the base-game spouse count ladders.
+2 of 6 traits are linked (faithful and philanderer).
+
 # Trait Mods
 
 Traits from these mods are linked to memes and to individual precepts.
@@ -180,10 +188,6 @@ The full list of links, trait by trait, is in [docs/trait-meme-affinity.md](docs
 ## [[SYR] Individuality (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3253596705)
 
 9 of 14 traits are linked.
-
-## [Way Better Romance](https://steamcommunity.com/sharedfiles/filedetails/?id=2877731755)
-
-3 of 4 traits are linked.
 
 ## [Bad People](https://steamcommunity.com/sharedfiles/filedetails/?id=1369675292)
 

@@ -34,6 +34,47 @@ public class LadderHeuristicBacktest(ITestOutputHelper output) : SeededTest
         Assert.Null(guess.NeutralRank);
     }
 
+    [Fact]
+    public void CountLadder_OrdersByLimit_AndLeavesNeutralToTheDefaults()
+    {
+        var guess = LadderHeuristic.Classify(
+        [
+            Rung("LoverCount_Male_Unlimited"), Rung("LoverCount_Male_MaxThree"), Rung("LoverCount_Male_None", 1f),
+            Rung("LoverCount_Male_MaxOne"), Rung("LoverCount_Male_MaxTwo"),
+        ]);
+
+        Assert.True(guess.IsConfident);
+        Assert.Equal(
+            ["LoverCount_Male_None", "LoverCount_Male_MaxOne", "LoverCount_Male_MaxTwo", "LoverCount_Male_MaxThree", "LoverCount_Male_Unlimited"],
+            guess.Order);
+        Assert.Null(guess.NeutralRank);
+    }
+
+    [Fact]
+    public void CountLadder_WithoutAnOpenDefaultRung_IsFlagged()
+    {
+        var guess = LadderHeuristic.Classify(
+            [Rung("Issue_MaxOne", 1f, needsMeme: true), Rung("Issue_MaxTwo"), Rung("Issue_Unlimited")]);
+
+        Assert.False(guess.IsConfident);
+    }
+
+    [Fact]
+    public void CountLadder_WithARepeatedLimit_IsFlagged()
+    {
+        var guess = LadderHeuristic.Classify([Rung("A_Issue_MaxTwo", 1f), Rung("B_Issue_MaxTwo"), Rung("Issue_None")]);
+
+        Assert.Contains(guess.Flags, flag => flag.StartsWith("same count"));
+    }
+
+    [Fact]
+    public void CountWordsMixedWithStanceWords_AreFlagged()
+    {
+        var guess = LadderHeuristic.Classify([Rung("Issue_MaxOne", 1f), Rung("Issue_Abhorrent")]);
+
+        Assert.False(guess.IsConfident);
+    }
+
     private static Dictionary<string, List<FixtureRung>> LoadFixture()
     {
         var path = Path.Combine(AppContext.BaseDirectory, "Fixtures", "ladders.json");
