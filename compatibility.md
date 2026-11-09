@@ -103,6 +103,11 @@ The `DrugUse` and `BodyModification` ladders — which Political Compass extends
 
 Homelessness precepts are treated as ideo-specific obligations and don't generate cross-ideo tension.
 
+## [Nuanced Child Raiders](https://steamcommunity.com/sharedfiles/filedetails/?id=3511362228)
+
+**Child death** is a full moral axis, from `accepted` through `respected if guilty` to `abhorrent`.
+Colonists without a particular view sit at the mod's default, `respected if guilty`.
+
 ## [Progression: Ammunition](https://steamcommunity.com/sharedfiles/filedetails/?id=3798845290)
 
 Ammo handling precepts are treated as ideo-specific stat modifiers and don't generate cross-ideo tension.

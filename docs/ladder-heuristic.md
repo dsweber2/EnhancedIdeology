@@ -66,7 +66,7 @@ The lexicon (intensities from +3 to −3) is in `Source/Precepts/LadderHeuristic
   `HeuristicRungOf` reads the same effect fields as `EFFECT_FIELDS` in the catalog script; keep the two the same.
 - `tests/LadderHeuristicWiringTests.cs`: table priority, flagged issues, each effect field, saved ladders and the startup report.
 - `Source/Precepts/PreceptPolicy.cs`: `IsCurated(defName)` is true when any table (Moral, UniversalPositive, Special, NA, KnownPositiveOnly, DuplicateOf) lists the issue.
-- `scripts/meme_precept_catalog.py`: `make catalog` also writes `tests/Fixtures/ladders.json`, which holds every installed issue with 2 or more visible rungs (168 now).
+- `scripts/meme_precept_catalog.py`: `make catalog` also writes `tests/Fixtures/ladders.json`, which holds every installed issue with 2 or more visible rungs (171 now).
   "Has effects" means the rung's XML sets comps, abilityStatFactors, statOffsets, statFactors, conditionalStatAffecters, opposedWorkTypes, enablesNeeds or disablesNeeds.
   Effects that a mod adds in C# are not visible (the Mount Ownership rungs read as having no effects).
 - `tests/LadderHeuristicBacktest.cs`: the gate.
@@ -85,13 +85,13 @@ The last run is saved in `cache/backtest.txt`.
 
 ## Backtest results
 
-The 163 hand-classified multi-rung ladders that are installed locally (2026-11-07):
+The 164 hand-classified multi-rung ladders that are installed locally (2026-11-09):
 
 | outcome | count |
 | --- | --- |
 | agrees with the tables | 68 |
 | confidently wrong | 0 |
-| flagged | 95 |
+| flagged | 96 |
 | not classified by hand, heuristic would classify | 6 |
 | not classified by hand, heuristic flags | 1 (`ROBTRG_Repopulation`, RJW only, deliberately left alone) |
 

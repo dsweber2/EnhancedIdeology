@@ -207,6 +207,18 @@ public class ModIssueLadderTests : SeededTest
     }
 
     [Fact]
+    public void ChildDeath_IsMoral_AndNeutralIsRespectedIfGuilty()
+    {
+        var issue = Register("ChildDeath",
+            ("ChildDeath_Abhorrent", 30, 0f, true), ("ChildDeath_RespectedIfGuilty", 20, 1f, true),
+            ("ChildDeath_Accepted", 10, 0f, true));
+
+        Assert.Equal(PreceptCategory.Moral, PreceptPolicy.CategoryOf(issue));
+        Assert.Equal(["ChildDeath_Accepted", "ChildDeath_RespectedIfGuilty", "ChildDeath_Abhorrent"], RungNames(issue));
+        Assert.Equal(1f, PreceptLadder.DontCareRank(issue));
+    }
+
+    [Fact]
     public void AlienDating_AcceptableSitsBetweenProAndAntiRungs()
     {
         var issue = Register("HAR_AlienDating",

@@ -827,6 +827,32 @@
    "mod": "Ideology (DLC)"
   }
  ],
+ "ChildDeath": [
+  {
+   "defName": "ChildDeath_Abhorrent",
+   "displayOrderInIssue": 30,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Nuanced Child Raiders"
+  },
+  {
+   "defName": "ChildDeath_Accepted",
+   "displayOrderInIssue": 10,
+   "defaultSelectionWeight": 0.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Nuanced Child Raiders"
+  },
+  {
+   "defName": "ChildDeath_RespectedIfGuilty",
+   "displayOrderInIssue": 20,
+   "defaultSelectionWeight": 1.0,
+   "hasEffects": false,
+   "needsMeme": false,
+   "mod": "Nuanced Child Raiders"
+  }
+ ],
  "ChildLabor": [
   {
    "defName": "ChildLabor_Disapproved",

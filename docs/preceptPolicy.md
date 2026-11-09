@@ -352,6 +352,12 @@ Ladders are listed in rank order. A tied rung shares its anchor's rank.
 The log counted 16 `SUF_Torture` rungs and 5 `RS_Issue_Pregnancy` rungs; the released mods ship 9 and 3.
 Some other mod adds rungs that we have not seen. They keep their display order after the listed rungs.
 
+**Nuanced Child Raiders** ✓ (`planetace.nuancedchildren`).
+`ChildDeath` is Moral: `Accepted` → `RespectedIfGuilty` → `Abhorrent`, with neutral at `RespectedIfGuilty`, the only default rung.
+The rungs only control when the vanilla penalty for killing a child applies: never, not for hostile children, or always.
+`RespectedIfGuilty` behaves exactly like holding no precept, and it gives no respect despite its name.
+It must stay in the hand table, because the heuristic would score the word `Respected` above `Accepted` and misplace the rung.
+
 **A Rim of Ice and Fire** ✓ (`lordfelix.ARimOfIceAndFire`).
 Every rung it adds has `defaultSelectionWeight` 1 but needs a Westerosi meme, so each Moral issue below has a `DontCare` entry; otherwise the lone rung would be the neutral.
 Almost every ROIAF issue has a single rung, and a faith holds it or does not, so those issues are Moral.

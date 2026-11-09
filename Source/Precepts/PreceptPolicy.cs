@@ -127,6 +127,8 @@ internal static partial class PreceptPolicy
         "AC_Stacking", "AC_Sleeving", "AC_CrossSleeving", "AC_StackDuplicating", "AC_XenoSleeving",
         // One-sided pro ladders: a silent outsider sits at the default neutral, before rank 0.
         "VFEP_Camaraderie", "ROBTRG_Hospitality",
+        // Nuanced Child Raiders. RespectedIfGuilty is the baseline rung here, not an approving rung as on Execution.
+        "ChildDeath",
         // A Rim of Ice and Fire. Each single-rung issue is a belief that a faith holds or does not hold.
         // Death, Expectations and Royalty copy VME issues (see DuplicateOf). The permit perks stay PositiveOnly.
         "ARIOIAF_Lineage", "ARIOIAF_Death", "ARIOIAF_Expectations", "ARIOIAF_Royalty",
